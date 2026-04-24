@@ -1,0 +1,18 @@
+[project]
+name = "tutoring-check"
+version = "0.1.0"
+description = "Socratic two-LLM simulator using LiteLLM"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "litellm",
+  "python-dotenv",
+  "pydantic>=2.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
