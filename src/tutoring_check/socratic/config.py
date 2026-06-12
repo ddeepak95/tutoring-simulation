@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 
-from tutoring_check.schemas import (
+from tutoring_check.socratic.schemas import (
     LanguagesFile,
     ModelsFile,
     ResolvedSession,

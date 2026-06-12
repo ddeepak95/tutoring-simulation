@@ -10,7 +10,8 @@ from uuid import uuid4
 
 from litellm import acompletion
 
-from tutoring_check.schemas import ResolvedSession
+from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.socratic.schemas import ResolvedSession
 
 
 END_CONVERSATION_TOOL = {
@@ -50,38 +51,6 @@ class SessionResult:
     output_dir: Path
 
 
-def _utc_now() -> str:
-    return datetime.now(timezone.utc).isoformat()
-
-
-def _serialize_response(response: Any) -> Any:
-    if hasattr(response, "model_dump"):
-        return response.model_dump(mode="json")
-    return json.loads(json.dumps(response, default=str))
-
-
-class JsonlLogger:
-    def __init__(self, out_dir: Path):
-        self.out_dir = out_dir
-        self.transcript_path = out_dir / "transcript.jsonl"
-        self.api_path = out_dir / "api_responses.jsonl"
-        self.request_path = out_dir / "api_requests.jsonl"
-        self.out_dir.mkdir(parents=True, exist_ok=True)
-
-    def _append(self, path: Path, record: dict) -> None:
-        with path.open("a", encoding="utf-8") as f:
-            f.write(json.dumps(record, ensure_ascii=False) + "\n")
-
-    def log_transcript(self, record: dict) -> None:
-        self._append(self.transcript_path, record)
-
-    def log_api_response(self, record: dict) -> None:
-        self._append(self.api_path, record)
-
-    def log_api_request(self, record: dict) -> None:
-        self._append(self.request_path, record)
-
-
 def _teacher_system_prompt(session: ResolvedSession) -> str:
     criteria_lines = "\n".join(f"- {c}" for c in session.criteria)
     return (
@@ -90,10 +59,9 @@ def _teacher_system_prompt(session: ResolvedSession) -> str:
         f"Target question:\n{session.question}\n\n"
         f"Rubric checklist:\n{criteria_lines}\n\n"
         "Rules:\n"
-        "- Ask short probing questions and follow-ups.\n"
-        "- Do not dump the full answer in one message.\n"
+        "- Do not reveal the full answer in one message.\n"
         "- Keep the conversation in the target language.\n"
-        "- When the student has answered sufficiently according to the rubric, "
+        "- When the student has adequately addressed all points in the rubric in their own words, "
         "call end_conversation with reason='thorough'.\n"
         "- If the student explicitly refuses to answer, call end_conversation with reason='refusal'.\n"
     )
@@ -104,9 +72,9 @@ def _student_system_prompt(session: ResolvedSession) -> str:
     return (
         f"You are a student in a tutoring session. Respond only in {session.language_name} "
         f"({session.language_locale}).\n\n"
-        "You may hold these misconceptions or partial understandings:\n"
+        "You hold these misconceptions or partial understandings:\n"
         f"{misconception_lines}\n\n"
-        "Answer naturally and conversationally. Do not list these misconceptions directly."
+        "Answer naturally and conversationally. Embed misconceptions indirectly and defend them when challenged."
     )
 
 
@@ -127,8 +95,7 @@ async def run_single_session(
         {"role": "user", "content": "Begin the tutoring session."}
     ]
     student_messages: list[dict[str, Any]] = [
-        {"role": "system", "content": student_system},
-        {"role": "user", "content": "The teacher is starting the tutoring session. Respond as the student."}
+        {"role": "system", "content": student_system}
     ]
 
     turn_index = 0
@@ -141,7 +108,7 @@ async def run_single_session(
         }
         logger.log_api_request(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "role": "teacher",
                 "run_set_item_id": session.run_set_item_id,
                 "topic_id": session.topic_id,
@@ -154,7 +121,7 @@ async def run_single_session(
         teacher_message = teacher_response.choices[0].message
         logger.log_api_response(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "role": "teacher",
                 "model_preset_id": session.teacher_model_id,
                 "litellm_model": session.teacher_litellm_model,
@@ -162,7 +129,7 @@ async def run_single_session(
                 "topic_id": session.topic_id,
                 "misconception_set_id": session.misconception_set_id,
                 "language_id": session.language_id,
-                "raw_response": _serialize_response(teacher_response),
+                "raw_response": serialize_response(teacher_response),
             }
         )
 
@@ -184,7 +151,7 @@ async def run_single_session(
                     arguments = {"reason": "thorough", "message": str(arguments_raw)}
                 logger.log_transcript(
                     {
-                        "timestamp": _utc_now(),
+                        "timestamp": utc_now(),
                         "turn_index": turn_index,
                         "role": "teacher_tool",
                         "tool_name": "end_conversation",
@@ -196,7 +163,7 @@ async def run_single_session(
         teacher_content = getattr(teacher_message, "content", None) or ""
         logger.log_transcript(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "turn_index": turn_index,
                 "role": "teacher",
                 "content": teacher_content,
@@ -211,7 +178,7 @@ async def run_single_session(
         }
         logger.log_api_request(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "role": "student",
                 "run_set_item_id": session.run_set_item_id,
                 "topic_id": session.topic_id,
@@ -225,7 +192,7 @@ async def run_single_session(
         student_content = getattr(student_message, "content", None) or ""
         logger.log_api_response(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "role": "student",
                 "model_preset_id": session.student_model_id,
                 "litellm_model": session.student_litellm_model,
@@ -233,12 +200,12 @@ async def run_single_session(
                 "topic_id": session.topic_id,
                 "misconception_set_id": session.misconception_set_id,
                 "language_id": session.language_id,
-                "raw_response": _serialize_response(student_response),
+                "raw_response": serialize_response(student_response),
             }
         )
         logger.log_transcript(
             {
-                "timestamp": _utc_now(),
+                "timestamp": utc_now(),
                 "turn_index": turn_index,
                 "role": "student",
                 "content": student_content,
