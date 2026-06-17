@@ -19,10 +19,13 @@ class SessionConfig:
     """
 
     topic: str
+    instruction: str                          # authored teaching directive placed inside <instruction>
     knowledge_components: dict[str, int]      # concept name -> initial mastery 1-5
     misconceptions: dict[str, str]            # concept name -> misconception string (logged only)
     num_turns: int
     language: str
+    region: str = ""                          # cultural/geographic context the student speaks from
+    context_dependent: bool = False           # True -> student speaks from own background, not a forget-and-learn frame
     student_name: str = "Student"
     teacher_name: str = "Teacher"
     academic_self_efficacy: int = 3           # 1-5
@@ -39,51 +42,62 @@ class SessionConfig:
             )
 
 
-def create_example_configs() -> list[SessionConfig]:
+def create_pilot_profiles() -> list[SessionConfig]:
+    """Three maximally-different students on ONE fixed topic, for the prompt-sensitivity pilot. """
+    topic = "Photosynthesis basics"
+    instruction = "Explain how photosynthesis works step by step."
     return [
+        # A: low knowledge, low motivation.
         SessionConfig(
-            topic="Photosynthesis basics",
+            topic=topic,
+            instruction=instruction,
             knowledge_components={
-                "role of sunlight": 1,
+                "gas exchange (CO2 in, O2 out)": 1,
+                "glucose as stored energy": 1,
+                "role of sunlight": 2,
                 "light-dependent reactions": 1,
-                "gas exchange (CO2 in, O2 out)": 2,
-                "glucose as stored energy": 2,
             },
             misconceptions={
                 "gas exchange (CO2 in, O2 out)": "Plants take in oxygen and release carbon dioxide.",
+                "glucose as stored energy": "A plant uses the food it makes right away and stores none of it.",
             },
             num_turns=8,
             language="English (US)",
+            student_name="Avery",
+            intrinsic_motivation=1,
         ),
+        # B: medium knowledge, high stress.
         SessionConfig(
-            topic="The water cycle",
+            topic=topic,
+            instruction=instruction,
             knowledge_components={
-                "evaporation": 3,
-                "condensation": 2,
-                "precipitation": 2,
-                "collection": 1,
+                "gas exchange (CO2 in, O2 out)": 3,
+                "glucose as stored energy": 2,
+                "role of sunlight": 3,
+                "light-dependent reactions": 2,
             },
             misconceptions={
-                "condensation": "Clouds are made of water vapor rather than tiny liquid droplets.",
+                "glucose as stored energy": "A plant uses the food it makes right away and stores none of it.",
             },
             num_turns=8,
             language="English (US)",
+            student_name="Blake",
+            academic_stress=5,
         ),
+        # C: high knowledge, high self-efficacy.
         SessionConfig(
-            topic="Basic fractions",
+            topic=topic,
+            instruction=instruction,
             knowledge_components={
-                "numerator and denominator": 3,
-                "equivalent fractions": 1,
-                "comparing fractions": 2,
+                "gas exchange (CO2 in, O2 out)": 5,
+                "glucose as stored energy": 4,
+                "role of sunlight": 5,
+                "light-dependent reactions": 4,
             },
-            misconceptions={
-                "comparing fractions": "A fraction with a bigger denominator is always larger.",
-            },
+            misconceptions={},
             num_turns=8,
             language="English (US)",
-            academic_self_efficacy=2,
-            intrinsic_motivation=2,
-            academic_stress=4,
-            goal_commitment=3,
+            student_name="Casey",
+            academic_self_efficacy=5,
         ),
     ]

@@ -8,11 +8,11 @@ from uuid import uuid4
 from litellm import acompletion
 
 from tutoring_check.teachtune.agents import (
+    TeacherPrompt,
     build_student_system_prompt,
     build_teacher_system_prompt,
     can_say_components,
 )
-from tutoring_check.teachtune.knowledge import KnowledgeStateTracker, reflect_coverage
 from tutoring_check.teachtune.student_profile import generate_trait_overview
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 from tutoring_check.teachtune.config import SessionConfig
@@ -24,21 +24,17 @@ async def run_teachtune_session(
     teacher_model: str,
     student_model: str,
     output_root: Path,
+    teacher_prompt: TeacherPrompt = TeacherPrompt.P4,
 ) -> Path:
     run_id = str(uuid4())
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     out_dir = output_root / f"{timestamp}_{run_id}"
     logger = JsonlLogger(out_dir=out_dir)
 
-    component_names = list(config.knowledge_components)
-    total = len(component_names)
-
     # Setup before the conversation loop
     trait_overview = await generate_trait_overview(config, model=student_model)
     student_system = build_student_system_prompt(config, trait_overview)
-    teacher_system = build_teacher_system_prompt(config)  # static for the whole session
-    tracker = KnowledgeStateTracker(component_names)
-
+    teacher_system = build_teacher_system_prompt(config, teacher_prompt)
     logger.log_transcript(
         {
             "timestamp": utc_now(),
@@ -47,6 +43,10 @@ async def run_teachtune_session(
             "language": config.language,
             "student_name": config.student_name,
             "teacher_name": config.teacher_name,
+            "teacher_model": teacher_model,
+            "student_model": student_model,
+            "teacher_prompt_variant": teacher_prompt.value, # pilot: which candidate prompt (P1-P4)
+            "teacher_system_prompt": teacher_system, # additional metadata
             "trait_levels": {
                 "academic_self_efficacy": config.academic_self_efficacy,
                 "intrinsic_motivation": config.intrinsic_motivation,
@@ -68,9 +68,7 @@ async def run_teachtune_session(
     student_messages: list[dict[str, Any]] = [
         {"role": "system", "content": student_system},
     ]
-    transcript: list[dict] = []
 
-    end_reason = "turn_limit"
     for turn_index in range(config.num_turns):
         # Teacher turn
         teacher_request = {"model": teacher_model, "messages": teacher_messages}
@@ -85,7 +83,6 @@ async def run_teachtune_session(
         )
         teacher_messages.append({"role": "assistant", "content": teacher_content})
         student_messages.append({"role": "user", "content": teacher_content})
-        transcript.append({"role": "teacher", "content": teacher_content})
 
         # Student turn
         student_request = {"model": student_model, "messages": student_messages}
@@ -100,42 +97,11 @@ async def run_teachtune_session(
         )
         student_messages.append({"role": "assistant", "content": student_content})
         teacher_messages.append({"role": "user", "content": student_content})
-        transcript.append({"role": "student", "content": student_content})
-
-        # Reflect: which components were covered in this exchange.
-        indices = await reflect_coverage(
-            transcript,
-            component_names,
-            model=teacher_model,
-            teacher_name=config.teacher_name,
-            student_name=config.student_name,
-        )
-        tracker.update(indices)
-        logger.log_transcript(
-            {
-                "timestamp": utc_now(),
-                "type": "knowledge_snapshot",
-                "turn": turn_index + 1,
-                "reflected_indices": indices,
-                "covered_indices": sorted(tracker.covered_indices),
-            }
-        )
-
-        if tracker.is_complete(total):
-            end_reason = "coverage_complete"
-            break
-
-    covered = [component_names[i] for i in sorted(tracker.covered_indices)]
-    uncovered = [n for i, n in enumerate(component_names) if i not in tracker.covered_indices]
     logger.log_transcript(
         {
             "timestamp": utc_now(),
             "type": "session_end",
-            "end_reason": end_reason,
-            "covered": covered,
-            "uncovered": uncovered,
-            "covered_count": len(covered),
-            "total_components": total,
+            "turns_completed": config.num_turns,
         }
     )
 

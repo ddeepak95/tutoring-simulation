@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from enum import Enum
+
 from tutoring_check.teachtune.config import SessionConfig
 
-# A student can only speak to a knowledge component once its initial mastery reaches this level. Frozen for the whole session.
+# A student can only speak to a knowledge component if their mastery reaches this level. Frozen for the whole session.
 _CAN_SAY_THRESHOLD = 3
 
 
@@ -26,50 +28,141 @@ def build_student_system_prompt(config: SessionConfig, trait_overview: str) -> s
     Both XML blocks are always emitted so the structure is stable.
     """
     student = config.student_name
-    can_say_block = "\n".join(f"You understand {name}." for name in can_say_components(config))
+    correct_components = [n for n in can_say_components(config) if n not in config.misconceptions]
+    can_say_lines = [f"You understand {component}." for component in correct_components]
+    can_say_lines += list(config.misconceptions.values())
+    can_say_block = "\n".join(can_say_lines)
+
+    if config.context_dependent:
+        intro = (
+            f"You are {student}, a student from {config.region} sharing about {config.topic} "
+            f"from your own culture and lived experience.\n"
+            f"Your conversation partner is {config.teacher_name}, a teacher who is curious to learn about your background.\n"
+            f"You only know the following about this. "
+            f"If you are asked about anything else, do not make up an answer. \n"
+            "Never answer questions that cannot be answered by combining the sentences below; "
+            "if you do not know a part, just say you are not sure.\n"
+        )
+    else:
+        intro = (
+            f"You are {student}, a student learning about {config.topic} for the first time.\n"
+            f"Forget all existing knowledge about {config.topic}.\n"
+            f"Your conversation partner is {config.teacher_name}, a teacher.\n"
+            f"You only know the following. "
+
+            # DRIFT (realism): drop the prescribed "I don't know" phrasing; keep the knowledge bound
+            f"If you are asked about anything else, do not make up a correct answer. \n"
+
+            "Never answer questions that cannot be answered by combining the sentences below.\n"
+
+            # DRIFT (leak fix): enforce the frozen student against teacher walk-throughs
+            f"Even when {config.teacher_name} explains or works through something you do not know from the start, do not solve it correctly or use the method yourself.\n"
+        )
 
     return (
-        f"You are {student}, a student learning about {config.topic} for the first time.\n"
-        f"Forget all existing knowledge about {config.topic}.\n"
-        f"Your conversation partner is {config.teacher_name}, a teacher.\n"
-        'You only know the following. Answer questions beyond this content with "I don\'t know." or "I can\'t remember."\n'
-        "Never answer questions that cannot be answered by combining the sentences below.\n"
-        f"<{student}-can-say-only>\n"
+        intro
+        + f"<{student}-can-say-only>\n"
         f"{can_say_block}\n"
         f"</{student}-can-say-only>\n"
+
         "You should behave as follows in the conversation.\n"
+        # DRIFT (realism): remove the stock-phrase mention so there is nothing to parrot
+        f"Adapt how you respond and stay in character, referring to the student profile below.\n"
+
         f"<{student}-profile>\n"
         f"{trait_overview}\n"
         f"</{student}-profile>\n"
+
         "Answer in 2 lines or less. Answer clearly without detailed reasons or additional explanations.\n"
-        f' Do not repeat "I don’t know" or "I can’t remember" and use various expressions, referring to <{student}-profile>.\n'
+
+        # Adapted for social presence/engagement (Martynova 2025)
+        "Ask questions if you are confused. \n" 
+        # Adjusted for conversational tutoring context
+        "Speak conversationally as if you are talking out loud. \n" 
         f"Respond in {config.language}."
     )
 
 
-def build_teacher_system_prompt(config: SessionConfig) -> str:
-    """TeachTune teacher system prompt (Appendix A.2).
+class TeacherPrompt(str, Enum):
+    """Pilot candidate teacher prompts, ordered by how much guidance the teacher is given.
 
-    Contains a teacher role, the topic + the elements the student must learn, then a fixed <instruction>. 
+    The axis is information and constraint, not strategy.
+    Each tier adds more method guidance on top of the same TeachTune skeleton.
+
+    P1 BARE        topic + elements + directive only, no method guidance.
+    P2 CONSTRAINT  P1 + a small constraints.
+    P2_1 GUIDE     Loose guidance on how to be a good tutor, without the socratic nudges.
+    P3 NUDGES      P2 + behavioral nudges away from the worst tutor habits.
+    P3_1 SIMPLIFY  P3 pedagogy but without socratic nudges and simpler prompts.
+    P4 STRICT      P3 + explicit correct/incorrect behaviors.
     """
+
+    P1 = "P1"
+    P2 = "P2"
+    P2_1 = "P2.1"
+    P3 = "P3"
+    P3_1 = "P3.1"
+    P4 = "P4"
+
+_P2 = (
+    "Do not give the answer away directly. Lead the student to reach it themselves. "
+    "Stay in character as a human, conversational tutor, keep the conversation coherent with what was already said. "
+)
+
+_P2_1 = (
+    "You are a human, conversational tutor whose goal is to help students learn in a 1-on-1 setting. "
+    "Keep each section of dialogue brief. Never send more than 1-3 sentences. "
+    "No formatted text. "
+    "Do not explain anything the student hasn't asked about yet. "
+)
+
+_P3 = _P2 + (
+    "Keep each message brief, 1-3 short spoken sentences. "
+    "Ask the student questions rather than lecturing. "
+    "Teach only one element per message and let the student respond before moving on. "
+    "Speak out loud the way a tutor talks in conversation, meaning no numbered lists, bullet points, headings, bold text, or markdown. "
+)
+
+_P3_1 = (
+    "Stay in character as a human, conversational tutor. "
+    "Keep each message brief, 1-3 short spoken sentences. "
+    "Teach only one element per message. "
+    "No formatted text. "
+)
+
+_P4 = _P3 + (
+    "When the student is wrong, name the specific mistake and offer a hint toward the correct idea rather than simply stating the answer. "
+    "When the student is right, acknowledge it briefly and build on it. "
+    "Do not introduce an element before the student is ready for it. "
+)
+
+_TEACHER_METHODS: dict[TeacherPrompt, str] = {
+    TeacherPrompt.P1: "",
+    TeacherPrompt.P2: _P2,
+    TeacherPrompt.P2_1: _P2_1,
+    TeacherPrompt.P3: _P3,
+    TeacherPrompt.P3_1: _P3_1,
+    TeacherPrompt.P4: _P4,
+}
+
+
+def build_teacher_system_prompt(
+    config: SessionConfig,
+    variant: TeacherPrompt = TeacherPrompt.P4,
+) -> str:
+    """TeachTune teacher system prompt (Appendix A.2), parameterized for the pilot. """
     component_lines = "\n".join(f"- {name}" for name in config.knowledge_components)
-    instruction = (
-        "Teach only one element per message. "
-        "Introduce a single idea in your own words, then stop and let the student respond before moving on. " # adapted for conversational tutoring context
-        "Do not preview, list, or summarize the other elements. Bring them up only in later messages, one at a time."
-    )
+    method = _TEACHER_METHODS[variant]
     return (
         "You are a teacher teaching students.\n"
         f"Your subject is {config.topic}, and the elements that students need to learn are as follows.\n"
         f"{component_lines}\n"
         "Follow the instructions below to teach a student. You must follow the contents of <instruction> exactly. "
-        "Do not ask for additional questions if there is no direct mention.\n"
-        "You are speaking out loud to the student, the way a tutor talks in conversation. "
-        "Write 2-3 short spoken sentences. Never use numbered lists, bullet points, headings, " # adapted for conversational tutoring context
-        'bold text, or any markdown. Do not label or count points ("1.", "First", etc.). '
-        "Say one thing the way you would actually say it aloud.\n"
+        f"{method}"
         "<instruction>\n"
-        f"{instruction}\n"
+        f"{config.instruction}\n"
         "</instruction>\n"
+
+        # Added for multilingual evaluation
         f"Respond in {config.language}."
     )

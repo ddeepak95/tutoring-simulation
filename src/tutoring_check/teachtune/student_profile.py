@@ -4,7 +4,7 @@ from litellm import acompletion
 
 from tutoring_check.teachtune.config import SessionConfig
 
-# Generic, subject-agnostic self-report statements derived from arxiv:2410.04078.
+# Psychology statements from arxiv:2410.04078.
 _GOAL_COMMITMENT_STATEMENTS = [
     "I am strongly committed to pursuing this goal.",
     "I think this is a good goal to shoot for.",
@@ -46,8 +46,6 @@ def _format_trait_block(statements: list[str], value: int) -> str:
 
 async def generate_trait_overview(config: SessionConfig, *, model: str) -> str:
     """TeachTune Interpret (Appendix A.3): traits -> prose character description.
-
-    `model` is the litellm model string.
     """
     system_prompt = (
         "You are a playwright who describes the psychology and behavior of characters well."
@@ -70,8 +68,11 @@ async def generate_trait_overview(config: SessionConfig, *, model: str) -> str:
         "Based on the information above, describe the student profile in detail about the student's goal commitment, motivation, self-efficacy, and stress.\n"
         "Interpret each category as independently as possible and it should be interpreted as high, medium, and low, not positive/negative.\n"
         "For 'neutral,' you must write in a neutral way.\n"
+        # DRIFT: Now describes how the student behaves when corrected as a consequence of those traits (e.g. defend/concede and engagement emerge.)
+        "Also describe, as a consequence of these traits, how the student tends to behave when the teacher asks a question or corrects them, "
+        "for example, how readily they venture an answer versus hold back, defend what they think versus reconsider it, or persist thinking versus give up.\n"
         f"Write in {config.language}."
-    )
+    )   
 
     response = await acompletion(
         model=model,

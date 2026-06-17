@@ -1,12 +1,47 @@
 {
+  "_comment": "A run set dictates the conditions of one session.",
   "items": [
     {
-      "id": "run-photosynthesis-en-confused",
+      "id": "photosynthesis-en-socratic",
+      "topic_type": "context_independent",
+      "topic_id": "photosynthesis",
       "language_id": "en-US",
-      "topic_id": "photosynthesis-basics",
-      "misconception_set_id": "confuses-respiration",
+      "misconception_set_id": "food-from-soil",
+      "teacher_model_id": "gpt-4o",
+      "student_model_id": "gpt-4o",
+      "prompt_variant": "P2.1",
+      "repeats": 1
+    },
+    {
+      "id": "fractions-zh-socratic",
+      "topic_type": "context_independent",
+      "topic_id": "comparing-fractions",
+      "language_id": "zh-CN",
+      "misconception_set_id": "bigger-denominator-larger",
       "teacher_model_id": "gpt-5.4-mini",
-      "student_model_id": "gpt-4"
+      "student_model_id": "gpt-4o",
+      "prompt_variant": "P3",
+      "repeats": 1
+    },
+    {
+      "id": "festive-china-socratic",
+      "topic_type": "context_dependent",
+      "topic_id": "festive-events",
+      "knowledge_pack_id": "china-spring-festival",
+      "teacher_model_id": "gpt-4o",
+      "student_model_id": "gpt-4o",
+      "prompt_variant": "P3",
+      "repeats": 1
+    },
+    {
+      "id": "festive-usa-socratic",
+      "topic_type": "context_dependent",
+      "topic_id": "festive-events",
+      "knowledge_pack_id": "usa-thanksgiving",
+      "teacher_model_id": "gpt-4o",
+      "student_model_id": "gpt-4o",
+      "prompt_variant": "P3",
+      "repeats": 1
     }
   ]
 }

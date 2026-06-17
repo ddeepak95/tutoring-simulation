@@ -1,0 +1,34 @@
+{
+  "_comment": "Selectable cultural knowledge packs for context-dependent topics. A run picks topic (domain) x knowledge_pack; region (and thus language) is derived from the pack's region_id, so a pack can only ever appear with its own region. knowledge_components map name -> mastery (1-5); components below 3 are gaps the student cannot speak to and will say it is unsure about. domain is metadata. No misconceptions: there is no canonical right answer.",
+  "knowledge_packs": [
+    {
+      "id": "usa-thanksgiving",
+      "domain": "Social Practices, Rituals, and Festive Events",
+      "region_id": "united-states",
+      "knowledge_components": {
+        "Thanksgiving celebration (fourth Thursday of November)": 3,
+        "family gathering with a turkey, mashed potato, and stuffing dinner": 4,
+        "taking work or school off": 5,
+        "Black Friday and Cyber Monday shopping deals": 4,
+        "writing thank you cards for friends and family": 3,
+        "the historical origins of the holiday": 2,
+        "preparing for Christmas right after": 3
+      }
+    },
+    {
+      "id": "china-spring-festival",
+      "domain": "Social Practices, Rituals, and Festive Events",
+      "region_id": "china",
+      "knowledge_components": {
+        "Chinese New Year celebration": 4,
+        "Crowded travel as people return to their hometowns, like standing train tickets": 4,
+        "family reunion dinner and children receiving red envelopes": 4,
+        "making dumplings which symbolize family unity": 3,
+        "the historical evolution of the festival across different regions": 2,
+        "the Spring Festival Gala TV show": 3,
+        "firecrackers and fireworks to scare away evil spirits": 4,
+        "hanging posters with couplets": 3
+      }
+    }
+  ]
+}
