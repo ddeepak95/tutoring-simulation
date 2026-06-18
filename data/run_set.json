@@ -1,46 +1,26 @@
 {
-  "_comment": "A run set dictates the conditions of one session.",
+  "_comment": "A run set enumerates the cells to run. Each item resolves to a SessionConfig + models. CI items take topic_id + language_id; CD items take topic_id + region_id (language defaults from the region). seed is the base seed; repeat r uses seed+r so r0 of every tutor faces the same student draw.",
   "items": [
     {
-      "id": "photosynthesis-en-socratic",
+      "id": "photosynthesis-en",
       "topic_type": "context_independent",
       "topic_id": "photosynthesis",
       "language_id": "en-US",
-      "misconception_set_id": "food-from-soil",
-      "teacher_model_id": "gpt-4o",
+      "tutor_model_id": "gpt-4o",
       "student_model_id": "gpt-4o",
-      "prompt_variant": "P2.1",
+      "prompt_variant": "baseline",
+      "seed": 0,
       "repeats": 1
     },
     {
-      "id": "fractions-zh-socratic",
-      "topic_type": "context_independent",
-      "topic_id": "comparing-fractions",
-      "language_id": "zh-CN",
-      "misconception_set_id": "bigger-denominator-larger",
-      "teacher_model_id": "gpt-5.4-mini",
-      "student_model_id": "gpt-4o",
-      "prompt_variant": "P3",
-      "repeats": 1
-    },
-    {
-      "id": "festive-china-socratic",
+      "id": "festive-china",
       "topic_type": "context_dependent",
       "topic_id": "festive-events",
-      "knowledge_pack_id": "china-spring-festival",
-      "teacher_model_id": "gpt-4o",
+      "region_id": "china",
+      "tutor_model_id": "gpt-4o",
       "student_model_id": "gpt-4o",
-      "prompt_variant": "P3",
-      "repeats": 1
-    },
-    {
-      "id": "festive-usa-socratic",
-      "topic_type": "context_dependent",
-      "topic_id": "festive-events",
-      "knowledge_pack_id": "usa-thanksgiving",
-      "teacher_model_id": "gpt-4o",
-      "student_model_id": "gpt-4o",
-      "prompt_variant": "P3",
+      "prompt_variant": "baseline",
+      "seed": 0,
       "repeats": 1
     }
   ]

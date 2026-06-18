@@ -25,8 +25,7 @@ anything not from the paper.
 This branch **replaces the prior TeachTune student** (arXiv:2410.04078) wholesale. Removed:
 the four psychological traits, the *Interpret* step, the bounded-knowledge model
 (`can_say` / mastery). Replaced with the LearnLM gen-AI role-play (A2): one fixed student
-model given a **persona + proficiency level** and a **predefined, fixed per-turn state
-sequence** (B1). The injected state — not a knowledge bound — controls how the student
+model driven by a **predefined, fixed per-turn state sequence** (B1). The injected state — not a knowledge bound — controls how the student
 behaves each turn (e.g. "frustration" → shows it is tempted to give up; "off-topic" → drifts
 from the lesson). The paper publishes no verbatim prompts and names only one state ("make
 mistake", A8); the working set is `[your design]`. The context-independent (CI) student keeps
@@ -37,21 +36,21 @@ separate, reduced set (see §3, §4).
 
 ## 0. Principles
 
-1. **Identical student for every tutor (B1).** Same student model, persona, proficiency, and
-   the same fixed state sequence per scenario. This is the comparability requirement and the
-   reason cross-model scores (§8) are meaningful.
+1. **Identical student for every tutor (B1).** Same student model and the same fixed state
+   sequence per scenario. This is the comparability requirement and the reason cross-model
+   scores (§8) are meaningful.
 2. **State controls behavior, not knowledge (A3/B1).** No `can_say`, no mastery gate. The
-   per-turn injected state says *how* the student behaves; it realizes that from persona +
-   grounding + its own latent knowledge. Tutor and student may both see the grounding —
-   behavior is governed by the state, so shared grounding does not defeat the simulation.
+   per-turn injected state says *how* the student behaves; it realizes that from its own
+   latent knowledge, pinned by the topic (CI) or region (CD). Correctness is governed by the
+   state, so the student knowing the material does not defeat the simulation.
 3. **The tutor receives no privileged state info (B1).** The paper hands the learner's hidden
    state to the tutor only to generate training data; doing so at evaluation time would
    trivialize the dimensions that require the tutor to *infer* what the student is doing (e.g.
    spotting confusion or disengagement). The tutor sees only the student's spoken text and
    must infer.
 4. **Headline axes = tutor model × language.** The scenario is the fixed-student container (a
-   coverage axis). Tutor prompt variant and student persona may vary while getting the design
-   right, but are held fixed for the headline runs.
+   coverage axis). Tutor prompt variant may vary while getting the design right, but is held
+   fixed for the headline runs.
 5. **One conversation = one directory**, resume-safe, with explicit repeats.
 
 ---
@@ -59,7 +58,7 @@ separate, reduced set (see §3, §4).
 ## 1. The experiment — cells, axes, repeats
 
 A **cell** is one fully-specified configuration: one scenario, one tutor model, one language,
-one tutor prompt variant, with the student model, persona, and state sequence all fixed.
+one tutor prompt variant, with the student model and state sequence all fixed.
 
 - **Headline axes:** tutor model × language.
 - **Secondary axes** (fixed for the headline comparison, varied only while tuning the design):
@@ -77,7 +76,7 @@ already on disk, and runs the rest, so adding a model or language only fills the
 ## 2. Components (responsibilities, not code)
 
 - **student** — owns the learner-state set, the per-state strategy text, and assembly of the
-  student prompt: a static part (role, persona, proficiency, grounding) plus the dynamic
+  student prompt: a static part (role and framing) plus the dynamic
   injected state for the current turn.
 - **tutor** — assembles the tutor prompt: static only, no state injection.
 - **catalog / config** — loads the topic catalogs (context-independent and context-dependent),
@@ -97,22 +96,25 @@ should be renamed since the method is no longer TeachTune.
 Scenarios are the **context-independent (CI)** and **context-dependent (CD)** topics from the
 previous version, not new files. This reintroduces **regions** for the CD case.
 
-- **CI topics** — the student is a learner and the tutor teaches the topic. The topic supplies:
-  topic name, the tutor's teaching directive / learning goal, and the grounding material (the
-  lesson and the elements to teach). The old `knowledge_components` survive only as the tutor's
-  "elements to teach"; the **mastery numbers and the `can_say` gate are dropped**. Authored
-  per-topic misconceptions, if kept, become optional content for the CI student's
-  "misconception" state — which misconception it voices — not a knowledge bound.
-- **CD topics** — the student shares knowledge of their own culture/region and the tutor is a
-  curious learner. This brings in the **region** (and likely the cultural knowledge pack as the
-  student's grounding). Language may default from the region, overridable per run-set item.
+- **CI topics** — the student is a learner and the tutor teaches the topic. The topic supplies
+  a topic name and the tutor's teaching directive / learning goal; the latter encodes what the
+  tutor steers toward. The CI "misconception" state has the student improvise a plausible
+  misconception itself.
+- **CD topics** — the student is learning more about their **own** culture/region, which they
+  know only partially: firsthand from lived experience, with gaps in the deeper layer (history,
+  meaning, significance). The tutor helps them deepen that understanding — which is why CD has a
+  tutor at all. This brings in the **region**, which pins the culture the student speaks from.
+  Language may default from the region, overridable per run-set item.
 
-> **CD differs from CI — authored separately.** For CD the student is the authority on their
-> own lived experience and cannot be "wrong," so CD **drops the correctness/mistake states**
-> and gets its own state set (communication behaviors — hesitant, detailed,
-> confused-by-the-question, etc.), authored apart from the CI set. CD scoring likewise **drops
-> the "identify and address misconceptions" dimension** (§5, §8). CI keeps the full original
-> state set and all dimensions.
+> **CD differs from CI — authored separately.** The CD student lives on two layers: a **lived
+> layer** (their own experienced traditions) where they are the authority and cannot be
+> "corrected," and a **deeper layer** (history, meaning, significance) where they have gaps and
+> can be partly wrong. So CD gets its own state set (communication behaviors plus the learner
+> states `knowledge_gap` and `partial_understanding` for the deeper layer), authored apart from
+> the CI set; it has no general correctness/mistake states because the lived layer is off-limits
+> to correction. The tutor must tell the two layers apart: validate and draw out the lived
+> layer, teach the deeper one. Which scored dimensions CD keeps under this framing is revisited
+> in §5/§8/§10. CI keeps the full original state set and all dimensions.
 
 ---
 
@@ -121,9 +123,9 @@ previous version, not new files. This reintroduces **regions** for the CD case.
 The paper's role-play has two layers per role: a **static** prompt fixed for the whole
 conversation, and a **dynamic** prompt that changes each turn — the injection.
 
-- **Static (student):** you are a learner, not an assistant; persona and proficiency; the
-  grounding material; brief spoken answers; ask questions when confused; respond in the run's
-  language. Kept close to the current student prompt to limit drift.
+- **Static (student):** you are a learner, not an assistant; brief spoken answers; ask
+  questions when confused; respond in the run's language. Kept close to the current student
+  prompt to limit drift.
 - **Dynamic (student):** the strategy for the current learner state — e.g. for "misconception,"
   voice a specific, plausible misconception confidently without signaling it is wrong; for
   "frustration," show the work is hard and you are tempted to give up.
@@ -150,34 +152,38 @@ conversation, and a **dynamic** prompt that changes each turn — the injection.
 ## 5. Tutor prompt
 
 Static only — the tutor never receives the learner state (§0.3). Minimal and **identical
-across tutor models** for the headline comparison: role, the topic's teaching directive, the
-grounding material, and baseline pedagogy reflecting the paper's five principles and eight
+across tutor models** for the headline comparison: role, the topic's teaching directive, and
+baseline pedagogy reflecting the paper's five principles and eight
 scored dimensions (stay on topic, don't reveal the answer, guide actively, promote engagement,
 address mistakes, respond to affect, positive tone, adapt to level), responding in the run's
-language. For CD, "address mistakes" does not apply and is dropped `[your design]` (the CD
-student is the authority on its own culture), leaving seven. Two more are **weak for CD and
-candidates for removal** — "don't reveal the answer" and "adapt to level" both assume a
-student attempting answers / having a proficiency level. Dropping them takes CD to five: stay
-on topic, guide actively (drawing the knowledge out), promote engagement, respond to affect,
-positive tone. They could still apply, though, where the CD student *doesn't* know
-certain things — a CD student knows only parts of its own culture and admits the gaps, and
-those gaps give the tutor something to adapt to and to guide toward rather than reveal — so
-they may be worth keeping for that case. The tutor sees the grounding and the spoken conversation; never the state labels.
+language. For CD the prompt instead frames the tutor as helping the student learn more about
+their **own** culture: build on and draw out what the student knows firsthand (the lived layer,
+treated as authoritative and never corrected), and teach the deeper layer — history, meaning,
+significance — where the student is unsure or partly wrong (§3). The tutor sees only the spoken
+conversation; never the state labels.
+
+> **TODO (CD dimensions, deferred to the critic design — §8, §10).** Under the reframe above the
+> CD dimension set needs revisiting. The previously CD-weak/dropped dimensions likely **return**:
+> "address mistakes" applies to the deeper layer (but never to the lived layer), and "adapt to
+> level" / "don't reveal the answer" stop being weak because the student now has a knowledge
+> level and a deeper layer to be guided toward rather than handed. Whether CD ends up at eight,
+> or with "address mistakes" scoped to the deeper layer only, is not settled here.
 Prompt variant is a secondary knob, fixed for the headline runs.
 
 ---
 
 ## 6. The conversation loop
 
-For each state in the scenario's fixed sequence: the student speaks first, with the current
-state injected into its dynamic prompt, and the spoken turn plus its state label are stored;
-then the tutor responds, seeing only the spoken text so far (state labels stripped). The
+The tutor speaks first, opening from its teaching directive. Then for each state in the
+scenario's fixed sequence: the student responds with the current state injected into its
+dynamic prompt, and the spoken turn plus its state label are stored; then the tutor responds
+to the next student turn, seeing only the spoken text so far (state labels stripped). The
 student conditions on the full history including the tutor's turns — it reacts to what the
 tutor said, while the injected state pins *how* it reacts. Comparability comes from the fixed
 student model + params + state sequence + seed, not from identical wording.
 
-Pick student-first or tutor-first deliberately and keep it fixed across the campaign; the
-sequence opening with an "opening" state implies student-first.
+Turn order is **tutor-first**, fixed across the campaign: with no "opening" student state, the
+tutor opens the lesson and each student turn carries one state from the sequence.
 
 ---
 
@@ -224,12 +230,9 @@ and topics are catalog entries.
 
 ## 10. Open questions
 
-- Drop the two CD-weak dimensions ("don't reveal the answer", "adapt to level")? Doing so
-  takes CD from seven dimensions to five — but they could still apply where the CD student has
-  gaps in its own cultural knowledge (§5).
-- Keep authored misconceptions as CI "misconception"-state content, or let the student
-  improvise (§3)?
-- Student-first vs. tutor-first turn order (§6).
+- CD dimension set under the §3 reframe. Previously-weak/dropped dimensions likely return:
+  "address mistakes" on the deeper layer only (never the lived layer), "adapt to level" and
+  "don't reveal the answer" no longer weak. Settle when the critic is designed (§5, §8).
 - Per-language localization of the strategy strings (§4).
 - Exact CI working state set beyond the paper-confirmed "make mistake"; CD state set is
   authored separately (§3–§4).
@@ -238,16 +241,14 @@ and topics are catalog entries.
 
 ## 11. Fidelity / design checklist
 
-- [ ] Student = fixed model + persona/proficiency + per-turn state injection (A3/B1); no
-      traits, Interpret, or `can_say`.
+- [ ] Student = fixed model + per-turn state injection (A3/B1); no traits, Interpret, or `can_say`.
 - [ ] State sequence fixed per scenario; identical student for every tutor (B1).
 - [ ] State injected into the student only; stored, hidden from the tutor (B1).
 - [ ] Tutor prompt minimal and identical across tutor models; reflects the five principles /
       eight dimensions (CD scoring drops "address mistakes" → seven).
-- [ ] Headline axes = tutor model × language; prompt variant + persona fixed for headline runs.
+- [ ] Headline axes = tutor model × language; prompt variant fixed for headline runs.
 - [ ] Scenarios are the existing CI/CD topics; region reintroduced for CD.
-- [ ] Multi-turn, scenario-guided; student and tutor share grounding (correctness is
-      state-controlled).
+- [ ] Multi-turn, scenario-guided; correctness is state-controlled, not knowledge-bounded.
 - [ ] Student model + params + seed fixed and recorded; repeats supported.
 - [ ] Transcript carries scenario id/type/region, state, language, model id for downstream
       scoring/ranking; no surface-overlap metrics.

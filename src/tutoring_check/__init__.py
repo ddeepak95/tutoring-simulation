@@ -1,2 +1,2 @@
-"""Socratic two-LLM simulator package."""
+"""State-driven tutor/student conversation simulator (LearnLM role-play)."""
 
