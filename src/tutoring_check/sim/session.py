@@ -89,9 +89,12 @@ async def run_session(
         student_turns.append({"role": "user", "content": tutor_text})
         turn_id += 1
 
-        # Student turn: inject the current state into a freshly-built system prompt
-        student_system = student_static + "\n\n" + build_state_injection(config, state_name)
-        student_messages = [{"role": "system", "content": student_system}] + student_turns
+        # Student turn: static system prompt up front, current state instruction as a trailing message
+        student_messages = (
+            [{"role": "system", "content": student_static}]
+            + student_turns
+            + [{"role": "system", "content": build_state_injection(config, state_name)}]
+        )
         student_request = _completion_kwargs(student_model, student_messages, seed, temperature)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
         student_response = await acompletion(**student_request)

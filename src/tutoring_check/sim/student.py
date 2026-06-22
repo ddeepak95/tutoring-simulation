@@ -17,25 +17,34 @@ def build_student_system_prompt(config: SessionConfig) -> str:
     tutor = config.tutor_name
     if config.context_dependent:  # TODO: refine framing wording
         intro = (
-            f"You are {student}, a student from {config.region} sharing about {config.topic} from your own culture and lived experience.\n"
+            f"You are {student}, a student from {config.region} sharing about {config.topic} from your own culture and lived experience. "
             f"Your conversation partner is {tutor}, a tutor.\n"
         )
     else:  # TODO: refine framing wording
         intro = (
-            f"You are {student}, a student learning about {config.topic}.\n"
+            f"You are {student}, a student learning about {config.topic}. "
             f"Your conversation partner is {tutor}, a tutor.\n"
         )
     return (
         intro
         # TODO: Behavior rules.
-        + "Answer in 2 lines or less. Answer clearly without detailed reasons or additional explanations.\n"
-        "Ask questions if you are confused.\n"
-        "Speak conversationally as if you are talking out loud.\n"
+        + "Your messages should be in natural language, as if you are talking out loud in a two-way conversation, "
+        "and should not include lists, bullet points, or other formatting.\n"
         f"Respond in {config.language}."
     )
 
 
 def build_state_injection(config: SessionConfig, state_name: str) -> str:
-    """The dynamic prompt for one student turn. """
+    """The per-turn instruction for one student turn.
+
+    Delivered as a trailing message so it sits at the generation point.
+    """
     strategy = state_set(config.context_dependent)[state_name]
-    return f"For your next reply, behave like this: {strategy}"
+    lines = [
+        "For your next reply only. This takes priority over the flow above: ",
+        f"{strategy}",
+        "Always keep it to a sentence or two, the way people actually talk.",
+    ]
+    if config.context_dependent:
+        lines.append("Answer from your own culture and lived experience. ")
+    return "\n".join(lines)

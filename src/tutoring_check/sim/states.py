@@ -6,7 +6,7 @@ Only "make mistake" is paper-confirmed (A8). The others are authorial design dec
 
 Two disjoint sets:
 - Context-independent (CI): the student is a learner of the topic, so it keeps the correctness/mistake states.
-- Context-dependent (CD): the student knows its own culture only partially, with lived experience plus gaps in the deeper layer (history, meaning, significance).
+- Context-dependent (CD): the student knows its own culture only partially. Lived experience and personal meaning are authoritative; anything outside it (the factual record, or customs it has never practiced) can be wrong or unknown.
 
 An ordered sequence of these states are used for the simulation.
 """
@@ -22,7 +22,7 @@ CI_STATES: dict[str, str] = {
     "wrong_answer": (
         "Give an answer you believe is right but that is actually incorrect. State it plainly and do not signal that you are unsure."
     ),
-    "misconception": ( #TODO: can CD have misconceptions? 
+    "misconception": (
         "Voice a specific, plausible misconception confidently, as if it were correct. Do not hint that it might be wrong."
     ),
     "implicit_confusion": (
@@ -48,22 +48,29 @@ CI_STATES: dict[str, str] = {
 
 CD_STATES: dict[str, str] = {
     "detailed_answer": (
-        "Share what you know in rich, specific detail, drawing on your own lived experience."
+        "Share what you know firsthand in rich, specific detail, drawing on your own lived experience and what this means to you."
     ),
     "partial_answer": (
-        "Venture an explanation of the deeper meaning, history, or significance, but get it partly wrong or leave it incomplete: you have a personal connection to this but have not fully learned this part."
+        "Try to explain something beyond your own lived experience, such as the origin, history, or meaning of a name, or a custom you do not practice yourself, "
+        "but get a detail wrong or leave the explanation incomplete: you have a personal connection here, but have not fully learned this part."
     ),
-    "hesitant": (
-        "You are unsure how to put it into words, so the answer you share comes out tentative and partial."
-    ),
-    "confusion": (
-        "You are not sure what the tutor is actually asking. Ask them to clarify or rephrase before you answer."
+    "misconception": (
+        "Voice a specific, plausible but incorrect claim about something beyond your own lived experience, such as an origin, a date, or a general custom you do not practice yourself, "
+        "stated confidently as if it were correct. Do not hint that it might be wrong. This is never about your own lived experience."
     ),
     "knowledge_gap": (
-        "This touches a part of your culture you do not really know well. Admit honestly that you are not sure about this part."
+        "This touches a part of your culture you do not really know, having neither lived it nor learned its background. "
+        "Admit that briefly and naturally, in your own words, without elaborating."
     ),
-    "off-topic": (
-        "Drift into a loosely-related personal story or side detail that moves away from the tutor's question."
+    "hesitant": (
+        "You half-remember the factual background but are unsure how to put it into words, "
+        "so it comes out short, tentative, and trailing off."
+    ),
+    "confusion": (
+        "You are not sure what the tutor is asking. Briefly ask them to clarify or rephrase before you answer."
+    ),
+    "off_topic": (
+        "Drift into a loosely-related personal story or side detail that moves away from the conversation."
     ),
     "disengagement": (
         "You have lost interest. Reply in a flat, minimal way that shows you are not really engaged right now."
