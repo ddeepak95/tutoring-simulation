@@ -3,7 +3,7 @@
 Simulates tutoring conversations: a **fixed simulated student**, driven by a per-turn
 **learner-state injection**, talks to a **tutor model**. The student is identical for every
 tutor so that many tutor models can be compared. **One simulation = one conversation =
-one cell × repeat** (see §1), saved as one transcript.
+one condition × repeat** (see §1), saved as one transcript.
 
 This build is the **simulator** — it produces transcripts. Scoring is **out of scope** here,
 but the transcript (see §7) carries the fields the downstream critic/ranking needs (§8).
@@ -55,21 +55,21 @@ separate, reduced set (see §3, §4).
 
 ---
 
-## 1. The experiment — cells, axes, repeats
+## 1. The experiment — conditions, axes, repeats
 
-A **cell** is one fully-specified configuration: one scenario, one tutor model, one language,
+A **condition** is one fully-specified configuration: one scenario, one tutor model, one language,
 one tutor prompt variant, with the student model and state sequence all fixed.
 
 - **Headline axes:** tutor model × language.
 - **Secondary axes** (fixed for the headline comparison, varied only while tuning the design):
   scenario coverage and tutor prompt variant.
-- **Repeats.** Because the models are stochastic, each cell is run `repeats` times; each run
+- **Repeats.** Because the models are stochastic, each condition is run `repeats` times; each run
   (`r0`, `r1`, …) is an independent draw producing its own transcript. Repeats give a
-  distribution per cell instead of a single sample — what the downstream ranking consumes.
+  distribution per condition instead of a single sample — what the downstream ranking consumes.
   Comparability holds because every repeat of every tutor faces the identical fixed student.
 
-A **run-set** enumerates the cells (and their repeat counts). The CLI expands it, skips cells
-already on disk, and runs the rest, so adding a model or language only fills the missing cells.
+A **run-set** enumerates the conditions (and their repeat counts). The CLI expands it, skips conditions
+already on disk, and runs the rest, so adding a model or language only fills the missing conditions.
 
 ---
 
@@ -84,7 +84,7 @@ already on disk, and runs the rest, so adding a model or language only fills the
 - **session** — runs one conversation (calling litellm directly) and logs it.
 - **run-logger** — JSONL logging of raw API requests/responses plus the transcript (kept from
   the current project).
-- **cli** — expands the run-set matrix into cells × repeats and runs them, resume-safe.
+- **cli** — expands the run-set matrix into conditions × repeats and runs them, resume-safe.
 
 The TeachTune *Interpret* module and the knowledge/mastery catalogs are removed. The package
 should be renamed since the method is no longer TeachTune.
@@ -153,21 +153,16 @@ conversation, and a **dynamic** prompt that changes each turn — the injection.
 
 Static only — the tutor never receives the learner state (§0.3). Minimal and **identical
 across tutor models** for the headline comparison: role, the topic's teaching directive, and
-baseline pedagogy reflecting the paper's five principles and eight
-scored dimensions (stay on topic, don't reveal the answer, guide actively, promote engagement,
+baseline pedagogy reflecting the paper's five principles and pedagogical dimensions
+(stay on topic, don't reveal the answer, guide actively, promote engagement,
 address mistakes, respond to affect, positive tone, adapt to level), responding in the run's
-language. For CD the prompt instead frames the tutor as helping the student learn more about
+language. (Tutor turns are scored on the mTeach
+framework §8, `evaluation.md`.) For CD the prompt instead frames the tutor as helping the student learn more about
 their **own** culture: build on and draw out what the student knows firsthand (the lived layer,
 treated as authoritative and never corrected), and teach the deeper layer — history, meaning,
 significance — where the student is unsure or partly wrong (§3). The tutor sees only the spoken
 conversation; never the state labels.
 
-> **TODO (CD dimensions, deferred to the critic design — §8, §10).** Under the reframe above the
-> CD dimension set needs revisiting. The previously CD-weak/dropped dimensions likely **return**:
-> "address mistakes" applies to the deeper layer (but never to the lived layer), and "adapt to
-> level" / "don't reveal the answer" stop being weak because the student now has a knowledge
-> level and a deeper layer to be guided toward rather than handed. Whether CD ends up at eight,
-> or with "address mistakes" scoped to the deeper layer only, is not settled here.
 Prompt variant is a secondary knob, fixed for the headline runs.
 
 ---
@@ -189,7 +184,7 @@ tutor opens the lesson and each student turn carries one state from the sequence
 
 ## 7. Output and transcript
 
-One directory per cell × repeat, resume-safe; a cell whose transcript already exists is
+One directory per condition × repeat, resume-safe; a condition whose transcript already exists is
 skipped. Each transcript records: scenario id, scenario type (CI/CD) and region, language,
 tutor model and prompt variant, student model and params, the seed, and the ordered turns —
 each with a turn id, speaker, spoken text, and (on student turns) the stored state label —
@@ -197,23 +192,12 @@ plus a creation timestamp. These fields are chosen so the downstream critic and 
 can reconstruct any comparison.
 
 > Determinism note: with temperature > 0 the wording varies per run; the seed pins the state
-> *trajectory*, not the text. That is why cells carry an explicit repeat index — repeats give
+> *trajectory*, not the text. That is why conditions carry an explicit repeat index — repeats give
 > the distribution the ranking consumes.
 
 ---
 
-## 8. Downstream (out of scope here; kept to justify the schema)
-
-Not built in this stage, but the transcript is shaped to feed it: a critic LLM (not one of the
-tutors under test) scores each tutor turn on the dimensions separately, never collapsed —
-**eight for CI, seven for CD** (CD drops "identify and address misconceptions") `[your design]`; critic-vs-human agreement is validated **per language** before the scores are
-trusted; a Bradley-Terry model per dimension ranks many tutors and accepts new ones by
-refitting. Surface-overlap metrics (BLEU/ROUGE/BERTScore) are explicitly rejected for tutor
-quality.
-
----
-
-## 9. Build order
+## 8. Build order
 
 1. student — state set, per-state strategy text, static/dynamic prompt assembly; validate the
    scenario's state strings against the known set.
@@ -221,31 +205,28 @@ quality.
 3. session — one full conversation; verify the state label is stored but absent from what the
    tutor saw.
 4. catalog / cli — load topic catalogs + regions + languages + models, expand the run-set into
-   cells × repeats, resume-safe.
+   conditions × repeats, resume-safe.
 
 Ship a context-independent topic in English with one tutor model first; more models, languages,
 and topics are catalog entries.
 
 ---
 
-## 10. Open questions
+## 9. Open questions
 
-- CD dimension set under the §3 reframe. Previously-weak/dropped dimensions likely return:
-  "address mistakes" on the deeper layer only (never the lived layer), "adapt to level" and
-  "don't reveal the answer" no longer weak. Settle when the critic is designed (§5, §8).
 - Per-language localization of the strategy strings (§4).
 - Exact CI working state set beyond the paper-confirmed "make mistake"; CD state set is
   authored separately (§3–§4).
 
 ---
 
-## 11. Fidelity / design checklist
+## 10. Fidelity / design checklist
 
 - [ ] Student = fixed model + per-turn state injection (A3/B1); no traits, Interpret, or `can_say`.
 - [ ] State sequence fixed per scenario; identical student for every tutor (B1).
 - [ ] State injected into the student only; stored, hidden from the tutor (B1).
-- [ ] Tutor prompt minimal and identical across tutor models; reflects the five principles /
-      eight dimensions (CD scoring drops "address mistakes" → seven).
+- [ ] Tutor prompt minimal and identical across tutor models; reflects the paper's five
+      principles / pedagogical dimensions (scoring is mTeach — §8, `evaluation.md`).
 - [ ] Headline axes = tutor model × language; prompt variant fixed for headline runs.
 - [ ] Scenarios are the existing CI/CD topics; region reintroduced for CD.
 - [ ] Multi-turn, scenario-guided; correctness is state-controlled, not knowledge-bounded.

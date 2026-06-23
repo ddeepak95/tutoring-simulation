@@ -34,7 +34,6 @@ async def run_session(
     output_root: Path,
     seed: int,
     temperature: float | None = None,
-    tutor_prompt_variant: str = "baseline",
 ) -> Path:
     run_id = str(uuid4())
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -54,7 +53,6 @@ async def run_session(
             "region": config.region,
             "language": config.language,
             "tutor_model": tutor_model,
-            "tutor_prompt_variant": tutor_prompt_variant,
             "student_model": student_model,
             "student_params": {"seed": seed, "temperature": temperature},
             "seed": seed,

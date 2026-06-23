@@ -28,7 +28,6 @@ class ResolvedRun:
     config: SessionConfig
     tutor_model: str                    # litellm model string
     student_model: str
-    tutor_prompt_variant: str
     base_seed: int                      # repeat r uses base_seed + r
     temperature: float | None
     repeats: int
@@ -106,7 +105,6 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
         config=build_session_config(item, cat),
         tutor_model=_model_litellm(cat, item["tutor_model_id"]),
         student_model=_model_litellm(cat, item["student_model_id"]),
-        tutor_prompt_variant=item.get("prompt_variant", "baseline"),
         base_seed=item.get("seed", 0),
         temperature=item.get("temperature"),
         repeats=item.get("repeats", 1),

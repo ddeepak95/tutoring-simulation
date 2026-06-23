@@ -50,7 +50,6 @@ async def run(args: argparse.Namespace) -> int:
                 output_root=cell,
                 seed=r.base_seed + rep,
                 temperature=r.temperature,
-                tutor_prompt_variant=r.tutor_prompt_variant,
             )
             print(f"completed item_id={r.item_id} r{rep} output_dir={out_dir}")
     return 0
