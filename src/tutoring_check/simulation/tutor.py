@@ -4,7 +4,7 @@ It carries the role, the topic's teaching directive, and baseline pedagogy refle
 """
 from __future__ import annotations
 
-from tutoring_check.sim.config import SessionConfig
+from tutoring_check.simulation.config import SessionConfig
 
 _PEDAGOGY = (
     # Role and goal

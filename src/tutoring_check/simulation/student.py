@@ -5,8 +5,8 @@ The dynamic injection is the current state's strategy, rebuilt each student turn
 """
 from __future__ import annotations
 
-from tutoring_check.sim.config import SessionConfig
-from tutoring_check.sim.states import state_set
+from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.states import state_set
 
 
 def build_student_system_prompt(config: SessionConfig) -> str:

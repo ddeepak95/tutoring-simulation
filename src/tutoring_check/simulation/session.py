@@ -1,7 +1,7 @@
 """Run one conversation = one simulation, and log it (spec §6, §7).
 Tutor-first, alternating; the fixed state sequence is walked one state per student turn.
 The state label is stored on the student turn but never shown to the tutor (spec §0.3).
-Comparability comes from the fixed student model + params + seed + state sequence, not identical wording.
+Comparability comes from the fixed student model + state sequence, not identical wording.
 """
 from __future__ import annotations
 
@@ -12,18 +12,15 @@ from uuid import uuid4
 
 from litellm import acompletion
 
-from tutoring_check.sim.config import SessionConfig
-from tutoring_check.sim.student import build_student_system_prompt, build_state_injection
-from tutoring_check.sim.tutor import build_tutor_system_prompt
+from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.student import build_student_system_prompt, build_state_injection
+from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 
 
-def _completion_kwargs(model: str, messages: list[dict], seed: int, temperature: float | None) -> dict:
-    """Assemble litellm kwargs, omitting temperature when not set so the provider default applies."""
-    kwargs: dict[str, Any] = {"model": model, "messages": messages, "seed": seed}
-    if temperature is not None:
-        kwargs["temperature"] = temperature
-    return kwargs
+def _completion_kwargs(model: str, messages: list[dict]) -> dict:
+    """Assemble litellm kwargs; the provider's default sampling applies."""
+    return {"model": model, "messages": messages}
 
 
 async def run_session(
@@ -32,8 +29,6 @@ async def run_session(
     tutor_model: str,
     student_model: str,
     output_root: Path,
-    seed: int,
-    temperature: float | None = None,
 ) -> Path:
     run_id = str(uuid4())
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -54,15 +49,13 @@ async def run_session(
             "language": config.language,
             "tutor_model": tutor_model,
             "student_model": student_model,
-            "student_params": {"seed": seed, "temperature": temperature},
-            "seed": seed,
             "state_sequence": list(config.state_sequence),
             "tutor_system_prompt": tutor_system,
             "student_static_prompt": student_static,
         }
     )
 
-    # The tutor sees only spoken text; it is seeded with a kickoff so it opens the conversation.
+    # The tutor sees only spoken text; the pre-loaded message opens the conversation.
     messages: list[dict[str, Any]] = [
         {"role": "system", "content": tutor_system},
         {"role": "user", "content": "Begin the conversation. Do not reply to this message. "},
@@ -73,7 +66,7 @@ async def run_session(
     turn_id = 0
     for state_name in config.state_sequence:
         # Tutor turn
-        tutor_request = _completion_kwargs(tutor_model, messages, seed, temperature)
+        tutor_request = _completion_kwargs(tutor_model, messages)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
         tutor_response = await acompletion(**tutor_request)
         tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
@@ -93,7 +86,7 @@ async def run_session(
             + student_turns
             + [{"role": "system", "content": build_state_injection(config, state_name)}]
         )
-        student_request = _completion_kwargs(student_model, student_messages, seed, temperature)
+        student_request = _completion_kwargs(student_model, student_messages)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
         student_response = await acompletion(**student_request)
         student_text = getattr(student_response.choices[0].message, "content", None) or ""

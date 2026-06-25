@@ -1,5 +1,4 @@
 """CLI: expand the run-set into cells x repeats and run each, resume-safe (spec §1, §9).
-Repeat r of a cell uses seed = base_seed + r, so r0 of every tutor faces the same student draw.
 A cell whose transcript already exists on disk is skipped, so adding a model/topic only fills gaps.
 """
 from __future__ import annotations
@@ -10,8 +9,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from tutoring_check.sim.catalog import load_run_set
-from tutoring_check.sim.session import run_session
+from tutoring_check.simulation.catalog import load_run_set
+from tutoring_check.simulation.session import run_session
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -26,7 +25,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 async def run(args: argparse.Namespace) -> int:
     load_dotenv()
-    # Each run_set item carries its own config, models, prompt, seed, and repeat count
+    # Each run_set item carries its own config, models, prompt, and repeat count
     # (resolved from the JSON catalogs in the same dir as --run-set).
     runs = load_run_set(args.run_set.parent)
     if args.item_id:
@@ -48,8 +47,6 @@ async def run(args: argparse.Namespace) -> int:
                 tutor_model=tutor_model,
                 student_model=student_model,
                 output_root=cell,
-                seed=r.base_seed + rep,
-                temperature=r.temperature,
             )
             print(f"completed item_id={r.item_id} r{rep} output_dir={out_dir}")
     return 0

@@ -8,7 +8,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.sim.config import SessionConfig
+from tutoring_check.simulation.config import SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -28,8 +28,6 @@ class ResolvedRun:
     config: SessionConfig
     tutor_model: str                    # litellm model string
     student_model: str
-    base_seed: int                      # repeat r uses base_seed + r
-    temperature: float | None
     repeats: int
 
 
@@ -105,8 +103,6 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
         config=build_session_config(item, cat),
         tutor_model=_model_litellm(cat, item["tutor_model_id"]),
         student_model=_model_litellm(cat, item["student_model_id"]),
-        base_seed=item.get("seed", 0),
-        temperature=item.get("temperature"),
         repeats=item.get("repeats", 1),
     )
 

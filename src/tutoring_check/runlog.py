@@ -17,11 +17,18 @@ def serialize_response(response: Any) -> Any:
 
 
 class JsonlLogger:
-    def __init__(self, out_dir: Path):
+    def __init__(
+        self,
+        out_dir: Path,
+        *,
+        transcript_name: str = "transcript.jsonl",
+        response_name: str = "api_responses.jsonl",
+        request_name: str = "api_requests.jsonl",
+    ):
         self.out_dir = out_dir
-        self.transcript_path = out_dir / "transcript.jsonl"
-        self.api_path = out_dir / "api_responses.jsonl"
-        self.request_path = out_dir / "api_requests.jsonl"
+        self.transcript_path = out_dir / transcript_name
+        self.api_path = out_dir / response_name
+        self.request_path = out_dir / request_name
         self.out_dir.mkdir(parents=True, exist_ok=True)
 
     def _append(self, path: Path, record: dict) -> None:

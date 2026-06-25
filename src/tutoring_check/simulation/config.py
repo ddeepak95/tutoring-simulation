@@ -1,13 +1,13 @@
 """The content spec for one simulation = one conversation (spec §1, §7).
 The student is driven by the injected per-turn state alone (spec §0.2).
 The learner's framing (learner vs. culture-sharer) follows from context_dependent + topic + region.
-Run-level knobs (models, seed, params, repeat index) live at the session call, not here.
+Run-level knobs (models, repeat index) live at the session call, not here.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-from tutoring_check.sim.states import validate_sequence
+from tutoring_check.simulation.states import validate_sequence
 
 
 @dataclass
