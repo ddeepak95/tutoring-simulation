@@ -40,3 +40,20 @@ PYTHONPATH=src python -m tutoring_check.cli --run-set data/run_set.json --item-i
 
 Each conversation is written to `runs/<folder_name>/<item_id>/r<n>/<timestamp>_<uuid>/` as
 `transcript.jsonl` plus raw `api_requests.jsonl` / `api_responses.jsonl`.
+
+## Run evaluation
+
+Annotate every conversation under a runs/ tree with the mTeach Instructional Ability moves (resume-safe):
+
+```bash
+# from project root — traverse runs/ and evaluate each transcript.jsonl
+PYTHONPATH=src python -m tutoring_check.evaluation.cli --runs runs --annotator-model <litellm_model>
+```
+
+Flags:
+- `--runs <path>` — root dir to traverse for `transcript.jsonl` (default: `runs`).
+- `--annotator-model <litellm_model>` — required; must differ from the tutor and student models to avoid self-serving bias.
+
+Each conversation gets an `evaluation_transcript.jsonl` written alongside its `transcript.jsonl`,
+plus raw `evaluation_requests.jsonl` / `evaluation_responses.jsonl`. A conversation that already
+has `evaluation_transcript.jsonl` is skipped, so re-running only fills gaps.

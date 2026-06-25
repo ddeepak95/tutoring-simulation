@@ -3,6 +3,45 @@
 This is a specification for the evaluation pipeline of tutor/student conversation. 
 
 
+## Modules
+
+The evaluator lives in `src/tutoring_check/evaluation/`. The annotator's prompts and response schema are generated from the dimension registry so they cannot drift from it; the same registry's rules are reused to validate each response.
+
+```mermaid
+flowchart TD
+    %% cli drives the outer loop
+    cli[cli.py<br/>traverse runs/, resume-safe] --> load[transcript.py<br/>load conversation]
+    load --> evaluator[evaluator.py<br/>driver · loop tutor turns × annotators]
+
+    %% evaluator is the orchestrator
+    evaluator -->|build prompt + schema| annotate
+    evaluator -->|call| llm{{litellm}}
+    evaluator -->|check| validate[/validate · location substring/]
+    evaluator -->|write record| runlog[runlog.py · JsonlLogger]
+
+    subgraph annotate [annotator.py]
+        direction TB
+        ia[Instructional Ability]
+        iq[Informational Quality]
+        lq[Language Quality]
+    end
+
+    runlog --> out[(evaluation_transcript.jsonl)]
+    out --> judge[judge.py · aggregation + comparison · TBD]
+
+    %% dimensions registry feeds the pipeline from the side
+    dims[(dimensions.py<br/> dimensions registry)] -. generates prompt + schema .-> annotate
+    dims -. supplies validation rules .-> validate
+
+    classDef store fill:#eef,stroke:#5566aa,color:#222;
+    classDef ext fill:#efe,stroke:#557755,color:#222;
+    class out,dims store;
+    class llm ext;
+```
+
+`dimensions.py` and `transcript.py` are leaves; `annotator.py` builds on both; `evaluator.py` is the driver; `judge.py` is a later stage that aggregates across turns.
+
+
 ## Inputs and Outputs
 
 The evaluator consumes the simulator's output. It does not re-run a conversation. For each conversation, it reads `transcript.jsonl`, which has data on the `scenario-id`, `scenario-type` (CI or CD), `region`, and `language`. 
@@ -14,7 +53,7 @@ Additionally, there will be `evaluation_requests` and `evaulation_responses`, th
 
 ## Schema
 
-Here is the schema for `evaluation_transcript.jsonl`
+Here is the header schema for `evaluation_transcript.jsonl`.
 ```
 # header
 { "timestamp": ...,
@@ -22,21 +61,9 @@ Here is the schema for `evaluation_transcript.jsonl`
   "scenario_type": "CI|CD",
   "region": ...,
   "language": ...,
-  "critic_model": ...,
-  "critic_params": { "seed": ..., "temperature": ... },
+  "annotator_model": ...,
   "tutor_model": ...,            # copied from the transcript
   "transcript_path": ... }
-
-# per tutor turn
-{ "timestamp": ..., 
-  "turn_id": <int>,
-  "dimensions": {
-     "<dimension_name>": { "verdict": "yes|no|na", 
-                           "location": "<verbatim quote>",      # exact substring of the tutor turn
-                           "rationale": ... 
-                         }, 
-     ...
-  } }
 ```
 
 
@@ -50,7 +77,7 @@ Instructional Ability (from LearnLM):
 2. Encourage Active Learning (Keeps the student actively participating (for example, through questions  or practice problems that the student has to answer). Guides student to an answer with appropriate steps.)
 3. Deepen Metacognition (Provides clear feedback identifying any mistakes made by the student.  Provides clear feedback pointing out “successes” by the student (for example, on the student’s skills, problem-solving, work, knowledge, etc.)) 
 4. Motivate and Stimulate Curiosity (Inspires and stimulates the interest or curiosity of the student. Monitors the student’s motivational state and adjusts responses accordingly.) Delivers feedback (whether positive or negative) in an encouraging way.
-5. Adapt to Learners’ Goals and needs (Identifies the student’s goal or prior knowledge).
+5. Adapt to Learners’ Goals and Needs (Identifies the student’s goal or prior knowledge).
 
 
 Informational Quality (adapted from Wang and Strong's dimensions):
@@ -67,60 +94,59 @@ Language Quality:
 3. Naturalness
 4. Vocabulary (the proficiency-level framework is TBD)
 
-Each dimension is a bundle of sub-aspects (listed above in parentheses). The rollup rule is conjunctive: the verdict is `yes` only if every sub-aspect holds, and `no` if any one fails.
+Each dimension is a bundle of sub-aspects (listed above in parentheses). A move is tagged only when its behavior, as described by those sub-aspects, is exhibited on the turn.
 
 
-## The critic
+## The annotators
 
-Each utterance (tutor message) is evaluated on mTeach through another model as a critic. The critic is a single fixed model used across all conditions, so that a model or language difference is never confounded. It must differ from both the tutor model under test and the student model, to avoid self-serving bias. Its model id and params (seed, temperature) are recorded in the evaluation header for reproducibility.
+Each utterance (tutor message) is evaluated by a separate model acting as annotators. The mTeach framework has three dimension categories, kept as three separate annotators. 
+The annotators have a single fixed model. It must differ from both the tutor model under test and the student model, to avoid self-serving bias. Its model id and params (seed, temperature) are recorded in the evaluation header for reproducibility.
 
-The critic sees the full transcript and scores it turn-by-turn. For each tutor turn, it receives the whole conversation with that target turn marked, and returns a verdict per dimension for the marked turn only.
+Each annotator has its own system prompt, built from its own dimensions.
 
-The critic reads the transcript in its original language because a translation step would introduce its own errors and confound the language comparison. Regardless of the transcript's language, the critic's `rationale` fields are written in English, so an analyst can review uniformly.
+The instructional ability annotator see the full transcript and reads it turn-by-turn. For each tutor turn, the whole conversation is rendered once with that target turn marked, and the annotator labels the marked turn only. 
 
-
-## Verdicts: yes / no / na
-
-Each dimension is scored `yes`/`no`/`na` per turn. Every dimension is worded so that `yes` is the desirable outcome. The yes-rate is directly a quality signal.
-
-If the occasion for a behavior is present, the critic must commit to yes or no. The occasion is absent and the verdict is `na` only under three occasions:
-
-- **The turn contains no explanation or informational content** (such as a bare question, acknowledgement, or social filler). This would make `Manage Cognitive Load`, and all three Informational Quality dimensions `na`. A turn that asserts no information has no accuracy, relevance, or clarity to judge.
-- **The prior student turn contains no assessable attempt** (such as an answer, work, or a mistake to react to). This makes `Deepen Metacognition` `na`, since both of its sub-behaviors (feedback on mistakes, feedback on successes) need student work to react to. It separates "failed to give warranted feedback" (`no`) from "no feedback was warranted" (`na`), which arises whenever the student gave nothing to assess (`off_topic`, `disengagement`, `confusion`, or a bare clarifying question).
-- **Lived Experience in a CD conversation:** when a student is talking about their lived experience in a CD context, it is authoritative and off-limits to correction. The correction-oriented dimensions are `na`, since there is no mistake to identify.
-
-A dimension is `na` only when all of its sub-behaviors are out of occasion. A composite dimension with at least one always-applicable sub-behavior is never `na`; the gated sub-behavior simply drops out of the judgment on turns where its occasion is absent. `Motivate & Stimulate Curiosity` in particular has inspire-curiosity and monitor-and-adjust sub-behaviors apply every turn, so it is always scored; its "deliver feedback encouragingly" clause only weighs in when feedback actually occurs, but its absence does not force `na`.
-
-All other dimensions always apply and are never `na`: `Encourage Active Learning`, `Adapt to Learners' Goals and Needs`, `Motivate & Stimulate Curiosity`, and all four Language Quality dimensions.
-
-`na` turns are excluded from that dimension's denominator when rates are computed (see Aggregation).
+The annotators read the transcript in the original language. Regardless of the transcript's language, the annotator's `reasoning` fields are written in English, so an analyst can review uniformly.
 
 
-## Location
+## Current scope: Instructional Ability as move identification
 
-`location` is a verbatim quote. It's an exact substring copied from the tutor turn (so it can be found back in the text with a string search). Usage rule: for Instructional Ability dimensions, it is recorded on any verdict (`yes` or `no`), pointing to where the behavior occurred; for the other categories it is recorded only on a `no`, pointing at the offending span. On `na`, there is no location.
+The first build is only the Instructional Ability annotator, which executes move identification. The five Instructional Ability dimensions are the move vocabulary. For the marked turn, the annotator tags which moves occur and omits the rest exactly as in an example per-utterance prompt from the National Tutoring Observatory's RND. Each tagged move records a `location` (a verbatim substring of the turn) and a `reasoning` in English.
 
+In this mode, the per-tutor-turn record is a list of tagged moves:
 
-## Evaluator system prompt
+```
+{ "timestamp": ...,
+  "turn_id": <int>,
+  "moves": [
+     { "move": "<instructional_dimension_key>",      # one of the five Instructional Ability dimensions
+       "location": "<quote>",                        # exact substring of the tutor turn
+       "reasoning": ...                              # English
+     }, ... ] }
+```
 
-A system prompt for the evaluator will be written. This example starter is adapted from LearnLM. "You a critic assessing a Tutor who is interacting with a Student. The Tutor should attempt to be (believable, objective, accurate, and reputable). As a critic, based on the transcript provided, you identify whether the tutor is (believable, objective, accurate, and reputable), stating yes or no, and why. "
+## Location and reasoning
+
+`location` is a verbatim quote, an exact substring copied from the tutor turn, so it can be found back in the text with a string search. Every tagged move records one, pointing to where the move occurred.
+
+`reasoning` is recorded for every tagged move, in English. It is an audit and aid for prompt-iteration and not a score.
 
 
 ## Validation (TBD)
 
-Critic scores are temporary until validated against a human-labeled sample.
+Annotator tags are temporary until validated against a human-labeled sample.
 
-The validation is TBD. When built, it compares the critic's verdicts to human labels on the same yes/no/na instrument, checks agreement separately per language, and only trusts a dimension's scores once agreement is good enough. The agreement metric and the threshold are also TBD.
+The validation is TBD. When built, it compares the annotator's tagged moves to human labels on the same move set, checks agreement separately per language, and only trusts a move's tags once agreement is good enough. The agreement metric and the threshold are also TBD.
 
 
-## Aggregation and comparison (TBD)
+## The judge: aggregation and comparison (TBD)
 
-The following is TBD and are implementation suggestions:
+Where the annotator emits per-turn move tags, the judge is the deterministic step that consumes those tags and computes the rollups and comparisons below. The following is TBD and are implementation suggestions:
 
-1. **Turn aggregation to conversation.** Per dimension, drop `na` turns and take yes / (yes + no), a quality score in [0,1].
-2. **Conversation aggregation to condition.** A condition (scenario × tutor model × language) is run `repeats` times, producing one conversation each. Average the per-conversation yes-rates across those repeats and report a spread (e.g. std, bootstrap CI).
-3. **Condition comparison.** Across the headline axes (tutor model × language), either compare per-dimension yes-rates with their intervals, or fit Bradley-Terry per dimension for head-to-head ranking of many tutors. Once decided, update `simulation.md`.
+1. Turn aggregation to conversation.
+2. Conversation aggregation to condition.
+   A condition (scenario × tutor model × language) is run `repeats` times, producing one conversation each. Average the per-conversation presence rates across those repeats and report a spread (e.g. std, bootstrap CI).
+3. Condition comparison. Compare across the headline axes (tutor model × language).
 
-- On a fixed model, the languages will vary and be compared.
-- On a fixed language, the models will vary and be compared.
+On a fixed model, the languages will vary and be compared. On a fixed language, the models will vary and be compared.
 

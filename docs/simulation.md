@@ -89,6 +89,23 @@ already on disk, and runs the rest, so adding a model or language only fills the
 The TeachTune *Interpret* module and the knowledge/mastery catalogs are removed. The package
 should be renamed since the method is no longer TeachTune.
 
+The simulator lives in `src/tutoring_check/sim/`:
+
+```mermaid
+flowchart TD
+    cli[cli.py<br/>expand run-set × repeats, resume-safe] --> catalog[catalog.py<br/>load JSON catalogs]
+    catalog --> config[config.py<br/>SessionConfig]
+    config -. validates against .-> states[states.py<br/>learner-state set]
+    cli --> session[session.py<br/>run one conversation]
+    config --> session
+    session --> tutor[tutor.py<br/>tutor system prompt]
+    session --> student[student.py<br/>student prompt + state injection]
+    student -. reads .-> states
+    session --> llm{{litellm<br/>acompletion, alternating turns}}
+    session --> runlog[runlog.py<br/>JsonlLogger]
+    runlog --> out[(transcript.jsonl<br/>api_requests/responses.jsonl)]
+```
+
 ---
 
 ## 3. Scenarios = the existing topic catalogs
