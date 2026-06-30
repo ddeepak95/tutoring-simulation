@@ -24,26 +24,26 @@ def build_student_system_prompt(config: SessionConfig) -> str:
         intro = (
             f"You are {student}, a student learning about {config.topic}. "
             f"Your conversation partner is {tutor}, a tutor.\n"
+            f"Over about {len(config.state_sequence)} exchanges, work from initial misunderstanding "
+            f"toward a clear, correct understanding, coming to a conclusion by the end.\n"
+            f"Stay fully in whatever you are asked to do on each turn; do not jump ahead to "
+            f"understanding before you actually get there.\n"
         )
     return (
         intro
         # TODO: Behavior rules.
-        + "Your messages should be in natural language, as if you are talking out loud in a two-way conversation, "
-        "and should not include lists, bullet points, or other formatting.\n"
+        + "Write in plain, simple prose, not lists or bullet points or any other formatting.\n"
         f"Respond in {config.language}."
     )
 
 
 def build_state_injection(config: SessionConfig, state_name: str) -> str:
-    """The per-turn instruction for one student turn.
-
-    Delivered as a trailing message so it sits at the generation point.
-    """
+    """The per-turn instruction for one student turn."""
     strategy = state_set(config.context_dependent)[state_name]
     lines = [
         "For your next reply only. This takes priority over the flow above: ",
         f"{strategy}",
-        "Always keep it to a sentence or two, the way people actually talk.",
+        "Keep it short and direct, using a single sentence or phrase. Get to your point.\n"
     ]
     if config.context_dependent:
         lines.append("Answer from your own culture and lived experience. ")

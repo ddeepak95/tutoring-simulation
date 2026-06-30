@@ -58,13 +58,22 @@ async def run_session(
     # The tutor sees only spoken text; the pre-loaded message opens the conversation.
     messages: list[dict[str, Any]] = [
         {"role": "system", "content": tutor_system},
-        {"role": "user", "content": "Begin the conversation. Do not reply to this message. "},
+        {
+            "role": "user",
+            "content": (
+                "Begin the conversation. Open by posing the full problem from your instructions to the "
+                "student. Address the student, not this message."
+            ),
+        },
     ]
     # The student turns hold spoken turns only; its system prompt is rebuilt each turn with the injection.
     student_turns: list[dict[str, Any]] = []
 
     turn_id = 0
-    for state_name in config.state_sequence:
+    # One extra iteration past the states: each iteration opens with a tutor turn, so the final pass
+    # captures the tutor's response to the last student turn before breaking. This is an ordinary
+    # tutor turn, not a wrap-up; we do not assume the conversation has ended.
+    for step in range(len(config.state_sequence)):
         # Tutor turn
         tutor_request = _completion_kwargs(tutor_model, messages)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
@@ -79,12 +88,23 @@ async def run_session(
         messages.append({"role": "assistant", "content": tutor_text})
         student_turns.append({"role": "user", "content": tutor_text})
         turn_id += 1
+        
+        state_name = config.state_sequence[step]
 
-        # Student turn: static system prompt up front, current state instruction as a trailing message
+        # Student turn: static system prompt up front, current state instruction folded onto the
+        # end of the latest tutor turn so it sits at the generation point. Appending it as its own
+        # message would make two consecutive user turns, which some providers (e.g. Anthropic) reject;
+        # merging keeps the message list strictly alternating for every provider.
+        *prior_turns, latest_tutor = student_turns
         student_messages = (
             [{"role": "system", "content": student_static}]
-            + student_turns
-            + [{"role": "system", "content": build_state_injection(config, state_name)}]
+            + prior_turns
+            + [
+                {
+                    "role": "user",
+                    "content": latest_tutor["content"] + "\n\n" + build_state_injection(config, state_name),
+                }
+            ]
         )
         student_request = _completion_kwargs(student_model, student_messages)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})

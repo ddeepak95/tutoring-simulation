@@ -19,29 +19,23 @@ CI_STATES: dict[str, str] = {
     "partial_answer": (
         "Give an answer that is partly right but incomplete: you grasp some of it but leave out or get fuzzy on the rest."
     ),
-    "wrong_answer": (
-        "Give an answer you believe is right but that is actually incorrect. State it plainly and do not signal that you are unsure."
-    ),
     "misconception": (
-        "Voice a specific, plausible misconception confidently, as if it were correct. Do not hint that it might be wrong."
+        "Voice a specific, plausible misconception, as if it were correct. Do not hint that it might be wrong."
     ),
     "implicit_confusion": (
-        "You are confused, but do not say so directly. Let it show through a hesitant, muddled, or off-base answer."
+        "You are confused, but do not say so directly. Let it show through a hesitant, muddled answer."
     ),
     "explicit_confusion": (
         "You are confused and you say so: ask the tutor a question or express a lack of understanding."
     ),
-    "disengagement": (
-        "You have lost interest. Reply in a flat, minimal way that shows you are not really engaged right now."
-    ),
     "frustration": (
-        "The material feels hard and you are getting frustrated. Show that you are tempted to give up."
+        "You are getting a little frustrated and discouraged, and it is not clicking. Show it lightly, not dramatically."
     ),
     "correct_no_explanation": (
         "Give the correct answer, but only the bare answer with no reasoning or explanation, even when an explanation would help."
     ),
     "off_topic": (
-        "Drift away from the lesson: bring up something unrelated instead of staying on the topic."
+        "Drift off the lesson onto a tangent the topic sparked: a curious side question or 'what about...' that is related to the subject but pulls away from what the tutor is trying to get at."
     ),
 }
 
@@ -56,7 +50,7 @@ CD_STATES: dict[str, str] = {
     ),
     "misconception": (
         "Voice a specific, plausible but incorrect claim about something beyond your own lived experience, such as an origin, a date, or a general custom you do not practice yourself, "
-        "stated confidently as if it were correct. Do not hint that it might be wrong. This is never about your own lived experience."
+        "stated as if it were correct. Do not hint that it might be wrong. This is never about your own lived experience."
     ),
     "knowledge_gap": (
         "This touches a part of your culture you do not really know, having neither lived it nor learned its background. "

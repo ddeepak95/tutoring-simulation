@@ -76,7 +76,7 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
             context_dependent=False,
             topic=topic["topic"],
             instruction=topic["instruction"],
-            state_sequence=list(topic["state_sequence"]),
+            state_sequence=list(item["state_sequence"]),
             language=_language_name(cat, item["language_id"]),
         )
 
@@ -89,7 +89,7 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
             context_dependent=True,
             topic=topic["topic"],
             instruction=topic["instruction"],
-            state_sequence=list(topic["state_sequence"]),
+            state_sequence=list(item["state_sequence"]),
             language=_language_name(cat, language_id),
             region=region["name"],
         )
@@ -108,8 +108,16 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
 
 
 def load_run_set(data_dir: Path | None = None) -> list[ResolvedRun]:
-    """Resolve every item in run_set.json into a runnable ResolvedRun."""
+    """Resolve every item in run_set.json into a runnable ResolvedRun.
+
+    The shared default_state_sequence is folded into each item that does not set its own,
+    so the student arc lives in one place but stays overridable per item.
+    """
     data_dir = data_dir or _DATA_DIR
     cat = load_catalogs(data_dir)
-    items = json.loads((data_dir / "run_set.json").read_text())["items"]
+    run_set = json.loads((data_dir / "run_set.json").read_text())
+    default_sequence = run_set.get("default_state_sequence", [])
+    items = run_set["items"]
+    for item in items:
+        item.setdefault("state_sequence", default_sequence)
     return [resolve_run_item(item, cat) for item in items]

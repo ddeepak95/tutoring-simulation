@@ -144,7 +144,7 @@ conversation, and a **dynamic** prompt that changes each turn — the injection.
   questions when confused; respond in the run's language. Kept close to the current student
   prompt to limit drift.
 - **Dynamic (student):** the strategy for the current learner state — e.g. for "misconception,"
-  voice a specific, plausible misconception confidently without signaling it is wrong; for
+  voice a specific, plausible misconception without signaling it is wrong; for
   "frustration," show the work is hard and you are tempted to give up.
 - **State set (CI):** only "make mistake" is paper-confirmed; the rest is extrapolated and
   `[your design]` — opening, correct answer, partial answer, wrong answer, misconception,
