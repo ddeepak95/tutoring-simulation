@@ -107,15 +107,17 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
     )
 
 
-def load_run_set(data_dir: Path | None = None) -> list[ResolvedRun]:
-    """Resolve every item in run_set.json into a runnable ResolvedRun.
+def load_run_set(run_set_path: Path | None = None) -> list[ResolvedRun]:
+    """Resolve every item in the given run-set file into a runnable ResolvedRun.
 
-    The shared default_state_sequence is folded into each item that does not set its own,
-    so the student arc lives in one place but stays overridable per item.
+    The catalogs (languages, models, topics, regions) are loaded from the run-set
+    file's own directory. The shared default_state_sequence is folded into each item
+    that does not set its own, so the student arc lives in one place but stays
+    overridable per item.
     """
-    data_dir = data_dir or _DATA_DIR
-    cat = load_catalogs(data_dir)
-    run_set = json.loads((data_dir / "run_set.json").read_text())
+    run_set_path = run_set_path or (_DATA_DIR / "run_set.json")
+    cat = load_catalogs(run_set_path.parent)
+    run_set = json.loads(run_set_path.read_text())
     default_sequence = run_set.get("default_state_sequence", [])
     items = run_set["items"]
     for item in items:

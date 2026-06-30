@@ -5,10 +5,8 @@ Comparability comes from the fixed student model + state sequence, not identical
 """
 from __future__ import annotations
 
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from uuid import uuid4
 
 from litellm import acompletion
 
@@ -30,9 +28,7 @@ async def run_session(
     student_model: str,
     output_root: Path,
 ) -> Path:
-    run_id = str(uuid4())
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out_dir = output_root / f"{timestamp}_{run_id}"
+    out_dir = output_root
     logger = JsonlLogger(out_dir=out_dir)
 
     tutor_system = build_tutor_system_prompt(config)

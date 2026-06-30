@@ -22,8 +22,7 @@ def build_student_system_prompt(config: SessionConfig) -> str:
         )
     else:  # TODO: refine framing wording
         intro = (
-            f"You are {student}, a student learning about {config.topic}. "
-            f"Your conversation partner is {tutor}, a tutor.\n"
+            f"You are pretending to be a realistic student learning about {config.topic}. "
             f"Over about {len(config.state_sequence)} exchanges, work from initial misunderstanding "
             f"toward a clear, correct understanding, coming to a conclusion by the end.\n"
             f"Stay fully in whatever you are asked to do on each turn; do not jump ahead to "

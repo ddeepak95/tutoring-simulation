@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import shutil
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -27,19 +28,24 @@ async def run(args: argparse.Namespace) -> int:
     load_dotenv()
     # Each run_set item carries its own config, models, prompt, and repeat count
     # (resolved from the JSON catalogs in the same dir as --run-set).
-    runs = load_run_set(args.run_set.parent)
+    runs = load_run_set(args.run_set)
     if args.item_id:
         runs = [r for r in runs if r.item_id == args.item_id]
         if not runs:
             raise ValueError(f"No run_set entry matched --item-id '{args.item_id}'")
 
-    args.out.mkdir(parents=True, exist_ok=True)
+    # Group every run-set's output under a parent folder named after the run-set file,
+    # so outputs from different run-sets don't collide under a shared --out.
+    out_root = args.out / args.run_set.stem
+    out_root.mkdir(parents=True, exist_ok=True)
+    # Keep a copy of the run-set alongside its outputs so each run is self-describing.
+    shutil.copy2(args.run_set, out_root / args.run_set.name)
     for r in runs:
         tutor_model = args.tutor_model or r.tutor_model
         student_model = args.student_model or r.student_model
         for rep in range(r.repeats):
-            cell = args.out / r.item_id / f"r{rep}"
-            if list(cell.glob("*/transcript.jsonl")):
+            cell = out_root / r.item_id / f"r{rep}"
+            if (cell / "transcript.jsonl").exists():
                 print(f"skip (exists) item_id={r.item_id} r{rep}")
                 continue
             out_dir = await run_session(
