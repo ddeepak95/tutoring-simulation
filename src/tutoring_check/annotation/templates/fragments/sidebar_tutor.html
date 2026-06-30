@@ -1,0 +1,28 @@
+<div class="sidebar-head">
+  <span class="speaker">teacher · turn {{ turn.turn_id }}</span>
+  <blockquote>{{ turn.content|sanitize }}</blockquote>
+</div>
+
+{% for d in dimensions %}
+<div class="dim">
+  <label>{{ d.name }}</label>
+  <p class="criteria">{{ d.criteria }}</p>
+  <select class="label {{ labels.get(d.key)|label_class }}" name="value"
+          hx-post="/annotate/{{ slug }}/save?turn_id={{ turn.turn_id }}&kind=tutor_dimensions&dim={{ d.key }}"
+          hx-target="#sidebar-status" hx-swap="outerHTML" hx-trigger="change">
+    <option value="">—</option>
+    {% for lab in d.labels %}
+    <option value="{{ lab }}" {{ 'selected' if labels.get(d.key) == lab else '' }}>{{ lab }}</option>
+    {% endfor %}
+  </select>
+</div>
+{% endfor %}
+
+<div class="dim">
+  <label>Note</label>
+  <textarea name="note"
+            hx-post="/annotate/{{ slug }}/save?turn_id={{ turn.turn_id }}&kind=tutor_dimensions&field=note"
+            hx-target="#sidebar-status" hx-swap="outerHTML" hx-trigger="change">{{ data.get('note', '') }}</textarea>
+</div>
+
+<span id="sidebar-status" class="status"></span>

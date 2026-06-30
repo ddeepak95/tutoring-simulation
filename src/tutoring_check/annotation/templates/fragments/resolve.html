@@ -1,0 +1,18 @@
+<div class="resolve-card">
+  <h2>{{ name }}</h2>
+  <ul class="meta">
+    <li><b>topic</b> {{ header.scenario_id }}</li>
+    <li><b>type</b> {{ header.scenario_type }}</li>
+    <li><b>region</b> {{ header.region or "—" }}</li>
+    <li><b>language</b> {{ header.language }}</li>
+    <li><b>tutor model</b> {{ header.tutor_model }}</li>
+    <li><b>timestamp</b> {{ header.timestamp }}</li>
+    <li><b>run</b> {{ ref.key }}</li>
+    <li><b>status</b>
+      {% if done == total %}<span class="ok">complete</span>
+      {% elif done == 0 %}not started
+      {% else %}in progress{% endif %}
+      ({{ done }}/{{ total }} turns)</li>
+  </ul>
+  <a class="open" href="/annotate/{{ ref.slug }}">Open →</a>
+</div>

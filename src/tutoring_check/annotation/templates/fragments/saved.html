@@ -1,0 +1,3 @@
+<span id="sidebar-status" class="status">{{ '✓ complete' if complete else 'saved' }}</span>
+<span id="marker-{{ turn_id }}" class="marker {{ 'done' if complete else 'partial' }}"
+      hx-swap-oob="true">{{ '●' if complete else '◐' }}</span>

@@ -21,98 +21,75 @@ class Category(str, Enum):
 
 @dataclass(frozen=True)
 class Dimension:
-    """One mTeach dimension and the sub-aspects that describe its behavior. """
+    """One mTeach dimension, the criterion describing its behavior, and its allowed labels. """
     key: str
     name: str
     category: Category
-    sub_aspects: tuple[str, ...]
+    criteria: str
+    labels: tuple[str, ...]
+
+
+# The label set shared by most dimensions.
+_THREE_POINT: tuple[str, ...] = ("Yes", "To an extent", "No")
 
 
 DIMENSIONS: tuple[Dimension, ...] = (
-    # Instructional Ability (from LearnLM)
+    # Instructional Ability
     Dimension(
-        key="manage_cognitive_load",
-        name="Manage Cognitive Load",
+        key="mistake_identification",
+        name="Mistake Identification",
         category=Category.INSTRUCTIONAL_ABILITY,
-        sub_aspects=("Explains the underlying concepts or skills clearly and understandably.",),
+        criteria="Has the tutor identified/recognized a mistake in a student's response?",
+        labels=_THREE_POINT,
     ),
     Dimension(
-        key="encourage_active_learning",
-        name="Encourage Active Learning",
+        key="mistake_location",
+        name="Mistake Location",
         category=Category.INSTRUCTIONAL_ABILITY,
-        sub_aspects=(
-            "Keeps the student actively participating, e.g. through questions or practice problems to answer.",
-            "Guides the student to an answer with appropriate steps.",
-        ),
+        criteria="Does the tutor's response accurately point to a genuine mistake and its location?",
+        labels=_THREE_POINT,
     ),
     Dimension(
-        key="deepen_metacognition",
-        name="Deepen Metacognition",
+        key="revealing_answer",
+        name="Revealing the Answer",
         category=Category.INSTRUCTIONAL_ABILITY,
-        sub_aspects=(
-            "Gives clear feedback identifying any mistakes the student made.",
-            "Gives clear feedback pointing out the student's successes.",
-        ),
+        criteria="Does the tutor reveal the final answer (whether correct or not)?",
+        labels=("Yes (and correct)", "Yes (and incorrect)", "No"),
     ),
     Dimension(
-        key="motivate_curiosity",
-        name="Motivate & Stimulate Curiosity",
+        key="providing_guidance",
+        name="Providing Guidance",
         category=Category.INSTRUCTIONAL_ABILITY,
-        sub_aspects=(
-            "Inspires and stimulates the student's interest or curiosity.",
-            "Monitors the student's motivational state and adjusts responses accordingly.",
-            "Delivers feedback, whether positive or negative, in an encouraging way.",
-        ),
+        criteria="Does the tutor offer correct and relevant guidance, such as an explanation, elaboration, hint, examples, and so on?",
+        labels=_THREE_POINT,
     ),
     Dimension(
-        key="adapt_to_learners",
-        name="Adapt to Learners' Goals and Needs",
+        key="actionability",
+        name="Actionability",
         category=Category.INSTRUCTIONAL_ABILITY,
-        sub_aspects=("Identifies the student's goal or prior knowledge.",),
-    ),
-    # Informational Quality (adapted from Wang & Strong).
-    Dimension(
-        key="intrinsic_dq",
-        name="Intrinsic Data Quality",
-        category=Category.INFORMATIONAL_QUALITY,
-        sub_aspects=("Believability", "Objectivity", "Accuracy", "Reputation"),
+        criteria="Is it clear from the tutor's feedback what the student should do next?",
+        labels=_THREE_POINT,
     ),
     Dimension(
-        key="contextual_dq",
-        name="Contextual Data Quality",
-        category=Category.INFORMATIONAL_QUALITY,
-        sub_aspects=("Value-added", "Relevancy", "Timelessness", "Completeness", "Appropriate amount of data"),
+        key="coherence",
+        name="Coherence",
+        category=Category.INSTRUCTIONAL_ABILITY,
+        criteria="Is the tutor's response logically consistent with the student's previous responses?",
+        labels=_THREE_POINT,
     ),
     Dimension(
-        key="representational_dq",
-        name="Representational Data Quality",
-        category=Category.INFORMATIONAL_QUALITY,
-        sub_aspects=("Interpretability", "Ease of understanding", "Consistency", "Conciseness"),
-    ),
-    # Language Quality
-    Dimension(
-        key="fluency",
-        name="Fluency",
-        category=Category.LANGUAGE_QUALITY,
-        sub_aspects=("Pace", "Filler words"),  # TODO
+        key="tutor_tone",
+        name="Tutor Tone",
+        category=Category.INSTRUCTIONAL_ABILITY,
+        criteria="Is the tutor's response encouraging, neutral, or offensive?",
+        labels=("Encouraging", "Neutral", "Offensive"),
     ),
     Dimension(
-        key="grammaticality",
-        name="Grammaticality",
-        category=Category.LANGUAGE_QUALITY,
-        sub_aspects=("Grammaticality",),  # TODO
-    ),
-    Dimension(
-        key="naturalness",
-        name="Naturalness",
-        category=Category.LANGUAGE_QUALITY,
-        sub_aspects=("Naturalness",),  # TODO
-    ),
-    Dimension(
-        key="vocabulary",
-        name="Vocabulary",
-        category=Category.LANGUAGE_QUALITY,
-        sub_aspects=("Vocabulary",),  # TODO
+        key="human_likeness",
+        name="Human-likeness",
+        category=Category.INSTRUCTIONAL_ABILITY,
+        criteria="Does the tutor's response sound natural rather than robotic or artificial?",
+        labels=_THREE_POINT,
     ),
 )
 
