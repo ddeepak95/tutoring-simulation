@@ -7,7 +7,7 @@
   <section class="thread">
     <div class="convo-head">
       <strong>{{ name }}</strong>
-      <span class="sub">{{ header.scenario_type }} · {{ header.region or "—" }} · {{ header.tutor_model }}</span>
+      <span class="sub">{{ header.region or "—" }}</span>
       <span id="convo-progress" class="sub">{{ done }}/{{ total }} done</span>
       <form hx-post="/annotate/{{ slug }}/export" hx-target="#export-msg" hx-swap="innerHTML">
         <button type="submit">Export jsonl</button>

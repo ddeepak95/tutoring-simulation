@@ -3,11 +3,6 @@
   <blockquote>{{ turn.content|sanitize }}</blockquote>
 </div>
 
-<div class="state">
-  <label>Assigned state: <strong>{{ state_name }}</strong></label>
-  <p class="criteria">{{ state_text }}</p>
-</div>
-
 {% set cur = data.get('state', '') %}
 <div class="dim">
   <label>Which state is the student in?</label>

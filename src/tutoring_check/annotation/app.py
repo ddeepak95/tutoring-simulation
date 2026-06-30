@@ -7,7 +7,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -24,10 +24,25 @@ app.mount("/static", StaticFiles(directory=str(_HERE / "static")), name="static"
 store.init_db()
 
 ANNOTATOR_COOKIE = "annotator_id"
+ANNOTATORS = ["deepak", "emily"]
 
 
 def annotator_of(request: Request) -> str:
-    return request.cookies.get(ANNOTATOR_COOKIE, "default")
+    """The annotator id from the cookie, or "" when none has been set yet."""
+    return request.cookies.get(ANNOTATOR_COOKIE, "")
+
+
+def _needs_annotator(request: Request) -> Response | None:
+    """Guard for annotator-dependent routes: send the client to the picker if none is set.
+
+    HTMX honours the HX-Redirect header, so stale fragment requests navigate away
+    instead of silently creating an annotation set with no annotator.
+    """
+    if annotator_of(request):
+        return None
+    resp = Response(status_code=204)
+    resp.headers["HX-Redirect"] = "/"
+    return resp
 
 
 @app.get("/favicon.ico")
@@ -45,14 +60,16 @@ def picker(request: Request):
     return templates.TemplateResponse(
         request,
         "picker.html",
-        {"request": request, "run_sets": store.list_run_sets(), "annotator": annotator_of(request)},
+        {"request": request, "run_sets": store.list_run_sets(),
+         "annotator": annotator_of(request), "annotators": ANNOTATORS},
     )
 
 
 @app.post("/annotator")
 def set_annotator(annotator_id: str = Form(...)):
     resp = RedirectResponse("/", status_code=303)
-    resp.set_cookie(ANNOTATOR_COOKIE, annotator_id.strip() or "default")
+    if annotator_id.strip() in ANNOTATORS:  # ignore anything off the known list
+        resp.set_cookie(ANNOTATOR_COOKIE, annotator_id.strip())
     return resp
 
 
@@ -76,6 +93,8 @@ def api_runs(request: Request, run_set: str = "", item: str = ""):
 
 @app.get("/api/resolve", response_class=HTMLResponse)
 def api_resolve(request: Request, run_set: str = "", item: str = "", run: str = ""):
+    if (guard := _needs_annotator(request)) is not None:
+        return guard
     ref = store.ref_for(f"{run_set}/{item}/{run}")
     if ref is None:
         return HTMLResponse("")
@@ -109,6 +128,8 @@ def _load(request: Request, slug: str):
 
 @app.get("/annotate/{slug}", response_class=HTMLResponse)
 def annotate(request: Request, slug: str):
+    if not annotator_of(request):  # no annotator set yet — back to the picker
+        return RedirectResponse("/", status_code=303)
     loaded = _load(request, slug)
     if loaded is None:
         return PlainTextResponse("transcript not found", status_code=404)
@@ -133,6 +154,8 @@ def annotate(request: Request, slug: str):
 
 @app.get("/annotate/{slug}/sidebar", response_class=HTMLResponse)
 def sidebar(request: Request, slug: str, turn_id: int):
+    if (guard := _needs_annotator(request)) is not None:
+        return guard
     loaded = _load(request, slug)
     if loaded is None:
         return PlainTextResponse("transcript not found", status_code=404)
@@ -146,15 +169,16 @@ def sidebar(request: Request, slug: str, turn_id: int):
         ctx["dimensions"] = store.TUTOR_DIMENSIONS
         ctx["labels"] = data.get("labels", {})
         return templates.TemplateResponse(request, "fragments/sidebar_tutor.html", ctx)
-    states = store.states_for(header)
-    ctx["states"] = states
-    ctx["state_name"] = turn.state
-    ctx["state_text"] = states.get(turn.state or "", "(unknown state)")
+    # The dropdown lists every candidate state, but the turn's assigned state is
+    # deliberately not surfaced so the annotator judges it blind.
+    ctx["states"] = store.states_for(header)
     return templates.TemplateResponse(request, "fragments/sidebar_student.html", ctx)
 
 
 @app.post("/annotate/{slug}/save", response_class=HTMLResponse)
 async def save(request: Request, slug: str, turn_id: int, kind: str, dim: str = "", field: str = ""):
+    if (guard := _needs_annotator(request)) is not None:
+        return guard
     ref = store.ref_for(store.key_from_slug(slug))
     if ref is None:
         return PlainTextResponse("transcript not found", status_code=404)
@@ -182,6 +206,8 @@ async def save(request: Request, slug: str, turn_id: int, kind: str, dim: str = 
 
 @app.post("/annotate/{slug}/export", response_class=HTMLResponse)
 def export(request: Request, slug: str):
+    if (guard := _needs_annotator(request)) is not None:
+        return guard
     ref = store.ref_for(store.key_from_slug(slug))
     if ref is None:
         return PlainTextResponse("transcript not found", status_code=404)
@@ -209,15 +235,19 @@ def aggregate(request: Request, language: str = ""):
 
 
 def main() -> None:
-    """Console entry point (`tutoring-annotate`); host/port via ANNOTATION_HOST/ANNOTATION_PORT."""
+    """Console entry point (`tutoring-annotate`); host/port via ANNOTATION_HOST/ANNOTATION_PORT.
+
+    Set ANNOTATION_RELOAD=1 during development to auto-reload on code/template edits.
+    """
     import os
 
     import uvicorn
 
     host = os.environ.get("ANNOTATION_HOST", "127.0.0.1")
     port = int(os.environ.get("ANNOTATION_PORT", "8000"))
-    print(f"annotation tool → http://{host}:{port}/")
-    uvicorn.run("tutoring_check.annotation.app:app", host=host, port=port, reload=False)
+    reload = os.environ.get("ANNOTATION_RELOAD", "").lower() in ("1", "true", "yes")
+    print(f"annotation tool → http://{host}:{port}/" + ("  (auto-reload on)" if reload else ""))
+    uvicorn.run("tutoring_check.annotation.app:app", host=host, port=port, reload=reload)
 
 
 if __name__ == "__main__":

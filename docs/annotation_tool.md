@@ -20,6 +20,37 @@ bubble; which job the sidebar offers depends on whether the clicked turn is a
 tutor or a student turn.
 
 
+## Running the tool
+
+The tool lives in `src/tutoring_check/annotation/` and runs as a single
+`uvicorn` process. Its dependencies are the optional `annotation` extra
+(FastAPI, uvicorn, Jinja2, python-multipart), kept out of the core install.
+
+```bash
+# from project root
+uv pip install -e ".[annotation]"   # one time — installs the annotation extra
+uv run tutoring-annotate            # serves http://127.0.0.1:8000/
+```
+
+`tutoring-annotate` is the console entry point (`pyproject.toml` → `app:main`).
+On start it creates the SQLite tables if absent and prints the URL.
+
+**Environment variables** (all optional):
+
+| Var | Default | Purpose |
+|-----|---------|---------|
+| `ANNOTATION_RUNS_ROOT` | `runs/annotating` | Read-only tree scanned for transcripts. |
+| `ANNOTATION_DB` | `annotations.sqlite3` | SQLite store; keep on durable storage when hosted. |
+| `ANNOTATION_HOST` | `127.0.0.1` | Bind host. |
+| `ANNOTATION_PORT` | `8000` | Bind port. |
+
+**Transcript layout.** The picker only discovers files exactly four path
+segments below the runs root — `<run_set>/<item_id>/r<rep>/transcript.jsonl`.
+Anything shallower or deeper is skipped. If your runs sit directly under `runs/`
+(e.g. `runs/run_set_06301159/gravity-en/r0/transcript.jsonl`), set
+`ANNOTATION_RUNS_ROOT=runs` so the three picker dropdowns populate.
+
+
 ## Scope
 
 - One conversation is reviewed at a time. The tool loads a single

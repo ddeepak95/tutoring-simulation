@@ -57,3 +57,34 @@ Flags:
 Each conversation gets an `evaluation_transcript.jsonl` written alongside its `transcript.jsonl`,
 plus raw `evaluation_requests.jsonl` / `evaluation_responses.jsonl`. A conversation that already
 has `evaluation_transcript.jsonl` is skipped, so re-running only fills gaps.
+
+## Run the human annotation tool
+
+A reviewer-facing web app (FastAPI + Jinja/HTMX) for hand-labeling one conversation
+at a time — click a chat bubble, annotate it in the sidebar. Tutor turns get the 8
+Instructional Ability dimensions; student turns get a state-adherence check. See
+`docs/annotation_tool.md` for the full spec.
+
+Install the annotation extra (one time), then launch:
+
+```bash
+# from project root
+uv pip install -e ".[annotation]"
+uv run tutoring-annotate          # → http://127.0.0.1:8000/
+```
+
+By default the picker scans `runs/annotating/` for transcripts laid out exactly as
+`<run_set>/<item_id>/r<rep>/transcript.jsonl`. Point it at a different tree (and
+change host/port or the DB location) via environment variables:
+
+- `ANNOTATION_RUNS_ROOT` — read-only transcript tree to scan (default `runs/annotating`).
+- `ANNOTATION_DB` — SQLite annotation store (default `annotations.sqlite3`); put it on durable storage when hosted.
+- `ANNOTATION_HOST` / `ANNOTATION_PORT` — bind address (default `127.0.0.1:8000`).
+
+```bash
+# example: annotate transcripts that live directly under runs/
+ANNOTATION_RUNS_ROOT=runs uv run tutoring-annotate
+```
+
+Annotations save live to SQLite as you click; the **Export** button writes
+`human_annotation.<annotator_id>.jsonl` next to each transcript for the downstream judge.

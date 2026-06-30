@@ -4,11 +4,20 @@
 
 <form method="post" action="/annotator" class="annotator">
   <label>Annotator
-    <input name="annotator_id" value="{{ annotator }}">
+    <select name="annotator_id" required autofocus
+            {% if not annotator %}aria-invalid="true"{% endif %}>
+      <option value="" disabled {{ 'selected' if not annotator else '' }}>select…</option>
+      {% for a in annotators %}
+      <option value="{{ a }}" {{ 'selected' if annotator == a else '' }}>{{ a }}</option>
+      {% endfor %}
+    </select>
   </label>
-  <button type="submit">set</button>
+  <button type="submit">{% if annotator %}change{% else %}set{% endif %}</button>
 </form>
 
+{% if not annotator %}
+<p class="hint">Enter an annotator id to start — transcripts are hidden until it is set.</p>
+{% else %}
 <div class="cascade">
   <select name="run_set"
           hx-get="/api/items" hx-target="#item-select" hx-swap="innerHTML">
@@ -30,4 +39,5 @@
 </div>
 
 <div id="resolve"></div>
+{% endif %}
 {% endblock %}

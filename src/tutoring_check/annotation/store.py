@@ -69,7 +69,10 @@ def discover() -> list[TranscriptRef]:
         return refs
     for path in sorted(root.glob("**/transcript.jsonl")):
         parts = path.relative_to(root).parts
-        if len(parts) != 4:  # exactly run_set/item/run/transcript.jsonl
+        # Layout is run_set/item/run/<session>/transcript.jsonl, where <session>
+        # is the simulator's <timestamp>_<uuid> dir; older runs omit it. Accept
+        # either depth and key on the first three (run_set, item, run) segments.
+        if len(parts) not in (4, 5):
             continue
         refs.append(TranscriptRef(parts[0], parts[1], parts[2], path))
     return refs
