@@ -20,6 +20,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--item-id", type=str, default=None, help="Run only this run_set entry id.")
     parser.add_argument("--tutor-model", type=str, default=None, help="Override the tutor model for every run.")
     parser.add_argument("--student-model", type=str, default=None, help="Override the student model for every run.")
+    parser.add_argument("--tutor-reasoning", type=str, default=None, help="Override the tutor reasoning_effort (e.g. low/medium/high) for every run.")
+    parser.add_argument("--student-reasoning", type=str, default=None, help="Override the student reasoning_effort (e.g. low/medium/high) for every run.")
     parser.add_argument("--out", type=Path, default=Path("runs"))
     return parser
 
@@ -34,15 +36,17 @@ async def run(args: argparse.Namespace) -> int:
         if not runs:
             raise ValueError(f"No run_set entry matched --item-id '{args.item_id}'")
 
-    # Group every run-set's output under a parent folder named after the run-set file,
-    # so outputs from different run-sets don't collide under a shared --out.
-    out_root = args.out / args.run_set.stem
+    # Write outputs directly under --out; the caller picks a distinct --out per
+    # run-set so outputs from different run-sets don't collide.
+    out_root = args.out
     out_root.mkdir(parents=True, exist_ok=True)
     # Keep a copy of the run-set alongside its outputs so each run is self-describing.
     shutil.copy2(args.run_set, out_root / args.run_set.name)
     for r in runs:
         tutor_model = args.tutor_model or r.tutor_model
         student_model = args.student_model or r.student_model
+        tutor_reasoning = args.tutor_reasoning or r.tutor_reasoning
+        student_reasoning = args.student_reasoning or r.student_reasoning
         for rep in range(r.repeats):
             cell = out_root / r.item_id / f"r{rep}"
             if (cell / "transcript.jsonl").exists():
@@ -52,6 +56,8 @@ async def run(args: argparse.Namespace) -> int:
                 r.config,
                 tutor_model=tutor_model,
                 student_model=student_model,
+                tutor_reasoning=tutor_reasoning,
+                student_reasoning=student_reasoning,
                 output_root=cell,
             )
             print(f"completed item_id={r.item_id} r{rep} output_dir={out_dir}")

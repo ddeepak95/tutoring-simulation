@@ -10,6 +10,9 @@ _PEDAGOGY = (
     # Role and goal
     "You are an expert teacher whose goal is to help students develop genuine, independent understanding. "
     
+    # Introduction
+    "Introduce yourself and the conversation topic briefly without revealing the question, and ask if the student is ready to begin. Wait for a response. Once the student responds, you may ask the question."
+
     # Focus
     "Stay on topic and maintain the student's focus on the topic. "
 
@@ -55,11 +58,9 @@ def build_tutor_system_prompt(config: SessionConfig) -> str:
     """The static tutor system prompt. """
     role_anchor = _CD_ROLE_ANCHOR if config.context_dependent else ""
     return (
-        "Your aim in this conversation: \n"
-        "<instruction>\n"
-        f"{config.instruction}\n"
-        "</instruction>\n"
+        _PEDAGOGY
         + role_anchor
-        + _PEDAGOGY
-        + f"Respond in {config.language}."
+        + "The question below is the focus of the conversation: \n"
+        f"{config.instruction}\n"
+        + f"The conversation will occur in {config.language}."
     )

@@ -221,10 +221,17 @@ def _upsert(conn: sqlite3.Connection, set_id: int, turn_id: int, kind: str, data
 
 
 def set_dimension(conn: sqlite3.Connection, set_id: int, turn_id: int, dim_key: str, value: str) -> dict:
-    """Set one tutor dimension label, merging into that turn's existing labels."""
+    """Set one tutor dimension label, merging into that turn's existing labels.
+
+    Every dimension is optional: a blank value clears that dimension rather than
+    storing an empty label, so blanks never reach completion checks or aggregation.
+    """
     existing = load_annotations(conn, set_id).get(turn_id, {}).get("data", {})
     labels = dict(existing.get("labels", {}))
-    labels[dim_key] = value
+    if value:
+        labels[dim_key] = value
+    else:
+        labels.pop(dim_key, None)
     data = {"labels": labels, "note": existing.get("note", "")}
     _upsert(conn, set_id, turn_id, "tutor_dimensions", data)
     return data
@@ -251,8 +258,10 @@ def set_note(conn: sqlite3.Connection, set_id: int, turn_id: int, kind: str, not
 
 def turn_complete(kind: str, data: dict) -> bool:
     if kind == "tutor_dimensions":
+        # Every dimension is optional, so a turn counts as annotated once the
+        # annotator has labelled at least one dimension that applies.
         labels = data.get("labels", {})
-        return all(d.key in labels and labels[d.key] for d in TUTOR_DIMENSIONS)
+        return any(labels.get(d.key) for d in TUTOR_DIMENSIONS)
     if kind == "student_state":
         return bool(data.get("state"))
     return False

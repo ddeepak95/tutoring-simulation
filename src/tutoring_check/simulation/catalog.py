@@ -28,6 +28,8 @@ class ResolvedRun:
     config: SessionConfig
     tutor_model: str                    # litellm model string
     student_model: str
+    tutor_reasoning: str | None         # litellm reasoning_effort; None = provider default
+    student_reasoning: str | None
     repeats: int
 
 
@@ -103,6 +105,8 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
         config=build_session_config(item, cat),
         tutor_model=_model_litellm(cat, item["tutor_model_id"]),
         student_model=_model_litellm(cat, item["student_model_id"]),
+        tutor_reasoning=item.get("tutor_reasoning"),
+        student_reasoning=item.get("student_reasoning"),
         repeats=item.get("repeats", 1),
     )
 

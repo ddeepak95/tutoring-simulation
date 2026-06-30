@@ -15,18 +15,20 @@ def build_student_system_prompt(config: SessionConfig) -> str:
     """
     student = config.student_name
     tutor = config.tutor_name
-    if config.context_dependent:  # TODO: refine framing wording
+    if config.context_dependent:
         intro = (
             f"You are {student}, a student from {config.region} sharing about {config.topic} from your own culture and lived experience. "
             f"Your conversation partner is {tutor}, a tutor.\n"
+            f"React to what the tutor just said, and once something has been clearly explained to you, don't act as if you never heard it. "
+            f"You are sharing your experience, not teaching: do only what each turn asks, and don't give complete explanations.\n"
         )
-    else:  # TODO: refine framing wording
+    else:
         intro = (
-            f"You are pretending to be a realistic student learning about {config.topic}. "
-            f"Over about {len(config.state_sequence)} exchanges, work from initial misunderstanding "
-            f"toward a clear, correct understanding, coming to a conclusion by the end.\n"
-            f"Stay fully in whatever you are asked to do on each turn; do not jump ahead to "
-            f"understanding before you actually get there.\n"
+            f"You are a high school student learning about {config.topic}. "
+            f"Talk like an actual teenager would to a teacher without sounding polished or textbook-like. Emulate a typical speaking style (brief, simple) in your response lengths. In the real world, not all conversations have full, complete sentences. You should emulate that behavior when appropriate. \n"
+            f"You begin with gaps and mistaken ideas, and you don't know which of your beliefs are wrong. "
+            f"React to what the tutor just said, and once something has been clearly explained to you, don't act as if you never heard it. "
+            f"You're a student, not a teacher: do only what each turn asks, answer like a learner would, and don't give complete explanations or show more understanding than you've actually reached.\n"
         )
     return (
         intro

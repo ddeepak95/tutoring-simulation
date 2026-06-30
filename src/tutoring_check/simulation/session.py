@@ -16,9 +16,15 @@ from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 
 
-def _completion_kwargs(model: str, messages: list[dict]) -> dict:
-    """Assemble litellm kwargs; the provider's default sampling applies."""
-    return {"model": model, "messages": messages}
+def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None = None) -> dict:
+    """Assemble litellm kwargs; the provider's default sampling applies.
+    When reasoning is set it becomes litellm's unified reasoning_effort ("low"/"medium"/"high",
+    plus "none"/"disable" where the provider supports it); unset leaves the provider default.
+    """
+    kwargs: dict = {"model": model, "messages": messages}
+    if reasoning:
+        kwargs["reasoning_effort"] = reasoning
+    return kwargs
 
 
 async def run_session(
@@ -27,6 +33,8 @@ async def run_session(
     tutor_model: str,
     student_model: str,
     output_root: Path,
+    tutor_reasoning: str | None = None,
+    student_reasoning: str | None = None,
 ) -> Path:
     out_dir = output_root
     logger = JsonlLogger(out_dir=out_dir)
@@ -45,6 +53,8 @@ async def run_session(
             "language": config.language,
             "tutor_model": tutor_model,
             "student_model": student_model,
+            "tutor_reasoning": tutor_reasoning,
+            "student_reasoning": student_reasoning,
             "state_sequence": list(config.state_sequence),
             "tutor_system_prompt": tutor_system,
             "student_static_prompt": student_static,
@@ -71,7 +81,7 @@ async def run_session(
     # tutor turn, not a wrap-up; we do not assume the conversation has ended.
     for step in range(len(config.state_sequence)):
         # Tutor turn
-        tutor_request = _completion_kwargs(tutor_model, messages)
+        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
         tutor_response = await acompletion(**tutor_request)
         tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
@@ -102,7 +112,7 @@ async def run_session(
                 }
             ]
         )
-        student_request = _completion_kwargs(student_model, student_messages)
+        student_request = _completion_kwargs(student_model, student_messages, student_reasoning)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
         student_response = await acompletion(**student_request)
         student_text = getattr(student_response.choices[0].message, "content", None) or ""

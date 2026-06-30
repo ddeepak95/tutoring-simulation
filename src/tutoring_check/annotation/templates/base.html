@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Annotation tool</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css?v={{ static_v() }}">
   <script src="https://unpkg.com/htmx.org@1.9.12"></script>
 </head>
 <body>
@@ -15,24 +15,5 @@
     {% block topbar_extra %}{% endblock %}
   </header>
   <main>{% block content %}{% endblock %}</main>
-  <script>
-    // Mirror of store.label_class for live recoloring of dropdowns.
-    const POLARITY = {
-      "Yes": "pos", "Yes (and correct)": "pos", "Encouraging": "pos",
-      "To an extent": "mid", "Neutral": "mid",
-      "No": "neg", "Yes (and incorrect)": "neg", "Offensive": "neg"
-    };
-    function colorize(sel) {
-      sel.classList.remove("pos", "mid", "neg");
-      const c = POLARITY[sel.value];
-      if (c) sel.classList.add(c);
-    }
-    document.addEventListener("change", e => {
-      if (e.target.matches("select.label")) colorize(e.target);
-    });
-    document.addEventListener("htmx:afterSwap", () => {
-      document.querySelectorAll("select.label").forEach(colorize);
-    });
-  </script>
 </body>
 </html>

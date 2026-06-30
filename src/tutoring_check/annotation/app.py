@@ -19,6 +19,17 @@ templates = Jinja2Templates(directory=str(_HERE / "templates"))
 templates.env.filters["label_class"] = store.label_class
 templates.env.filters["sanitize"] = store.sanitize
 
+
+def _static_v() -> str:
+    """Cache-busting token = style.css mtime, recomputed per render so edits show up."""
+    try:
+        return str(int((_HERE / "static" / "style.css").stat().st_mtime))
+    except OSError:
+        return "0"
+
+
+templates.env.globals["static_v"] = _static_v
+
 app = FastAPI(title="Tutoring annotation tool")
 app.mount("/static", StaticFiles(directory=str(_HERE / "static")), name="static")
 store.init_db()
@@ -183,6 +194,7 @@ async def save(request: Request, slug: str, turn_id: int, kind: str, dim: str = 
     if ref is None:
         return PlainTextResponse("transcript not found", status_code=404)
     header = store.header_of(str(ref.path))
+    transcript = load_transcript(ref.path)
     form = await request.form()
     value = (form.get("value") or "").strip()
     with store.connect() as conn:
@@ -196,11 +208,14 @@ async def save(request: Request, slug: str, turn_id: int, kind: str, dim: str = 
         annotations = store.load_annotations(conn, set_id)
     data = annotations.get(turn_id, {}).get("data", {})
     complete = store.turn_complete(kind, data)
-    # Status line for the sidebar, plus an out-of-band swap of the bubble's marker.
+    done, total = store.conversation_status(transcript, annotations)
+    # Status line for the sidebar, plus out-of-band swaps of the bubble's marker
+    # and the conversation progress count.
     return templates.TemplateResponse(
         request,
         "fragments/saved.html",
-        {"request": request, "turn_id": turn_id, "complete": complete},
+        {"request": request, "turn_id": turn_id, "complete": complete,
+         "done": done, "total": total},
     )
 
 

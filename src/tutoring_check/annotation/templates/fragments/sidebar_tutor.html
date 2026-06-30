@@ -7,7 +7,7 @@
 <div class="dim">
   <label>{{ d.name }}</label>
   <p class="criteria">{{ d.criteria }}</p>
-  <select class="label {{ labels.get(d.key)|label_class }}" name="value"
+  <select class="label" name="value"
           hx-post="/annotate/{{ slug }}/save?turn_id={{ turn.turn_id }}&kind=tutor_dimensions&dim={{ d.key }}"
           hx-target="#sidebar-status" hx-swap="outerHTML" hx-trigger="change">
     <option value="">—</option>

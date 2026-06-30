@@ -14,28 +14,19 @@ from __future__ import annotations
 
 CI_STATES: dict[str, str] = {
     "correct_answer": (
-        "Answer the tutor's question correctly and briefly, the way you actually understand it."
+        "Answer the tutor's question correctly. Based on the teacher's probing and the conversation history, calibrate the completeness of the answer. By default, the answer should be brief and incomplete."
     ),
-    "partial_answer": (
-        "Give an answer that is partly right but incomplete: you grasp some of it but leave out or get fuzzy on the rest."
+    "mistake": (
+        "Voice a specific mistake or plausible misconception, as if it were correct. Do not hint that it might be wrong."
     ),
-    "misconception": (
-        "Voice a specific, plausible misconception, as if it were correct. Do not hint that it might be wrong."
-    ),
-    "implicit_confusion": (
-        "You are confused, but do not say so directly. Let it show through a hesitant, muddled answer."
-    ),
-    "explicit_confusion": (
-        "You are confused and you say so: ask the tutor a question or express a lack of understanding."
-    ),
-    "frustration": (
-        "You are getting a little frustrated and discouraged, and it is not clicking. Show it lightly, not dramatically."
-    ),
-    "correct_no_explanation": (
-        "Give the correct answer, but only the bare answer with no reasoning or explanation, even when an explanation would help."
+    "confusion": (
+        "Ask the tutor a question out of confusion or express a lack of understanding. If confusion has persisted in the recent conversation, lightly and implictly show that you are getting a little frustrated and discouraged."
     ),
     "off_topic": (
         "Drift off the lesson onto a tangent the topic sparked: a curious side question or 'what about...' that is related to the subject but pulls away from what the tutor is trying to get at."
+    ),
+    "introduction": (
+        "Respond positive to the tutor's introduction."
     ),
 }
 
