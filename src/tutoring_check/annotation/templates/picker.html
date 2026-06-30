@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Pick a transcript</h1>
+
+<form method="post" action="/annotator" class="annotator">
+  <label>Annotator
+    <input name="annotator_id" value="{{ annotator }}">
+  </label>
+  <button type="submit">set</button>
+</form>
+
+<div class="cascade">
+  <select name="run_set"
+          hx-get="/api/items" hx-target="#item-select" hx-swap="innerHTML">
+    <option value="">run set…</option>
+    {% for rs in run_sets %}<option value="{{ rs }}">{{ rs }}</option>{% endfor %}
+  </select>
+
+  <select name="item" id="item-select"
+          hx-get="/api/runs" hx-target="#run-select" hx-swap="innerHTML"
+          hx-include="[name=run_set]">
+    <option value="">topic item…</option>
+  </select>
+
+  <select name="run" id="run-select"
+          hx-get="/api/resolve" hx-target="#resolve" hx-swap="innerHTML"
+          hx-include="[name=run_set],[name=item]">
+    <option value="">run…</option>
+  </select>
+</div>
+
+<div id="resolve"></div>
+{% endblock %}

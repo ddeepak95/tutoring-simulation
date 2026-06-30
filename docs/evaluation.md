@@ -72,7 +72,7 @@ Here is the header schema for `evaluation_transcript.jsonl`.
 Here are framework dimensions for mTeach, an evaluation framework. 
 mTeach has 3 categories of dimensions (instructional ability, informational quality, and langauge quality). The dimensions are below in detail:
 
-Instructional Ability (from LearnLM):
+Instructional Ability (from MrBench):
 1. Manage Cognitive Load (Explains the underlying concepts or skills in a clear way that is easy for the student to understand.)
 2. Encourage Active Learning (Keeps the student actively participating (for example, through questions  or practice problems that the student has to answer). Guides student to an answer with appropriate steps.)
 3. Deepen Metacognition (Provides clear feedback identifying any mistakes made by the student.  Provides clear feedback pointing out “successes” by the student (for example, on the student’s skills, problem-solving, work, knowledge, etc.)) 

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Per-language aggregation</h1>
+
+<form method="get" action="/aggregate">
+  <select name="language" onchange="this.form.submit()">
+    <option value="">choose language…</option>
+    {% for l in languages %}<option value="{{ l }}" {{ 'selected' if l == language else '' }}>{{ l }}</option>{% endfor %}
+  </select>
+</form>
+
+{% if result %}
+<p>{{ result.set_count }} annotation set(s) in <strong>{{ language }}</strong>.</p>
+
+<h2>Tutor dimensions</h2>
+<table class="agg">
+  {% for d in dimensions %}
+  <tr>
+    <th>{{ d.name }}</th>
+    <td>
+      {% for lab, n in result.dimensions[d.key].items() %}
+      <span class="chip {{ lab|label_class }}">{{ lab }}: {{ n }}</span>
+      {% endfor %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h2>Student state correctness</h2>
+<p>How often the annotator's chosen state matches the state assigned by the run's sequence.</p>
+<p>
+  <span class="chip pos">Correct: {{ result.correct }}</span>
+  <span class="chip neg">Incorrect: {{ result.incorrect }}</span>
+</p>
+
+<h3>Selected-state distribution</h3>
+<p>
+  {% for state, n in result.states.items() %}
+  <span class="chip">{{ state }}: {{ n }}</span>
+  {% else %}
+  <span class="chip">none yet</span>
+  {% endfor %}
+</p>
+{% endif %}
+{% endblock %}

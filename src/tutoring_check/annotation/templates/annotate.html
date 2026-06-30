@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block topbar_extra %}
+  <span class="who">{{ annotator }}</span>
+{% endblock %}
+{% block content %}
+<div class="annotate">
+  <section class="thread">
+    <div class="convo-head">
+      <strong>{{ name }}</strong>
+      <span class="sub">{{ header.scenario_type }} · {{ header.region or "—" }} · {{ header.tutor_model }}</span>
+      <span id="convo-progress" class="sub">{{ done }}/{{ total }} done</span>
+      <form hx-post="/annotate/{{ slug }}/export" hx-target="#export-msg" hx-swap="innerHTML">
+        <button type="submit">Export jsonl</button>
+      </form>
+      <span id="export-msg"></span>
+    </div>
+
+    {% for t in turns %}
+    <div class="bubble {{ 'tutor' if t.is_tutor else 'student' }}"
+         hx-get="/annotate/{{ slug }}/sidebar?turn_id={{ t.turn_id }}"
+         hx-target="#sidebar" hx-swap="innerHTML">
+      <div class="bubble-head">
+        <span class="speaker">{{ 'teacher' if t.is_tutor else 'student' }}</span>
+        <span id="marker-{{ t.turn_id }}" class="marker {{ 'done' if markers[t.turn_id] else '' }}">{{ '●' if markers[t.turn_id] else '○' }}</span>
+      </div>
+      <div class="content">{{ t.content|sanitize }}</div>
+    </div>
+    {% endfor %}
+  </section>
+
+  <aside id="sidebar" class="sidebar">
+    <p class="hint">Click a bubble to annotate it.</p>
+  </aside>
+</div>
+{% endblock %}
