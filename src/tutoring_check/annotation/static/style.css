@@ -71,8 +71,10 @@ button:hover { background: #111827; border-color: #111827; }
 .chip.neg { background: var(--neg); border-color: var(--neg-b); }
 
 /* aggregation */
+.card { border: 1px solid var(--line); border-radius: .5rem; padding: .8rem 1rem; margin: 1rem 0; }
+.card h2 { margin-top: 0; }
 .agg { border-collapse: collapse; }
 .agg th { text-align: left; padding: .3rem .6rem .3rem 0; vertical-align: top; }
-.agg td { padding: .3rem 0; }
+.agg td { padding: .3rem .6rem .3rem 0; text-align: right; font-variant-numeric: tabular-nums; }
 .chip { display: inline-block; padding: .1rem .5rem; margin: .1rem; border: 1px solid var(--line);
   border-radius: 1rem; font-size: .82rem; }
