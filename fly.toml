@@ -1,0 +1,27 @@
+# Fly.io app config for the tutoring annotation tool.
+# `fly launch` will fill in `app` with your chosen name; edit here if it doesn't match.
+app = "tutoring-annotate"
+primary_region = "iad"
+
+[build]
+
+[env]
+  ANNOTATION_HOST = "0.0.0.0"
+  ANNOTATION_PORT = "8080"
+  ANNOTATION_RUNS_ROOT = "/data/runs/annotating"
+  ANNOTATION_DB = "/data/annotations.sqlite3"
+
+[[mounts]]
+  source = "annotation_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"
