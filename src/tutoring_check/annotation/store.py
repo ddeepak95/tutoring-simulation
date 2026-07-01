@@ -399,6 +399,52 @@ def _slot_keys(slot: dict):
     return keys
 
 
+def language_dimension_distribution(run_set: str) -> dict:
+    """Tutor-dimension label averages-per-annotator grouped by transcript language.
+
+    Counts each annotator's tutor_dimensions labels separately (per language, per
+    dimension), then averages across the annotators who covered that language, so
+    languages with uneven annotator coverage stay comparable. Descriptive, not an
+    agreement measure.
+    """
+    root = runs_root()
+    base = root / run_set
+    # language -> dim_key -> annotator -> label -> count
+    counts: dict[str, dict[str, dict[str, dict[str, int]]]] = {}
+    for path in sorted(base.glob("**/human_annotation.*.jsonl")):
+        header, records = read_export(path)
+        language = header.get("language") or "?"
+        annotator = header.get("annotator_id") or path.stem.split(".", 1)[-1]
+        lang_counts = counts.setdefault(language, {})
+        for rec in records:
+            if rec.get("kind") != "tutor_dimensions":
+                continue
+            for key, label in rec.get("labels", {}).items():
+                if not label:
+                    continue
+                annot_counts = lang_counts.setdefault(key, {}).setdefault(annotator, {})
+                annot_counts[label] = annot_counts.get(label, 0) + 1
+
+    languages = sorted(counts)
+    rows = []
+    for d in TUTOR_DIMENSIONS:
+        by_language = {}
+        for lang in languages:
+            per_annotator = counts[lang].get(d.key, {})
+            n_annotators = len(per_annotator)
+            totals = {label: sum(a.get(label, 0) for a in per_annotator.values()) for label in d.labels}
+            by_language[lang] = {
+                "n_annotators": n_annotators,
+                "labels": [
+                    {"label": label,
+                     "avg": (totals[label] / n_annotators) if n_annotators else None}
+                    for label in d.labels
+                ],
+            }
+        rows.append({"dimension": d, "by_language": by_language})
+    return {"languages": languages, "rows": rows}
+
+
 def interrater_run_set(run_set: str) -> dict:
     """Interrater reliability for one run set, broken down per topic item.
 

@@ -59,5 +59,31 @@
   {% endfor %}
 </section>
 {% endfor %}
+
+{% if language_comparison and language_comparison.languages|length > 1 %}
+<section class="card">
+  <h2>Tutor dimensions across languages</h2>
+  <p class="hint">Average count per annotator of each tutor-dimension label, by language (across items/runs).</p>
+  <table class="agg">
+    <tr><th></th><th></th>{% for lang in language_comparison.languages %}<th>{{ lang }}</th>{% endfor %}</tr>
+    {% for row in language_comparison.rows %}
+    {% for label in row.dimension.labels %}
+    <tr>
+      {% if loop.first %}<th rowspan="{{ row.dimension.labels|length + 1 }}">{{ row.dimension.name }}</th>{% endif %}
+      <th>{{ label }}</th>
+      {% for lang in language_comparison.languages %}
+      {% set entry = row.by_language[lang].labels|selectattr('label', 'equalto', label)|first %}
+      <td>{{ '%.1f'|format(entry.avg) if entry.avg is not none else '—' }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+      <th class="hint">annotators</th>
+      {% for lang in language_comparison.languages %}<td class="hint">{{ row.by_language[lang].n_annotators }}</td>{% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+{% endif %}
 {% endif %}
 {% endblock %}

@@ -238,11 +238,13 @@ def export(request: Request, slug: str):
 @app.get("/aggregate", response_class=HTMLResponse)
 def aggregate(request: Request, run_set: str = ""):
     result = store.interrater_run_set(run_set) if run_set else None
+    language_comparison = store.language_dimension_distribution(run_set) if run_set else None
     return templates.TemplateResponse(
         request,
         "aggregate.html",
         {"request": request, "run_sets": store.list_run_sets(),
-         "run_set": run_set, "result": result, "dimensions": store.TUTOR_DIMENSIONS},
+         "run_set": run_set, "result": result, "dimensions": store.TUTOR_DIMENSIONS,
+         "language_comparison": language_comparison},
     )
 
 
