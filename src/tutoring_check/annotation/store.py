@@ -11,6 +11,7 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from functools import lru_cache
+from itertools import combinations
 from pathlib import Path
 
 from tutoring_check.evaluation.dimensions import Category, category_dimensions
@@ -330,43 +331,139 @@ def export_jsonl(conn: sqlite3.Connection, ref: TranscriptRef, header: dict, ann
     return out_path
 
 
-# --- per-language aggregation ---------------------------------------------
+# --- interrater reliability -----------------------------------------------
+#
+# Agreement is computed from the committed human_annotation.<annotator>.jsonl exports,
+# not the SQLite store: the db is gitignored and local to one machine, so only the
+# exports carry every annotator's work once they are merged across computers.
 
 
-def aggregate_language(conn: sqlite3.Connection, language: str) -> dict:
-    """Roll up completed annotations within one language (annotation_tool.md "Aggregation")."""
-    set_rows = conn.execute(
-        "SELECT id, transcript_path FROM annotation_set WHERE language = ?", (language,)
-    ).fetchall()
-    dims = {d.key: {label: 0 for label in d.labels} for d in TUTOR_DIMENSIONS}
-    states: dict[str, int] = {}  # distribution of annotator-selected states
-    correct = incorrect = 0  # selected state vs. the turn's assigned state
-    for row in set_rows:
-        try:
-            assigned = assigned_states(Path(row["transcript_path"]))
-        except (OSError, ValueError):
-            assigned = {}
-        for turn_id, ann in load_annotations(conn, row["id"]).items():
-            data, kind = ann["data"], ann["kind"]
-            if kind == "tutor_dimensions":
-                for key, value in data.get("labels", {}).items():
-                    if key in dims and value in dims[key]:
-                        dims[key][value] += 1
-            elif kind == "student_state" and data.get("state"):
-                states[data["state"]] = states.get(data["state"], 0) + 1
-                if turn_id in assigned:
-                    if data["state"] == assigned[turn_id]:
-                        correct += 1
-                    else:
-                        incorrect += 1
-    return {
-        "dimensions": dims,
-        "states": dict(sorted(states.items())),
-        "correct": correct,
-        "incorrect": incorrect,
-        "set_count": len(set_rows),
-    }
+def percent_agreement(pairs: list[tuple[str, str]]) -> float | None:
+    """Raw fraction of aligned label pairs the two raters agree on, or None when empty."""
+    if not pairs:
+        return None
+    return sum(a == b for a, b in pairs) / len(pairs)
 
 
-def languages_seen() -> list[str]:
-    return sorted({header_of(str(r.path)).get("language", "?") for r in discover()})
+def cohens_kappa(pairs: list[tuple[str, str]]) -> float | None:
+    """Two-rater Cohen's kappa over aligned label pairs, chance-corrected.
+
+    Returns the observed-minus-expected agreement scaled by its headroom,
+    `(po - pe) / (1 - pe)`.
+    Returns None when undefined: no pairs, or perfect expected agreement
+    (`pe == 1`, i.e. both raters used a single constant label).
+    """
+    n = len(pairs)
+    if n == 0:
+        return None
+    po = sum(a == b for a, b in pairs) / n
+    labels_a: dict[str, int] = {}
+    labels_b: dict[str, int] = {}
+    for a, b in pairs:
+        labels_a[a] = labels_a.get(a, 0) + 1
+        labels_b[b] = labels_b.get(b, 0) + 1
+    pe = sum((labels_a.get(k, 0) / n) * (labels_b.get(k, 0) / n) for k in set(labels_a) | set(labels_b))
+    if pe == 1:
+        return None
+    return (po - pe) / (1 - pe)
+
+
+def read_export(path: Path) -> tuple[dict, list[dict]]:
+    """Parse a human_annotation.*.jsonl export into its (header, records).
+
+    The first non-blank line is the session header; the rest are per-turn records.
+    """
+    header: dict = {}
+    records: list[dict] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        record = json.loads(line)
+        if not header and "annotator_id" in record and "kind" not in record:
+            header = record
+        else:
+            records.append(record)
+    return header, records
+
+
+def _agreement(pairs: list[tuple[str, str]]) -> dict:
+    """Count, percent agreement, and Cohen's kappa for one set of aligned label pairs."""
+    return {"n": len(pairs), "agree": percent_agreement(pairs), "kappa": cohens_kappa(pairs)}
+
+
+def _slot_keys(slot: dict):
+    """Every (run, turn_id) key an annotator touched, across student turns and dimensions."""
+    keys = set(slot["student"])
+    for marks in slot["dims"].values():
+        keys |= set(marks)
+    return keys
+
+
+def interrater_run_set(run_set: str) -> dict:
+    """Interrater reliability for one run set, broken down per topic item.
+
+    Reads the per-annotator jsonl exports under the run set, pools each item's turns
+    across its runs, and compares annotators pairwise on the student state and on each
+    tutor dimension; it also reports every annotator's accuracy against the assigned
+    (ground-truth) state.
+    """
+    root = runs_root()
+    base = root / run_set
+    # item -> annotator -> {"student": {(run, tid): state},
+    #                       "dims": {dim_key: {(run, tid): label}},
+    #                       "gt": [(state, assigned_state), ...],
+    #                       "header": dict}
+    items: dict[str, dict[str, dict]] = {}
+    for path in sorted(base.glob("**/human_annotation.*.jsonl")):
+        parts = path.relative_to(root).parts  # run_set / item / run / [...] / file
+        if len(parts) < 3:
+            continue
+        item, run = parts[1], parts[2]
+        header, records = read_export(path)
+        annotator = header.get("annotator_id") or path.stem.split(".", 1)[-1]
+        slot = items.setdefault(item, {}).setdefault(
+            annotator, {"student": {}, "dims": {}, "gt": [], "header": header}
+        )
+        for rec in records:
+            tid = rec.get("turn_id")
+            if rec.get("kind") == "tutor_dimensions":
+                for key, label in rec.get("labels", {}).items():
+                    slot["dims"].setdefault(key, {})[(run, tid)] = label
+            elif rec.get("kind") == "student_state" and rec.get("state"):
+                slot["student"][(run, tid)] = rec["state"]
+                if rec.get("assigned_state") is not None:
+                    slot["gt"].append((rec["state"], rec["assigned_state"]))
+
+    result_items = []
+    for item in sorted(items):
+        annotators = sorted(items[item])
+        pairs_out = []
+        for a, b in combinations(annotators, 2):
+            sa, sb = items[item][a], items[item][b]
+            student_pairs = [
+                (sa["student"][k], sb["student"][k]) for k in sa["student"] if k in sb["student"]
+            ]
+            dim_out = {}
+            for d in TUTOR_DIMENSIONS:
+                ma, mb = sa["dims"].get(d.key, {}), sb["dims"].get(d.key, {})
+                dim_pairs = [(ma[k], mb[k]) for k in ma if k in mb]
+                dim_out[d.key] = _agreement(dim_pairs)
+            runs_a = {run for run, _ in _slot_keys(sa)}
+            runs_b = {run for run, _ in _slot_keys(sb)}
+            n_transcripts = len(runs_a & runs_b)
+            pairs_out.append(
+                {"a": a, "b": b, "n_transcripts": n_transcripts,
+                 "student": _agreement(student_pairs), "dimensions": dim_out}
+            )
+        ground_truth = {
+            a: {"n": len(items[item][a]["gt"]),
+                "accuracy": (sum(s == g for s, g in items[item][a]["gt"]) / len(items[item][a]["gt"]))
+                if items[item][a]["gt"] else None}
+            for a in annotators
+        }
+        header = next((items[item][a]["header"] for a in annotators if items[item][a]["header"]), {})
+        result_items.append(
+            {"item": item, "display": display_name(header) if header else item,
+             "annotators": annotators, "pairs": pairs_out, "ground_truth": ground_truth}
+        )
+    return {"run_set": run_set, "items": result_items}

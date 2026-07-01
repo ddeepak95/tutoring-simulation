@@ -232,20 +232,17 @@ def export(request: Request, slug: str):
     return HTMLResponse(f"<span class='ok'>exported → {out}</span>")
 
 
-# per-language aggregation 
+# per-run-set interrater reliability
 
 
 @app.get("/aggregate", response_class=HTMLResponse)
-def aggregate(request: Request, language: str = ""):
-    result = None
-    if language:
-        with store.connect() as conn:
-            result = store.aggregate_language(conn, language)
+def aggregate(request: Request, run_set: str = ""):
+    result = store.interrater_run_set(run_set) if run_set else None
     return templates.TemplateResponse(
         request,
         "aggregate.html",
-        {"request": request, "languages": store.languages_seen(),
-         "language": language, "result": result, "dimensions": store.TUTOR_DIMENSIONS},
+        {"request": request, "run_sets": store.list_run_sets(),
+         "run_set": run_set, "result": result, "dimensions": store.TUTOR_DIMENSIONS},
     )
 
 

@@ -1,45 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Per-language aggregation</h1>
+<h1>Interrater reliability</h1>
 
 <form method="get" action="/aggregate">
-  <select name="language" onchange="this.form.submit()">
-    <option value="">choose language…</option>
-    {% for l in languages %}<option value="{{ l }}" {{ 'selected' if l == language else '' }}>{{ l }}</option>{% endfor %}
+  <select name="run_set" onchange="this.form.submit()">
+    <option value="">choose run set…</option>
+    {% for rs in run_sets %}<option value="{{ rs }}" {{ 'selected' if rs == run_set else '' }}>{{ rs }}</option>{% endfor %}
   </select>
 </form>
 
+{% macro pct(x) %}{{ '%.0f%%'|format(x * 100) if x is not none else '—' }}{% endmacro %}
+{% macro kappa(k) %}{{ '%.2f'|format(k) if k is not none else '—' }}{% endmacro %}
+
 {% if result %}
-<p>{{ result.set_count }} annotation set(s) in <strong>{{ language }}</strong>.</p>
+{% if not result['items'] %}
+<p class="hint">No annotation exports found under <strong>{{ run_set }}</strong>.</p>
+{% endif %}
 
-<h2>Tutor dimensions</h2>
-<table class="agg">
-  {% for d in dimensions %}
-  <tr>
-    <th>{{ d.name }}</th>
-    <td>
-      {% for lab, n in result.dimensions[d.key].items() %}
-      <span class="chip {{ lab|label_class }}">{{ lab }}: {{ n }}</span>
-      {% endfor %}
-    </td>
-  </tr>
+{% for item in result['items'] %}
+<section class="card">
+  <h2>{{ item.display }}</h2>
+  <p class="hint">{{ item.item }} · annotators: {{ item.annotators|join(', ') }}</p>
+
+  <h3>Vs ground truth</h3>
+  <p>Each annotator's chosen student state vs. the state assigned by the run.</p>
+  <p>
+    {% for a, gt in item.ground_truth.items() %}
+    <span class="chip">{{ a }}: {{ pct(gt.accuracy) }} <span class="hint">(n={{ gt.n }})</span></span>
+    {% endfor %}
+  </p>
+
+  {% if not item.pairs %}
+  <p class="hint">Needs ≥2 annotators in this topic for agreement.</p>
+  {% endif %}
+
+  {% for p in item.pairs %}
+  <h3>{{ p.a }} vs {{ p.b }} <span class="hint">({{ p.n_transcripts }} shared run(s))</span></h3>
+
+  <h4>Student state</h4>
+  <p>
+    <span class="chip">agreement: {{ pct(p.student.agree) }}</span>
+    <span class="chip">κ: {{ kappa(p.student.kappa) }}</span>
+    <span class="hint">n={{ p.student.n }}</span>
+  </p>
+
+  <h4>Tutor dimensions</h4>
+  <table class="agg">
+    <tr><th></th><th>agreement</th><th>κ</th><th>n</th></tr>
+    {% for d in dimensions %}{% set dd = p.dimensions[d.key] %}
+    <tr>
+      <th>{{ d.name }}</th>
+      <td>{{ pct(dd.agree) }}</td>
+      <td>{{ kappa(dd.kappa) }}</td>
+      <td>{{ dd.n }}</td>
+    </tr>
+    {% endfor %}
+  </table>
   {% endfor %}
-</table>
-
-<h2>Student state correctness</h2>
-<p>How often the annotator's chosen state matches the state assigned by the run's sequence.</p>
-<p>
-  <span class="chip pos">Correct: {{ result.correct }}</span>
-  <span class="chip neg">Incorrect: {{ result.incorrect }}</span>
-</p>
-
-<h3>Selected-state distribution</h3>
-<p>
-  {% for state, n in result.states.items() %}
-  <span class="chip">{{ state }}: {{ n }}</span>
-  {% else %}
-  <span class="chip">none yet</span>
-  {% endfor %}
-</p>
+</section>
+{% endfor %}
 {% endif %}
 {% endblock %}
