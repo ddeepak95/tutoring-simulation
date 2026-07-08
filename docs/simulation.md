@@ -41,6 +41,11 @@ one tutor prompt variant, with the student model fixed.
 A **run-set** enumerates the conditions (and their repeat counts). The CLI expands it, skips conditions
 already on disk, and runs the rest, so adding a model or language only fills the missing conditions.
 
+The default `data/run_set.json` declares the shared `defaults` (models, reasoning, language, `repeats`), a list of `topics`, and a `pedagogy_sweep` — and `load_run_set` expands the cross-product into cells. The sweep fixes exactly one approach at each `extreme` (Very High / Very Low)
+with the rest at `baseline` (Neutral), giving `topics × approaches × extremes` cells with ids like
+`gravity-en-ce-vh`. An explicit `items` list is still accepted for one-off run-sets (used by the CD
+copies under `runs/`).
+
 ---
 
 ## 2. Components (responsibilities, not code)

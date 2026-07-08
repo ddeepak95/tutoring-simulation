@@ -15,7 +15,10 @@ Put API keys in `.env` (see `.env.example`).
 
 ## Run simulation
 
-Expand the run-set in `data/run_set.json` into cells x repeats and run them (resume-safe):
+The run-set in `data/run_set.json` declares `defaults` (models, reasoning, language, `repeats`), a list of `topics`, and a `pedagogy_sweep`. `load_run_set` expands the
+cross-product into cells where one approach is fixed at each extreme (Very High / Very Low) with the
+rest at Neutral, with ids like `gravity-en-ce-vh`. Expand it into cells x repeats and run them
+(resume-safe):
 
 ```bash
 # from project root

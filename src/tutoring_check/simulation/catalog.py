@@ -115,19 +115,51 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
     )
 
 
+def _expand_sweep(run_set: dict) -> list[dict]:
+    """Expand a compact `pedagogy_sweep` run set into item dicts.
+
+    Each cell fixes one approach at one extreme (Very High / Very Low) with the rest
+    at the baseline level, for every topic. The id is {topic}-{lang}-{approach}-{extreme}.
+    """
+    defaults = run_set.get("defaults", {})
+    lang = defaults["language_id"].split("-")[0]
+    sweep = run_set["pedagogy_sweep"]
+    baseline, approaches, extremes = sweep["baseline"], sweep["approaches"], sweep["extremes"]
+
+    items: list[dict] = []
+    for topic in run_set["topics"]:
+        for approach in approaches:
+            for extreme in extremes:
+                levels = {a["name"]: baseline for a in approaches}
+                levels[approach["name"]] = extreme["level"]
+                items.append(
+                    {
+                        **defaults,
+                        "id": f"{topic}-{lang}-{approach['code']}-{extreme['code']}",
+                        "topic_id": topic,
+                        "pedagogy_levels": levels,
+                    }
+                )
+    return items
+
+
 def load_run_set(run_set_path: Path | None = None) -> list[ResolvedRun]:
     """Resolve every item in the given run-set file into a runnable ResolvedRun.
 
     The catalogs (languages, models, topics, regions) are loaded from the run-set
-    file's own directory. The shared pedagogy_levels is folded into each item that
-    does not set its own, so the tutor's assigned levels live in one place but stay
-    overridable per item.
+    file's own directory. A run set is either compact (a `pedagogy_sweep` expanded
+    into cells here) or an explicit `items` list; in the latter the shared
+    pedagogy_levels is folded into each item that does not set its own, so the
+    tutor's assigned levels live in one place but stay overridable per item.
     """
     run_set_path = run_set_path or (_DATA_DIR / "run_set.json")
     cat = load_catalogs(run_set_path.parent)
     run_set = json.loads(run_set_path.read_text())
-    default_levels = run_set.get("pedagogy_levels", {})
-    items = run_set["items"]
-    for item in items:
-        item.setdefault("pedagogy_levels", default_levels)
+    if "pedagogy_sweep" in run_set:
+        items = _expand_sweep(run_set)
+    else:
+        default_levels = run_set.get("pedagogy_levels", {})
+        items = run_set["items"]
+        for item in items:
+            item.setdefault("pedagogy_levels", default_levels)
     return [resolve_run_item(item, cat) for item in items]

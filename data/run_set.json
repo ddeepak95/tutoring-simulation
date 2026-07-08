@@ -1,101 +1,25 @@
 {
-  "_comment": "A run set enumerates the cells to run. Each item resolves to a SessionConfig + models. CI items take topic_id + language_id; CD items take topic_id + region_id (language defaults from the region, overridable with language_id). repeats runs each item r times (r0, r1, …), each an independent draw. pedagogy_levels is the tutor's assigned level per pedagogical approach (scale: Very Low, Low, Neutral, High, Very High), set per item. Optional tutor_reasoning/student_reasoning set litellm reasoning_effort (low/medium/high, or none/disable where supported); omit for the provider default.",
-  "items": [
-    {
-      "id": "gravity-en-ce",
-      "topic_type": "context_independent",
-      "topic_id": "gravity",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very High",
-        "Formative Assessment": "Very Low",
-        "Accountability": "Very Low"
-      }
-    },
-    {
-      "id": "speed-en-ce",
-      "topic_type": "context_independent",
-      "topic_id": "speed",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very High",
-        "Formative Assessment": "Very Low",
-        "Accountability": "Very Low"
-      }
-    },
-    {
-      "id": "gravity-en-fa",
-      "topic_type": "context_independent",
-      "topic_id": "gravity",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very Low",
-        "Formative Assessment": "Very High",
-        "Accountability": "Very Low"
-      }
-    },
-    {
-      "id": "speed-en-fa",
-      "topic_type": "context_independent",
-      "topic_id": "speed",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very Low",
-        "Formative Assessment": "Very High",
-        "Accountability": "Very Low"
-      }
-    },
-    {
-      "id": "gravity-en-acc",
-      "topic_type": "context_independent",
-      "topic_id": "gravity",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very Low",
-        "Formative Assessment": "Very Low",
-        "Accountability": "Very High"
-      }
-    },
-    {
-      "id": "speed-en-acc",
-      "topic_type": "context_independent",
-      "topic_id": "speed",
-      "language_id": "en-US",
-      "tutor_model_id": "gemini-3.5-flash",
-      "student_model_id": "gemini-3.1-pro-preview",
-      "tutor_reasoning": "low",
-      "student_reasoning": "high",
-      "repeats": 1,
-      "pedagogy_levels": {
-        "Cognitive Engagement": "Very Low",
-        "Formative Assessment": "Very Low",
-        "Accountability": "Very High"
-      }
-    }
-  ]
+  "_comment": "Compact run set: axes are declared once and expanded into cells by load_run_set. defaults are merged into every cell. The pedagogy_sweep sets exactly one approach to each extreme with the rest at baseline; each (topic x approach x extreme) becomes one cell run `repeats` times. Cell ids follow {topic}-{lang}-{approach_code}-{extreme_code}, e.g. gravity-en-ce-vh.",
+  "defaults": {
+    "topic_type": "context_independent",
+    "language_id": "en-US",
+    "tutor_model_id": "gemini-3.5-flash",
+    "student_model_id": "gemini-3.1-pro-preview",
+    "tutor_reasoning": "low",
+    "student_reasoning": "high",
+    "repeats": 2
+  },
+  "topics": ["gravity", "speed", "tree-mass", "energy-transfer", "rust"],
+  "pedagogy_sweep": {
+    "baseline": "Neutral",
+    "extremes": [
+      {"level": "Very High", "code": "vh"},
+      {"level": "Very Low", "code": "vl"}
+    ],
+    "approaches": [
+      {"name": "Cognitive Engagement", "code": "ce"},
+      {"name": "Formative Assessment", "code": "fa"},
+      {"name": "Accountability", "code": "ac"}
+    ]
+  }
 }
