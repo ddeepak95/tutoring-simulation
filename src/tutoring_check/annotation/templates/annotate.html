@@ -21,7 +21,9 @@
          hx-target="#sidebar" hx-swap="innerHTML">
       <div class="bubble-head">
         <span class="speaker">{{ 'teacher' if t.is_tutor else 'student' }}</span>
+        {% if t.is_tutor %}
         <span id="marker-{{ t.turn_id }}" class="marker {{ 'done' if markers[t.turn_id] else '' }}">{{ '●' if markers[t.turn_id] else '○' }}</span>
+        {% endif %}
       </div>
       <div class="content">{{ t.content|sanitize }}</div>
     </div>

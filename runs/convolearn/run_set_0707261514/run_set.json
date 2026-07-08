@@ -1,0 +1,71 @@
+{
+  "_comment": "A run set enumerates the cells to run. Each item resolves to a SessionConfig + models. CI items take topic_id + language_id; CD items take topic_id + region_id (language defaults from the region, overridable with language_id). seed is the base seed; repeat r uses seed+r so r0 of every tutor faces the same student draw. Optional tutor_reasoning/student_reasoning set litellm reasoning_effort (low/medium/high, or none/disable where supported); omit for the provider default.",
+  "items": [
+    {
+      "id": "gravity-en",
+      "topic_type": "context_independent",
+      "topic_id": "gravity",
+      "language_id": "en-US",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    },
+    {
+      "id": "speed-en",
+      "topic_type": "context_independent",
+      "topic_id": "speed",
+      "language_id": "en-US",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    },
+    {
+      "id": "gravity-zh",
+      "topic_type": "context_independent",
+      "topic_id": "gravity",
+      "language_id": "zh-CN",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    },
+    {
+      "id": "speed-zh",
+      "topic_type": "context_independent",
+      "topic_id": "speed",
+      "language_id": "zh-CN",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    },
+    {
+      "id": "gravity-ta",
+      "topic_type": "context_independent",
+      "topic_id": "gravity",
+      "language_id": "ta-IN",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    },
+    {
+      "id": "speed-ta",
+      "topic_type": "context_independent",
+      "topic_id": "speed",
+      "language_id": "ta-IN",
+      "tutor_model_id": "gemini-3.5-flash",
+      "student_model_id": "gemini-3.1-pro-preview",
+      "tutor_reasoning": "low",
+      "student_reasoning": "high",
+      "repeats": 1
+    }
+  ]
+}

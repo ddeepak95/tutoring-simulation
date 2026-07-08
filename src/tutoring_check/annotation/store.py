@@ -15,8 +15,7 @@ from itertools import combinations
 from pathlib import Path
 
 from tutoring_check.evaluation.dimensions import Category, category_dimensions
-from tutoring_check.evaluation.transcript import Transcript, load_transcript
-from tutoring_check.simulation.states import state_set
+from tutoring_check.evaluation.transcript import Transcript
 
 # The 8 Instructional Ability dimensions are the tutor-turn move vocabulary.
 TUTOR_DIMENSIONS = category_dimensions(Category.INSTRUCTIONAL_ABILITY)
@@ -238,14 +237,6 @@ def set_dimension(conn: sqlite3.Connection, set_id: int, turn_id: int, dim_key: 
     return data
 
 
-def set_state(conn: sqlite3.Connection, set_id: int, turn_id: int, state: str) -> dict:
-    """Record the state the annotator judges the student utterance to actually be in."""
-    existing = load_annotations(conn, set_id).get(turn_id, {}).get("data", {})
-    data = {"state": state, "note": existing.get("note", "")}
-    _upsert(conn, set_id, turn_id, "student_state", data)
-    return data
-
-
 def set_note(conn: sqlite3.Connection, set_id: int, turn_id: int, kind: str, note: str) -> dict:
     existing = load_annotations(conn, set_id).get(turn_id, {}).get("data", {})
     data = dict(existing)
@@ -263,42 +254,30 @@ def turn_complete(kind: str, data: dict) -> bool:
         # annotator has labelled at least one dimension that applies.
         labels = data.get("labels", {})
         return any(labels.get(d.key) for d in TUTOR_DIMENSIONS)
-    if kind == "student_state":
-        return bool(data.get("state"))
     return False
 
 
 def conversation_status(transcript: Transcript, annotations: dict[int, dict]) -> tuple[int, int]:
-    """(#complete turns, #total turns) — every tutor and student turn is in scope."""
-    total = len(transcript.turns)
+    """(#complete turns, #total turns) — only tutor turns are in scope."""
+    total = 0
     done = 0
     for turn in transcript.turns:
-        kind = "tutor_dimensions" if turn.is_tutor else "student_state"
+        if not turn.is_tutor:
+            continue
+        total += 1
         ann = annotations.get(turn.turn_id)
-        if ann and turn_complete(kind, ann["data"]):
+        if ann and turn_complete("tutor_dimensions", ann["data"]):
             done += 1
     return done, total
 
 
-def states_for(header: dict) -> dict[str, str]:
-    """The state -> strategy-text map in force for this transcript's scenario type."""
-    return state_set(str(header.get("scenario_type", "CI")).upper() == "CD")
-
-
 # --- jsonl export ---------------------------------------------------------
-
-
-def assigned_states(path: Path) -> dict[int, str | None]:
-    """Map student turn_id -> the state assigned to it by the run's state_sequence."""
-    transcript = load_transcript(path)
-    return {t.turn_id: t.state for t in transcript.turns if not t.is_tutor}
 
 
 def export_jsonl(conn: sqlite3.Connection, ref: TranscriptRef, header: dict, annotator_id: str) -> Path:
     """Materialize a completed set as human_annotation.<annotator>.jsonl next to the transcript."""
     set_id = get_or_create_set(conn, ref, header, annotator_id)
     annotations = load_annotations(conn, set_id)
-    assigned = assigned_states(ref.path)
     out_path = ref.path.parent / f"human_annotation.{annotator_id}.jsonl"
     lines = [
         {
@@ -318,11 +297,6 @@ def export_jsonl(conn: sqlite3.Connection, ref: TranscriptRef, header: dict, ann
         record = {"kind": kind, "turn_id": turn_id, "note": data.get("note", "")}
         if kind == "tutor_dimensions":
             record["labels"] = data.get("labels", {})
-        else:
-            selected = data.get("state")
-            record["state"] = selected
-            record["assigned_state"] = assigned.get(turn_id)
-            record["correct"] = selected is not None and selected == assigned.get(turn_id)
         lines.append(record)
     out_path.write_text(
         "\n".join(json.dumps(line, ensure_ascii=False) for line in lines) + "\n",
@@ -392,8 +366,8 @@ def _agreement(pairs: list[tuple[str, str]]) -> dict:
 
 
 def _slot_keys(slot: dict):
-    """Every (run, turn_id) key an annotator touched, across student turns and dimensions."""
-    keys = set(slot["student"])
+    """Every (run, turn_id) key an annotator touched, across dimensions."""
+    keys: set = set()
     for marks in slot["dims"].values():
         keys |= set(marks)
     return keys
@@ -449,16 +423,11 @@ def interrater_run_set(run_set: str) -> dict:
     """Interrater reliability for one run set, broken down per topic item.
 
     Reads the per-annotator jsonl exports under the run set, pools each item's turns
-    across its runs, and compares annotators pairwise on the student state and on each
-    tutor dimension; it also reports every annotator's accuracy against the assigned
-    (ground-truth) state.
+    across its runs, and compares annotators pairwise on each tutor dimension.
     """
     root = runs_root()
     base = root / run_set
-    # item -> annotator -> {"student": {(run, tid): state},
-    #                       "dims": {dim_key: {(run, tid): label}},
-    #                       "gt": [(state, assigned_state), ...],
-    #                       "header": dict}
+    # item -> annotator -> {"dims": {dim_key: {(run, tid): label}}, "header": dict}
     items: dict[str, dict[str, dict]] = {}
     for path in sorted(base.glob("**/human_annotation.*.jsonl")):
         parts = path.relative_to(root).parts  # run_set / item / run / [...] / file
@@ -468,17 +437,13 @@ def interrater_run_set(run_set: str) -> dict:
         header, records = read_export(path)
         annotator = header.get("annotator_id") or path.stem.split(".", 1)[-1]
         slot = items.setdefault(item, {}).setdefault(
-            annotator, {"student": {}, "dims": {}, "gt": [], "header": header}
+            annotator, {"dims": {}, "header": header}
         )
         for rec in records:
             tid = rec.get("turn_id")
             if rec.get("kind") == "tutor_dimensions":
                 for key, label in rec.get("labels", {}).items():
                     slot["dims"].setdefault(key, {})[(run, tid)] = label
-            elif rec.get("kind") == "student_state" and rec.get("state"):
-                slot["student"][(run, tid)] = rec["state"]
-                if rec.get("assigned_state") is not None:
-                    slot["gt"].append((rec["state"], rec["assigned_state"]))
 
     result_items = []
     for item in sorted(items):
@@ -486,9 +451,6 @@ def interrater_run_set(run_set: str) -> dict:
         pairs_out = []
         for a, b in combinations(annotators, 2):
             sa, sb = items[item][a], items[item][b]
-            student_pairs = [
-                (sa["student"][k], sb["student"][k]) for k in sa["student"] if k in sb["student"]
-            ]
             dim_out = {}
             for d in TUTOR_DIMENSIONS:
                 ma, mb = sa["dims"].get(d.key, {}), sb["dims"].get(d.key, {})
@@ -498,18 +460,11 @@ def interrater_run_set(run_set: str) -> dict:
             runs_b = {run for run, _ in _slot_keys(sb)}
             n_transcripts = len(runs_a & runs_b)
             pairs_out.append(
-                {"a": a, "b": b, "n_transcripts": n_transcripts,
-                 "student": _agreement(student_pairs), "dimensions": dim_out}
+                {"a": a, "b": b, "n_transcripts": n_transcripts, "dimensions": dim_out}
             )
-        ground_truth = {
-            a: {"n": len(items[item][a]["gt"]),
-                "accuracy": (sum(s == g for s, g in items[item][a]["gt"]) / len(items[item][a]["gt"]))
-                if items[item][a]["gt"] else None}
-            for a in annotators
-        }
         header = next((items[item][a]["header"] for a in annotators if items[item][a]["header"]), {})
         result_items.append(
             {"item": item, "display": display_name(header) if header else item,
-             "annotators": annotators, "pairs": pairs_out, "ground_truth": ground_truth}
+             "annotators": annotators, "pairs": pairs_out}
         )
     return {"run_set": run_set, "items": result_items}

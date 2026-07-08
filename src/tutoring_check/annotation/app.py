@@ -147,10 +147,10 @@ def annotate(request: Request, slug: str):
     ref, header, transcript, set_id, annotations = loaded
     markers = {
         t.turn_id: store.turn_complete(
-            "tutor_dimensions" if t.is_tutor else "student_state",
-            annotations.get(t.turn_id, {}).get("data", {}),
+            "tutor_dimensions", annotations.get(t.turn_id, {}).get("data", {})
         )
         for t in transcript.turns
+        if t.is_tutor
     }
     done, total = store.conversation_status(transcript, annotations)
     return templates.TemplateResponse(
@@ -180,9 +180,6 @@ def sidebar(request: Request, slug: str, turn_id: int):
         ctx["dimensions"] = store.TUTOR_DIMENSIONS
         ctx["labels"] = data.get("labels", {})
         return templates.TemplateResponse(request, "fragments/sidebar_tutor.html", ctx)
-    # The dropdown lists every candidate state, but the turn's assigned state is
-    # deliberately not surfaced so the annotator judges it blind.
-    ctx["states"] = store.states_for(header)
     return templates.TemplateResponse(request, "fragments/sidebar_student.html", ctx)
 
 
@@ -203,8 +200,6 @@ async def save(request: Request, slug: str, turn_id: int, kind: str, dim: str = 
             store.set_note(conn, set_id, turn_id, kind, form.get("note", ""))
         elif kind == "tutor_dimensions":
             store.set_dimension(conn, set_id, turn_id, dim, value)
-        elif kind == "student_state":
-            store.set_state(conn, set_id, turn_id, value)
         annotations = store.load_annotations(conn, set_id)
     data = annotations.get(turn_id, {}).get("data", {})
     complete = store.turn_complete(kind, data)

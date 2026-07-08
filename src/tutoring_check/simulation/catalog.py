@@ -1,6 +1,5 @@
 """Load the JSON catalogs in `data/` and resolve run-set items into runnable sessions (spec §2).
 CI items take topic_id + language_id; CD items take topic_id + region_id (language defaults from the region).
-The state sequence comes from the topic and is validated when the SessionConfig is built.
 """
 from __future__ import annotations
 
@@ -8,7 +7,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.config import PedagogyLevel, SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -67,6 +66,11 @@ def _model_litellm(cat: Catalogs, model_id: str) -> str:
     return _lookup(cat.models, model_id, "model id")["litellm_model"]
 
 
+def _pedagogy_levels(item: dict) -> dict[str, PedagogyLevel]:
+    """The item's assigned pedagogy levels, with scale labels (e.g. "Very Low")."""
+    return {approach: PedagogyLevel(level) for approach, level in item.get("pedagogy_levels", {}).items()}
+
+
 def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
     """Assemble a SessionConfig from one run-set item."""
     topic_type = item["topic_type"]
@@ -77,9 +81,9 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
             scenario_id=item["topic_id"],
             context_dependent=False,
             topic=topic["topic"],
-            instruction=topic["instruction"],
-            state_sequence=list(item["state_sequence"]),
+            question=topic["question"],
             language=_language_name(cat, item["language_id"]),
+            pedagogy_levels=_pedagogy_levels(item),
         )
 
     if topic_type == "context_dependent":
@@ -90,10 +94,10 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
             scenario_id=item["topic_id"],
             context_dependent=True,
             topic=topic["topic"],
-            instruction=topic["instruction"],
-            state_sequence=list(item["state_sequence"]),
+            question=topic["question"],
             language=_language_name(cat, language_id),
             region=region["name"],
+            pedagogy_levels=_pedagogy_levels(item),
         )
 
     raise ValueError(f"unknown topic_type {topic_type!r} in run-set item {item.get('id')!r}")
@@ -115,15 +119,15 @@ def load_run_set(run_set_path: Path | None = None) -> list[ResolvedRun]:
     """Resolve every item in the given run-set file into a runnable ResolvedRun.
 
     The catalogs (languages, models, topics, regions) are loaded from the run-set
-    file's own directory. The shared default_state_sequence is folded into each item
-    that does not set its own, so the student arc lives in one place but stays
+    file's own directory. The shared pedagogy_levels is folded into each item that
+    does not set its own, so the tutor's assigned levels live in one place but stay
     overridable per item.
     """
     run_set_path = run_set_path or (_DATA_DIR / "run_set.json")
     cat = load_catalogs(run_set_path.parent)
     run_set = json.loads(run_set_path.read_text())
-    default_sequence = run_set.get("default_state_sequence", [])
+    default_levels = run_set.get("pedagogy_levels", {})
     items = run_set["items"]
     for item in items:
-        item.setdefault("state_sequence", default_sequence)
+        item.setdefault("pedagogy_levels", default_levels)
     return [resolve_run_item(item, cat) for item in items]

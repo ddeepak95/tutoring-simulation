@@ -8,12 +8,11 @@ from pathlib import Path
 
 @dataclass(frozen=True)
 class Turn:
-    """One spoken turn. `state` is the student's dynamic-state label and is None on tutor turns."""
+    """One spoken turn."""
 
     turn_id: int
     speaker: str  # "tutor" | "student"
     content: str
-    state: str | None = None
 
     @property
     def is_tutor(self) -> bool:
@@ -56,7 +55,6 @@ def load_transcript(path: Path) -> Transcript:
                     turn_id=record["turn_id"],
                     speaker=record["speaker"],
                     content=record["content"],
-                    state=record.get("state"),
                 )
             )
 

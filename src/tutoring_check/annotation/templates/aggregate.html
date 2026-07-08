@@ -22,27 +22,12 @@
   <h2>{{ item.display }}</h2>
   <p class="hint">{{ item.item }} · annotators: {{ item.annotators|join(', ') }}</p>
 
-  <h3>Vs ground truth</h3>
-  <p>Each annotator's chosen student state vs. the state assigned by the run.</p>
-  <p>
-    {% for a, gt in item.ground_truth.items() %}
-    <span class="chip">{{ a }}: {{ pct(gt.accuracy) }} <span class="hint">(n={{ gt.n }})</span></span>
-    {% endfor %}
-  </p>
-
   {% if not item.pairs %}
   <p class="hint">Needs ≥2 annotators in this topic for agreement.</p>
   {% endif %}
 
   {% for p in item.pairs %}
   <h3>{{ p.a }} vs {{ p.b }} <span class="hint">({{ p.n_transcripts }} shared run(s))</span></h3>
-
-  <h4>Student state</h4>
-  <p>
-    <span class="chip">agreement: {{ pct(p.student.agree) }}</span>
-    <span class="chip">κ: {{ kappa(p.student.kappa) }}</span>
-    <span class="hint">n={{ p.student.n }}</span>
-  </p>
 
   <h4>Tutor dimensions</h4>
   <table class="agg">

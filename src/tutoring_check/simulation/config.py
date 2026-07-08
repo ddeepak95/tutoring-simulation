@@ -1,27 +1,33 @@
 """The content spec for one simulation = one conversation (spec §1, §7).
-The student is driven by the injected per-turn state alone (spec §0.2).
 The learner's framing (learner vs. culture-sharer) follows from context_dependent + topic + region.
 Run-level knobs (models, repeat index) live at the session call, not here.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from enum import Enum
 
-from tutoring_check.simulation.states import validate_sequence
+
+class PedagogyLevel(str, Enum):
+    """The level a tutor is asked to exhibit a pedagogical approach at.
+    The value is the label used verbatim in the tutor prompt.
+    """
+    VERY_LOW = "Very Low"
+    LOW = "Low"
+    NEUTRAL = "Neutral"
+    HIGH = "High"
+    VERY_HIGH = "Very High"
 
 
 @dataclass
 class SessionConfig:
     scenario_id: str                 # topic / scenario id, recorded in the transcript
-    context_dependent: bool          # CI vs CD: picks the state set, prompt frame, dimensions
+    context_dependent: bool          # CI vs CD: picks the prompt frame and dimensions
     topic: str                       # human-readable topic name
-    instruction: str                 # opening prompt
-    state_sequence: list[str]        # fixed per-turn states; conversation length == len(sequence)
+    question: str                    # the question the student opens the conversation with
     language: str                    # language name, e.g. "English (US)"
     region: str = ""                 # CD only: the culture/region the student speaks from
-    student_name: str = "Student"
+    student_name: str = "Jamie"
     tutor_name: str = "Tutor"
-
-    def __post_init__(self) -> None:
-        # Fail fast on an authoring typo before any model is called.
-        validate_sequence(self.state_sequence, self.context_dependent)
+    # approach name -> assigned level, from the run set; the tutor exhibits each at its level.
+    pedagogy_levels: dict[str, PedagogyLevel] = field(default_factory=dict)

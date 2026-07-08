@@ -1,7 +1,6 @@
-# State-driven tutor/student conversation simulator & evaluator
+# Tutor/student conversation simulator & evaluator
 
-Simulates tutoring conversations between a tutor model under test and a fixed, state-driven student. 
-Evaluates tutoring conversations with the mTeach framework.
+Simulates tutoring conversations between a tutor model under test and a fixed student model. 
 See `/docs`.
 
 
@@ -62,15 +61,15 @@ has `evaluation_transcript.jsonl` is skipped, so re-running only fills gaps.
 
 A reviewer-facing web app (FastAPI + Jinja/HTMX) for hand-labeling one conversation
 at a time — click a chat bubble, annotate it in the sidebar. Tutor turns get the 8
-Instructional Ability dimensions; student turns get a state-adherence check. See
-`docs/annotation_tool.md` for the full spec.
+Instructional Ability dimensions; student turns are shown for context but are not
+annotated. See `docs/annotation_tool.md` for the full spec.
 
 Install the annotation extra (one time), then launch:
 
 ```bash
 # from project root
 uv pip install -e ".[annotation]"
-uv run tutoring-annotate          # → http://127.0.0.1:8000/
+uv run tutoring-annotate
 ```
 
 By default the picker scans `runs/annotating/` for transcripts laid out exactly as

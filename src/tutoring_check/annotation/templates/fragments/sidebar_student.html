@@ -2,25 +2,3 @@
   <span class="speaker">student · turn {{ turn.turn_id }}</span>
   <blockquote>{{ turn.content|sanitize }}</blockquote>
 </div>
-
-{% set cur = data.get('state', '') %}
-<div class="dim">
-  <label>Which state is the student in?</label>
-  <select class="label" name="value"
-          hx-post="/annotate/{{ slug }}/save?turn_id={{ turn.turn_id }}&kind=student_state"
-          hx-target="#sidebar-status" hx-swap="outerHTML" hx-trigger="change">
-    <option value="" {{ 'selected' if cur == '' else '' }}>—</option>
-    {% for key, desc in states.items() %}
-    <option value="{{ key }}" title="{{ desc }}" {{ 'selected' if cur == key else '' }}>{{ key }}</option>
-    {% endfor %}
-  </select>
-</div>
-
-<div class="dim">
-  <label>Note</label>
-  <textarea name="note"
-            hx-post="/annotate/{{ slug }}/save?turn_id={{ turn.turn_id }}&kind=student_state&field=note"
-            hx-target="#sidebar-status" hx-swap="outerHTML" hx-trigger="change">{{ data.get('note', '') }}</textarea>
-</div>
-
-<span id="sidebar-status" class="status"></span>
