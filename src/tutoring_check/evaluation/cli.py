@@ -23,9 +23,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 async def run(args: argparse.Namespace) -> int:
     load_dotenv()
-    transcripts = sorted(args.runs.rglob("transcript.jsonl"))
+    # Matches the English `transcript.jsonl` and every translated `transcript_<Lang>.jsonl`.
+    transcripts = sorted(args.runs.rglob("transcript*.jsonl"))
     if not transcripts:
-        raise ValueError(f"no transcript.jsonl found under {args.runs}")
+        raise ValueError(f"no transcript*.jsonl found under {args.runs}")
 
     for transcript_path in transcripts:
         out_dir = await evaluate_transcript(transcript_path, annotator_model=args.annotator_model)

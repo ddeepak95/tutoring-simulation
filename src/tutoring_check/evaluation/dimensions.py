@@ -1,95 +1,210 @@
-"""The mTeach dimensions and their per-turn move definitions.
+"""The tutoring-move dimensions the evaluator counts on each tutor turn.
 
-Each dimension is a bundle of sub-aspects; a move is tagged when the behavior those
-sub-aspects describe is exhibited on the turn (evaluation.md "Dimensions").
+Each dimension names one kind of tutor move; the evaluator counts how many instances of each dimension a tutor turn contains (evaluation.md "Dimensions").
 
-This module is the single source of truth for the move vocabulary: the Instructional
-Ability dimensions are the moves the annotator may tag (evaluation.md "Current scope").
+This module is the single source of truth for the move vocabulary.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
 
 
-class Category(str, Enum):
-    """The three mTeach dimension categories. """
-    INSTRUCTIONAL_ABILITY = "instructional_ability"
-    INFORMATIONAL_QUALITY = "informational_quality"
-    LANGUAGE_QUALITY = "language_quality"
+@dataclass(frozen=True)
+class Example:
+    """A contrasting pair that bounds one dimension.
+
+    `counts` is an utterance that is an instance of the dimension; `doesnt_count` is a
+    near-miss that is not an instance of it; `why` explains the boundary.
+    """
+    counts: str
+    doesnt_count: str
+    why: str
 
 
 @dataclass(frozen=True)
 class Dimension:
-    """One mTeach dimension, the criterion describing its behavior, and its allowed labels. """
+    """One countable tutor move: its criterion and the examples that bound it. """
     key: str
     name: str
-    category: Category
     criteria: str
-    labels: tuple[str, ...]
-
-
-# The label set shared by most dimensions.
-_THREE_POINT: tuple[str, ...] = ("Yes", "To an extent", "No")
+    examples: tuple[Example, ...]
 
 
 DIMENSIONS: tuple[Dimension, ...] = (
-    # Instructional Ability
     Dimension(
-        key="mistake_identification",
-        name="Mistake Identification",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Has the tutor identified/recognized a mistake in a student's response?",
-        labels=_THREE_POINT,
+        key="understanding_checks",
+        name="Understanding Checks",
+        criteria=(
+            "Tutor asks a question aimed purely at finding out what the student currently "
+            "understands, with no new information supplied and no justification demanded."
+        ),
+        examples=(
+            Example(
+                counts="What do you think happens when you multiply two negatives?",
+                doesnt_count="Remember, a negative times a negative is positive — does that make sense?",
+                why="The second sentence supplies the rule first, so it's Hints/Explanations, not a pure check.",
+            ),
+            Example(
+                counts="Can you tell me in your own words what the question is asking?",
+                doesnt_count="You said the area is 24 — how did you get that?",
+                why="The second demands justification for a claim already made, so it's Asking for Justification.",
+            ),
+            Example(
+                counts="Where are you feeling stuck right now?",
+                doesnt_count="\"Does that make sense?\" asked reflexively after every explanation",
+                why="Still technically a check — count it (quality is judged separately), don't exclude it.",
+            ),
+            Example(
+                counts="Before we move on, what's the formula we just used?",
+                doesnt_count="What's your plan for solving this?",
+                why="The second asks about strategy, not content understanding, so it's Metacognition.",
+            ),
+        ),
     ),
     Dimension(
-        key="mistake_location",
-        name="Mistake Location",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Does the tutor's response accurately point to a genuine mistake and its location?",
-        labels=_THREE_POINT,
+        key="hints_explanations",
+        name="Hints/Explanations",
+        criteria=(
+            "Tutor supplies a hint, partial or full explanation, worked example, analogy, "
+            "elaboration, or any kind of information."
+        ),
+        examples=(
+            Example(
+                counts="Here's a similar example: 2² × 2³ = 2⁵.",
+                doesnt_count="What's 2 to the power of 3?",
+                why="The second is a content-free arithmetic question with no hint or explanation attached — an Understanding Check.",
+            ),
+            Example(
+                counts="Inertia is an object's resistance to being accelerated.",
+                doesnt_count="What would that tell us about how all objects fall, regardless of their weight?",
+                why="The second is a question that checks the student's understanding, not an explanation — an Understanding Check.",
+            ),
+            Example(
+                counts="Think about what happens to the sign when you flip a fraction.",
+                doesnt_count="Good job!",
+                why="No content supplied — this is Positive Affective Behavior instead.",
+            ),
+        ),
     ),
     Dimension(
-        key="revealing_answer",
-        name="Revealing the Answer",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Does the tutor reveal the final answer (whether correct or not)?",
-        labels=("Yes (and correct)", "Yes (and incorrect)", "No"),
+        key="asking_for_justification",
+        name="Asking for Justification",
+        criteria=(
+            "Tutor requires the student to justify, evidence, or elaborate on a claim the "
+            "student has already made."
+        ),
+        examples=(
+            Example(
+                counts="Why do you think the answer is?",
+                doesnt_count="What do you think the answer is?",
+                why="The second asks for an answer, not justification of one already given — Understanding Check.",
+            ),
+            Example(
+                counts="Where in the passage does it say that?",
+                doesnt_count="Can you re-read the passage?",
+                why="The second is an instruction, not a demand for evidence of a specific claim.",
+            ),
+            Example(
+                counts="Why does that method work?",
+                doesnt_count="Nice, that's correct!",
+                why="Simple confirmation with no push for reasoning doesn't count.",
+            ),
+            Example(
+                counts="Explain your reasoning.",
+                doesnt_count="Are you sure?",
+                why="If the tutor never actually requires reasoning and just moves on, don't count it.",
+            ),
+        ),
     ),
     Dimension(
-        key="providing_guidance",
-        name="Providing Guidance",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Does the tutor offer correct and relevant guidance, such as an explanation, elaboration, hint, examples, and so on?",
-        labels=_THREE_POINT,
+        key="metacognition",
+        name="Metacognition",
+        criteria=(
+            "Tutor prompts awareness of the student's own thinking, strategy, planning, or "
+            "self-monitoring — not the correctness of content."
+        ),
+        examples=(
+            Example(
+                counts="What's your plan before you start solving?",
+                doesnt_count="What's the first step in solving this equation?",
+                why="The second is content-specific, not the student's personal approach — Understanding Check.",
+            ),
+            Example(
+                counts="How did you know that strategy would work?",
+                doesnt_count="How did you get 42?",
+                why="The second asks about the calculation, not the strategy choice — likely Asking for Justification.",
+            ),
+            Example(
+                counts="Looking back, would you approach this differently next time?",
+                doesnt_count="Good work today!",
+                why="No reflection prompted — Positive Affective Behavior.",
+            ),
+            Example(
+                counts="How do you usually check your own work?",
+                doesnt_count="Can you check your work?",
+                why="The second is an instruction to perform an action, not a prompt to articulate process — count only if the phrasing asks the student to explain, not just do.",
+            ),
+        ),
     ),
     Dimension(
-        key="actionability",
-        name="Actionability",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Is it clear from the tutor's feedback what the student should do next?",
-        labels=_THREE_POINT,
+        key="positive_affective_behavior",
+        name="Positive Affective Behavior",
+        criteria=(
+            "An explicit affirming, encouraging, or collaborative statement — not just neutral "
+            "politeness or task language."
+        ),
+        examples=(
+            Example(
+                counts="You're really getting the hang of this!",
+                doesnt_count="Okay, let's continue.",
+                why="Neutral transition, no affect.",
+            ),
+            Example(
+                counts="I know this is frustrating, but you're making real progress.",
+                doesnt_count="That's incorrect, try again.",
+                why="Neutral/corrective, no warmth marker.",
+            ),
+            Example(
+                counts="Let's figure this one out together.",
+                doesnt_count="Please solve the next problem.",
+                why="Plain instruction, no collaborative framing.",
+            ),
+            Example(
+                counts="That was a great question to ask.",
+                doesnt_count="Thanks.",
+                why="Bare politeness, not encouragement about the student's thinking specifically.",
+            ),
+        ),
     ),
     Dimension(
-        key="coherence",
-        name="Coherence",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Is the tutor's response logically consistent with the student's previous responses?",
-        labels=_THREE_POINT,
-    ),
-    Dimension(
-        key="tutor_tone",
-        name="Tutor Tone",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Is the tutor's response encouraging, neutral, or offensive?",
-        labels=("Encouraging", "Neutral", "Offensive"),
-    ),
-    Dimension(
-        key="human_likeness",
-        name="Human-likeness",
-        category=Category.INSTRUCTIONAL_ABILITY,
-        criteria="Does the tutor's response sound natural rather than robotic or artificial?",
-        labels=_THREE_POINT,
+        key="cultural_responsiveness",
+        name="Cultural Responsiveness",
+        criteria=(
+            "Tutor references or actively builds on the student's specific background, community, "
+            "or lived experience — not just generic real-world examples."
+        ),
+        examples=(
+            Example(
+                counts="You mentioned your family runs a bakery — how might they scale up a recipe? That's the same ratio idea.",
+                doesnt_count="Think of it like a recipe — if you double the batch...",
+                why="The second is a generic analogy available to any student, not tied to this student's actual background.",
+            ),
+            Example(
+                counts="Does this match how your community measures distances or time?",
+                doesnt_count="In real life, people use fractions when cooking.",
+                why="Generic real-world framing isn't tied to the specific student.",
+            ),
+            Example(
+                counts="Tutor adapts an example after the student mentions their home country's currency.",
+                doesnt_count="Tutor uses dollars by default without ever asking or adapting.",
+                why="No engagement with background at all.",
+            ),
+            Example(
+                counts="I remember you said you play soccer — let's use field dimensions for this problem.",
+                doesnt_count="Let's use a soccer field as an example.",
+                why="The second doesn't reference anything the student actually shared.",
+            ),
+        ),
     ),
 )
 
@@ -98,10 +213,5 @@ DIMENSIONS_MAP: dict[str, Dimension] = {d.key: d for d in DIMENSIONS}
 
 
 def dimension_keys() -> tuple[str, ...]:
-    """The ordered dimension keys."""
+    """The ordered dimension keys (the move vocabulary the evaluator counts)."""
     return tuple(d.key for d in DIMENSIONS)
-
-
-def category_dimensions(category: Category) -> tuple[Dimension, ...]:
-    """The dimensions in `category`, in registry order (the move vocabulary for that annotator)."""
-    return tuple(d for d in DIMENSIONS if d.category is category)

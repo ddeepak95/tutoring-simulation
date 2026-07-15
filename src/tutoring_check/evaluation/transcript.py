@@ -68,7 +68,8 @@ def load_transcript(path: Path) -> Transcript:
         scenario_id=header["scenario_id"],
         scenario_type=header["scenario_type"],
         region=header["region"],
-        language=header["language"],
+        # Translated transcripts keep the source `language` and carry the real one in `target_lang`.
+        language=header.get("target_lang") or header["language"],
         tutor_model=header["tutor_model"],
         turns=tuple(turns),
     )

@@ -14,11 +14,10 @@ from functools import lru_cache
 from itertools import combinations
 from pathlib import Path
 
-from tutoring_check.evaluation.dimensions import Category, category_dimensions
+from tutoring_check.evaluation.dimensions import DIMENSIONS
 from tutoring_check.evaluation.transcript import Transcript
 
-# The 8 Instructional Ability dimensions are the tutor-turn move vocabulary.
-TUTOR_DIMENSIONS = category_dimensions(Category.INSTRUCTIONAL_ABILITY)
+TUTOR_DIMENSIONS = DIMENSIONS
 
 
 def runs_root() -> Path:

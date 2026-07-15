@@ -1,29 +1,28 @@
-"""Export transcript.jsonl files to two-column CSVs for reading in a spreadsheet.
+"""Export transcript.jsonl files to single-column text CSVs for reading in a spreadsheet.
 
-Each transcript's dialogue turns become rows of (speaker, content), skipping the
-session_start/session_end control lines. Every transcript*.jsonl under the run
-folder is converted, so originals and their translations both get a CSV beside them.
-The CSV opens directly in Google Sheets or pastes straight into a sheet. Run it with:
+Each transcript's dialogue turns become one content line each, dropping the speaker
+label and the session_start/session_end control lines. The content is written
+unquoted, one turn per line, so it pastes straight into a Google Sheets column.
+Every transcript*.jsonl under the run folder is converted, so originals and their
+translations both get a CSV beside them. Run it with:
 
     uv run python -m tutoring_check.translations.to_csv --run-dir runs/dialogic/run_set_<mmddHHMM>
 """
 from __future__ import annotations
 
 import argparse
-import csv
 from pathlib import Path
 
 from tutoring_check.translations.transcript import load_transcript
 
 
 def transcript_to_csv(source: Path) -> Path:
-    """Write one transcript's turns as a (speaker, content) CSV beside it, returning that path."""
+    """Write one transcript's turn contents as a single unquoted text column beside it, returning that path."""
     _, turns = load_transcript(source)
     out_path = source.with_suffix(".csv")
     with open(out_path, "w", newline="", encoding="utf-8-sig") as out:
-        writer = csv.writer(out)
-        writer.writerow(["speaker", "content"])
-        writer.writerows((turn["speaker"], turn["content"]) for turn in turns)
+        for turn in turns:
+            out.write(" ".join(turn["content"].splitlines()) + "\n")
     return out_path
 
 

@@ -1,0 +1,21 @@
+{
+  "_comment": "Translation run set. Inputs are simulator transcript.jsonl files, resolved relative to the --input-dir run folder, and each is translated as one whole conversation. Each job pairs its own transcripts with its own target languages, so different conversations go to different languages. Translations are written beside their source, e.g. gravity-en/r0/transcript_Mandarin_Chinese.jsonl.",
+  "jobs": [
+    {
+      "transcripts": [
+        "gravity-en/r0/transcript.jsonl",
+        "speed-en/r0/transcript.jsonl"
+      ],
+      "target_languages": ["Mandarin Chinese"]
+    },
+    {
+      "transcripts": [
+        "tree-mass-en/r0/transcript.jsonl",
+        "energy-transfer-en/r0/transcript.jsonl"
+      ],
+      "target_languages": ["Tamil"]
+    }
+  ],
+  "model_id": "gemini-2.5-pro",
+  "max_refine_iters": 1
+}

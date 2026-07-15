@@ -5,35 +5,40 @@ adapted from a per-utterance move-tagging prompt with a math context (National T
 """
 from __future__ import annotations
 
-from tutoring_check.evaluation.dimensions import (
-    Category,
-    Dimension,
-    category_dimensions,
-)
+from tutoring_check.evaluation.dimensions import DIMENSIONS, Dimension
 from tutoring_check.evaluation.transcript import Transcript
 
-_MOVES: tuple[Dimension, ...] = category_dimensions(Category.INSTRUCTIONAL_ABILITY)
+_MOVES: tuple[Dimension, ...] = DIMENSIONS
+
+
+def _move_catalog_entry(d: Dimension) -> str:
+    """Render one move as its name, key, criterion, and the examples that bound it."""
+    lines = [f"- {d.name} [{d.key}]: {d.criteria}"]
+    for ex in d.examples:
+        lines.append(f"    - Counts: {ex.counts}")
+        lines.append(f"      Doesn't count: {ex.doesnt_count}")
+        lines.append(f"      Why: {ex.why}")
+    return "\n".join(lines)
+
 
 def build_system_prompt() -> str:
-    """The fixed Instructional Ability annotator system prompt."""
-    # A string list where each move has a name, key, and joined sub-aspects.
-    catalog = "\n".join(f"- {d.name} [{d.key}]: {' '.join(d.sub_aspects)}" for d in _MOVES)
+    """The fixed move-counting annotator system prompt."""
+    catalog = "\n".join(_move_catalog_entry(d) for d in _MOVES)
     return (
         "You are an expert tutor.\n"
-        "Your task is to identify every move the tutor made (tutor turns are marked inside <target_turn>).\n\n"
+        "Your task is to identify every move the tutor made in the turn marked inside <target_turn>.\n\n"
         "Workflow\n"
         "1. Read the dialogue.\n"
-        "2. Map each tutor move to an utterance from the *Allowed Moves* list below.\n"
-        "3. Omit any turns that are not marked a tutor turn.\n\n" #Diverges from omitting "off-topic, administrative, or not directly about solving the math prompt"
+        "2. Tag every instance of a move from the *Allowed Moves* list in the marked turn.\n"
         "Allowed Moves\n"
         f"{catalog}\n\n"
         "Clarifications (follow these exactly):\n"
-        "- Return **only** moves from the Allowed Moves list by their key-no synonyms or casing changes.\n"
-        "- **Omit** any turns that are not marked a tutor turn.\n\n"
+        "- Return **only** moves from the Allowed Moves list by their key, no synonyms or casing changes.\n"
+        "- Tag only the marked <target_turn>; use the rest of the dialogue as context only.\n"
+        "- The moves are not mutually exclusive: the same turn may carry multiple moves.\n\n"
+        "- A single sentence or phrase may exhibit more than one move. Each turn has at most one instance of any move.\n\n"
         "Output your choices into the JSON structure where:\n"
         "move = the move's key from the Allowed Moves list.\n"
-        "location = an exact, verbatim substring of the marked turn where the move occurs.\n"
-        "reasoning = the reason you chose this move explained in English.\n"
         # TODO: add few-shot examples based on performance
     )
 
@@ -51,25 +56,25 @@ def mark_dialogue(transcript: Transcript, target_turn_id: int) -> str:
 
 
 def response_format() -> dict:
-    """The structured-output schema: a list of tagged moves (evaluation.md "Schema")."""
+    """The structured-output schema: the set of move keys present on the marked turn.
+
+    Each turn has at most one instance of any move, so the annotator returns each present
+    move key at most once; the evaluator turns this into a 0/1 vector over `dimension_keys()`.
+    """
     keys = [d.key for d in _MOVES]
-    move_schema = {
-        "type": "object",
-        "properties": {
-            "move": {"type": "string", "enum": keys},
-            "location": {"type": "string"},
-            "reasoning": {"type": "string"},
-        },
-        "required": ["move", "location", "reasoning"],
-        "additionalProperties": False,
-    }
     return {
         "type": "json_schema",
         "json_schema": {
-            "name": "instructional_ability_moves",
+            "name": "tutoring_moves",
             "schema": {
                 "type": "object",
-                "properties": {"moves": {"type": "array", "items": move_schema}},
+                "properties": {
+                    "moves": {
+                        "type": "array",
+                        "items": {"type": "string", "enum": keys},
+                        "uniqueItems": True,
+                    }
+                },
                 "required": ["moves"],
                 "additionalProperties": False,
             },
