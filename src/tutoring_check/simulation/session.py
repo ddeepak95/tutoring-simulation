@@ -10,7 +10,7 @@ from litellm import acompletion
 
 from tutoring_check.simulation.config import SessionConfig
 from tutoring_check.simulation.student import build_student_system_prompt
-from tutoring_check.simulation.tutor import build_tutor_system_prompt, build_tutor_final_turn_instruction
+from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 
 
@@ -61,24 +61,39 @@ async def run_session(
         }
     )
 
-    # The student speaks first, posing the problem; the tutor sees only spoken text.
-    messages: list[dict[str, Any]] = [{"role": "system", "content": tutor_system}]
-    # The student turns hold spoken turns only; its static system prompt is prepended each turn.
-    # A pre-loaded message opens the conversation by having the student pose the problem.
-    student_turns: list[dict[str, Any]] = [
+    # The tutor speaks first, posing the learning question; each side sees only spoken text.
+    # A pre-loaded message opens the conversation by having the tutor pose the question.
+    messages: list[dict[str, Any]] = [
+        {"role": "system", "content": tutor_system},
         {
             "role": "user",
             "content": (
-                "Begin the conversation. Open by posing the full problem you are confused about. Address the teacher, not this message."
+                "Begin the conversation. Open by posing the learning question to the student. Address the student, not this message."
             ),
         },
     ]
+    # The student turns hold spoken turns only; its static system prompt is prepended each turn.
+    student_turns: list[dict[str, Any]] = []
 
     turn_id = 0
-    # Each iteration is one student turn followed by one tutor turn.
+    # Each iteration is one tutor turn followed by one student turn.
     # The conversation is a fixed TURNS_PER_SPEAKER iterations long.
-    # The final iteration's tutor turn is the wrap-up: it carries the appended closure instruction, so we treat it as the end of the conversation.
     for step in range(TURNS_PER_SPEAKER):
+        # Tutor turn
+        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning)
+        logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
+        tutor_response = await acompletion(**tutor_request)
+        tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
+        logger.log_api_response(
+            {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response)}
+        )
+        logger.log_transcript(
+            {"timestamp": utc_now(), "turn_id": turn_id, "speaker": "tutor", "content": tutor_text}
+        )
+        messages.append({"role": "assistant", "content": tutor_text})
+        student_turns.append({"role": "user", "content": tutor_text})
+        turn_id += 1
+
         # Student turn
         student_messages = [{"role": "system", "content": student_static}] + student_turns
         student_request = _completion_kwargs(student_model, student_messages, student_reasoning)
@@ -98,31 +113,6 @@ async def run_session(
         )
         student_turns.append({"role": "assistant", "content": student_text})
         messages.append({"role": "user", "content": student_text})
-        turn_id += 1
-
-        # Tutor turn. On the final tutor turn only, the closure instruction is added onto the end of the latest user message.
-        if step == TURNS_PER_SPEAKER - 1:
-            *prior_messages, latest_user = messages
-            tutor_messages = prior_messages + [
-                {
-                    "role": latest_user["role"],
-                    "content": latest_user["content"] + "\n\n" + build_tutor_final_turn_instruction(),
-                }
-            ]
-        else:
-            tutor_messages = messages
-        tutor_request = _completion_kwargs(tutor_model, tutor_messages, tutor_reasoning)
-        logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
-        tutor_response = await acompletion(**tutor_request)
-        tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
-        logger.log_api_response(
-            {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response)}
-        )
-        logger.log_transcript(
-            {"timestamp": utc_now(), "turn_id": turn_id, "speaker": "tutor", "content": tutor_text}
-        )
-        messages.append({"role": "assistant", "content": tutor_text})
-        student_turns.append({"role": "user", "content": tutor_text})
         turn_id += 1
 
     logger.log_transcript(
