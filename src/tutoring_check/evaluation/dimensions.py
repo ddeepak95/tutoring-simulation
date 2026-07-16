@@ -32,11 +32,10 @@ class Dimension:
 
 DIMENSIONS: tuple[Dimension, ...] = (
     Dimension(
-        key="understanding_checks",
-        name="Understanding Checks",
+        key="checking_for_understanding",
+        name="Checking for Understanding",
         criteria=(
-            "Tutor asks a question aimed purely at finding out what the student currently "
-            "understands, with no new information supplied and no justification demanded."
+            "Tutor asks a question aimed purely at finding out what the student currently understands."
         ),
         examples=(
             Example(
@@ -63,7 +62,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
     ),
     Dimension(
         key="hints_explanations",
-        name="Hints/Explanations",
+        name="Guided Hinting/Explaining",
         criteria=(
             "Tutor supplies a hint, partial or full explanation, worked example, analogy, "
             "elaboration, or any kind of information."
@@ -90,8 +89,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
         key="asking_for_justification",
         name="Asking for Justification",
         criteria=(
-            "Tutor requires the student to justify, evidence, or elaborate on a claim the "
-            "student has already made."
+            "Tutor requires the student to justify or reason beyond just supplying an answer."
         ),
         examples=(
             Example(
@@ -120,8 +118,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
         key="metacognition",
         name="Metacognition",
         criteria=(
-            "Tutor prompts awareness of the student's own thinking, strategy, planning, or "
-            "self-monitoring — not the correctness of content."
+            "Tutor prompts awareness of the student's own thinking, strategy, progress, or planning and not the correctness of content."
         ),
         examples=(
             Example(
@@ -150,8 +147,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
         key="positive_affective_behavior",
         name="Positive Affective Behavior",
         criteria=(
-            "An explicit affirming, encouraging, or collaborative statement — not just neutral "
-            "politeness or task language."
+            "An explicit affirming, encouraging, or collaborative statement beyond just neutral politeness or task language."
         ),
         examples=(
             Example(
@@ -180,8 +176,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
         key="cultural_responsiveness",
         name="Cultural Responsiveness",
         criteria=(
-            "Tutor references or actively builds on the student's specific background, community, "
-            "or lived experience — not just generic real-world examples."
+            "Tutor references or actively builds on the student's specific background, community, or lived experience, beyond just generic real-world examples."
         ),
         examples=(
             Example(
