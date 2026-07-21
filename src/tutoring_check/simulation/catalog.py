@@ -7,7 +7,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.simulation.config import PedagogyLevel, SessionConfig
+from tutoring_check.simulation.config import SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -66,41 +66,33 @@ def _model_litellm(cat: Catalogs, model_id: str) -> str:
     return _lookup(cat.models, model_id, "model id")["litellm_model"]
 
 
-def _pedagogy_levels(item: dict) -> dict[str, PedagogyLevel]:
-    """The item's assigned pedagogy levels, with scale labels (e.g. "Very Low")."""
-    return {approach: PedagogyLevel(level) for approach, level in item.get("pedagogy_levels", {}).items()}
-
-
 def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
-    """Assemble a SessionConfig from one run-set item."""
-    topic_type = item["topic_type"]
+    """Assemble a SessionConfig from one run-set item.
 
+    `region_id` names the region the student is from (their profile); it may be set on any
+    item and its default language is used when the item does not set `language_id`.
+    """
+    topic_type = item["topic_type"]
     if topic_type == "context_independent":
         topic = _lookup(cat.topics_ci, item["topic_id"], "context-independent topic_id")
-        return SessionConfig(
-            scenario_id=item["topic_id"],
-            context_dependent=False,
-            topic=topic["topic"],
-            question=topic["question"],
-            language=_language_name(cat, item["language_id"]),
-            pedagogy_levels=_pedagogy_levels(item),
-        )
-
-    if topic_type == "context_dependent":
+    elif topic_type == "context_dependent":
         topic = _lookup(cat.topics_cd, item["topic_id"], "context-dependent topic_id")
-        region = _lookup(cat.regions, item["region_id"], "region_id")
-        language_id = item.get("language_id") or region["language_id"]  # region default, overridable
-        return SessionConfig(
-            scenario_id=item["topic_id"],
-            context_dependent=True,
-            topic=topic["topic"],
-            question=topic["question"],
-            language=_language_name(cat, language_id),
-            region=region["name"],
-            pedagogy_levels=_pedagogy_levels(item),
-        )
+    else:
+        raise ValueError(f"unknown topic_type {topic_type!r} in run-set item {item.get('id')!r}")
 
-    raise ValueError(f"unknown topic_type {topic_type!r} in run-set item {item.get('id')!r}")
+    region = _lookup(cat.regions, item["region_id"], "region_id") if item.get("region_id") else None
+    language_id = item.get("language_id") or (region and region["language_id"])
+    if not language_id:
+        raise KeyError(f"run-set item {item.get('id')!r} sets no language_id and its region has no default")
+
+    return SessionConfig(
+        scenario_id=item["topic_id"],
+        context_dependent=topic_type == "context_dependent",
+        topic=topic["topic"],
+        question=topic["question"],
+        language=_language_name(cat, language_id),
+        region=region["name"] if region else "",
+    )
 
 
 def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
@@ -115,51 +107,17 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
     )
 
 
-def _expand_sweep(run_set: dict) -> list[dict]:
-    """Expand a compact `pedagogy_sweep` run set into item dicts.
-
-    Each cell fixes one approach at one extreme (Very High / Very Low) with the rest
-    at the baseline level, for every topic. The id is {topic}-{lang}-{approach}-{extreme}.
-    """
-    defaults = run_set.get("defaults", {})
-    lang = defaults["language_id"].split("-")[0]
-    sweep = run_set["pedagogy_sweep"]
-    baseline, approaches, extremes = sweep["baseline"], sweep["approaches"], sweep["extremes"]
-
-    items: list[dict] = []
-    for topic in run_set["topics"]:
-        for approach in approaches:
-            for extreme in extremes:
-                levels = {a["name"]: baseline for a in approaches}
-                levels[approach["name"]] = extreme["level"]
-                items.append(
-                    {
-                        **defaults,
-                        "id": f"{topic}-{lang}-{approach['code']}-{extreme['code']}",
-                        "topic_id": topic,
-                        "pedagogy_levels": levels,
-                    }
-                )
-    return items
-
-
 def load_run_set(run_set_path: Path | None = None) -> list[ResolvedRun]:
     """Resolve every item in the given run-set file into a runnable ResolvedRun.
 
     The catalogs (languages, models, topics, regions) are loaded from the run-set
-    file's own directory. A run set is either compact (a `pedagogy_sweep` expanded
-    into cells here) or an explicit `items` list; in the latter the shared
-    pedagogy_levels is folded into each item that does not set its own, so the
-    tutor's assigned levels live in one place but stay overridable per item.
+    file's own directory. A run set is an explicit `items` list; an optional
+    `defaults` block is merged under each item, so shared fields (e.g. `region_id`,
+    models) live in one place but stay overridable per item.
     """
     run_set_path = run_set_path or (_DATA_DIR / "run_set.json")
     cat = load_catalogs(run_set_path.parent)
     run_set = json.loads(run_set_path.read_text())
-    if "pedagogy_sweep" in run_set:
-        items = _expand_sweep(run_set)
-    else:
-        default_levels = run_set.get("pedagogy_levels", {})
-        items = run_set["items"]
-        for item in items:
-            item.setdefault("pedagogy_levels", default_levels)
+    defaults = run_set.get("defaults", {})
+    items = [{**defaults, **item} for item in run_set["items"]]
     return [resolve_run_item(item, cat) for item in items]

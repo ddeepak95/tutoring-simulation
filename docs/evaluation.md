@@ -11,7 +11,7 @@ The evaluator lives in `src/tutoring_check/evaluation/`. The annotator's prompts
 flowchart TD
     %% cli drives the outer loop
     cli[cli.py<br/>traverse runs/, resume-safe] --> load[transcript.py<br/>load conversation]
-    load --> evaluator[evaluator.py<br/>driver · loop tutor turns × annotators]
+    load --> evaluator[evaluator.py<br/>driver · loop tutor turns]
 
     %% evaluator is the orchestrator
     evaluator -->|build prompt + schema| annotate
@@ -21,9 +21,7 @@ flowchart TD
 
     subgraph annotate [annotator.py]
         direction TB
-        ia[Instructional Ability]
-        iq[Informational Quality]
-        lq[Language Quality]
+        ia[Tutoring-move annotator]
     end
 
     runlog --> out[(evaluation_transcript.jsonl)]
@@ -69,49 +67,56 @@ Here is the header schema for `evaluation_transcript.jsonl`.
 
 ## Dimensions
 
-Here are framework dimensions for mTeach, an evaluation framework. 
-mTeach has 3 categories of dimensions (instructional ability, informational quality, and langauge quality). The dimensions are below in detail:
+The dimensions are a set of countable tutor moves, organized as leaves under parent categories. The leaves (keyed in parentheses) are the move vocabulary. Each leaf lists the utterances that illustrate it — examples (that count) and, where useful, non-examples (near-misses that don't):
 
-Instructional Ability (from MrBench):
-1. Manage Cognitive Load (Explains the underlying concepts or skills in a clear way that is easy for the student to understand.)
-2. Encourage Active Learning (Keeps the student actively participating (for example, through questions  or practice problems that the student has to answer). Guides student to an answer with appropriate steps.)
-3. Deepen Metacognition (Provides clear feedback identifying any mistakes made by the student.  Provides clear feedback pointing out “successes” by the student (for example, on the student’s skills, problem-solving, work, knowledge, etc.)) 
-4. Motivate and Stimulate Curiosity (Inspires and stimulates the interest or curiosity of the student. Monitors the student’s motivational state and adjusts responses accordingly.) Delivers feedback (whether positive or negative) in an encouraging way.
-5. Adapt to Learners’ Goals and Needs (Identifies the student’s goal or prior knowledge).
+1. Checking Understanding — questions that surface what the student knows or believes.
+   1.1 Comprehension Check (`comprehension_check`): probes recall of a definition or basic comprehension.
+   - "What does 'velocity' mean?" — directly probing recall of a definition.
+   - "Can you tell me what the variables mean in this equation?" — checking basic comprehension.
+   - "How has the temperature changed?" — checking solving skills.
+   1.2 Eliciting Reasoning/Justification (`eliciting_reasoning`): asks the student to justify or reason through a specific claim.
+   - "Elaborating on the 'tusk-hunting cultures' you mentioned, how have elephants adapted?" — asking them to justify a specific claim.
+   - "Why do you think the volume of the liquid expanded?" — probing the reasoning behind a claim made by the teacher or student.
+   1.3 Eliciting Application of Knowledge (`eliciting_application`): asks the student to apply or transfer a concept to a new context.
+   - "Can you give me an example of where you'd use the Pythagorean theorem in real life?" — asking them to apply a concept.
+   - "Where else have you seen fractions show up outside of math class?" — prompting transfer to new contexts.
+2. Scaffolding — information or structure to help the student progress.
+   2.1 Hinting (`hinting`): partial guidance or a directional nudge that stops short of solving it.
+   - "Think about what happens to the equation if you move everything to one side." — directional nudge but doesn't solve it.
+   - "For the next step, what do you notice about the two denominators?" — draws attention to a feature and prompts the next step.
+   2.2 Explaining (`explaining`): direct instruction, elaboration, worked example, or analogy.
+   - "So the equals sign means both sides have to stay balanced, like a scale. Whatever you do to one side, you do to the other." — analogy.
+   - "Actually, X-rays and gamma rays differ in frequency." — direct explanation.
+3. Metacognitive Prompting (`metacognition`): asks the student to reflect on or plan their own thinking or process, not the content itself.
+   - "Explain how you will set up that equation." — asking student to plan their process out loud.
+   - "What made you decide to use subtraction there?" — reflecting on a choice already made.
+   - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
+4. Affective Support — responding to the student's emotional or motivational state.
+   4.1 Positive Encouragement (`positive_encouragement`): explicit affirmation of the student's thinking, effort, or progress.
+   - "That's a strong connection!" — positive affirmation of their thinking.
+   - "I can see how hard you've been working on this, and it's paying off." — acknowledging effort and progress.
+   4.2 Neutral Acknowledgment (`neutral_acknowledgment`): validates the experience without cheerleading, including naming a misconception as common.
+   - "I hear you — that part does feel confusing." — validating the experience without cheerleading.
+   - "That's a very common thought." — acknowledging their misconception.
+5. Personalized Contextualization (`personalized_contextualization`): framing a concept using a scenario, context, or reference drawn from this specific student's known region, background, or interests.
+   - "Imagine making 10 empanadas, and your friend ate 3 of them." — frames the problem around a food tied to the student's background.
+   - "If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?" — tipping and tax norms vary by region, so this frames the problem around the student's regional context.
 
-
-Informational Quality (adapted from Wang and Strong's dimensions):
-
-1. Intrinsic DQ (Believability, Objectivity, Accuracy, Reputation)
-2. Contextual DQ (Value-added, Relevancy, Timelessness, Completeness, Appropriate amount of data)
-3. Representational DQ (Interpretability, Ease of understanding, Consistency, Conciseness)
-
-
-Language Quality:
-
-1. Fluency (pace, filler words)
-2. Grammaticality
-3. Naturalness
-4. Vocabulary (the proficiency-level framework is TBD)
-
-Each dimension is a bundle of sub-aspects (listed above in parentheses). A move is tagged only when its behavior, as described by those sub-aspects, is exhibited on the turn.
-
-
-## The annotators
-
-Each utterance (tutor message) is evaluated by a separate model acting as annotators. The mTeach framework has three dimension categories, kept as three separate annotators. 
-The annotators have a single fixed model. It must differ from both the tutor model under test and the student model, to avoid self-serving bias. Its model id and params (seed, temperature) are recorded in the evaluation header for reproducibility.
-
-Each annotator has its own system prompt, built from its own dimensions.
-
-The instructional ability annotator see the full transcript and reads it turn-by-turn. For each tutor turn, the whole conversation is rendered once with that target turn marked, and the annotator labels the marked turn only. 
-
-The annotators read the transcript in the original language. Regardless of the transcript's language, the annotator's `reasoning` fields are written in English, so an analyst can review uniformly.
+A move is tagged only when its behavior, as described above, is exhibited on the turn. The moves are not mutually exclusive: a turn may carry several, but at most one instance of any given move.
 
 
-## Current scope: Instructional Ability as move identification
+## The annotator
 
-The first build is only the Instructional Ability annotator, which executes move identification. The five Instructional Ability dimensions are the move vocabulary. For the marked turn, the annotator tags which moves occur and omits the rest exactly as in an example per-utterance prompt from the National Tutoring Observatory's RND. Each tagged move records a `location` (a verbatim substring of the turn) and a `reasoning` in English.
+Each utterance (tutor message) is evaluated by a single annotator model. It must differ from both the tutor model under test and the student model, to avoid self-serving bias. Its model id and params (seed, temperature) are recorded in the evaluation header for reproducibility.
+
+The annotator sees the full transcript and reads it turn-by-turn. For each tutor turn, the whole conversation is rendered once with that target turn marked, and the annotator labels the marked turn only.
+
+The annotator reads the transcript in the original language. Regardless of the transcript's language, the `reasoning` fields are written in English, so an analyst can review uniformly.
+
+
+## Move identification
+
+The annotator executes move identification. The dimension leaves above are the move vocabulary. For the marked turn, the annotator tags which moves occur and omits the rest exactly as in an example per-utterance prompt from the National Tutoring Observatory's RND. Each tagged move records a `location` (a verbatim substring of the turn) and a `reasoning` in English.
 
 In this mode, the per-tutor-turn record is a list of tagged moves:
 
@@ -119,7 +124,7 @@ In this mode, the per-tutor-turn record is a list of tagged moves:
 { "timestamp": ...,
   "turn_id": <int>,
   "moves": [
-     { "move": "<instructional_dimension_key>",      # one of the five Instructional Ability dimensions
+     { "move": "<dimension_key>",                    # one of the dimension leaf keys
        "location": "<quote>",                        # exact substring of the tutor turn
        "reasoning": ...                              # English
      }, ... ] }

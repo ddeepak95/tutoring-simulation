@@ -1,6 +1,7 @@
 """The tutoring-move dimensions the evaluator counts on each tutor turn.
 
-Each dimension names one kind of tutor move; the evaluator counts how many instances of each dimension a tutor turn contains (evaluation.md "Dimensions").
+Each dimension names one countable leaf move; leaves are grouped under a parent category (evaluation.md "Dimensions").
+The evaluator counts how many instances of each leaf dimension a tutor turn contains.
 
 This module is the single source of truth for the move vocabulary.
 """
@@ -11,193 +12,179 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Example:
-    """A contrasting pair that bounds one dimension.
+    """One utterance that illustrates a dimension.
 
-    `counts` is an utterance that is an instance of the dimension; `doesnt_count` is a
-    near-miss that is not an instance of it; `why` explains the boundary.
+    `text` is the utterance; `note` is a short gloss on why it does (or does not) fit.
     """
-    counts: str
-    doesnt_count: str
-    why: str
+    text: str
+    note: str
 
 
 @dataclass(frozen=True)
 class Dimension:
-    """One countable tutor move: its criterion and the examples that bound it. """
+    """One countable tutor move: its parent category, criterion, and illustrating utterances.
+
+    `examples` are utterances that are instances of the move; `non_examples` are near-misses that are not.
+    Either list may be empty.
+    """
     key: str
     name: str
+    category: str
     criteria: str
-    examples: tuple[Example, ...]
+    examples: tuple[Example, ...] = ()
+    non_examples: tuple[Example, ...] = ()
 
 
 DIMENSIONS: tuple[Dimension, ...] = (
     Dimension(
-        key="checking_for_understanding",
-        name="Checking for Understanding",
+        key="comprehension_check",
+        name="Comprehension Check",
+        category="Checking Understanding",
         criteria=(
-            "Tutor asks a question aimed purely at finding out what the student currently understands."
+            "Tutor asks a question that surfaces what the student knows or believes, "
+            "probing recall of a definition or basic comprehension of the content."
+        ),
+        examples=(
+            Example(text="What does 'velocity' mean?", note="Directly probing recall of a definition."),
+            Example(text="Can you tell me what the variables mean in this equation?", note="Checking basic comprehension."),
+            Example(text="How has the temperature changed?", note="Checking solving skills."),
+        ),
+    ),
+    Dimension(
+        key="eliciting_reasoning",
+        name="Eliciting Reasoning/Justification",
+        category="Checking Understanding",
+        criteria=(
+            "Tutor asks the student to justify or reason through a specific claim made by "
+            "the tutor or the student, beyond just supplying an answer."
         ),
         examples=(
             Example(
-                counts="What do you think happens when you multiply two negatives?",
-                doesnt_count="Remember, a negative times a negative is positive — does that make sense?",
-                why="The second sentence supplies the rule first, so it's Hints/Explanations, not a pure check.",
+                text="Elaborating on the 'tusk-hunting cultures' you mentioned, how have elephants adapted?",
+                note="Asking them to justify a specific claim.",
             ),
             Example(
-                counts="Can you tell me in your own words what the question is asking?",
-                doesnt_count="You said the area is 24 — how did you get that?",
-                why="The second demands justification for a claim already made, so it's Asking for Justification.",
-            ),
-            Example(
-                counts="Where are you feeling stuck right now?",
-                doesnt_count="\"Does that make sense?\" asked reflexively after every explanation",
-                why="Still technically a check — count it (quality is judged separately), don't exclude it.",
-            ),
-            Example(
-                counts="Before we move on, what's the formula we just used?",
-                doesnt_count="What's your plan for solving this?",
-                why="The second asks about strategy, not content understanding, so it's Metacognition.",
+                text="Why do you think the volume of the liquid expanded?",
+                note="Probing the reasoning behind a claim made by the teacher or student.",
             ),
         ),
     ),
     Dimension(
-        key="hints_explanations",
-        name="Guided Hinting/Explaining",
+        key="eliciting_application",
+        name="Eliciting Application of Knowledge",
+        category="Checking Understanding",
         criteria=(
-            "Tutor supplies a hint, partial or full explanation, worked example, analogy, "
-            "elaboration, or any kind of information."
+            "Tutor asks the student to apply a concept or transfer it to a new context or example."
         ),
         examples=(
             Example(
-                counts="Here's a similar example: 2² × 2³ = 2⁵.",
-                doesnt_count="What's 2 to the power of 3?",
-                why="The second is a content-free arithmetic question with no hint or explanation attached — an Understanding Check.",
+                text="Can you give me an example of where you'd use the Pythagorean theorem in real life?",
+                note="Asking them to apply a concept.",
             ),
             Example(
-                counts="Inertia is an object's resistance to being accelerated.",
-                doesnt_count="What would that tell us about how all objects fall, regardless of their weight?",
-                why="The second is a question that checks the student's understanding, not an explanation — an Understanding Check.",
-            ),
-            Example(
-                counts="Think about what happens to the sign when you flip a fraction.",
-                doesnt_count="Good job!",
-                why="No content supplied — this is Positive Affective Behavior instead.",
+                text="Where else have you seen fractions show up outside of math class?",
+                note="Prompting transfer to new contexts.",
             ),
         ),
     ),
     Dimension(
-        key="asking_for_justification",
-        name="Asking for Justification",
+        key="hinting",
+        name="Hinting",
+        category="Scaffolding",
         criteria=(
-            "Tutor requires the student to justify or reason beyond just supplying an answer."
+            "Tutor gives partial guidance — a directional nudge or draws attention to a feature — "
+            "that helps the student take the next step without solving it for them."
         ),
         examples=(
             Example(
-                counts="Why do you think the answer is?",
-                doesnt_count="What do you think the answer is?",
-                why="The second asks for an answer, not justification of one already given — Understanding Check.",
+                text="Think about what happens to the equation if you move everything to one side.",
+                note="Directional nudge but doesn't solve it.",
             ),
             Example(
-                counts="Where in the passage does it say that?",
-                doesnt_count="Can you re-read the passage?",
-                why="The second is an instruction, not a demand for evidence of a specific claim.",
+                text="For the next step, what do you notice about the two denominators?",
+                note="Draws attention to a feature and prompts the next step.",
             ),
+        ),
+    ),
+    Dimension(
+        key="explaining",
+        name="Explaining",
+        category="Scaffolding",
+        criteria=(
+            "Tutor gives direct instruction, elaboration, a worked example, or an analogy that "
+            "supplies content to the student."
+        ),
+        examples=(
             Example(
-                counts="Why does that method work?",
-                doesnt_count="Nice, that's correct!",
-                why="Simple confirmation with no push for reasoning doesn't count.",
+                text="So the equals sign means both sides have to stay balanced, like a scale. Whatever you do to one side, you do to the other.",
+                note="Analogy.",
             ),
-            Example(
-                counts="Explain your reasoning.",
-                doesnt_count="Are you sure?",
-                why="If the tutor never actually requires reasoning and just moves on, don't count it.",
-            ),
+            Example(text="Actually, X-rays and gamma rays differ in frequency.", note="Direct explanation."),
         ),
     ),
     Dimension(
         key="metacognition",
-        name="Metacognition",
+        name="Metacognitive Prompting",
+        category="Metacognitive Prompting",
         criteria=(
-            "Tutor prompts awareness of the student's own thinking, strategy, progress, or planning and not the correctness of content."
+            "Tutor asks the student to reflect on or plan their own thinking or process explicitly — "
+            "reasoning about their thinking, not just reasoning through the content."
         ),
         examples=(
+            Example(text="Explain how you will set up that equation.", note="Asking student to plan their process out loud."),
+            Example(text="What made you decide to use subtraction there?", note="Reflecting on a choice already made."),
+        ),
+        non_examples=(
             Example(
-                counts="What's your plan before you start solving?",
-                doesnt_count="What's the first step in solving this equation?",
-                why="The second is content-specific, not the student's personal approach — Understanding Check.",
-            ),
-            Example(
-                counts="How did you know that strategy would work?",
-                doesnt_count="How did you get 42?",
-                why="The second asks about the calculation, not the strategy choice — likely Asking for Justification.",
-            ),
-            Example(
-                counts="Looking back, would you approach this differently next time?",
-                doesnt_count="Good work today!",
-                why="No reflection prompted — Positive Affective Behavior.",
-            ),
-            Example(
-                counts="How do you usually check your own work?",
-                doesnt_count="Can you check your work?",
-                why="The second is an instruction to perform an action, not a prompt to articulate process — count only if the phrasing asks the student to explain, not just do.",
+                text="Explain your thinking.",
+                note="Eliciting reasoning about their response, not reasoning about their thinking.",
             ),
         ),
     ),
     Dimension(
-        key="positive_affective_behavior",
-        name="Positive Affective Behavior",
+        key="positive_encouragement",
+        name="Positive Encouragement",
+        category="Affective Support",
         criteria=(
-            "An explicit affirming, encouraging, or collaborative statement beyond just neutral politeness or task language."
+            "Tutor gives explicit positive affirmation of the student's thinking, effort, or progress."
         ),
         examples=(
+            Example(text="That's a strong connection!", note="Positive affirmation of their thinking."),
             Example(
-                counts="You're really getting the hang of this!",
-                doesnt_count="Okay, let's continue.",
-                why="Neutral transition, no affect.",
-            ),
-            Example(
-                counts="I know this is frustrating, but you're making real progress.",
-                doesnt_count="That's incorrect, try again.",
-                why="Neutral/corrective, no warmth marker.",
-            ),
-            Example(
-                counts="Let's figure this one out together.",
-                doesnt_count="Please solve the next problem.",
-                why="Plain instruction, no collaborative framing.",
-            ),
-            Example(
-                counts="That was a great question to ask.",
-                doesnt_count="Thanks.",
-                why="Bare politeness, not encouragement about the student's thinking specifically.",
+                text="I can see how hard you've been working on this, and it's paying off.",
+                note="Acknowledging effort and progress.",
             ),
         ),
     ),
     Dimension(
-        key="cultural_responsiveness",
-        name="Cultural Responsiveness",
+        key="neutral_acknowledgment",
+        name="Neutral Acknowledgment",
+        category="Affective Support",
         criteria=(
-            "Tutor references or actively builds on the student's specific background, community, or lived experience, beyond just generic real-world examples."
+            "Tutor validates the student's emotional state or experience without cheerleading — "
+            "including acknowledging a misconception as common."
+        ),
+        examples=(
+            Example(text="I hear you — that part does feel confusing.", note="Validating the experience without cheerleading."),
+            Example(text="That's a very common thought.", note="Acknowledging their misconception."),
+        ),
+    ),
+    Dimension(
+        key="personalized_contextualization",
+        name="Personalized Contextualization",
+        category="Personalized Contextualization",
+        criteria=(
+            "Framing a concept using a scenario, context, or reference drawn from this specific "
+            "student's known region, background, or interests."
         ),
         examples=(
             Example(
-                counts="You mentioned your family runs a bakery — how might they scale up a recipe? That's the same ratio idea.",
-                doesnt_count="Think of it like a recipe — if you double the batch...",
-                why="The second is a generic analogy available to any student, not tied to this student's actual background.",
+                text="Imagine making 10 empanadas, and your friend ate 3 of them.",
+                note="Frames the problem around a food tied to the student's background.",
             ),
             Example(
-                counts="Does this match how your community measures distances or time?",
-                doesnt_count="In real life, people use fractions when cooking.",
-                why="Generic real-world framing isn't tied to the specific student.",
-            ),
-            Example(
-                counts="Tutor adapts an example after the student mentions their home country's currency.",
-                doesnt_count="Tutor uses dollars by default without ever asking or adapting.",
-                why="No engagement with background at all.",
-            ),
-            Example(
-                counts="I remember you said you play soccer — let's use field dimensions for this problem.",
-                doesnt_count="Let's use a soccer field as an example.",
-                why="The second doesn't reference anything the student actually shared.",
+                text="If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?",
+                note="Tipping and tax norms vary by region, so this frames the problem around the student's regional context.",
             ),
         ),
     ),

@@ -15,15 +15,27 @@ def _move_catalog_entry(d: Dimension) -> str:
     """Render one move as its name, key, criterion, and the examples that bound it."""
     lines = [f"- {d.name} [{d.key}]: {d.criteria}"]
     for ex in d.examples:
-        lines.append(f"    - Counts: {ex.counts}")
-        lines.append(f"      Doesn't count: {ex.doesnt_count}")
-        lines.append(f"      Why: {ex.why}")
+        lines.append(f"    - Counts: {ex.text} ({ex.note})")
+    for ex in d.non_examples:
+        lines.append(f"    - Doesn't count: {ex.text} ({ex.note})")
+    return "\n".join(lines)
+
+
+def _move_catalog() -> str:
+    """Render the allowed moves grouped under their parent categories, preserving order."""
+    lines: list[str] = []
+    current_category: str | None = None
+    for d in _MOVES:
+        if d.category != current_category:
+            current_category = d.category
+            lines.append(f"{current_category}")
+        lines.append(_move_catalog_entry(d))
     return "\n".join(lines)
 
 
 def build_system_prompt() -> str:
     """The fixed move-counting annotator system prompt."""
-    catalog = "\n".join(_move_catalog_entry(d) for d in _MOVES)
+    catalog = _move_catalog()
     return (
         "You are an expert tutor.\n"
         "Your task is to identify every move the tutor made in the turn marked inside <target_turn>.\n\n"
