@@ -12,19 +12,28 @@ from tutoring_check.simulation.config import SessionConfig
 from tutoring_check.simulation.student import build_student_system_prompt
 from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.vertex_auth import with_adc_token
 
 
 TURNS_PER_SPEAKER = 10
 
 
-def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None = None) -> dict:
+def _completion_kwargs(
+    model: str,
+    messages: list[dict],
+    reasoning: str | None = None,
+    params: dict | None = None,
+) -> dict:
     """Assemble litellm kwargs; the provider's default sampling applies.
     When reasoning is set it becomes litellm's unified reasoning_effort ("low"/"medium"/"high",
     plus "none"/"disable" where the provider supports it); unset leaves the provider default.
+    `params` carries the model's own litellm kwargs from models.json (e.g. vertex_location).
     """
     kwargs: dict = {"model": model, "messages": messages}
     if reasoning:
         kwargs["reasoning_effort"] = reasoning
+    if params:
+        kwargs.update(params)
     return kwargs
 
 
@@ -36,6 +45,8 @@ async def run_session(
     output_root: Path,
     tutor_reasoning: str | None = None,
     student_reasoning: str | None = None,
+    tutor_model_params: dict | None = None,
+    student_model_params: dict | None = None,
 ) -> Path:
     out_dir = output_root
     logger = JsonlLogger(out_dir=out_dir)
@@ -80,9 +91,9 @@ async def run_session(
     # The conversation is a fixed TURNS_PER_SPEAKER iterations long.
     for step in range(TURNS_PER_SPEAKER):
         # Tutor turn
-        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning)
+        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning, tutor_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
-        tutor_response = await acompletion(**tutor_request)
+        tutor_response = await acompletion(**with_adc_token(tutor_request))
         tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
         logger.log_api_response(
             {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response)}
@@ -96,9 +107,9 @@ async def run_session(
 
         # Student turn
         student_messages = [{"role": "system", "content": student_static}] + student_turns
-        student_request = _completion_kwargs(student_model, student_messages, student_reasoning)
+        student_request = _completion_kwargs(student_model, student_messages, student_reasoning, student_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
-        student_response = await acompletion(**student_request)
+        student_response = await acompletion(**with_adc_token(student_request))
         student_text = getattr(student_response.choices[0].message, "content", None) or ""
         logger.log_api_response(
             {"timestamp": utc_now(), "role": "student", "raw_response": serialize_response(student_response)}

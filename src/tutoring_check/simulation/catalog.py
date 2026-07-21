@@ -4,7 +4,8 @@ CI items take topic_id + language_id; CD items take topic_id + region_id (langua
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+import os
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from tutoring_check.simulation.config import PedagogyLevel, SessionConfig
@@ -30,6 +31,8 @@ class ResolvedRun:
     tutor_reasoning: str | None         # litellm reasoning_effort; None = provider default
     student_reasoning: str | None
     repeats: int
+    tutor_model_params: dict = field(default_factory=dict)      # extra litellm kwargs from models.json
+    student_model_params: dict = field(default_factory=dict)
 
 
 def _index(rows: list[dict], key: str = "id") -> dict[str, dict]:
@@ -64,6 +67,32 @@ def _language_name(cat: Catalogs, language_id: str) -> str:
 
 def _model_litellm(cat: Catalogs, model_id: str) -> str:
     return _lookup(cat.models, model_id, "model id")["litellm_model"]
+
+
+def _model_params(cat: Catalogs, model_id: str) -> dict:
+    """Extra litellm kwargs a model needs, e.g. `vertex_location` for region-pinned models.
+
+    String values expand environment variables, so an entry can refer to `${VERTEXAI_PROJECT}`
+    instead of hard-coding the project into the shared catalog.
+    """
+    params = _lookup(cat.models, model_id, "model id").get("litellm_params", {})
+    return {k: os.path.expandvars(v) if isinstance(v, str) else v for k, v in params.items()}
+
+
+def resolve_model_ref(ref: str, cat: Catalogs | None = None) -> tuple[str, dict]:
+    """Resolve a model reference into (litellm model string, extra litellm kwargs).
+
+    `ref` is either a models.json id or a raw litellm string. A raw string still picks up
+    the catalog's `litellm_params` when it matches a known entry, so a region-pinned model
+    works the same whether it is named by id or spelled out on the command line.
+    """
+    cat = cat or load_catalogs()
+    if ref in cat.models:
+        return _model_litellm(cat, ref), _model_params(cat, ref)
+    for model_id, row in cat.models.items():
+        if row["litellm_model"] == ref:
+            return ref, _model_params(cat, model_id)
+    return ref, {}
 
 
 def _pedagogy_levels(item: dict) -> dict[str, PedagogyLevel]:
@@ -112,6 +141,8 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
         tutor_reasoning=item.get("tutor_reasoning"),
         student_reasoning=item.get("student_reasoning"),
         repeats=item.get("repeats", 1),
+        tutor_model_params=_model_params(cat, item["tutor_model_id"]),
+        student_model_params=_model_params(cat, item["student_model_id"]),
     )
 
 

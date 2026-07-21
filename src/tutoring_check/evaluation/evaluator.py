@@ -17,14 +17,18 @@ from tutoring_check.evaluation import instruction_annotator
 from tutoring_check.evaluation.dimensions import dimension_keys
 from tutoring_check.evaluation.transcript import Transcript, Turn, load_transcript
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.vertex_auth import with_adc_token
 
 
-def _completion_kwargs(model: str, messages: list[dict]) -> dict:
-    """Assemble litellm kwargs with the annotator's structured-output schema."""
+def _completion_kwargs(model: str, messages: list[dict], params: dict | None = None) -> dict:
+    """Assemble litellm kwargs with the annotator's structured-output schema.
+    `params` carries the model's own litellm kwargs from models.json (e.g. vertex_location).
+    """
     return {
         "model": model,
         "messages": messages,
         "response_format": instruction_annotator.response_format(),
+        **(params or {}),
     }
 
 
@@ -34,7 +38,9 @@ def _presence_vector(moves: list[str]) -> list[int]:
     return [1 if key in present else 0 for key in dimension_keys()]
 
 
-async def _annotate_turn(model: str, transcript: Transcript, turn: Turn, logger: JsonlLogger) -> list[int]:
+async def _annotate_turn(
+    model: str, transcript: Transcript, turn: Turn, logger: JsonlLogger, params: dict | None = None
+) -> list[int]:
     """Ask the annotator which moves `turn` makes, log the raw call, and return the 0/1 presence vector.
 
     The system message carries the fixed instructions; the user message is the whole dialogue with
@@ -44,9 +50,9 @@ async def _annotate_turn(model: str, transcript: Transcript, turn: Turn, logger:
         {"role": "system", "content": instruction_annotator.build_system_prompt()},
         {"role": "user", "content": instruction_annotator.mark_dialogue(transcript, turn.turn_id)},
     ]
-    request = _completion_kwargs(model, messages)
+    request = _completion_kwargs(model, messages, params)
     logger.log_api_request({"timestamp": utc_now(), "turn_id": turn.turn_id, "payload": request})
-    response = await acompletion(**request)
+    response = await acompletion(**with_adc_token(request))
     logger.log_api_response(
         {"timestamp": utc_now(), "turn_id": turn.turn_id, "raw_response": serialize_response(response)}
     )
@@ -55,7 +61,9 @@ async def _annotate_turn(model: str, transcript: Transcript, turn: Turn, logger:
     return _presence_vector(moves)
 
 
-async def evaluate_transcript(transcript_path: Path, *, annotator_model: str) -> Path | None:
+async def evaluate_transcript(
+    transcript_path: Path, *, annotator_model: str, annotator_model_params: dict | None = None
+) -> Path | None:
     """Evaluate one conversation, writing move tags alongside its `transcript.jsonl`; resume-safe.
 
     Returns the output directory, or None if an `evaluation_transcript.jsonl` is already present there.
@@ -93,7 +101,7 @@ async def evaluate_transcript(transcript_path: Path, *, annotator_model: str) ->
 
     totals = [0] * len(keys)
     for turn in transcript.tutor_turns():
-        vector = await _annotate_turn(annotator_model, transcript, turn, logger)
+        vector = await _annotate_turn(annotator_model, transcript, turn, logger, annotator_model_params)
         totals = [t + v for t, v in zip(totals, vector)]
         logger.log_transcript({"timestamp": utc_now(), "turn_id": turn.turn_id, "dimensions": vector})
 

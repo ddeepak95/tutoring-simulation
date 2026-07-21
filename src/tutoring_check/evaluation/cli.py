@@ -12,12 +12,13 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from tutoring_check.evaluation.evaluator import evaluate_transcript
+from tutoring_check.simulation.catalog import resolve_model_ref
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Evaluate simulated tutoring conversations with the mTeach annotator.")
     parser.add_argument("--runs", type=Path, default=Path("runs"), help="Root dir to traverse for transcript.jsonl.")
-    parser.add_argument("--annotator-model", type=str, required=True, help="litellm model string for the annotator.")
+    parser.add_argument("--annotator-model", type=str, required=True, help="Annotator model: a models.json id or a litellm model string.")
     return parser
 
 
@@ -28,8 +29,15 @@ async def run(args: argparse.Namespace) -> int:
     if not transcripts:
         raise ValueError(f"no transcript*.jsonl found under {args.runs}")
 
+    # Resolve through the catalog so a region-pinned annotator picks up its litellm_params.
+    annotator_model, annotator_params = resolve_model_ref(args.annotator_model)
+
     for transcript_path in transcripts:
-        out_dir = await evaluate_transcript(transcript_path, annotator_model=args.annotator_model)
+        out_dir = await evaluate_transcript(
+            transcript_path,
+            annotator_model=annotator_model,
+            annotator_model_params=annotator_params,
+        )
         if out_dir is None:
             print(f"skip (exists) {transcript_path.parent}")
         else:
