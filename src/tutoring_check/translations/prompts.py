@@ -40,12 +40,13 @@ TERM_GUIDANCE = {
 - Keep technical and academic terms in English, as the speakers would really say them out loud - the English word sitting inside the {target_lang} sentence, not a {target_lang} coinage and not a transliteration of a translated term.
 - Put everything else in colloquial spoken {target_lang}: the explanations, the reasoning, the questions, the encouragement, the asides.
 - Bend the English terms to {target_lang} grammar the way a real speaker does, attaching {target_lang} case markers, plurals, and verb endings to the English word rather than leaving it as a bare quoted foreign word.
-- Do not translate a term just because a {target_lang} translation exists: if this student would say the English word in class, keep the English word.""",
+- Do not translate a term just because a {target_lang} translation exists: if this student would say the English word in class, keep the English word.
+- Write the {target_lang} in its own script, never romanised, and leave the English terms in the Latin alphabet - do not spell them out in the {target_lang} script. Each language keeps its own writing system, so the two are visibly distinct on the page.""",
     MONOLINGUAL: """This student studies the subject in {target_lang}, in a {target_lang}-medium classroom, so the subject matter itself is in {target_lang}:
 - Use the {target_lang} term for technical and academic concepts - the term this student would actually meet in a {target_lang}-medium textbook or hear from a {target_lang}-medium teacher.
-- This does not mean pure or formal {target_lang}. A {target_lang}-medium student does not speak a cleaned-up language; only their subject-matter vocabulary differs from an English-medium student's.
-- So keep the everyday English words that speakers mix into casual conversation whatever their medium of instruction - the ordinary conversational borrowings, not the academic ones - and keep all the colloquial speech habits described above.
-- Where a concept has no {target_lang} term in real classroom use, keep the English word rather than inventing an unnatural coinage. Replicate what is actually said, not what a purist glossary would prescribe.""",
+- This does not mean pure or formal {target_lang}. A {target_lang}-medium student does not speak a cleaned-up language; only their subject-matter vocabulary is different, never the way they talk.
+- So let them talk the way people around them really talk, mixing in whatever words and borrowings are ordinary in everyday conversation, and keeping all the colloquial speech habits described above.
+- Write the {target_lang} in its own script, never romanised, and leave any borrowed word in the script it is borrowed from.""",
 }
 
 # Appended to the estimate prompt. Without this the evaluator reads an English term inside
@@ -54,10 +55,12 @@ TERM_GUIDANCE = {
 MODE_EVAL_GUIDANCE = {
     CODE_MIXED: """This conversation is code-mixed on purpose: the student is in an English-medium classroom, so English technical and academic terms inside {target_lang} sentences are correct here. Never report those as accuracy/untranslated text or as non-translation. Treat these as errors instead:
 terminology/inappropriate for context - a technical term rendered in {target_lang} where this speaker would have said the English word.
-fluency/grammar - an English term dropped in bare, without the {target_lang} case markers, plurals, or verb endings a real speaker would attach to it.""",
+fluency/grammar - an English term dropped in bare, without the {target_lang} case markers, plurals, or verb endings a real speaker would attach to it.
+fluency/spelling - {target_lang} written in romanised form instead of its own script, or an English term spelled out in the {target_lang} script instead of the Latin alphabet. The two languages must stay in their own writing systems throughout.""",
     MONOLINGUAL: """This conversation is from a {target_lang}-medium classroom, so technical and academic concepts should carry their {target_lang} term. Treat these as errors:
 terminology/inappropriate for context - an English technical term left standing where a {target_lang}-medium student would use the {target_lang} term; or an invented, unnatural {target_lang} coinage in place of the word speakers really use.
-Do not flag the ordinary everyday English words that speakers of every medium mix into casual speech, and do not push the language towards a pure or formal variety - this is a {target_lang}-medium student talking, not a textbook.""",
+fluency/spelling - {target_lang} written in romanised form instead of its own script.
+Do not flag the ordinary words and borrowings that speakers mix into casual speech, and do not push the language towards a pure or formal variety - this is a {target_lang}-medium student talking, not a textbook.""",
 }
 
 
