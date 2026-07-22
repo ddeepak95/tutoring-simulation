@@ -23,48 +23,55 @@ from tutoring_check.translations.transcript import (
 )
 
 
-def translate_conversation(source: str, n_turns: int, target_lang: str, ts: TranslateSet) -> tuple[list[str], int]:
+def translate_conversation(
+    source: str, n_turns: int, target_lang: str, mode: str, ts: TranslateSet
+) -> tuple[list[str], int]:
     """Translate one whole conversation, returning its turns and the number of refinement passes applied.
     The translate and refine calls are pinned to a JSON-array response_format, so the raw response is the turns.
     """
+    label = f"{target_lang}/{mode}"
+
     def _translate() -> tuple[str, list[str]]:
-        raw = call_model(build_translate_prompt(source, target_lang), ts.model, TURNS_SCHEMA)
+        raw = call_model(build_translate_prompt(source, target_lang, mode), ts.model, TURNS_SCHEMA)
         return raw, parse_turns(raw, n_turns)
 
-    text, turns = attempt(_translate, f"translate/{target_lang}")
+    text, turns = attempt(_translate, f"translate/{label}")
 
     refinements = 0
     for _ in range(ts.max_refine_iters):
         evaluation = attempt(
-            lambda: parse_estimate(call_model(build_estimate_prompt(source, text, target_lang), ts.model)),
-            f"estimate/{target_lang}",
+            lambda: parse_estimate(call_model(build_estimate_prompt(source, text, target_lang, mode), ts.model)),
+            f"estimate/{label}",
         )
         if not evaluation.needs_fix:
             break
 
         def _refine() -> tuple[str, list[str]]:
-            raw = call_model(build_refine_prompt(source, text, evaluation, target_lang), ts.model, TURNS_SCHEMA)
+            raw = call_model(
+                build_refine_prompt(source, text, evaluation, target_lang, mode), ts.model, TURNS_SCHEMA
+            )
             return raw, parse_turns(raw, n_turns)
 
-        text, turns = attempt(_refine, f"refine/{target_lang}")
+        text, turns = attempt(_refine, f"refine/{label}")
         refinements += 1
 
     return turns, refinements
 
 
-def translate_transcript(transcript: str, target_lang: str, ts: TranslateSet) -> Path:
-    """Translate one transcript into one language, writing it beside its source and returning that path."""
+def translate_transcript(transcript: str, target_lang: str, mode: str, ts: TranslateSet) -> Path:
+    """Translate one transcript into one language and mode, writing it beside its source and returning that path."""
     source = ts.run_dir / transcript
     control, turns = load_transcript(source)
     translated, refinements = translate_conversation(
-        flatten_turns(turns), len(turns), target_lang, ts
+        flatten_turns(turns), len(turns), target_lang, mode, ts
     )
-    out_path = translated_path(source, target_lang)
+    out_path = translated_path(source, target_lang, mode)
     write_transcript(
         out_path,
         control,
         [{**turn, "content": text} for turn, text in zip(turns, translated)],
         target_lang,
+        mode,
         refinements,
     )
     return out_path

@@ -34,9 +34,9 @@ MAX_WORKERS = 8
 def run(ts: TranslateSet) -> None:
     # A translation that is already on disk is its own record that the job is done.
     pending = [
-        (transcript, lang)
-        for transcript, lang in ts.jobs
-        if not translated_path(ts.run_dir / transcript, lang).exists()
+        (transcript, lang, mode)
+        for transcript, lang, mode in ts.jobs
+        if not translated_path(ts.run_dir / transcript, lang, mode).exists()
     ]
     skipped = len(ts.jobs) - len(pending)
     print(f"model={ts.model}  max_refine_iters={ts.max_refine_iters}  "
@@ -44,15 +44,15 @@ def run(ts: TranslateSet) -> None:
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         futures = {
-            pool.submit(translate_transcript, transcript, lang, ts): (transcript, lang)
-            for transcript, lang in pending
+            pool.submit(translate_transcript, transcript, lang, mode, ts): (transcript, lang, mode)
+            for transcript, lang, mode in pending
         }
         for future in concurrent.futures.as_completed(futures):
-            transcript, lang = futures[future]
+            transcript, lang, mode = futures[future]
             try:
                 print(f"wrote {future.result().relative_to(ts.run_dir)}")
             except Exception as e:
-                print(f"FAILED: {transcript} -> {lang}: {e}")
+                print(f"FAILED: {transcript} -> {lang}/{mode}: {e}")
 
 
 def main():

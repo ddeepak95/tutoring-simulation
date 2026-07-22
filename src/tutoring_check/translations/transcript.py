@@ -25,7 +25,7 @@ TURNS_SCHEMA = {
 def load_transcript(path: Path) -> tuple[list[dict], list[dict]]:
     """Split a transcript.jsonl into its control lines and its dialogue turns, in file order."""
     control, turns = [], []
-    for line in path.read_text().splitlines():
+    for line in path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if not line:
             continue
@@ -54,28 +54,30 @@ def parse_turns(raw: str, expected: int) -> list[str]:
     return turns
 
 
-def translated_path(source: Path, target_lang: str) -> Path:
-    """Beside the source, suffixed with the language; its existence marks the pair done.
-    e.g. gravity-en/r0/transcript.jsonl -> gravity-en/r0/transcript_Mandarin_Chinese.jsonl
+def translated_path(source: Path, target_lang: str, mode: str) -> Path:
+    """Beside the source, suffixed with the language and mode; its existence marks the job done.
+    The mode is in the name because the two modes are different renderings of the same
+    conversation into the same language, so they must not overwrite each other.
+    e.g. gravity-en/r0/transcript.jsonl -> gravity-en/r0/transcript_Mandarin_Chinese_code_mixed.jsonl
     """
     slug = target_lang.replace(" ", "_")
-    return source.with_name(f"{source.stem}_{slug}{source.suffix}")
+    return source.with_name(f"{source.stem}_{slug}_{mode}{source.suffix}")
 
 
 def write_transcript(
-    path: Path, control: list[dict], turns: list[dict], target_lang: str, refine_iters: int
+    path: Path, control: list[dict], turns: list[dict], target_lang: str, mode: str, refine_iters: int
 ) -> None:
-    """Write a translated transcript.jsonl, recording the language and refinement count on its session_start."""
+    """Write a translated transcript.jsonl, recording the language, mode, and refinement count on its session_start."""
     path.parent.mkdir(parents=True, exist_ok=True)
     by_type = {c.get("type"): c for c in control}
 
     lines: list[dict] = []
     if start := by_type.get("session_start"):
-        lines.append({**start, "target_lang": target_lang, "refine_iters": refine_iters})
+        lines.append({**start, "target_lang": target_lang, "mode": mode, "refine_iters": refine_iters})
     lines.extend(turns)
     if end := by_type.get("session_end"):
         lines.append(end)
 
-    with open(path, "w") as out:
+    with open(path, "w", encoding="utf-8") as out:
         for obj in lines:
             out.write(json.dumps(obj, ensure_ascii=False) + "\n")

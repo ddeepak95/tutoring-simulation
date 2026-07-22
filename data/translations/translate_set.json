@@ -1,21 +1,23 @@
 {
-  "_comment": "Translation run set. Inputs are simulator transcript.jsonl files, resolved relative to the --input-dir run folder, and each is translated as one whole conversation. Each job pairs its own transcripts with its own target languages, so different conversations go to different languages. Translations are written beside their source, e.g. gravity-en/r0/transcript_Mandarin_Chinese.jsonl.",
+  "_comment": "Translation run set. Inputs are simulator transcript.jsonl files, resolved relative to the --run-dir run folder, and each is translated as one whole conversation. Each job pairs its own transcripts with its own target languages and modes, so different conversations go to different languages. `modes` is required: code_mixed keeps technical terms in English (an English-medium student), monolingual carries them in the target language (a vernacular-medium student). Translations are written beside their source, e.g. gravity-en/r0/transcript_Mandarin_Chinese_code_mixed.jsonl.",
   "jobs": [
     {
       "transcripts": [
         "gravity-en/r0/transcript.jsonl",
         "speed-en/r0/transcript.jsonl"
       ],
-      "target_languages": ["Mandarin Chinese"]
+      "target_languages": ["Mandarin Chinese"],
+      "modes": ["code_mixed", "monolingual"]
     },
     {
       "transcripts": [
         "tree-mass-en/r0/transcript.jsonl",
         "energy-transfer-en/r0/transcript.jsonl"
       ],
-      "target_languages": ["Tamil"]
+      "target_languages": ["Tamil"],
+      "modes": ["code_mixed", "monolingual"]
     }
   ],
-  "model_id": "gemini-2.5-pro",
+  "model_id": "gemini-3.1-pro-preview",
   "max_refine_iters": 1
 }

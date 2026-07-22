@@ -178,7 +178,7 @@ def load_judge_codes(runs_dir: Path) -> dict[CodeKey, list[int]]:
     for path in sorted(runs_dir.rglob("evaluation_transcript*.jsonl")):
         if path.name.endswith(("_requests.jsonl", "_responses.jsonl")):
             continue
-        rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
         if not rows:
             continue
         header = rows[0]
