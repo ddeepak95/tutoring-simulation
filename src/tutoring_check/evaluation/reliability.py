@@ -188,7 +188,8 @@ def load_judge_codes(runs_dir: Path) -> dict[CodeKey, list[int]]:
                 f"the current {keys}; re-run the annotator on this file"
             )
         scenario = path.parent.parent.name
-        language = header["language"]
+        mode = header.get("mode")
+        language = f"{header['language']} ({mode})" if mode else header["language"]
         for row in rows:
             if "turn_id" not in row:
                 continue

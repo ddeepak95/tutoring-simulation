@@ -24,6 +24,8 @@ def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None =
 
     When reasoning is set it becomes litellm's unified reasoning_effort ("low"/"medium"/"high");
     the model's reasoning trace is then returned on the response and captured in the responses log.
+    Vertex Claude models are the exception: litellm renders reasoning_effort as `thinking.type.enabled`,
+    which those models reject alongside a response_format, so the effort goes through `output_config`.
     """
     kwargs: dict = {
         "model": model,
@@ -31,7 +33,11 @@ def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None =
         "response_format": instruction_annotator.response_format(),
     }
     if reasoning:
-        kwargs["reasoning_effort"] = reasoning
+        if model.startswith("vertex_ai/claude"):
+            kwargs["thinking"] = {"type": "adaptive"}
+            kwargs["output_config"] = {"effort": reasoning}
+        else:
+            kwargs["reasoning_effort"] = reasoning
     return kwargs
 
 
@@ -96,6 +102,7 @@ async def evaluate_transcript(
             "scenario_type": transcript.scenario_type,
             "region": transcript.region,
             "language": transcript.language,
+            "mode": transcript.mode,
             "annotator_model": annotator_model,
             "annotator_reasoning": annotator_reasoning,
             "tutor_model": transcript.tutor_model,

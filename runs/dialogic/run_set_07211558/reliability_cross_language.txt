@@ -1,0 +1,105 @@
+Cross-language annotation reliability (Cohen's kappa)
+run set  : run_set_07211558
+annotator: vertex_ai/claude-opus-4-8 (reasoning=medium)
+reference: English (US)
+topics   : energy-transfer, gravity, speed, tree-mass (4 x 10 tutor turns = 40 per cell)
+generated: 2026-07-23 16:57 UTC
+
+judge-coded turns: 210
+
+languages present: English (US), Mandarin Chinese (code_mixed), Mandarin Chinese (monolingual), Tamil, Tamil (code_mixed), Tamil (monolingual)
+
+JUDGE: English (US) vs Mandarin Chinese (code_mixed) (same annotator, translated stimulus)  (n = 40 turns)
+------------------------------------------------------------------------------
+dimension                         kappa          95% CI  agree  prev A  prev B
+------------------------------------------------------------------------------
+comprehension_check               +0.51   [+0.21,+0.77]    80%     20%     35%
+eliciting_reasoning               +0.58   [+0.30,+0.83]    80%     42%     38%
+eliciting_application             +0.55   [+0.29,+0.79]    80%     40%     20%
+hinting                           +0.83   [+0.61,+1.00]    92%     30%     32%
+explaining                        +0.90   [+0.75,+1.00]    95%     52%     57%
+planning_ahead                    +0.48   [+0.00,+1.00]    95%      2%      8%
+reflecting_back                   +0.66   [+0.00,+1.00]    98%      2%      5%
+positive_encouragement            +0.87   [+0.64,+1.00]    95%     78%     72%
+neutral_acknowledgment            +0.87   [+0.48,+1.00]    98%     10%     12%
+cultural_regional_grounding       +0.71   [+0.44,+0.93]    88%     28%     35%
+
+JUDGE: English (US) vs Mandarin Chinese (monolingual) (same annotator, translated stimulus)  (n = 40 turns)
+------------------------------------------------------------------------------
+dimension                         kappa          95% CI  agree  prev A  prev B
+------------------------------------------------------------------------------
+comprehension_check               +0.52   [+0.17,+0.80]    82%     20%     28%
+eliciting_reasoning               +0.53   [+0.25,+0.78]    78%     42%     35%
+eliciting_application             +0.63   [+0.36,+0.85]    82%     40%     38%
+hinting                           +0.71   [+0.43,+0.93]    88%     30%     32%
+explaining                        +0.85   [+0.66,+1.00]    92%     52%     60%
+planning_ahead                    +0.66   [+0.00,+1.00]    98%      2%      5%
+reflecting_back                   +0.66   [+0.00,+1.00]    98%      2%      5%
+positive_encouragement            +0.78   [+0.47,+1.00]    92%     78%     80%
+neutral_acknowledgment            +0.87   [+0.48,+1.00]    98%     10%     12%
+cultural_regional_grounding       +0.57   [+0.27,+0.83]    82%     28%     30%
+
+JUDGE: English (US) vs Tamil (same annotator, translated stimulus)  (n = 10 turns)
+------------------------------------------------------------------------------
+dimension                         kappa          95% CI  agree  prev A  prev B
+------------------------------------------------------------------------------
+comprehension_check               +0.21   [-0.32,+0.80]    70%     30%     20%
+eliciting_reasoning               +0.78   [+0.20,+1.00]    90%     70%     60%
+eliciting_application             +0.37   [-0.25,+1.00]    80%     20%     20%
+hinting                           +0.41   [+0.00,+1.00]    80%     10%     30%
+explaining                        +0.55   [+0.00,+1.00]    80%     60%     80%
+planning_ahead                        -               -   100%      0%      0%
+                                undefined: both raters constant, no variance to agree about
+reflecting_back                       -               -   100%      0%      0%
+                                undefined: both raters constant, no variance to agree about
+positive_encouragement            +1.00   [+1.00,+1.00]   100%     90%     90%
+neutral_acknowledgment                -               -   100%      0%      0%
+                                undefined: both raters constant, no variance to agree about
+cultural_regional_grounding       +0.74   [+0.00,+1.00]    90%     30%     20%
+
+JUDGE: English (US) vs Tamil (code_mixed) (same annotator, translated stimulus)  (n = 40 turns)
+------------------------------------------------------------------------------
+dimension                         kappa          95% CI  agree  prev A  prev B
+------------------------------------------------------------------------------
+comprehension_check               +0.48   [+0.08,+0.80]    85%     20%     15%
+eliciting_reasoning               +0.55   [+0.27,+0.80]    78%     42%     50%
+eliciting_application             +0.63   [+0.36,+0.85]    82%     40%     38%
+hinting                           +0.77   [+0.53,+0.95]    90%     30%     35%
+explaining                        +0.70   [+0.46,+0.90]    85%     52%     62%
+planning_ahead                    +0.48   [+0.00,+1.00]    95%      2%      8%
+reflecting_back                   +0.66   [+0.00,+1.00]    98%      2%      5%
+positive_encouragement            +0.84   [+0.58,+1.00]    95%     78%     82%
+neutral_acknowledgment            +0.84   [+0.00,+1.00]    98%     10%      8%
+cultural_regional_grounding       +0.83   [+0.61,+1.00]    92%     28%     35%
+
+JUDGE: English (US) vs Tamil (monolingual) (same annotator, translated stimulus)  (n = 40 turns)
+------------------------------------------------------------------------------
+dimension                         kappa          95% CI  agree  prev A  prev B
+------------------------------------------------------------------------------
+comprehension_check               +0.37   [-0.01,+0.71]    80%     20%     20%
+eliciting_reasoning               +0.70   [+0.47,+0.90]    85%     42%     52%
+eliciting_application             +0.73   [+0.48,+0.94]    88%     40%     32%
+hinting                           +0.72   [+0.46,+0.94]    88%     30%     38%
+explaining                        +0.60   [+0.31,+0.80]    80%     52%     57%
+planning_ahead                    +0.66   [+0.00,+1.00]    98%      2%      5%
+reflecting_back                   +0.48   [+0.00,+1.00]    95%      2%      8%
+positive_encouragement            +0.79   [+0.53,+1.00]    92%     78%     75%
+neutral_acknowledgment            +0.72   [+0.00,+1.00]    95%     10%     10%
+cultural_regional_grounding       +0.66   [+0.38,+0.89]    85%     28%     38%
+
+JUDGE: English (US) vs each language — kappa per dimension
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+dimension                          Mandarin Chinese (code_mixed)  Mandarin Chinese (monolingual)                           Tamil              Tamil (code_mixed)             Tamil (monolingual)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+comprehension_check                                        +0.51                           +0.52                           +0.21                           +0.48                           +0.37
+eliciting_reasoning                                        +0.58                           +0.53                           +0.78                           +0.55                           +0.70
+eliciting_application                                      +0.55                           +0.63                           +0.37                           +0.63                           +0.73
+hinting                                                    +0.83                           +0.71                           +0.41                           +0.77                           +0.72
+explaining                                                 +0.90                           +0.85                           +0.55                           +0.70                           +0.60
+planning_ahead                                             +0.48                           +0.66                               -                           +0.48                           +0.66
+reflecting_back                                            +0.66                           +0.66                               -                           +0.66                           +0.48
+positive_encouragement                                     +0.87                           +0.78                           +1.00                           +0.84                           +0.79
+neutral_acknowledgment                                     +0.87                           +0.87                               -                           +0.84                           +0.72
+cultural_regional_grounding                                +0.71                           +0.57                           +0.74                           +0.83                           +0.66
+
+  n per cell: Mandarin Chinese (code_mixed)=40, Mandarin Chinese (monolingual)=40, Tamil=10, Tamil (code_mixed)=40, Tamil (monolingual)=40

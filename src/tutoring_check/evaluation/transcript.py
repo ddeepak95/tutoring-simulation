@@ -30,6 +30,8 @@ class Transcript:
     language: str
     tutor_model: str
     turns: tuple[Turn, ...]
+    # Translation mode ("code_mixed" | "monolingual");
+    mode: str | None = None
 
     def tutor_turns(self) -> tuple[Turn, ...]:
         """The turns to score (evaluation.md: only `speaker == tutor` is evaluated)."""
@@ -72,4 +74,5 @@ def load_transcript(path: Path) -> Transcript:
         language=header.get("target_lang") or header["language"],
         tutor_model=header["tutor_model"],
         turns=tuple(turns),
+        mode=header.get("mode"),
     )

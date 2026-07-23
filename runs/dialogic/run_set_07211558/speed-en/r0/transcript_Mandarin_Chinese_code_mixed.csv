@@ -1,0 +1,20 @@
+﻿欢迎！我们来想象一下你从上海开车去苏州，speed是30 mph，然后你顺着原路返回，speed变成60 mph。你觉得这整个round trip的average speed会是多少？你要怎么开始calculate呢？
+我觉得就是45 mph吧？因为如果你去的时候是30，回来是60，你就直接把它们加起来然后除以2，对吧？
+这是个非常常见也很直观的第一个guess！为了看看这样算对不对，我们来想一想每一段路上花掉的time。如果我们假设上海到苏州的distance是60 miles，以30 mph开过去需要几个小时？以60 mph开回来又要几个小时呢？
+好的，所以去的话要2个小时。回来的话只要1个小时，因为你开得快嘛。
+算得很棒。现在我们来看看整个round trip，total distance是多少？花掉的total time又是多少？根据这两个total，你会怎么calculate真正的average speed呢？
+所以total distance是120 miles，因为单程是60，然后total time是3个小时。我是不是直接拿120除以3？  等一下……那样算出来是40 mph。为什么不是45啊？
+你算得完全正确；average speed确实是40 mph！想要搞懂为什么不是45 mph，你得仔细看看你在每个speed下开了多久。既然你花了两个小时开30 mph，却只花了一个小时开60 mph，这种不对等的time是怎么影响整体的average speed的呢？
+哦！所以因为我花在开慢车上的time更多，它就把average给拉低了？就好像30 mph在整个trip里的占比比60 mph更大？
+没错！你解释得太好了。因为你在较慢的speed上花了两倍的time，那个慢的speed对你总体的average就有一个更大的“weight”。  如果我们不知道这两个城市之间的确切distance，假设它是一个未知的distance $d$ 而不是60 miles，average speed还会是40 mph吗？我们要怎么prove呢？
+我猜还是40吧？但是用letter还挺confusing的。  如果distance是$d$，我知道total distance就是$2d$，但是如果我没有一个real number可以拿来除，我要怎么求出time呢？
+一开始觉得variable有点tricky是完全正常的，但是你可以用和刚才算60完全一样的step。当distance是60 miles的时候，你用它除以30 mph来得出time。如果distance是$d$，你会怎么写去程花掉的time呢？
+所以我就直接写$d$除以30？就像一个fraction一样写成$d/30$？
+完全正确！是的，去程的time是$d/30$个小时。  顺着同一个logic，回程的time你要怎么写？要是把它们加在一起，total time的expression会是什么样的？
+回程就是$d/60$对吧？所以total time就是$d/30 + d/60$。  等等，里面有letter的话，我具体要怎么加啊？我是不是得找个common denominator什么的？
+你说得太对了！找common denominator就是最完美的解法。  30和60的common denominator是多少？你要怎么改写然后把这两个fraction加起来？
+我觉得common denominator是60。所以$d/30$就会变成$2d/60$，对吧？  如果我把它们加起来，是不是就是$3d/60$了？
+绝对正确！这个round trip的total time确实是$3d/60$，我们可以把它simplify成$d/20$。  现在，记住了，average speed就是total distance除以total time。如果你的total distance是$2d$，total time是$d/20$，把这两个一除会得到什么？
+所以我是不是得用$2d$除以$d/20$？如果我把fraction翻过来做乘法，就变成了$2d$乘以$20/d$……  等等，$d$直接cancel掉了！这是不是意味着就是2乘以20，结果是40？
+你做到了！这是一段非常精彩的algebra推导，而且你刚刚在数学上prove了average speed将永远是40 mph，不管这两个城市隔得有多远。  你觉得为什么最后distance $d$ 会cancel掉呢？关于distance是怎么影响round trip的average speed的，这告诉了我们什么？
+因为上面和下面都有个$d$，所以它们就直接约掉了？  这难道意味着实际的distance根本就不重要吗？比如说，就算城市之间隔了1000 miles，也还是40 mph？

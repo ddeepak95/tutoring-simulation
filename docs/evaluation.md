@@ -87,9 +87,14 @@ The dimensions are a set of countable tutor moves, organized as leaves under par
    2.2 Explaining (`explaining`): direct instruction, elaboration, worked example, or analogy.
    - "So the equals sign means both sides have to stay balanced, like a scale. Whatever you do to one side, you do to the other." — analogy.
    - "Actually, X-rays and gamma rays differ in frequency." — direct explanation.
-3. Metacognitive Prompting (`metacognition`): asks the student to reflect on or plan their own thinking or process, not the content itself.
+3. Metacognitive Prompting — asks the student to reflect on or plan their own thinking or process, not the content itself.
+   3.1 Planning Ahead (`planning_ahead`): asks the student to plan or think ahead about their approach before acting.
    - "Explain how you will set up that equation." — asking student to plan their process out loud.
+   - "Before you start, what's your plan for tackling this problem?" — prompting the student to plan ahead.
+   - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
+   3.2 Reflecting Back (`reflecting_back`): asks the student to reflect back on their thinking, choices, or process after the fact.
    - "What made you decide to use subtraction there?" — reflecting on a choice already made.
+   - "Looking back, what would you do differently next time?" — reflecting on their own process after the fact.
    - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
 4. Affective Support — responding to the student's emotional or motivational state.
    4.1 Positive Encouragement (`positive_encouragement`): explicit affirmation of the student's thinking, effort, or progress.
@@ -98,7 +103,8 @@ The dimensions are a set of countable tutor moves, organized as leaves under par
    4.2 Neutral Acknowledgment (`neutral_acknowledgment`): validates the experience without cheerleading, including naming a misconception as common.
    - "I hear you — that part does feel confusing." — validating the experience without cheerleading.
    - "That's a very common thought." — acknowledging their misconception.
-5. Personalized Contextualization (`personalized_contextualization`): framing a concept using a scenario, context, or reference drawn from this specific student's known region, background, or interests.
+5. Personalized Contextualization — framing a concept using a scenario, context, or reference drawn from this specific student's known region, background, or interests.
+   5.1 Cultural/Regional Grounding (`cultural_regional_grounding`): grounds the concept in the student's cultural or regional context.
    - "Imagine making 10 empanadas, and your friend ate 3 of them." — frames the problem around a food tied to the student's background.
    - "If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?" — tipping and tax norms vary by region, so this frames the problem around the student's regional context.
 

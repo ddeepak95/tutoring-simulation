@@ -28,19 +28,50 @@ ENGLISH = "English (US)"
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Interrater reliability for evaluated tutoring conversations.")
     parser.add_argument("--runs", type=Path, required=True, help="Run-set dir holding evaluation_transcript*.jsonl.")
-    parser.add_argument("--human", type=Path, required=True, help="CSV of hand-coded turns.")
+    parser.add_argument(
+        "--human",
+        type=Path,
+        default=None,
+        help="CSV of hand-coded turns. Omit to run judge-only: the annotator against itself across each translation.",
+    )
     parser.add_argument("--bootstrap", type=int, default=5000, help="Bootstrap resamples per CI.")
     return parser
 
 
 def run(args: argparse.Namespace) -> int:
-    human, coders = load_human_codes(args.human)
     judge = load_judge_codes(args.runs)
+    print(f"judge-coded turns: {len(judge)}")
+
+    if args.human is not None:
+        _report_human_vs_judge(args, judge)
+
+    # JUDGE cross-language: the annotator against itself on each translation, English as the reference.
+    # This is the whole report when no human codes are supplied.
+    print(f"\nlanguages present: {', '.join(languages(judge))}")
+    matrix: dict[str, list[Agreement]] = {}
+    for language in languages(judge):
+        if language == ENGLISH:
+            continue
+        try:
+            results = cross_language(judge, ENGLISH, language, n_boot=args.bootstrap)
+        except ValueError as exc:
+            print(f"\nJUDGE: {ENGLISH} vs {language} — NOT COMPUTABLE\n  {exc}")
+            continue
+        matrix[language] = results
+        print(format_table(results, title=f"JUDGE: {ENGLISH} vs {language} (same annotator, translated stimulus)"))
+    if matrix:
+        print(format_matrix(matrix, title=f"JUDGE: {ENGLISH} vs each language — kappa per dimension"))
+    return 0
+
+
+def _report_human_vs_judge(args: argparse.Namespace, judge: dict) -> None:
+    """Report human-vs-judge agreement and the human cross-language contrast (only when human codes exist)."""
+    human, coders = load_human_codes(args.human)
 
     shared = set(human) & set(judge)
     if not shared:
         raise ValueError("human and judge codes share no (scenario, language, turn_id) keys")
-    print(f"human-coded turns: {len(human)}   judge-coded turns: {len(judge)}   shared: {len(shared)}")
+    print(f"human-coded turns: {len(human)}   shared with judge: {len(shared)}")
 
     # load_human_codes rejects a doubly-coded unit, so reaching here means no unit has two humans on it
     # and human-human kappa has nothing to cross-tabulate.
@@ -73,14 +104,12 @@ def run(args: argparse.Namespace) -> int:
     for language in languages(human):
         if language == ENGLISH:
             continue
-        for rater, codes, rater_coders in (("HUMAN", human, coders), ("JUDGE", judge, None)):
-            try:
-                results = cross_language(codes, ENGLISH, language, coders=rater_coders, n_boot=args.bootstrap)
-            except ValueError as exc:
-                print(f"\n{rater}: {ENGLISH} vs {language} — NOT COMPUTABLE\n  {exc}")
-                continue
-            print(format_table(results, title=f"{rater}: {ENGLISH} vs {language} (same rater, translated stimulus)"))
-    return 0
+        try:
+            results = cross_language(human, ENGLISH, language, coders=coders, n_boot=args.bootstrap)
+        except ValueError as exc:
+            print(f"\nHUMAN: {ENGLISH} vs {language} — NOT COMPUTABLE\n  {exc}")
+            continue
+        print(format_table(results, title=f"HUMAN: {ENGLISH} vs {language} (same rater, translated stimulus)"))
 
 
 def main() -> int:

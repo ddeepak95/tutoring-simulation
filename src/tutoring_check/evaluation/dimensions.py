@@ -123,16 +123,35 @@ DIMENSIONS: tuple[Dimension, ...] = (
         ),
     ),
     Dimension(
-        key="metacognition",
-        name="Metacognitive Prompting",
+        key="planning_ahead",
+        name="Planning Ahead",
         category="Metacognitive Prompting",
         criteria=(
-            "Tutor asks the student to reflect on or plan their own thinking or process explicitly — "
-            "reasoning about their thinking, not just reasoning through the content."
+            "Tutor asks the student to plan or think ahead about their own approach or process before "
+            "acting — reasoning about how they will proceed, not just reasoning through the content."
         ),
         examples=(
             Example(text="Explain how you will set up that equation.", note="Asking student to plan their process out loud."),
+            Example(text="Before you start, what's your plan for tackling this problem?", note="Prompting the student to plan ahead."),
+        ),
+        non_examples=(
+            Example(
+                text="Explain your thinking.",
+                note="Eliciting reasoning about their response, not reasoning about their thinking.",
+            ),
+        ),
+    ),
+    Dimension(
+        key="reflecting_back",
+        name="Reflecting Back",
+        category="Metacognitive Prompting",
+        criteria=(
+            "Tutor asks the student to reflect back on their own thinking, choices, or process after the "
+            "fact — reasoning about a step they already took, not just reasoning through the content."
+        ),
+        examples=(
             Example(text="What made you decide to use subtraction there?", note="Reflecting on a choice already made."),
+            Example(text="Looking back, what would you do differently next time?", note="Reflecting on their own process after the fact."),
         ),
         non_examples=(
             Example(
@@ -170,8 +189,8 @@ DIMENSIONS: tuple[Dimension, ...] = (
         ),
     ),
     Dimension(
-        key="personalized_contextualization",
-        name="Personalized Contextualization",
+        key="cultural_regional_grounding",
+        name="Cultural/Regional Grounding",
         category="Personalized Contextualization",
         criteria=(
             "Framing a concept using a scenario, context, or reference drawn from this specific "

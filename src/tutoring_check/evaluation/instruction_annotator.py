@@ -47,6 +47,7 @@ def build_system_prompt() -> str:
         "Clarifications (follow these exactly):\n"
         "- Return **only** moves from the Allowed Moves list by their key, no synonyms or casing changes.\n"
         "- Tag only the marked <target_turn>; use the rest of the dialogue as context only.\n"
+        "- Tag each turn independently: if a move's behavior is present, tag it even if it also appeared in an earlier turn.\n"
         "- The moves are not mutually exclusive: the same turn may carry multiple moves.\n\n"
         "- A single sentence or phrase may exhibit more than one move. Each turn has at most one instance of any move.\n\n"
         "Output your choices into the JSON structure where:\n"
