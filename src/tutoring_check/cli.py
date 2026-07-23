@@ -61,6 +61,7 @@ async def run(args: argparse.Namespace) -> int:
                 tutor_reasoning=args.tutor_reasoning or r.tutor_reasoning,
                 student_reasoning=args.student_reasoning or r.student_reasoning,
                 output_root=cell,
+                concurrency=max(1, args.concurrency),
             )
             print(f"completed item_id={r.item_id} r{rep} output_dir={out_dir}")
 

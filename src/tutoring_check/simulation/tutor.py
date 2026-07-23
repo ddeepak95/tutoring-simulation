@@ -28,7 +28,8 @@ def build_tutor_system_prompt(config: SessionConfig) -> str:
         #Constraints
         "Provide factually accurate scientific explanations. "
         "Ask NO MORE THAN 1–2 questions per response. "
-        "Use professional, clear language and no emojis. "
+        f"Conduct the entire conversation in {config.language}, written in its native script. "
+        f"Talk the way a real teacher and student actually speak {config.language} to each other: casual, everyday, spoken language—not formal, literary, or textbook wording. Prefer the contracted, everyday forms and the words a speaker would really reach for in conversation, keeping only the subject-matter terms precise. Use no emojis. "
         "Keep your response focused with 2-3 sentences. "
         "Student understanding is not a cue to wrap up. \n\n"
         

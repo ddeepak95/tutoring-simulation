@@ -3,9 +3,11 @@ Tutor-first, alternating, for a fixed number of turns per speaker.
 """
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any
 
+import litellm
 from litellm import acompletion
 
 from tutoring_check.simulation.config import SessionConfig
@@ -28,6 +30,68 @@ def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None =
     return kwargs
 
 
+def _extract_usage(response: Any) -> dict[str, Any]:
+    """Normalize the provider's token accounting into a flat, comparable shape.
+    Missing fields stay None so a provider that omits a breakdown is distinguishable from a zero.
+    """
+    usage = getattr(response, "usage", None)
+    if usage is None:
+        return {}
+    u = usage.model_dump() if hasattr(usage, "model_dump") else dict(usage)
+    completion_details = u.get("completion_tokens_details") or {}
+    prompt_details = u.get("prompt_tokens_details") or {}
+    cached = prompt_details.get("cached_tokens")
+    if cached is None:
+        cached = u.get("cache_read_input_tokens")
+    return {
+        "prompt_tokens": u.get("prompt_tokens"),
+        "completion_tokens": u.get("completion_tokens"),
+        "total_tokens": u.get("total_tokens"),
+        "reasoning_tokens": completion_details.get("reasoning_tokens"),
+        "output_text_tokens": completion_details.get("text_tokens"),
+        "cached_tokens": cached,
+    }
+
+
+async def _acompletion_with_metrics(kwargs: dict, concurrency: int) -> tuple[Any, str, dict[str, Any]]:
+    """Stream one completion so time-to-first-byte can be timed, then rebuild the full
+    (non-streamed) response so downstream logging and parsing are unchanged.
+    Returns (reconstructed_response, spoken_text, metrics).
+
+    `concurrency` is the number of sessions sharing the event loop for this run; it is
+    recorded with each call because at >1 the loop can suspend this coroutine between
+    chunks, inflating latency_s. It is context for interpreting latency, not a measurement.
+    """
+    # perf_counter drives the durations (monotonic); wall-clock ISO stamps are for auditing only.
+    start_ts = utc_now()
+    start = time.perf_counter()
+    ttfb: float | None = None
+    chunks: list[Any] = []
+    stream = await acompletion(**kwargs, stream=True, stream_options={"include_usage": True})
+    async for chunk in stream:
+        if ttfb is None:
+            ttfb = time.perf_counter() - start
+        chunks.append(chunk)
+    latency = time.perf_counter() - start
+    end_ts = utc_now()
+
+    response = litellm.stream_chunk_builder(chunks, messages=kwargs.get("messages")) if chunks else None
+    text = ""
+    if response is not None:
+        text = getattr(response.choices[0].message, "content", None) or ""
+
+    metrics = {
+        "ttfb_s": ttfb,
+        "latency_s": latency,
+        "start_ts": start_ts,
+        "end_ts": end_ts,
+        "n_chunks": len(chunks),
+        "concurrency": concurrency,
+        **_extract_usage(response),
+    }
+    return response, text, metrics
+
+
 async def run_session(
     config: SessionConfig,
     *,
@@ -36,6 +100,7 @@ async def run_session(
     output_root: Path,
     tutor_reasoning: str | None = None,
     student_reasoning: str | None = None,
+    concurrency: int = 1,
 ) -> Path:
     out_dir = output_root
     logger = JsonlLogger(out_dir=out_dir)
@@ -56,6 +121,7 @@ async def run_session(
             "student_model": student_model,
             "tutor_reasoning": tutor_reasoning,
             "student_reasoning": student_reasoning,
+            "concurrency": concurrency,
             "tutor_system_prompt": tutor_system,
             "student_static_prompt": student_static,
         }
@@ -82,13 +148,12 @@ async def run_session(
         # Tutor turn
         tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
-        tutor_response = await acompletion(**tutor_request)
-        tutor_text = getattr(tutor_response.choices[0].message, "content", None) or ""
+        tutor_response, tutor_text, tutor_metrics = await _acompletion_with_metrics(tutor_request, concurrency)
         logger.log_api_response(
-            {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response)}
+            {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response), "metrics": tutor_metrics}
         )
         logger.log_transcript(
-            {"timestamp": utc_now(), "turn_id": turn_id, "speaker": "tutor", "content": tutor_text}
+            {"timestamp": utc_now(), "turn_id": turn_id, "speaker": "tutor", "content": tutor_text, "metrics": tutor_metrics}
         )
         messages.append({"role": "assistant", "content": tutor_text})
         student_turns.append({"role": "user", "content": tutor_text})
@@ -98,10 +163,9 @@ async def run_session(
         student_messages = [{"role": "system", "content": student_static}] + student_turns
         student_request = _completion_kwargs(student_model, student_messages, student_reasoning)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
-        student_response = await acompletion(**student_request)
-        student_text = getattr(student_response.choices[0].message, "content", None) or ""
+        student_response, student_text, student_metrics = await _acompletion_with_metrics(student_request, concurrency)
         logger.log_api_response(
-            {"timestamp": utc_now(), "role": "student", "raw_response": serialize_response(student_response)}
+            {"timestamp": utc_now(), "role": "student", "raw_response": serialize_response(student_response), "metrics": student_metrics}
         )
         logger.log_transcript(
             {
@@ -109,6 +173,7 @@ async def run_session(
                 "turn_id": turn_id,
                 "speaker": "student",
                 "content": student_text,
+                "metrics": student_metrics,
             }
         )
         student_turns.append({"role": "assistant", "content": student_text})
