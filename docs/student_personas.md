@@ -7,10 +7,10 @@ The simulated student in [student.py](../src/tutoring_check/simulation/student.p
 The fix is to make the student's **epistemic state** explicit and to derive the prompt from a structured, literature-grounded trait vector instead of hand-written prose. A persona is compiled once, offline, into a pinned artifact on disk; the session loop stays a deterministic string assembly with no extra LLM calls, so a persona is byte-identical across every tutor model and every repeat.
 
 **Decisions taken:**
-- **The study manipulates one factor with four levels, not seven traits.** Traits are the compiler's internal vocabulary — the place the literature grounding lives — but a run set names a single `student_level`. A run set cannot set an individual trait. See [Part 5](#part-5--the-four-student-levels).
-- MVP is **one topic**, then extend. Topic = **`tree-mass`** — it is what `run_set_dialogic.json` and `run_set_probe.json` already run, so replacing the legacy personas doesn't strand the active run sets, and "a tree's mass comes from the soil" is a textbook *ontologically robust* misconception, which is the sharpest test of the design.
+- **The study manipulates one factor with four levels, not eight traits.** Traits are the compiler's internal vocabulary — the place the literature grounding lives — but a run set names a single `level`. A run set cannot set an individual trait. See [Part 5](#part-5--the-four-student-levels).
+- MVP is **one topic**, then extend. Topic = **`tree-mass`** — it is what the active run sets already use, and "a tree's mass comes from the soil" is a textbook *ontologically robust* misconception, which is the sharpest test of the design.
 - Misconceptions are **researched by LLM agents with web search**, one time per topic, into a per-topic JSON file, with a **real verification pass** (an independent agent that fetches every cited source) followed by human sign-off.
-- Legacy `standard` / `struggling` / `advanced` are **replaced** by compiled equivalents under the same ids. `student.PERSONALITY` is deleted.
+- **No backward compatibility.** The old personas are deleted outright, not preserved alongside. `student.PERSONALITY` and the `PERSONAS` constants go; run sets are updated to name a level. Transcripts already under `runs/` are historical artifacts of a different stimulus and are not reproducible from the new code — that is accepted, and it is why the artifact + `spec_hash` machinery exists from here on.
 - **All realism measurement is deferred.** No metrics module, no student-act judge in this work.
 
 ---
@@ -21,7 +21,7 @@ The organizing frame is **Epistemic State Specification** from *Towards Valid St
 
 The failure modes to design against come from *Simulated Students in Tutoring Dialogues: Substance or Illusion?* ([arXiv:2601.04025](https://arxiv.org/abs/2601.04025), ACL 2026), which had expert teachers interact with simulated students across six realism dimensions (dialogue acts, correctness, error-making, knowledge acquisition, language use, tutors' responses). Prompted LLM students: **over-produce "seek information" acts and correct responses**; write too short or with **formal grammar and punctuation unlike real students**; and — the one that matters most here — show **response patterns that are uniform across students, lacking diversity**.
 
-Everything else grounds an individual trait:
+Everything else grounds an individual trait (full citations in [References](#references)):
 
 | Source | What it grounds |
 |---|---|
@@ -29,11 +29,12 @@ Everything else grounds an individual trait:
 | **diSessa** knowledge-in-pieces / p-prims (fragmented, context-cued, labile) vs **Chi** ontological miscategorization (treating force/heat/matter as a possessed substance — empirically **resistant to instruction**) | `misconception_robustness` — how many turns before the student gives up the wrong idea. This is the mechanism the current `struggling` bullet "Don't follow a hint to its conclusion" crudely stands in for |
 | **ICAP** (Chi & Wylie 2014): passive → active → constructive → interactive; Chi et al. 1994 self-explanation | `self_explanation_propensity` — bare answer vs. generating reasoning beyond what was given |
 | **Aleven & Koedinger**, IJAIED 2016 help-seeking review; Baker gaming-the-system | `help_seeking_style` — avoidant / executive ("just tell me") / instrumental |
+| Achievement goal theory (mastery / performance-approach / performance-avoidance); Dweck | `goal_orientation` — performance-avoidance predicts helpless responses and avoidance of any visible risk of failure, i.e. bluffing or going quiet rather than admitting confusion |
 | **D'Mello & Graesser** affect dynamics: engaged/flow → confusion at an impasse → frustration if unresolved → boredom | `affect_trajectory` — a state machine with triggers, not a static mood |
 | Chi 2001 (tutors produce ~93.5% of words); the realism paper's register finding | `register_and_verbosity` |
 | **HACHIMI** ([arXiv:2603.04855](https://arxiv.org/abs/2603.04855)) — theory-anchored components generated by a propose → validate → revise loop against executable constraints | The compiler pipeline architecture |
 
-Phase-2 traits, designed for but not built: `transfer_fragility` (diSessa — gains collapse when the framing changes), `goal_orientation` (mastery / performance-approach / performance-avoidance — avoidance predicts bluffing rather than admitting confusion), `self_efficacy` (Bandura), `metacognitive_calibration`, `classroom_norms` / `medium_of_instruction` (translanguaging; ties to the existing `code_mixed` vs `monolingual` modes in [prompts.py](../src/tutoring_check/translations/prompts.py)).
+Phase-2 traits, designed for but not built: `transfer_fragility` (diSessa — gains collapse when the framing changes), `self_efficacy` (Bandura), `metacognitive_calibration`, `classroom_norms` / `medium_of_instruction` (translanguaging; ties to the existing `code_mixed` vs `monolingual` modes in [prompts.py](../src/tutoring_check/translations/prompts.py)).
 
 ---
 
@@ -46,6 +47,8 @@ Phase-2 traits, designed for but not built: `transfer_fragility` (diSessa — ga
 **Stage 2 — Verify (independent agent, does not see Stage 1's reasoning).** For every entry, fetch every cited URL and confirm it resolves and actually states the misconception. Each source's `verified` flips to `true` only on that basis. An entry with no verified source is deleted, not downgraded — a misconception with a broken citation is indistinguishable from one the model invented. **This is the guard against fabricated citations, the single largest risk in LLM-sourced literature grounding.**
 
 **Stage 3 — Human sign-off.** You read the file and set `reviewed` to your handle and the date. The loader raises on any entry where `reviewed` is null, unless `--allow-unreviewed` is passed.
+
+**A topic with no reviewed library cannot be run.** There is no fallback persona. That is the E3 commitment made operational: a student whose wrong idea is unspecified is exactly the E1 student this work exists to replace. The practical consequence is that [run_set.json](../data/run_set.json) and [run_set_contrast.json](../data/run_set_contrast.json) stay unrunnable until libraries exist for their topics.
 
 ### Schema
 
@@ -77,7 +80,7 @@ Phase-2 traits, designed for but not built: `transfer_fragility` (diSessa — ga
 |---|---|
 | `belief`, `predicts` | compiler → `what_you_believe`; `predicts` also drives the `belief_present` validator |
 | `changes_only_when` | compiler → the conceptual-change rule. The level says *how much* evidence shifts the student; this says *what counts as evidence for this concept*, which the level cannot know. Anything not on the list is re-explained away rather than accepted, so a separate "resists" list is redundant |
-| `slides_into` | **optional.** compiler → the wrong-idea → *different* wrong-idea → right-idea path, so change isn't monotonic. Free prose, not an id, so a topic needs only one entry |
+| `slides_into` | **optional.** compiler → the wrong-idea → *different* wrong-idea → right-idea path, so change isn't monotonic. Free prose, not an id |
 | `canonical_explanation`, `answer_giveaway_terms` | the `no_answer_leak` validator |
 | `sources`, `reviewed` | the human auditing the literature claim |
 
@@ -85,23 +88,23 @@ Phase-2 traits, designed for but not built: `transfer_fragility` (diSessa — ga
 
 `changes_only_when` is the field most likely to look droppable and isn't. Without it the compiler invents a yield condition, and the most natural thing for it to invent is the correct explanation — which is precisely the answer-leak failure `no_answer_leak` exists to catch. A human-authored yield condition that deliberately stops short of the answer is a control, not decoration.
 
-**Cut, and why:** `robustness` / `why_robust` / `ontology` (theory in the wrong file — `misconception_robustness` is a trait the level fixes, and the level must win, or `struggling` and `advanced` could not differ on the same topic) · `topic_type` (derivable from which topic catalog the id is in) · `reasoning` (folded into `belief` — a first-person statement carries its own because-clause) · `resists` (the complement of `changes_only_when`) · `prevalence` (never reaches the prompt, and the field most likely to be quietly fabricated) · per-source `type`/`item_code` and the nested `review` object (a citation, a URL, a checkbox, and a signature are enough).
-
 `canonical_explanation` and `answer_giveaway_terms` live here rather than in [topics_ci.json](../data/topics_ci.json) so the answer-leak validator has everything it needs in one file, and no catalog every consumer reads has to change.
 
-**Two entries per topic is the working default, one is viable.** The primary misconception is what the levels bind to; a second is only worth authoring if it is genuinely distinct rather than a rephrasing. `slides_into` being prose means the wrong-idea drift no longer requires a second full entry to exist.
+**One entry per topic is enough to start.** `slides_into` is prose rather than an id, so the wrong-idea drift does not require a second entry to exist. Author a second only if it is genuinely a different idea rather than a rephrasing of the first — the `misconception` trait can then select it.
+
+**Cut from earlier drafts, and why:** `robustness` / `why_robust` / `ontology` (theory in the wrong file — `misconception_robustness` is a trait the level fixes, and the level must win, or `struggling` and `advanced` could not differ on the same topic) · `topic_type` (derivable from which topic catalog the id is in) · `reasoning` (folded into `belief` — a first-person statement carries its own because-clause) · `resists` (the complement of `changes_only_when`) · `prevalence` (never reaches the prompt, and the field most likely to be quietly fabricated) · per-source `type`/`item_code` and the nested `review` object (a citation, a URL, a checkbox, and a signature are enough).
 
 ---
 
 ## Part 2 — Trait registry (internal vocabulary, *not* study variables)
 
-> **Traits are never named in a run set.** They exist so each student level has a principled, citable definition and so the compiler receives a specific behavioral brief rather than an adjective. The only thing that varies in an experiment is `student_level`, and each level fixes every trait at once. Adding a trait therefore costs nothing in study design — it costs prompt tokens, and that is the real budget (see Risk 3).
+> **Traits are never named in a run set.** They exist so each level has a principled, citable definition and so the compiler receives a specific behavioral brief rather than an adjective. The only thing that varies in an experiment is `level`, and each level fixes every trait at once. Adding a trait therefore costs nothing in study design — it costs prompt tokens, and that is the real budget (see Risk 3).
 
-`src/tutoring_check/personas/traits.py`, structured exactly like [dimensions.py](../src/tutoring_check/evaluation/dimensions.py) — frozen dataclasses, a module tuple, a `_MAP`, accessor functions. It is the single source of truth: compiler prompt text, JSON schema, spec validation, and the jargon blocklist all render from it.
+`src/tutoring_check/personas/traits.py`, structured like [dimensions.py](../src/tutoring_check/evaluation/dimensions.py) — frozen dataclasses, a module tuple, a `_MAP`, accessor functions. It is the single source of truth: compiler prompt text, level validation, and the jargon blocklist all render from it.
 
 ```python
 @dataclass(frozen=True)
-class TraitLevel:
+class TraitValue:
     value: str          # "robust"
     definition: str     # one line, in the literature's own terms
     consequence: str    # the behavioural instruction handed to the compiler
@@ -113,28 +116,30 @@ class Trait:
     group: str          # epistemic | learning_dynamics | dialogue | affect
     definition: str
     citation: str
-    levels: tuple[TraitLevel, ...]
-    default: str
-    topic_bound: bool = False
+    values: tuple[TraitValue, ...]
     banned_terms: tuple[str, ...] = ()   # jargon that must not reach the student prompt
 ```
 
+No `default` field: every level fixes every trait, so a default would never be read. `TraitValue` rather than `TraitLevel` — "level" is reserved for the study factor, and the collision was confusing.
+
 ### MVP traits (eight)
 
-| key | group | values | topic-bound | citation |
-|---|---|---|---|---|
-| `misconception` | epistemic | an id from the topic's library, or `none` | **yes** | Driver et al.; AAAS 2061 |
-| `misconception_robustness` | epistemic | `labile` \| `intermediate` \| `robust` | no | diSessa vs Chi |
-| `conceptual_change_rate` | learning_dynamics | `slow` \| `moderate` \| `fast` | no | ESS "simulating learning" |
-| `self_explanation_propensity` | dialogue | `passive` \| `active` \| `constructive` | no | ICAP, Chi & Wylie 2014 |
-| `help_seeking_style` | dialogue | `avoidant` \| `executive` \| `instrumental` | no | Aleven & Koedinger 2016 |
-| `register_and_verbosity` | dialogue | `terse_colloquial` \| `typical` \| `expansive` (each carries a sentence band + mechanics rules) | no | Chi 2001; realism paper |
-| `affect_trajectory` | affect | `engaged_persistent` \| `confusion_to_frustration` \| `flat_compliant` | no | D'Mello & Graesser |
-| `goal_orientation` | affect | `mastery` \| `performance_approach` \| `performance_avoidance` | no | achievement goal theory; Dweck |
+| key | group | values | citation |
+|---|---|---|---|
+| `misconception` | epistemic | `primary` \| `secondary` — which entry from the topic's library | Driver et al.; AAAS 2061 |
+| `misconception_robustness` | epistemic | `labile` \| `intermediate` \| `robust` | diSessa vs Chi |
+| `conceptual_change_rate` | learning_dynamics | `slow` \| `moderate` \| `fast` | ESS "simulating learning" |
+| `self_explanation_propensity` | dialogue | `passive` \| `active` \| `constructive` | ICAP, Chi & Wylie 2014 |
+| `help_seeking_style` | dialogue | `avoidant` \| `executive` \| `instrumental` | Aleven & Koedinger 2016 |
+| `register_and_verbosity` | dialogue | `terse_colloquial` \| `typical` \| `expansive` (each carries a sentence band + mechanics rules) | Chi 2001; realism paper |
+| `goal_orientation` | affect | `mastery` \| `performance_approach` \| `performance_avoidance` | achievement goal theory; Dweck |
+| `affect_trajectory` | affect | `engaged_persistent` \| `confusion_to_frustration` \| `flat_compliant` | D'Mello & Graesser |
 
-`misconception_robustness` and `conceptual_change_rate` are deliberately separate. Robustness is how hard *this student* finds *this one belief* to give up; change rate is how quickly they take on a new idea in general. Keeping them apart is what lets a fast learner still cling to a single belief long after they have absorbed everything else — which is the behavior no current persona can produce. Both are fixed by the level, not by the topic: if the library pinned robustness per misconception, `struggling` and `advanced` could not differ on the same topic, which would defeat the level design.
+`misconception` is the only trait that resolves against the topic; the other seven mean the same thing on every topic.
 
-`goal_orientation` earns its place because `performance_avoidance` is the only construct that produces bluffing and going quiet *instead of* admitting confusion. It is what defines the fourth student level below; without it that level is just "struggling with extra steps".
+`misconception_robustness` and `conceptual_change_rate` are deliberately separate. Robustness is how hard *this student* finds *this one belief* to give up; change rate is how quickly they take on a new idea in general. Keeping them apart is what lets a fast learner still cling to a single belief long after they have absorbed everything else — the behavior no current persona can produce. Both are fixed by the level, not the topic: if the library pinned robustness per misconception, `struggling` and `advanced` could not differ on the same topic, which would defeat the level design.
+
+`goal_orientation` earns its place because `performance_avoidance` is the only construct that produces bluffing and going quiet *instead of* admitting confusion. It is what defines the fourth level; without it that level is just "struggling with extra steps".
 
 **Consequence text is the tuning surface.** It must be quantified and non-optional. Illustrative, for `misconception_robustness = robust`:
 
@@ -144,7 +149,7 @@ Note the contrast with the current prompt's `Sometimes misunderstand or partiall
 
 ---
 
-## Part 3 — Persona spec, compiler, validator
+## Part 3 — Compiler and validator
 
 ### What the compiler replaces
 
@@ -156,7 +161,7 @@ Reading [student.py](../src/tutoring_check/simulation/student.py) line by line:
 
 ### Output: JSON with fixed named sections
 
-Free text would be undiffable and would let structure vary across personas. Fixed keys, fixed render order:
+Free text would be undiffable and would let structure vary across levels. Fixed keys, fixed render order:
 
 `who_you_are` · `what_you_believe` · `what_you_can_and_cannot_use` · `how_you_talk` · `how_you_respond_to_teaching` · `how_you_feel_as_it_goes` · `when_you_are_stuck` · `do_not`
 
@@ -211,24 +216,25 @@ data/personas/compiled/<level>__<topic_id>__<language_id>.json    # output, one 
 data/personas/persona_set.json                                    # the generation job list
 ```
 
-There is **no spec file** — a level *is* its trait bundle in `personas/levels.py`, so the input to compilation is code plus the topic's misconception entry. One level compiles to N artifacts because `misconception` is topic-bound and register is language-bound; one file per cell keeps the CLI resume-safe by file existence, matching [cli.py](../src/tutoring_check/cli.py) and [evaluation/cli.py](../src/tutoring_check/evaluation/cli.py).
+There is **no spec file** — a level *is* its trait bundle in `personas/levels.py`, so the input to compilation is code plus the topic's misconception entry. One level compiles to N artifacts: `misconception` resolves against the topic, and `how_you_talk` is written against the target language's register. One file per cell keeps the CLI resume-safe by file existence, matching [cli.py](../src/tutoring_check/cli.py) and [evaluation/cli.py](../src/tutoring_check/evaluation/cli.py).
 
-Artifact carries: `level`, `topic_id`, `language_id`, `region_id`, `spec_hash`, `registry_version`, `misconception_id`, `traits` (the resolved flat dict, so the artifact is self-describing even if `levels.py` later changes), `sections`, `compiler` (model, reasoning, prompt sha256), `validation`, `history`, `created_at`.
+Artifact carries: `level`, `topic_id`, `language_id`, `spec_hash`, `registry_version`, `misconception_id`, `traits` (the resolved flat dict, so the artifact is self-describing even if `levels.py` later changes), `sections`, `compiler` (model, reasoning, prompt sha256), `validation`, `history`, `created_at`.
 
 **Caching:** `spec_hash = sha256(resolved trait dict + topic entry + misconception entry + registry_version)`. Skip if the artifact exists *and* the hash matches. A **mismatch is a loud error, not a silent recompile** (`--force` to override) — silently recompiling mid-campaign would change the stimulus between cells and quietly invalidate the comparison. This is one notch stricter than the existence-only check in `evaluator.py`, and the asymmetry is deliberate: an evaluation is a measurement, a persona is a stimulus. It also means editing one level's bundle invalidates only that level's artifacts, not all four.
 
 **Changes to existing files:**
 
-- [config.py](../src/tutoring_check/simulation/config.py) — delete `STANDARD`/`STRUGGLING`/`ADVANCED`/`PERSONAS`. `SessionConfig` keeps `persona: str` as the field name (it is what run sets and existing transcript headers already say) but it now holds a level id, and the dataclass gains `persona_artifact: PersonaArtifact`. Validation of the id moves to `personas.levels`.
+- [config.py](../src/tutoring_check/simulation/config.py) — delete `STANDARD` / `STRUGGLING` / `ADVANCED` / `PERSONAS`. `SessionConfig.persona` becomes `SessionConfig.level`, and the dataclass gains `persona_artifact: PersonaArtifact`. Validation of the id moves to `personas.levels`.
 - [student.py](../src/tutoring_check/simulation/student.py) — delete `PERSONALITY`. `build_student_system_prompt` becomes fixed frame + `SECTION_ORDER` render of the artifact's sections. Keep the existing inline `#` comments on the surviving lines; they are the record of what has already failed.
 - [catalog.py](../src/tutoring_check/simulation/catalog.py) — `build_session_config` loads the compiled artifact for `(level, topic_id, language_id)` and raises with a message naming both the expected path and the known levels if it is missing. `Catalogs` gains a misconceptions entry via the existing `_read`/`_index` idiom.
-- [session.py](../src/tutoring_check/simulation/session.py) — `session_start` header gains `persona_registry_version`, `persona_spec_hash`, `persona_traits`, `misconception_id`, all additive so [transcript.py](../src/tutoring_check/evaluation/transcript.py) keeps working (older transcripts under `runs/` have no `persona` key at all — read via `.get()`). `persona_traits` is what downstream analysis conditions on when a level definition later changes.
+- [session.py](../src/tutoring_check/simulation/session.py) — `session_start` header carries `level`, `persona_registry_version`, `persona_spec_hash`, `persona_traits`, `misconception_id`. `persona_traits` is what downstream analysis conditions on when a level definition later changes.
+- [run_set_dialogic.json](../data/run_set_dialogic.json), [run_set_probe.json](../data/run_set_probe.json) — rename each item's `persona` key to `level`.
 
 ---
 
 ## Part 5 — The four student levels
 
-**`student_level` is the study's only manipulated student factor.** Each level is a fixed, named bundle of all eight traits, defined once in `personas/levels.py` and versioned with the registry. A run-set item names a level; it cannot set a trait. That keeps the design at four cells per topic and keeps every comparison legible.
+**`level` is the study's only manipulated student factor.** Each level is a fixed, named bundle of all eight traits, defined once in `personas/levels.py` and versioned with the registry. A run-set item names a level; it cannot set a trait. That keeps the design at four cells per topic and keeps every comparison legible.
 
 | level | misconception | robustness | change rate | self-explanation | help-seeking | goal orientation | register | affect |
 |---|---|---|---|---|---|---|---|---|
@@ -251,12 +257,6 @@ The level table is one dict in `personas/levels.py` — changing the count is a 
 - **Drop to three** by removing `developing` (keeping the two ability extremes plus `reluctant`) if four cells × topics × tutor models is too many runs. Do not drop `reluctant`.
 - **Extend to five** with `overconfident` — fast change rate, `performance_approach`, expansive register, `intermediate` robustness — a student who claims understanding early and moves on with the wrong idea intact. This is the direct counterpart to the documented LLM-student failure of over-producing correct responses, and it is the natural next addition if four separates cleanly.
 
-### Backward compatibility
-
-Legacy `standard` maps to `developing`; `struggling` and `advanced` keep their ids. A `generic` level (no misconception, otherwise `developing`) is compiled once per language as the topic-independent fallback, so run sets that never name a persona — [run_set.json](../data/run_set.json), [run_set_contrast.json](../data/run_set_contrast.json) — keep loading on topics whose misconception library doesn't exist yet.
-
-**Consequence to be explicit about:** re-running an old run set after this change produces a *different student* than the transcripts already in `runs/`. That is inherent to replacing the personas, and it is why the artifact + `spec_hash` machinery exists — from here on, the stimulus is pinned and auditable, which it currently is not.
-
 ---
 
 ## File layout and CLI
@@ -265,7 +265,7 @@ New package `src/tutoring_check/personas/` — not files inside `simulation/`. T
 
 ```
 personas/
-  traits.py            registry: Trait, TraitLevel, TRAITS, trait_keys()
+  traits.py            registry: Trait, TraitValue, TRAITS, trait_keys()
   levels.py            LEVELS: the four named trait bundles + resolve(level, misconception)
   misconceptions.py    loader for data/misconceptions/*.json + `reviewed` gate
   artifact.py          PersonaArtifact, SECTION_ORDER, read/write, artifact_path(), spec_hash()
@@ -285,26 +285,26 @@ PYTHONPATH=src python -m tutoring_check.personas.cli \
   [--level struggling] [--force] [--dry-run] [--allow-unreviewed]
 ```
 
-`persona_set.json` mirrors `run_set.json` exactly — a `defaults` block merged under each `items` entry, per [`load_run_set`](../src/tutoring_check/simulation/catalog.py). `--dry-run` prints the compiler prompt and the expanded cell list with **no model call**; that is what you want most of the time while iterating on `consequence` wording, and it costs nothing.
+`persona_set.json` mirrors `run_set.json` — a `defaults` block merged under each `items` entry, per [`load_run_set`](../src/tutoring_check/simulation/catalog.py). `--dry-run` prints the compiler prompt and the expanded cell list with **no model call**; that is what you want most of the time while iterating on `consequence` wording, and it costs nothing.
 
 ---
 
 ## Verification
 
 1. `--dry-run` the compiler for `struggling__tree-mass__en-US` and read the assembled compiler prompt: the trait catalog renders from the registry, the misconception entry is embedded verbatim, and the writing rules are present.
-2. Compile all four personas for `tree-mass` / `en-US`. Confirm each artifact has `validation.status == "passed"`, and read `history` to see whether the revise loop fired and on which rule.
+2. Compile all four levels for `tree-mass` / `en-US`. Confirm each artifact has `validation.status == "passed"`, and read `history` to see whether the revise loop fired and on which rule.
 3. Deliberately break it: hand-edit an artifact so `how_you_respond_to_teaching` contains a quoted example and an `answer_giveaway_terms` term, re-run, and confirm `no_example_utterances` and `no_answer_leak` both fire and the loader refuses a `failed_validation` artifact. Then confirm the mirror case — the *same* term in `what_you_can_and_cannot_use` must **not** fire, or the exemption is wired wrong.
-4. Print the four assembled student system prompts and diff them against each other and against the current prompt. The fixed frame must be identical across all four; only the section content differs. Check specifically that `developing` and `reluctant` differ in *withholding*, not in *ability* — they share a conceptual-change rate, so any wording that makes `reluctant` read as slower is a level-definition bug.
-5. Run the existing probe set end to end — `PYTHONPATH=src python -m tutoring_check.cli --run-set data/run_set_probe.json --out runs/persona_mvp` — and confirm `session_start` carries `level`, `persona_traits`, `misconception_id` and `spec_hash`.
+4. Print the four assembled student system prompts and diff them against each other. The fixed frame must be identical across all four; only the section content differs. Check specifically that `developing` and `reluctant` differ in *withholding*, not in *ability* — they share a conceptual-change rate, so any wording that makes `reluctant` read as slower is a level-definition bug.
+5. Run the probe set end to end — `PYTHONPATH=src python -m tutoring_check.cli --run-set data/run_set_probe.json --out runs/persona_mvp` — and confirm `session_start` carries `level`, `persona_traits`, `misconception_id` and `spec_hash`.
 6. Read the transcripts, one per level. What to look for: does `struggling` hold the soil belief for most of the conversation and re-explain the tutor's counterexample in its own terms; does `advanced` drop it after one good explanation; does `reluctant` stay short and agreeable without ever committing to a claim it could be wrong about; do any turns open with the same two words; does any student turn use a term from its own "cannot use" list before the tutor introduced it.
-8. The design's own success criterion: a reader shown four unlabelled transcripts should be able to sort them by level. If `developing` and `reluctant` are indistinguishable, the trait `consequence` text is too weak, not the level table.
 7. Re-run the compile CLI unchanged and confirm every cell reports `skip (exists)`; then bump `registry_version` and confirm the hash mismatch raises rather than silently recompiling.
+8. **The design's own success criterion:** a reader shown four unlabelled transcripts should be able to sort them by level. If `developing` and `reluctant` are indistinguishable, the trait `consequence` text is too weak — that is not a reason to change the level table.
 
 ---
 
 ## Deferred / out of scope
 
-- **All realism measurement** — no metrics module, no student dialogue-act judge, no cross-persona separation statistics. When you do want it, the six realism dimensions from arXiv:2601.04025 are the taxonomy, and the cheap deterministic half (boundary leakage, utterance-length variance, opening n-gram concentration, misconception persistence) is computable from `transcript.jsonl` with no API cost.
+- **All realism measurement** — no metrics module, no student dialogue-act judge, no cross-level separation statistics. When you do want it, the six realism dimensions from arXiv:2601.04025 are the taxonomy, and the cheap deterministic half (boundary leakage, utterance-length variance, opening n-gram concentration, misconception persistence) is computable from `transcript.jsonl` with no API cost.
 - Remaining traits (`transfer_fragility`, `self_efficacy`, `metacognitive_calibration`, sociocultural traits) — the registry is designed to hold them, and adding one costs prompt tokens rather than study cells.
 - A fifth `overconfident` level, and any per-trait manipulation in run sets. If a later study needs to vary one trait while holding the rest fixed, that is a deliberate extension of `levels.py`, not something a run set should be able to do ad hoc.
 - Topics beyond `tree-mass`; the research procedure in `docs/misconception_library.md` is written to be re-run per topic.
@@ -315,10 +315,89 @@ PYTHONPATH=src python -m tutoring_check.personas.cli \
 ## Risks
 
 1. **Reasoning models see through the persona.** Every current run set uses `student_reasoning: "high"`. A reasoning model told to hold a false belief frequently reasons its way to the true answer in the trace and then leaks it. Test `low` / `none` early — I'd expect this to matter more than any prompt wording, and it is a one-line experiment.
-2. **The copying failure will recur in a new form.** Banning quoted examples stops literal copying; the model can still emit a template ("you start by saying you're not sure, then…") that the student turns into a formula. Nothing in this scope catches that automatically, since measurement is deferred — it needs eyes on the transcripts at step 6.
+2. **The copying failure will recur in a new form.** Banning quoted examples stops literal copying; the model can still emit a template ("you start by saying you're not sure, then…") that the student turns into a formula. Nothing in this scope catches that automatically, since measurement is deferred — it needs eyes on the transcripts at verification step 6.
 3. **Instruction-following ceiling — the real budget.** Levels cap the *study* at four cells, but they do not cap the *prompt*: every trait added to the registry lands in all four compiled prompts. Past roughly 800 tokens of persona instruction, models average everything toward a bland default, and the levels stop separating. Eight traits is already near the useful limit; adding a ninth should mean cutting something.
-8. **Level collapse.** Four bundles that differ on paper can still produce four similar transcripts, because the traits are not independent in the model's head — "avoidant + passive + terse" may just read as "struggling". Verification step 8 is the check; if it fails, the fix is sharper quantified `consequence` text (turn counts, sentence bands), not more traits.
-4. **Fabricated citations** in the misconception library. Stage 2's independent fetch-and-check pass is the mitigation; do not skip it, and do not let the researching agent verify its own sources.
-5. **[docs/simulation.md](simulation.md) §0.1 makes "identical student for every tutor" the design's foundation.** Varying the student is a deliberate reversal of the checked-in spec; comparability is preserved by pinning artifacts and holding the frame constant, but §0, §4 and the §8 checklist need rewriting as part of this work rather than being left stale.
-6. **[data/run_set.json](../data/run_set.json) is currently unloadable** — it declares `topics` + `pedagogy_sweep`, but `load_run_set` reads only `run_set["items"]`. Build only on the `items` path; a persona sweep expander written now would collide with whatever eventually restores the pedagogy sweep.
-7. There is **no test suite** (no `tests/`, no pytest dep). The V1 validators are pure functions over strings and are the natural place to introduce `pytest` under a `dev` extra — without it, a registry edit silently invalidates every compiled artifact and nothing notices.
+4. **Level collapse.** Four bundles that differ on paper can still produce four similar transcripts, because the traits are not independent in the model's head — "avoidant + passive + terse" may just read as "struggling". Verification step 8 is the check; if it fails, the fix is sharper quantified `consequence` text (turn counts, sentence bands), not more traits.
+5. **Fabricated citations** in the misconception library. Stage 2's independent fetch-and-check pass is the mitigation; do not skip it, and do not let the researching agent verify its own sources.
+6. **[docs/simulation.md](simulation.md) §0.1 makes "identical student for every tutor" the design's foundation.** Varying the student is a deliberate reversal of the checked-in spec; comparability is preserved by pinning artifacts and holding the frame constant, but §0, §4 and the §8 checklist need rewriting as part of this work rather than being left stale.
+7. **[data/run_set.json](../data/run_set.json) is currently unloadable** — it declares `topics` + `pedagogy_sweep`, but `load_run_set` reads only `run_set["items"]`. Build only on the `items` path; a persona sweep expander written now would collide with whatever eventually restores the pedagogy sweep.
+8. There is **no test suite** (no `tests/`, no pytest dep). The V1 validators are pure functions over strings and are the natural place to introduce `pytest` under a `dev` extra — without it, a registry edit silently invalidates every compiled artifact and nothing notices.
+
+---
+
+## References
+
+Author lists and titles for the three 2026 preprints were checked against their arXiv abstract pages. Page numbers for the two ACL 2026 papers should be filled in once the proceedings are final.
+
+### Architecture — the two papers the design is built on
+
+**Yuan, Z., Xiao, Y., Li, M., Xuan, W., Tong, R., Diab, M., & Mitchell, T. (2026). Towards Valid Student Simulation with Large Language Models.** arXiv:2601.05473 [cs.CL].
+*Used in:* the whole design's spine. Its **Epistemic State Specification** (E0–E4) is the frame for [Literature grounding](#literature-grounding) and the reason the work exists — the current prompt is E1, the target is E3. Its three E3+ criteria become concrete artifacts: *boundary of competence* → the `what_you_can_and_cannot_use` section and the `boundary_nonempty` validator; *fidelity of error* → `belief_present`; *epistemic consistency* → the compiler's requirement that every error trace back to a stated boundary. Its "simulating learning" facet grounds the `conceptual_change_rate` trait. Its **competence paradox** — broadly capable models struggle to emulate partially knowledgeable learners — is the mechanism behind Risk 1.
+
+**Scarlatos, A., Lee, J., Woodhead, S., & Lan, A. (2026). Simulated Students in Tutoring Dialogues: Substance or Illusion?** *Proceedings of ACL 2026* (64th Annual Meeting of the Association for Computational Linguistics). arXiv:2601.04025.
+*Used in:* the failure catalogue. Its six realism dimensions (dialogue acts, correctness, error-making, knowledge acquisition, language use, tutors' responses) are the deferred measurement taxonomy in [Deferred / out of scope](#deferred--out-of-scope). Three findings drive live design decisions: *response patterns uniform across students* → the entire level design and Risk 4 (level collapse); *formal grammar and punctuation unlike real students* → `register_and_verbosity`; *over-production of seek-information acts and correct responses* → the `overconfident` fifth level sketched in Part 5.
+
+### Misconception theory — Part 1, the library
+
+**Driver, R., & Easley, J. (1978). Pupils and paradigms: A review of literature related to concept development in adolescent science students.** *Studies in Science Education*, 5(1), 61–84.
+*Used in:* the term "alternative conceptions" and the premise that learners hold coherent non-scientific frameworks rather than simply lacking facts — why the library's `belief` field is written as a first-person position, not a deficit.
+
+**Driver, R., Squires, A., Rushworth, P., & Wood-Robinson, V. (1994). *Making Sense of Secondary Science: Research into Children's Ideas*.** London: Routledge.
+*Used in:* Stage 1 source priority. The reference work for what middle-school students actually believe about each topic, including the tree-mass and conservation-of-mass cases.
+
+**AAAS Project 2061 Science Assessment Website.** American Association for the Advancement of Science. https://assessment.aaas.org
+*Used in:* Stage 1 source priority, and the highest-value source type because its distractors are field-tested misconceptions with measured selection rates — the only source in the set that supplies prevalence rather than existence.
+
+**diSessa, A. A. (1993). Toward an epistemology of physics.** *Cognition and Instruction*, 10(2–3), 105–225.
+*Used in:* the `labile` value of `misconception_robustness`. Knowledge-in-pieces / p-prims — fragmented, context-cued intuitions that flip when the question is reframed. Also grounds the deferred `transfer_fragility` trait.
+
+**Chi, M. T. H. (2005). Commonsense conceptions of emergent processes: Why some misconceptions are robust.** *Journal of the Learning Sciences*, 14(2), 161–199.
+**Chi, M. T. H., Slotta, J. D., & de Leeuw, N. (1994). From things to processes: A theory of conceptual change for learning science concepts.** *Learning and Instruction*, 4(1), 27–43.
+*Used in:* the `robust` value of `misconception_robustness`, and the reason it is the design's key behavioral knob. Ontological miscategorization — filing a process under *substance* — predicts resistance to instruction, which is what the `robust` consequence text operationalizes as "you re-explain the counterexample in terms of the idea you already hold". For tree-mass specifically: matter miscategorized as necessarily solid, so a gas cannot be what a tree is made of.
+
+**Hestenes, D., Wells, M., & Swackhamer, G. (1992). Force Concept Inventory.** *The Physics Teacher*, 30(3), 141–158.
+*Used in:* Stage 1 source priority as the model for what a concept inventory supplies. Directly relevant when the library extends to the `gravity` topic.
+
+### Trait grounding — Part 2
+
+**Chi, M. T. H., & Wylie, R. (2014). The ICAP framework: Linking cognitive engagement to active learning outcomes.** *Educational Psychologist*, 49(4), 219–243.
+*Used in:* `self_explanation_propensity`. The passive / active / constructive ordering, and the prediction that each mode outlearns the one below it.
+
+**Chi, M. T. H., de Leeuw, N., Chiu, M.-H., & LaVancher, C. (1994). Eliciting self-explanations improves understanding.** *Cognitive Science*, 18(3), 439–477.
+*Used in:* `self_explanation_propensity`, specifically the finding of large individual differences in *spontaneous* self-explanation — which is what makes it a trait rather than a constant.
+
+**Chi, M. T. H., Siler, S. A., Jeong, H., Yamauchi, T., & Hausmann, R. G. (2001). Learning from human tutoring.** *Cognitive Science*, 25(4), 471–533.
+*Used in:* `register_and_verbosity`. The observation that tutors produce the overwhelming majority of words in real tutoring dialogue is why the default student is terse and why `expansive` is the marked case.
+
+**Aleven, V., Roll, I., McLaren, B. M., & Koedinger, K. R. (2016). Help helps, but only so much: Research on help seeking with intelligent tutoring systems.** *International Journal of Artificial Intelligence in Education*, 26(1), 205–223.
+**Aleven, V., McLaren, B., Roll, I., & Koedinger, K. (2006). Toward meta-cognitive tutoring: A model of help seeking with a Cognitive Tutor.** *IJAIED*, 16(2), 101–128.
+*Used in:* `help_seeking_style`. The adaptive/maladaptive taxonomy supplies all three values — `instrumental` (appropriate), `executive` ("just tell me the answer"), `avoidant` (help avoidance). `avoidant` is a defining trait of the `reluctant` level.
+
+**Baker, R. S., Corbett, A. T., Koedinger, K. R., & Wagner, A. Z. (2004). Off-task behavior in the Cognitive Tutor classroom: When students "game the system".** *Proceedings of CHI 2004*, 383–390.
+*Used in:* `help_seeking_style`, as the boundary case beyond `executive`. Gaming is *not* a value in the MVP set — a 20-turn dialogue has no system to exploit — but it is why the trait is framed as a strategy rather than a quantity.
+
+**D'Mello, S., & Graesser, A. (2012). Dynamics of affective states during complex learning.** *Learning and Instruction*, 22(2), 145–157.
+*Used in:* `affect_trajectory`. The engagement → confusion → frustration → boredom transition model is why the trait is written as a state machine with turn-count triggers rather than a static mood, and it supplies the `confusion_to_frustration` value directly.
+
+**Elliot, A. J., & McGregor, H. A. (2001). A 2×2 achievement goal framework.** *Journal of Personality and Social Psychology*, 80(3), 501–519.
+**Dweck, C. S. (1986). Motivational processes affecting learning.** *American Psychologist*, 41(10), 1040–1048.
+*Used in:* `goal_orientation`. Supplies `mastery` / `performance_approach` / `performance_avoidance`. The avoidance finding — helpless responses, avoiding tasks that risk visible failure — is the entire basis of the `reluctant` level, and the only construct in the set that produces silence or bluffing *instead of* an admission of confusion.
+
+### Method precedent — Part 3
+
+**Jiang, Y., Tan, F., Yin, X., Leng, J., & Zhou, A. (2026). HACHIMI: Scalable and Controllable Student Persona Generation via Orchestrated Agents.** *Proceedings of ACL 2026*. arXiv:2603.04855.
+*Used in:* the compiler pipeline shape — theory-anchored components assembled by a **propose → validate → revise** loop against executable constraints, which is what `personas/pipeline.py` and the V1 rule table implement. Note the deliberate divergence: HACHIMI generates a million personas with stratified sampling; this design generates four and treats them as a fixed experimental factor. Its caution that synthetic personas are not a substitute for real-student evidence is why realism measurement is deferred rather than dropped.
+
+### Consulted, not load-bearing
+
+**Macina, J., Daheim, N., Chowdhury, S. P., Sinha, T., Kapur, M., Gurevych, I., & Sachan, M. (2023). MathDial: A dialogue tutoring dataset with rich pedagogical properties grounded in math reasoning problems.** *Findings of EMNLP 2023*. arXiv:2305.14536.
+*Precedent for* grounding each dialogue in a specific incorrect student solution rather than generic confusion. Not cited in the design because its student conditioning is thinner than what ESS requires.
+
+**LLM-Based Educational Simulation: Evaluating Temporal Student Persona Stability Across ADHD Profiles.** arXiv:2605.06307. *(author list not verified)*
+*Used in:* the deferred per-turn anti-drift nudge. Its finding that scripted per-turn task prompts eliminate within-conversation persona drift is the argument for that item; its threat to comparability is the argument against making it a default.
+
+**Bandura, A. (1997). *Self-Efficacy: The Exercise of Control*.** New York: W. H. Freeman.
+*Reserved for* the deferred `self_efficacy` trait.
+
+**García, O., & Wei, L. (2014). *Translanguaging: Language, Bilingualism and Education*.** Basingstoke: Palgrave Macmillan.
+*Reserved for* the deferred `medium_of_instruction` / `classroom_norms` traits, which would connect to the existing `code_mixed` vs `monolingual` modes in the translations pipeline.
