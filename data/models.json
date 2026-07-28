@@ -18,22 +18,83 @@
     {
       "id": "gemini-2.5-flash",
       "label": "Google Gemini 2.5 Flash",
-      "litellm_model": "gemini/gemini-2.5-flash"
+      "litellm_model": "vertex_ai/gemini-2.5-flash"
     },
     {
       "id": "gemini-2.5-pro",
       "label": "Google Gemini 2.5 Pro",
-      "litellm_model": "gemini/gemini-2.5-pro"
+      "litellm_model": "vertex_ai/gemini-2.5-pro"
     },
     {
       "id": "gemini-3.5-flash",
       "label": "Google Gemini 3.5 Flash",
-      "litellm_model": "gemini/gemini-3.5-flash"
+      "litellm_model": "vertex_ai/gemini-3.5-flash"
     },
     {
       "id": "gemini-3.1-pro-preview",
       "label": "Google Gemini 3.1 Pro Preview",
-      "litellm_model": "gemini/gemini-3.1-pro-preview"
+      "litellm_model": "vertex_ai/gemini-3.1-pro-preview"
+    },
+    {
+      "id": "claude-opus-4-8",
+      "label": "Anthropic Claude Opus 4.8",
+      "litellm_model": "vertex_ai/claude-opus-4-8"
+    },
+    {
+      "id": "claude-sonnet-5",
+      "label": "Anthropic Claude Sonnet 5",
+      "litellm_model": "vertex_ai/claude-sonnet-5"
+    },
+    {
+      "id": "llama-4-maverick",
+      "label": "Meta Llama 4 Maverick 17B 128E Instruct",
+      "litellm_model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "litellm_params": { "vertex_location": "us-east5" }
+    },
+    {
+      "id": "grok-4.3",
+      "label": "xAI Grok 4.3",
+      "litellm_model": "openai/xai/grok-4.3",
+      "litellm_params": {
+        "api_base": "https://aiplatform.googleapis.com/v1/projects/${VERTEXAI_PROJECT}/locations/global/endpoints/openapi",
+        "api_key": "@adc-token"
+      }
+    },
+    {
+      "id": "grok-4.20-reasoning",
+      "label": "xAI Grok 4.20 (reasoning)",
+      "litellm_model": "openai/xai/grok-4.20-reasoning",
+      "litellm_params": {
+        "api_base": "https://aiplatform.googleapis.com/v1/projects/${VERTEXAI_PROJECT}/locations/global/endpoints/openapi",
+        "api_key": "@adc-token"
+      }
+    },
+    {
+      "id": "grok-4.20-non-reasoning",
+      "label": "xAI Grok 4.20 (non-reasoning)",
+      "litellm_model": "openai/xai/grok-4.20-non-reasoning",
+      "litellm_params": {
+        "api_base": "https://aiplatform.googleapis.com/v1/projects/${VERTEXAI_PROJECT}/locations/global/endpoints/openapi",
+        "api_key": "@adc-token"
+      }
+    },
+    {
+      "id": "grok-4.1-fast-reasoning",
+      "label": "xAI Grok 4.1 Fast (reasoning)",
+      "litellm_model": "openai/xai/grok-4.1-fast-reasoning",
+      "litellm_params": {
+        "api_base": "https://aiplatform.googleapis.com/v1/projects/${VERTEXAI_PROJECT}/locations/global/endpoints/openapi",
+        "api_key": "@adc-token"
+      }
+    },
+    {
+      "id": "grok-4.1-fast-non-reasoning",
+      "label": "xAI Grok 4.1 Fast (non-reasoning)",
+      "litellm_model": "openai/xai/grok-4.1-fast-non-reasoning",
+      "litellm_params": {
+        "api_base": "https://aiplatform.googleapis.com/v1/projects/${VERTEXAI_PROJECT}/locations/global/endpoints/openapi",
+        "api_key": "@adc-token"
+      }
     }
   ]
 }

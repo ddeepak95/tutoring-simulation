@@ -14,19 +14,28 @@ from tutoring_check.simulation.config import SessionConfig
 from tutoring_check.simulation.student import build_student_system_prompt
 from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.vertex_auth import with_adc_token
 
 
 TURNS_PER_SPEAKER = 10
 
 
-def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None = None) -> dict:
+def _completion_kwargs(
+    model: str,
+    messages: list[dict],
+    reasoning: str | None = None,
+    params: dict | None = None,
+) -> dict:
     """Assemble litellm kwargs; the provider's default sampling applies.
     When reasoning is set it becomes litellm's unified reasoning_effort ("low"/"medium"/"high",
     plus "none"/"disable" where the provider supports it); unset leaves the provider default.
+    `params` carries the model's own litellm kwargs from models.json (e.g. vertex_location).
     """
     kwargs: dict = {"model": model, "messages": messages}
     if reasoning:
         kwargs["reasoning_effort"] = reasoning
+    if params:
+        kwargs.update(params)
     return kwargs
 
 
@@ -61,7 +70,11 @@ async def _acompletion_with_metrics(kwargs: dict, concurrency: int) -> tuple[Any
     `concurrency` is the number of sessions sharing the event loop for this run; it is
     recorded with each call because at >1 the loop can suspend this coroutine between
     chunks, inflating latency_s. It is context for interpreting latency, not a measurement.
+
+    The ADC sentinel is swapped for a live token here, i.e. after the caller has logged
+    `kwargs`, so the credential never reaches `api_requests.jsonl`.
     """
+    kwargs = with_adc_token(kwargs)
     # perf_counter drives the durations (monotonic); wall-clock ISO stamps are for auditing only.
     start_ts = utc_now()
     start = time.perf_counter()
@@ -100,6 +113,8 @@ async def run_session(
     output_root: Path,
     tutor_reasoning: str | None = None,
     student_reasoning: str | None = None,
+    tutor_model_params: dict | None = None,
+    student_model_params: dict | None = None,
     concurrency: int = 1,
 ) -> Path:
     out_dir = output_root
@@ -147,7 +162,7 @@ async def run_session(
     # The conversation is a fixed TURNS_PER_SPEAKER iterations long.
     for step in range(TURNS_PER_SPEAKER):
         # Tutor turn
-        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning)
+        tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning, tutor_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
         tutor_response, tutor_text, tutor_metrics = await _acompletion_with_metrics(tutor_request, concurrency)
         logger.log_api_response(
@@ -162,7 +177,7 @@ async def run_session(
 
         # Student turn
         student_messages = [{"role": "system", "content": student_static}] + student_turns
-        student_request = _completion_kwargs(student_model, student_messages, student_reasoning)
+        student_request = _completion_kwargs(student_model, student_messages, student_reasoning, student_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
         student_response, student_text, student_metrics = await _acompletion_with_metrics(student_request, concurrency)
         logger.log_api_response(

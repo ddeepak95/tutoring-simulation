@@ -17,20 +17,25 @@ from tutoring_check.evaluation import instruction_annotator
 from tutoring_check.evaluation.dimensions import dimension_keys, scale_keys
 from tutoring_check.evaluation.transcript import Transcript, Turn, load_transcript
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.vertex_auth import with_adc_token
 
 
-def _completion_kwargs(model: str, messages: list[dict], reasoning: str | None = None) -> dict:
+def _completion_kwargs(
+    model: str, messages: list[dict], reasoning: str | None = None, params: dict | None = None
+) -> dict:
     """Assemble litellm kwargs with the annotator's structured-output schema.
 
     When reasoning is set it becomes litellm's unified reasoning_effort ("low"/"medium"/"high");
     the model's reasoning trace is then returned on the response and captured in the responses log.
     Vertex Claude models are the exception: litellm renders reasoning_effort as `thinking.type.enabled`,
     which those models reject alongside a response_format, so the effort goes through `output_config`.
+    `params` carries the model's own litellm kwargs from models.json (e.g. vertex_location).
     """
     kwargs: dict = {
         "model": model,
         "messages": messages,
         "response_format": instruction_annotator.response_format(),
+        **(params or {}),
     }
     if reasoning:
         if model.startswith("vertex_ai/claude"):
@@ -48,7 +53,12 @@ def _presence_vector(moves: list[str]) -> list[int]:
 
 
 async def _annotate_turn(
-    model: str, transcript: Transcript, turn: Turn, logger: JsonlLogger, reasoning: str | None = None
+    model: str,
+    transcript: Transcript,
+    turn: Turn,
+    logger: JsonlLogger,
+    reasoning: str | None = None,
+    params: dict | None = None,
 ) -> tuple[list[int], list[int]]:
     """Annotate `turn`: log the raw call and return its 0/1 move vector and its per-scale rating vector.
 
@@ -61,9 +71,9 @@ async def _annotate_turn(
         {"role": "system", "content": instruction_annotator.build_system_prompt()},
         {"role": "user", "content": instruction_annotator.mark_dialogue(transcript, turn.turn_id)},
     ]
-    request = _completion_kwargs(model, messages, reasoning)
+    request = _completion_kwargs(model, messages, reasoning, params)
     logger.log_api_request({"timestamp": utc_now(), "turn_id": turn.turn_id, "payload": request})
-    response = await acompletion(**request)
+    response = await acompletion(**with_adc_token(request))
     logger.log_api_response(
         {"timestamp": utc_now(), "turn_id": turn.turn_id, "raw_response": serialize_response(response)}
     )
@@ -74,7 +84,11 @@ async def _annotate_turn(
 
 
 async def evaluate_transcript(
-    transcript_path: Path, *, annotator_model: str, annotator_reasoning: str | None = None
+    transcript_path: Path,
+    *,
+    annotator_model: str,
+    annotator_reasoning: str | None = None,
+    annotator_model_params: dict | None = None,
 ) -> Path | None:
     """Evaluate one conversation, writing move tags alongside its `transcript.jsonl`; resume-safe.
 
@@ -119,7 +133,7 @@ async def evaluate_transcript(
     totals = [0] * len(keys)
     for turn in transcript.tutor_turns():
         vector, scale_values = await _annotate_turn(
-            annotator_model, transcript, turn, logger, annotator_reasoning
+            annotator_model, transcript, turn, logger, annotator_reasoning, annotator_model_params
         )
         totals = [t + v for t, v in zip(totals, vector)]
         logger.log_transcript(
