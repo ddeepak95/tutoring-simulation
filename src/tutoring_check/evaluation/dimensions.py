@@ -1,9 +1,11 @@
-"""The tutoring-move dimensions the evaluator counts on each tutor turn.
+"""The tutoring dimensions the evaluator scores on each tutor turn.
 
-Each dimension names one countable leaf move; leaves are grouped under a parent category (evaluation.md "Dimensions").
-The evaluator counts how many instances of each leaf dimension a tutor turn contains.
+Most dimensions name one countable leaf move, present or absent; leaves are grouped under a parent
+category (evaluation.md "Dimensions").
+Affective support is the exception: a turn always has some tone, so it is a 1-5 rating from neutral to
+positive rather than a move that is present or absent.
 
-This module is the single source of truth for the move vocabulary.
+This module is the single source of truth for the dimension vocabulary.
 """
 from __future__ import annotations
 
@@ -37,8 +39,8 @@ class Dimension:
 
 DIMENSIONS: tuple[Dimension, ...] = (
     Dimension(
-        key="comprehension_check",
-        name="Comprehension Check",
+        key="eliciting_knowledge",
+        name="Eliciting Knowledge",
         category="Checking Understanding",
         criteria=(
             "Tutor asks a question that surfaces what the student knows or believes, "
@@ -71,7 +73,7 @@ DIMENSIONS: tuple[Dimension, ...] = (
     ),
     Dimension(
         key="eliciting_application",
-        name="Eliciting Application of Knowledge",
+        name="Eliciting Real-World Application of Knowledge",
         category="Checking Understanding",
         criteria=(
             "Tutor asks the student to apply a concept or transfer it to a new context or example."
@@ -88,12 +90,58 @@ DIMENSIONS: tuple[Dimension, ...] = (
         ),
     ),
     Dimension(
+        key="follow_up_probing",
+        name="Follow-up Probing",
+        category="Checking Understanding",
+        criteria=(
+            "Tutor asks a question that goes deeper on the student's immediately preceding answer — a "
+            "natural next question that presses further on what the student just said, rather than "
+            "opening a new thread."
+        ),
+        examples=(
+            Example(
+                text="You said the ball falls because it's heavy — so what would happen if it weighed half as much?",
+                note="Presses directly on the claim the student just made.",
+            ),
+            Example(
+                text="Okay, and why do you think the air pushes back harder at higher speeds?",
+                note="Digs a layer deeper into the reason the student just gave.",
+            ),
+        ),
+        non_examples=(
+            Example(
+                text="Let's move on — can you tell me what density means?",
+                note="Opens a new thread instead of going deeper on the last answer.",
+            ),
+        ),
+    ),
+    Dimension(
+        key="understanding_checkpoint",
+        name="Understanding Checkpoint",
+        category="Checking Understanding",
+        criteria=(
+            "Tutor asks the student to restate, summarize, or explain the concept back in their own "
+            "words to confirm they have it, rather than to reason toward a new answer."
+        ),
+        examples=(
+            Example(
+                text="Can you put in your own words why the two balls land at the same time?",
+                note="Asks the student to explain the concept back to confirm understanding.",
+            ),
+            Example(
+                text="Before we go on, how would you summarize what we just figured out?",
+                note="A checkpoint asking the student to summarize the concept.",
+            ),
+        ),
+    ),
+    Dimension(
         key="hinting",
         name="Hinting",
         category="Scaffolding",
         criteria=(
             "Tutor gives partial guidance — a directional nudge or draws attention to a feature — "
-            "that helps the student take the next step without solving it for them."
+            "that helps the student take the next step without solving it for them. Usually phrased as "
+            "a question that points the student toward the next step."
         ),
         examples=(
             Example(
@@ -161,34 +209,6 @@ DIMENSIONS: tuple[Dimension, ...] = (
         ),
     ),
     Dimension(
-        key="positive_encouragement",
-        name="Positive Encouragement",
-        category="Affective Support",
-        criteria=(
-            "Tutor gives explicit positive affirmation of the student's thinking, effort, or progress."
-        ),
-        examples=(
-            Example(text="That's a strong connection!", note="Positive affirmation of their thinking."),
-            Example(
-                text="I can see how hard you've been working on this, and it's paying off.",
-                note="Acknowledging effort and progress.",
-            ),
-        ),
-    ),
-    Dimension(
-        key="neutral_acknowledgment",
-        name="Neutral Acknowledgment",
-        category="Affective Support",
-        criteria=(
-            "Tutor validates the student's emotional state or experience without cheerleading — "
-            "including acknowledging a misconception as common."
-        ),
-        examples=(
-            Example(text="I hear you — that part does feel confusing.", note="Validating the experience without cheerleading."),
-            Example(text="That's a very common thought.", note="Acknowledging their misconception."),
-        ),
-    ),
-    Dimension(
         key="cultural_regional_grounding",
         name="Cultural/Regional Grounding",
         category="Personalized Contextualization",
@@ -213,6 +233,62 @@ DIMENSIONS: tuple[Dimension, ...] = (
 DIMENSIONS_MAP: dict[str, Dimension] = {d.key: d for d in DIMENSIONS}
 
 
+@dataclass(frozen=True)
+class ScaleLevel:
+    """One point on an ordinal rating scale: its integer value and what that value means."""
+    value: int
+    descriptor: str
+
+
+@dataclass(frozen=True)
+class ScaleDimension:
+    """One dimension rated on an ordinal scale rather than tagged present or absent.
+
+    Every tutor turn gets exactly one `value` from `levels`; there is no "absent", since a turn always
+    carries some tone.
+    """
+    key: str
+    name: str
+    category: str
+    criteria: str
+    levels: tuple[ScaleLevel, ...]
+
+    def values(self) -> tuple[int, ...]:
+        """The allowed integer values, low to high."""
+        return tuple(level.value for level in self.levels)
+
+
+# Affective support, rated 1 (neutral) to 5 (strongly positive). This replaces the former
+# positive-encouragement and neutral-acknowledgment moves: warmth is a matter of degree, so a single
+# turn's tone is better placed on a scale than split across two present/absent tags.
+AFFECTIVE_TONE = ScaleDimension(
+    key="affective_tone",
+    name="Affective Tone",
+    category="Affective Support",
+    criteria=(
+        "How warm the tutor's tone is toward the student, from neutral and matter-of-fact to explicitly "
+        "positive and encouraging. Rate the affective coloring of the whole turn, not whether any "
+        "content was correct."
+    ),
+    levels=(
+        ScaleLevel(1, "Neutral: purely informational, no affective coloring."),
+        ScaleLevel(2, "Acknowledging: registers the student's state or names a misconception as common, without warmth."),
+        ScaleLevel(3, "Mildly encouraging: light, passing affirmation of the student."),
+        ScaleLevel(4, "Warm: clear affirmation of the student's thinking, effort, or progress."),
+        ScaleLevel(5, "Strongly positive: explicit praise or celebration of the student's effort or progress."),
+    ),
+)
+
+SCALES: tuple[ScaleDimension, ...] = (AFFECTIVE_TONE,)
+
+SCALES_MAP: dict[str, ScaleDimension] = {s.key: s for s in SCALES}
+
+
 def dimension_keys() -> tuple[str, ...]:
-    """The ordered dimension keys (the move vocabulary the evaluator counts)."""
+    """The ordered keys of the present/absent move dimensions the evaluator tags."""
     return tuple(d.key for d in DIMENSIONS)
+
+
+def scale_keys() -> tuple[str, ...]:
+    """The ordered keys of the ordinal scale dimensions the evaluator rates."""
+    return tuple(s.key for s in SCALES)

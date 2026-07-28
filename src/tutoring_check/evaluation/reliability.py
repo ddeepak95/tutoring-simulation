@@ -14,7 +14,7 @@ import random
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.evaluation.dimensions import dimension_keys
+from tutoring_check.evaluation.dimensions import dimension_keys, scale_keys
 
 # A single coded unit: one tutor turn of one conversation in one language.
 CodeKey = tuple[str, str, int]
@@ -71,27 +71,38 @@ def _percentile(values: list[float], q: float) -> float:
     return ordered[lo] + (ordered[hi] - ordered[lo]) * (pos - lo)
 
 
-def bootstrap_ci(
-    a: list[int], b: list[int], *, n_boot: int = 5000, seed: int = 0
+def _bootstrap_ci(
+    n: int, statistic, *, n_boot: int = 5000, seed: int = 0
 ) -> tuple[float | None, float | None]:
-    """Percentile bootstrap CI for Kappa, resampling turns with replacement.
+    """Percentile bootstrap CI for a statistic over `n` units, resampling unit indices with replacement.
 
     Preferred over the asymptotic standard error because these dimensions are heavily skewed and
     the normal approximation misbehaves there.
-    Resamples that land on a constant vector yield an undefined Kappa and are dropped, so a wide or
-    absent interval is itself a signal that the dimension is too rare to estimate.
+    Resamples on which the statistic is undefined are dropped, so a wide or absent interval is itself
+    a signal that the dimension is too rare to estimate.
     """
     rng = random.Random(seed)
-    n = len(a)
     draws: list[float] = []
     for _ in range(n_boot):
         idx = [rng.randrange(n) for _ in range(n)]
-        k = cohen_kappa([a[i] for i in idx], [b[i] for i in idx])
-        if k is not None:
-            draws.append(k)
+        value = statistic(idx)
+        if value is not None:
+            draws.append(value)
     if len(draws) < n_boot * 0.5:
         return None, None
     return _percentile(draws, 0.025), _percentile(draws, 0.975)
+
+
+def bootstrap_ci(
+    a: list[int], b: list[int], *, n_boot: int = 5000, seed: int = 0
+) -> tuple[float | None, float | None]:
+    """Percentile bootstrap CI for Cohen's Kappa, resampling turns with replacement."""
+    return _bootstrap_ci(
+        len(a),
+        lambda idx: cohen_kappa([a[i] for i in idx], [b[i] for i in idx]),
+        n_boot=n_boot,
+        seed=seed,
+    )
 
 
 def agreement(a: list[int], b: list[int], *, dimension: str, n_boot: int = 5000) -> Agreement:
@@ -120,6 +131,211 @@ def agreement(a: list[int], b: list[int], *, dimension: str, n_boot: int = 5000)
         pabak=2 * p_o - 1 if n else None,
         note=note,
     )
+
+
+@dataclass(frozen=True)
+class GroupAgreement:
+    """One dimension's agreement among three or more raters who all coded the same turns.
+
+    Cohen's Kappa is defined for two raters only, so a panel is summarised with Fleiss' Kappa, which
+    asks the same question of the whole panel instead of averaging pair coefficients that each rest on
+    a different marginal.
+    `kappa` is None when the statistic is undefined, which happens when the move is absent (or present)
+    on every turn for every rater; `note` then says so.
+    """
+    dimension: str
+    n: int
+    raters: int
+    kappa: float | None
+    ci_low: float | None
+    ci_high: float | None
+    unanimous: float
+    prevalence: float
+    note: str = ""
+
+
+def fleiss_kappa(vectors: list[list[int]]) -> float | None:
+    """Fleiss' Kappa for `m` raters coding the same `n` units on one binary dimension.
+
+    Returns None rather than 0.0 when chance agreement is total, since that case carries no
+    information about agreement instead of indicating agreement at chance.
+    """
+    m = len(vectors)
+    n = len(vectors[0]) if vectors else 0
+    if m < 2 or n == 0:
+        return None
+    positives = [sum(v[i] for v in vectors) for i in range(n)]
+    # Per-unit agreement: the share of rater pairs on a unit that assigned it the same code.
+    p_bar = sum(p * p + (m - p) * (m - p) - m for p in positives) / (n * m * (m - 1))
+    p_one = sum(positives) / (n * m)
+    p_e = p_one * p_one + (1 - p_one) * (1 - p_one)
+    if abs(1 - p_e) < 1e-12:
+        return None
+    return (p_bar - p_e) / (1 - p_e)
+
+
+def group_agreement(
+    vectors: list[list[int]], *, dimension: str, n_boot: int = 5000
+) -> GroupAgreement:
+    """Score one dimension across a panel of raters: Fleiss' Kappa with a bootstrap CI."""
+    m, n = len(vectors), len(vectors[0]) if vectors else 0
+    kappa = fleiss_kappa(vectors)
+    note = "" if kappa is not None else "undefined: chance agreement is total, the move is near-absent for every rater"
+    lo, hi = (
+        _bootstrap_ci(n, lambda idx: fleiss_kappa([[v[i] for i in idx] for v in vectors]), n_boot=n_boot)
+        if kappa is not None
+        else (None, None)
+    )
+    unanimous = sum(1 for i in range(n) if len({v[i] for v in vectors}) == 1) / n if n else 0.0
+    return GroupAgreement(
+        dimension=dimension,
+        n=n,
+        raters=m,
+        kappa=kappa,
+        ci_low=lo,
+        ci_high=hi,
+        unanimous=unanimous,
+        prevalence=sum(sum(v) for v in vectors) / (n * m) if n else 0.0,
+        note=note,
+    )
+
+
+def shared_keys(raters: dict[str, dict[CodeKey, list[int]]], *, language: str | None = None) -> list[CodeKey]:
+    """The turns every rater in the panel coded, optionally within one language.
+
+    A panel coefficient needs one common set of units, so a turn any rater skipped is dropped for all.
+    """
+    if not raters:
+        return []
+    shared = set.intersection(*(set(codes) for codes in raters.values()))
+    if language is not None:
+        shared = {k for k in shared if k[1] == language}
+    return sorted(shared)
+
+
+def compare_panel(
+    raters: dict[str, dict[CodeKey, list[int]]], *, language: str | None = None, n_boot: int = 5000
+) -> list[GroupAgreement]:
+    """Score every dimension across a whole panel over the turns all of them coded."""
+    keys = shared_keys(raters, language=language)
+    if not keys:
+        raise ValueError("no turns coded by every rater" + (f" for language {language}" if language else ""))
+    return [
+        group_agreement(
+            [[codes[k][i] for k in keys] for codes in raters.values()], dimension=dim, n_boot=n_boot
+        )
+        for i, dim in enumerate(dimension_keys())
+    ]
+
+
+def compare_pairs(
+    raters: dict[str, dict[CodeKey, list[int]]],
+    *,
+    language: str | None = None,
+    keys: list[CodeKey] | None = None,
+    n_boot: int = 5000,
+) -> dict[tuple[str, str], list[Agreement]]:
+    """Cohen's Kappa for every pair in the panel, in rater order.
+
+    Pass `keys` to hold every pair to one common unit set, which is what makes the pair coefficients
+    comparable with each other and with the panel's Fleiss' Kappa; leave it out to let each pair use
+    every turn the two of them share, which uses more data per pair but not the same data.
+    """
+    names = list(raters)
+    out: dict[tuple[str, str], list[Agreement]] = {}
+    for i, a in enumerate(names):
+        for b in names[i + 1 :]:
+            if keys is None:
+                out[(a, b)] = compare(raters[a], raters[b], language=language, n_boot=n_boot)
+            else:
+                subset_a = {k: raters[a][k] for k in keys}
+                subset_b = {k: raters[b][k] for k in keys}
+                out[(a, b)] = compare(subset_a, subset_b, n_boot=n_boot)
+    return out
+
+
+@dataclass(frozen=True)
+class ScaleAgreement:
+    """One ordinal scale's agreement across a panel of raters, by Krippendorff's alpha.
+
+    Cohen's Kappa treats a 1-vs-5 disagreement the same as 1-vs-2; on an interval scale that throws
+    away the spacing, so the affective rating is scored with Krippendorff's alpha under an interval
+    difference metric instead, which also takes any number of raters at once.
+    `alpha` is None when the statistic is undefined, which happens when every rating in the pool is
+    identical, so there is no expected disagreement to normalise by; `note` then says so.
+    """
+    dimension: str
+    n_units: int
+    raters: int
+    alpha: float | None
+    ci_low: float | None
+    ci_high: float | None
+    note: str = ""
+
+
+def krippendorff_alpha_interval(units: list[list[int]]) -> float | None:
+    """Krippendorff's alpha for ordinal ratings under an interval metric, δ²(a, b) = (a − b)².
+
+    `units` holds one list of ratings per unit — the ratings the raters who coded that unit gave it.
+    Units with fewer than two ratings carry no pairable information and are dropped. Returns None when
+    the expected disagreement is zero (every rating identical), where alpha is undefined.
+    """
+    pairable = [u for u in units if len(u) >= 2]
+    flat = [v for u in pairable for v in u]
+    n = len(flat)
+    if n < 2:
+        return None
+    # Observed: mean within-unit squared difference, each unit weighted by 1/(m_u − 1) per Krippendorff.
+    observed = sum(
+        sum((a - b) ** 2 for a in u for b in u) / (len(u) - 1) for u in pairable
+    )
+    # Expected: squared difference between every pair of ratings in the whole pool.
+    expected = sum((a - b) ** 2 for a in flat for b in flat) / (n - 1)
+    if abs(expected) < 1e-12:
+        return None
+    return 1 - observed / expected
+
+
+def scale_agreement(
+    raters: dict[str, dict[CodeKey, list[int]]],
+    *,
+    dimension_index: int,
+    dimension: str,
+    keys: list[CodeKey],
+    n_boot: int = 5000,
+) -> ScaleAgreement:
+    """Score one ordinal scale across the panel over `keys`: Krippendorff's alpha with a bootstrap CI.
+
+    The bootstrap resamples units (not ratings), so a unit's whole row of ratings moves together and the
+    interval is not narrowed by pretending the raters are independent.
+    """
+    units = [[raters[name][k][dimension_index] for name in raters] for k in keys]
+    alpha = krippendorff_alpha_interval(units)
+    note = "" if alpha is not None else "undefined: every rating identical, no expected disagreement to normalise by"
+    lo, hi = (
+        _bootstrap_ci(len(units), lambda idx: krippendorff_alpha_interval([units[i] for i in idx]), n_boot=n_boot)
+        if alpha is not None
+        else (None, None)
+    )
+    return ScaleAgreement(
+        dimension=dimension,
+        n_units=len(keys),
+        raters=len(raters),
+        alpha=alpha,
+        ci_low=lo,
+        ci_high=hi,
+        note=note,
+    )
+
+
+def compare_scales(
+    raters: dict[str, dict[CodeKey, list[int]]], *, keys: list[CodeKey], n_boot: int = 5000
+) -> list[ScaleAgreement]:
+    """Score every ordinal scale dimension across the panel over the shared `keys`."""
+    return [
+        scale_agreement(raters, dimension_index=i, dimension=key, keys=keys, n_boot=n_boot)
+        for i, key in enumerate(scale_keys())
+    ]
 
 
 def load_human_codes(path: Path) -> tuple[dict[CodeKey, list[int]], dict[CodeKey, str]]:
@@ -195,6 +411,36 @@ def load_judge_codes(runs_dir: Path) -> dict[CodeKey, list[int]]:
                 continue
             codes[(scenario, language, row["turn_id"])] = [1 if v > 0 else 0 for v in row["dimensions"]]
     return codes
+
+
+def load_judge_scales(runs_dir: Path) -> dict[CodeKey, list[int]]:
+    """Read every `evaluation_transcript*.jsonl` under `runs_dir` for its ordinal scale ratings.
+
+    Returns one integer vector over `scale_keys()` per turn, keyed like `load_judge_codes`.
+    Raises if a file was written under a stale scale vocabulary, which would misalign the columns.
+    """
+    keys = list(scale_keys())
+    scales: dict[CodeKey, list[int]] = {}
+    for path in sorted(runs_dir.rglob("evaluation_transcript*.jsonl")):
+        if path.name.endswith(("_requests.jsonl", "_responses.jsonl")):
+            continue
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        if not rows:
+            continue
+        header = rows[0]
+        if header.get("scales") != keys:
+            raise ValueError(
+                f"{path}: scale vocabulary {header.get('scales')} does not match "
+                f"the current {keys}; re-run the annotator on this file"
+            )
+        scenario = path.parent.parent.name
+        mode = header.get("mode")
+        language = f"{header['language']} ({mode})" if mode else header["language"]
+        for row in rows:
+            if "turn_id" not in row:
+                continue
+            scales[(scenario, language, row["turn_id"])] = list(row["scales"])
+    return scales
 
 
 def compare(
@@ -300,6 +546,44 @@ def format_matrix(cells: dict[str, list[Agreement]], *, title: str) -> str:
             row += (f"{k:+.2f}" if k is not None else "-").rjust(width)
         lines.append(row)
     lines.append(f"\n  n per cell: " + ", ".join(f"{n}={cells[n][0].n}" for n in names))
+    return "\n".join(lines)
+
+
+def format_group_table(results: list[GroupAgreement], *, title: str) -> str:
+    """Render a panel's Fleiss' Kappa per dimension, with unanimity and prevalence beside it.
+
+    `unanimous` is the share of turns on which every rater agreed, the panel counterpart of the
+    observed agreement reported for a pair.
+    """
+    lines = [
+        f"\n{title}  (n = {results[0].n} turns, {results[0].raters} raters)",
+        "-" * 78,
+        f"{'dimension':32s}{'fleiss':>7}{'95% CI':>16}{'unanim':>8}{'prev':>7}",
+        "-" * 78,
+    ]
+    for r in results:
+        ci = f"[{r.ci_low:+.2f},{r.ci_high:+.2f}]" if r.ci_low is not None else "-"
+        kappa = f"{r.kappa:+.2f}" if r.kappa is not None else "-"
+        lines.append(f"{r.dimension:32s}{kappa:>7}{ci:>16}{r.unanimous:>8.0%}{r.prevalence:>7.0%}")
+        if r.note:
+            lines.append(f"{'':32s}{r.note}")
+    return "\n".join(lines)
+
+
+def format_scale_table(results: list[ScaleAgreement], *, title: str) -> str:
+    """Render each ordinal scale's Krippendorff's alpha with its bootstrap CI."""
+    lines = [
+        f"\n{title}  (n = {results[0].n_units} turns, {results[0].raters} raters)",
+        "-" * 78,
+        f"{'dimension':32s}{'alpha':>7}{'95% CI':>16}",
+        "-" * 78,
+    ]
+    for r in results:
+        ci = f"[{r.ci_low:+.2f},{r.ci_high:+.2f}]" if r.ci_low is not None else "-"
+        alpha = f"{r.alpha:+.2f}" if r.alpha is not None else "-"
+        lines.append(f"{r.dimension:32s}{alpha:>7}{ci:>16}")
+        if r.note:
+            lines.append(f"{'':32s}{r.note}")
     return "\n".join(lines)
 
 

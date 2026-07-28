@@ -1,12 +1,15 @@
 """The Translate -> Evaluate -> Refine prompts, adapted from the paper
 (https://aclanthology.org/2025.findings-naacl.218.pdf), and the evaluator's verdict.
 
-The paper's prompts are kept intact except for two instructions added at each stage:
+The paper's prompts are kept intact except for three instructions added at each stage:
 
 - register: these are spoken tutoring conversations, so the target should read like
   everyday speech between a tutor and a student, not like a textbook translation.
 - mode: whether the subject matter is carried in English or in the target language,
   modelling an English-medium against a vernacular-medium student (see MODES).
+- localisation: culture-bound examples are re-grounded in the target language's own
+  context rather than carried over, so the conversation reads as one that could have
+  happened there (see LOCALIZATION_GUIDANCE).
 """
 from __future__ import annotations
 
@@ -24,7 +27,7 @@ REGISTER_GUIDANCE = """These are turns of a spoken tutoring conversation between
 - Use the everyday word a speaker would reach for in conversation rather than its formal or technical synonym, except for subject-matter terms that must stay precise.
 - Keep the natural markers of speech - fillers, hedges, discourse particles, tag questions, interjections, short fragments - rendering them with whatever plays the same role in spoken {target_lang} rather than translating them word for word.
 - Match each speaker's tone and level of politeness in the source, using the form of address a tutor and student of this familiarity would really use.
-- Keep it natural to say out loud: if a native speaker would not say it that way in conversation, rephrase it."""
+- Keep it natural to say out loud: if a native speaker would not say it that way in conversation, rephrase it. For the contextual examples, use an equivalent example that a speaker in the {target_lang} culture would use. """
 
 # The two translation modes, modelling the two kinds of student we want to compare.
 # Neither mode is "pure" target language: a vernacular-medium student learns the subject

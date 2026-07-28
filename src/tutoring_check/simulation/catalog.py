@@ -7,7 +7,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.config import PERSONAS, STANDARD, SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -71,6 +71,7 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
 
     `region_id` names the region the student is from (their profile); it may be set on any
     item and its default language is used when the item does not set `language_id`.
+    `persona` names the student persona; it defaults to the standard one.
     """
     topic_type = item["topic_type"]
     if topic_type == "context_independent":
@@ -85,6 +86,13 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
     if not language_id:
         raise KeyError(f"run-set item {item.get('id')!r} sets no language_id and its region has no default")
 
+    # Checked here so a typo fails when the run set loads, not partway into the campaign.
+    persona = item.get("persona", STANDARD)
+    if persona not in PERSONAS:
+        raise ValueError(
+            f"unknown persona {persona!r} in run-set item {item.get('id')!r}; known: {list(PERSONAS)}"
+        )
+
     return SessionConfig(
         scenario_id=item["topic_id"],
         context_dependent=topic_type == "context_dependent",
@@ -92,6 +100,7 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
         question=topic["question"],
         language=_language_name(cat, language_id),
         region=region["name"] if region else "",
+        persona=persona,
     )
 
 

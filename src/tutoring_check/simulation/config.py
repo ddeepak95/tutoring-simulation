@@ -6,6 +6,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+# The student personas, modelling the kinds of learner we want to compare.
+# All are middle schoolers who do not understand the concept at the start; they differ in how
+# readily they get there - the standard student follows an explanation and often lands on the
+# right idea, the struggling one has thin prior knowledge and needs several passes, the advanced
+# one gets there fast and pushes the teacher past the opening question. The Personality section
+# for each lives in `student.PERSONALITY`; the ids live here so a run-set item can name one.
+STANDARD = "standard"
+STRUGGLING = "struggling"
+ADVANCED = "advanced"
+PERSONAS = (STANDARD, STRUGGLING, ADVANCED)
+
 
 @dataclass
 class SessionConfig:
@@ -15,5 +26,6 @@ class SessionConfig:
     question: str                    # the question the student opens the conversation with
     language: str                    # language name, e.g. "English (US)"
     region: str = ""                 # the region the student is from (their profile), set from the run set
+    persona: str = STANDARD          # which student persona speaks, one of PERSONAS
     student_name: str = "Jamie"
     tutor_name: str = "Tutor"

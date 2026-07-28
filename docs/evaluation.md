@@ -67,21 +67,28 @@ Here is the header schema for `evaluation_transcript.jsonl`.
 
 ## Dimensions
 
-The dimensions are a set of countable tutor moves, organized as leaves under parent categories. The leaves (keyed in parentheses) are the move vocabulary. Each leaf lists the utterances that illustrate it — examples (that count) and, where useful, non-examples (near-misses that don't):
+Most dimensions are countable tutor moves, organized as leaves under parent categories. The leaves (keyed in parentheses) are the move vocabulary. Each leaf lists the utterances that illustrate it — examples (that count) and, where useful, non-examples (near-misses that don't). Affective Support is the exception: it is a 1–5 rating rather than a present/absent move (see below).
 
 1. Checking Understanding — questions that surface what the student knows or believes.
-   1.1 Comprehension Check (`comprehension_check`): probes recall of a definition or basic comprehension.
+   1.1 Eliciting Knowledge (`eliciting_knowledge`): probes recall of a definition or basic comprehension.
    - "What does 'velocity' mean?" — directly probing recall of a definition.
    - "Can you tell me what the variables mean in this equation?" — checking basic comprehension.
    - "How has the temperature changed?" — checking solving skills.
    1.2 Eliciting Reasoning/Justification (`eliciting_reasoning`): asks the student to justify or reason through a specific claim.
    - "Elaborating on the 'tusk-hunting cultures' you mentioned, how have elephants adapted?" — asking them to justify a specific claim.
    - "Why do you think the volume of the liquid expanded?" — probing the reasoning behind a claim made by the teacher or student.
-   1.3 Eliciting Application of Knowledge (`eliciting_application`): asks the student to apply or transfer a concept to a new context.
+   1.3 Eliciting Real-World Application of Knowledge (`eliciting_application`): asks the student to apply or transfer a concept to a new context.
    - "Can you give me an example of where you'd use the Pythagorean theorem in real life?" — asking them to apply a concept.
    - "Where else have you seen fractions show up outside of math class?" — prompting transfer to new contexts.
+   1.4 Follow-up Probing (`follow_up_probing`): asks a question that goes deeper on the student's immediately preceding answer rather than opening a new thread.
+   - "You said the ball falls because it's heavy — so what would happen if it weighed half as much?" — presses directly on the claim just made.
+   - "Okay, and why do you think the air pushes back harder at higher speeds?" — digs a layer deeper into the reason just given.
+   - [Doesn't count] "Let's move on — can you tell me what density means?" — opens a new thread instead of going deeper.
+   1.5 Understanding Checkpoint (`understanding_checkpoint`): asks the student to restate, summarize, or explain the concept back in their own words to confirm they have it.
+   - "Can you put in your own words why the two balls land at the same time?" — asks the student to explain the concept back.
+   - "Before we go on, how would you summarize what we just figured out?" — a checkpoint asking the student to summarize.
 2. Scaffolding — information or structure to help the student progress.
-   2.1 Hinting (`hinting`): partial guidance or a directional nudge that stops short of solving it.
+   2.1 Hinting (`hinting`): partial guidance or a directional nudge that stops short of solving it; usually phrased as a question that points the student toward the next step.
    - "Think about what happens to the equation if you move everything to one side." — directional nudge but doesn't solve it.
    - "For the next step, what do you notice about the two denominators?" — draws attention to a feature and prompts the next step.
    2.2 Explaining (`explaining`): direct instruction, elaboration, worked example, or analogy.
@@ -96,19 +103,18 @@ The dimensions are a set of countable tutor moves, organized as leaves under par
    - "What made you decide to use subtraction there?" — reflecting on a choice already made.
    - "Looking back, what would you do differently next time?" — reflecting on their own process after the fact.
    - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
-4. Affective Support — responding to the student's emotional or motivational state.
-   4.1 Positive Encouragement (`positive_encouragement`): explicit affirmation of the student's thinking, effort, or progress.
-   - "That's a strong connection!" — positive affirmation of their thinking.
-   - "I can see how hard you've been working on this, and it's paying off." — acknowledging effort and progress.
-   4.2 Neutral Acknowledgment (`neutral_acknowledgment`): validates the experience without cheerleading, including naming a misconception as common.
-   - "I hear you — that part does feel confusing." — validating the experience without cheerleading.
-   - "That's a very common thought." — acknowledging their misconception.
+4. Affective Support — how warm the tutor's tone is toward the student. Unlike the moves above, this is not present/absent: every tutor turn carries some tone, so it is rated on a 1–5 scale (`affective_tone`) from neutral to strongly positive.
+   - 1 = Neutral: purely informational, no affective coloring.
+   - 2 = Acknowledging: registers the student's state or names a misconception as common, without warmth.
+   - 3 = Mildly encouraging: light, passing affirmation of the student.
+   - 4 = Warm: clear affirmation of the student's thinking, effort, or progress.
+   - 5 = Strongly positive: explicit praise or celebration of the student's effort or progress.
 5. Personalized Contextualization — framing a concept using a scenario, context, or reference drawn from this specific student's known region, background, or interests.
    5.1 Cultural/Regional Grounding (`cultural_regional_grounding`): grounds the concept in the student's cultural or regional context.
    - "Imagine making 10 empanadas, and your friend ate 3 of them." — frames the problem around a food tied to the student's background.
    - "If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?" — tipping and tax norms vary by region, so this frames the problem around the student's regional context.
 
-A move is tagged only when its behavior, as described above, is exhibited on the turn. The moves are not mutually exclusive: a turn may carry several, but at most one instance of any given move.
+A move is tagged only when its behavior, as described above, is exhibited on the turn. The moves are not mutually exclusive: a turn may carry several, but at most one instance of any given move. Affective Support is always rated exactly once per turn on its 1–5 scale.
 
 
 ## The annotator

@@ -117,6 +117,7 @@ async def run_session(
             "scenario_type": "CD" if config.context_dependent else "CI",
             "region": config.region,
             "language": config.language,
+            "persona": config.persona,
             "tutor_model": tutor_model,
             "student_model": student_model,
             "tutor_reasoning": tutor_reasoning,

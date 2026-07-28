@@ -14,7 +14,7 @@ from typing import Any
 from litellm import acompletion
 
 from tutoring_check.evaluation import instruction_annotator
-from tutoring_check.evaluation.dimensions import dimension_keys
+from tutoring_check.evaluation.dimensions import dimension_keys, scale_keys
 from tutoring_check.evaluation.transcript import Transcript, Turn, load_transcript
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 
@@ -49,12 +49,13 @@ def _presence_vector(moves: list[str]) -> list[int]:
 
 async def _annotate_turn(
     model: str, transcript: Transcript, turn: Turn, logger: JsonlLogger, reasoning: str | None = None
-) -> list[int]:
-    """Ask the annotator which moves `turn` makes, log the raw call, and return the 0/1 presence vector.
+) -> tuple[list[int], list[int]]:
+    """Annotate `turn`: log the raw call and return its 0/1 move vector and its per-scale rating vector.
 
     The system message carries the fixed instructions; the user message is the whole dialogue with
     `turn` marked inside <target_turn> (evaluation.md "The annotators"). When `reasoning` is set the
     annotator model reasons before answering, and its reasoning trace is recorded in the responses log.
+    The scale vector holds one integer per `scale_keys()`, in that order.
     """
     messages = [
         {"role": "system", "content": instruction_annotator.build_system_prompt()},
@@ -67,8 +68,9 @@ async def _annotate_turn(
         {"timestamp": utc_now(), "turn_id": turn.turn_id, "raw_response": serialize_response(response)}
     )
     content = getattr(response.choices[0].message, "content", None) or "{}"
-    moves = json.loads(content).get("moves", [])
-    return _presence_vector(moves)
+    parsed = json.loads(content)
+    scales = [parsed[key] for key in scale_keys()]
+    return _presence_vector(parsed.get("moves", [])), scales
 
 
 async def evaluate_transcript(
@@ -93,8 +95,10 @@ async def evaluate_transcript(
     )
 
     keys = list(dimension_keys())
+    scales = list(scale_keys())
 
-    # Header (evaluation.md "Schema"). `dimensions` names each column of the per-turn vectors.
+    # Header (evaluation.md "Schema"). `dimensions` names each column of the per-turn move vectors;
+    # `scales` names each column of the per-turn ordinal ratings.
     logger.log_transcript(
         {
             "timestamp": utc_now(),
@@ -108,16 +112,22 @@ async def evaluate_transcript(
             "tutor_model": transcript.tutor_model,
             "transcript_path": str(transcript_path),
             "dimensions": keys,
+            "scales": scales,
         }
     )
 
     totals = [0] * len(keys)
     for turn in transcript.tutor_turns():
-        vector = await _annotate_turn(annotator_model, transcript, turn, logger, annotator_reasoning)
+        vector, scale_values = await _annotate_turn(
+            annotator_model, transcript, turn, logger, annotator_reasoning
+        )
         totals = [t + v for t, v in zip(totals, vector)]
-        logger.log_transcript({"timestamp": utc_now(), "turn_id": turn.turn_id, "dimensions": vector})
+        logger.log_transcript(
+            {"timestamp": utc_now(), "turn_id": turn.turn_id, "dimensions": vector, "scales": scale_values}
+        )
 
-    # Conversation total: each dimension's column (see header `dimensions`) summed over all tutor turns.
+    # Conversation total: each move dimension's column (see header `dimensions`) summed over all tutor turns.
+    # Scale ratings are ordinal, so they are not summed here; read them per turn.
     logger.log_transcript({"timestamp": utc_now(), "totals": totals})
 
     return out_dir
