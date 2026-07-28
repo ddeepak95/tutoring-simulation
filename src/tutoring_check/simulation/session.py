@@ -4,12 +4,14 @@ Tutor-first, alternating, for a fixed number of turns per speaker.
 from __future__ import annotations
 
 import time
+from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 import litellm
 from litellm import acompletion
 
+from tutoring_check.personas.traits import REGISTRY_VERSION
 from tutoring_check.simulation.config import SessionConfig
 from tutoring_check.simulation.student import build_student_system_prompt
 from tutoring_check.simulation.tutor import build_tutor_system_prompt
@@ -132,7 +134,16 @@ async def run_session(
             "scenario_type": "CD" if config.context_dependent else "CI",
             "region": config.region,
             "language": config.language,
-            "persona": config.persona,
+            # The student stimulus, recorded so a transcript stays interpretable after the level
+            # bundles in personas/levels.py move on: persona_traits is the resolved vector that
+            # actually produced this prompt. The prompt itself is logged below as
+            # student_static_prompt, which is the full record - the persona is rendered
+            # deterministically, so there is nothing else to pin.
+            "level": config.level,
+            "persona_registry_version": REGISTRY_VERSION,
+            "persona_traits": config.traits,
+            "misconception_id": config.misconception_id,
+            "student_profile": asdict(config.student) if config.student else None,
             "tutor_model": tutor_model,
             "student_model": student_model,
             "tutor_reasoning": tutor_reasoning,

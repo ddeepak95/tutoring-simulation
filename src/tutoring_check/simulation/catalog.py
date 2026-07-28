@@ -8,7 +8,11 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from tutoring_check.simulation.config import PERSONAS, STANDARD, SessionConfig
+from tutoring_check.personas.levels import level_names, resolve
+from tutoring_check.personas.misconceptions import load_topic
+from tutoring_check.personas.profile import StudentProfile
+from tutoring_check.personas.render import build_sections
+from tutoring_check.simulation.config import SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -20,6 +24,7 @@ class Catalogs:
     topics_ci: dict[str, dict]          # context-independent topic id -> topic
     topics_cd: dict[str, dict]          # context-dependent topic id -> topic
     regions: dict[str, dict]            # region id -> {name, language_id}
+    students: dict[str, dict]           # student id -> {name, age, grade, speaks}
 
 
 @dataclass
@@ -51,6 +56,7 @@ def load_catalogs(data_dir: Path | None = None) -> Catalogs:
         topics_ci=_index(_read("topics_ci.json", "topics")),
         topics_cd=_index(_read("topics_cd.json", "topics")),
         regions=_index(_read("regions.json", "regions")),
+        students=_index(_read("students.json", "students")),
     )
 
 
@@ -100,7 +106,8 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
 
     `region_id` names the region the student is from (their profile); it may be set on any
     item and its default language is used when the item does not set `language_id`.
-    `persona` names the student persona; it defaults to the standard one.
+    `level` names the student level, whose compiled persona is loaded from disk here so a
+    missing or unvalidated one fails when the run set loads, not partway into the campaign.
     """
     topic_type = item["topic_type"]
     if topic_type == "context_independent":
@@ -115,21 +122,47 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
     if not language_id:
         raise KeyError(f"run-set item {item.get('id')!r} sets no language_id and its region has no default")
 
-    # Checked here so a typo fails when the run set loads, not partway into the campaign.
-    persona = item.get("persona", STANDARD)
-    if persona not in PERSONAS:
+    # Resolved here so a typo or a missing misconception library fails when the run set loads
+    # rather than partway into the campaign.
+    level = item.get("level")
+    if level not in level_names():
         raise ValueError(
-            f"unknown persona {persona!r} in run-set item {item.get('id')!r}; known: {list(PERSONAS)}"
+            f"unknown level {level!r} in run-set item {item.get('id')!r}; known: {list(level_names())}"
         )
+    if topic_type == "context_dependent":
+        raise ValueError(
+            f"run-set item {item.get('id')!r} names a context-dependent topic. On those the student "
+            "is the expert on their own culture, so a misconception-structured persona does not apply."
+        )
+
+    traits = resolve(level)
+    library = load_topic(item["topic_id"])
+    language_name = _language_name(cat, language_id)
+
+    # The profile is who the student is; the level is how they learn. Both are named by the run set,
+    # and holding one fixed while varying the other is what makes either comparison mean anything.
+    student_id = item.get("student_id")
+    if not student_id:
+        raise KeyError(
+            f"run-set item {item.get('id')!r} sets no student_id; known: {sorted(cat.students)}"
+        )
+    profile = StudentProfile.from_row(
+        _lookup(cat.students, student_id, "student_id"),
+        region=region["name"] if region else "",
+    )
 
     return SessionConfig(
         scenario_id=item["topic_id"],
-        context_dependent=topic_type == "context_dependent",
+        context_dependent=False,
         topic=topic["topic"],
         question=topic["question"],
-        language=_language_name(cat, language_id),
+        language=language_name,
+        level=level,
+        persona_sections=build_sections(level, library, profile, language_name, language_id),
+        traits=traits,
+        misconception_id=library.primary.id,
         region=region["name"] if region else "",
-        persona=persona,
+        student=profile,
     )
 
 

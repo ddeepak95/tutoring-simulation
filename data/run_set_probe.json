@@ -1,16 +1,36 @@
 {
-  "_comment": "Temporary probe set: tree-mass, advanced vs struggling, 5 repeats each, for the student-prompt persona-cap check. Reasoning off on both roles.",
+  "_comment": "Probe set: tree-mass, 5 repeats per student level, for checking that the four levels actually separate. Reasoning off on both roles - a reasoning student told to hold a false belief tends to reason its way to the true answer and then leak it. Personas are rendered deterministically from personas/levels.py and data/misconceptions/tree-mass.json; nothing needs compiling first.",
   "defaults": {
     "topic_type": "context_independent",
     "region_id": "china",
+    "student_id": "wei",
     "language_id": "en-US",
     "tutor_model_id": "gemini-3.5-flash",
     "student_model_id": "gemini-3.1-pro-preview",
     "tutor_reasoning": "none",
-    "student_reasoning": "none"
+    "student_reasoning": "none",
+    "repeats": 5
   },
   "items": [
-    { "id": "tree-mass-advanced", "topic_id": "tree-mass", "persona": "advanced", "repeats": 5 },
-    { "id": "tree-mass-struggling", "topic_id": "tree-mass", "persona": "struggling", "repeats": 5 }
+    {
+      "id": "tree-mass-struggling",
+      "topic_id": "tree-mass",
+      "level": "struggling"
+    },
+    {
+      "id": "tree-mass-developing",
+      "topic_id": "tree-mass",
+      "level": "developing"
+    },
+    {
+      "id": "tree-mass-advanced",
+      "topic_id": "tree-mass",
+      "level": "advanced"
+    },
+    {
+      "id": "tree-mass-reluctant",
+      "topic_id": "tree-mass",
+      "level": "reluctant"
+    }
   ]
 }

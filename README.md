@@ -110,6 +110,34 @@ Troubleshooting:
 - 404 `Publisher model … was not found` — usually `VERTEXAI_LOCATION` is not `global`; otherwise the
   model name in `data/models.json` is not offered on Vertex.
 
+## Student personas
+
+Each run-set item names a `level` (`struggling` | `developing` | `advanced` | `reluctant`). The
+student prompt for that level is assembled **deterministically** from a literature-grounded trait
+registry (`src/tutoring_check/personas/traits.py`) plus the topic's documented misconception
+(`data/misconceptions/<topic_id>.json`). There is no compile step and no model call — the prompt is
+a pure function of (level, topic, language), so the same cell produces the same bytes every time.
+
+Design: [docs/student_personas.md](docs/student_personas.md). Authoring a misconception library for
+a new topic: [docs/misconception_library.md](docs/misconception_library.md).
+
+```bash
+# from project root — see exactly what a run will send
+PYTHONPATH=src python -m tutoring_check.personas.cli show --topic tree-mass --level struggling
+PYTHONPATH=src python -m tutoring_check.personas.cli show --topic tree-mass --sections-only
+
+# check the misconception library, the trait registry, and every rendered level
+PYTHONPATH=src python -m tutoring_check.personas.cli lint --topic tree-mass
+```
+
+Neither command writes anything or calls a model. Useful flags: `--language <id>`, `--level <name>`.
+
+A topic with no misconception library cannot be run — there is no fallback persona, by design.
+`build_session_config` fails when the run set loads, naming the file to author.
+
+To change the study design, edit `personas/levels.py`. To change how a level behaves, edit the
+`prose` fields in `personas/traits.py` — that text reaches the student verbatim.
+
 ## Run simulation
 
 The run-set in `data/run_set.json` declares `defaults` (models, reasoning, language, `repeats`), a list of `topics`, and a `pedagogy_sweep`. `load_run_set` expands the

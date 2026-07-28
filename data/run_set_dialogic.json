@@ -1,8 +1,9 @@
 {
-  "_comment": "Dialogic tutor run set: one conversation per topic, no repeats. The tutor prompt exhibits the pedagogical strategies without assigned levels. `defaults` are merged under every item; `region_id` sets the region the student is from (their profile), fed to both the student and tutor prompts. `persona` picks the student persona (standard | struggling | advanced), default standard.",
+  "_comment": "Dialogic tutor run set: one conversation per student level, no repeats. The tutor prompt exhibits the pedagogical strategies without assigned levels. `defaults` are merged under every item; `region_id` sets the region the student is from (their profile), fed to both the student and tutor prompts. `level` picks the student level (struggling | developing | advanced | reluctant); its persona is rendered deterministically at load time, so nothing needs compiling first.",
   "defaults": {
     "topic_type": "context_independent",
     "region_id": "china",
+    "student_id": "wei",
     "language_id": "en-US",
     "tutor_model_id": "gemini-3.5-flash",
     "student_model_id": "gemini-3.1-pro-preview",
@@ -10,8 +11,25 @@
     "student_reasoning": "none"
   },
   "items": [
-    { "id": "tree-mass-en-advanced", "topic_id": "tree-mass", "persona": "advanced" },
-    { "id": "tree-mass-en-standard", "topic_id": "tree-mass", "persona": "standard" },
-    { "id": "tree-mass-en-struggling", "topic_id": "tree-mass", "persona": "struggling" }
+    {
+      "id": "tree-mass-en-struggling",
+      "topic_id": "tree-mass",
+      "level": "struggling"
+    },
+    {
+      "id": "tree-mass-en-developing",
+      "topic_id": "tree-mass",
+      "level": "developing"
+    },
+    {
+      "id": "tree-mass-en-advanced",
+      "topic_id": "tree-mass",
+      "level": "advanced"
+    },
+    {
+      "id": "tree-mass-en-reluctant",
+      "topic_id": "tree-mass",
+      "level": "reluctant"
+    }
   ]
 }
