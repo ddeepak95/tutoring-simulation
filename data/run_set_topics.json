@@ -1,0 +1,304 @@
+{
+  "_comment": "Topic sweep. Three topics x four tutors x three languages, 36 cells, one run each, 15 turns per speaker (30 messages). Level is `struggling` throughout - `robust` belief plus `slow` change rate is the level where a tutor has to actually work, where `advanced` gets there almost regardless of who is teaching. Companion to run_set_tutors.json, which is the same design on tree-mass.",
+  "_comment_student": "English and Tamil use `arun`; Mandarin uses `li`, because arun's `speaks` names Tamil and English and the prompt would otherwise order him to write in a language it also says he lacks. `li` is pinned to arun's age and grade, so the swap costs only name, home language and region. The Mandarin cells are therefore not a pure language contrast.",
+  "_comment_reasoning": "`tutor_reasoning` is null because three of the four tutors reject the parameter outright (llama-4-maverick and grok-4.3 raise UnsupportedParamsError; claude-sonnet-5 errors inside litellm). gemini-3.5-flash would accept it but is left null too, so no cell differs in a second way. No cell here is a no-reasoning run - see `reasoning_tokens_spent` in session_end.",
+  "defaults": {
+    "topic_type": "context_independent",
+    "level": "struggling",
+    "student_model_id": "gemini-3.1-pro-preview",
+    "tutor_reasoning": null,
+    "student_reasoning": "none",
+    "repeats": 1,
+    "turns_per_speaker": 15
+  },
+  "items": [
+    {
+      "id": "gravity-maverick-en",
+      "topic_id": "gravity",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-maverick-ta",
+      "topic_id": "gravity",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-maverick-zh",
+      "topic_id": "gravity",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "gravity-sonnet-en",
+      "topic_id": "gravity",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-sonnet-ta",
+      "topic_id": "gravity",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-sonnet-zh",
+      "topic_id": "gravity",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "gravity-grok-en",
+      "topic_id": "gravity",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-grok-ta",
+      "topic_id": "gravity",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-grok-zh",
+      "topic_id": "gravity",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "gravity-gemini-en",
+      "topic_id": "gravity",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-gemini-ta",
+      "topic_id": "gravity",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "gravity-gemini-zh",
+      "topic_id": "gravity",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "speed-maverick-en",
+      "topic_id": "speed",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-maverick-ta",
+      "topic_id": "speed",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-maverick-zh",
+      "topic_id": "speed",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "speed-sonnet-en",
+      "topic_id": "speed",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-sonnet-ta",
+      "topic_id": "speed",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-sonnet-zh",
+      "topic_id": "speed",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "speed-grok-en",
+      "topic_id": "speed",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-grok-ta",
+      "topic_id": "speed",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-grok-zh",
+      "topic_id": "speed",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "speed-gemini-en",
+      "topic_id": "speed",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-gemini-ta",
+      "topic_id": "speed",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "speed-gemini-zh",
+      "topic_id": "speed",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "rust-maverick-en",
+      "topic_id": "rust",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-maverick-ta",
+      "topic_id": "rust",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-maverick-zh",
+      "topic_id": "rust",
+      "tutor_model_id": "llama-4-maverick",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "rust-sonnet-en",
+      "topic_id": "rust",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-sonnet-ta",
+      "topic_id": "rust",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-sonnet-zh",
+      "topic_id": "rust",
+      "tutor_model_id": "claude-sonnet-5",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "rust-grok-en",
+      "topic_id": "rust",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-grok-ta",
+      "topic_id": "rust",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-grok-zh",
+      "topic_id": "rust",
+      "tutor_model_id": "grok-4.3",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    },
+    {
+      "id": "rust-gemini-en",
+      "topic_id": "rust",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "en-US",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-gemini-ta",
+      "topic_id": "rust",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "ta-IN",
+      "student_id": "arun",
+      "region_id": "india"
+    },
+    {
+      "id": "rust-gemini-zh",
+      "topic_id": "rust",
+      "tutor_model_id": "gemini-3.5-flash",
+      "language_id": "zh-CN",
+      "student_id": "li",
+      "region_id": "china"
+    }
+  ]
+}

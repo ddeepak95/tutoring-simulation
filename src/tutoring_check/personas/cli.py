@@ -58,7 +58,7 @@ def _show(args) -> int:
 
     for level in ([args.level] if args.level else level_names()):
         traits = resolve(level)
-        sections = build_sections(level, library, profile, language, args.language)
+        sections = build_sections(level, library, profile, language, topic["topic"])
         print(f"\n{'=' * 30} {level} {'=' * 30}")
         if args.sections_only:
             print(render(sections))
@@ -85,14 +85,22 @@ def _lint(args) -> int:
     cat = load_catalogs(args.data_dir)
     language = cat.languages[args.language]["name"]
     profile = _profile(args, cat)
+    topic = cat.topics_ci[args.topic]
+    sizes: list[tuple[str, int]] = []
     for level in level_names():
-        traits = resolve(level)
-        sections = build_sections(level, library, profile, language, args.language)
+        sections = build_sections(level, library, profile, language, topic["topic"])
         violations += lint_mod.check_rendered(sections, library, level)
+        sizes.append((level, lint_mod.persona_tokens(sections)))
 
     for v in violations:
         print(f"{v.rule_id:22} {v}")
     print(f"\n{len(violations)} violation(s)")
+
+    # Reported, not enforced - see the note on NOMINAL_TOKENS. Printed every run so the number
+    # stays visible while it is uncalibrated, instead of quietly failing builds.
+    print(f"persona size ({profile.id}/{args.language}), nominal ~{lint_mod.NOMINAL_TOKENS}:")
+    for level, n in sizes:
+        print(f"  {level:12} {n:>5} tok")
     return 1 if violations else 0
 
 

@@ -10,7 +10,12 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from tutoring_check.simulation.catalog import load_catalogs, load_run_set, resolve_model_ref
+from tutoring_check.simulation.catalog import (
+    load_catalogs,
+    load_run_set,
+    reasoning_not_honoured,
+    resolve_model_ref,
+)
 from tutoring_check.simulation.session import run_session
 
 
@@ -23,6 +28,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--tutor-reasoning", type=str, default=None, help="Override the tutor reasoning_effort (e.g. low/medium/high) for every run.")
     parser.add_argument("--student-reasoning", type=str, default=None, help="Override the student reasoning_effort (e.g. low/medium/high) for every run.")
     parser.add_argument("--out", type=Path, default=Path("runs"))
+    parser.add_argument(
+        "--turns-per-speaker",
+        type=int,
+        default=None,
+        help="Override conversation length for every run. Messages = 2 x this. Default comes from "
+             "the run-set item's `turns_per_speaker`, else 10.",
+    )
     parser.add_argument(
         "--concurrency",
         type=int,
@@ -46,6 +58,20 @@ async def run(args: argparse.Namespace) -> int:
         runs = [r for r in runs if r.item_id == args.item_id]
         if not runs:
             raise ValueError(f"No run_set entry matched --item-id '{args.item_id}'")
+
+    # A reasoning setting the provider will not honour is worth one loud line before any tokens are
+    # spent, because it is otherwise invisible: the run set says "none", the header records "none",
+    # and the model reasons anyway. Warn once per distinct (model, setting), not once per cell.
+    warned: set[str] = set()
+    for r in runs:
+        for model, reasoning in (
+            ((tutor_override or (r.tutor_model, None))[0], args.tutor_reasoning or r.tutor_reasoning),
+            ((student_override or (r.student_model, None))[0], args.student_reasoning or r.student_reasoning),
+        ):
+            msg = reasoning_not_honoured(model, reasoning)
+            if msg and msg not in warned:
+                warned.add(msg)
+                print(f"WARNING: {msg}")
 
     # Write outputs directly under --out; the caller picks a distinct --out per
     # run-set so outputs from different run-sets don't collide.
@@ -71,6 +97,7 @@ async def run(args: argparse.Namespace) -> int:
                 student_model_params=student_params,
                 output_root=cell,
                 concurrency=max(1, args.concurrency),
+                turns_per_speaker=args.turns_per_speaker or r.turns_per_speaker,
             )
             print(f"completed item_id={r.item_id} r{rep} output_dir={out_dir}")
 

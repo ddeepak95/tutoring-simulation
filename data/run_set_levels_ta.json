@@ -1,0 +1,21 @@
+{
+  "_comment": "The Tamil counterpart of run_set_levels.json: same student, same topic, same models, same levels - only `language_id` differs. Kept as its own file rather than an extra item in the English set so the two stay directly comparable, and so a language change never silently alters the English baseline. Arun speaks Tamil at home, so ta-IN is the language he would actually be taught in; `india` defaults to ta-IN anyway, but it is written out here because a default that matters should be visible in the run set.",
+  "defaults": {
+    "topic_type": "context_independent",
+    "region_id": "india",
+    "student_id": "arun",
+    "language_id": "ta-IN",
+    "tutor_model_id": "gemini-3.5-flash",
+    "student_model_id": "gemini-3.1-pro-preview",
+    "tutor_reasoning": "none",
+    "student_reasoning": "none",
+    "repeats": 1
+  },
+  "items": [
+    {
+      "id": "struggling",
+      "topic_id": "tree-mass",
+      "level": "struggling"
+    }
+  ]
+}

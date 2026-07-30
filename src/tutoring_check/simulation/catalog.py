@@ -12,7 +12,7 @@ from tutoring_check.personas.levels import level_names, resolve
 from tutoring_check.personas.misconceptions import load_topic
 from tutoring_check.personas.profile import StudentProfile
 from tutoring_check.personas.render import build_sections
-from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.config import TURNS_PER_SPEAKER, SessionConfig
 
 _DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
@@ -36,6 +36,7 @@ class ResolvedRun:
     tutor_reasoning: str | None         # litellm reasoning_effort; None = provider default
     student_reasoning: str | None
     repeats: int
+    turns_per_speaker: int = TURNS_PER_SPEAKER   # messages = 2 x this
     tutor_model_params: dict = field(default_factory=dict)      # extra litellm kwargs from models.json
     student_model_params: dict = field(default_factory=dict)
 
@@ -58,6 +59,30 @@ def load_catalogs(data_dir: Path | None = None) -> Catalogs:
         regions=_index(_read("regions.json", "regions")),
         students=_index(_read("students.json", "students")),
     )
+
+
+# Gemini 3 cannot switch thinking off. `reasoning_effort="none"` maps to thinkingLevel "low" (or
+# "minimal" on some flash variants), never to zero - litellm's own mapping says as much, and a
+# direct probe of gemini-3.5-flash and gemini-3.1-pro-preview confirmed it: none / minimal /
+# disable / thinking-disabled / no-knob all returned 200-580 reasoning tokens per call.
+#
+# So this is not a setting that can be corrected, and the defect it leaves behind is a recording
+# one: a run set that says `"reasoning": "none"` writes that into every transcript header, and
+# anything reading those headers later would conclude reasoning was off. It was not. The warning
+# fires at load so the claim is never made silently; `session_end` carries the tokens actually
+# spent, which is the auditable version of the same fact.
+_THINKING_ALWAYS_ON = ("gemini-3",)
+
+
+def reasoning_not_honoured(model: str, reasoning: str | None) -> str | None:
+    """The warning text if `reasoning` cannot be delivered by `model`, else None."""
+    if reasoning in ("none", "disable") and any(m in model for m in _THINKING_ALWAYS_ON):
+        return (
+            f"{model} cannot disable thinking; reasoning={reasoning!r} will be served as a low "
+            "thinking level, not off. Transcripts record the tokens actually spent - do not "
+            "describe these runs as having reasoning disabled."
+        )
+    return None
 
 
 def _lookup(table: dict[str, dict], key: str, label: str) -> dict:
@@ -158,7 +183,7 @@ def build_session_config(item: dict, cat: Catalogs) -> SessionConfig:
         question=topic["question"],
         language=language_name,
         level=level,
-        persona_sections=build_sections(level, library, profile, language_name, language_id),
+        persona_sections=build_sections(level, library, profile, language_name, topic["topic"]),
         traits=traits,
         misconception_id=library.primary.id,
         region=region["name"] if region else "",
@@ -175,6 +200,7 @@ def resolve_run_item(item: dict, cat: Catalogs) -> ResolvedRun:
         tutor_reasoning=item.get("tutor_reasoning"),
         student_reasoning=item.get("student_reasoning"),
         repeats=item.get("repeats", 1),
+        turns_per_speaker=item.get("turns_per_speaker", TURNS_PER_SPEAKER),
         tutor_model_params=_model_params(cat, item["tutor_model_id"]),
         student_model_params=_model_params(cat, item["student_model_id"]),
     )

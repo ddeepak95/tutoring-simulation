@@ -1,0 +1,34 @@
+{
+  "_comment_student": "The English and Tamil cells use `arun`, who speaks both. The Mandarin cells cannot: his `speaks` names Tamil and English, so the prompt would order him to write in a language it also says he does not have. They use `li` instead, a profile pinned to arun's age and grade so the swap costs only name, home language and region. That is a real confound and the Mandarin column is not a pure language contrast against the other two - it is the tightest coherent one available without re-running English and Tamil on a fourth profile.",
+  "_comment": "Tutor-model comparison. Four tutors x three languages, twelve cells. Everything else is pinned: same student model, same student profile, same topic, same level (`struggling`), one run each, 15 turns per speaker (30 messages). So the only things that differ between cells are the tutor model and the language, and the English/Tamil pair for a given tutor differs in language alone. `struggling` is the level to compare tutors on - `robust` belief plus `slow` change rate means a tutor has to actually work, where `advanced` reaches the answer almost regardless of who is teaching.",
+  "_comment_reasoning": "`tutor_reasoning` is null, not \"none\", because three of the four tutors do not accept the parameter at all: llama-4-maverick and grok-4.3 raise UnsupportedParamsError from litellm and claude-sonnet-5 errors inside it. Null means the parameter is not sent and the provider default applies. gemini-3.5-flash is the exception and would accept \"none\", but it is deliberately left at null too - setting it on one tutor and not the others would make that cell differ in a second way, and gemini-3 cannot disable thinking regardless (see `catalog.reasoning_not_honoured`). So no cell here is a no-reasoning run: grok-4.3 was measured spending 207 reasoning tokens on a two-word reply with no knob to turn it off. `reasoning_tokens_spent` in session_end is the auditable number. The student keeps \"none\", which gemini-3.1-pro-preview accepts and then ignores.",
+  "defaults": {
+    "topic_type": "context_independent",
+    "topic_id": "tree-mass",
+    "level": "struggling",
+    "region_id": "india",
+    "student_id": "arun",
+    "student_model_id": "gemini-3.1-pro-preview",
+    "tutor_reasoning": null,
+    "student_reasoning": "none",
+    "repeats": 1,
+    "turns_per_speaker": 15
+  },
+  "items": [
+    { "id": "maverick-en", "tutor_model_id": "llama-4-maverick", "language_id": "en-US" },
+    { "id": "sonnet-en",   "tutor_model_id": "claude-sonnet-5",  "language_id": "en-US" },
+    { "id": "grok-en",     "tutor_model_id": "grok-4.3",         "language_id": "en-US" },
+
+    { "id": "gemini-en",   "tutor_model_id": "gemini-3.5-flash", "language_id": "en-US" },
+
+    { "id": "maverick-ta", "tutor_model_id": "llama-4-maverick", "language_id": "ta-IN" },
+    { "id": "sonnet-ta",   "tutor_model_id": "claude-sonnet-5",  "language_id": "ta-IN" },
+    { "id": "grok-ta",     "tutor_model_id": "grok-4.3",         "language_id": "ta-IN" },
+    { "id": "gemini-ta",   "tutor_model_id": "gemini-3.5-flash", "language_id": "ta-IN" },
+
+    { "id": "maverick-zh", "tutor_model_id": "llama-4-maverick", "language_id": "zh-CN", "student_id": "li", "region_id": "china" },
+    { "id": "sonnet-zh",   "tutor_model_id": "claude-sonnet-5",  "language_id": "zh-CN", "student_id": "li", "region_id": "china" },
+    { "id": "grok-zh",     "tutor_model_id": "grok-4.3",         "language_id": "zh-CN", "student_id": "li", "region_id": "china" },
+    { "id": "gemini-zh",   "tutor_model_id": "gemini-3.5-flash", "language_id": "zh-CN", "student_id": "li", "region_id": "china" }
+  ]
+}

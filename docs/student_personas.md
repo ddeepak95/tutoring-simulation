@@ -128,7 +128,7 @@ The general rule this arrived at: **if code doesn't read it, it's a comment.** A
 | `conceptual_change_rate` | learning_dynamics | `slow` \| `moderate` \| `fast` | ESS "simulating learning" |
 | `self_explanation_propensity` | dialogue | `passive` \| `active` \| `constructive` | ICAP, Chi & Wylie 2014 |
 | `help_seeking_style` | dialogue | `avoidant` \| `executive` \| `instrumental` | Aleven & Koedinger 2016 |
-| `register_and_verbosity` | dialogue | `terse_colloquial` \| `typical` \| `expansive` (each carries a sentence band + mechanics rules) | Chi 2001; realism paper |
+| `register_and_verbosity` | dialogue | `minimal` \| `terse_colloquial` \| `typical` \| `expansive` (each carries a sentence band + mechanics rules) | Chi 2001; Sinclair & Coulthard 1975; Mehan 1979; Nystrand & Gamoran 1991 |
 | `goal_orientation` | affect | `mastery` \| `performance_approach` \| `performance_avoidance` | achievement goal theory; Dweck |
 | `affect_trajectory` | affect | `engaged_persistent` \| `confusion_to_frustration` \| `flat_compliant` | D'Mello & Graesser |
 
@@ -185,6 +185,74 @@ Three reasons that mattered:
 3. A rare but real artifact: of six runs where the tutor opened with *"are you ready?"* instead of the question, one student answered anyway. Five behaved correctly, so this was the weakest of the three reasons — but it is the one that shows up in data.
 
 What orients the student instead is the frame's `The topic is:` line plus the library's `predicts`, which is written around the same scenario in the student's own voice and is a better anchor than the question because it is a belief rather than a prompt. If a tutor fails to pose a real question, the student now has nothing to be wrong about — which is a tutor failure worth seeing in the transcript rather than one the student prompt silently covers for.
+
+### The opening turn is a greeting, not the question
+
+[session.py](../src/tutoring_check/simulation/session.py)'s kickoff message now asks the tutor to greet the student, say who they are, and ask one settling-in question — explicitly *not* the learning question, which comes from the next turn. Opening cold on an assessment item gave every transcript the same abrupt shape and is not how a session starts.
+
+It also earns its cost: the student's reply to *"how's the weather?"* is the cleanest read on their register you get, because no subject matter is in play yet. Arun answers *"It's pretty hot today."* — four words, flat, no question back.
+
+The instruction is scoped to the first message on purpose. That message stays in the tutor's context for the whole conversation, so an unscoped "don't ask the question" would keep suppressing it.
+
+**It costs one of the ten exchanges.** `TURNS_PER_SPEAKER` is unchanged, so a run now has nine teaching turns rather than ten. Raise it to 11 if you want the old amount of teaching.
+
+### Two findings from the pilot runs
+
+**`minimal` exists because "passive" was not producing minimal answers.** With `terse_colloquial`, reluctant-Arun averaged ~9 words per turn in well-formed clauses — *"It gets big by pulling stuff up out of the dirt"*. Real students in teacher-led talk answer in fragments, and the classroom-discourse literature on the triadic sequence (Sinclair & Coulthard's IRF, Mehan's IRE, Nystrand & Gamoran on the rarity of extended student turns) says the student slot is characteristically elliptical. A model will not do this unprompted: left alone it writes complete sentences, which is the most visible tell that it is not a student. With `minimal`, the same cell averages **3.9 words**.
+
+**`avoidant` was written as a silence the student cannot perform.** It said *"you go quiet"*, but `student.py`'s ground rules require a reply every turn. Given that conflict the model took the cheapest exit and simply said it was lost — the one thing the trait forbids — in both pilot runs (*"I don't know which one"*, *"I don't remember the name"*). The rule now names verbal moves instead: put down a guess you don't believe, or hand back part of what the teacher just said. Both appeared in the next run, and the admissions disappeared.
+
+The general lesson is worth keeping: **a trait that describes not-acting will be resolved by the model however it likes.** Prose has to name what the student *does*.
+
+### Writing mechanics: one rule for every language
+
+Even at 3.9 words a turn the student typed *"It's pretty hot today."* — capital, apostrophe, full stop. No 14-year-old messages like that.
+
+The first fix was a per-language override with English orthography spelled out. It worked (0/10 capitalised, 0/10 full stops, 0/10 apostrophes) but it does not generalise, and it created a confound: English personas would have read as more authentically teenaged than Tamil ones for reasons unrelated to the tutor, which would have quietly contaminated every cross-language comparison.
+
+`render.STUDENT_REGISTER` is now one note for all languages, stated as a rule about **typing behaviour** rather than a list of marks:
+
+> Type this the way a 14-year-old in India types to a friend on their phone. You are going fast and you do not go back over it, so whatever careful writing in English (US) would tidy up — the capital at the start if the script has capitals, the apostrophe inside a word, the stop at the end — you leave out.
+
+Same result on the mechanics, no per-language table. Two constraints shaped it:
+
+**It may only name marks a script either has or lacks entirely.** A capital, an apostrophe, a terminal stop: a script without them simply has nothing to skip. It must never name a mark that lives *inside* a word in an abugida — dropping the vowel signs in Tamil or Devanagari does not read as casual, it reads as broken.
+
+**Fillers and slang key off the profile, not the language.** What a 14-year-old in India types is a fact about the student, not about English. No example tokens, ever: naming one gets it echoed every turn.
+
+### A rate is not an instruction a stateless prompt can follow
+
+The filler rule first read *"about one reply in three carries a filler."* The pilot came back with a filler in **10 of 10 turns, seven of them opening on the same word.**
+
+The student prompt is rebuilt from scratch every turn, so there is no running tally for "one in three" to refer to — the model applies the rule to each turn in isolation, where the only way to satisfy "sometimes" is to do it. Rephrased as a **condition** plus a rule checkable against visible history — *belongs only where you are genuinely hesitating, never at the front of a reply you are sure of, and you never open two replies with the same word* — filler openings dropped to **2 of 10**.
+
+Generalise it: **a trait stated as a frequency across turns will not be honoured.** State the condition under which the behaviour occurs, or state something the model can check against the conversation it can see.
+
+Typos follow the same shape — named as a failure to *correct* rather than a rate of *making*, and scoped to the whole conversation the student can see rather than a per-turn chance it cannot count. The mechanism is spelled out (a letter doubled, two swapped, one dropped) because a model asked simply to "make a typo" produces a plausible wrong word, which reads as a vocabulary problem rather than a fast thumb. Output: *"from the dirt nd water"*, *"maybe from the sunlght"*, *"probly the water"*, *"frm air but still some dirt"*.
+
+### `avoidant` was over-strict, and the construct says so
+
+It had been sharpened to *"you never say you are lost"* after the model kept resolving an impossible instruction that way. That overshot. **Aleven's help avoidance is about not *requesting* help** — saying "no idea" and stopping there is not a request, it is a refusal to make one, which is the behaviour itself. Banning it also removed the most natural thing a stuck 14-year-old says. What stays banned is asking: for the answer, for a repeat, for anything. *"dont know the name"* is now in-character, and reads it.
+
+### Keep `slides_into`
+
+It is the field most obviously droppable and the one doing the most visible work. In the latest run:
+
+> **A (15):** frm air but still some dirt
+> **T (16):** …the soil does give the tree some tiny minerals, kind of like how we need a pinch of salt… if we dried a tree completely out, about 95% of its weight would be from the carbon it took from the air.
+
+Turn 16 — the tutor's most substantive correction in the conversation — exists **only** because of turn 15. Without the relapse the student answers "from the air" at turn 15 and the lesson is over four turns early. That is the whole failure mode this design targets: a simulated student who converges cleanly makes every tutor look good.
+
+Honest caveat: this is correlational. `misconception_robustness=intermediate` is also resisting change, and these runs cannot separate the two contributions. The repeats harness would.
+
+### The opening turn takes no name and invents nothing
+
+The tutor introduced itself as *"I'm Amit"* and improvised a monsoon question. Both vary run to run, neither is under study, and they were the first thing every student ever saw — unmeasured variance in the opening stimulus. It now introduces itself as the student's AI tutor with no name, states the topic, and asks whether they are ready:
+
+> **T:** Hello! I'm your AI tutor, and today we're going to explore a really cool puzzle: where a giant tree actually gets all of its weight and mass from as it grows from a tiny seed. Are you ready to get started?
+> **A:** yeah im ready
+
+Same social opening, nothing improvised in it.
 
 `misconception_robustness` and `conceptual_change_rate` are deliberately separate. Robustness is how hard *this student* finds *this one belief* to give up; change rate is how quickly they take on a new idea in general. Keeping them apart is what lets a fast learner still cling to a single belief long after they have absorbed everything else — the behavior no current persona can produce. Both are fixed by the level, not the topic: if the library pinned robustness per misconception, `struggling` and `advanced` could not differ on the same topic, which would defeat the level design.
 
@@ -267,7 +335,7 @@ There are **no artifacts and no cache.** A persona is recomputed from code and d
 | `struggling` | robust | slow | passive | instrumental | mastery | terse_colloquial | confusion_to_frustration |
 | `developing` | intermediate | moderate | active | instrumental | mastery | typical | engaged_persistent |
 | `advanced` | labile | fast | constructive | instrumental | mastery | typical | engaged_persistent |
-| `reluctant` | intermediate | **moderate** | passive | **avoidant** | **performance_avoidance** | terse_colloquial | flat_compliant |
+| `reluctant` | intermediate | **moderate** | passive | **avoidant** | **performance_avoidance** | **minimal** | flat_compliant |
 
 ### Why four, and why this fourth one
 

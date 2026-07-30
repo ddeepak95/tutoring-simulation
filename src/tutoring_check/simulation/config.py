@@ -8,6 +8,14 @@ from dataclasses import dataclass, field
 
 from tutoring_check.personas.profile import StudentProfile
 
+# One "turn" in a transcript is one message, so a conversation runs 2 x this many. A run-set item
+# overrides it with `turns_per_speaker`, and the value used is written into the transcript header.
+#
+# It lives here rather than in `session.py` because `catalog.py` needs it as a dataclass default and
+# must not import `session` - that would pull litellm into `personas.cli lint`, which deliberately
+# defers importing the simulation package so linting still works while it is mid-edit.
+TURNS_PER_SPEAKER = 10
+
 
 @dataclass
 class SessionConfig:

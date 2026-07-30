@@ -51,12 +51,14 @@ LEVELS: dict[str, dict[str, str]] = {
         "affect_trajectory": "engaged_persistent",
     },
     # Same change rate as `developing` on purpose: the difference is withholding, not ability.
+    # `minimal` rather than `terse_colloquial`: withholding shows up in how much they say before
+    # it shows up in what they know, and this is the level where the two must not be confounded.
     RELUCTANT: {
         "misconception_robustness": "intermediate",
         "conceptual_change_rate": "moderate",
         "self_explanation_propensity": "passive",
         "help_seeking_style": "avoidant",
-        "register_and_verbosity": "terse_colloquial",
+        "register_and_verbosity": "minimal",
         "goal_orientation": "performance_avoidance",
         "affect_trajectory": "flat_compliant",
     },

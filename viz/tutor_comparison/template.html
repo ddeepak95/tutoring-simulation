@@ -1,0 +1,567 @@
+<title>Tutoring simulation</title>
+
+<style>
+  :root {
+    --paper:   #f4f6f8;
+    --panel:   #ffffff;
+    --sunk:    #eceff3;
+    --ink:     #141920;
+    --muted:   #5c6673;
+    --faint:   #8a94a2;
+    --rule:    #dde2e9;
+    --rule-hi: #c3cbd6;
+
+    /* Who is speaking is carried by the bubble fill: the tutor cool, the student warm. Both are
+       near-neutral on purpose - the four model accents already colour the column headers, and a
+       saturated bubble would compete with the thing the columns are for. */
+    --bub-tutor:      #e6ebf1;
+    --bub-tutor-edge: #d6dee8;
+    --bub-stu:        #f2ede6;
+    --bub-stu-edge:   #e4dbcf;
+
+    --m-maverick: #6a55cc;
+    --m-sonnet:   #b8622a;
+    --m-grok:     #2a769c;
+    --m-gemini:   #237c59;
+
+    --display: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    /* Script fallbacks are named explicitly. Without them Tamil and Han render as boxes on a
+       machine whose default UI font covers neither, and the artifact CSP blocks font CDNs, so
+       there is no webfont to fall back to. */
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+            "Nirmala UI", "Latha", "Noto Sans Tamil",
+            "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC",
+            sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Consolas, monospace;
+
+    /* One size for both speakers. The tutor used to be set a step smaller than the student, which
+       made every column read as if the tutor mattered less; length differences between the two are
+       the finding here, and unequal type sizes fake them. Sits between step--1 and step-0. */
+    --step-turn: clamp(.84rem, .81rem + .12vw, .9rem);
+
+    --step--1: clamp(.76rem, .74rem + .1vw, .82rem);
+    --step-0:  clamp(.92rem, .89rem + .14vw, 1rem);
+    --step-1:  clamp(1.08rem, 1.02rem + .3vw, 1.25rem);
+    --step-2:  clamp(1.4rem, 1.25rem + .7vw, 1.9rem);
+    --step-3:  clamp(1.9rem, 1.5rem + 1.9vw, 3.1rem);
+
+    /* Measured from the real control bar at runtime. It was hardcoded, and the moment the bar
+       gained a fourth group and started wrapping, the sticky column headers pinned behind it and
+       clipped the first exchange. */
+    --controls-h: 3.4rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#0d1015; --panel:#151a21; --sunk:#1b212a; --ink:#e7ebf1;
+      --muted:#99a3b1; --faint:#6d7885; --rule:#262d38; --rule-hi:#38414f;
+      --m-maverick:#a394f0; --m-sonnet:#e0975f; --m-grok:#6bb4d8; --m-gemini:#5cbd92;
+      --bub-tutor:#1a2029; --bub-tutor-edge:#2b3543; --bub-stu:#241f1a; --bub-stu-edge:#3a3128;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:#0d1015; --panel:#151a21; --sunk:#1b212a; --ink:#e7ebf1;
+    --muted:#99a3b1; --faint:#6d7885; --rule:#262d38; --rule-hi:#38414f;
+    --m-maverick:#a394f0; --m-sonnet:#e0975f; --m-grok:#6bb4d8; --m-gemini:#5cbd92;
+    --bub-tutor:#1a2029; --bub-tutor-edge:#2b3543; --bub-stu:#241f1a; --bub-stu-edge:#3a3128;
+  }
+  :root[data-theme="light"] {
+    --paper:#f4f6f8; --panel:#ffffff; --sunk:#eceff3; --ink:#141920;
+    --muted:#5c6673; --faint:#8a94a2; --rule:#dde2e9; --rule-hi:#c3cbd6;
+    --m-maverick:#6a55cc; --m-sonnet:#b8622a; --m-grok:#2a769c; --m-gemini:#237c59;
+    --bub-tutor:#e6ebf1; --bub-tutor-edge:#d6dee8; --bub-stu:#f2ede6; --bub-stu-edge:#e4dbcf;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Full width on purpose. The transcripts are the content, and every rem taken by a reading-width
+     column is a rem the conversations do not get. */
+  .wrap { width: 100%; max-width: 1920px; margin: 0 auto; padding: 0 clamp(1rem, 2vw, 1.75rem); }
+
+  header.masthead { padding: clamp(1.75rem, 4vw, 3rem) 0 0; }
+  h1 {
+    font-family: var(--display); font-weight: 400;
+    font-size: var(--step-2); line-height: 1.1; letter-spacing: -.015em;
+    margin: 0; text-wrap: balance;
+  }
+
+  .constants {
+    margin: 1.4rem 0 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.25rem 0;
+    display: grid; gap: 1.25rem 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+  .constants dt {
+    font-family: var(--mono); font-size: var(--step--1);
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 .3rem;
+  }
+  .constants dd { margin: 0; font-size: var(--step--1); line-height: 1.45; }
+
+  h2 {
+    font-family: var(--display); font-weight: 400;
+    font-size: var(--step-2); letter-spacing: -.015em;
+    margin: 0 0 .4rem; text-wrap: balance;
+  }
+  section { margin: clamp(1.75rem, 3.5vw, 2.75rem) 0; }
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 3px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 46rem; font-size: var(--step--1); }
+  thead th {
+    text-align: right; font-weight: 600; font-family: var(--mono);
+    font-size: .72rem; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--faint); padding: .8rem .85rem;
+    border-bottom: 1px solid var(--rule-hi); white-space: nowrap;
+  }
+  thead th:first-child, tbody td:first-child { text-align: left; }
+  tbody td { padding: .6rem .85rem; border-bottom: 1px solid var(--rule); text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr.lang-break td { border-top: 2px solid var(--rule-hi); }
+  .cellname { display: flex; align-items: center; gap: .55rem; white-space: nowrap; }
+  .swatch { width: .55rem; height: .55rem; border-radius: 50%; flex: none; background: var(--c); }
+  .langtag {
+    font-family: var(--mono); font-size: .68rem; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--faint);
+    border: 1px solid var(--rule-hi); padding: .05rem .3rem; border-radius: 2px;
+  }
+  .bar { display: flex; align-items: center; gap: .45rem; justify-content: flex-end; }
+  .bar i { display: block; height: .4rem; background: var(--c); opacity: .55; border-radius: 1px; }
+  .zero { color: var(--faint); }
+
+  .controls {
+    position: sticky; top: 0; z-index: 30;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: .8rem 0;
+    display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center;
+  }
+  .ctrl-group { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+  .ctrl-label {
+    font-family: var(--mono); font-size: .7rem;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+  }
+  .seg { display: flex; border: 1px solid var(--rule-hi); border-radius: 3px; overflow: hidden; }
+  .seg button {
+    font: inherit; font-size: var(--step--1);
+    background: var(--panel); color: var(--muted);
+    border: 0; padding: .35rem .8rem; cursor: pointer;
+  }
+  .seg button + button { border-left: 1px solid var(--rule-hi); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .chip {
+    font: inherit; font-size: var(--step--1);
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: var(--panel); color: var(--muted);
+    border: 1px solid var(--rule-hi); border-radius: 3px;
+    padding: .35rem .7rem; cursor: pointer;
+  }
+  .chip .swatch { opacity: .3; }
+  .chip[aria-pressed="true"] { color: var(--ink); border-color: var(--c); }
+  .chip[aria-pressed="true"] .swatch { opacity: 1; }
+  select {
+    font: inherit; font-size: var(--step--1);
+    background: var(--panel); color: var(--ink);
+    border: 1px solid var(--rule-hi); border-radius: 3px;
+    padding: .35rem .5rem; cursor: pointer;
+  }
+  button:focus-visible, select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  /* The pane scrolls in both directions rather than the page doing it. `overflow-x: auto` alone
+     forces overflow-y to compute to auto anyway, which quietly makes this a vertical scrollport and
+     breaks any sticky child pinned to the viewport - so it is made an explicit, bounded scrollport
+     and the sticky headers pin to it. That also keeps the body from ever scrolling sideways. */
+  /* The question every column is working on. It sits between the controls and the grid because
+     changing topic changes it, and without it the transcripts start mid-argument. */
+  .question {
+    margin: .9rem 0 .6rem;
+    padding-left: .8rem;
+    border-left: 3px solid var(--rule-hi);
+    color: var(--muted);
+    font-size: var(--step--1);
+  }
+  .question b { color: var(--ink); font-weight: 600; }
+
+  .grid-scroll {
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - var(--controls-h));
+    height: calc(100dvh - var(--controls-h));
+    min-height: 24rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .grid { display: grid; gap: 0; min-width: min-content; }
+  .colhead {
+    position: sticky; top: 0; z-index: 15;
+    background: var(--paper);
+    padding: .9rem .9rem .7rem;
+    border-bottom: 2px solid var(--c, var(--rule-hi));
+  }
+  /* Pinned on both axes so it never lets a column header or a turn number slide underneath it. */
+  .corner {
+    position: sticky; top: 0; left: 0; z-index: 25;
+    background: var(--paper);
+    border-bottom: 2px solid var(--rule-hi);
+  }
+  /* Tamil columns carry a dashed rule as well as a written tag, so the language a column is in
+     survives being read at a glance or by someone who cannot separate the two hues. */
+  .colhead.lang-ta { border-bottom-style: dashed; }
+  .colhead .name { font-family: var(--display); font-size: var(--step-1); line-height: 1.2; }
+  .colhead .meta { display: flex; align-items: center; gap: .45rem; margin-top: .15rem; }
+  .colhead .vendor {
+    font-family: var(--mono); font-size: .68rem;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
+  }
+  .rowno {
+    position: sticky; left: 0; z-index: 12;
+    background: var(--paper);
+    font-family: var(--mono); font-size: .72rem; color: var(--faint);
+    padding: 1.1rem .5rem 0 0; text-align: right;
+    font-variant-numeric: tabular-nums; border-top: 1px solid var(--rule);
+  }
+  .rowno.first { border-top: 0; }
+  .cell { padding: 1rem .9rem 1.4rem; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+  .cell.first { border-top: 0; }
+  .turn { margin: 0 0 .7rem; }
+  .turn:last-child { margin-bottom: 0; }
+  .turn .who {
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .1em;
+    text-transform: uppercase; display: flex; gap: .5rem; align-items: baseline;
+    margin-bottom: .25rem;
+  }
+  .turn .wc { color: var(--faint); font-variant-numeric: tabular-nums; }
+  .turn.tutor .who { color: var(--c); }
+  .turn.student .who { color: var(--muted); }
+  .turn .body {
+    font-size: var(--step-turn); line-height: 1.55;
+    border-radius: 4px; padding: .55rem .7rem;
+    border: 1px solid transparent;
+  }
+  .turn.tutor   .body { background: var(--bub-tutor); border-color: var(--bub-tutor-edge); }
+  .turn.student .body { background: var(--bub-stu);   border-color: var(--bub-stu-edge); }
+  .body { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <h1>Tutoring simulation</h1>
+    <dl class="constants" id="constants"></dl>
+  </header>
+
+  <section>
+    <h2>What each run produced</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Run</th>
+            <th scope="col">Student</th>
+            <th scope="col">Tutor / turn</th>
+            <th scope="col">Student / turn</th>
+            <th scope="col">Student range</th>
+            <th scope="col">Tutor reasoning tokens</th>
+          </tr>
+        </thead>
+        <tbody id="metrics"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section style="margin-bottom:1.5rem">
+    <h2>Read them side by side</h2>
+  </section>
+</div>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="ctrl-group">
+      <label class="ctrl-label" for="topicsel">Topic</label>
+      <select id="topicsel"></select>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Tutors</span>
+      <div id="modelchips" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Languages</span>
+      <div id="langchips" style="display:flex;gap:.4rem;flex-wrap:wrap"></div>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Order by</span>
+      <div class="seg" id="groupseg" role="group" aria-label="Column order"></div>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">Show</span>
+      <div class="seg" id="whoseg" role="group" aria-label="Which speakers to show"></div>
+    </div>
+  </div>
+
+  <p class="question" id="question"></p>
+
+  <div class="grid-scroll">
+    <div class="grid" id="grid"></div>
+  </div>
+
+</div>
+
+<script>
+const DATA = __DATA__;
+
+const HUE = {
+  maverick: 'var(--m-maverick)',
+  sonnet:   'var(--m-sonnet)',
+  grok:     'var(--m-grok)',
+  gemini:   'var(--m-gemini)',
+};
+
+// Columns are the cross product of the selected tutors and the selected languages, so a language
+// is picked the same way a tutor is. `group` decides which of the two varies fastest: ordering by
+// tutor puts a model's two languages next to each other, which is the comparison you want when the
+// question is "what does this model do differently in Tamil".
+//
+// Topic is SINGLE-select, deliberately. A row means "the same point in the lesson", and that only
+// holds while every column is answering the same question - two topics side by side at row 7 would
+// look aligned and not be.
+const state = {
+  topic: DATA.topics.find(t => t.present > 0).key,
+  who: 'both',
+  group: 'model',
+  models: new Set(DATA.models.map(m => m.key)),
+  langs: new Set(DATA.langs.map(l => l.key)),
+};
+
+const cellAt = (m, l) => DATA.cells[state.topic + '-' + m.key + '-' + l.key];
+
+// Only columns that actually have a finished run for this topic.
+function columns() {
+  const ms = DATA.models.filter(m => state.models.has(m.key));
+  const ls = DATA.langs.filter(l => state.langs.has(l.key));
+  const out = [];
+  if (state.group === 'model') {
+    for (const m of ms) for (const l of ls) out.push({ m, l });
+  } else {
+    for (const l of ls) for (const m of ms) out.push({ m, l });
+  }
+  return out.filter(({ m, l }) => cellAt(m, l));
+}
+
+const el = (tag, cls, txt) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (txt != null) n.textContent = txt;
+  return n;
+};
+
+function renderConstants() {
+  const f = DATA.fixed, p = f.profile || {};
+  const z = f.profileZh || {};
+  const rows = [
+    ['Student model', f.studentModel.replace(/^vertex_ai\//, '')],
+    ['Persona level', f.level + ' (' + f.registry + ')'],
+    ['Topic', f.topic],
+    ['Length', f.turnsPerSpeaker + ' turns each, ' + (f.turnsPerSpeaker * 2) + ' messages'],
+    ['Student — English, Tamil', p.name + ', ' + p.age + ', ' + p.grade + ', ' + p.region],
+    ['Student — Mandarin', z.name + ', ' + z.age + ', ' + z.grade + ', ' + z.region],
+  ];
+  const dl = document.getElementById('constants');
+  const boxes = rows.map(([k, v]) => {
+    const box = el('div');
+    box.append(el('dt', null, k), el('dd', null, v));
+    return box;
+  });
+  dl.replaceChildren(...boxes);
+}
+
+function renderMetrics() {
+  const body = document.getElementById('metrics');
+  const maxReason = Math.max(...Object.values(DATA.cells).map(c => c.reasonTutor), 1);
+  const rows = [];
+  DATA.langs.forEach((lang, li) => {
+    DATA.models.forEach((m, mi) => {
+      const c = cellAt(m, lang);
+      if (!c) return;
+      const tr = el('tr');
+      if (li > 0 && mi === 0) tr.className = 'lang-break';
+      tr.style.setProperty('--c', HUE[m.key]);
+
+      const nameCell = el('td');
+      const flex = el('div', 'cellname');
+      flex.append(el('span', 'swatch'), el('span', null, m.name), el('span', 'langtag', lang.name));
+      nameCell.append(flex);
+
+      const barCell = el('td');
+      const bar = el('div', 'bar');
+      if (c.reasonTutor === 0) {
+        bar.append(el('span', 'zero', 'none'));
+      } else {
+        const i = el('i');
+        i.style.width = Math.round((c.reasonTutor / maxReason) * 70) + 'px';
+        bar.append(el('span', null, c.reasonTutor.toLocaleString()), i);
+      }
+      barCell.append(bar);
+
+      const u = c.unit === 'chars' ? ' c' : ' w';
+      tr.append(
+        nameCell,
+        el('td', null, c.student),
+        el('td', null, c.tutorWpt.toFixed(1) + u),
+        el('td', null, c.studentWpt.toFixed(1) + u),
+        el('td', null, c.studentMin + '–' + c.studentMax + u),
+        barCell,
+      );
+      rows.push(tr);
+    });
+  });
+  body.replaceChildren(...rows);
+}
+
+function segButton(label, pressed, onClick) {
+  const b = el('button', null, label);
+  b.type = 'button';
+  b.setAttribute('aria-pressed', String(pressed));
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+function toggleChip(label, on, hue, onClick) {
+  const b = el('button', 'chip');
+  b.type = 'button';
+  if (hue) b.style.setProperty('--c', hue);
+  b.setAttribute('aria-pressed', String(on));
+  if (hue) b.append(el('span', 'swatch'));
+  b.append(el('span', null, label));
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+function renderControls() {
+  // A topic with no finished runs is listed but not selectable, so the set of topics the campaign
+  // covers stays visible while it is still filling in.
+  const sel = document.getElementById('topicsel');
+  sel.replaceChildren(...DATA.topics.map(t => {
+    const o = el('option', null, t.present ? t.name : t.name + ' (no runs yet)');
+    o.value = t.key;
+    o.disabled = !t.present;
+    o.selected = state.topic === t.key;
+    return o;
+  }));
+  sel.onchange = () => {
+    state.topic = sel.value;
+    renderMetrics(); renderQuestion(); renderGrid();
+  };
+
+  const whoOpts = [['both', 'Both'], ['tutor', 'Tutor only'], ['student', 'Student only']];
+  document.getElementById('whoseg').replaceChildren(...whoOpts.map(([k, label]) =>
+    segButton(label, state.who === k, () => {
+      state.who = k; renderControls(); renderGrid();
+    })));
+
+  const groupOpts = [['model', 'Tutor'], ['lang', 'Language']];
+  document.getElementById('groupseg').replaceChildren(...groupOpts.map(([k, label]) =>
+    segButton(label, state.group === k, () => {
+      state.group = k; renderControls(); renderGrid();
+    })));
+
+  document.getElementById('modelchips').replaceChildren(...DATA.models.map(m => {
+    const on = state.models.has(m.key);
+    return toggleChip(m.name, on, HUE[m.key], () => {
+      if (on && state.models.size === 1) return;   // never leave the grid empty
+      if (on) state.models.delete(m.key); else state.models.add(m.key);
+      renderControls();
+      renderGrid();
+    });
+  }));
+
+  document.getElementById('langchips').replaceChildren(...DATA.langs.map(l => {
+    const on = state.langs.has(l.key);
+    return toggleChip(l.name, on, null, () => {
+      if (on && state.langs.size === 1) return;
+      if (on) state.langs.delete(l.key); else state.langs.add(l.key);
+      renderControls();
+      renderGrid();
+    });
+  }));
+}
+
+function turnBlock(kind, text, len, unit) {
+  const t = el('div', 'turn ' + kind);
+  const who = el('div', 'who');
+  who.append(
+    el('span', null, kind === 'tutor' ? 'Tutor' : 'Student'),
+    el('span', 'wc', len + (unit === 'chars' ? 'c' : 'w')),
+  );
+  t.append(who, el('div', 'body', text));
+  return t;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const cols = columns();
+  const colMin = cols.length > 6 ? 300 : cols.length > 3 ? 340 : 420;
+  grid.style.gridTemplateColumns =
+    '2.6rem repeat(' + cols.length + ', minmax(' + colMin + 'px, 1fr))';
+
+  const nodes = [el('div', 'corner')];             // empty corner above the row numbers
+  for (const { m, l } of cols) {
+    const h = el('div', 'colhead lang-' + l.key);
+    h.style.setProperty('--c', HUE[m.key]);
+    const meta = el('div', 'meta');
+    meta.append(el('span', 'vendor', m.vendor), el('span', 'langtag', l.name));
+    h.append(el('div', 'name', m.name), meta);
+    nodes.push(h);
+  }
+
+  const n = Math.max(...cols.map(({ m, l }) => cellAt(m, l).exchanges.length));
+  for (let i = 0; i < n; i++) {
+    nodes.push(el('div', 'rowno' + (i === 0 ? ' first' : ''), String(i + 1)));
+    for (const { m, l } of cols) {
+      const ex = cellAt(m, l).exchanges[i];
+      const cell = el('div', 'cell' + (i === 0 ? ' first' : ''));
+      if (!ex) { cell.style.setProperty('--c', HUE[m.key]); nodes.push(cell); continue; }
+      cell.style.setProperty('--c', HUE[m.key]);
+      if (state.who !== 'student') cell.append(turnBlock('tutor', ex.tutor, ex.tw, l.unit));
+      if (state.who !== 'tutor') cell.append(turnBlock('student', ex.student, ex.sw, l.unit));
+      nodes.push(cell);
+    }
+  }
+  grid.replaceChildren(...nodes);
+}
+
+// The control bar wraps to two or three lines depending on viewport width, and the scroll pane is
+// sized against it. Measured rather than assumed, and re-measured whenever it reflows.
+const controlsEl = document.querySelector('.controls');
+const syncControlsHeight = () =>
+  document.documentElement.style.setProperty('--controls-h', controlsEl.offsetHeight + 'px');
+
+function renderQuestion() {
+  const t = DATA.topics.find(x => x.key === state.topic);
+  const p = document.getElementById('question');
+  p.replaceChildren(el('b', null, 'The question: '), document.createTextNode(t.question));
+}
+
+renderConstants();
+renderControls();
+renderMetrics();
+renderQuestion();
+renderGrid();
+
+syncControlsHeight();
+if (window.ResizeObserver) new ResizeObserver(syncControlsHeight).observe(controlsEl);
+else window.addEventListener('resize', syncControlsHeight);
+</script>

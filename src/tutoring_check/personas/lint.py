@@ -21,46 +21,40 @@ from tutoring_check.personas import render
 from tutoring_check.personas.misconceptions import TopicLibrary
 from tutoring_check.personas.traits import TRAITS
 
-# Research vocabulary that must not reach the student. The point is that `prose` has to *realize*
-# a construct without *naming* it: a student told it "holds a misconception" performs having one -
-# theatrical confusion that folds the moment the tutor pushes - instead of simply believing the
-# thing. Same for "low self-efficacy", which produces a textbook illustration rather than a kid.
+# A `no_jargon` rule used to live here: a 30-term blocklist of research vocabulary
+# ("misconception", "conceptual change", "self-efficacy", "p-prim" …) checked against every trait
+# prose string. Its reasoning was that `prose` has to *realize* a construct without *naming* it,
+# because a student told it "holds a misconception" performs having one - theatrical confusion that
+# folds the moment the tutor pushes - instead of simply believing the thing.
 #
-# One flat list rather than a field on each Trait: nothing needed it per-trait, and the check is
-# the same everywhere. Kept deliberately short - ordinary English that happens to be a construct
-# name ("affect", "register", "constructive") was removed, because a false positive here blocks
-# valid prose and costs more than the miss.
-BANNED_TERMS: tuple[str, ...] = (
-    "misconception", "alternative conception", "wrong idea",
-    "labile", "p-prim", "ontological", "miscategorisation", "knowledge in pieces",
-    "conceptual change", "learning rate",
-    "ICAP", "self-explanation", "cognitive engagement",
-    "help-seeking", "help avoidance", "help abuse", "gaming the system",
-    "goal orientation", "mastery goal", "performance-avoidance", "performance-approach",
-    "self-efficacy", "mindset",
-    "affective state", "flow state", "disengagement",
-    "verbosity", "colloquial register",
-    "persona", "trait", "student level", "scaffold",
-)
+# It was removed as unnecessarily restrictive, and because the prompt's own section headings now
+# name several of those constructs outright ("Belief persistence and conceptual change", "Learning
+# goals and motivation"); a blocklist the prompt openly violates one line above the text it polices
+# is not a check, it is a contradiction. The reasoning above is not retracted, only its enforcement.
+# `git log` has the term list if it is wanted back.
+#
+# What remains are three rules that catch mechanical errors rather than exercising vocabulary
+# judgement: `second_person`, `no_example_utterances`, and `no_answer_leak`.
 
 # Only double quotes. Apostrophes in contractions make single-quote matching produce constant false
 # positives, and a scripted utterance the student then echoes is always written with double quotes.
 _QUOTED = re.compile(r'"([^"]{1,400})"|“([^”]{1,400})”')
 MAX_QUOTED_WORDS = 3
 
-# Budget is a guard against instruction dilution: past some amount of persona instruction the model
-# averages everything toward a bland default and the levels stop separating.
+# Persona size is REPORTED, not enforced. It used to be a violation above a fixed ceiling, on the
+# theory that past some amount of instruction the model averages everything toward a bland default
+# and the levels stop separating. That theory may well be right. The ceiling was not.
 #
-# TREAT THIS NUMBER AS NOISE UNTIL IT IS CALIBRATED. It has never been checked against a transcript.
-# It started at 800, went to 850 when the student profile was added, and is now 900 because the
-# check was found to be measuring the section bodies without their headings - about 45 tokens short
-# of what the model is actually sent. 900 is roughly the old 850 restated against a correct
-# measurement, not a new claim about where dilution starts.
+# It went 800 -> 850 (student profile) -> 900 (the check was found to be measuring section bodies
+# without their headings, ~45 tokens short of what the model is actually sent) -> 950 (writing
+# mechanics). Four moves, zero measurements: every time a feature earned its tokens, the number
+# moved to accommodate it. A threshold that always yields is not measuring anything - but it was
+# still shaping the prose on the way, because text got trimmed to reach it.
 #
-# The check that would make it real: run the same four levels at several budgets and see where the
-# behavioural contrast between them starts to collapse. Until then this catches runaway prose and
-# nothing more, and it should not be used to argue against a feature that earns its tokens.
-TOKEN_BUDGET = 900
+# So it is a number you read, not a number that fails. `cli lint` prints it per level. To make it
+# a real check, calibrate first: run the four levels at several sizes and find where the
+# behavioural contrast between them actually collapses. Then set the ceiling there and enforce it.
+NOMINAL_TOKENS = 1000  # what the personas cost around now; a reference point, not a limit
 
 
 @dataclass(frozen=True)
@@ -76,15 +70,6 @@ class Violation:
 def estimate_tokens(text: str) -> int:
     """Rough count without a tokenizer dependency; deliberately an over-estimate (~1.35/word)."""
     return int(len(text.split()) * 1.35)
-
-
-def _jargon_pattern() -> re.Pattern[str]:
-    """Word-boundary alternation - substring matching fires on "ICAP" inside "handicap"."""
-    alts = sorted((re.escape(t) for t in BANNED_TERMS), key=len, reverse=True)
-    return re.compile(rf"\b(?:{'|'.join(alts)})\b", re.IGNORECASE)
-
-
-_JARGON = _jargon_pattern()
 
 
 def _scripted_utterances(text: str, where: str) -> list[Violation]:
@@ -148,43 +133,29 @@ def check_library(library: TopicLibrary) -> list[Violation]:
 
 
 def check_registry() -> list[Violation]:
-    """Catch a careless edit to hand-written `prose`: jargon, scripted lines, wrong person."""
+    """Catch a careless edit to hand-written `prose`: scripted lines, wrong person."""
     out: list[Violation] = []
     for trait, values in TRAITS.items():
         for value, prose in values.items():
             where = f"{trait}={value}"
-            hits = sorted({m.group(0).lower() for m in _JARGON.finditer(prose)})
-            if hits:
-                out.append(
-                    Violation(
-                        "no_jargon",
-                        where,
-                        f"prose uses research vocabulary {hits}; describe what the student does, "
-                        "not the construct it instantiates",
-                    )
-                )
             out.extend(_scripted_utterances(prose, where))
             if "the student" in prose.lower():
                 out.append(Violation("second_person", where, "prose says 'the student'; write to them as 'you'"))
     return out
 
 
+def persona_tokens(sections: dict[str, str]) -> int:
+    """What the model is actually sent, headings included.
+
+    Not what the old budget check measured - it joined the raw section bodies, a string that
+    appears nowhere, and so under-counted by the seven headings (about 45 tokens).
+    """
+    return estimate_tokens(render.render(sections))
+
+
 def check_rendered(sections: dict[str, str], library: TopicLibrary, where: str) -> list[Violation]:
-    """Belt-and-braces on the assembled persona: budget, and a leak the library lint could miss."""
+    """A leak the library lint could miss: an answer term reaching a section it should not."""
     out: list[Violation] = []
-    # Measure what the model is actually sent, headings included. This used to join the raw section
-    # bodies, which is not a string that appears anywhere - it under-counted by the seven headings,
-    # about 45 tokens, so the budget was quietly 45 looser than it claimed.
-    total = estimate_tokens(render.render(sections))
-    if total > TOKEN_BUDGET:
-        out.append(
-            Violation(
-                "budget",
-                where,
-                f"about {total} tokens, over the {TOKEN_BUDGET} budget. It is prepended to every "
-                "student turn, and past this the levels stop separating.",
-            )
-        )
     for key, text in sections.items():
         if key in render.ANSWER_LEAK_EXEMPT:
             continue

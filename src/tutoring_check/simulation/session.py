@@ -12,14 +12,19 @@ import litellm
 from litellm import acompletion
 
 from tutoring_check.personas.traits import REGISTRY_VERSION
-from tutoring_check.simulation.config import SessionConfig
+from tutoring_check.simulation.config import TURNS_PER_SPEAKER, SessionConfig
 from tutoring_check.simulation.student import build_student_system_prompt
 from tutoring_check.simulation.tutor import build_tutor_system_prompt
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 from tutoring_check.vertex_auth import with_adc_token
 
 
-TURNS_PER_SPEAKER = 10
+# `TURNS_PER_SPEAKER` is imported from `config.py` rather than defined here, so `catalog.py` can
+# default to it without importing this module - that import would pull litellm into
+# `personas.cli lint`, which deliberately defers the simulation package.
+#
+# Conversation length changes what a tutor can get through, so a 20-message run and a 30-message run
+# are not comparable as tutors. The value used is written into the transcript header.
 
 
 def _completion_kwargs(
@@ -107,6 +112,40 @@ async def _acompletion_with_metrics(kwargs: dict, concurrency: int) -> tuple[Any
     return response, text, metrics
 
 
+class EmptyTurnError(RuntimeError):
+    """A speaker returned no text, so the transcript would have a hole in it.
+
+    Seen in practice with `reasoning_effort="none"` on vertex_ai/gemini-3.5-flash: the request
+    carries the flag, the model reasons anyway, and one turn spent 326 of its 327 completion tokens
+    on reasoning and returned a bare newline. `finish_reason` was "stop", so nothing downstream
+    would have noticed - the transcript simply had an empty tutor turn in the middle of it, and the
+    student, correctly, asked if they were still there.
+
+    Raised rather than logged because a transcript with a hole is not a smaller sample, it is a
+    corrupt one, and the cell should be re-run. Delete the cell directory to retry: `cli.py` skips
+    any cell whose transcript.jsonl already exists, including a partial one.
+    """
+
+
+async def _speak(
+    request: dict, concurrency: int, *, role: str, turn: int
+) -> tuple[Any, str, dict]:
+    """One turn, retried once if it comes back empty."""
+    response, text, metrics = await _acompletion_with_metrics(request, concurrency)
+    if text.strip():
+        return response, text, metrics
+
+    response, text, metrics = await _acompletion_with_metrics(request, concurrency)
+    if text.strip():
+        metrics["retried_after_empty"] = True
+        return response, text, metrics
+
+    raise EmptyTurnError(
+        f"{role} returned no text on turn {turn}, twice. Completion tokens went to reasoning: "
+        f"{metrics.get('reasoning_tokens')} reasoning vs {metrics.get('completion_tokens')} total."
+    )
+
+
 async def run_session(
     config: SessionConfig,
     *,
@@ -118,6 +157,7 @@ async def run_session(
     tutor_model_params: dict | None = None,
     student_model_params: dict | None = None,
     concurrency: int = 1,
+    turns_per_speaker: int = TURNS_PER_SPEAKER,
 ) -> Path:
     out_dir = output_root
     logger = JsonlLogger(out_dir=out_dir)
@@ -149,19 +189,33 @@ async def run_session(
             "tutor_reasoning": tutor_reasoning,
             "student_reasoning": student_reasoning,
             "concurrency": concurrency,
+            "turns_per_speaker": turns_per_speaker,
             "tutor_system_prompt": tutor_system,
             "student_static_prompt": student_static,
         }
     )
 
-    # The tutor speaks first, posing the learning question; each side sees only spoken text.
-    # A pre-loaded message opens the conversation by having the tutor pose the question.
+    # The tutor speaks first; each side sees only spoken text. A pre-loaded message opens the
+    # conversation.
+    #
+    # The first turn is an introduction, not the question. Real sessions do not open cold on an
+    # assessment item, and opening on one gave every transcript the same abrupt shape. It also
+    # gains something: the student's reply here is the cleanest read on their register, before any
+    # subject matter is in play.
+    #
+    # No human name and no small talk. Left to itself the tutor invented one ("I'm Amit") and made
+    # up a settling question, both of which vary run to run and neither of which is under study -
+    # an unmeasured source of variance in the first thing the student ever sees. Naming the topic
+    # and asking if they are ready is the same social opening with nothing improvised in it.
+    #
+    # Scoped to the first message explicitly - this stays in the tutor's context for the whole
+    # conversation, so an unscoped "do not ask the question" would keep suppressing it.
     messages: list[dict[str, Any]] = [
         {"role": "system", "content": tutor_system},
         {
             "role": "user",
             "content": (
-                "Begin the conversation. Open by posing the learning question to the student. Address the student, not this message."
+                f"Begin the conversation. For this first message only: introduce yourself as the student's AI tutor. Say that today's topic is {config.topic}, and ask whether they are ready to start. Do not pose the learning question itself yet. From your next turn onward, move into the learning question and teach as your instructions. Address the student, not this message."
             ),
         },
     ]
@@ -169,13 +223,15 @@ async def run_session(
     student_turns: list[dict[str, Any]] = []
 
     turn_id = 0
+    reasoning_spent = {"tutor": 0, "student": 0}
     # Each iteration is one tutor turn followed by one student turn.
-    # The conversation is a fixed TURNS_PER_SPEAKER iterations long.
-    for step in range(TURNS_PER_SPEAKER):
+    for step in range(turns_per_speaker):
         # Tutor turn
         tutor_request = _completion_kwargs(tutor_model, messages, tutor_reasoning, tutor_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "tutor", "payload": tutor_request})
-        tutor_response, tutor_text, tutor_metrics = await _acompletion_with_metrics(tutor_request, concurrency)
+        tutor_response, tutor_text, tutor_metrics = await _speak(
+            tutor_request, concurrency, role="tutor", turn=turn_id
+        )
         logger.log_api_response(
             {"timestamp": utc_now(), "role": "tutor", "raw_response": serialize_response(tutor_response), "metrics": tutor_metrics}
         )
@@ -184,13 +240,16 @@ async def run_session(
         )
         messages.append({"role": "assistant", "content": tutor_text})
         student_turns.append({"role": "user", "content": tutor_text})
+        reasoning_spent["tutor"] += tutor_metrics.get("reasoning_tokens") or 0
         turn_id += 1
 
         # Student turn
         student_messages = [{"role": "system", "content": student_static}] + student_turns
         student_request = _completion_kwargs(student_model, student_messages, student_reasoning, student_model_params)
         logger.log_api_request({"timestamp": utc_now(), "role": "student", "payload": student_request})
-        student_response, student_text, student_metrics = await _acompletion_with_metrics(student_request, concurrency)
+        student_response, student_text, student_metrics = await _speak(
+            student_request, concurrency, role="student", turn=turn_id
+        )
         logger.log_api_response(
             {"timestamp": utc_now(), "role": "student", "raw_response": serialize_response(student_response), "metrics": student_metrics}
         )
@@ -205,9 +264,18 @@ async def run_session(
         )
         student_turns.append({"role": "assistant", "content": student_text})
         messages.append({"role": "user", "content": student_text})
+        reasoning_spent["student"] += student_metrics.get("reasoning_tokens") or 0
         turn_id += 1
 
+    # Reasoning tokens are recorded, not asserted. `tutor_reasoning` in the header says what was
+    # *requested*; these say what was *spent*. On Gemini 3 the two disagree and cannot be made to
+    # agree - see `catalog.reasoning_not_honoured` - so the transcript carries both.
     logger.log_transcript(
-        {"timestamp": utc_now(), "type": "session_end", "turns": turn_id}
+        {
+            "timestamp": utc_now(),
+            "type": "session_end",
+            "turns": turn_id,
+            "reasoning_tokens_spent": reasoning_spent,
+        }
     )
     return out_dir

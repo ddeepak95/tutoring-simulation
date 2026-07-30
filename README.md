@@ -168,6 +168,31 @@ PYTHONPATH=src python -m tutoring_check.cli --run-set data/run_set.json --item-i
 Each conversation is written to `runs/<folder_name>/<item_id>/r<n>/<timestamp>_<uuid>/` as
 `transcript.jsonl` plus raw `api_requests.jsonl` / `api_responses.jsonl`.
 
+### ⚠️ `reasoning: "none"` is not honoured on Gemini 3
+
+**Gemini 3 models cannot switch thinking off.** litellm maps `reasoning_effort="none"` to a *low*
+thinking level, never to zero, and a direct probe of `gemini-3.5-flash` and `gemini-3.1-pro-preview`
+confirmed it — `none`, `minimal`, `disable`, `thinking={"type":"disabled"}` and no setting at all
+all returned 200–580 reasoning tokens per call. There is no parameter that fixes this.
+
+Every run set in `data/` sets `"tutor_reasoning": "none"` and `"student_reasoning": "none"`, and
+those values are written verbatim into each transcript header. **They describe what was requested,
+not what happened.** A typical ten-turn conversation spends ~2,000 tutor and ~3,600 student
+reasoning tokens.
+
+So:
+
+- `cli.py` prints a warning once per model before spending anything.
+- `session_end` records `reasoning_tokens_spent` per speaker — the auditable version of the claim.
+- **Do not describe these runs as having reasoning disabled.** If the study needs a genuine
+  no-reasoning condition, it needs a model that supports one.
+
+A related failure this causes: a turn can spend its whole output budget on reasoning and return an
+empty string with `finish_reason: "stop"`. `session.py` retries such a turn once and then raises
+`EmptyTurnError` rather than writing a transcript with a hole in it. Because `cli.py` skips any
+cell whose `transcript.jsonl` already exists, **delete the cell directory before re-running a
+failed cell.**
+
 ## Run evaluation
 
 Annotate every conversation under a runs/ tree with the mTeach Instructional Ability moves (resume-safe):

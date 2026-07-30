@@ -1,77 +1,72 @@
 """Assembly of the student prompt.
 
-One fixed, hand-written frame plus the sections of a rendered persona
-(docs/student_personas.md). The frame varies only with the topic and the language - not with the
-level and not with who the student is - which is the comparability guarantee: a comparison across
-levels isolates the learner and nothing else. Everything else comes from `personas.render`, a pure
-function of (level, topic, profile, language): no model call here or anywhere downstream, so the
-same cell produces the same prompt every time.
+An opening frame, the rendered sections, and a closing reminder. Nothing else.
 
-**The frame states role and constraints. It never states motivation or affect.** That division is
-the whole reason the levels can differ. How much a student wants to understand is
-`goal_orientation`; how they hold up when it does not land is `affect_trajectory`; whether they ask
-for help is `help_seeking_style`. A fixed line asserting any of those overrides all four levels at
-once, and it overrides them toward the cooperative, eager default - which is exactly the
-under-specified student this design replaces.
+Everything the student is told is authored in `personas/render.py` - who they are, the topic, the
+language, what they believe, what words they have, how they write, what moves them, how they feel,
+what they want, what they do when stuck. This file used to restate the first three in a frame of
+its own, and every one of them caused a problem: the identity duplicated the profile section and
+could contradict it; a "The topic is:" heading told the student twice what it was there for; and a
+block of ground rules banned behaviours that traits were separately asking for, which is how
+`instrumental` help-seeking came to fail on the one level whose affect trait also told it to stop.
 
-The frame's inline `#` comments record prompt-engineering history and are worth keeping: they are
-what stops a fixed line being "improved" back into something already found to fail.
+The rule that survived all of that: **a fact stated in two places has two authors.** The sections
+are the author. If something needs saying to the student, it goes in a section, where it sits next
+to the trait it might conflict with and can be seen to.
+
+What lives here instead are the two things that are NOT facts about the student - they are
+instructions to the model about the simulation, and there is no section they could sit in:
+
+    ROLE      what this is and where to draw from, stated before the sections
+    REMINDER  to hold the character over a long conversation, stated after them
+
+Neither may restate anything a section says. `ROLE` deliberately does not tell the student to avoid
+the answer terms or to keep asking questions: the first is the vocabulary section's job and the
+second is `help_seeking_style`'s, and the last time this file gave orders in their territory it
+broke `instrumental` help-seeking on the one level whose affect trait pulled the other way.
 """
 from __future__ import annotations
 
-from tutoring_check.personas.render import render
+from tutoring_check.personas.render import SEPARATOR, render
 from tutoring_check.simulation.config import SessionConfig
+
+# Names the job before the sections arrive, so the eight headings are read as an identity to inhabit
+# rather than a brief to summarise.
+#
+# The middle clause is the only one genuinely about the model rather than the student, and it has to
+# name it as the model to land. No section can carry it: a section speaks to the student, who has
+# never heard of photosynthesis, while it is the model that knows the answer and has to set it
+# aside. That gap is where an answer leak comes from, and it is where the one leak in the last
+# `traits-v2` run came through.
+#
+# It used to close on "Be realistic and do not drift from the instructions", which is dropped. "Be
+# realistic" appeals to a standard the model fills in from its own priors, and the model's prior of
+# a realistic student is the articulate, cooperative, well-punctuated one - exactly the default the
+# whole persona exists to override. "Do not drift" was said twice: the clause before it says the
+# same thing, and REMINDER says it again below with the part that carries information.
+ROLE = (
+    "You are role-playing a student in a tutoring conversation. The instructions below describe "
+    "that student. As an AI model you know things this student does not but guide your responses "
+    "only based on the provided instructions."
+)
+
+# The only place drift is addressed, and it sits at the end because recency is its mechanism: over
+# ten exchanges the model gets steadily more cooperative and quicker to understand than the persona
+# says, and this is the last thing before the turns where that is worst.
+#
+# It names the DIRECTION of drift, which is the part a model can act on - "do not drift" alone says
+# nothing. An earlier version read "respond authentically as a confused but on-task student", which
+# described a fifth student no level defines and pulled the reluctant and flat levels back toward
+# engagement.
+REMINDER = (
+    "Stay this student even when the lesson goes badly. Do not get quicker, keener, or easier to "
+    "teach than the instructions say."
+)
 
 
 def build_student_system_prompt(config: SessionConfig) -> str:
     """The student system prompt for the conversation, carrying the cell's persona."""
     return (
-        # Role and premise only. Who the student is belongs to `who_you_are`.
-        #
-        # This line used to read "You are {name}, a student from {region} who genuinely doesn't
-        # understand a specific {topic} concept. Your goal is to learn, not to test the teacher."
-        # Three things were wrong with it. The identity duplicated the persona. The topic strings in
-        # topics_ci.json are titles, not clause fragments, so it produced "a specific Where a tree's
-        # mass comes from concept". And "your goal is to learn" is a motivation claim that
-        # contradicts `reluctant` outright - that level is built on performance-avoidance, whose
-        # whole point is that the student's goal is to not look stupid.
-        "You are a student in a one-to-one conversation with a teacher.\n"
-        f"The topic is: {config.topic}\n\n"
-
-        f"Speak entirely in {config.language}, written in its native script, throughout the conversation.\n\n"
-
-        # Before the persona, not after: the persona closes on what the student does when stuck,
-        # and two "what not to do" blocks in one prompt read as a contradiction waiting to happen.
-        #
-        # The last rule is the participation floor, and it is deliberately about turn-taking rather
-        # than willingness. "You are willing to say what you think" would guarantee the same turns
-        # while contradicting `avoidant` help-seeking, which is built on going quiet.
-        "Ground rules, whatever kind of student you are:\n"
-        "• You are the student, not the teacher. Let the teacher lead.\n"
-        "• Don’t ask leading questions or fish for specific information.\n"
-        "• Don’t suggest what to cover next, and don’t set out to test the teacher.\n"
-        "• You reply whenever the teacher says something to you.\n\n"
-
-        f"{render(config.persona_sections)}\n\n"
-
-        # The question itself is deliberately absent, and `config.question` is read only by the
-        # tutor now. The tutor opens the conversation by posing it (session.py), and across the
-        # English transcripts it always paraphrases rather than quotes - so putting the canonical
-        # wording here gave the student a second, differently-worded copy of a question nobody had
-        # asked yet. Two costs: the persona says the teacher is *about to* ask, which the block
-        # contradicted; and the tutor is instructed to frame the concept in the student's own
-        # regional context, which has less to bite on if the student is already holding the plain
-        # item text. What orients the student instead is the topic line above plus the library's
-        # `predicts`, which is written around the scenario in the student's own voice.
-        #
-        # It also removed a rare artifact: of six runs where the tutor opened with "are you ready?"
-        # instead of the question, one student answered anyway.
-
-        # Was "respond authentically as a confused but on-task student", which described a fifth
-        # student no level defines, and pulled the reluctant and flat levels back toward engagement.
-        # What a closing reminder is actually good for is resisting drift: over a long conversation
-        # the model gets steadily more cooperative and quicker to understand than the persona says.
-        "Reminder:\n"
-        "Stay the student described above for the whole conversation, including when that makes the "
-        "lesson go badly. Do not become easier to teach than that student would be.\n\n"
+        f"{ROLE}\n\n{render(config.persona_sections)}\n"
+        f"{SEPARATOR}\n## Reminder\n{REMINDER}\n"
     )
