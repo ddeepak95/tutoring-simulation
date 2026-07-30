@@ -253,6 +253,18 @@
   .turn.student .body { background: var(--bub-stu);   border-color: var(--bub-stu-edge); }
   .body { white-space: pre-wrap; overflow-wrap: anywhere; }
 
+  /* Mandarin turns print the pinyin over the character it belongs to. The extra line-height is
+     what makes room for the reading. */
+  /* The annotated turns are set a step larger than the plain ones: the reading is a fraction of the
+     character's size, so the character has to carry both. */
+  .body.ruby { font-size: calc(var(--step-turn) * 1.15); line-height: 2.05; }
+  .body.ruby ruby { ruby-position: over; ruby-align: center; }
+  .body.ruby rt {
+    font-family: var(--sans); font-size: .72em; font-weight: 400;
+    color: var(--ink); letter-spacing: 0; line-height: 1;
+    padding-bottom: .3em;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
   }
@@ -499,14 +511,29 @@ function renderControls() {
   }));
 }
 
-function turnBlock(kind, text, len, unit) {
+// A Mandarin turn arrives as [chunk, reading] pairs from the extract: one pair per character where
+// there is a reading, one pair for each unannotated run in between. Anything without readings is
+// still just text.
+function bodyBlock(text, readings) {
+  if (!readings) return el('div', 'body', text);
+  const b = el('div', 'body ruby');
+  b.append(...readings.map(([chunk, reading]) => {
+    if (!reading) return document.createTextNode(chunk);
+    const r = document.createElement('ruby');
+    r.append(chunk, el('rt', null, reading));
+    return r;
+  }));
+  return b;
+}
+
+function turnBlock(kind, text, len, unit, readings) {
   const t = el('div', 'turn ' + kind);
   const who = el('div', 'who');
   who.append(
     el('span', null, kind === 'tutor' ? 'Tutor' : 'Student'),
     el('span', 'wc', len + (unit === 'chars' ? 'c' : 'w')),
   );
-  t.append(who, el('div', 'body', text));
+  t.append(who, bodyBlock(text, readings));
   return t;
 }
 
@@ -535,8 +562,8 @@ function renderGrid() {
       const cell = el('div', 'cell' + (i === 0 ? ' first' : ''));
       if (!ex) { cell.style.setProperty('--c', HUE[m.key]); nodes.push(cell); continue; }
       cell.style.setProperty('--c', HUE[m.key]);
-      if (state.who !== 'student') cell.append(turnBlock('tutor', ex.tutor, ex.tw, l.unit));
-      if (state.who !== 'tutor') cell.append(turnBlock('student', ex.student, ex.sw, l.unit));
+      if (state.who !== 'student') cell.append(turnBlock('tutor', ex.tutor, ex.tw, l.unit, ex.tr));
+      if (state.who !== 'tutor') cell.append(turnBlock('student', ex.student, ex.sw, l.unit, ex.sr));
       nodes.push(cell);
     }
   }

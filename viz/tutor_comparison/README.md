@@ -11,9 +11,11 @@ Mandarin than in English" by eye, before anything gets scored.
 python viz/tutor_comparison/build.py
 ```
 
-Writes `tutor_comparison.html` in this directory. No dependencies beyond the standard library, and
-no build step for the page itself - the HTML is self-contained, with the CSS, the JavaScript and
-the whole dataset inlined, so it opens from the filesystem and can be attached to an email.
+Writes `tutor_comparison.html` in this directory. `pypinyin` is the one dependency (`uv pip install
+-e '.[viz]'`), used to read the Mandarin; nothing else is needed beyond the standard library, and
+there is no build step for the page itself - the HTML is self-contained, with the CSS, the
+JavaScript and the whole dataset inlined, so it opens from the filesystem and can be attached to an
+email.
 
 Run it from anywhere; paths resolve from the file's own location, not the working directory.
 
@@ -65,6 +67,16 @@ against the English one.
 **A run counts as finished only if its transcript contains a `session_end` record.** Testing that
 the file exists is not enough: a run killed part way leaves a partial transcript that passes an
 existence check and would quietly show up as a short conversation.
+
+## Pinyin over the Mandarin
+
+Mandarin turns are rendered as `<ruby>`, one reading over each character. The readings are computed at
+build time by `readings()` in `extract.py` and travel with the data as `tr` / `sr` on each exchange.
+
+`readings()` hands whole runs of characters to pypinyin rather than one character at a time. The
+phrase dictionary is the only thing that can tell 长大 (zhǎng) from 长度 (cháng), and it needs the
+neighbouring characters to do it. Punctuation, digits and stray Latin pass through as unannotated
+chunks.
 
 ## Publishing
 

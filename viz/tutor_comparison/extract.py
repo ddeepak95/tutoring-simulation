@@ -11,6 +11,9 @@ topic dropdown as disabled options.
 
 Writes data.json next to this file. Run it from anywhere - paths are resolved from __file__, not
 from the working directory.
+
+Mandarin turns carry a pinyin reading per character alongside the text, so the page can print the
+reading above the character. The `pypinyin` package is imported where it is used.
 """
 import json
 from pathlib import Path
@@ -45,7 +48,39 @@ def measure(text: str, unit: str) -> int:
     return len(text.split()) if unit == "words" else len("".join(text.split()))
 
 
-def read(path: Path, unit: str) -> dict | None:
+def is_han(ch: str) -> bool:
+    """CJK unified ideographs, main block plus extension A - everything a transcript will contain."""
+    return "一" <= ch <= "鿿" or "㐀" <= ch <= "䶿"
+
+
+def readings(text: str) -> list[list[str]]:
+    """Split text into [chunk, reading] pairs; reading is "" for anything that is not a character.
+
+    Han runs come back one pair per character so the page can set the reading over exactly the
+    character it belongs to. The run, not the character, is what goes to pypinyin: 长 is chang or
+    zhang depending on the word it sits in, and the phrase dictionary only gets to disambiguate if
+    it can see the neighbours. Everything else - punctuation, digits, stray Latin - is passed
+    through as one unannotated chunk.
+    """
+    from pypinyin import Style, pinyin
+
+    out: list[list[str]] = []
+    run = ""
+    run_han = False
+    for ch in text + "\0":                      # sentinel flushes the last run
+        han = is_han(ch)
+        if run and (han != run_han or ch == "\0"):
+            if run_han:
+                out += [[c, p[0]] for c, p in zip(run, pinyin(run, style=Style.TONE))]
+            else:
+                out.append([run, ""])
+            run = ""
+        run_han = han
+        run += ch
+    return out
+
+
+def read(path: Path, unit: str, ruby: bool = False) -> dict | None:
     """One transcript, or None if it is missing or never reached session_end.
 
     The session_end check matters: a run killed part way leaves a transcript behind that looks
@@ -71,10 +106,14 @@ def read(path: Path, unit: str) -> dict | None:
     exchanges = []
     for i in range(0, len(turns) - 1, 2):
         t, s = turns[i], turns[i + 1]
-        exchanges.append({
+        ex = {
             "tutor": t[1], "student": s[1],
             "tw": measure(t[1], unit), "sw": measure(s[1], unit),
-        })
+        }
+        if ruby:
+            ex["tr"] = readings(t[1])
+            ex["sr"] = readings(s[1])
+        exchanges.append(ex)
 
     tw = [e["tw"] for e in exchanges]
     sw = [e["sw"] for e in exchanges]
@@ -105,7 +144,7 @@ def build() -> dict:
         for mk, _, _ in MODELS:
             for lk, _, unit in LANGS:
                 cell = f"{mk}-{lk}" if bare else f"{tkey}-{mk}-{lk}"
-                got = read(root / cell / "r0" / "transcript.jsonl", unit)
+                got = read(root / cell / "r0" / "transcript.jsonl", unit, ruby=lk == "zh")
                 if got:
                     data["cells"][f"{tkey}-{mk}-{lk}"] = got
                     present += 1
