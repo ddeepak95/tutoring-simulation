@@ -16,7 +16,7 @@ flowchart TD
     %% evaluator is the orchestrator
     evaluator -->|build prompt + schema| annotate
     evaluator -->|call| llm{{litellm}}
-    evaluator -->|check| validate[/validate · location substring/]
+    evaluator -->|tags to vector| vectorize[/presence vector over dimension_keys()/]
     evaluator -->|write record| runlog[runlog.py · JsonlLogger]
 
     subgraph annotate [annotator.py]
@@ -29,7 +29,7 @@ flowchart TD
 
     %% dimensions registry feeds the pipeline from the side
     dims[(dimensions.py<br/> dimensions registry)] -. generates prompt + schema .-> annotate
-    dims -. supplies validation rules .-> validate
+    dims -. orders the vector's columns .-> vectorize
 
     classDef store fill:#eef,stroke:#5566aa,color:#222;
     classDef ext fill:#efe,stroke:#557755,color:#222;
@@ -59,63 +59,63 @@ Here is the header schema for `evaluation_transcript.jsonl`.
   "scenario_type": "CI|CD",
   "region": ...,
   "language": ...,
+  "mode": ...,
   "annotator_model": ...,
+  "annotator_reasoning": ...,    # reasoning effort, or null
+  "annotator_prompt": ...,       # the PROMPT_VERSIONS name the run was annotated under
   "tutor_model": ...,            # copied from the transcript
-  "transcript_path": ... }
+  "transcript_path": ...,
+  "dimensions": [...] }          # dimension_keys(), naming each column of the per-turn vectors
 ```
 
 
 ## Dimensions
 
-Most dimensions are countable tutor moves, organized as leaves under parent categories. The leaves (keyed in parentheses) are the move vocabulary. Each leaf lists the utterances that illustrate it — examples (that count) and, where useful, non-examples (near-misses that don't). Affective Support is the exception: it is a 1–5 rating rather than a present/absent move (see below).
+Every dimension is a countable tutor move, present or absent on a turn, organized as leaves under parent categories. The leaves (keyed in parentheses) are the move vocabulary. Names are Verb + Noun by what the tutor does: Elicit draws content out of the student, Provide gives content or support, Request asks the student about their own process or state.
 
-1. Checking Understanding — questions that surface what the student knows or believes.
-   1.1 Eliciting Knowledge (`eliciting_knowledge`): probes recall of a definition or basic comprehension.
-   - "What does 'velocity' mean?" — directly probing recall of a definition.
-   - "Can you tell me what the variables mean in this equation?" — checking basic comprehension.
-   - "How has the temperature changed?" — checking solving skills.
-   1.2 Eliciting Reasoning/Justification (`eliciting_reasoning`): asks the student to justify or reason through a specific claim.
-   - "Elaborating on the 'tusk-hunting cultures' you mentioned, how have elephants adapted?" — asking them to justify a specific claim.
-   - "Why do you think the volume of the liquid expanded?" — probing the reasoning behind a claim made by the teacher or student.
-   1.3 Eliciting Real-World Application of Knowledge (`eliciting_application`): asks the student to apply or transfer a concept to a new context.
-   - "Can you give me an example of where you'd use the Pythagorean theorem in real life?" — asking them to apply a concept.
-   - "Where else have you seen fractions show up outside of math class?" — prompting transfer to new contexts.
-   1.4 Follow-up Probing (`follow_up_probing`): asks a question that goes deeper on the student's immediately preceding answer rather than opening a new thread.
-   - "You said the ball falls because it's heavy — so what would happen if it weighed half as much?" — presses directly on the claim just made.
-   - "Okay, and why do you think the air pushes back harder at higher speeds?" — digs a layer deeper into the reason just given.
-   - [Doesn't count] "Let's move on — can you tell me what density means?" — opens a new thread instead of going deeper.
-   1.5 Understanding Checkpoint (`understanding_checkpoint`): asks the student to restate, summarize, or explain the concept back in their own words to confirm they have it.
-   - "Can you put in your own words why the two balls land at the same time?" — asks the student to explain the concept back.
-   - "Before we go on, how would you summarize what we just figured out?" — a checkpoint asking the student to summarize.
-2. Scaffolding — information or structure to help the student progress.
-   2.1 Hinting (`hinting`): partial guidance or a directional nudge that stops short of solving it; usually phrased as a question that points the student toward the next step.
-   - "Think about what happens to the equation if you move everything to one side." — directional nudge but doesn't solve it.
-   - "For the next step, what do you notice about the two denominators?" — draws attention to a feature and prompts the next step.
-   2.2 Explaining (`explaining`): direct instruction, elaboration, worked example, or analogy.
-   - "So the equals sign means both sides have to stay balanced, like a scale. Whatever you do to one side, you do to the other." — analogy.
-   - "Actually, X-rays and gamma rays differ in frequency." — direct explanation.
-3. Metacognitive Prompting — asks the student to reflect on or plan their own thinking or process, not the content itself.
-   3.1 Planning Ahead (`planning_ahead`): asks the student to plan or think ahead about their approach before acting.
-   - "Explain how you will set up that equation." — asking student to plan their process out loud.
-   - "Before you start, what's your plan for tackling this problem?" — prompting the student to plan ahead.
-   - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
-   3.2 Reflecting Back (`reflecting_back`): asks the student to reflect back on their thinking, choices, or process after the fact.
-   - "What made you decide to use subtraction there?" — reflecting on a choice already made.
-   - "Looking back, what would you do differently next time?" — reflecting on their own process after the fact.
-   - [Doesn't count] "Explain your thinking." — eliciting reasoning about their response, not reasoning about their thinking.
-4. Affective Support — how warm the tutor's tone is toward the student. Unlike the moves above, this is not present/absent: every tutor turn carries some tone, so it is rated on a 1–5 scale (`affective_tone`) from neutral to strongly positive.
-   - 1 = Neutral: purely informational, no affective coloring.
-   - 2 = Acknowledging: registers the student's state or names a misconception as common, without warmth.
-   - 3 = Mildly encouraging: light, passing affirmation of the student.
-   - 4 = Warm: clear affirmation of the student's thinking, effort, or progress.
-   - 5 = Strongly positive: explicit praise or celebration of the student's effort or progress.
-5. Personalized Contextualization — framing a concept using a scenario, context, or reference drawn from this specific student's known region, background, or interests.
-   5.1 Cultural/Regional Grounding (`cultural_regional_grounding`): grounds the concept in the student's cultural or regional context.
-   - "Imagine making 10 empanadas, and your friend ate 3 of them." — frames the problem around a food tied to the student's background.
-   - "If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?" — tipping and tax norms vary by region, so this frames the problem around the student's regional context.
+Each leaf is given in two tiers. The **description** is the move itself, and is the test the tag is decided on. The **forms** are the shapes the move commonly takes; they illustrate the description and never bound it, so a turn that fits the description but matches none of the listed forms is still an instance of the move. (A third tier, example and non-example utterances, is defined in `dimensions.py` but left empty while the rubric is piloted on descriptions alone.)
 
-A move is tagged only when its behavior, as described above, is exhibited on the turn. The moves are not mutually exclusive: a turn may carry several, but at most one instance of any given move. Affective Support is always rated exactly once per turn on its 1–5 scale.
+No move is a residual bucket: a turn matching nothing is tagged with nothing. A catch-all attracts whatever a marker cannot place, and its agreement figure is then the one number that cannot be interpreted.
 
+Prevalence is topic-dependent by design, and a move only earns its place if it can fire in any scenario. Asking the student to compute an answer was tried as a move on its own and dropped: common in a quantitative scenario and near-absent in a conceptual one, it measured the scenario rather than the tutor. It now sits as one form of Elicit Application, alongside the non-quantitative shapes that same move takes.
+
+This section is generated from `dimensions.py`, which is the single source of truth.
+
+1. Understanding Check
+   1.1 Elicit Recall (`elicit_recall`): Tutor asks the student for a general rule, principle, or formula from the subject matter. The student states it rather than using it.
+   - Commonly appears as: asking for a fact, definition, formula, law, or named principle; asking for a sequence or set of steps; asking what a worked case shows in general.
+   1.2 Elicit Application (`elicit_application`): Tutor asks the student to apply knowledge on a particular case. The student uses it rather than stating it.
+   - Commonly appears as: asking for a value to be computed or a problem to be solved end-to-end; asking what happens under a stated condition; asking for a real-life application.
+   1.3 Elicit Elaboration (`elicit_elaboration`): Tutor asks the student to justify or expand on something they said. The question can only be answered by referring back to the student's own words.
+   - Commonly appears as: asking for the reasoning behind an answer; asking 'how' or 'why' about something they said; asking for more detail on a point they made.
+   1.4 Elicit Summary (`elicit_summary`): Tutor asks the student to account for what has been covered. The scope is the lesson rather than any single point in it.
+   - Commonly appears as: asking for a summary of the lesson so far; asking for an explanation of what they have learned.
+2. Scaffolding
+   2.1 Provide Explanation (`provide_explanation`): Tutor supplies knowledge directly rather than having the student produce it.
+   - Commonly appears as: stating a concept, rule, or principle; explaining a procedure or a line of reasoning; working an example through; giving an analogy or a comparison.
+   2.2 Provide Hint (`provide_hint`): Tutor points the student toward material they weren't already using. If the hint were removed, the student's task would be different. It does not spell out the material outright and is not material the question already sets up.
+   - Commonly appears as: naming a concept, law, or formula to use, without stating what it says; proposing a case or step to try that the student was not already working with; pointing at a feature or place to look that the student was not already working with.
+3. Metacognition
+   3.1 Request Planning (`request_planning`): Tutor asks the student to describe their planned approach.
+   - Commonly appears as: asking which strategy they will use, and why; asking for a prediction of possible challenges; asking how to approach a similar problem differently next time.
+   3.2 Request Reflection (`request_reflection`): Tutor asks the student to look back on their learning experience.
+   - Commonly appears as: asking what was difficult or confusing; asking what the student would do differently; asking how the student's understanding has changed.
+   3.3 Request Status (`request_status`): Tutor asks the student to report whether they are following.
+   - Commonly appears as: asking if it makes sense; asking if the student has any questions; asking whether to continue or go over it again; asking how confident or comfortable the student feels.
+4. Affective Support
+   4.1 Provide Encouragement (`provide_encouragement`): Tutor offers affective/motivational support directed at the student as a person independent of whether their answer was correct.
+   - Commonly appears as: praising the student's effort or persistence; affirming the student's progress; reassuring the student that a difficulty, mistake, or confusion is normal; expressing confidence in the student's ability to succeed.
+   4.2 Provide Confirmation (`provide_confirmation`): Tutor evaluates the correctness of the student's answer rather than the student as a person. Restating what the student thinks, without assessing it, is not enough.
+   - Commonly appears as: explicitly confirming the correctness of the student's answer, whether stated plainly or as praise.
+5. Personalized Contextualization
+   5.1 Provide Contextualization (`provide_contextualization`): Tutor draws on this student's own life or surroundings rather than a generic setting. Any mention counts, including one that carries on a setting already introduced earlier.
+   - Commonly appears as: using a scenario from the student's region or local surroundings (e.g. plants, landmarks); drawing on the student's stated interests or information about themselves; using local units.
+
+A move is tagged only when its behavior, as described above, is exhibited on the turn. The moves are not mutually exclusive: a turn may carry several, but at most one instance of any given move, and a single sentence or phrase may exhibit more than one move.
+
+### Prompt versions
+
+The dimensions' wording is still being tuned, so `instruction_annotator.PROMPT_VERSIONS` holds several phrasings of the annotator system prompt side by side, varying in how much is given beyond each move's description. `v1_baseline` gives the description plus the forms the move commonly takes; `v2_no_forms` is the ablation that gives descriptions alone. Running the two against each other measures what the forms are doing: if they are read as an exhaustive list rather than as illustrations, `v1_baseline` tags strictly fewer turns than `v2_no_forms`. Every version reads the vocabulary from `dimensions.py`, so none of them can drift from the registry. Pick one with `--annotator-prompt`; it is recorded in the evaluation header as `annotator_prompt`, since two runs are only comparable if annotated under the same wording. `uv run python -m tutoring_check.evaluation.instruction_annotator --version <name>` prints one for eyeballing or diffing.
 
 ## The annotator
 
@@ -123,30 +123,30 @@ Each utterance (tutor message) is evaluated by a single annotator model. It must
 
 The annotator sees the full transcript and reads it turn-by-turn. For each tutor turn, the whole conversation is rendered once with that target turn marked, and the annotator labels the marked turn only.
 
-The annotator reads the transcript in the original language. Regardless of the transcript's language, the `reasoning` fields are written in English, so an analyst can review uniformly.
+The student's region is given above the dialogue, and is the only thing from the run header that is. The human marker has the region too. Run sets that left region unset get no line rather than an empty one.
+
+The annotator reads the transcript in the original language, while its instructions and its output vocabulary are English, so runs in different languages are directly comparable.
 
 
 ## Move identification
 
-The annotator executes move identification. The dimension leaves above are the move vocabulary. For the marked turn, the annotator tags which moves occur and omits the rest exactly as in an example per-utterance prompt from the National Tutoring Observatory's RND. Each tagged move records a `location` (a verbatim substring of the turn) and a `reasoning` in English.
+The annotator executes move identification. The dimension leaves above are the move vocabulary. For the marked turn, the annotator returns the keys of the moves it carries and omits the rest, as in an example per-utterance prompt from the National Tutoring Observatory's RND. An empty list is a valid answer and means the turn carries none of the moves.
 
-In this mode, the per-tutor-turn record is a list of tagged moves:
+The returned keys are turned into a 0/1 presence vector over `dimension_keys()`, in the order the header's `dimensions` lists them, so the per-tutor-turn record is one vector:
 
 ```
 { "timestamp": ...,
   "turn_id": <int>,
-  "moves": [
-     { "move": "<dimension_key>",                    # one of the dimension leaf keys
-       "location": "<quote>",                        # exact substring of the tutor turn
-       "reasoning": ...                              # English
-     }, ... ] }
+  "dimensions": [0, 1, 0, ...] }   # one entry per key in the header's `dimensions`
 ```
 
-## Location and reasoning
+The last record of the file is the conversation total, each dimension's column summed over all tutor turns:
 
-`location` is a verbatim quote, an exact substring copied from the tutor turn, so it can be found back in the text with a string search. Every tagged move records one, pointing to where the move occurred.
+```
+{ "timestamp": ..., "totals": [<int>, ...] }
+```
 
-`reasoning` is recorded for every tagged move, in English. It is an audit and aid for prompt-iteration and not a score.
+A per-move `reasoning` field is not emitted and is TBD: one English line per tag, whatever the transcript's language, as an audit trail and an aid to prompt iteration rather than a score. It is worth adding once the vocabulary settles, since it is what makes a judge-vs-human disagreement adjudicable instead of merely countable.
 
 
 ## Validation (TBD)

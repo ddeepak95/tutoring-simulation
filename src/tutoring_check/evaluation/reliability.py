@@ -14,7 +14,7 @@ import random
 from dataclasses import dataclass
 from pathlib import Path
 
-from tutoring_check.evaluation.dimensions import dimension_keys, scale_keys
+from tutoring_check.evaluation.dimensions import dimension_keys
 
 # A single coded unit: one tutor turn of one conversation in one language.
 CodeKey = tuple[str, str, int]
@@ -328,15 +328,6 @@ def scale_agreement(
     )
 
 
-def compare_scales(
-    raters: dict[str, dict[CodeKey, list[int]]], *, keys: list[CodeKey], n_boot: int = 5000
-) -> list[ScaleAgreement]:
-    """Score every ordinal scale dimension across the panel over the shared `keys`."""
-    return [
-        scale_agreement(raters, dimension_index=i, dimension=key, keys=keys, n_boot=n_boot)
-        for i, key in enumerate(scale_keys())
-    ]
-
 
 def load_human_codes(path: Path) -> tuple[dict[CodeKey, list[int]], dict[CodeKey, str]]:
     """Read hand-coded turns from a CSV with coder, scenario, language, turn_id, then one dimension per column.
@@ -412,35 +403,6 @@ def load_judge_codes(runs_dir: Path) -> dict[CodeKey, list[int]]:
             codes[(scenario, language, row["turn_id"])] = [1 if v > 0 else 0 for v in row["dimensions"]]
     return codes
 
-
-def load_judge_scales(runs_dir: Path) -> dict[CodeKey, list[int]]:
-    """Read every `evaluation_transcript*.jsonl` under `runs_dir` for its ordinal scale ratings.
-
-    Returns one integer vector over `scale_keys()` per turn, keyed like `load_judge_codes`.
-    Raises if a file was written under a stale scale vocabulary, which would misalign the columns.
-    """
-    keys = list(scale_keys())
-    scales: dict[CodeKey, list[int]] = {}
-    for path in sorted(runs_dir.rglob("evaluation_transcript*.jsonl")):
-        if path.name.endswith(("_requests.jsonl", "_responses.jsonl")):
-            continue
-        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-        if not rows:
-            continue
-        header = rows[0]
-        if header.get("scales") != keys:
-            raise ValueError(
-                f"{path}: scale vocabulary {header.get('scales')} does not match "
-                f"the current {keys}; re-run the annotator on this file"
-            )
-        scenario = path.parent.parent.name
-        mode = header.get("mode")
-        language = f"{header['language']} ({mode})" if mode else header["language"]
-        for row in rows:
-            if "turn_id" not in row:
-                continue
-            scales[(scenario, language, row["turn_id"])] = list(row["scales"])
-    return scales
 
 
 def compare(

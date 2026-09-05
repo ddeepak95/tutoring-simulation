@@ -1,83 +1,133 @@
-"""Assemble the Instructional Ability annotator's prompts and structured-output schema.
+"""Assemble the annotator's prompts and structured-output schema.
 
-The annotator identifies which Instructional Ability moves a tutor turn makes,
-adapted from a per-utterance move-tagging prompt with a math context (National Tutoring Observatory RND).
+The annotator returns the keys of the moves a tutor turn makes, and the evaluator turns them into a 0/1
+vector. Reasoning comes from the model's `reasoning_effort`.
+
+`PROMPT_VERSIONS` holds several phrasings side by side so a run can be repeated and the agreement
+compared; all read the vocabulary from `dimensions.py`, so none can drift from the registry.
 """
 from __future__ import annotations
 
-from tutoring_check.evaluation.dimensions import DIMENSIONS, SCALES, Dimension, ScaleDimension
+from collections.abc import Callable
+
+from tutoring_check.evaluation.dimensions import DIMENSIONS, Dimension
 from tutoring_check.evaluation.transcript import Transcript
 
 _MOVES: tuple[Dimension, ...] = DIMENSIONS
-_SCALES: tuple[ScaleDimension, ...] = SCALES
 
 
-def _move_catalog_entry(d: Dimension) -> str:
-    """Render one move as its name, key, criterion, and the examples that bound it."""
-    lines = [f"- {d.name} [{d.key}]: {d.criteria}"]
-    for ex in d.examples:
-        lines.append(f"    - Counts: {ex.text} ({ex.note})")
-    for ex in d.non_examples:
-        lines.append(f"    - Doesn't count: {ex.text} ({ex.note})")
+def _move_catalog_entry(d: Dimension, *, forms: bool, examples: bool) -> str:
+    """Render one move: name, key, description, and whatever illustrates it."""
+    lines = [f"- {d.name} [{d.key}]: {d.description}"]
+    if forms and d.forms:
+        lines.append(f"    Commonly appears as (not an exhaustive list): {' '.join(d.forms)}")
+    if examples:
+        for ex in d.examples:
+            lines.append(f'    - Counts: "{ex.text}" ({ex.note})')
+        for ex in d.non_examples:
+            lines.append(f'    - Doesn\'t count: "{ex.text}" ({ex.note})')
     return "\n".join(lines)
 
 
-def _move_catalog() -> str:
-    """Render the allowed moves grouped under their parent categories, preserving order."""
+def _move_catalog(*, forms: bool = True, examples: bool = True) -> str:
+    """Render the moves grouped under their categories, in registry order, one blank line apart."""
     lines: list[str] = []
     current_category: str | None = None
     for d in _MOVES:
         if d.category != current_category:
             current_category = d.category
+            if lines:
+                lines.append("")
             lines.append(f"{current_category}")
-        lines.append(_move_catalog_entry(d))
+        lines.append(_move_catalog_entry(d, forms=forms, examples=examples))
     return "\n".join(lines)
 
 
-def _scale_catalog() -> str:
-    """Render each scale-rated dimension as its criterion and the meaning of every rating level."""
-    lines: list[str] = []
-    for s in _SCALES:
-        lines.append(f"{s.category}")
-        lines.append(f"- {s.name} [{s.key}]: {s.criteria}")
-        for level in s.levels:
-            lines.append(f"    - {level.value} = {level.descriptor}")
-    return "\n".join(lines)
+def _baseline(examples: bool = True) -> str:
+    """Each move as its description plus the forms it commonly takes."""
+    return f"""You are an expert annotator of tutoring dialogue.
+Read the dialogue in the original language, then decide, for each move listed below, whether the tutor turn marked inside <target_turn> makes that move.
+Return the keys of the moves it makes. You are describing what the tutor did, not judging how well they did it: a move made poorly is still that move.
+Decide each move on its description and forms (the shapes it commonly but not always takes).
+
+## Moves
+{_move_catalog(forms=True, examples=examples)}
+
+Return every move the marked turn makes, each at most once, using the keys exactly as written above, and read the rest of the dialogue as context only.
+A `Student region:` line may precede the dialogue; it is not a turn, and says what counts as this student's own surroundings for provide_contextualization.
+
+## Output
+moves = the keys of the moves the marked turn makes; an empty list if it makes none.
+"""
 
 
-def build_system_prompt() -> str:
-    """The fixed annotator system prompt: tag the present moves and rate the scale dimensions."""
-    catalog = _move_catalog()
-    scales = _scale_catalog()
-    return (
-        "You are an expert tutor.\n"
-        "Your task is to identify every move the tutor made in the turn marked inside <target_turn>, "
-        "and to rate that turn on each scaled dimension.\n\n"
-        "Workflow\n"
-        "1. Read the dialogue.\n"
-        "2. Tag every instance of a move from the *Allowed Moves* list in the marked turn.\n"
-        "3. Give the marked turn one rating for each dimension in *Scaled Dimensions*.\n"
-        "Allowed Moves\n"
-        f"{catalog}\n\n"
-        "Scaled Dimensions\n"
-        f"{scales}\n\n"
-        "Clarifications (follow these exactly):\n"
-        "- Return **only** moves from the Allowed Moves list by their key, no synonyms or casing changes.\n"
-        "- Tag only the marked <target_turn>; use the rest of the dialogue as context only.\n"
-        "- Tag each turn independently: if a move's behavior is present, tag it even if it also appeared in an earlier turn.\n"
-        "- The moves are not mutually exclusive: the same turn may carry multiple moves.\n"
-        "- A single sentence or phrase may exhibit more than one move. Each turn has at most one instance of any move.\n"
-        "- Every scaled dimension gets exactly one integer rating from its listed levels; a turn always has a tone, so there is no 'absent'.\n\n"
-        "Output your choices into the JSON structure where:\n"
-        "move = the move's key from the Allowed Moves list.\n"
-        "each scaled dimension's key = its integer rating.\n"
-        # TODO: add few-shot examples based on performance
-    )
+def _no_forms(examples: bool = True) -> str:
+    """Each move as its description alone."""
+    return f"""You are an expert annotator of tutoring dialogue.
+Read the dialogue in the original language, then decide, for each move listed below, whether the tutor turn marked inside <target_turn> makes that move.
+Return the keys of the moves it makes. You are describing what the tutor did, not judging how well they did it: a move made poorly is still that move.
+Decide each move on its description.
+
+## Moves
+{_move_catalog(forms=False, examples=examples)}
+
+Return every move the marked turn makes, each at most once, using the keys exactly as written above, and read the rest of the dialogue as context only.
+A `Student region:` line may precede the dialogue; it is not a turn, and says what counts as this student's own surroundings for provide_contextualization.
+
+## Output
+moves = the keys of the moves the marked turn makes; an empty list if it makes none.
+"""
+
+
+def _bullets(examples: bool = True) -> str:
+    """The baseline's content as terse bullets rather than prose."""
+    return f"""You are an expert annotator of tutoring dialogue.
+For each move listed below, decide whether the tutor turn marked inside <target_turn> makes it, and return that move's key.
+
+## Moves
+{_move_catalog(forms=True, examples=examples)}
+
+## Rules
+- Read the dialogue in its original language.
+- Decide each move on its description. Forms are shapes it commonly, not always, takes.
+- Describe what the tutor did, not how well: a move made poorly still counts.
+- Mark the <target_turn> only. The rest of the dialogue is context.
+- Return every move it makes, each at most once, keyed exactly as above.
+- `Student region:` is not a turn. It says what counts as this student's own surroundings for provide_contextualization.
+
+## Output
+moves = the keys of the moves the marked turn makes; an empty list if it makes none.
+"""
+
+
+# Keep old entries once a run has used them, so a header's `annotator_prompt` still resolves.
+PROMPT_VERSIONS: dict[str, Callable[[], str]] = {
+    "v1_baseline": _baseline,
+    "v2_no_forms": _no_forms,
+    "v3_bullets": _bullets,
+}
+
+DEFAULT_PROMPT_VERSION = "v1_baseline"
+
+
+def build_system_prompt(version: str = DEFAULT_PROMPT_VERSION) -> str:
+    """The fixed annotator system prompt for `version`: tag the moves present in the marked turn."""
+    try:
+        return PROMPT_VERSIONS[version]()
+    except KeyError:
+        raise ValueError(
+            f"unknown annotator prompt version {version!r}; known versions: {', '.join(PROMPT_VERSIONS)}"
+        ) from None
 
 
 def mark_dialogue(transcript: Transcript, target_turn_id: int) -> str:
-    """Render the full conversation with `target_turn_id` wrapped in <target_turn>; all instruction lives in the system prompt."""
-    lines: list[str] = []
+    """Render the region and the full conversation, with `target_turn_id` wrapped in <target_turn>.
+
+    Region is the only thing carried over from the run header; Provide Contextualization cannot be
+    decided without it.
+    """
+    lines = [f"Student region: {transcript.region}", ""] if transcript.region else []
+    lines.append("Dialogue:")
     for t in transcript.turns:
         speaker = "Tutor" if t.is_tutor else "Student"
         line = f"[{t.turn_id}] {speaker}: {t.content}"
@@ -88,31 +138,36 @@ def mark_dialogue(transcript: Transcript, target_turn_id: int) -> str:
 
 
 def response_format() -> dict:
-    """The structured-output schema: the present move keys plus one integer rating per scale dimension.
-
-    Each turn has at most one instance of any move, so the annotator returns each present move key at
-    most once; the evaluator turns this into a 0/1 vector over `dimension_keys()`. Each scale dimension
-    is a required integer constrained to its allowed values.
-    """
-    keys = [d.key for d in _MOVES]
-    properties: dict = {
-        "moves": {
-            "type": "array",
-            "items": {"type": "string", "enum": keys},
-            "uniqueItems": True,
-        }
-    }
-    for s in _SCALES:
-        properties[s.key] = {"type": "integer", "enum": list(s.values())}
+    """The structured-output schema: the keys of the moves present in the marked turn, each at most once."""
     return {
         "type": "json_schema",
         "json_schema": {
             "name": "tutoring_moves",
             "schema": {
                 "type": "object",
-                "properties": properties,
-                "required": ["moves", *(s.key for s in _SCALES)],
+                "properties": {
+                    "moves": {
+                        "type": "array",
+                        "items": {"type": "string", "enum": [d.key for d in _MOVES]},
+                        "uniqueItems": True,
+                    }
+                },
+                "required": ["moves"],
                 "additionalProperties": False,
             },
         },
     }
+
+
+def main() -> int:
+    """Print one prompt version."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Print an annotator system prompt version.")
+    parser.add_argument("--version", default=DEFAULT_PROMPT_VERSION, choices=sorted(PROMPT_VERSIONS))
+    print(build_system_prompt(parser.parse_args().version))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

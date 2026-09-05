@@ -1,9 +1,14 @@
 """The tutoring dimensions the evaluator scores on each tutor turn.
 
-Most dimensions name one countable leaf move, present or absent; leaves are grouped under a parent
+Every dimension names one countable leaf move, present or absent; leaves are grouped under a parent
 category (evaluation.md "Dimensions").
-Affective support is the exception: a turn always has some tone, so it is a 1-5 rating from neutral to
-positive rather than a move that is present or absent.
+
+Leaves are named Verb + Noun by what the tutor does: Elicit draws content out of the student, Provide
+gives content or support, Request asks the student about their own process or state.
+
+`description` is the move itself.
+`forms` are the shapes the move commonly takes, which are illustrative and never exhaustive
+`examples`/`non_examples` are actual utterances. (Not included now).
 
 This module is the single source of truth for the dimension vocabulary.
 """
@@ -24,207 +29,179 @@ class Example:
 
 @dataclass(frozen=True)
 class Dimension:
-    """One countable tutor move: its parent category, criterion, and illustrating utterances.
+    """One countable tutor move: its parent category, what it is, and how it commonly appears.
 
-    `examples` are utterances that are instances of the move; `non_examples` are near-misses that are not.
-    Either list may be empty.
+    `description` defines the move and is the test the tag is decided on. `forms` are the shapes it
+    commonly takes; they illustrate the description and never bound it, so a turn that fits the
+    description but matches no listed form is still an instance of the move.
+    `examples` are utterances that are instances of the move; `non_examples` are near-misses that are
+    not. Both are empty while the rubric is being piloted on descriptions alone.
     """
     key: str
     name: str
     category: str
-    criteria: str
+    description: str
+    forms: tuple[str, ...] = ()
     examples: tuple[Example, ...] = ()
     non_examples: tuple[Example, ...] = ()
 
 
 DIMENSIONS: tuple[Dimension, ...] = (
     Dimension(
-        key="eliciting_knowledge",
-        name="Eliciting Knowledge",
-        category="Checking Understanding",
-        criteria=(
-            "Tutor asks a question that surfaces what the student knows or believes, "
-            "probing recall of a definition or basic comprehension of the content."
+        key="elicit_recall",
+        name="Elicit Recall",
+        category="Understanding Check",
+        description=(
+            "Tutor asks the student for a general rule, principle, or formula from the subject matter. "
+            "The student states it rather than using it."
         ),
-        examples=(
-            Example(text="What does 'velocity' mean?", note="Directly probing recall of a definition."),
-            Example(text="Can you tell me what the variables mean in this equation?", note="Checking basic comprehension."),
-            Example(text="How has the temperature changed?", note="Checking solving skills."),
-        ),
-    ),
-    Dimension(
-        key="eliciting_reasoning",
-        name="Eliciting Reasoning/Justification",
-        category="Checking Understanding",
-        criteria=(
-            "Tutor asks the student to justify or reason through a specific claim made by "
-            "the tutor or the student, beyond just supplying an answer."
-        ),
-        examples=(
-            Example(
-                text="Elaborating on the 'tusk-hunting cultures' you mentioned, how have elephants adapted?",
-                note="Asking them to justify a specific claim.",
-            ),
-            Example(
-                text="Why do you think the volume of the liquid expanded?",
-                note="Probing the reasoning behind a claim made by the teacher or student.",
-            ),
+        forms=(
+            "Asking for a fact, definition, formula, law, or named principle.",
+            "Asking for a sequence or set of steps.",
+            "Asking what a worked case shows in general.",
         ),
     ),
     Dimension(
-        key="eliciting_application",
-        name="Eliciting Real-World Application of Knowledge",
-        category="Checking Understanding",
-        criteria=(
-            "Tutor asks the student to apply a concept or transfer it to a new context or example."
+        key="elicit_application",
+        name="Elicit Application",
+        category="Understanding Check",
+        description=(
+            "Tutor asks the student to apply knowledge on a particular case. "
+            "The student uses it rather than stating it."
         ),
-        examples=(
-            Example(
-                text="Can you give me an example of where you'd use the Pythagorean theorem in real life?",
-                note="Asking them to apply a concept.",
-            ),
-            Example(
-                text="Where else have you seen fractions show up outside of math class?",
-                note="Prompting transfer to new contexts.",
-            ),
+        forms=(
+            "Asking for a value to be computed or a problem to be solved end-to-end.",
+            "Asking what happens under a stated condition.",
+            "Asking for a real-life application.",
         ),
     ),
     Dimension(
-        key="follow_up_probing",
-        name="Follow-up Probing",
-        category="Checking Understanding",
-        criteria=(
-            "Tutor asks a question that goes deeper on the student's immediately preceding answer — a "
-            "natural next question that presses further on what the student just said, rather than "
-            "opening a new thread."
+        key="elicit_elaboration",
+        name="Elicit Elaboration",
+        category="Understanding Check",
+        description=(
+            "Tutor asks the student to justify or expand on something they said. "
+            "The question can only be answered by referring back to the student's own words."
         ),
-        examples=(
-            Example(
-                text="You said the ball falls because it's heavy — so what would happen if it weighed half as much?",
-                note="Presses directly on the claim the student just made.",
-            ),
-            Example(
-                text="Okay, and why do you think the air pushes back harder at higher speeds?",
-                note="Digs a layer deeper into the reason the student just gave.",
-            ),
-        ),
-        non_examples=(
-            Example(
-                text="Let's move on — can you tell me what density means?",
-                note="Opens a new thread instead of going deeper on the last answer.",
-            ),
+        forms=(
+            "Asking for the reasoning behind an answer.",
+            "Asking 'how' or 'why' about something they said.",
+            "Asking for more detail on a point they made.",
         ),
     ),
     Dimension(
-        key="understanding_checkpoint",
-        name="Understanding Checkpoint",
-        category="Checking Understanding",
-        criteria=(
-            "Tutor asks the student to restate, summarize, or explain the concept back in their own "
-            "words to confirm they have it, rather than to reason toward a new answer."
+        key="elicit_summary",
+        name="Elicit Summary",
+        category="Understanding Check",
+        description=(
+            "Tutor asks the student to account for what has been covered. "
+            "The scope is the lesson rather than any single point in it."
         ),
-        examples=(
-            Example(
-                text="Can you put in your own words why the two balls land at the same time?",
-                note="Asks the student to explain the concept back to confirm understanding.",
-            ),
-            Example(
-                text="Before we go on, how would you summarize what we just figured out?",
-                note="A checkpoint asking the student to summarize the concept.",
-            ),
+        forms=(
+            "Asking for a summary of the lesson so far.",
+            "Asking for an explanation of what they have learned.",
         ),
     ),
     Dimension(
-        key="hinting",
-        name="Hinting",
+        key="provide_explanation",
+        name="Provide Explanation",
         category="Scaffolding",
-        criteria=(
-            "Tutor gives partial guidance — a directional nudge or draws attention to a feature — "
-            "that helps the student take the next step without solving it for them. Usually phrased as "
-            "a question that points the student toward the next step."
-        ),
-        examples=(
-            Example(
-                text="Think about what happens to the equation if you move everything to one side.",
-                note="Directional nudge but doesn't solve it.",
-            ),
-            Example(
-                text="For the next step, what do you notice about the two denominators?",
-                note="Draws attention to a feature and prompts the next step.",
-            ),
+        description="Tutor supplies knowledge directly rather than having the student produce it.",
+        forms=(
+            "Stating a concept, rule, or principle.",
+            "Explaining a procedure or a line of reasoning.",
+            "Working an example through.",
+            "Giving an analogy or a comparison.",
         ),
     ),
     Dimension(
-        key="explaining",
-        name="Explaining",
+        key="provide_hint",
+        name="Provide Hint",
         category="Scaffolding",
-        criteria=(
-            "Tutor gives direct instruction, elaboration, a worked example, or an analogy that "
-            "supplies content to the student."
+        description=(
+            "Tutor points the student toward material they weren't already using. "
+            "If the hint were removed, the student's task would be different. "
+            "It does not spell out the material outright and is not material the question already sets up."
         ),
-        examples=(
-            Example(
-                text="So the equals sign means both sides have to stay balanced, like a scale. Whatever you do to one side, you do to the other.",
-                note="Analogy.",
-            ),
-            Example(text="Actually, X-rays and gamma rays differ in frequency.", note="Direct explanation."),
-        ),
-    ),
-    Dimension(
-        key="planning_ahead",
-        name="Planning Ahead",
-        category="Metacognitive Prompting",
-        criteria=(
-            "Tutor asks the student to plan or think ahead about their own approach or process before "
-            "acting — reasoning about how they will proceed, not just reasoning through the content."
-        ),
-        examples=(
-            Example(text="Explain how you will set up that equation.", note="Asking student to plan their process out loud."),
-            Example(text="Before you start, what's your plan for tackling this problem?", note="Prompting the student to plan ahead."),
-        ),
-        non_examples=(
-            Example(
-                text="Explain your thinking.",
-                note="Eliciting reasoning about their response, not reasoning about their thinking.",
-            ),
+        forms=(
+            "Naming a concept, law, or formula to use, without stating what it says.",
+            "Proposing a case or step to try that the student was not already working with.",
+            "Pointing at a feature or place to look that the student was not already working with.",
         ),
     ),
     Dimension(
-        key="reflecting_back",
-        name="Reflecting Back",
-        category="Metacognitive Prompting",
-        criteria=(
-            "Tutor asks the student to reflect back on their own thinking, choices, or process after the "
-            "fact — reasoning about a step they already took, not just reasoning through the content."
-        ),
-        examples=(
-            Example(text="What made you decide to use subtraction there?", note="Reflecting on a choice already made."),
-            Example(text="Looking back, what would you do differently next time?", note="Reflecting on their own process after the fact."),
-        ),
-        non_examples=(
-            Example(
-                text="Explain your thinking.",
-                note="Eliciting reasoning about their response, not reasoning about their thinking.",
-            ),
+        key="request_planning",
+        name="Request Planning",
+        category="Metacognition",
+        description="Tutor asks the student to describe their planned approach.",
+        forms=(
+            "Asking which strategy they will use, and why.",
+            "Asking for a prediction of possible challenges.",
+            "Asking how to approach a similar problem differently next time.",
         ),
     ),
     Dimension(
-        key="cultural_regional_grounding",
-        name="Cultural/Regional Grounding",
+        key="request_reflection",
+        name="Request Reflection",
+        category="Metacognition",
+        description="Tutor asks the student to look back on their learning experience.",
+        forms=(
+            "Asking what was difficult or confusing.",
+            "Asking what the student would do differently.",
+            "Asking how the student's understanding has changed.",
+        ),
+    ),
+    Dimension(
+        key="request_status",
+        name="Request Status",
+        category="Metacognition",
+        description=(
+            "Tutor asks the student to report whether they are following."
+        ),
+        forms=(
+            "Asking if it makes sense.",
+            "Asking if the student has any questions.",
+            "Asking whether to continue or go over it again.",
+            "Asking how confident or comfortable the student feels.",
+        ),
+    ),
+    Dimension(
+        key="provide_encouragement",
+        name="Provide Encouragement",
+        category="Affective Support",
+        description="Tutor offers affective/motivational support directed at the student as a person independent "
+        "of whether their answer was correct.",
+        forms=(
+            "Praising the student's effort or persistence.",
+            "Affirming the student's progress.",
+            "Reassuring the student that a difficulty, mistake, or confusion is normal.",
+            "Expressing confidence in the student's ability to succeed.",
+        ),
+    ),
+    Dimension(
+        key="provide_confirmation",
+        name="Provide Confirmation",
+        category="Affective Support",
+        description=(
+            "Tutor evaluates the correctness of the student's answer rather than the student as a person. "
+            "Restating what the student thinks, without assessing it, is not enough."
+        ),
+        forms=(
+            "Explicitly confirming the correctness of the student's answer, whether stated plainly or as praise.",
+        ),
+    ),
+    Dimension(
+        key="provide_contextualization",
+        name="Provide Contextualization",
         category="Personalized Contextualization",
-        criteria=(
-            "Framing a concept using a scenario, context, or reference drawn from this specific "
-            "student's known region, background, or interests."
+        description=(
+            "Tutor draws on this student's own life or surroundings rather than a generic setting. "
+            "Any mention counts, including one that carries on a setting already introduced earlier."
         ),
-        examples=(
-            Example(
-                text="Imagine making 10 empanadas, and your friend ate 3 of them.",
-                note="Frames the problem around a food tied to the student's background.",
-            ),
-            Example(
-                text="If you must pay a 18% tip on top of a 10% tax, how much additional cost did you have to pay?",
-                note="Tipping and tax norms vary by region, so this frames the problem around the student's regional context.",
-            ),
+        forms=(
+            "Using a scenario from the student's region or local surroundings (e.g. plants, landmarks).",
+            "Drawing on the student's stated interests or information about themselves.",
+            "Using local units.",
         ),
     ),
 )
@@ -235,17 +212,17 @@ DIMENSIONS_MAP: dict[str, Dimension] = {d.key: d for d in DIMENSIONS}
 
 @dataclass(frozen=True)
 class ScaleLevel:
-    """One point on an ordinal rating scale: its integer value and what that value means."""
+    """One point on an ordinal rating scale: its integer value, what that value means, and sample utterances."""
     value: int
     descriptor: str
+    examples: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
 class ScaleDimension:
     """One dimension rated on an ordinal scale rather than tagged present or absent.
 
-    Every tutor turn gets exactly one `value` from `levels`; there is no "absent", since a turn always
-    carries some tone.
+    Every tutor turn gets exactly one `value` from `levels`; there is no "absent".
     """
     key: str
     name: str
@@ -258,37 +235,16 @@ class ScaleDimension:
         return tuple(level.value for level in self.levels)
 
 
-# Affective support, rated 1 (neutral) to 5 (strongly positive). This replaces the former
-# positive-encouragement and neutral-acknowledgment moves: warmth is a matter of degree, so a single
-# turn's tone is better placed on a scale than split across two present/absent tags.
-AFFECTIVE_TONE = ScaleDimension(
-    key="affective_tone",
-    name="Affective Tone",
-    category="Affective Support",
-    criteria=(
-        "How warm the tutor's tone is toward the student, from neutral and matter-of-fact to explicitly "
-        "positive and encouraging. Rate the affective coloring of the whole turn, not whether any "
-        "content was correct."
-    ),
-    levels=(
-        ScaleLevel(1, "Neutral: purely informational, no affective coloring."),
-        ScaleLevel(2, "Acknowledging: registers the student's state or names a misconception as common, without warmth."),
-        ScaleLevel(3, "Mildly encouraging: light, passing affirmation of the student."),
-        ScaleLevel(4, "Warm: clear affirmation of the student's thinking, effort, or progress."),
-        ScaleLevel(5, "Strongly positive: explicit praise or celebration of the student's effort or progress."),
-    ),
-)
-
-SCALES: tuple[ScaleDimension, ...] = (AFFECTIVE_TONE,)
-
-SCALES_MAP: dict[str, ScaleDimension] = {s.key: s for s in SCALES}
-
-
 def dimension_keys() -> tuple[str, ...]:
-    """The ordered keys of the present/absent move dimensions the evaluator tags."""
+    """The ordered keys of the dimensions the evaluator tags."""
     return tuple(d.key for d in DIMENSIONS)
 
 
-def scale_keys() -> tuple[str, ...]:
-    """The ordered keys of the ordinal scale dimensions the evaluator rates."""
-    return tuple(s.key for s in SCALES)
+
+def categories() -> tuple[str, ...]:
+    """The parent categories of the move dimensions, in order, without repeats."""
+    seen: list[str] = []
+    for d in DIMENSIONS:
+        if d.category not in seen:
+            seen.append(d.category)
+    return tuple(seen)

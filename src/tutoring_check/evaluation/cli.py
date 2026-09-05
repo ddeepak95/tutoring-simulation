@@ -11,6 +11,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from tutoring_check.evaluation import instruction_annotator
 from tutoring_check.evaluation.evaluator import evaluate_transcript
 from tutoring_check.simulation.catalog import resolve_model_ref
 
@@ -24,6 +25,13 @@ def build_parser() -> argparse.ArgumentParser:
         type=str,
         default=None,
         help="Reasoning effort for the annotator model (low/medium/high); its reasoning trace is logged in the responses file.",
+    )
+    parser.add_argument(
+        "--annotator-prompt",
+        type=str,
+        default=instruction_annotator.DEFAULT_PROMPT_VERSION,
+        choices=sorted(instruction_annotator.PROMPT_VERSIONS),
+        help="Which wording of the annotator system prompt to use; recorded in the evaluation header.",
     )
     return parser
 
@@ -44,6 +52,7 @@ async def run(args: argparse.Namespace) -> int:
             annotator_model=annotator_model,
             annotator_reasoning=args.annotator_reasoning,
             annotator_model_params=annotator_params,
+            annotator_prompt=args.annotator_prompt,
         )
         if out_dir is None:
             print(f"skip (exists) {transcript_path.parent}")

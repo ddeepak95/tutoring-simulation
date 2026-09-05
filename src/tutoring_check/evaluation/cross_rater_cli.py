@@ -15,13 +15,10 @@ from tutoring_check.evaluation.rating_sheets import load_sheets, load_transcript
 from tutoring_check.evaluation.reliability import (
     compare_pairs,
     compare_panel,
-    compare_scales,
     format_group_table,
     format_matrix,
-    format_scale_table,
     format_table,
     load_judge_codes,
-    load_judge_scales,
     shared_keys,
 )
 
@@ -58,7 +55,6 @@ def build_parser() -> argparse.ArgumentParser:
 def run(args: argparse.Namespace) -> int:
     transcripts = load_transcripts(args.runs)
     judge = load_judge_codes(args.runs)
-    judge_scales = load_judge_scales(args.runs)
 
     sheet_paths = sorted(args.sheets.glob("*.csv"))
     if args.topic:
@@ -67,14 +63,11 @@ def run(args: argparse.Namespace) -> int:
     if not sheet_paths:
         raise ValueError(f"no rating sheets in {args.sheets}" + (f" for topics {args.topic}" if args.topic else ""))
 
-    by_rater, scales_by_rater = load_sheets(sheet_paths, transcripts, language=ENGLISH)
+    by_rater = load_sheets(sheet_paths, transcripts, language=ENGLISH)
 
     # The panel: every human rater plus the judge, all keyed the same way and all on English turns.
     raters = {name: codes for name, codes in sorted(by_rater.items())}
     raters[args.judge_name] = {k: v for k, v in judge.items() if k[1] == ENGLISH}
-    # The same panel for the ordinal scale ratings, keyed identically.
-    scale_raters = {name: scales_by_rater[name] for name in sorted(scales_by_rater)}
-    scale_raters[args.judge_name] = {k: v for k, v in judge_scales.items() if k[1] == ENGLISH}
 
     print(f"raters: {', '.join(raters)}")
     for name, codes in raters.items():
@@ -99,12 +92,6 @@ def run(args: argparse.Namespace) -> int:
     panel = compare_panel(raters, language=ENGLISH, n_boot=args.bootstrap)
     print(format_group_table(panel, title="PANEL agreement, move dimensions (Fleiss' kappa, all raters)"))
 
-    # Ordinal scale dimensions: Krippendorff's alpha over the whole panel, on the same shared turns.
-    scale_keys_missing = [k for k in keys if any(k not in scale_raters[name] for name in scale_raters)]
-    if scale_keys_missing:
-        raise ValueError(f"{len(scale_keys_missing)} shared turn(s) lack a scale rating from some rater; e.g. {scale_keys_missing[0]}")
-    scales = compare_scales(scale_raters, keys=keys, n_boot=args.bootstrap)
-    print(format_scale_table(scales, title="PANEL agreement, scale dimensions (Krippendorff's alpha, all raters)"))
     return 0
 
 

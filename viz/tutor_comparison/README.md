@@ -19,15 +19,41 @@ email.
 
 Run it from anywhere; paths resolve from the file's own location, not the working directory.
 
-## The three files
+## The four files
 
 | File | What it is |
 |---|---|
 | `template.html` | The page. Everything visual lives here. `__DATA__` is where the dataset lands. |
 | `extract.py` | Reads `runs/` and produces the dataset - which cells exist, the turns, the length stats. |
 | `build.py` | Runs the extract, checks the template, inlines the result. |
+| `to_doc.py` | Writes one topic's transcripts out as Markdown, for people who will not open the page. |
 
 `tutor_comparison.html` is generated. Edit the template, never the output.
+
+## The Markdown export
+
+```
+python viz/tutor_comparison/to_doc.py --topic speed
+```
+
+Writes `<topic>_conversations.md` next to this file - one topic, all twelve model x language
+conversations, ready to paste into a doc. One topic at a time because all four is past a hundred
+pages. `--topic` takes any key from `TOPICS` and defaults to `speed`.
+
+It reads `runs/` through `extract.py` for the same reason `build.py` does: `tutor_comparison.html`
+is generated, and anything scraping it goes stale on the next rebuild.
+
+Two things the format is carrying:
+
+**Mandarin readings sit on the line above the line they belong to.** The page has `<ruby>` and can
+put a reading over each character; a document cannot, so the pairing is by position along the line
+and the alignment is line-level. Same `readings()` as the page, so the two never disagree about how
+a character is read.
+
+**Turns that span paragraphs keep their breaks.** Markdown folds a bare newline into the line
+before it, which would silently reflow a multi-paragraph turn into one block, so the breaks are
+written as hard breaks. A Mandarin turn like that gets its reading split on the same boundaries -
+one reading per line, not one long reading above the whole thing.
 
 ## Editing the page
 
