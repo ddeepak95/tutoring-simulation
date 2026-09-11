@@ -1,5 +1,7 @@
-"""The Translate -> Evaluate -> Refine prompts, adapted from the paper
-(https://aclanthology.org/2025.findings-naacl.218.pdf), and the evaluator's verdict.
+"""The TEaR (Translate, Estimate, and Refine) prompts and the evaluator's verdict.
+
+Feng et al., "TEaR: Improving LLM-based Machine Translation with Systematic Self-Refinement",
+Findings of NAACL 2025. https://aclanthology.org/2025.findings-naacl.218.pdf
 
 The paper's prompts are kept intact except for three instructions added at each stage:
 
@@ -17,6 +19,8 @@ from dataclasses import dataclass
 
 from tutoring_check.translations.model import strip_fences
 
+# The default source language. Target-turn scoring translates the other way, target -> English, and
+# passes `source_lang` explicitly; see docs/target_turns.md §6.
 SOURCE_LANG = "English"
 
 # Appended to the translate and refine prompts: the transcripts are spoken tutoring
@@ -67,14 +71,23 @@ Do not flag the ordinary words and borrowings that speakers mix into casual spee
 }
 
 
-def build_mode_guidance(target_lang: str, mode: str) -> str:
-    """The register and term instructions for one mode, resolved for `target_lang`."""
+def into_source_lang(target_lang: str) -> bool:
+    """Whether this call renders into English rather than out of it."""
+    return target_lang == SOURCE_LANG
+
+
+def build_mode_guidance(target_lang: str, mode: str, source_lang: str = SOURCE_LANG) -> str:
+    """The register and term instructions for one mode.
+    The term guidance says how to *produce* code-mixed or monolingual text, so it applies only when
+    the target is that language. Rendering into English keeps the register guidance alone;
+    including it there would ask for English and for the other language in the same prompt.
+    """
     if mode not in MODES:
         raise ValueError(f"unknown translation mode {mode!r}; expected one of {list(MODES)}")
-    return "\n".join((
-        REGISTER_GUIDANCE.format(target_lang=target_lang),
-        TERM_GUIDANCE[mode].format(target_lang=target_lang),
-    ))
+    register = REGISTER_GUIDANCE.format(target_lang=target_lang)
+    if into_source_lang(target_lang):
+        return register
+    return "\n".join((register, TERM_GUIDANCE[mode].format(target_lang=target_lang)))
 
 
 @dataclass
@@ -85,15 +98,19 @@ class Evaluation:
     raw: str
 
 
-def build_translate_prompt(source: str, target_lang: str, mode: str) -> str:
+def build_translate_prompt(
+    source: str, target_lang: str, mode: str, source_lang: str = SOURCE_LANG
+) -> str:
     """Stage 1 — first-pass translation of one conversation (paper's Translate prompt)."""
-    return f"""Please provide the {target_lang} translation for the {SOURCE_LANG} sentences:
-{build_mode_guidance(target_lang, mode)}
+    return f"""Please provide the {target_lang} translation for the {source_lang} sentences:
+{build_mode_guidance(target_lang, mode, source_lang)}
 Source: {source}
 Target:"""
 
 
-def build_estimate_prompt(source: str, translation: str, target_lang: str, mode: str) -> str:
+def build_estimate_prompt(
+    source: str, translation: str, target_lang: str, mode: str, source_lang: str = SOURCE_LANG
+) -> str:
     """Stage 2 — critique the translation. """
     return f"""Please identify errors and assess the quality of the translation.
 The categories of errors are accuracy (addition, mistranslation, omission, untranslated text), fluency (character encoding, grammar, inconsistency, punctuation, register, spelling), locale convention (currency, date, name, telephone, or time format) style (awkward), terminology (inappropriate for context, inconsistent use), non-translation, other, or no-error.
@@ -126,19 +143,24 @@ The text below is a spoken tutoring conversation between a tutor and a student, 
 fluency/register - formal, literary, or textbook wording where a speaker would use an everyday colloquial form; full written forms where speech would contract, elide, or shorten; a form of address or politeness level that does not match the speaker's tone in the source.
 style/awkward - phrasing a native speaker would not say out loud in conversation; fillers, hedges, discourse particles, tag questions, or interjections rendered word for word instead of by whatever plays the same role in spoken {target_lang}; spoken fragments inflated into full written sentences.
 Do not flag informality, contractions, or conversational looseness that is faithful to the source - in this text those are correct, not defects.
-{MODE_EVAL_GUIDANCE[mode].format(target_lang=target_lang)}
-{SOURCE_LANG} source: {source}
+{"" if into_source_lang(target_lang) else MODE_EVAL_GUIDANCE[mode].format(target_lang=target_lang)}
+{source_lang} source: {source}
 {target_lang} translation: {translation}
 MQM annotations:
 """
 
 
 def build_refine_prompt(
-    source: str, translation: str, evaluation: Evaluation, target_lang: str, mode: str
+    source: str,
+    translation: str,
+    evaluation: Evaluation,
+    target_lang: str,
+    mode: str,
+    source_lang: str = SOURCE_LANG,
 ) -> str:
     """Stage 3 — refine the translation using the evaluator's feedback. """
-    return f"""Please provide the {target_lang} translation for the {SOURCE_LANG} sentences.
-{build_mode_guidance(target_lang, mode)}
+    return f"""Please provide the {target_lang} translation for the {source_lang} sentences.
+{build_mode_guidance(target_lang, mode, source_lang)}
 Source: {source}
 Target: {translation}
 I’m not satisfied with this target, because some defects exist: {evaluation.feedback}

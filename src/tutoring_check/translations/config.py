@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from tutoring_check.translations.prompts import MODES
@@ -19,6 +19,7 @@ class TranslateSet:
     jobs: list[tuple[str, str, str]]    # (transcript path relative to run_dir, target language, mode)
     model: str
     max_refine_iters: int
+    model_params: dict = field(default_factory=dict)   # the model's own litellm kwargs
 
 
 def _resolve_model(spec: dict) -> str:

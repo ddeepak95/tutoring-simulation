@@ -11,12 +11,20 @@ class ParseError(ValueError):
     """The model's response could not be parsed. """
 
 
-def call_model(prompt: str, model: str, response_format: dict | None = None) -> str:
+def call_model(
+    prompt: str, model: str, response_format: dict | None = None, params: dict | None = None
+) -> str:
     from litellm import completion
 
+    from tutoring_check.vertex_auth import with_adc_token
+
+    # `params` carries the model's own litellm kwargs from models.json, e.g. vertex_location.
     kwargs = {"response_format": response_format} if response_format else {}
-    response = completion(model=model, messages=[{"role": "user", "content": prompt}], **kwargs)
-    return response.choices[0].message.content
+    kwargs.update(params or {})
+    request = with_adc_token(
+        {"model": model, "messages": [{"role": "user", "content": prompt}], **kwargs}
+    )
+    return completion(**request).choices[0].message.content
 
 
 def strip_fences(raw: str) -> str:

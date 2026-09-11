@@ -11,13 +11,19 @@ from tutoring_check.translations.model import ParseError
 # Control lines in a transcript carry no dialogue turn.
 CONTROL_TYPES = ("session_start", "session_end")
 
-# response_format schema pinning the translation to a JSON array of turn strings,
-# so the provider returns clean JSON and parsing is a plain json.loads.
+# response_format schema pinning the translation to one turn string per source turn.
+# Wrapped in an object because OpenAI rejects an array at the schema root; `parse_turns` reads
+# either shape, so a provider that returns the bare array is still fine.
 TURNS_SCHEMA = {
     "type": "json_schema",
     "json_schema": {
         "name": "translated_turns",
-        "schema": {"type": "array", "items": {"type": "string"}},
+        "schema": {
+            "type": "object",
+            "properties": {"turns": {"type": "array", "items": {"type": "string"}}},
+            "required": ["turns"],
+            "additionalProperties": False,
+        },
     },
 }
 
@@ -49,7 +55,16 @@ def parse_turns(raw: str, expected: int) -> list[str]:
         turns = json.loads(raw)
     except json.JSONDecodeError as e:
         raise ParseError(f"invalid JSON: {e}") from e
-    if not isinstance(turns, list) or len(turns) != expected or not all(isinstance(t, str) for t in turns):
+    if isinstance(turns, dict):
+        turns = turns.get("turns")
+    if not isinstance(turns, list) or not all(isinstance(t, str) for t in turns):
+        raise ParseError(f"expected {expected} strings, got {turns!r}")
+    # A single turn split into several strings is the model reading sentence breaks as array
+    # elements. With one turn asked for there is nowhere else the pieces can belong, so they are
+    # rejoined. Above one turn the same split would misalign, and still fails.
+    if expected == 1 and len(turns) > 1:
+        return [" ".join(t.strip() for t in turns)]
+    if len(turns) != expected:
         raise ParseError(f"expected {expected} strings, got {turns!r}")
     return turns
 
