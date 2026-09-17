@@ -9,7 +9,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from tutoring_check.simulation.catalog import load_catalogs, resolve_model_ref
-from tutoring_check.targeted_simulation.script import _DATA_DIR
+from tutoring_check.targeted_simulation.script import _DATA_DIR, SCRIPTS_DIR_NAME
 from tutoring_check.targeted_simulation.script_translate import (
     SOURCE_LANGUAGE_ID,
     source_script_ids,
@@ -23,7 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--languages", nargs="+", required=True, help="Target language ids, e.g. ta-IN kn-IN sw-KE.")
     parser.add_argument("--translator-model", type=str, required=True, help="Translator model: a models.json id or a litellm model string.")
     parser.add_argument("--script-id", nargs="+", default=None, help="Scripts to translate (default: every English one).")
-    parser.add_argument("--scripts", type=Path, default=None, help="Script root (default data/scripts).")
+    parser.add_argument("--scripts", type=Path, default=None, help="Script root (default data/scripts-messages).")
     parser.add_argument("--region-id", type=str, default=None, help="Region for the translated scripts (default: the region whose language this is).")
     parser.add_argument("--mode", type=str, default=CODE_MIXED, choices=sorted(MODES), help="Whether the subject matter is carried in English.")
     parser.add_argument("--max-refine-iters", type=int, default=1, help="Refinement passes the TEaR loop may apply per script.")
@@ -36,7 +36,7 @@ def main() -> int:
     load_dotenv()
     cat = load_catalogs(_DATA_DIR)
     model, params = resolve_model_ref(args.translator_model)
-    root = args.scripts or _DATA_DIR / "scripts"
+    root = args.scripts or _DATA_DIR / SCRIPTS_DIR_NAME
     script_ids = args.script_id or source_script_ids(args.scripts)
 
     for language_id in args.languages:

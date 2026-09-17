@@ -37,16 +37,21 @@ def strip_fences(raw: str) -> str:
     return cleaned
 
 
-def attempt(fn, what: str):
+def attempt(fn, what: str, *, parse_retries: int = 0, on_parse_error=None):
     """Run `fn` with exponential-backoff retries, re-raising a labeled error on exhaustion.
-    A ParseError is not retried: the prompt would be identical, so it fails on the first occurrence.
+    A ParseError is retried only when the caller passes `parse_retries` along with an
+    `on_parse_error` hook that changes what the next call asks for.
     """
     last_err = None
+    parse_left = parse_retries
     for retry in range(MAX_RETRIES):
         try:
             return fn()
         except ParseError as e:
-            raise RuntimeError(f"unparseable response ({what}): {e}") from e
+            if parse_left <= 0 or on_parse_error is None:
+                raise RuntimeError(f"unparseable response ({what}): {e}") from e
+            parse_left -= 1
+            on_parse_error(e)
         except Exception as e:
             last_err = e
             time.sleep(2 ** retry)

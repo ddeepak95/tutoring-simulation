@@ -18,7 +18,7 @@ from tutoring_check.targeted_simulation.target import completed_repeats, run_cel
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Sample target turns against prewritten scripts.")
     parser.add_argument("--run-set", type=Path, default=Path("data/target_run_set.json"))
-    parser.add_argument("--scripts", type=Path, default=None, help="Script root (default data/scripts).")
+    parser.add_argument("--scripts", type=Path, default=None, help="Script root (default data/scripts-messages).")
     parser.add_argument("--out", type=Path, default=Path("runs/targets"))
     parser.add_argument("--script-id", type=str, default=None, help="Run only cells for this script.")
     parser.add_argument("--repeats", type=int, default=None, help="Override the run set's repeat count.")

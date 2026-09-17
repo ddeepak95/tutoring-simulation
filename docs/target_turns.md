@@ -4,15 +4,16 @@ A second mode alongside the live simulation. This hands the tutor a prewritten c
 Everything before the target turn is authored, identical for every tutor and every repeat.
 
 Status: §2–§7 implemented in `src/tutoring_check/targeted_simulation/`, except the round-tripped
-script check in §6.2.
+script check in §6.2. The script file is the request (§2), so this path no longer shares the live
+simulation's prompt builders. So, `simulation/tutor.py` and `simulation/student.py` are not used here.
 
 ---
 
 ## 1. Principles
 
-1. **The tutor must not know the history is prewritten.** It receives the same system prompt as the
-   live simulation and the prewritten turns in the ordinary message roles (its own turns as
-   `assistant`, the student's as `user`).
+1. **The tutor must not know the history is prewritten.** It receives a system prompt and the
+   prewritten turns in the ordinary message roles (its own turns as `assistant`, the student's as
+   `user`). Nothing in the request marks the history as authored.
 2. **Free choice.** The target turn never names a target move.
 3. **Repeats.** `n` samples at that same context give a distribution, which is the actual object being compared across models and languages.
 
@@ -20,25 +21,32 @@ script check in §6.2.
 
 ## 2. Script format
 
-Hand-authored JSON under `data/scripts/<language_id>/<script_id>.json`. A script is the authored
-context; the **target turn** is the tutor turn that would come next.
+Hand-authored JSON under `data/scripts-messages/<language_id>/<script_id>.json`. **The script file
+is the request.** It carries its own system prompt, so there is no separate prompt builder and no
+student prompt on this path; the **target turn** is the tutor turn that would come next.
 
 ```json
 {
   "script_id": "gravity-correct",
   "language_id": "en-US",
   "topic_id": "gravity",
-  "region_id": "",
-  "conversation": [
-    {"speaker": "tutor",   "text": "..."},
-    {"speaker": "student", "text": "..."},
-    {"speaker": "tutor",   "text": "..."},
-    {"speaker": "student", "text": "..."}
+  "region_id": "united-states",
+  "messages": [
+    {"role": "system",    "content": "You are a teacher teaching a student from {region}. ... Respond in {language}."},
+    {"role": "assistant", "content": "..."},
+    {"role": "user",      "content": "..."},
+    {"role": "assistant", "content": "..."},
+    {"role": "user",      "content": "..."}
   ]
 }
 ```
 
-`conversation` is the authored context. Turns alternate, with tutor-first, and end on a student turn.
+`messages[0]` is the system prompt; the rest is the authored context, alternating tutor-first
+(`assistant`) and ending on a student turn (`user`).
+
+`{region}` and `{language}` are the only variables. `load_script` fills them from `regions.json`
+and `languages.json` using the file's own `region_id` and `language_id`, so the system prompt is
+authored once, in English, and is byte-identical across the language directories.
 - Scripts carry no author's claim about what a good tutor does. 
 - Scoring is the raw move distribution (§7).
 
@@ -48,7 +56,11 @@ Scripts are authored in English, then produced per language by translation and a
 pass, sharing the `script_id` across the language directories.
 
 `targeted_simulation/script_translate_cli.py` does the translation via the TEaR pipeline and is re-validated
-through `load_script` (checking that the script is tutor-first and there is non-empty text in each JSON list item). 
+through `load_script` (checking that the script is tutor-first and there is non-empty text in each JSON list item).
+Only the turns are translated: the system message is copied over verbatim with its variables intact,
+since it is the tutor's instructions rather than dialogue and `{language}` is what makes the tutor
+answer in the target language.
+
 `region_id` follows the target language.
 `mode` (code-mixed or multilingual), `translated_from` and `refinements` (number of TEaR refinement passes are made) are recorded in the file
 No overwriting occurs without `--overwrite`.
@@ -57,23 +69,14 @@ No overwriting occurs without `--overwrite`.
 
 ## 3. Building the request
 
-```
-messages = [
-  {"role": "system",    "content": tutor_system_prompt(config)},   # identical to the live sim
-  {"role": "user",      "content": OPENING_INSTRUCTION},           # the live sim's first-turn nudge
-  {"role": "assistant", "content": turns[0].text},                 # scripted tutor
-  {"role": "user",      "content": turns[1].text},                 # scripted student
-  ...
-  {"role": "user",      "content": turns[-1].text},                # the last scripted turn, a student one
-]
-```
-
-Then one `acompletion`. The completion **is** the target turn.
+`script.request` — the file's `messages` with `{region}` and `{language}` filled in — goes to one
+`acompletion` unchanged. The completion **is** the target turn.
 
 Details that carry the "must not know" principle (§1):
 
-- The live simulation's opening instruction (`"Begin the conversation… introduce yourself…"`) is
-  kept, because it is present in every live request. Scripts must therefore author that turn as the introduction.
+- The script opens on the tutor posing the learning question. There is no greeting turn and no
+  opening instruction: the live simulation's `"Begin the conversation… introduce yourself…"` nudge
+  belongs to the live path only.
 - There is no final-turn closure instruction.
 
 ---
@@ -117,12 +120,11 @@ runs/<run_set_id>/<script_id>/<language_id>/<model_id>/
  "script_id": "...", 
  "language": "...", 
  "region": "...", 
- "topic": "...",
+ "topic_id": "...",
  "tutor_model": "...", 
  "tutor_reasoning": "...", 
  "repeats": 10,
- "conversation": [{"speaker": "...", "text": "..."}],
- "tutor_system_prompt": "...",}
+ "messages": [{"role": "...", "content": "..."}]}
 ```
 
 then one record per repeat:

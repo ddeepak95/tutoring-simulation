@@ -13,6 +13,7 @@ from tutoring_check.evaluation.dimensions import dimension_keys
 from tutoring_check.evaluation.evaluator import _completion_kwargs, _parse_moves, _presence_vector
 from tutoring_check.evaluation.transcript import Transcript, Turn
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
+from tutoring_check.targeted_simulation.script import SYSTEM, TUTOR
 from tutoring_check.targeted_simulation.target import RESPONSES_NAME
 from tutoring_check.vertex_auth import with_adc_token
 
@@ -76,9 +77,10 @@ def read_cell(cell_dir: Path, *, prefer_english: bool = True) -> tuple[dict, lis
 
 def _transcript(cell_dir: Path, header: dict, content: str) -> tuple[Transcript, int]:
     """The scripted turns plus one sampled turn, and that turn's id. Only the last turn varies."""
+    # The system message is the tutor's instructions, not a turn the annotator reads.
     turns = [
-        Turn(turn_id=i, speaker=t["speaker"], content=t["text"])
-        for i, t in enumerate(header["conversation"])
+        Turn(turn_id=i, speaker="tutor" if m["role"] == TUTOR else "student", content=m["content"])
+        for i, m in enumerate(m for m in header["messages"] if m["role"] != SYSTEM)
     ]
     target_id = len(turns)
     turns.append(Turn(turn_id=target_id, speaker="tutor", content=content))

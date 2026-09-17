@@ -9,7 +9,6 @@ from typing import Any
 
 from tutoring_check.runlog import JsonlLogger, serialize_response, utc_now
 from tutoring_check.simulation.session import EmptyTurnError, _acompletion_with_metrics, _completion_kwargs
-from tutoring_check.targeted_simulation.prompt import build_messages, build_tutor_system
 from tutoring_check.targeted_simulation.runset import Cell
 
 RESPONSES_NAME = "responses.jsonl"
@@ -52,8 +51,7 @@ async def run_cell(cell: Cell, *, output_root: Path, concurrency: int = 1) -> Pa
         return output_root
 
     logger = JsonlLogger(out_dir=output_root, transcript_name=RESPONSES_NAME)
-    tutor_system = build_tutor_system(cell.config)
-    messages = build_messages(cell.script, cell.config)
+    messages = cell.script.request
 
     # Keyed on the file, not on `done`: a run that died between the header and the first repeat
     # leaves a header with no records, and resuming on `done == 0` would write a second one.
@@ -63,17 +61,14 @@ async def run_cell(cell: Cell, *, output_root: Path, concurrency: int = 1) -> Pa
                 "timestamp": utc_now(),
                 "type": "target_start",
                 "script_id": cell.script.script_id,
-                "language": cell.config.language,
-                "region": cell.config.region,
-                "topic": cell.config.topic,
+                "language": cell.script.language,
+                "region": cell.script.region,
+                "topic_id": cell.script.topic_id,
                 "tutor_model": cell.tutor_model,
                 "tutor_reasoning": cell.tutor_reasoning,
                 "repeats": cell.repeats,
-                # The scripted context, so scoring can render the dialogue from this file alone.
-                "conversation": [
-                    {"speaker": t.speaker, "text": t.text} for t in cell.script.conversation
-                ],
-                "tutor_system_prompt": tutor_system,
+                # The context as sent, so scoring can render the dialogue from this file alone.
+                "messages": messages,
             }
         )
 
