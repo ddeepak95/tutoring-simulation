@@ -1,0 +1,21 @@
+{
+  "channel": "chrome",
+  "output_root": "outputs/browser-runs",
+  "selectors": {
+    "composer": "#prompt-textarea",
+    "send": "[data-testid='send-button']",
+    "assistant": "[data-message-author-role='assistant']",
+    "user": "[data-message-author-role='user']",
+    "turn": "article",
+    "stop": "[data-testid='stop-button']",
+    "complete": "[data-testid='copy-turn-action-button']",
+    "model_label": "[data-testid='model-switcher-dropdown-button']",
+    "thinking_button": "form button[aria-haspopup='menu']:not([data-testid='composer-plus-btn'])",
+    "sources_button": "button:has-text('Sources')",
+    "sources_panel": "[role='dialog']",
+    "tools_button": "[data-testid='composer-plus-btn']",
+    "search_option": "text=\"Web search\"",
+    "search_active": "#prompt-textarea [data-system-hint-type='search']"
+  },
+  "conditions": {}
+}

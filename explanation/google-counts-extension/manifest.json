@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Research Google Result Counts",
+  "version": "1.0.1",
+  "description": "Collect visible Google estimates for a fixed research query list in your signed-in Chrome session.",
+  "permissions": ["storage", "scripting", "alarms"],
+  "host_permissions": ["https://www.google.com/*"],
+  "background": {"service_worker": "worker.js"},
+  "action": {"default_popup": "popup.html", "default_title": "Research Google Counts"}
+}

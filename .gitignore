@@ -1,18 +1,7 @@
 .env
 .venv/
 __pycache__/
-runs/extra
+*.py[cod]
 uv.lock
-# annotation tool local DB
-annotations.sqlite3
-
-# generated run set
-runs/convolearn/run_set_07081515/*
-!runs/convolearn/run_set_07081515/conversations.jsonl
-
-# generated dialogic runs and translations
-
-# intermediate for the tutor comparison page; build.py only writes it with --keep-json.
-# The built page itself IS tracked, so the html can be opened without running anything.
-viz/*/data.json
-
+# Collected data and browser profiles are also ignored by explanation/.gitignore.
+consolidated-study/

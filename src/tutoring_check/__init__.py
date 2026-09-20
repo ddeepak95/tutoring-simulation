@@ -1,2 +1,2 @@
-"""State-driven tutor/student conversation simulator (LearnLM role-play)."""
+"""Shared authentication support for explanation collection."""
 
