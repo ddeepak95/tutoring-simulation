@@ -1,0 +1,18 @@
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\evaluate_v3.py", line 198, in <module>
+    if __name__=='__main__': asyncio.run(main())
+                             ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\evaluate_v3.py", line 131, in main
+    topic=source['job']['topic_name']
+          ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'topic_name'

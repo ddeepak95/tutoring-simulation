@@ -1,0 +1,793 @@
+# covalent radius: model responses
+
+15 requests. Response text is preserved from the saved JSON results.
+
+Source: [manifest.json](manifest.json)
+
+## Contents
+
+- [Prompt 1 (en)](#prompt-1)
+  - [gpt-5.6-terra](#run-001-f363e58d0ed8b1ce)
+  - [grok-4.3](#run-001-74c61ad967da5842)
+  - [gemini-3.8-flash](#run-001-07fca11817f0cbf8)
+  - [claude-sonnet-5](#run-001-32e17a751371eca0)
+  - [llama-4-maverick](#run-001-70ac966231c14e2b)
+- [Prompt 2 (ta)](#prompt-2)
+  - [gpt-5.6-terra](#run-002-cc1fa93bb27c3f12)
+  - [grok-4.3](#run-002-82d2163d54bf695e)
+  - [gemini-3.8-flash](#run-002-8a850ca3ac8b44fa)
+  - [claude-sonnet-5](#run-002-45754f15b72ce34d)
+  - [llama-4-maverick](#run-002-7d441e333cc2fddc)
+- [Prompt 3 (en)](#prompt-3)
+  - [gpt-5.6-terra](#run-003-68a24b562029b40f)
+  - [grok-4.3](#run-003-86d6a629dc2be449)
+  - [gemini-3.8-flash](#run-003-95d73d5b028fad25)
+  - [claude-sonnet-5](#run-003-b778d6d860afcc11)
+  - [llama-4-maverick](#run-003-058c2d30a895621f)
+
+---
+
+<a id="prompt-1"></a>
+
+## Prompt 1 (en)
+
+**Prompt**
+
+> You are an expert teacher teaching an high school student. Explain covalent radius in English.
+
+---
+
+<a id="run-001-f363e58d0ed8b1ce"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed
+
+**Source:** [run-001-f363e58d0ed8b1ce.json](run-001-f363e58d0ed8b1ce.json)
+
+**Covalent radius** is a measure of the size of an atom when it is joined to another atom by a **covalent bond**.
+
+A covalent bond forms when two atoms **share electrons**. Because atoms do not have sharp outer edges, scientists cannot directly measure the “edge” of one atom. Instead, they use the distance between the nuclei of two bonded atoms.
+
+### Definition
+The covalent radius of an atom is:
+
+> **Half the distance between the nuclei of two identical atoms joined by a single covalent bond.**
+
+For example, in a chlorine molecule, Cl₂, the two chlorine atoms are joined by a covalent bond. If the distance between their nuclei is 198 pm (picometres), then:
+
+\[
+\text{Covalent radius of Cl} = \frac{198}{2} = 99\text{ pm}
+\]
+
+A **picometre (pm)** is \(10^{-12}\) metres, so atomic radii are extremely small.
+
+### Trends in the periodic table
+
+- **Across a period (left to right):** covalent radius generally **decreases**.  
+  This happens because the number of protons increases, pulling the outer electrons closer to the nucleus.
+
+- **Down a group (top to bottom):** covalent radius generally **increases**.  
+  This is because each element has an additional electron shell, making the atom larger.
+
+### Important note
+The covalent radius can depend slightly on the type of bond:
+- A **single bond** is longer, so it gives a larger radius.
+- A **double bond** is shorter.
+- A **triple bond** is even shorter.
+
+For example, carbon has a slightly smaller effective radius in a triple bond than in a single bond because the atoms are pulled closer together.
+
+In short, covalent radius tells us the approximate size of an atom when it forms covalent bonds.
+
+
+---
+
+<a id="run-001-74c61ad967da5842"></a>
+
+### grok-4.3
+
+**Status:** completed
+
+**Source:** [run-001-74c61ad967da5842.json](run-001-74c61ad967da5842.json)
+
+Covalent radius is a way to measure the size of an atom when it forms a covalent bond with another atom.
+
+Think of an atom as a tiny nucleus (made of protons and neutrons) surrounded by a fuzzy cloud of electrons. Atoms don’t have a hard edge like a basketball, so scientists need a practical way to say “this atom is this big.” One common way is to look at atoms that are actually bonded together.
+
+When two identical atoms share electrons in a covalent bond (like the two chlorine atoms in a Cl₂ molecule), they sit at a certain distance from each other. That distance is called the bond length. The covalent radius is simply **half** of that bond length.
+
+### Simple Example
+- In a chlorine molecule, the two nuclei are 198 picometers apart.
+- Half of that distance = 99 picometers.
+- So the covalent radius of chlorine is 99 pm.
+
+This works for other non-metal elements too. For hydrogen in H₂, the covalent radius is about 31 pm. For oxygen in O₂, it’s about 66 pm.
+
+### Why This Matters
+Covalent radius helps us predict:
+- How big atoms are when they form molecules
+- How long bonds will be
+- Trends across the periodic table (atoms get smaller as you move right across a row because the nucleus pulls the electrons tighter; they get bigger as you go down a column because extra electron shells are added)
+
+So, in short: covalent radius = half the distance between two identical atoms that are covalently bonded. It’s a practical “size” we assign to an atom based on real chemical bonds rather than trying to measure a single, isolated atom.
+
+
+---
+
+<a id="run-001-07fca11817f0cbf8"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed
+
+**Source:** [run-001-07fca11817f0cbf8.json](run-001-07fca11817f0cbf8.json)
+
+Hello! Welcome to chemistry class. Today, we’re going to tackle a concept that sounds fancy, but is actually very logical once you picture it: the **covalent radius**.
+
+Let’s break it down step-by-step.
+
+---
+
+### The Problem: How do you measure an atom?
+
+Imagine trying to measure the exact size of a fluffy cloud or a cotton ball. It’s hard, right? There is no hard outer surface—just a fuzzy edge. 
+
+Atoms are the same way. An atom has a nucleus in the center, surrounded by a "cloud" of electrons. Because this cloud doesn't have a sharp boundary, **you can't just take a ruler and measure the radius from the center to the edge.**
+
+### The Solution: Teamwork between atoms!
+
+To solve this, scientists wait until two identical atoms bond together by sharing electrons—which is called a **covalent bond**. 
+
+When two identical atoms form a covalent bond, their electron clouds overlap, and their nuclei are locked at a stable, measurable distance from each other. 
+
+Scientists can easily measure the distance between the centers (the nuclei) of these two bonded atoms using X-ray technology. 
+
+### The Definition
+
+> **The covalent radius is simply half the distance between the nuclei of two identical atoms joined by a single covalent bond.**
+
+Here is the simple formula:
+
+$$\text{Covalent Radius} = \frac{\text{Distance between two nuclei}}{2}$$
+
+* **Example:** In a chlorine molecule ($\text{Cl}_2$), the distance between the two chlorine nuclei is about **198 picometers** (pm). 
+* To find the covalent radius of a single chlorine atom, just divide that by 2:
+  $$\frac{198}{2} = 99\text{ pm}$$
+* So, the covalent radius of chlorine is **99 pm**.
+
+*(Think of it like two identical tennis balls squished slightly together. If you measure the distance from the center of Ball A to the center of Ball B and divide by two, you get the radius of one ball).*
+
+---
+
+### How does it change on the Periodic Table? (Trends to know for tests!)
+
+Your chemistry teacher will definitely ask you how covalent radius changes as you move across the periodic table. Here are the two rules:
+
+#### 1. Going DOWN a group (column) $\downarrow$ $\rightarrow$ Atoms get BIGGER.
+* **Why?** Every time you move down a row, you are adding a completely new **energy level (shell)** of electrons. It’s like putting on another bulky winter jacket. The outer electrons are further from the center, so the covalent radius increases.
+
+#### 2. Going ACROSS a period (row) from Left to Right $\rightarrow$ Atoms get SMALLER.
+* **Why?** *(This one usually tricks students!)* As you go left to right, you are adding more protons to the nucleus and more electrons to the *same* energy level. 
+* More protons mean a stronger positive charge in the center. The nucleus acts like a stronger magnet, pulling that electron cloud closer and tighter toward the middle. This shrinks the atom, so the covalent radius decreases.
+
+---
+
+### Quick Summary for Your Notes:
+* **What is it?** Half the distance between the centers of two identical atoms bonded covalently.
+* **Why use it?** Atoms are fuzzy; this gives us a reliable way to define an atom's "size."
+* **Periodic Trend:** 
+  * **Down** a column = Radius gets **larger**.
+  * **Across** a row (left to right) = Radius gets **smaller**.
+
+Does that make sense? Let me know if you want to practice with an example!
+
+
+---
+
+<a id="run-001-32e17a751371eca0"></a>
+
+### claude-sonnet-5
+
+**Status:** completed
+
+**Source:** [run-001-32e17a751371eca0.json](run-001-32e17a751371eca0.json)
+
+# Covalent Radius
+
+## Definition
+
+**Covalent radius** is defined as **half the distance between the nuclei of two identical atoms that are joined together by a single covalent bond**.
+
+## A Simple Way to Picture It
+
+Imagine two identical atoms bonded together, like in a chlorine molecule (Cl–Cl). If you measure the distance between the centers (nuclei) of the two chlorine atoms, and then divide that distance by 2, you get the covalent radius of chlorine.
+
+$$\text{Covalent radius} = \frac{\text{Distance between nuclei of bonded atoms}}{2}$$
+
+**Example:**
+- The bond length in a Cl₂ molecule is 198 pm (picometers)
+- Covalent radius of Cl = 198/2 = **99 pm**
+
+## Why Do We Need This Concept?
+
+Atoms don't have a fixed, sharply defined boundary (electrons are spread out in probability clouds), so we can't measure the "size" of an atom directly like we would measure a ball. Instead, scientists measure the distance between two bonded atoms and use that to define atomic size.
+
+## Trends in the Periodic Table
+
+Covalent radius follows predictable patterns:
+
+| Direction | Trend | Reason |
+|-----------|-------|--------|
+| **Across a period (left to right)** | Decreases | Nuclear charge increases, pulling electrons closer to the nucleus |
+| **Down a group (top to bottom)** | Increases | New electron shells are added, increasing the size |
+
+## Key Points to Remember
+
+1. It applies specifically to **covalently bonded** atoms (not ionic or metallic bonds)
+2. It's usually measured in **picometers (pm)** or **angstroms (Å)**
+3. It helps us compare and predict the relative sizes of atoms
+4. It's used to calculate bond lengths in different molecules
+
+## Quick Check Question
+If the bond length between two identical bromine atoms (Br–Br) is 228 pm, what is the covalent radius of bromine?
+
+*(Answer: 228 ÷ 2 = 114 pm)*
+
+Would you like me to explain how this compares to other types of atomic radii, like ionic or metallic radius?
+
+
+---
+
+<a id="run-001-70ac966231c14e2b"></a>
+
+### llama-4-maverick
+
+**Status:** completed
+
+**Source:** [run-001-70ac966231c14e2b.json](run-001-70ac966231c14e2b.json)
+
+Covalent radius is an important concept in chemistry that helps us understand the size of atoms and how they interact with each other.
+
+**What is Covalent Radius?**
+
+Covalent radius is the radius of an atom when it is covalently bonded to another atom. In other words, it is the distance from the center of an atom to the point where it is bonded to another atom through a covalent bond.
+
+**Let's Break it Down**
+
+When two atoms share one or more pairs of electrons to form a covalent bond, the distance between the nuclei of the two atoms is called the bond length. The covalent radius is half of this bond length.
+
+For example, consider a molecule of chlorine (Cl2). The distance between the two chlorine nuclei is measured to be 198 pm (picometers). Since the two chlorine atoms are identical, the covalent radius of chlorine is half of this distance, which is 99 pm.
+
+**Why is Covalent Radius Important?**
+
+Covalent radius is a useful concept because it helps us understand the size of atoms and how they pack together in molecules. It's also related to the physical and chemical properties of elements, such as their reactivity and the shape of their molecules.
+
+**Key Points to Remember**
+
+1. Covalent radius is the radius of an atom when it's covalently bonded to another atom.
+2. It's half the distance between the nuclei of two atoms that are covalently bonded.
+3. Covalent radius helps us understand the size of atoms and their interactions.
+
+**Example to Illustrate the Concept**
+
+Let's consider a simple molecule like HCl (hydrogen chloride). The covalent radius of hydrogen is 37 pm, and that of chlorine is 99 pm. The bond length between H and Cl is the sum of their covalent radii, which is 37 + 99 = 136 pm. This is close to the experimentally measured bond length, which is 127 pm (the difference is due to other factors that affect bond length).
+
+Now, I hope you have a good understanding of covalent radius! Do you have any questions or would you like me to explain further?
+
+
+---
+
+<a id="prompt-2"></a>
+
+## Prompt 2 (ta)
+
+**Prompt**
+
+> நீங்கள் ஒரு சிறந்த ஆசிரியர். ஒரு உயர்நிலைப் பள்ளி மாணவருக்கு சகப்பிணைப்பு ஆரம் பற்றி விளக்குங்கள்.
+
+---
+
+<a id="run-002-cc1fa93bb27c3f12"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed
+
+**Source:** [run-002-cc1fa93bb27c3f12.json](run-002-cc1fa93bb27c3f12.json)
+
+**சகப்பிணைப்பு ஆரம் (Covalent Radius)** என்பது ஒரு அணுவின் அளவைச் சுட்டிக்காட்டும் அளவாகும்.
+
+ஒரே தனிமத்தைச் சேர்ந்த இரண்டு அணுக்கள் சகப்பிணைப்பால் இணைந்திருக்கும்போது, அவற்றின் **கருக்களுக்கிடையேயான தூரத்தின் பாதி** அந்தத் தனிமத்தின் சகப்பிணைப்பு ஆரம் எனப்படும்.
+
+### எளிய விளக்கம்
+இரண்டு ஒரே அளவுள்ள பந்துகள் ஒன்றோடொன்று தொடுவதாகக் கற்பனை செய்யுங்கள்.  
+அவற்றின் மையங்களுக்கிடையிலான தூரம் இரு பந்துகளின் ஆரங்களின் கூட்டுத்தொகை.  
+அதேபோல், இரண்டு அணுக்கள் இணைந்தால்:
+
+\[
+\text{சகப்பிணைப்பு ஆரம்} = \frac{\text{இரு கருக்களுக்கிடையிலான தூரம்}}{2}
+\]
+
+### உதாரணம்: குளோரின் மூலக்கூறு
+குளோரின் மூலக்கூறு \(Cl_2\)-இல் இரண்டு குளோரின் அணுக்கள் இணைந்துள்ளன.
+
+கருக்களுக்கிடையிலான தூரம் \(198 \, pm\) எனில்,
+
+\[
+\text{Cl-ன் சகப்பிணைப்பு ஆரம்} = \frac{198}{2} = 99 \, pm
+\]
+
+இங்கு **pm (பிகோமீட்டர்)** என்பது மிகச் சிறிய நீள அலகு.
+
+\[
+1\, pm = 10^{-12}\, m
+\]
+
+### ஏன் இது முக்கியம்?
+சகப்பிணைப்பு ஆரம் மூலம்:
+
+- அணுக்களின் ஒப்பீட்டு அளவை அறியலாம்.
+- பிணைப்பு நீளத்தைப் புரிந்துகொள்ளலாம்.
+- தனிமங்களின் பண்புகளை ஒப்பிடலாம்.
+- ஒரு மூலக்கூறின் அமைப்பை விளக்கலாம்.
+
+### அட்டவணையில் ஏற்படும் மாற்றம்
+1. **ஒரு காலத்தில் (இடமிருந்து வலமாகச் செல்லும்போது):**  
+   பொதுவாக சகப்பிணைப்பு ஆரம் **குறையும்**.  
+   காரணம்: கருவில் உள்ள நேர்ம மின்னூட்டம் அதிகரித்து, எலக்ட்ரான்களை அதிகமாக ஈர்க்கிறது.
+
+2. **ஒரு தொகுதியில் (மேலிருந்து கீழாகச் செல்லும்போது):**  
+   சகப்பிணைப்பு ஆரம் **அதிகரிக்கும்**.  
+   காரணம்: புதிய எலக்ட்ரான் அடுக்குகள் சேருவதால் அணுவின் அளவு பெரிதாகிறது.
+
+### நினைவில் கொள்ள வேண்டியது
+- சகப்பிணைப்பு ஆரம் என்பது சகப்பிணைப்பில் உள்ள அணுக்களுக்குப் பயன்படுத்தப்படும் அளவு.
+- இது அணுவின் “உண்மையான எல்லை” அல்ல; அணுக்களின் அளவை ஒப்பிட உதவும் ஒரு நடைமுறை அளவாகும்.
+- ஒற்றைப் பிணைப்பு, இரட்டைப் பிணைப்பு, மும்மைப் பிணைப்பு ஆகியவற்றில் பிணைப்பு நீளம் மாறலாம். பொதுவாக பிணைப்பின் வலிமை அதிகரிக்கும்போது பிணைப்பு நீளம் குறையும்.
+
+**சுருக்கமாக:**  
+ஒரே தனிமத்தின் இரண்டு அணுக்கள் சகப்பிணைப்பில் இணைந்திருக்கும் போது, அவற்றின் கருக்களுக்கிடையிலான தூரத்தின் பாதியே அந்தத் தனிமத்தின் சகப்பிணைப்பு ஆரம்.
+
+
+---
+
+<a id="run-002-82d2163d54bf695e"></a>
+
+### grok-4.3
+
+**Status:** completed
+
+**Source:** [run-002-82d2163d54bf695e.json](run-002-82d2163d54bf695e.json)
+
+மாணவரே, வணக்கம்! நான் உங்களுக்கு சகப்பிணைப்பு ஆரத்தை மிக எளிமையாகவும் தெளிவாகவும் விளக்குகிறேன். உயர்நிலைப் பள்ளி மட்டத்தில் புரிந்துகொள்ளும் வகையில் சொல்கிறேன்.
+
+### சகப்பிணைப்பு ஆரம் என்றால் என்ன?
+
+இரண்டு அணுக்கள் **சகப்பிணைப்பு** (covalent bond) மூலம் ஒன்றாக இணைந்திருக்கும்போது, அந்த இரண்டு அணுக்களின் **அணுக்கருக்களுக்கு** இடையே உள்ள தூரத்தின் பாதியைத்தான் **சகப்பிணைப்பு ஆரம்** என்று அழைக்கிறோம்.
+
+எளிய வார்த்தைகளில் சொன்னால்:  
+இரண்டு அணுக்கள் கையைப் பிடித்துக்கொண்டு நிற்பதுபோல் இணைந்திருக்கின்றன. அந்த இரண்டு அணுக்களின் மையப் பகுதிகளுக்கு (அணுக்கரு) இடையே உள்ள மொத்த தூரத்தை அரைத்தால் கிடைப்பதுதான் ஒரு அணுவின் சகப்பிணைப்பு ஆரம்.
+
+### உதாரணத்துடன் பார்ப்போம்
+
+குளோரின் (Cl₂) மூலக்கூறை எடுத்துக்கொள்வோம்.  
+- இரண்டு குளோரின் அணுக்கள் சகப்பிணைப்பு மூலம் இணைந்திருக்கின்றன.  
+- இந்த இரண்டு அணுக்களின் அணுக்கருக்களுக்கு இடையே உள்ள மொத்த தூரம் (பிணைப்பு நீளம்) சுமார் **198 பிகோமீட்டர்** (pm).  
+
+இப்போது ஒவ்வொரு குளோரின் அணுவின் சகப்பிணைப்பு ஆரம் = 198 ÷ 2 = **99 pm**.
+
+இதேபோல் ஹைட்ரஜன் (H₂) மூலக்கூறில் பிணைப்பு நீளம் 74 pm எனில், ஹைட்ரஜன் அணுவின் சகப்பிணைப்பு ஆரம் 37 pm ஆகும்.
+
+### ஏன் இதை அளக்கிறோம்?
+
+அணுக்கள் நேரடியாகப் பார்க்க முடியாதவை. எனவே அணுக்களின் அளவை ஒப்பிடுவதற்கு இந்த ஆரத்தைப் பயன்படுத்துகிறோம். இது முக்கியமாக உலோகமற்ற தனிமங்களுக்கு (non-metals) அதிகம் பயன்படுத்தப்படுகிறது.
+
+### ஆவர்த்தன அட்டவணையில் சகப்பிணைப்பு ஆரத்தின் போக்கு
+
+1. **ஒரு காலத்தில் (Period) இடமிருந்து வலதுபுறம் செல்லச் செல்ல**  
+   ஆரம் **குறைகிறது**.  
+   காரணம்: அணுக்கருவின் மின்னூட்டம் (proton எண்ணிக்கை) அதிகரிக்கிறது. இது வெளிப்புற எலக்ட்ரான்களை இன்னும் இறுக்கமாக இழுத்து அணுவை சிறியதாக்குகிறது.
+
+2. **ஒரு குழுவில் (Group) மேலிருந்து கீழே செல்லச் செல்ல**  
+   ஆரம் **அதிகரிக்கிறது**.  
+   காரணம்: புதிய எலக்ட்ரான் ஷெல் (shell) சேர்கிறது. இந்த புதிய ஷெல் அணுவைப் பெரிதாக்குகிறது.
+
+### சுருக்கமாக நினைவில் கொள்ள வேண்டியவை
+
+- சகப்பிணைப்பு ஆரம் = பிணைப்பு நீளத்தின் பாதி
+- அணுவின் அளவை ஒப்பிடுவதற்கு உதவும்
+- காலத்தில்: இடமிருந்து வலம் → ஆரம் குறைவு
+- குழுவில்: மேலிருந்து கீழ் → ஆரம் அதிகரிப்பு
+
+இப்போது புரிந்ததா மாணவரே?  
+ஏதாவது இடம் தெளிவாக இல்லையா அல்லது உதாரணம் வேண்டுமா? சொல்லுங்கள், இன்னும் எளிதாக விளக்குகிறேன்!
+
+
+---
+
+<a id="run-002-8a850ca3ac8b44fa"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed
+
+**Source:** [run-002-8a850ca3ac8b44fa.json](run-002-8a850ca3ac8b44fa.json)
+
+வணக்கம் மாணவரே! வாருங்கள், வேதியியலில் மிக முக்கியமான மற்றும் எளிமையான ஒரு தலைப்பான **"சகப்பிணைப்பு ஆரம்" (Covalent Radius)** பற்றி இன்று மிகத் தெளிவாகப் புரிந்து கொள்வோம்.
+
+முதலில் ஒரு சின்னக் கேள்வி: 
+*ஒரு வட்டத்தின் ஆரம் (Radius) என்றால் என்ன? அதன் மையத்திலிருந்து விளிம்பு வரை உள்ள தூரம், சரியா?* 
+
+ஆனால், அணுக்கள் விஷயத்தில் இது அவ்வளவு சுலபமல்ல. ஏனென்றால், அணுவுக்கு என்று ஒரு திடமான சுவர் அல்லது எல்லை கிடையாது. எலக்ட்ரான்கள் ஒரு மேகம் போல அணுக்கருவைச் சுற்றி ஓடிக்கொண்டே இருக்கும். அதனால் ஒரு தனித்த அணுவின் ஆரத்தை நம்மால் டேப் (Tape) வைத்தெல்லாம் அளக்க முடியாது.
+
+இதற்கு விஞ்ஞானிகள் கண்டுபிடித்த ஒரு புத்திசாலித்தனமான வழிதான் **சகப்பிணைப்பு ஆரம்**. 
+
+---
+
+### சகப்பிணைப்பு ஆரம் என்றால் என்ன?
+
+இதை ஒரு எளிய உதாரணத்தின் மூலம் பார்ப்போம்:
+இரண்டு சிறந்த நண்பர்கள் ஒருவரையொருவர் இறுக்கமாகக் கைகுலுக்கிக் கொள்வது போல, இரண்டு அணுக்கள் எலக்ட்ரான்களைப் **பகிர்ந்து கொண்டு** பிணைப்பை (Covalent Bond) ஏற்படுத்துகின்றன. 
+
+இப்போது வரையறைக்கு வருவோம்:
+> **"ஒரே தனிமத்தைச் சேர்ந்த இரண்டு அணுக்கள் ஒற்றைச் சகப்பிணைப்பால் பிணைக்கப்பட்டிருக்கும் போது, அந்த இரண்டு அணுக்களின் அணுக்கருக்களுக்கு (Nuclei) இடையே உள்ள தூரத்தின் சரிபாதி அளவே 'சகப்பிணைப்பு ஆரம்' எனப்படும்."**
+
+### ஒரு எளிய கணக்கு (Formula):
+
+இரண்டு அணுக்கருக்களுக்கு இடையே உள்ள மொத்த தூரத்தை **"d" (Bond length)** என்று வைத்துக்கொள்வோம். 
+
+அப்படியென்றால், சகப்பிணைப்பு ஆரம் ($r$):
+$$r = \frac{d}{2}$$
+
+**உதாரணம் (குளோரின் மூலக்கூறு - $Cl_2$):**
+* இரண்டு குளோரின் அணுக்கள் இணையும் போது, அவற்றின் மையங்களுக்கு இடையே உள்ள தூரம் **$198\text{ pm}$** (பிகோமீட்டர்).
+* இப்போது இதன் சகப்பிணைப்பு ஆரம் = $\frac{198}{2} = 99\text{ pm}$.
+* அவ்வளவுதான்! குளோரின் அணுவின் ஆரம் **$99\text{ pm}$**.
+
+---
+
+### ஆவர்த்தன அட்டவணையில் (Periodic Table) இது எப்படி மாறும்?
+தேர்வுக்கு இது மிக முக்கியம், கவனமாகக் கேளுங்கள்:
+
+1. **இடமிருந்து வலமாகச் செல்லும்போது (தொடரில் - Across a Period):**
+   * சகப்பிணைப்பு ஆரம் **குறையும்**.
+   * *ஏன்?* அணுக்கருவில் நேர்மின்சுமை (புரோட்டான்கள்) அதிகரிப்பதால், அது எலக்ட்ரான்களைத் தன்னை நோக்கி பலமாக இழுக்கும். இதனால் அணு சுருங்கிவிடும்.
+
+2. **மேலிருந்து கீழாக வரும்போது (தொகுதியில் - Down a Group):**
+   * சகப்பிணைப்பு ஆரம் **அதிகரிக்கும்**.
+   * *ஏன்?* ஒவ்வொரு படியாகக் கீழே வரும்போதும் புதிய எலக்ட்ரான் கூடுகள் (Shells) சேர்ந்துகொண்டே போகும். உதாரணத்திற்கு, வெங்காயத்தில் அடுக்குகள் கூடக்கூட அதன் அளவு பெரிதாவது போல, அணுவின் அளவும் பெரிதாகும்.
+
+---
+
+### சுருக்கமாக நினைவில் வைக்க:
+* **சகப்பிணைப்பு:** எலக்ட்ரான் பங்கீடு.
+* **ஆரம்:** இரண்டு மையங்களுக்கு இடைப்பட்ட தூரத்தில் **பாதி** ($\frac{d}{2}$).
+* தொடரில் **குறையும்**, தொகுதியில் **கூடும்**.
+
+இதில் உங்களுக்கு ஏதேனும் சந்தேகம் உள்ளதா? அல்லது வேறு ஏதேனும் உதாரணம் பார்க்கலாமா?
+
+
+---
+
+<a id="run-002-45754f15b72ce34d"></a>
+
+### claude-sonnet-5
+
+**Status:** completed
+
+**Source:** [run-002-45754f15b72ce34d.json](run-002-45754f15b72ce34d.json)
+
+# சகப்பிணைப்பு ஆரம் (Covalent Bond)
+
+## சகப்பிணைப்பு ஆரம் என்றால் என்ன?
+
+இரண்டு அணுக்கள் தங்களுக்கிடையே **எலக்ட்ரான் ஜோடிகளைப் பகிர்ந்துகொள்வதன்** மூலம் ஏற்படும் வேதியியல் பிணைப்பே **சகப்பிணைப்பு ஆரம்** எனப்படும்.
+
+## ஏன் இந்த பிணைப்பு உருவாகிறது?
+
+- ஒவ்வொரு அணுவும் தன்னுடைய வெளிக்கூட்டு எலக்ட்ரான் அமைப்பை **நிலைப்புத்தன்மையுடைய நோபிள் வாயு அமைப்புக்கு (ஆக்டெட் விதி - 8 எலக்ட்ரான்கள்)** மாற்ற விரும்புகிறது.
+- எலக்ட்ரான்களை முழுவதுமாக இழக்காமல் அல்லது பெறாமல், **பகிர்ந்துகொள்வதன் மூலம்** இந்த நிலைப்புத்தன்மையை அடைகின்றன.
+
+## எடுத்துக்காட்டுகள்
+
+### 1. ஹைட்ரஜன் மூலக்கூறு (H₂)
+- இரண்டு ஹைட்ரஜன் அணுக்களும் தலா ஒரு எலக்ட்ரானை பங்களித்து, ஒரு எலக்ட்ரான் ஜோடியை பகிர்ந்துகொள்கின்றன.
+- இதனால் **ஒற்றைப் பிணைப்பு (Single Bond)** உருவாகிறது.
+- H – H
+
+### 2. நீர் மூலக்கூறு (H₂O)
+- ஆக்ஸிஜன் அணு இரண்டு ஹைட்ரஜன் அணுக்களுடன் எலக்ட்ரான்களைப் பகிர்கிறது.
+- ஆக்ஸிஜனுக்கு 8 எலக்ட்ரான்களும், ஒவ்வொரு ஹைட்ரஜனுக்கும் 2 எலக்ட்ரான்களும் கிடைக்கின்றன.
+
+### 3. ஆக்ஸிஜன் மூலக்கூறு (O₂)
+- இரு எலக்ட்ரான் ஜோடிகள் பகிரப்படுவதால் **இரட்டைப் பிணைப்பு (Double Bond)** உருவாகிறது.
+- O = O
+
+### 4. நைட்ரஜன் மூலக்கூறு (N₂)
+- மூன்று எலக்ட்ரான் ஜோடிகள் பகிரப்படுவதால் **முப்பிணைப்பு (Triple Bond)** உருவாகிறது.
+- N ≡ N
+
+## சகப்பிணைப்பு ஆரத்தின் வகைகள்
+
+| வகை | பகிரப்படும் எலக்ட்ரான் ஜோடிகள் | எடுத்துக்காட்டு |
+|------|-------------------------------|-----------------|
+| ஒற்றைப் பிணைப்பு | 1 | H₂, CH₄ |
+| இரட்டைப் பிணைப்பு | 2 | O₂, CO₂ |
+| முப்பிணைப்பு | 3 | N₂ |
+
+## முக்கிய பண்புகள்
+
+✅ இது பொதுவாக **உலோகமற்ற அணுக்களுக்கு** இடையே ஏற்படும்.
+
+✅ சகப்பிணைப்பு சேர்மங்கள் பொதுவாக **குறைந்த உருகுநிலை மற்றும் கொதிநிலையை** கொண்டிருக்கும்.
+
+✅ இவை **மின்சாரத்தை கடத்தாது** (பொதுவாக).
+
+✅ **அயனிப் பிணைப்புடன்** ஒப்பிடும்போது இது வலிமை குறைவானதாக இருக்கலாம், ஆனால் பல மூலக்கூறு சேர்மங்களில் மிக முக்கிய பங்கு வகிக்கிறது.
+
+## எளிய நினைவூட்டல்
+
+> **"பங்கீடு = பலம்"** - எலக்ட்ரான்களைப் பங்கிட்டுக் கொள்வதன் மூலம் இரு அணுக்களும் நிலைத்தன்மை பெறுகின்றன, இதுவே சகப்பிணைப்பு ஆரத்தின் அடிப்படை.
+
+இதை இன்னும் தெளிவாக புரிந்துகொள்ள, Lewis Structure (லூயிஸ் அமைப்பு) வரைந்து பயிற்சி செய்வது உதவும்!
+
+
+---
+
+<a id="run-002-7d441e333cc2fddc"></a>
+
+### llama-4-maverick
+
+**Status:** completed
+
+**Source:** [run-002-7d441e333cc2fddc.json](run-002-7d441e333cc2fddc.json)
+
+வணக்கம் மாணவரே, இன்று நாம் சகப்பிணைப்பு ஆரம் பற்றி பார்க்கலாம். ஒரே தனிமத்தின் இரு அணுக்களுக்கிடையேயுள்ள் பிணைப்பு நீளத்தில் பாதியை சகப்பிணைப்பு ஆரம் என்பர். சகப்பிணைப்பு ஆரம் என்பது ஒரே தனிமத்தைச் சேர்ந்த இரு அணுக்கள் சகப்பிணைப்பால் பிணைக்கப்பட்டிருக்கும் போது அவ்விரு அணுக்களுக்கிடையே உள்ள தூரத்தின் பாதி ஆகும். ஒரே வகையான இரு அணுக்களுக்கிடையே உள்ள பிணைப்பின் நீளம் = 2 × சகப்பிணைப்பு ஆரம். அதாவது, ஒரு தனிமத்தின் இரு அணுக்களுக்கிடையே சகப்பிணைப்பு உள்ள போது அவ்விரு அணுக்களின் மையக்கருக்களுக்கு இடையே உள்ள தொலைவின் பாதியை சகப்பிணைப்பு ஆரம் என்கிறோம். ஐதரசன் மூலக்கூறில் பிணைப்பு நீளம் 74 பைக்கோ மீட்டர் ஆகும். ஐதரசனின் சகப்பிணைப்பு ஆரம் 37 பைக்கோ மீட்டர் ஆகும். குளோரின் மூலக்கூறில் பிணைப்பு நீளம் 198 பைக்கோ மீட்டர் ஆகும். குளோரினின் சகப்பிணைப்பு ஆரம் 99 பைக்கோ மீட்டர் ஆகும். இவ்வாறு ஒரே தனிமத்தின் அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளத்தைக் கொண்டு அவ்வணுவின் சகப்பிணைப்பு ஆரம் கணக்கிடப்படுகிறது. ஆனால் வெவ்வேறு தனிமங்களின் அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளம் அவற்றின் சகப்பிணைப்பு ஆரங்களின் கூடுதலுக்குச் சமனாகவோ அல்லது அதற்கு அருகிலோ இருக்கும். எடுத்துக்காட்டாக C-Cl பிணைப்பு நீளம் = C சகப்பிணைப்பு ஆரம் + Cl சகப்பிணைப்பு ஆரம் = 77 pm + 99 pm = 176 pm. சகப்பிணைப்பு ஆரம் பிணைப்பு வரிசையை பொறுத்து அமையும். பிணைப்பு வரிசை அதிகரிக்கும் போது சகப்பிணைப்பு ஆரம் குறையும். மாணவரே உங்களுக்கு இப்போது சகப்பிணைப்பு ஆரம் பற்றி தெளிவாக புரிந்திருக்கும் என்று நம்புகிறேன்.
+
+
+---
+
+<a id="prompt-3"></a>
+
+## Prompt 3 (en)
+
+**Prompt**
+
+> You are an expert teacher teaching an high school student. Explain covalent radius in Tamil.
+
+---
+
+<a id="run-003-68a24b562029b40f"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed
+
+**Source:** [run-003-68a24b562029b40f.json](run-003-68a24b562029b40f.json)
+
+**கோவேலன்ட் ஆரம் (Covalent Radius)** என்பது ஒரு அணுவின் அளவை குறிப்பிடும் அளவாகும்.
+
+ஒரே வகை இரண்டு அணுக்கள் ஒரு **கோவேலன்ட் பிணைப்பால்** இணைந்திருக்கும் போது, அவற்றின் கருக்களுக்கு (nuclei) இடையிலான தூரத்தின் **பாதி** அந்த அணுவின் கோவேலன்ட் ஆரம் எனப்படும்.
+
+### வரையறை
+\[
+\text{கோவேலன்ட் ஆரம்} = \frac{\text{இரண்டு இணைந்த அணுக்களின் கருக்களுக்கிடையிலான தூரம்}}{2}
+\]
+
+### உதாரணம்
+குளோரின் மூலக்கூறு \(Cl_2\)-இல் இரண்டு குளோரின் அணுக்கள் இணைந்துள்ளன.
+
+கருக்களுக்கிடையிலான தூரம் \(198\ \text{pm}\) என்றால்,
+
+\[
+\text{Cl-ன் கோவேலன்ட் ஆரம்} = \frac{198}{2} = 99\ \text{pm}
+\]
+
+இங்கே **pm (picometre)** என்பது மிகவும் சிறிய நீள அலகு.
+
+\[
+1\ \text{pm} = 10^{-12}\ \text{m}
+\]
+
+### ஏன் இது முக்கியம்?
+கோவேலன்ட் ஆரம் மூலம்:
+
+- அணுவின் ஒப்பீட்டு அளவை அறியலாம்.
+- பிணைப்பின் நீளத்தைப் புரிந்துகொள்ளலாம்.
+- தனிமங்களின் பண்புகளை ஒப்பிடலாம்.
+
+### ஆவர்த்தன அட்டவணையில் மாற்றம்
+
+**1. ஒரு வரிசையில் இடமிருந்து வலமாகச் செல்லும்போது:**  
+கோவேலன்ட் ஆரம் பொதுவாக **குறையும்**.
+
+காரணம்: கருவில் உள்ள நேர்ம மின்சுமை அதிகரிப்பதால், எலக்ட்ரான்கள் கருவை நோக்கி அதிகமாக இழுக்கப்படுகின்றன.
+
+உதாரணம்:  
+\[
+\text{C} > \text{N} > \text{O} > \text{F}
+\]
+(அணு ஆரம் படிப்படியாகக் குறையும்.)
+
+**2. ஒரு தொகுதியில் மேலிருந்து கீழே செல்லும்போது:**  
+கோவேலன்ட் ஆரம் பொதுவாக **அதிகரிக்கும்**.
+
+காரணம்: ஒவ்வொரு கீழ் நிலைக்கும் புதிய எலக்ட்ரான் படலம் (shell) சேர்கிறது.
+
+உதாரணம்:  
+\[
+\text{F} < \text{Cl} < \text{Br} < \text{I}
+\]
+
+### நினைவில் வைத்துக்கொள்ள எளிய குறிப்பு
+- **ஒரே வரிசையில் → வலப்புறம் சென்றால் ஆரம் குறையும்**
+- **ஒரே தொகுதியில் → கீழே சென்றால் ஆரம் அதிகரிக்கும்**
+
+சுருக்கமாக, **கோவேலன்ட் பிணைப்பில் இணைந்த இரண்டு ஒரே அணுக்களின் கருக்களுக்கிடையிலான தூரத்தின் பாதியே கோவேலன்ட் ஆரம்** ஆகும்.
+
+
+---
+
+<a id="run-003-86d6a629dc2be449"></a>
+
+### grok-4.3
+
+**Status:** completed
+
+**Source:** [run-003-86d6a629dc2be449.json](run-003-86d6a629dc2be449.json)
+
+கோவலன்ட் ஆரம் என்றால் என்ன?
+
+மாணவர்களே, அணுக்கள் மிகவும் சிறியவை. எனவே அவற்றின் அளவை நேரடியாக அளக்க முடியாது. அதனால் விஞ்ஞானிகள் பல்வேறு வகையான “ஆரம்” (radius) வரையறைகளை உருவாக்கியுள்ளனர். அவற்றில் ஒன்றுதான் **கோவலன்ட் ஆரம்**.
+
+### எளிய வரையறை:
+இரண்டு அணுக்கள் **ஒற்றை கோவலன்ட் பிணைப்பு** (single covalent bond) மூலம் இணைந்திருக்கும்போது, அந்த இரண்டு அணுக்களின் அணுக்கருக்களுக்கு (nuclei) இடையே உள்ள தூரத்தின் **பாதியை** கோவலன்ட் ஆரம் என்று அழைக்கிறோம்.
+
+### எடுத்துக்காட்டு:
+- குளோரின் மூலக்கூறில் (Cl₂) இரண்டு குளோரின் அணுக்கள் ஒற்றைப் பிணைப்பால் இணைந்திருக்கின்றன.
+- Cl–Cl பிணைப்பின் மொத்த நீளம் 198 pm (பிகோமீட்டர்).
+- எனவே ஒரு குளோரின் அணுவின் கோவலன்ட் ஆரம் = 198 ÷ 2 = **99 pm**.
+
+இதே போல ஹைட்ரஜன் மூலக்கூறில் (H₂) H–H பிணைப்பு நீளம் 74 pm என்பதால் ஹைட்ரஜனின் கோவலன்ட் ஆரம் 37 pm ஆகும்.
+
+### முக்கியக் குறிப்புகள்:
+- கோவலன்ட் ஆரம் எப்போதும் **ஒற்றைப் பிணைப்பு** (single bond) உள்ள நிலையில் அளக்கப்படுகிறது.
+- பிணைப்பு எண்ணிக்கை அதிகரிக்கும்போது (இரட்டை அல்லது மூன்று பிணைப்பு) கோவலன்ட் ஆரம் சற்று குறையும்.
+- இது அணுவின் உண்மையான அளவை அளவிடும் ஒரு வசதியான முறை மட்டுமே.
+
+இந்தக் கோவலன்ட் ஆரம் மதிப்புகளைப் பயன்படுத்தித்தான் நாம் தனிம அட்டவணையில் (periodic table) அணு ஆரம் எப்படி மாறுகிறது என்பதைப் படிக்கிறோம். 
+
+இன்னும் ஏதேனும் சந்தேகம் இருந்தால் கேளுங்கள்!
+
+
+---
+
+<a id="run-003-95d73d5b028fad25"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed
+
+**Source:** [run-003-95d73d5b028fad25.json](run-003-95d73d5b028fad25.json)
+
+வணக்கம்! வேதியியலில் (Chemistry) மிக முக்கியமான மற்றும் எளிமையான ஒரு தலைப்பான **"சகப்பிணைப்பு ஆரம்" (Covalent Radius)** பற்றி இன்று நாம் தெரிந்து கொள்ளலாம்.
+
+ஒரு உயர்நிலைப் பள்ளி மாணவனாக, இதை நீங்கள் எளிதாகப் புரிந்துகொள்ள நான் ஒரு ஆசிரியராக விளக்குகிறேன்.
+
+---
+
+### சகப்பிணைப்பு ஆரம் என்றால் என்ன? (Definition)
+
+ஒரே தனிமத்தைச் சேர்ந்த இரண்டு அணுக்கள் **சகப்பிணைப்பால் (Covalent Bond - அதாவது எலக்ட்ரான்களைப் பகிர்ந்து கொள்வதன் மூலம்)** பிணைக்கப்பட்டிருக்கும் போது, **அந்த இரண்டு அணுக்கருக்களுக்கு (Nuclei) இடையே உள்ள தூரத்தின் சரிபாதியே "சகப்பிணைப்பு ஆரம்" ஆகும்.**
+
+எளிய வாய்ப்பாடு (Formula):
+$$\text{சகப்பிணைப்பு ஆரம் } (r) = \frac{d}{2}$$
+*(இங்கு '$d$' என்பது இரண்டு அணுக்கருக்களுக்கு இடையே உள்ள தூரம் - Internuclear distance)*
+
+---
+
+### ஒரு எளிய உதாரணம் (Real-life Analogy):
+
+இரண்டு சம அளவுள்ள களிமண் உருண்டைகளை எடுத்துக்கொள்ளுங்கள். அவற்றை லேசாக ஒன்றோடு ஒன்று அழுத்தி ஒட்ட வைக்கிறீர்கள் என்று வைத்துக்கொள்வோம் (இதுதான் சகப்பிணைப்பு). 
+
+இப்போது, முதல் உருண்டையின் மையப்புள்ளிக்கும், இரண்டாவது உருண்டையின் மையப்புள்ளிக்கும் இடையே உள்ள மொத்த தூரத்தை அளந்து, அதை **இரண்டால் வகுத்தால் (divide by 2)** என்ன கிடைக்குமோ, அதுதான் அந்த அணுவின் சகப்பிணைப்பு ஆரம்!
+
+---
+
+### அறிவியல் எடுத்துக்காட்டு (Example with Chlorine):
+
+* நாம் **குளோரின் மூலக்கூறை ($Cl_2$)** எடுத்துக்கொள்வோம். இதில் இரண்டு குளோரின் அணுக்கள் ஒற்றைச் சகப்பிணைப்பில் இணைந்துள்ளன.
+* இந்த இரண்டு குளோரின் அணுக்கருக்களுக்கு இடையே உள்ள தூரம் ($d$) = **$198\text{ pm}$** (பிக்கோ மீட்டர் - Picometre).
+* எனவே, குளோரினின் சகப்பிணைப்பு ஆரம்:
+  $$r = \frac{198}{2} = 99\text{ pm}$$
+
+---
+
+### தனிம வரிசை அட்டவணையில் இதன் மாற்றம் (Trends in Periodic Table):
+
+பரீட்சையில் இது மிக முக்கியமான கேள்வி. இது எப்படி மாறுகிறது என்று பார்ப்போம்:
+
+1. **ஒரு தொடரில், இடமிருந்து வலமாகச் செல்லும்போது (Across a Period - Left to Right):**
+   * சகப்பிணைப்பு ஆரம் **குறைகிறது**.
+   * **காரணம்:** அணுக்கருவில் நேர்மின்சுமை (Nuclear charge/புரோட்டான்கள்) அதிகரிப்பதால், அது வெளிக்கூட்டு எலக்ட்ரான்களைத் தன் பக்கமாக வலுவாக ஈர்க்கிறது. இதனால் அணு சுருங்குகிறது.
+
+2. **ஒரு தொகுதியில், மேலிருந்து கீழாக வரும்போது (Down a Group - Top to Bottom):**
+   * சகப்பிணைப்பு ஆரம் **அதிகரிக்கிறது**.
+   * **காரணம்:** கீழே செல்லச் செல்லப் புதிய எலக்ட்ரான் கூடுகள் (New shells) சேர்வதால், அணுக்கருவிற்கும் வெளிக்கூட்டுக்கும் உள்ள தூரம் அதிகமாகி, அணுவின் அளவு பெரிதாகிறது.
+
+---
+
+### நினைவில் வைக்க வேண்டிய முக்கிய குறிப்பு:
+தனியாக இருக்கும் ஒரு அணுவின் எல்லையைத் துல்லியமாக அளவிட முடியாது (ஏனெனில் எலக்ட்ரான் மேகம் பரவி இருக்கும்). அதனால்தான், சகப்பிணைப்பில் உள்ள இரண்டு அணுக்களின் மையத் தூரத்தை அளந்து, அதில் பாதியை எடுத்து "சகப்பிணைப்பு ஆரம்" என்று அழைக்கிறோம்.
+
+இப்போது புரிகிறதா? இதில் ஏதேனும் சந்தேகம் இருந்தால் தாராளமாகக் கேட்கலாம்!
+
+
+---
+
+<a id="run-003-b778d6d860afcc11"></a>
+
+### claude-sonnet-5
+
+**Status:** completed
+
+**Source:** [run-003-b778d6d860afcc11.json](run-003-b778d6d860afcc11.json)
+
+# கூட்டிணைவு ஆரம் (Covalent Radius) - விளக்கம்
+
+## முதலில் புரிந்துகொள்வோம்
+
+மாணவரே, இதை ஒரு எளிய உதாரணத்துடன் தொடங்குவோம். இரண்டு நபர்கள் கை குலுக்கும்போது, அவர்களுடைய உடல்கள் ஒரு குறிப்பிட்ட தூரத்தில் நிற்கிறார்கள் அல்லவா? அதே போலத்தான் இரண்டு அணுக்கள் இணையும்போதும் ஒரு குறிப்பிட்ட தூரத்தில் நிற்கும்.
+
+## கூட்டிணைவு ஆரம் என்றால் என்ன?
+
+**வரையறை:**
+இரண்டு ஒரே மாதிரியான அணுக்கள் (identical atoms) ஒரு **ஒற்றைப் பிணைப்பு (single covalent bond)** மூலம் இணைந்திருக்கும்போது, அவ்விரு அணுக்களின் **மையங்களுக்கு (nuclei) இடையேயான தூரத்தில் பாதி** தான் **கூட்டிணைவு ஆரம்** எனப்படும்.
+
+## சூத்திரம்
+
+$$\text{கூட்டிணைவு ஆரம்} = \frac{\text{இரு அணு மையங்களுக்கு இடையேயான தூரம்}}{2}$$
+
+## உதாரணத்துடன் விளக்கம்
+
+**குளோரின் மூலக்கூறை (Cl₂) எடுத்துக்கொள்வோம்:**
+
+```
+Cl -------- Cl
+    d (தூரம்)
+```
+
+- Cl₂ மூலக்கூறில் இரண்டு குளோரின் அணுக்களுக்கு இடையேயான தூரம் = 198 pm (picometre)
+- எனவே, குளோரின் அணுவின் கூட்டிணைவு ஆரம் = 198/2 = **99 pm**
+
+## முக்கிய குறிப்புகள்
+
+1. **ஒரே தனிமத்தின் இரு அணுக்கள்** இணையும்போது மட்டுமே இது பொருந்தும்
+2. இது **ஒற்றைப் பிணைப்புக்கு (single bond)** மட்டுமே பொருந்தும்
+3. அணு எண் (atomic number) அதிகரிக்கும்போது, பொதுவாக கூட்டிணைவு ஆரமும் அதிகரிக்கும் (ஒரே தொகுதியில்)
+
+## ஏன் இது முக்கியம்?
+
+- அணுக்களின் **அளவை** ஒப்பிட உதவுகிறது
+- **மூலக்கூறு அமைப்பை** புரிந்துகொள்ள உதவுகிறது
+- **கால அட்டவணையில் (Periodic Table)** போக்குகளை (trends) விளக்க பயன்படுகிறது
+
+---
+**சுருக்கமாக:** ஒரே தனிமத்தின் இரு அணுக்கள் ஒற்றைப் பிணைப்பால் இணையும்போது, அவற்றின் மைய புள்ளிகளுக்கு இடையேயான தூரத்தில் **பாதி அளவு** தான் கூட்டிணைவு ஆரம்.
+
+ஏதாவது சந்தேகம் இருந்தால் கேளுங்கள்! 😊
+
+
+---
+
+<a id="run-003-058c2d30a895621f"></a>
+
+### llama-4-maverick
+
+**Status:** completed
+
+**Source:** [run-003-058c2d30a895621f.json](run-003-058c2d30a895621f.json)
+
+வணக்கம். இன்று நாம் பரமாணு அமைப்பு பற்றி படிக்க போகிறோம். அதில் முக்கியமான ஒரு பகுதி என்னவென்றால் "பகிர்வு ஆரம்" (Covalent radius). ஒரு பிணைப்பில் ஈடுபடும் இரு அணுக்களுக்கு இடையிலே உள்ள தொலைவின் பாதி அளவை பகிர்வு ஆரம் என்பர். ஒரே மாதிரியான இரு அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளத்தை பாதியாக பிரித்தால் அதை பகிர்வு ஆரம் எனலாம். எடுத்துக்காட்டாக ஐதரசன் மூலக்கூறில் (H2) இரு ஐதரசன் அணுக்களுக்கு இடையே உள்ள தொலைவு 74 பிகோமீட்டர் என்றால் ஐதரசனின் பகிர்வு ஆரம் 37 பிகோமீட்டராக இருக்கும். அதேபோல் ஆக்சிஜன் மூலக்கூறில் (O2) ஆக்சிஜன் அணுக்களுக்கு இடையே உள்ள தொலைவு 144 பிகோமீட்டர் என்றால், ஆக்சிஜனின் பகிர்வு ஆரம் 74 பிகோமீட்டர். ஆனால் ஐதரசன் குளோரைடு (HCl) போன்ற வேறுபட்ட அணுக்களால் ஆன மூலக்கூறுகளில், பிணைப்பு நீளம் என்பது அந்த இரு அணுக்களின் பகிர்வு ஆரங்களின் கூடுதலுக்கு சமம். அதாவது HCl ல் ஐதரசன் மற்றும் குளோரின் அணுக்களுக்கு இடையே உள்ள பிணைப்பு நீளம் = ஐதரசனின் பகிர்வு ஆரம் + குளோரினின் பகிர்வு ஆரம். இவ்வாறு பகிர்வு ஆரம் கணக்கிடப்படுகிறது. இன்னும் நிறைய விளக்கங்கள் உள்ளன. அவை அனைத்தும் தனித்தனியாக பார்க்கலாம். நன்றி. வணக்கம்.
+

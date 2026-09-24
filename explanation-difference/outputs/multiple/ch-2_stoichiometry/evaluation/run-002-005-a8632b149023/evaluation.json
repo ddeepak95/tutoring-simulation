@@ -1,0 +1,389 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "e598d9be24019ef3c6a589f45918bdc784aa9544e8987fc975a68b35335811cd",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "chemical reaction basics, Dalton's atomic theory, and the law of multiple proportions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response discusses chemical reactions and the stoichiometric proportions in which elements combine to form compounds, citing Dalton's laws and the law of multiple proportions with numerical examples.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "வேதி வினைகள் பற்றிய அறிமுகம் (Introduction to Chemical Reactions)"
+      },
+      {
+        "id": "s2",
+        "label": "சேர்மங்களில் கூறுகளின் முழு எண் விகிதம் (Whole Number Ratios of Elements in Compounds)"
+      },
+      {
+        "id": "s3",
+        "label": "பல்விகித விதி (Law of Multiple Proportions)"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "வேதி வினைகள் மற்றும் கூறுகளின் விகிதம் பற்றிய அறிமுகம்",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines chemical reactions, reactants, products, and introduces the concept of atomic ratios in reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "வணக்கம் மாணவர்களே!",
+            "start": 0,
+            "end": 18
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இன்று நாம் வேதி வினைகளில் உள்ள கூறுகளின் விகிதம் பற்றி அறிந்து கொள்ள போகிறோம்.",
+            "start": 20,
+            "end": 98
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ஒரு தனிமம் அல்லது சேர்வை மற்றொன்றுடன் வினைபுரிந்து வேறு ஒரு புதிய தனிமம் அல்லது சேர்வையை உருவாக்கும் நிகழ்வு வேதி வினை எனப்படும்.",
+            "start": 100,
+            "end": 229
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்வேதி வினையில் வினைபடு பொருள்கள் என்று அழைக்கப்படும் தனிமங்கள் அல்லது சேர்வைகள் வினைபுரிந்து வேதி விளைபொருட்கள் எனப்படும் புதிய தனிமங்கள் அல்லது சேர்வைகள் உருவாகின்றன.",
+            "start": 231,
+            "end": 400
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்வேதி வினையில் வினைபடுபொருள்களுக்கும் விளைபொருட்களுக்கும் இடையேயுள்ள அணுக்களின் எண்ணிக்கை விகிதம் குறித்து இன்றைய பாடத்தில் காண்போம்.",
+            "start": 402,
+            "end": 537
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Passages p3 and p4 state that chemical reactions produce new elements or compounds ('புதிய தனிமம் அல்லது சேர்வை'). Chemical reactions involve the rearrangement of atoms to form new compounds or substances, but never create new chemical elements.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p3",
+                "p4"
+              ],
+              "description": "The text states that a chemical reaction forms a new element or compound ('புதிய தனிமம் அல்லது சேர்வை'). In ordinary chemical reactions, elements are conserved; new chemical elements cannot be synthesized or created through chemical reactions (which only occurs in nuclear reactions).",
+              "correction": "வேதி வினைகளில் அணுக்கள் மறுசீரமைக்கப்பட்டு புதிய சேர்மங்கள் அல்லது மூலக்கூறுகள் மட்டுமே உருவாகின்றன; புதிய தனிமங்கள் உருவாகாது.",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "டால்டனின் கூற்று: தனிமங்களின் முழு எண் விகித சேர்க்கை",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents Dalton's postulate that elements combine in whole number ratios to form compounds.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1804ஆம் ஆண்டு ஜான் டால்டன் என்ற விஞ்ஞானி வேதி வினைகளில் கூறுகளின் விகிதம் பற்றி விளக்கினார்.",
+            "start": 539,
+            "end": 631
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "அவர் கூறிய கருத்துகள் பின்வருமாறு:",
+            "start": 633,
+            "end": 667
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. தனிமங்கள் எப்பொழுதும் முழு எண் விகிதத்தில் இணைந்து சேர்வைகளை உருவாக்கும்.",
+            "start": 669,
+            "end": 745
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately conveys Dalton's atomic theory postulate regarding whole-number ratios in compounds.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "நீர்மூலக்கூறில் உள்ள அணுக்களின் விகிதம்",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the water molecule (H2O) to illustrate whole number combining ratios of elements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "எ.கா: நீரின் மூலக்கூறு வாய்ப்பாடு H2O ஆகும். இதில் ஹைட்ரஜன் மற்றும் ஆக்சிஜன் அணுக்களின் எண்ணிக்கை முறையே 2 மற்றும் 1 ஆகும். இவ்விரு அணுக்களின் எண்ணிக்கை விகிதம் 2:1 என்ற முழு எண் விகிதத்தில் உள்ளது.",
+            "start": 747,
+            "end": 945
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately identifies the 2:1 atomic ratio of hydrogen to oxygen in H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "பல்விகித விதி",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "States Dalton's Law of Multiple Proportions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. ஒரு தனிமம் வேறு தனிமத்துடன் வினைபுரிந்து ஒன்றிற்கு மேற்பட்ட சேர்வைகளை உருவாக்கும் போது, முதல் தனிமத்தின் நிலையான அளவுடன் இணையும் இரண்டாவது தனிமத்தின் அளவு எளிய முழு எண் விகிதத்தில் இருக்கும்.",
+            "start": 947,
+            "end": 1141
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately articulates the Law of Multiple Proportions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "CO மற்றும் CO2 கொண்டு பல்விகித விதியை விளக்குதல்",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a worked numerical demonstration of the Law of Multiple Proportions using carbon monoxide and carbon dioxide.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "எ.கா: கார்பன் தனிமம் ஆக்சிஜனுடன் வினைபுரிந்து இரு வேறு சேர்வைகளை CO, CO2 ஆகியவற்றை உருவாக்குகிறது.",
+            "start": 1143,
+            "end": 1241
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்விரு சேர்வைகளிலும் கார்பனின் நிலையான அளவு 12 கிராம் ஆகும். முதல் சேர்வையான CO வில் ஆக்சிஜனின் அளவு 16 கிராம் ஆகும். இரண்டாவது சேர்வையான CO2 ல் ஆக்சிஜனின் அளவு 32 கிராம் ஆகும்.",
+            "start": 1243,
+            "end": 1421
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்விரு சேர்வைகளிலும் கார்பனின் நிலையான அளவான 12 கிராம் கார்பனுடன் இணையும் ஆக்சிஜனின் அளவு 16 கிராம் மற்றும் 32 கிராம் ஆகியவை எளிய முழு எண்விகிதமான 1:2 இல் உள்ளது.",
+            "start": 1423,
+            "end": 1586
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "நாளைய பாடத்தில் சந்திக்கலாம். வணக்கம்!",
+            "start": 1588,
+            "end": 1626
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The masses of carbon (12 g) and oxygen (16 g in CO, 32 g in CO2) and the resulting 1:2 ratio are chemically and mathematically accurate.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\run-002-005-a8632b149023.json",
+    "original_sha256": "809e63106168e8ab47b2e139ba546610f11854439980a92d7fd8c957cd1d80eb",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 14,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 2
+    },
+    "nested_passages": 14,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 1,
+      "accurate": 4
+    },
+    "proposed_error_records": 1,
+    "proposed_error_severity": {
+      "major": 1
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,667 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "87af0da99d401737df43f10c76eaaecb63fc1035ba9725373af7d8247b65cccc",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining in Tamil",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response explains vapour phase refining in Tamil, including its introduction, two-step principle, essential conditions, two main examples (Mond process and Van Arkel process), and a concluding summary.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction, Principle, and Conditions of Vapour Phase Refining"
+      },
+      {
+        "id": "s2",
+        "label": "Mond's Process for Nickel Refining"
+      },
+      {
+        "id": "s3",
+        "label": "Van Arkel Method for Zirconium and Titanium Refining"
+      },
+      {
+        "id": "s4",
+        "label": "Summary and Applications of Vapour Phase Refining"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Introduction and Definition of Vapour Phase Refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines vapour phase refining by describing the general transformation of an impure metal into a volatile compound followed by decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# ஆவி நிலை சுத்திகரிப்பு (Vapour Phase Refining)",
+            "start": 0,
+            "end": 48
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## அறிமுகம்",
+            "start": 50,
+            "end": 61
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "உலோகங்களை தூய்மையாக்கும் (சுத்திகரிப்பு) பல முறைகளில் ஆவி நிலை சுத்திகரிப்பும் ஒன்று. இந்த முறையில், **தூய்மையற்ற உலோகத்தை ஒரு கனிம வாயுவுடன் (compound) சேர்த்து, எளிதில் ஆவியாகக்கூடிய ஒரு சேர்மமாக மாற்றி**, பின்னர் அந்த ஆவியை சிதைத்து தூய உலோகத்தைப் பெறுவார்கள்.",
+            "start": 63,
+            "end": 326
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The text states that the metal is reacted with an inorganic gas or compound ('ஒரு கனிம வாயுவுடன் (compound)'), but the reagent does not need to be a compound or a gas; in the Van Arkel process, the reagent is elemental iodine (I₂).",
+          "errors": [
+            {
+              "passage_ids": [
+                "p3"
+              ],
+              "description": "The passage asserts that the impure metal is reacted with a 'கனிம வாயுவுடன் (compound)' (inorganic gas/compound), but the reagent can be an elemental halogen like iodine vapour (I₂), not necessarily a compound.",
+              "correction": "தூய்மையற்ற உலோகத்தை ஒரு தகுந்த வினைக்காரணியுடன் (reagent) சேர்த்து எளிதில் ஆவியாகக்கூடிய சேர்மமாக மாற்ற வேண்டும் (The metal is reacted with a suitable reagent, which may be an element such as iodine or a compound such as carbon monoxide).",
+              "severity": "minor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Two-Step Principle of Vapour Phase Refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains the foundational two-stage sequence of vapour phase refining: formation of a volatile compound and its subsequent thermal decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## அடிப்படைக் கொள்கை (Principle)",
+            "start": 328,
+            "end": 360
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த முறை இரண்டு படிநிலைகளில் நடைபெறும்:",
+            "start": 362,
+            "end": 402
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **படி 1:** தூய்மையற்ற உலோகம் + ஒரு வாயு (reagent) → **ஆவியாகும் சேர்மம் (Volatile compound)**",
+            "start": 404,
+            "end": 500
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **படி 2:** இந்த ஆவியாகும் சேர்மத்தை **சிதைவடையச் செய்து (decomposition)** தூய உலோகத்தைப் பிரித்தெடுத்தல்.",
+            "start": 505,
+            "end": 613
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The two-stage principle of forming a volatile compound and thermally decomposing it to yield pure metal is correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CAVEAT",
+        "label": "Prerequisites and Essential Conditions for Vapour Phase Refining",
+        "attributes": {
+          "subtype": "qualification"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Outlines the necessary conditions that must be fulfilled for vapour phase refining to be feasible.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**முக்கிய நிபந்தனை:** ",
+            "start": 615,
+            "end": 637
+          },
+          {
+            "id": "p9",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- உருவாகும் சேர்மம் **எளிதாக ஆவியாக வேண்டும்**",
+            "start": 638,
+            "end": 684
+          },
+          {
+            "id": "p10",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- அது **எளிதில் சிதைவடையக்கூடியதாக** இருக்க வேண்டும்",
+            "start": 685,
+            "end": 737
+          },
+          {
+            "id": "p11",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- தூய்மையின்மைகள் (impurities) இந்த சேர்மத்துடன் வினைபுரியக் கூடாது",
+            "start": 738,
+            "end": 805
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The third condition incorrectly states that impurities should not react with 'this compound' ('இந்த சேர்மத்துடன்'), rather than stating that impurities should not react with the reagent.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p11"
+              ],
+              "description": "The text states 'தூய்மையின்மைகள் (impurities) இந்த சேர்மத்துடன் வினைபுரியக் கூடாது' (impurities should not react with this compound). The actual qualification is that impurities must not react with the added reagent to form volatile species, so they remain unaffected and separate.",
+              "correction": "தூய்மையின்மைகள் வினைக்காரணியுடன் (reagent) வினைபுரியக் கூடாது (Impurities should not react with the reagent).",
+              "severity": "minor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Mond's Process for Refining Nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides a real-world industrial illustration of vapour phase refining via Mond's process for nickel, detailing the reaction steps, temperatures, and chemical equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## எடுத்துக்காட்டுகள்",
+            "start": 807,
+            "end": 828
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. மாண்ட் முறை (Mond's Process) - நிக்கல் சுத்திகரிப்பு",
+            "start": 830,
+            "end": 889
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**படி 1:** தூய்மையற்ற நிக்கலை 330-350 K வெப்பநிலையில் கார்பன் மோனாக்சைடு (CO) வாயுவுடன் சூடாக்கும்போது, ஆவியாகும் **நிக்கல் டெட்ராகார்பொனைல்** உருவாகிறது.",
+            "start": 891,
+            "end": 1045
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$Ni + 4CO \\xrightarrow{330-350K} Ni(CO)_4$$",
+            "start": 1047,
+            "end": 1091
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**படி 2:** இந்த ஆவியை 450-470 K என்ற அதிக வெப்பநிலைக்கு கொண்டு சென்றால், அது சிதைந்து தூய நிக்கலைக் கொடுக்கும்.",
+            "start": 1093,
+            "end": 1204
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$Ni(CO)_4 \\xrightarrow{450-470K} Ni + 4CO$$",
+            "start": 1206,
+            "end": 1250
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இங்கு CO வாயு மீண்டும் மீண்டும் பயன்படுத்தப்படுகிறது.",
+            "start": 1252,
+            "end": 1305
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction temperatures (330-350 K for formation of nickel tetracarbonyl and 450-470 K for decomposition), stoichiometry, and recycling of CO are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Van Arkel Method for Refining Zirconium and Titanium",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the Van Arkel method used to remove oxygen and nitrogen impurities from zirconium and titanium, including the reaction with iodine and decomposition on a tungsten filament.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. வான் ஆர்க்கல் முறை (Van Arkel Method) - Zr/Ti சுத்திகரிப்பு",
+            "start": 1307,
+            "end": 1373
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இது **ஜிர்கோனியம் (Zr)** மற்றும் **டைட்டானியம் (Ti)** போன்ற உலோகங்களில் இருந்து **நைட்ரஜன் மற்றும் ஆக்ஸிஜன்** போன்ற தூய்மையின்மைகளை நீக்க பயன்படுகிறது.",
+            "start": 1375,
+            "end": 1526
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**படி 1:** தூய்மையற்ற உலோகத்தை அயோடினுடன் (I₂) சேர்த்து சூடாக்கும்போது ஆவியாகும் சேர்மம் உருவாகும்.",
+            "start": 1528,
+            "end": 1627
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$Zr + 2I_2 \\xrightarrow{870K} ZrI_4$$",
+            "start": 1629,
+            "end": 1667
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**படி 2:** இந்த ஆவியை மிக அதிக வெப்பநிலை கொண்ட (1800 K) டங்ஸ்டன் இழையின் (tungsten filament) மேல் பாய்ச்சும்போது, அது சிதைந்து தூய ஜிர்கோனியம் இழையின் மேல் படிகிறது.",
+            "start": 1669,
+            "end": 1834
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$ZrI_4 \\xrightarrow{1800K} Zr + 2I_2$$",
+            "start": 1836,
+            "end": 1875
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The description of the Van Arkel process for Zr/Ti, specific removal of oxygen and nitrogen impurities, formation of ZrI₄ at 870 K, and decomposition on an 1800 K tungsten filament are factually accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary Table and Applications",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Provides a concluding recap table summarizing the method, reactions, and resulting ultra-high purity (>99.9%) and applications in electronics and aerospace technology.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## சுருக்கம் (Summary)",
+            "start": 1877,
+            "end": 1899
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| அம்சம் | விளக்கம் |",
+            "start": 1901,
+            "end": 1922
+          },
+          {
+            "id": "p27",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "|---|---|",
+            "start": 1923,
+            "end": 1932
+          },
+          {
+            "id": "p28",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| முறை | தூய்மையற்ற உலோகத்தை ஆவியாகும் சேர்மமாக்கி பின் சிதைத்தல் |",
+            "start": 1933,
+            "end": 2000
+          },
+          {
+            "id": "p29",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| உதாரணம் 1 | Ni + CO → Ni(CO)₄ → Ni (மாண்ட் முறை) |",
+            "start": 2001,
+            "end": 2053
+          },
+          {
+            "id": "p30",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| உதாரணம் 2 | Zr + I₂ → ZrI₄ → Zr (வான் ஆர்க்கல் முறை) |",
+            "start": 2054,
+            "end": 2110
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| பயன் | உயர் தூய்மை (high purity) கொண்ட உலோகங்களைப் பெற |",
+            "start": 2111,
+            "end": 2169
+          },
+          {
+            "id": "p32",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த முறை மூலம் **99.9% தூய்மை** கொண்ட உலோகங்களைப் பெறலாம், இது மின்னணுவியல் (electronics) மற்றும் விண்வெளி தொழில்நுட்பம் போன்ற துறைகளில் மிகவும் முக்கியமானது.",
+            "start": 2171,
+            "end": 2330
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately consolidates the core concepts and highlights the high purity output and technological applications.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\run-003-1692f2a934bc4291.json",
+    "original_sha256": "c1351e4d5e2d67390cae0418e6186ccab8364f726f71dfce097d4b9bcb6ad888",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 32,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "CAVEAT": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 32,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 2,
+      "accurate": 4
+    },
+    "proposed_error_records": 2,
+    "proposed_error_severity": {
+      "minor": 2
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

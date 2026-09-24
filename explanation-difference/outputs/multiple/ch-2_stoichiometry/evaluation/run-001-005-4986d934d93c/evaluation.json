@@ -1,0 +1,555 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "9609768cdc09d1d07c08de921fc9357826b8ac6fd5dc7782830d6ce82e0a0495",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response directly and accurately explains stoichiometry, covering its definition, etymology, prerequisite concepts, step-by-step problem-solving procedure, and a worked example.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Etymology of stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Foundational chemistry concepts for stoichiometry"
+      },
+      {
+        "id": "s4",
+        "label": "Procedure for solving stoichiometry problems"
+      },
+      {
+        "id": "s5",
+        "label": "Worked stoichiometry example calculation"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and core concept of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the quantitative study of relationships between reactants and products in chemical reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry! It's a fundamental concept in chemistry that can seem daunting at first, but trust me, it's actually quite straightforward once you grasp the basics. So, let's dive in!",
+            "start": 0,
+            "end": 183
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**What is Stoichiometry?**",
+            "start": 185,
+            "end": 211
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry is the branch of chemistry that deals with the quantitative relationships between reactants and products in chemical reactions. In other words, it's all about figuring out how much of each substance is involved in a chemical reaction.",
+            "start": 213,
+            "end": 461
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry is scientifically accurate and appropriate for high school chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Etymological origins of the term stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains the Greek root words 'stoikheion' and 'metron' that form the term stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**The Word \"Stoichiometry\"**",
+            "start": 463,
+            "end": 491
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The word \"stoichiometry\" comes from the Greek words \"stoikheion\" (meaning \"element\") and \"metron\" (meaning \"measure\"). So, stoichiometry is all about measuring the amounts of elements involved in a chemical reaction.",
+            "start": 493,
+            "end": 709
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Greek roots 'stoikheion' (element) and 'metron' (measure) are historically and linguistically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Basic prerequisite concepts for stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents foundational concepts needed to perform stoichiometric calculations: chemical equations, the mole, and molar mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p9",
+              "quote": "It's like a dozen, but instead of 12, it's a really big number!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**The Basics**",
+            "start": 711,
+            "end": 725
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "To understand stoichiometry, you need to know a few basic concepts:",
+            "start": 727,
+            "end": 794
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1. **Chemical Equations**: A chemical equation represents a chemical reaction using chemical formulas and symbols. For example: 2H2 + O2 → 2H2O",
+            "start": 796,
+            "end": 939
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Mole**: A mole is a unit of measurement that represents 6.022 x 10^23 particles (atoms or molecules). It's like a dozen, but instead of 12, it's a really big number!",
+            "start": 940,
+            "end": 1110
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Molar Mass**: The molar mass of a substance is the mass of one mole of that substance. It's usually measured in grams per mole (g/mol).",
+            "start": 1111,
+            "end": 1251
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The descriptions and definitions of chemical equations, Avogadro's number/the mole, and molar mass are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Step-by-step stoichiometry calculation process",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Outlines a reusable, sequential procedure to solve general stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**The Stoichiometry Process**",
+            "start": 1253,
+            "end": 1282
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Now, let's walk through the steps to solve a stoichiometry problem:",
+            "start": 1284,
+            "end": 1351
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Write a Balanced Equation**: Start by writing a balanced chemical equation for the reaction. This ensures that the number of atoms of each element is the same on both the reactant and product sides.",
+            "start": 1353,
+            "end": 1556
+          },
+          {
+            "id": "p14",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Identify the Given Information**: Identify the information given in the problem, such as the mass or number of moles of a reactant or product.",
+            "start": 1557,
+            "end": 1704
+          },
+          {
+            "id": "p15",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Convert to Moles**: Convert the given information to moles using the molar mass of the substance.",
+            "start": 1705,
+            "end": 1807
+          },
+          {
+            "id": "p16",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. **Use the Mole Ratio**: Use the balanced equation to determine the mole ratio between the given substance and the substance you're trying to find. The mole ratio is the ratio of the coefficients in the balanced equation.",
+            "start": 1808,
+            "end": 2031
+          },
+          {
+            "id": "p17",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "5. **Calculate the Answer**: Use the mole ratio to calculate the number of moles of the substance you're trying to find. Then, convert this value to the desired unit (e.g., mass or volume).",
+            "start": 2032,
+            "end": 2221
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The five-step procedure accurately captures the standard methodology for stoichiometric calculations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked example calculating required mass of O2 from moles of H2",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a fully worked stoichiometry problem using the reaction 2H2 + O2 -> 2H2O to determine the mass of O2 required for 4 moles of H2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Example Problem**",
+            "start": 2223,
+            "end": 2242
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let's say we want to find the mass of oxygen gas (O2) required to react with 4 moles of hydrogen gas (H2) to form water (H2O).",
+            "start": 2244,
+            "end": 2370
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1. Write a balanced equation: 2H2 + O2 → 2H2O",
+            "start": 2372,
+            "end": 2417
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Identify the given information: 4 moles of H2",
+            "start": 2418,
+            "end": 2466
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. Convert to moles: Not needed, as we're already given moles!",
+            "start": 2467,
+            "end": 2529
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. Use the mole ratio: From the balanced equation, we see that 2 moles of H2 react with 1 mole of O2. So, the mole ratio is 2:1. Therefore, 4 moles of H2 will react with 2 moles of O2.",
+            "start": 2530,
+            "end": 2714
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "5. Calculate the answer: The molar mass of O2 is 32 g/mol. So, the mass of O2 required is 2 moles x 32 g/mol = 64 g.",
+            "start": 2715,
+            "end": 2831
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Conclusion**",
+            "start": 2833,
+            "end": 2847
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry is all about understanding the quantitative relationships between reactants and products in chemical reactions. By following these steps and practicing with different problems, you'll become a pro at solving stoichiometry questions! Do you have any specific questions or topics you'd like me to clarify?",
+            "start": 2849,
+            "end": 3166
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation balance, mole ratio derivation (2 mol H2 : 1 mol O2), molar mass of O2 (32 g/mol), and final calculation (2 mol * 32 g/mol = 64 g) are all correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\run-001-005-4986d934d93c.json",
+    "original_sha256": "fe47e09281679b481981bb4c4de5012ff8f7099759c99f1ea8af2472a4b6a65c",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 26,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 26,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 4,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,1198 @@
+# Optical isomerism: all model responses
+
+15 completed responses across 3 prompts and 5 models. Response text is reproduced verbatim from the saved results.
+
+Source: [batch manifest](manifest.json).
+
+## Contents
+
+- [Prompt 1: English prompt, English response](#prompt-1)
+  - [gpt-5.6-terra](#run-001-001-645e00275a56)
+  - [grok-4.3](#run-001-002-28bb5b2f4360)
+  - [gemini-3.8-flash](#run-001-003-e8bf7e33dff0)
+  - [claude-sonnet-5](#run-001-004-07eec70cd3e6)
+  - [llama-4-maverick](#run-001-005-f5d8a472557e)
+- [Prompt 2: Tamil prompt, Tamil response](#prompt-2)
+  - [gpt-5.6-terra](#run-002-001-ee8f53919cf1)
+  - [grok-4.3](#run-002-002-4853685ebea0)
+  - [gemini-3.8-flash](#run-002-003-464f2d8d7934)
+  - [claude-sonnet-5](#run-002-004-672be3c04b44)
+  - [llama-4-maverick](#run-002-005-c2290b24c3d5)
+- [Prompt 3: English prompt, Tamil response](#prompt-3)
+  - [gpt-5.6-terra](#run-003-001-a63a1032fb38)
+  - [grok-4.3](#run-003-002-bb95b2e97d7d)
+  - [gemini-3.8-flash](#run-003-003-54fbb9b78d1b)
+  - [claude-sonnet-5](#run-003-004-9403098ead7c)
+  - [llama-4-maverick](#run-003-005-b7e59861f2a8)
+
+---
+
+<a id="prompt-1"></a>
+
+## Prompt 1: English prompt, English response
+
+**Prompt**
+
+> You are an expert teacher teaching an high school student. Explain optical isomerism in English.
+
+---
+
+<a id="run-001-001-645e00275a56"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed ? **Source:** [run-001-001-645e00275a56.json](run-001-001-645e00275a56.json)
+
+**Optical isomerism** is a type of **stereoisomerism**. It occurs when two molecules have the same molecular formula and the same connections between atoms, but they are arranged in space as **non-superimposable mirror images**.
+
+These mirror-image molecules are called **enantiomers**.
+
+A useful analogy is your hands:
+
+- Your left and right hands are mirror images.
+- However, you cannot place one exactly on top of the other so that every part matches.
+- Therefore, hands are **chiral**.
+
+Similarly, molecules that exist as non-superimposable mirror images are called **chiral molecules**.
+
+---
+
+## 1. What causes optical isomerism?
+
+Optical isomerism often occurs when a carbon atom is attached to **four different groups**.
+
+Such a carbon is called a:
+
+- **chiral carbon**
+- **asymmetric carbon**
+- sometimes marked with an asterisk: C*
+
+For example:
+
+\[
+\text{CH}_3\text{-CH(OH)-COOH}
+\]
+
+In lactic acid, the middle carbon is attached to:
+
+- H
+- OH
+- CH₃
+- COOH
+
+Because these are four different groups, the molecule can form two mirror-image arrangements.
+
+---
+
+## 2. Enantiomers
+
+The two optical isomers are called **enantiomers**.
+
+They have:
+
+- the same molecular formula
+- the same melting point and boiling point
+- the same bonding structure
+- very similar chemical properties
+
+However, they differ in the way they interact with **plane-polarised light** and with other chiral substances, such as enzymes in living organisms.
+
+---
+
+## 3. Effect on plane-polarised light
+
+Ordinary light vibrates in many different directions. When it passes through a polarising filter, it becomes **plane-polarised light**, meaning it vibrates in only one plane.
+
+Optical isomers can rotate the plane of this light.
+
+- One enantiomer rotates the light **clockwise**. It is called **dextrorotatory**, written as **(+)**.
+- The other rotates the light by the same amount **anticlockwise**. It is called **levorotatory**, written as **(−)**.
+
+For example:
+
+\[
+\text{Enantiomer A: } +20^\circ
+\]
+
+\[
+\text{Enantiomer B: } -20^\circ
+\]
+
+This rotation of plane-polarised light is why the isomerism is called **optical isomerism**.
+
+> Important: The symbols (+) and (−) describe the direction of rotation of light. They are not necessarily related to the R/S naming system.
+
+---
+
+## 4. Racemic mixtures
+
+If equal amounts of both enantiomers are mixed together, the mixture is called a **racemic mixture** or **racemate**.
+
+One enantiomer rotates light clockwise, while the other rotates it anticlockwise by the same amount. The effects cancel out.
+
+Therefore, a racemic mixture does **not** rotate plane-polarised light overall.
+
+It is described as **optically inactive**.
+
+---
+
+## 5. Example: 2-butanol
+
+2-butanol has the formula:
+
+\[
+\text{CH}_3\text{-CH(OH)-CH}_2\text{CH}_3
+\]
+
+The second carbon is attached to:
+
+- H
+- OH
+- CH₃
+- CH₂CH₃
+
+These are four different groups, so this carbon is chiral. Therefore, 2-butanol has two enantiomers.
+
+---
+
+## 6. Why optical isomerism matters
+
+Optical isomerism is especially important in biology and medicine because living organisms are chiral environments.
+
+For example:
+
+- One enantiomer of a drug may be useful.
+- The other enantiomer may be less effective, inactive, or harmful.
+- Enzymes often react with only one optical isomer because their active sites have a specific three-dimensional shape.
+
+A well-known historical example is **thalidomide**, where different enantiomers had different biological effects.
+
+---
+
+## Summary
+
+| Term | Meaning |
+|---|---|
+| **Chiral molecule** | A molecule that is not superimposable on its mirror image |
+| **Chiral centre** | Usually a carbon attached to four different groups |
+| **Enantiomers** | A pair of non-superimposable mirror-image molecules |
+| **Optically active** | Able to rotate plane-polarised light |
+| **Dextrorotatory (+)** | Rotates light clockwise |
+| **Levorotatory (−)** | Rotates light anticlockwise |
+| **Racemic mixture** | Equal mixture of two enantiomers; does not rotate light overall |
+
+In short, **optical isomerism happens when molecules form mirror-image versions that cannot be placed exactly on top of each other, and these versions rotate plane-polarised light in opposite directions.**
+
+---
+
+<a id="run-001-002-28bb5b2f4360"></a>
+
+### grok-4.3
+
+**Status:** completed ? **Source:** [run-001-002-28bb5b2f4360.json](run-001-002-28bb5b2f4360.json)
+
+Optical isomerism is a type of "mirror-image" chemistry that happens with certain molecules. It’s easiest to understand if you picture your own two hands.
+
+### The Basic Idea
+Hold your hands up in front of you, palms facing each other. They look like exact mirror images, but you can’t perfectly lay one on top of the other so that every finger lines up. That’s because your hands are “chiral” (pronounced KY-rul)—they have a handedness. Molecules can be the same way.
+
+When a molecule exists in two forms that are mirror images of each other but **cannot** be rotated or flipped to match exactly, those two forms are called **optical isomers** (or **enantiomers**). They have the same atoms connected in the same order, but their 3-D shapes are opposites, just like left and right hands.
+
+### Why “Optical”?
+These isomers got the name “optical” because of how they interact with light. When you shine a special kind of light called **plane-polarized light** through one isomer, the molecule twists the light slightly to the right (like a clockwise turn). The mirror-image isomer twists the light exactly the same amount but to the left (counter-clockwise). This twisting is called **optical rotation**. A machine called a polarimeter measures it.
+
+If you have a 50-50 mixture of both mirror images, the twists cancel each other out and the light doesn’t rotate at all. That mixture is called a **racemic mixture** (or racemate).
+
+### What Makes a Molecule Able to Have Optical Isomers?
+Most cases involve a carbon atom that has **four different groups** attached to it. Chemists call this an **asymmetric carbon** or **chiral center**.  
+Example: lactic acid (the acid that makes your muscles sore after hard exercise). The middle carbon is attached to:
+- a hydrogen atom (–H)
+- a methyl group (–CH₃)
+- a hydroxyl group (–OH)
+- a carboxylic acid group (–COOH)
+
+Because all four groups are different, the molecule can exist in two mirror-image forms that can’t be superimposed.
+
+If even two of the groups are the same, the mirror images become identical and optical isomerism disappears.
+
+### Why Does It Matter?
+- **In biology and medicine**: Your body is also “handed.” Enzymes and receptors are shaped to fit only one mirror image. So one optical isomer of a drug might relieve pain while its mirror image does nothing—or even causes side effects. (The famous drug thalidomide is a tragic real-world example.)
+- **In everyday life**: Smell and taste molecules often have optical isomers. One form of limonene smells like oranges; its mirror image smells like lemons.
+- **In the lab**: Chemists try to make just one optical isomer when they synthesize drugs, because separating the mixture later is expensive and difficult.
+
+### Quick Summary
+Optical isomers are non-superimposable mirror-image molecules that rotate plane-polarized light in opposite directions. They exist when a molecule has a carbon with four different groups attached. They have identical physical properties (melting point, boiling point, etc.) except for the direction they twist light and how they behave in living systems.
+
+That’s optical isomerism in plain English—like chemistry with left and right hands.
+
+---
+
+<a id="run-001-003-e8bf7e33dff0"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed ? **Source:** [run-001-003-e8bf7e33dff0.json](run-001-003-e8bf7e33dff0.json)
+
+Hello! Welcome to chemistry class. Today, we are going to tackle a fascinating topic: **Optical Isomerism**. 
+
+Don’t let the big words scare you. By the end of this, you’ll see that it’s a concept you actually experience every single day—literally with your own two hands.
+
+---
+
+### Step 1: The "Glove" Analogy (What is Chirality?)
+
+Hold your hands out in front of you, palms facing you. 
+* Your left hand is a **mirror image** of your right hand. 
+* Now, try to lay your right hand directly on top of your left hand, with both palms facing down. 
+
+Do they match up? **No.** Your thumbs point in opposite directions. You cannot *superimpose* them (put one completely over the other so they look identical). 
+
+In chemistry, we call objects that are non-superimposable mirror images **chiral** (pronounced *KY-ral*, from the Greek word for "hand"). Molecules can be chiral, too!
+
+---
+
+### Step 2: What is an Optical Isomer?
+
+You already know that **isomers** are molecules that have the same chemical formula, but their atoms are arranged differently.
+
+**Optical isomers** (often called **enantiomers**) are pairs of molecules that:
+1. Have the exact same atoms and bonds.
+2. Are **mirror images** of each other.
+3. **Cannot** be superimposed on each other, no matter how much you rotate them in 3D space.
+
+#### How to spot one on an exam:
+To have optical isomers, a molecule usually needs a **chiral carbon** (also called an *asymmetric carbon*). 
+* Look for a carbon atom bonded to **four completely different groups/atoms**.
+* *Example:* A carbon bonded to:
+  1. A hydrogen atom (–H)
+  2. A chlorine atom (–Cl)
+  3. A methyl group (–CH₃)
+  4. An alcohol group (–OH)
+* If any two groups are the same (like two hydrogens), it is **not** chiral. 
+
+*(On exams, teachers usually mark this special carbon with a little asterisk: **C\***).*
+
+---
+
+### Step 3: Why are they called *Optical*?
+
+Here is the cool part. Most isomers have different boiling points, melting points, or densities. But enantiomers are identical twins! They have:
+* The same boiling point
+* The same melting point
+* The same density
+
+**So, how can scientists tell them apart? Using LIGHT.** (Hence, *optical*).
+
+1. Normal light waves vibrate in all directions (up, down, sideways).
+2. If you pass this light through a special filter (a polarizer), the waves are forced to vibrate in only **one single plane**. This is called **plane-polarized light**.
+3. When you shine this light through a solution of one isomer, **the molecule rotates the plane of light!**
+   * One isomer rotates the light to the **right** (clockwise). We call this the **(+) or D-form**.
+   * The other isomer rotates the light to the **left** (counter-clockwise) by the **exact same angle**. We call this the **(-) or L-form**.
+
+> **Quick Vocab Note:** A 50/50 mixture of both isomers is called a **racemic mixture** (or racemate). In this mixture, the left and right rotations cancel each other out, so the light doesn't rotate at all!
+
+---
+
+### Step 4: Why Does This Matter? (The Real-World Impact)
+
+If they are chemically so similar, why do we care? 
+
+Because **your body is also chiral!** 
+Your cells, enzymes, and receptors are made of proteins that have specific 3D "glove" shapes. A "right-handed" molecule will fit into a receptor, but the "left-handed" mirror image won't fit at all—just like your right foot won't fit comfortably into a left shoe.
+
+* **Taste and Smell:** 
+  * A molecule called *Limonene* has two optical isomers. One smells like **oranges**, and the other smells like **pine trees/lemons**. Your nose receptors can tell the difference!
+* **Medicine (Crucial!):** 
+  * With many drugs, only one isomer works, while the other does nothing. 
+  * In tragic cases, like the drug **Thalidomide** in the 1950s, one isomer cured morning sickness in pregnant women, but the other caused severe birth defects. Today, pharmaceutical companies must strictly separate or test both optical isomers of any new drug.
+
+---
+
+### Summary Checklist for Your Notes:
+1. **Chiral Center:** A carbon bonded to **four different groups**.
+2. **Optical Isomers (Enantiomers):** Non-superimposable mirror images.
+3. **The "Optical" Effect:** One rotates plane-polarized light clockwise (+), the other counter-clockwise (-).
+4. **Biology:** The two shapes behave differently in the human body because biological receptors are also chiral ("lock and key").
+
+How does that feel? Would you like to try spotting a chiral carbon in a practice molecule?
+
+---
+
+<a id="run-001-004-07eec70cd3e6"></a>
+
+### claude-sonnet-5
+
+**Status:** completed ? **Source:** [run-001-004-07eec70cd3e6.json](run-001-004-07eec70cd3e6.json)
+
+# Optical Isomerism
+
+## What is it?
+
+**Optical isomerism** is a type of stereoisomerism where two compounds have the **same molecular formula** and the **same structural arrangement of atoms**, but they are **mirror images of each other** that **cannot be superimposed** on one another.
+
+Think of your left and right hands — they look identical, are mirror images of each other, but you can't perfectly overlap them (try putting your left hand glove on your right hand!). This property is called **chirality**, and molecules that show this behavior are called **chiral molecules**.
+
+---
+
+## The Key Requirement: A Chiral Center
+
+Optical isomerism typically occurs when a carbon atom is attached to **four different groups**. This carbon is called a **chiral center** (or asymmetric carbon), often marked with an asterisk (*).
+
+**Example: Bromochlorofluoromethane (CHBrClF)**
+
+```
+        F                    F
+        |                    |
+   H — C* — Br    and   Br — C* — H
+        |                    |
+       Cl                   Cl
+```
+
+These two molecules are mirror images — you cannot rotate one to make it identical to the other.
+
+---
+
+## Naming the Isomers
+
+The two mirror-image forms are called **enantiomers**:
+- One is labeled **(+)** or **d** (dextrorotatory)
+- The other is labeled **(−)** or **l** (levorotatory)
+
+---
+
+## How Do We Detect Optical Isomers?
+
+Optical isomers are detected using **plane-polarized light** and an instrument called a **polarimeter**.
+
+- Normal light vibrates in all directions.
+- A polarizing filter allows light to vibrate in only **one plane** — this is plane-polarized light.
+- When this light passes through a solution of a chiral compound:
+  - **(+) isomer** rotates the light **clockwise** (to the right)
+  - **(−) isomer** rotates the light **counterclockwise** (to the left)
+
+This is why they're called "optical" isomers — they interact differently with light!
+
+---
+
+## Important Properties
+
+| Property | Enantiomers |
+|----------|-------------|
+| Melting point, boiling point, density | **Same** |
+| Solubility | **Same** |
+| Chemical reactions with non-chiral substances | **Same** |
+| Direction of rotating polarized light | **Different (opposite)** |
+| Reaction with other chiral molecules | **Different** (very important in biology!) |
+
+---
+
+## Why Does This Matter? (Real-World Importance)
+
+This concept is **crucial in biology and medicine** because our bodies are made of chiral molecules (like proteins made from L-amino acids).
+
+**Real example — Thalidomide:**
+- One enantiomer was an effective sedative for morning sickness.
+- The **other enantiomer caused severe birth defects**.
+- This tragedy taught scientists how critical it is to understand optical isomerism when designing drugs!
+
+---
+
+## Quick Summary
+
+✅ Same molecular formula, same connectivity  
+✅ Non-superimposable mirror images  
+✅ Requires a carbon with **4 different groups** attached  
+✅ Rotate plane-polarized light in **opposite directions**  
+✅ Called **enantiomers**  
+✅ Identical physical/chemical properties *except* interaction with polarized light and other chiral molecules
+
+---
+
+<a id="run-001-005-f5d8a472557e"></a>
+
+### llama-4-maverick
+
+**Status:** completed ? **Source:** [run-001-005-f5d8a472557e.json](run-001-005-f5d8a472557e.json)
+
+Optical isomerism is a fascinating topic in chemistry that deals with the three-dimensional arrangement of atoms in molecules. I'd be happy to explain it in a way that's easy to understand.
+
+**What is Optical Isomerism?**
+
+Optical isomerism occurs when a molecule has a non-superimposable mirror image. In other words, if you were to reflect a molecule in a mirror, the resulting image would not be identical to the original molecule. This happens when a molecule is asymmetric, meaning it lacks a plane of symmetry, a center of symmetry, or an axis of symmetry.
+
+**Chirality: The Key to Optical Isomerism**
+
+To understand optical isomerism, you need to grasp the concept of chirality. Chirality is a property of a molecule that describes its "handedness." Just like how your left and right hands are mirror images of each other but are not superimposable, a chiral molecule has a non-superimposable mirror image. Think of it like this: if you try to put your left hand into a right-hand glove, it won't fit. Similarly, a chiral molecule and its mirror image are not identical and cannot be superimposed.
+
+**Examples of Chiral Molecules**
+
+Let's consider a simple example: a molecule with a central carbon atom bonded to four different groups, such as CHClBrF (bromochlorofluoromethane). This molecule is chiral because it has four different substituents attached to the central carbon atom. The arrangement of these groups in space creates a non-superimposable mirror image.
+
+Imagine the carbon atom at the center, and the four groups (H, Cl, Br, and F) arranged around it in a tetrahedral geometry. If you were to create a mirror image of this molecule, the arrangement of the groups would be different, and the two molecules would not be identical.
+
+**Enantiomers: Non-Superimposable Mirror Images**
+
+The two non-superimposable mirror images of a chiral molecule are called enantiomers. Enantiomers have the same physical and chemical properties, except for their ability to rotate plane-polarized light. One enantiomer will rotate light to the left (levorotatory), while the other will rotate it to the right (dextrorotatory).
+
+**Properties of Enantiomers**
+
+Enantiomers have identical properties, such as:
+
+1. Boiling point
+2. Melting point
+3. Solubility
+4. Chemical reactivity (except when reacting with other chiral molecules)
+
+However, they differ in their:
+
+1. Optical activity (rotation of plane-polarized light)
+2. Biological activity (e.g., one enantiomer of a drug may be active, while the other is not)
+
+**Importance of Optical Isomerism**
+
+Optical isomerism is crucial in various fields, such as:
+
+1. **Pharmaceuticals**: Many drugs are chiral, and the correct enantiomer is essential for their efficacy and safety.
+2. **Biology**: Biological molecules, like amino acids and sugars, are often chiral, and their stereochemistry plays a vital role in their function.
+3. **Materials Science**: Chiral molecules can be used to create materials with unique properties, such as liquid crystals.
+
+In conclusion, optical isomerism is a fundamental concept in chemistry that arises from the three-dimensional arrangement of atoms in molecules. Understanding chirality and enantiomers is essential for appreciating the properties and behavior of molecules in various fields. I hope this explanation has helped you grasp the basics of optical isomerism!
+
+---
+
+<a id="prompt-2"></a>
+
+## Prompt 2: Tamil prompt, Tamil response
+
+**Prompt**
+
+> நீங்கள் ஒரு சிறந்த ஆசிரியர். ஒரு உயர்நிலைப் பள்ளி மாணவருக்கு ஒளிசுழற்சி மாற்றியத்தை விளக்குங்கள்.
+
+---
+
+<a id="run-002-001-ee8f53919cf1"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed ? **Source:** [run-002-001-ee8f53919cf1.json](run-002-001-ee8f53919cf1.json)
+
+**ஒளிசுழற்சி மாற்றியம் (Photoperiodism)** என்பது தாவரங்கள் ஒரு நாளில் கிடைக்கும் **ஒளி நேரம் மற்றும் இருள் நேரத்தின் நீளத்துக்கு** ஏற்ப வளர்ச்சி அல்லது பூப்பதை மாற்றிக் கொள்வது ஆகும்.
+
+எளிதாகச் சொன்னால்:
+
+> “பகல் எவ்வளவு நீளம்? இரவு எவ்வளவு நீளம்?” என்பதை உணர்ந்து, அதற்கேற்ப தாவரம் பூக்கும் அல்லது வளர்ச்சியை மாற்றிக் கொள்கிறது.
+
+### ஏன் இது முக்கியம்?
+பருவங்கள் மாறும்போது பகல்–இரவு நேரமும் மாறுகிறது. தாவரங்கள் சரியான பருவத்தில் பூத்து, விதை உருவாக்கி, இனப்பெருக்கம் செய்ய ஒளிசுழற்சியைப் பயன்படுத்துகின்றன.
+
+### தாவரங்களின் வகைகள்
+
+1. **குறுநாள் தாவரங்கள் (Short-day plants)**  
+   நீண்ட இரவு கிடைக்கும் போது பூக்கும்.  
+   அதாவது, பகல் நேரம் குறையும்போது பூக்கின்றன.  
+   **எடுத்துக்காட்டுகள்:** நெல், சோயாபீன், கிரிஸாந்தமம்.
+
+2. **நீண்டநாள் தாவரங்கள் (Long-day plants)**  
+   இரவு குறைவாகவும் பகல் நீளமாகவும் இருக்கும் போது பூக்கும்.  
+   **எடுத்துக்காட்டுகள்:** கோதுமை, கீரை வகைகள், முள்ளங்கி.
+
+3. **நடுநிலை தாவரங்கள் (Day-neutral plants)**  
+   பகல் அல்லது இரவு நீளத்தால் அதிகம் பாதிக்கப்படாமல் பூக்கும்.  
+   **எடுத்துக்காட்டுகள்:** தக்காளி, வெள்ளரிக்காய், சூரியகாந்தி.
+
+### தாவரம் ஒளியை எப்படிக் “உணருகிறது”?
+தாவர இலைகளில் **பைட்டோகிரோம் (Phytochrome)** என்ற ஒளி உணரும் நிறமி உள்ளது. இது ஒளி மற்றும் இருள் நேரத்தை உணர்ந்து, தாவரத்துக்கு பூக்கும் நேரம் வந்துவிட்டதா என்று தகவல் தருகிறது.
+
+### முக்கியக் கருத்து
+பல தாவரங்களில் உண்மையில் முக்கியமானது **பகல் நீளம் அல்ல; தொடர்ச்சியான இரவு நேரத்தின் நீளமே** ஆகும்.  
+உதாரணமாக, குறுநாள் தாவரத்திற்கு நீண்ட இரவு தேவை. அந்த இரவின் நடுவில் சிறிது நேரம் விளக்கு ஒளி பட்டாலும், அது பூக்காமல் இருக்கலாம்.
+
+### சுருக்கம்
+ஒளிசுழற்சி மாற்றியம் என்பது தாவரங்கள் பகல்–இரவு கால அளவை உணர்ந்து, குறிப்பாக **பூக்கும் காலத்தைத் தீர்மானிக்கும் இயல்பு** ஆகும்.
+
+---
+
+<a id="run-002-002-4853685ebea0"></a>
+
+### grok-4.3
+
+**Status:** completed ? **Source:** [run-002-002-4853685ebea0.json](run-002-002-4853685ebea0.json)
+
+**ஒளிசுழற்சி மாற்றியம் (Photosynthesis) – எளிய விளக்கம்**
+
+நண்பா/நண்பி, ஒளிசுழற்சி மாற்றியம் என்றால் **தாவரங்கள் சூரிய ஒளியைப் பயன்படுத்தி தன் உணவைத் தானே தயாரித்துக்கொள்ளும்** அற்புதமான செயல்முறை. இதை “ஒளி + சுழற்சி + மாற்றம்” என்று பிரித்துப் பார்த்தால் புரியும்:
+
+- **ஒளி** = சூரிய ஒளி  
+- **சுழற்சி** = மூலக்கூறுகள் சுழன்று மாறும் செயல்பாடு  
+- **மாற்றியம்** = ஒரு வகை ஆற்றலை மற்றொரு வகை ஆற்றலாக மாற்றுதல்
+
+### எளிய சமன்பாடு (Chemical Equation)
+**6 CO₂ + 6 H₂O + சூரிய ஒளி → C₆H₁₂O₆ (குளுக்கோஸ்) + 6 O₂**
+
+அதாவது: கார்பன் டை ஆக்சைடு + தண்ணீர் + ஒளி → சர்க்கரை + ஆக்சிஜன்
+
+### இது எங்கே நடக்கிறது?
+இலையின் பச்சை நிறப் பகுதியில் உள்ள **குளோரோபிளாஸ்ட்** என்னும் உறுப்பில். அதற்குள் இருக்கும் **குளோரோபில்** என்ற பச்சை நிறமி ஒளியை உறிஞ்சுகிறது.
+
+### இரண்டு நிலைகள் (Two Stages)
+
+**1. ஒளிச்சார்ந்த வினை (Light-dependent reaction / ஒளிசுழற்சி மாற்றியம்)**  
+இதுதான் உங்கள் கேள்வியில் குறிப்பிட்ட “ஒளிசுழற்சி” பகுதி.
+
+- சூரிய ஒளி குளோரோபிலைத் தாக்குகிறது.
+- தண்ணீர் (H₂O) பிரிக்கப்படுகிறது → H⁺ + O₂ (ஆக்சிஜன் வெளியேறுகிறது).
+- ஒளி ஆற்றல் **ATP** (ஆற்றல் நாணயம்) மற்றும் **NADPH** (எலக்ட்ரான் கேரியர்) என்ற இரண்டு முக்கியமான பொருட்களாக மாற்றப்படுகிறது.
+- இங்கே **சுழற்சி** நடக்கிறது: எலக்ட்ரான்கள் ஒரு சங்கிலி போல சுழன்று ATP உருவாக்கப்படுகிறது (cyclic & non-cyclic photophosphorylation).
+
+**2. ஒளிச்சாராத வினை (Dark reaction / கால்வின் சுழற்சி)**  
+ஒளி தேவையில்லை, ஆனால் முதல் நிலையில் உருவான ATP மற்றும் NADPH தேவை.
+
+- கார்பன் டை ஆக்சைடு (CO₂) உறிஞ்சப்பட்டு, சர்க்கரை (குளுக்கோஸ்) தயாரிக்கப்படுகிறது.
+- இதுவும் ஒரு சுழற்சி முறையில் (Calvin cycle) நடக்கிறது.
+
+### ஏன் இது முக்கியம்?
+- தாவரங்களுக்கு உணவு தருகிறது.
+- நமக்கு ஆக்சிஜன் தருகிறது.
+- உணவுச் சங்கிலியின் அடிப்படை (எல்லா உயிரினங்களுக்கும் மறைமுகமாக உணவு).
+
+### நினைவில் கொள்ள வேண்டிய முக்கிய புள்ளிகள் (High School Level)
+1. ஒளி தேவைப்படும் நிலை = ஒளிசுழற்சி மாற்றியம் (ATP + NADPH உற்பத்தி + O₂ வெளியேற்றம்)
+2. ஒளி தேவைப்படாத நிலை = இருள் வினை (சர்க்கரை தயாரிப்பு)
+3. மொத்தத்தில்: ஒளி ஆற்றல் → வேதி ஆற்றல் → உணவு ஆற்றல்
+
+இதை ஒரு **சோலார் பேனல் போன்று** நினைத்துக்கொள்: தாவரங்கள் சூரிய ஒளியைப் பிடித்து, அதை உணவாக மாற்றும் இயற்கை சோலார் பேனல்!
+
+ஏதாவது ஒரு பகுதி இன்னும் விரிவாக வேண்டுமா? (எ.கா. எலக்ட்ரான் போக்குவரத்து சங்கிலி, கால்வின் சுழற்சியின் படிகள்) சொல்லுங்கள், உடனே எளிய உதாரணங்களுடன் விளக்குகிறேன்!
+
+---
+
+<a id="run-002-003-464f2d8d7934"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed ? **Source:** [run-002-003-464f2d8d7934.json](run-002-003-464f2d8d7934.json)
+
+வணக்கம்! வேதியியல் என்பது நாம் சாதாரணமாகப் பார்க்கும் உலகத்திற்குப் பின்னால் இருக்கும் ஒரு மாயாஜாலம். இன்று நாம் பார்க்கப்போகும் **ஒளிசுழற்சி மாற்றியம் (Optical Isomerism)** மிக மிக சுவாரஸ்யமான ஒரு தலைப்பு. 
+
+இதை எளிமையாகப் புரிந்துகொள்ள, ஒரு சின்ன பரிசோதனையுடன் தொடங்குவோம்.
+
+---
+
+### 1. கைகளின் உதாரணம் (அடிப்படைக் கருத்து):
+உங்களுடைய இரண்டு உள்ளங்கைகளையும் பாருங்கள். இரண்டும் பார்ப்பதற்கு ஒரே மாதிரிதான் இருக்கும், இல்லையா? 
+இப்போது, உங்கள் வலது கையை ஒரு கண்ணாடியின் முன் காட்டினால், அது இடது கை போலத் தெரியும். அதாவது ஒன்றுக்கொன்று **"ஆடிப் பிம்பங்கள்" (Mirror Images)**.
+
+ஆனால், உங்கள் வலது கையை அப்படியே எடுத்து, இடது கையின் மீது வையுங்கள் (இரண்டு உள்ளங்கைகளும் கீழே பார்க்கும்படி). இப்போது கட்டை விரல்கள் எதிரெதிர் திசையில் இருக்கும். அதாவது, **ஒன்றன் மீது ஒன்று சரியாகப் பொருந்தாது (Non-superimposable)**. 
+
+வேதியியலிலும் சில மூலக்கூறுகள் (Molecules) இப்படித்தான் இருக்கின்றன. ஒரே மூலக்கூறு வாய்பாடு இருக்கும், ஆனால் அவை கைகளைப் போல ஒன்றன் மீது ஒன்று பொருந்தாத கண்ணாடி பிம்பங்களாக இருக்கும். 
+
+---
+
+### 2. இந்த மாற்றியம் எப்போது உருவாகும்? (முக்கியமான நிபந்தனை)
+ஒரு மூலக்கூறு ஒளிசுழற்சி மாற்றியத்தைக் காட்ட வேண்டுமென்றால், அதில் ஒரு **"சீரற்ற கார்பன்" (Asymmetric Carbon அல்லது Chiral Carbon)** இருக்க வேண்டும்.
+
+* **சீரற்ற கார்பன் என்றால் என்ன?**
+  கார்பனுக்கு 4 பிணைப்புகள் (bonds) உண்டு என்பது உங்களுக்குத் தெரியும். அந்த 4 பிணைப்புகளிலும் **4 வெவ்வேறு அணுக்கள் அல்லது தொகுதிகள்** இணைக்கப்பட்டிருந்தால், அந்தக் கார்பன்தான் "சீரற்ற கார்பன்" ($C^*$).
+
+*(உதாரணம்: லாக்டிக் அமிலம் - Lactic Acid)*
+
+---
+
+### 3. இதில் "ஒளி" எங்கே வருகிறது? (பெயர் காரணம்)
+இப்போது விஷயத்திற்கு வருவோம். இந்த மூலக்கூறுகளுக்கு ஏன் "ஒளிசுழற்சி மாற்றியம்" என்று பெயர் வந்தது?
+
+1. **தள முனைவுற்ற ஒளி (Plane Polarized Light):** சாதாரண ஒளி எல்லாத் திசைகளிலும் அதிர்வடையும். ஆனால், ஒரு குறிப்பிட்ட வடிகட்டி (Nicol Prism) வழியே அதை அனுப்பும்போது, அது **ஒரே ஒரு தளத்தில் (திசையில்)** மட்டும் அதிர்வடையும் ஒளியாக மாறும்.
+2. இந்த ஒளியை நாம் மேலே பார்த்த வேதிப்பொருளின் கரைசலில் பாய்ச்சுகிறோம்.
+3. அப்போது அந்த மூலக்கூறு, அந்த ஒளியை ஒரு குறிப்பிட்ட பக்கமாகச் சுழற்றும்!
+
+* **வலஞ்சுழி (Dextrorotatory - $d$ அல்லது $+$):** ஒளியை **வலதுபுறமாக** (கடிகார முள் சுழலும் திசையில்) சுழற்றினால், அது 'd-மாற்றியம்'.
+* **இடஞ்சுழி (Laevorotatory - $l$ அல்லது $-$):** ஒளியை **இடதுபுறமாக** (கடிகார முள்ளுக்கு எதிர்த்திசையில்) சுழற்றினால், அது 'l-மாற்றியம்'.
+
+இந்த இரண்டு மாற்றியங்களையும் சேர்த்து **"எனான்சியோமர்கள்" (Enantiomers)** என்று அழைப்போம்.
+
+---
+
+### தேர்வுக்கு நினைவில் வைக்க வேண்டிய 4 முக்கியக் குறிப்புகள்:
+
+1. **ஒரே மூலக்கூறு வாய்பாடு, ஒரே இயற்பியல் மற்றும் வேதியியல் பண்புகள்** இருக்கும்.
+2. கார்பனுடன் **4 வெவ்வேறு தொகுதிகள்** இணைந்திருக்க வேண்டும் (Chirality).
+3. இவை ஒன்றுக்கொன்று **பொருந்தாத ஆடிப் பிம்பங்கள்** (Non-superimposable mirror images).
+4. தள முனைவுற்ற ஒளியை **ஒன்று வலதுபுறமும் ($+$), மற்றொன்று இடதுபுறமும் ($-$)** சுழற்றும்.
+
+**ஒரு சுவாரஸ்ய தகவல்:** 
+நாம் குடிக்கும் பாலில் இருந்து உருவாகும் தயிரில் இருப்பது **L-(+) லாக்டிக் அமிலம்**, ஆனால் நாம் அதிகமாக உடற்பயிற்சி செய்யும்போது நமது தசைகளில் வலி ஏற்படுகிறதே, அதற்குக் காரணம் அங்கே உற்பத்தியாகும் **D-(-) லாக்டிக் அமிலம்**! மூலக்கூறு ஒன்றுதான், ஆனால் அதன் சுழற்சி திசை மாறும்போது உடலில் செய்யும் வேலையும் மாறுகிறது.
+
+புரிந்ததா? ஏதேனும் சந்தேகம் இருந்தால் தாராளமாகக் கேளுங்கள்!
+
+---
+
+<a id="run-002-004-672be3c04b44"></a>
+
+### claude-sonnet-5
+
+**Status:** completed ? **Source:** [run-002-004-672be3c04b44.json](run-002-004-672be3c04b44.json)
+
+# ஒளிசுழற்சி மாற்றியம் (Photoperiodism)
+
+வணக்கம்! இன்று நாம் **ஒளிசுழற்சி மாற்றியம்** (Photoperiodism) என்ற முக்கியமான உயிரியல் கருத்தைப் பற்றி எளிமையாகப் பார்க்கலாம்.
+
+## ஒளிசுழற்சி மாற்றியம் என்றால் என்ன?
+
+**ஒளிசுழற்சி மாற்றியம்** என்பது, ஒரு நாளில் கிடைக்கும் **ஒளியின் கால அளவு** (பகல்/இரவு நேரத்தின் நீளம்) மாறும்போது, தாவரங்கள் மற்றும் விலங்குகளின் உடலியல் செயல்பாடுகளில் ஏற்படும் மாற்றங்களைக் குறிக்கும்.
+
+எளிமையாகச் சொன்னால் - **"பகல் நேரம் எவ்வளவு நீளமாக அல்லது குறுகியதாக இருக்கிறது"** என்பதை உணர்ந்து, உயிரினங்கள் தங்கள் வளர்ச்சி, பூக்கும் காலம் போன்றவற்றை மாற்றிக் கொள்வதே இதன் அடிப்படை.
+
+## தாவரங்களில் இதன் முக்கியத்துவம்
+
+பூக்கும் தாவரங்களை மூன்று வகைகளாகப் பிரிக்கலாம்:
+
+| வகை | விளக்கம் | எடுத்துக்காட்டு |
+|---|---|---|
+| **குறு பகல் தாவரங்கள்** | குறுகிய பகல் நேரத்தில் (நீண்ட இரவில்) பூக்கும் | நெல், சோயா பீன் |
+| **நீள பகல் தாவரங்கள்** | நீண்ட பகல் நேரத்தில் பூக்கும் | கோதுமை, கீரை |
+| **நடுநிலை தாவரங்கள்** | பகல் நேரத்தால் பாதிக்கப்படாது | தக்காளி, சோளம் |
+
+## இது எப்படி நடக்கிறது?
+
+தாவரங்களில் **"ஃபைட்டோகிரோம்" (Phytochrome)** என்ற ஒரு வண்ணப்பொருள் (pigment) இருக்கிறது. இது:
+- இரவு நேரத்தின் நீளத்தை அளவிடுகிறது
+- அதற்கேற்ப ஹார்மோன் சமிக்ஞைகளை அனுப்புகிறது
+- இதன் மூலம் பூக்கும் காலம் நிர்ணயிக்கப்படுகிறது
+
+## நிஜ வாழ்க்கை உதாரணம்
+
+🌾 **விவசாயத்தில்:** நெல் விவசாயிகள், குறு பகல் இருக்கும் பருவத்தில்தான் நெல் பயிரை நடவு செய்கிறார்கள் - ஏனெனில் அப்போதுதான் நெல் பூக்கும்.
+
+🐦 **விலங்குகளில்:** சில பறவைகள் பகல் நேரம் நீளும்போது இடம்பெயர்கின்றன (migration), இனப்பெருக்கம் செய்கின்றன.
+
+## சுருக்கம்
+
+ஒளிசுழற்சி மாற்றியம் என்பது இயற்கையின் ஒரு அற்புதமான **"கடிகாரம்"** போன்றது - இது தாவரங்கள் மற்றும் விலங்குகளுக்கு பருவகாலங்களை உணர்த்தி, சரியான நேரத்தில் வளர்ச்சி, பூக்கும் காலம், இனப்பெருக்கம் போன்றவற்றை நடத்த உதவுகிறது.
+
+---
+*ஏதேனும் சந்தேகம் இருந்தால் கேளுங்கள்! 😊*
+
+---
+
+<a id="run-002-005-c2290b24c3d5"></a>
+
+### llama-4-maverick
+
+**Status:** completed ? **Source:** [run-002-005-c2290b24c3d5.json](run-002-005-c2290b24c3d5.json)
+
+கரைசலில் உள்ள சில சேர்மங்கள் ஒளித்தளத்தை சுழற்றும் தன்மையுடையவை. அவை ஒளியச்சுழற்றிகள் எனப்படுகின்றன. ஒளியச்சுழற்றிகளின் கரைசலின் வழியே ஒற்றை ஒளியை (ஒரே அலைநீளம் கொண்ட ஒளி) செலுத்தினால் ஒளியின் தளம் சுழற்றப்படுகிறது. இவ்வாறு ஒளித்தளம் சுழற்றப்படுவதை ஒளிசுழற்சி மாற்றம் என்பர்.
+
+ஒளிசுழற்சி மாற்றத்தைக் கீழ்க்கண்ட சோதனை மூலம் விளக்கலாம்.
+
+ஒரு குவார்ட்ஸ் பட்டகம் அல்லது நிக்கல் சல்பேட் படிகத்தை, இரண்டு நிக்கல் பிரிசங்களுக்கு (நிக்கல் பிரிசம் : ஒற்றை ஒளியைத் தரும் பிரிசம்) இடையில் வைத்து, ஒரு திரையில் ஒளியைப் பெற்றால், திரையில் ஒளி தோன்றாது. இது ஒளியச் சுழற்றிகளின் செயல்பாட்டை விளக்க
+நிக்கல் பிரிசங்களை சுழற்றினால், திரையில் ஒளி தோன்றும். இரண்டாவது நிக்கல் பிரிசத்தை மேலும் சுழற்றினால், மீண்டும் ஒளி மறைந்து விடும். இந்நிகழ்வு, முதல் நிக்கல் பிரிசம் ஒற்றை ஒளியை உருவாக்கி, அதை இரண்டாவது நிக்கல் பிரிசம் கடந்து செல்ல அனுமதிக்காததால் நிகழ்கிறது.
+
+இப்போது, முதல் நிக்கல் பிரிசத்திற்கும், இரண்டாவது நிக்கல் பிரிசத்திற்கும் இடையில் ஒளியச் சுழற்றியை (குவார்ட்ஸ் பட்டகம் அல்லது நிக்கல் சல்பேட் படிகம்) வைத்தால் திரையில் ஒளி தோன்றும். ஒளியச்சுழற்றி இல்லாத நிலையில் இரண்டாவது நிக்கல் பிரிசம் ஒளியைக் கடத்தாத நிலையில் உள்ளது. ஆனால் ஒளியச்சுழற்றியை வைத்தவுடன் திரையில் ஒளி தோன்றுகிறது. இது ஒளியச் சுழற்றி, ஒற்றை ஒளியின் தளத்தை சுழற்றுவதால் நிகழ்கிறது. அதாவது, முதல் நிக்கல் பிரிசத்திலிருந்து வெளிவரும் ஒற்றை ஒளியானது, ஒளியச்சுழற்றியால் சுழற்றப்பட்டு, இரண்டாவது நிக்கல் பிரிசத்தின் வழியே செல்ல அனுமதிக்கப்பட்டு திரையில் ஒளியைத் தோற்றுவிக்கிறது.
+
+ஒளியச் சுழற்றியால் ஒளித்தளம் சுழற்றப்படுவதை ஒளிசுழற்சி மாற்றம் என்பர். ஒளிசுழற்சி மாற்றத்தை ஒளியச் சுழற்றியின் சுழற்றும் திறன் கீழ்க்கண்ட சமன்பாட்டால் தரப்படுகிறது.
+
+α = θ/lc
+
+இச்சமன்பாட்டில், θ – ஒளித்தளச் சுழற்சி (டிகிரியில்)
+
+l – ஒளியச்சுழற்றியின் கரைசலின் தூரம் (dm ல்)
+
+C – ஒளியச்சுழற்றியின் செறிவு (g/mL)
+
+α – சுழற்றும் திறன் அல்லது ஒளிசுழற்சி மாறிலி.
+
+சுழற்றும் திறனானது, ஒளியச் சுழற்றியின் தன்மை, கரைப்பான், வெப்பநிலை மற்றும் ஒளியின் அலைநீளம் ஆகியவற்றைப் பொறுத்தது.
+
+சுழற்றும் திறன் வெப்பநிலையைப் பொறுத்தமையால், சுழற்றும் திறனைக் குறிக்கும் போது வெப்பநிலையும் குறிக்கப்பட வேண்டும்.
+
+சுழற்றும் திறன், ஒளியின் அலைநீளத்தைப் பொறுத்தமையால், ஒற்றை ஒளியைச் செலுத்தும் போதே சுழற்றும் திறனைக் காண இயலும். பொதுவாக சோடியத்தின் மஞ்சள் ஒளி (D- அலை) பயன்படுத்தப்படுகிறது.
+
+சுழற்றும் திறன், கரைசலின் செறிவைப் பொறுத்தமையால், ஒப்பிடும் போது செறிவும் குறிக்கப்பட வேண்டும். ஒளிசுழற்சி மாறிலியானது கீழ்க்கண்ட சமன்பாட்டால் தரப்படுகிறது.
+
+[α]Dt = 100θ/lc
+
+இச்சமன்பாட்டில், t – வெப்பநிலை (°C யில்)
+
+D – சோடிய ஒளி (D- அலை)
+
+θ – சுழற்றப்பட்ட ஒளித்தளம் (டிகிரியில்)
+
+l – கரைசலின் தூரம் (dm ல்)
+
+C – 100 மி.லி கரைசலில் உள்ள கருவனின் செறிவு (கிராமில்)
+
+ஒளிசுழற்சி மாறிலியானது, ஒளியச்சுழற்றியின் மூலக்கூறு வாய்ப்பாட்டினை அறிய உதவுகிறது. ஒளியச் சுழற்றிகள் வலஞ்சுழற்றிகள் அல்லது இடஞ்சுழற்றிகள் எனப்படும்.
+
+வலஞ்சுழற்றிகள்: ஒளித்தளத்தை வலப்புறமாகச் சுழற்றும் ஒளியச்சுழற்றிகள் வலஞ்சுழற்றிகள் எனப்படும். இவை (+) குறியால் குறிக்கப்படும்.
+
+இடஞ்சுழற்றிகள்: ஒளித்தளத்தை இடப்புறமாகச் சுழற்றும் ஒளியச்சுழற்றிகள் இடஞ்சுழற்றிகள் எனப்படும். இவை (-) குறியால் குறிக்கப்படும்.
+
+உதாரணம்: (+) பாக்டோஸ், (-) பாக்டோஸ்
+
+ஒளிசுழற்சி மாற்றத்திற்கான காரணம்:
+
+பொதுவாக ஒளியானது அனைத்துத் திசையிலும் அதிர்வெடுக்கும் தன்மையுடையது. ஒற்றை ஒளியானது ஒரு தளத்தில் அதிர்வெடுக்கும் தன்மையுடையது. ஒளியச்சுழற்றியின் கரைசல் வழியே ஒற்றை ஒளியைச் செலுத்தும் போது, ஒளியச்சுழற்றியானது ஒளியின் அதிர்வுத் தளத்தை சுழற்றுவதால் ஒளிசுழற்சி மாற்றம் நிகழ்கிறது.
+
+ஒளியச்சுழற்றிகளின் வகைகள்:
+
+ஒளியச்சுழற்றிகள் இரு வகைப்படும். அவை,
+
+இயற்கை ஒளியச்சுழற்றிகள்
+உருவாக்கப்பட்ட ஒளியச்சுழற்றிகள்
+இயற்கை ஒளியச்சுழற்றிகள்:
+
+இயற்கையிலேயே ஒளிசுழற்சி மாற்றத்தைத் தரும் தன்மையுடன் உள்ள சேர்மங்கள் இயற்கை ஒளியச்சுழற்றிகள் எனப்படும்.
+
+உதாரணம்: காம்பர், குளுக்கோஸ் போன்ற சேர்மங்கள்.
+
+உருவாக்கப்பட்ட ஒளியச்சுழற்றிகள்:
+
+சில சேர்மங்கள், சமச்சீரற்ற சூழ்நிலையில் வைக்கப்படும் போது ஒளியச்சுழற்றிகளாகச் செயல்படுகின்றன. இவை உருவாக்கப்பட்ட ஒளியச்சுழற்றிகள் எனப்படும்.
+
+உதாரணம்: குவார்ட்ஸ் பட்டகம்.
+
+ஒளியச்சுழற்றிகளின் பண்புகள்:
+
+ஒளியச்சுழற்றிகள் கீழ்க்கண்ட பண்புகளைப் பெற்றுள்ளன.
+
+ஒளியச்சுழற்றிகள் ஒளித்தளத்தை சுழற்றும் தன்மையுடையவை.
+ஒளியச்சுழற்றிகள் சமச்சீரற்ற தன்மையுடையவை. அதாவது இவை ஒன்றின் மீது ஒன்று பொருத்தப்பட இயலா இரு வடிவங்களாக உள்ளன.
+ஒளியச்சுழற்றிகள் கைமாற்றியலோகங்களாகச் செயல்படுகின்றன.
+ஒளியச்சுழற்றிகளின் செயல்பாடுகள்:
+
+ஒளியச்சுழற்றிகள் கீழ்க்கண்டவற்றிற்குப் பயன்படுகின்றன.
+
+சர்க்கரைத் தொழிலில் சர்க்கரையின் செறிவை அறிய.
+தாதுப் பொருட்களின் தூய்மையை அறிய.
+வேதியியல் மற்றும் மருத்துவத் துறைகளில் பயன்படும் சில சேர்மங்களின் அளவைக் கண்டறிய. உதாரணம்: பென்சீன் கரைசலில் உள்ள காம்பரின் அளவைக் கண்டறிய.
+
+---
+
+<a id="prompt-3"></a>
+
+## Prompt 3: English prompt, Tamil response
+
+**Prompt**
+
+> You are an expert teacher teaching an high school student. Explain optical isomerism in Tamil.
+
+---
+
+<a id="run-003-001-a63a1032fb38"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed ? **Source:** [run-003-001-a63a1032fb38.json](run-003-001-a63a1032fb38.json)
+
+**ஒளி சமவுருமை (Optical Isomerism)** என்பது ஒரே மூலக்கூற்று வாய்ப்பாடு மற்றும் ஒரே இணைப்பு அமைப்பு இருந்தாலும், அவை **தள-துருவப்படுத்தப்பட்ட ஒளியை (plane-polarised light)** வெவ்வேறு திசைகளில் திருப்பும் தன்மையால் வேறுபடும் சமவுருமையாகும்.
+
+இதனை **ஒளிச் சமவுருமை** என்றும் கூறலாம்.
+
+---
+
+## 1. துருவப்படுத்தப்பட்ட ஒளி என்றால் என்ன?
+
+சாதாரண ஒளியில் ஒளி அலைகள் பல திசைகளில் அதிரும்.  
+ஆனால் ஒரு சிறப்பு வடிகட்டி வழியாக ஒளியை அனுப்பினால், அது ஒரே தளத்தில் மட்டும் அதிரும். இதுவே:
+
+**தள-துருவப்படுத்தப்பட்ட ஒளி**  
+(Plane-polarised light)
+
+சில கரிமச் சேர்மங்கள் இந்த ஒளி தளத்தை இடது அல்லது வலது பக்கம் திருப்புகின்றன.
+
+---
+
+## 2. ஒளியைத் திருப்பும் இரண்டு வகைகள்
+
+ஒரு பொருள் துருவப்படுத்தப்பட்ட ஒளியைத் திருப்பினால் அது **ஒளிச் செயலில் உள்ள பொருள்** (optically active substance) எனப்படும்.
+
+### (a) வலப்புறம் திருப்புவது
+ஒளியை வலப்புறமாகத் திருப்பும் சமவுருமை:
+
+- **Dextrorotatory**
+- குறியீடு: **(+)** அல்லது **d**
+
+### (b) இடப்புறம் திருப்புவது
+ஒளியை இடப்புறமாகத் திருப்பும் சமவுருமை:
+
+- **Levorotatory**
+- குறியீடு: **(–)** அல்லது **l**
+
+> முக்கியம்: (+)/(–) என்பது ஒளி திரும்பும் திசையை மட்டுமே குறிக்கும்.  
+> இது R/S அமைப்புடன் நேரடியாக தொடர்புடையது அல்ல.
+
+---
+
+## 3. கைரல் தன்மை (Chirality)
+
+ஒரு பொருளின் கண்ணாடிப் பிம்பத்தை அதன் மீது முழுமையாகப் பொருத்த முடியாவிட்டால், அந்தப் பொருள் **கைரல் (chiral)** எனப்படும்.
+
+இதற்கு நம் கைகள் சிறந்த உதாரணம்:
+
+- இடது கை மற்றும் வலது கை கண்ணாடிப் பிம்பங்கள்.
+- ஆனால் இரண்டையும் முழுமையாக ஒன்றின் மேல் ஒன்று பொருத்த முடியாது.
+
+இதேபோல் சில மூலக்கூறுகளுக்கும் “இடது வடிவம்” மற்றும் “வலது வடிவம்” இருக்கும்.
+
+---
+
+## 4. அசமச்சீர் கார்பன் அணு / கைரல் கார்பன் அணு
+
+பொதுவாக, ஒரு கார்பன் அணுவுடன் **நான்கு வேறுபட்ட அணுக்கள் அல்லது அணுக்குழுக்கள்** இணைந்திருந்தால், அந்த கார்பன்:
+
+- **அசமச்சீர் கார்பன் (Asymmetric carbon)**
+- அல்லது **கைரல் கார்பன் (Chiral carbon)**
+
+எனப்படும்.
+
+இதனை பெரும்பாலும் **C\*** என்று குறிக்கிறார்கள்.
+
+### உதாரணம்: லாக்டிக் அமிலம்
+
+\[
+\text{CH}_3-\text{CH(OH)}-\text{COOH}
+\]
+
+நடுத்தர கார்பன் அணுவுடன் இணைந்துள்ள நான்கு குழுக்கள்:
+
+1. \(-H\)
+2. \(-OH\)
+3. \(-CH_3\)
+4. \(-COOH\)
+
+இவை நான்கும் வேறுபட்டவை. எனவே அந்தக் கார்பன் கைரல் கார்பன் ஆகும்.  
+அதனால் லாக்டிக் அமிலம் ஒளிச் சமவுருமையைக் காட்டுகிறது.
+
+---
+
+## 5. எனான்டியோமர்கள் (Enantiomers)
+
+ஒரு கைரல் மூலக்கூறின் இரண்டு கண்ணாடிப் பிம்ப வடிவங்கள் **எனான்டியோமர்கள்** எனப்படும்.
+
+இரண்டு எனான்டியோமர்கள்:
+
+- ஒன்றுக்கொன்று கண்ணாடிப் பிம்பங்கள்.
+- ஒன்றின் மேல் ஒன்று பொருந்தாது.
+- பெரும்பாலான இயற்பியல் பண்புகள் ஒரே மாதிரி இருக்கும்.
+- ஆனால் துருவப்படுத்தப்பட்ட ஒளியை எதிரெதிர் திசைகளில் திருப்பும்.
+
+உதாரணம்:
+
+- ஒரு வடிவம்: \(+\) லாக்டிக் அமிலம்
+- மற்ற வடிவம்: \(–\) லாக்டிக் அமிலம்
+
+ஒன்று வலப்புறம் திருப்பும்; மற்றொன்று அதே அளவு இடப்புறம் திருப்பும்.
+
+---
+
+## 6. ரேசமிக் கலவை (Racemic mixture)
+
+ஒரு சேர்மத்தின் \(+\) மற்றும் \(–\) வடிவங்கள் **சம அளவில்** கலந்தால், அது:
+
+**ரேசமிக் கலவை** (Racemic mixture) எனப்படும்.
+
+இதில்:
+
+- ஒரு வடிவம் ஒளியை வலப்புறம் திருப்பும்.
+- மற்ற வடிவம் அதே அளவு இடப்புறம் திருப்பும்.
+- இரண்டும் ஒன்றை ஒன்று நீக்கிவிடும்.
+
+எனவே ரேசமிக் கலவை **ஒளிச் செயலில் ஈடுபடாது**.
+
+\[
+(+)\; \text{வடிவம்} + (-)\; \text{வடிவம்}
+\Rightarrow \text{மொத்த சுழற்சி = 0}
+\]
+
+---
+
+## 7. எப்போது ஒளிச் சமவுருமை இருக்காது?
+
+ஒரு மூலக்கூறில் கைரல் கார்பன் இருந்தாலும், சில சமயங்களில் மூலக்கூறு முழுவதும் சமச்சீராக இருக்கலாம். அப்படிப்பட்டது ஒளிச் செயலில் ஈடுபடாது.
+
+இதற்கு **மீசோ சேர்மம் (Meso compound)** என்று பெயர்.
+
+மீசோ சேர்மத்தில்:
+
+- கைரல் கார்பன் அணுக்கள் இருக்கலாம்.
+- ஆனால் மூலக்கூறில் உள்சமச்சீர் தளம் (plane of symmetry) இருக்கும்.
+- ஆகவே ஒளியைத் திருப்பாது.
+
+---
+
+## 8. சுருக்கமாக
+
+| கருத்து | விளக்கம் |
+|---|---|
+| ஒளிச் சமவுருமை | துருவப்படுத்தப்பட்ட ஒளியைத் திருப்பும் சமவுருமை |
+| கைரல் கார்பன் | நான்கு வேறுபட்ட குழுக்களுடன் இணைந்த கார்பன் |
+| எனான்டியோமர்கள் | ஒன்றுக்கொன்று பொருந்தாத கண்ணாடிப் பிம்பங்கள் |
+| \(+\) அல்லது d | ஒளியை வலப்புறம் திருப்பும் |
+| \(–\) அல்லது l | ஒளியை இடப்புறம் திருப்பும் |
+| ரேசமிக் கலவை | \(+\), \(–\) வடிவங்கள் சம அளவு; ஒளிச் செயல் இல்லை |
+| மீசோ சேர்மம் | கைரல் மையங்கள் இருந்தும் உள்சமச்சீரால் ஒளிச் செயல் இல்லை |
+
+---
+
+### நினைவில் வைத்துக்கொள்ள எளிய விதி
+
+**ஒரு கார்பன் அணுவிற்கு நான்கு வேறுபட்ட குழுக்கள் இணைந்திருந்தால், அந்த மூலக்கூறு ஒளிச் சமவுருமையைக் காட்ட வாய்ப்பு உள்ளது.**
+
+---
+
+<a id="run-003-002-bb95b2e97d7d"></a>
+
+### grok-4.3
+
+**Status:** completed ? **Source:** [run-003-002-bb95b2e97d7d.json](run-003-002-bb95b2e97d7d.json)
+
+வணக்கம் மாணவரே!  
+
+இன்று நாம் வேதியியலில் ஒரு சுவாரசியமான தலைப்பான **ஒளியியல் மாற்றியம்** (Optical Isomerism) பற்றி எளிதாகப் புரிந்துகொள்ளும் விதத்தில் படிப்போம்.
+
+### முதலில் அடிப்படை
+மூலக்கூறுகள் ஒரே எண்ணிக்கையிலான அணுக்களைக் கொண்டிருந்தாலும், அவற்றின் அமைப்பு வேறுபட்டால் அவற்றை **மாற்றியங்கள்** என்போம். இதில் ஒரு வகை **ஒளியியல் மாற்றியம்**.
+
+### ஒளியியல் மாற்றியம் என்றால் என்ன?
+இரண்டு மூலக்கூறுகள் ஒரே மூலக்கூறு சூத்திரம் (Molecular formula) மற்றும் ஒரே அமைப்பு சூத்திரம் (Structural formula) கொண்டிருந்தாலும், அவை ஒன்றுக்கொன்று **கண்ணாடியில் பிரதிபலிக்கும் பிம்பம்** போல இருக்கும். ஆனால் அவற்றை ஒன்றின் மேல் ஒன்றாக வைத்துப் பொருத்த முடியாது.  
+
+இதை உங்கள் **இடது கை** மற்றும் **வலது கை**க்கு ஒப்பிடலாம். இரண்டும் ஒரே மாதிரி தெரிகின்றன, ஆனால் இடது கையை வலது கையின் மேல் போட்டால் ஒருபோதும் பொருந்தாது. இப்படிப்பட்ட மூலக்கூறுகளை **எனாண்டியோமர்கள்** (Enantiomers) என்று அழைக்கிறோம்.
+
+### எப்படி இந்த மாற்றியம் உருவாகிறது?
+இதற்கு ஒரு கார்பன் அணு **நான்கு வெவ்வேறு அணுக்கள் அல்லது குழுக்களுடன்** இணைந்திருக்க வேண்டும். இந்த கார்பனை **அசமச்சீர் கார்பன்** (Asymmetric carbon) அல்லது **கைரல் மையம்** (Chiral centre) என்று அழைக்கிறோம்.  
+
+இந்த கார்பன் இருப்பதால் மூலக்கூறுக்கு சமச்சீரற்ற தன்மை வருகிறது. அதனால் கண்ணாடி பிம்பம் உருவாகிறது.
+
+### ஒளியை சுழற்றும் தன்மை
+இந்த எனாண்டியோமர்கள் **தள முனைவு ஒளி** (Plane polarized light) என்ற சிறப்பு ஒளியை சுழற்றும்:  
+- ஒன்று **வலஞ்சுழி** (Dextrorotatory அல்லது +)  
+- மற்றொன்று **இடஞ்சுழி** (Levorotatory அல்லது -)  
+
+இதனால்தான் இதை **ஒளியியல் மாற்றியம்** என்று அழைக்கிறோம்.
+
+### ரேசமிக் கலவை
+இரண்டு எனாண்டியோமர்களும் **சம அளவில்** கலந்தால், ஒளியை சுழற்றாது. இதை **ரேசமிக் கலவை** (Racemic mixture) என்று சொல்வோம்.
+
+### எளிய எடுத்துக்காட்டுகள்
+- லாக்டிக் அமிலம் (பால் புளிப்பில் இருப்பது)  
+- டார்டாரிக் அமிலம்  
+- குளுக்கோஸ்  
+
+இந்த மூலக்கூறுகளில் அசமச்சீர் கார்பன் இருப்பதால் ஒளியியல் மாற்றியங்கள் உண்டு.
+
+---
+
+மாணவரே, இப்போது புரிந்ததா? உங்கள் இடது-வலது கை உதாரணம் மூலம் நினைவில் வைத்துக்கொள்ளுங்கள். எதாவது குழப்பம் இருந்தால் உடனே கேளுங்கள்!
+
+---
+
+<a id="run-003-003-54fbb9b78d1b"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed ? **Source:** [run-003-003-54fbb9b78d1b.json](run-003-003-54fbb9b78d1b.json)
+
+வணக்கம்! வேதியியலில் மிக முக்கியமான மற்றும் சுவாரஸ்யமான ஒரு தலைப்பான **"ஒளி சுழற்சி மாற்றியம்" (Optical Isomerism)** பற்றி மிக எளிமையாகப் பார்க்கலாம்.
+
+உனக்கு எளிதாகப் புரிய வைக்க, முதலில் நம் கைகளை ஒரு உதாரணமாக எடுத்துக்கொள்வோம். உன்னுடைய இடது கையையும் வலது கையையும் கண்ணாடியின் முன் வைத்தால், இரண்டும் ஒரே மாதிரி இருக்கும். ஆனால், இடது கையை அப்படியே எடுத்து வலது கையின் மீது வைத்தால் (உள்ளங்கைகள் ஒரே பக்கம் இருக்கும்படி), விரல்கள் சரியாக ஒன்றின் மேல் ஒன்று பொருந்தாது (Non-superimposable). 
+
+இதே போன்ற ஒரு பண்புதான் வேதியியலில் மூலக்கூறுகளுக்கும் (Molecules) ஏற்படுகிறது.
+
+---
+
+### ஒளி சுழற்சி மாற்றியம் என்றால் என்ன? (Definition)
+
+> **ஒரே மூலக்கூறு வாய்ப்பாடு (Molecular formula) மற்றும் ஒரே அமைப்பு வாய்ப்பாடு (Structural formula) கொண்ட இரு சேர்மங்கள், "தள முனைவுற்ற ஒளி"யை (Plane Polarized Light) வெவ்வேறு திசைகளில் சுழற்றினால், அவை "ஒளி சுழற்சி மாற்றியங்கள்" எனப்படும். இந்த நிகழ்வு ஒளி சுழற்சி மாற்றியம் ஆகும்.**
+
+இதைப் புரிந்து கொள்ள மூன்று முக்கியமான விஷயங்களைத் தெரிந்து கொள்ள வேண்டும்:
+
+#### 1. தள முனைவுற்ற ஒளி (Plane Polarized Light):
+சாதாரண ஒளி எல்லா திசைகளிலும் அதிர்வடையும். ஆனால், அதை ஒரு நிக்கல் படிகத்தின் (Nicol Prism) வழியே செலுத்தும்போது, அது ஒரே ஒரு தளத்தில் (Plane) மட்டும் அதிர்வடையும் ஒளியாக மாறும். இதுவே **தள முனைவுற்ற ஒளி** ஆகும்.
+
+#### 2. சமச்சீரற்ற கார்பன் அல்லது கைரல் கார்பன் (Chiral Carbon):
+ஒரு கார்பன் அணுவைச் சுற்றி நான்கு பிணைப்புகளிலும் **நான்கு வெவ்வேறு அணுக்கள் அல்லது தொகுதிகள்** இணைக்கப்பட்டிருந்தால், அந்தக் கார்பன் **"கைரல் கார்பன்" (Chiral Carbon / Asymmetric Carbon)** எனப்படும். 
+*(பொதுவாக இதை $C^*$ என்று குறிப்பார்கள்).* 
+ஒரு மூலக்கூறு ஒளி சுழற்சி மாற்றியத்தைக் காட்ட **கைரல் கார்பன் இருப்பது மிக அவசியம்.**
+
+#### 3. சுழற்சி திசைகள் (Rotation):
+இந்தக் கைரல் மூலக்கூறுகளின் கரைசலில் தள முனைவுற்ற ஒளியைச் செலுத்தும்போது, அவை ஒளியை இரண்டு திசைகளில் திருப்பும்:
+* **வலஞ்சுழி (Dextrorotatory அல்லது 'd' அல்லது '+'):** ஒளியை **வலப்புறமாக** (கடிகார முள் சுற்றும் திசையில் - Clockwise) திருப்பினால் அது டெக்ஸ்ட்ரோ எனப்படும்.
+* **இடஞ்சுழி (Laevorotatory அல்லது 'l' அல்லது '-'):** ஒளியை **இடப்புறமாக** (கடிகார முள் சுற்றும் எதிர் திசையில் - Anti-clockwise) திருப்பினால் அது லீவோ எனப்படும்.
+
+---
+
+### மிகச் சிறந்த உதாரணம்: லாக்டிக் அமிலம் (Lactic Acid)
+
+லாக்டிக் அமிலத்தின் வாய்ப்பாடு: $\text{CH}_3-\text{CH(OH)}-\text{COOH}$
+
+இங்குள்ள நடு கார்பனைப் பார்:
+1. ஒரு பக்கம் $-\text{H}$
+2. ஒரு பக்கம் $-\text{OH}$
+3. ஒரு பக்கம் $-\text{CH}_3$
+4. ஒரு பக்கம் $-\text{COOH}$
+
+நான்கு பக்கமும் வெவ்வேறு தொகுதிகள் இருப்பதால், இது ஒரு **கைரல் கார்பன்**.
+
+* **d-லாக்டிக் அமிலம்:** தள முனைவுற்ற ஒளியை வலதுபக்கம் சுழற்றும்.
+* **l-லாக்டிக் அமிலம்:** தள முனைவுற்ற ஒளியை இடதுபக்கம் சுழற்றும்.
+
+இவை இரண்டும் ஒன்றுக்கொன்று கண்ணாடி பிம்பங்கள் (Mirror images). ஆனால், ஒன்றை எடுத்து மற்றொன்றின் மீது வைத்தால் பொருந்தாது.
+
+---
+
+### முக்கியமாக நினைவில் கொள்ள வேண்டியவை (Exam Tips):
+
+1. **எனான்சியோமர்கள் (Enantiomers):** ஒன்றன் மீது ஒன்று பொருந்தாத கண்ணாடி பிம்பங்களாக உள்ள ஒளி சுழற்சி மாற்றியங்களை *எனான்சியோமர்கள்* என்போம். (உதாரணம்: d-லாக்டிக் அமிலம் மற்றும் l-லாக்டிக் அமிலம்).
+2. **ரேசிமிக் கலவை (Racemic Mixture):** சம அளவு 'd' மற்றும் 'l' மாற்றியங்களைக் கலந்தால், ஒளி எந்தப் பக்கமும் சுழலாது (சுழி சுழற்சி). இது ரேசிமிக் கலவை எனப்படும் $(\pm)$.
+
+**சுருக்கமாக:**
+நான்கு வெவ்வேறு தொகுதிகள் கொண்ட கார்பன் (Chiral carbon) இருக்க வேண்டும் $\rightarrow$ அதன் கண்ணாடி பிம்பம் அதன் மேல் பொருந்தக் கூடாது $\rightarrow$ அது ஒளியை வலதுபுறமோ அல்லது இடதுபுறமோ சுழற்ற வேண்டும். இதுவே ஒளி சுழற்சி மாற்றியம்!
+
+இதில் ஏதேனும் சந்தேகம் இருந்தால் தாராளமாகக் கேட்கலாம்!
+
+---
+
+<a id="run-003-004-9403098ead7c"></a>
+
+### claude-sonnet-5
+
+**Status:** completed ? **Source:** [run-003-004-9403098ead7c.json](run-003-004-9403098ead7c.json)
+
+# ஒளிச்சுழற்சி மாற்றியல்பு (Optical Isomerism) - விளக்கம்
+
+## அறிமுகம்
+
+வணக்கம்! இன்று நாம் கரிம வேதியியலில் (Organic Chemistry) மிகவும் சுவாரஸ்யமான ஒரு தலைப்பைப் பற்றி பார்க்கப் போகிறோம் - **ஒளிச்சுழற்சி மாற்றியல்பு (Optical Isomerism)**.
+
+## முதலில் ஒரு எளிய உதாரணத்தில் இருந்து தொடங்குவோம்
+
+உங்கள் **இரண்டு கைகளை** பாருங்கள் - இடது கை மற்றும் வலது கை. 
+
+- இவை இரண்டும் ஒரே மாதிரி தெரிகின்றன
+- ஆனால் ஒன்றை மற்றொன்றின் மேல் வைத்தால் **சரியாக பொருந்தாது**
+- ஒன்று மற்றொன்றின் **கண்ணாடிப் பிம்பம் (Mirror Image)** போல் இருக்கும்
+
+இதையே வேதியியலில் **"Chirality" (கையியல்பு)** என்று அழைக்கிறோம்.
+
+## ஒளிச்சுழற்சி மாற்றியல்பு என்றால் என்ன?
+
+**வரையறை:** ஒரே மூலக்கூற்று வாய்பாடு (Molecular Formula) மற்றும் ஒரே அமைப்பு (Structure) கொண்ட இரண்டு சேர்மங்கள், ஒன்று மற்றொன்றின் **கண்ணாடிப் பிம்பமாக** இருந்து, அவை **ஒன்றின் மேல் ஒன்று பொருந்தாத (Non-superimposable)** நிலையில் இருந்தால், அதை **ஒளிச்சுழற்சி மாற்றியல்பு** என்கிறோம்.
+
+## முக்கிய காரணம்: அசமச்சீர் கார்பன் அணு (Asymmetric Carbon Atom)
+
+ஒரு கார்பன் அணுவுடன் **நான்கு வெவ்வேறு குழுக்கள் (Four Different Groups)** இணைந்திருந்தால், அந்த கார்பனை **"Chiral Carbon"** அல்லது **"அசமச்சீர் கார்பன்"** என்கிறோம்.
+
+### உதாரணம்: லாக்டிக் அமிலம் (Lactic Acid)
+
+```
+        COOH
+         |
+    H — C — OH
+         |
+        CH₃
+```
+
+இங்கே கார்பன் அணுவுடன் இணைந்திருப்பவை:
+1. **-COOH** 
+2. **-OH**
+3. **-CH₃**
+4. **-H**
+
+இந்த நான்கு குழுக்களும் **வெவ்வேறானவை** - எனவே இது ஒரு அசமச்சீர் கார்பன்.
+
+## இரண்டு வகையான அமைப்புகள்
+
+இந்த அசமச்சீர் கார்பனால் **இரண்டு மாற்றியல்புகள்** உருவாகும்:
+
+| D-லாக்டிக் அமிலம் | L-லாக்டிக் அமிலம் |
+|---|---|
+| வலது கை போன்ற அமைப்பு | இடது கை போன்ற அமைப்பு |
+| ஒளியை வலமாக திருப்பும் | ஒளியை இடமாக திருப்பும் |
+
+இவற்றை **Enantiomers (என்னான்டியோமர்கள்)** என்று அழைக்கிறோம்.
+
+## "ஒளிச்சுழற்சி" என்ற பெயர் ஏன்?
+
+இந்த சேர்மங்களின் வழியாக **துருவப்பட்ட ஒளியை (Polarized Light)** செலுத்தும்போது:
+
+- ஒரு மாற்றியல்பு ஒளியின் திசையை **வலப்புறம்** திருப்பும் → **(+) அல்லது Dextrorotatory (d)**
+- மற்றொரு மாற்றியல்பு ஒளியின் திசையை **இடப்புறம்** திருப்பும் → **(-) அல்லது Levorotatory (l)**
+
+இதனால்தான் இதற்கு **"ஒளிச்சுழற்சி மாற்றியல்பு"** என்று பெயர்!
+
+## முக்கிய பண்புகள்
+
+| பண்பு | விளக்கம் |
+|---|---|
+| இயற்பியல் பண்புகள் | ஒரே மாதிரி (உருகுநிலை, கொதிநிலை) |
+| வேதியியல் பண்புகள் | பெரும்பாலும் ஒரே மாதிரி |
+| ஒளிச்சுழற்சி | **வேறுபட்டது** - எதிர் திசைகளில் |
+| உயிரியல் செயல்பாடு | பெரும்பாலும் **முற்றிலும் வேறுபட்டது** |
+
+## சுவாரஸ்யமான உண்மை - உயிரியல் முக்கியத்துவம்
+
+நம் உடலில் உள்ள **அமினோ அமிலங்கள் (Amino Acids)** அனைத்தும் **L-வடிவத்தில்** மட்டுமே இருக்கும்!
+
+**Thalidomide** என்ற மருந்தின் உதாரணம்:
+- ஒரு மாற்றியல்பு - சிறந்த மயக்க மருந்து
+- மற்றொரு மாற்றியல்பு - கருவின் வளர்ச்சிக் குறைபாடுகளை ஏற்படுத்தியது!
+
+இதனால்தான் ஒளிச்சுழற்சி மாற்றியல்பு மருந்தியல் துறையில் மிகவும் முக்கியமானது.
+
+## சுருக்கம்
+
+```
+ஒளிச்சுழற்சி மாற்றியல்பு = 
+        கண்ணாடிப் பிம்ப மூலக்கூறுகள் 
+        + 
+        ஒன்றின் மேல் ஒன்று பொருந்தாதவை
+        +
+        துருவப்பட்ட ஒளியை வெவ்வேறு திசையில் திருப்புபவை
+```
+
+**நினைவில் கொள்ளுங்கள்:** உங்கள் இரு கைகளைப் போலவே - ஒரே மாதிரி தெரிந்தாலும், முற்றிலும் மாறுபட்டவை!
+
+---
+
+**கேள்வி பயிற்சிக்கு:** CH₃-CHBr-COOH இல் எத்தனை அசமச்சீர் கார்பன் அணுக்கள் உள்ளன என்று கண்டுபிடிக்க முயற்சி செய்யுங்கள்! 🎯
+
+---
+
+<a id="run-003-005-b7e59861f2a8"></a>
+
+### llama-4-maverick
+
+**Status:** completed ? **Source:** [run-003-005-b7e59861f2a8.json](run-003-005-b7e59861f2a8.json)
+
+வணக்கம் மாணவரே! இன்று நாம் ஒளியியல் சமநோக்கு பற்றி படிக்க போகிறோம்.
+
+ஒளியியல் சமநோக்கு என்றால் என்ன?
+
+ஒளியியல் சமநோக்கு என்பது ஒரு வகையான சமநோக்கு ஆகும், இதில் ஒரே மாதிரியான இரண்டு சேர்மங்கள் உள்ளன, அவை ஒன்றின் கண்ணாடி பிம்பமாக மற்றொன்று இருக்கும். ஆனால் அவை ஒன்றின் மேல் ஒன்று மேற்பொருந்தாது.
+
+ஒளியியல் சமநோக்கு எவ்வாறு ஏற்படுகிறது?
+
+ஒரு கர்பன் அணுவுடன் நான்கு வெவ்வேறு அணுக்கள் அல்லது குழுக்கள் பிணைக்கப்பட்டிருந்தால், அந்த கர்பன் அணு கைரல் கர்பன் அணு என்று அழைக்கப்படுகிறது. இதுபோன்ற சேர்மங்கள் ஒளியியல் சமநோக்கை வெளிப்படுத்துகின்றன.
+
+உதாரணம்: 2-பியூட்டனால்
+
+2-பியூட்டனாலில், இரண்டாவது கர்பன் அணு கைரல் கர்பன் ஆகும், ஏனெனில் இது -H, -OH, -CH3 மற்றும் -C2H5 ஆகிய நான்கு வெவ்வேறு குழுக்களுடன் பிணைக்கப்பட்டுள்ளது.
+
+ஒளியியல் சமநோக்கு எத்தனை வகைப்படும்?
+
+ஒளியியல் சமநோக்கு இரண்டு வகைப்படும். அவை:
+
+1. d-ஐசோமர் (R-கட்டமைப்பு)
+2. l-ஐசோமர் (S-கட்டமைப்பு)
+
+d-ஐசோமர்: வலஞ்சுழி ஐசோமர் என்று அழைக்கப்படுகிறது. இது தள-முனைவுற்ற ஒளியை வலதுபுறம் சுழற்றுகிறது.
+
+l-ஐசோமர்: இது இடஞ்சுழி ஐசோமர் என்று அழைக்கப்படுகிறது. இது தள-முனைவுற்ற ஒளியை இடதுபுறம் சுழற்றுகிறது.
+
+ஒளியியல் சமநோக்கு பற்றிய முக்கிய குறிப்புகள்:
+
+*   ஒளியியல் சமநோக்கு சேர்மங்களின் பண்புகள் ஒரே மாதிரியாக இருக்கும், ஆனால் அவற்றின் ஒளியியல் செயல்பாடு வேறுபட்டது.
+*   ஒளியியல் சமநோக்கு சேர்மங்கள் ஒன்றின் கண்ணாடி பிம்பமாக மற்றொன்று இருக்கும்.
+*   கைரல் கர்பன் அணு இருந்தால் தான் ஒளியியல் சமநோக்கு சாத்தியமாகும்.
+
+இப்போது, மாணவரே, ஒளியியல் சமநோக்கு பற்றி உங்களுக்கு ஏதேனும் சந்தேகம் இருந்தால் கேளுங்கள்.

@@ -1,0 +1,1146 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "83eb1762792e4d4406c4763c1d69610cdd61614db57f016a6fb242eb82777e4f",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response explains stoichiometry directly and comprehensively, introducing its conceptual definition, using a recipe analogy, explaining the role of the mole and atomic masses, outlining the standard calculation procedure, and providing a fully worked calculation example.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction to Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Chemical Equations as Recipes"
+      },
+      {
+        "id": "s3",
+        "label": "Atomic Mass and the Need for the Mole"
+      },
+      {
+        "id": "s4",
+        "label": "The Mole Concept and Molar Mass"
+      },
+      {
+        "id": "s5",
+        "label": "Stoichiometric Calculation Procedure"
+      },
+      {
+        "id": "s6",
+        "label": "Worked Stoichiometry Problem"
+      },
+      {
+        "id": "s7",
+        "label": "Problem-Solving Strategies and Summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the topic, demystifies the term, and provides the core functional definition of stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "cooking with chemistry"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Welcome to chemistry class! ",
+            "start": 0,
+            "end": 28
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "First, let’s address the elephant in the room: **“Stoichiometry”** (pronounced *stoy-kee-AHM-uh-tree*) sounds like an intimidating, ancient spell. But I promise you, it isn't. ",
+            "start": 30,
+            "end": 206
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "At its core, **stoichiometry is simply cooking with chemistry.** It’s the math we use to figure out how much stuff we need to start with, or how much stuff we will end up with, during a chemical reaction.",
+            "start": 208,
+            "end": 412
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let’s break it down step-by-step.",
+            "start": 414,
+            "end": 447
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 449,
+            "end": 452
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition correctly describes stoichiometry as the branch of chemistry dealing with quantitative relationships between reactants and products in chemical reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Kitchen recipe analogy for balanced chemical equations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses a grilled cheese sandwich recipe to explain how stoichiometric coefficients in balanced chemical equations dictate reactant and product ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p7",
+              "quote": "Imagine you are making grilled cheese sandwiches."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 1: The Kitchen Analogy (The Recipe)",
+            "start": 454,
+            "end": 498
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine you are making grilled cheese sandwiches. Here is your recipe:",
+            "start": 500,
+            "end": 570
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{2 slices of Bread} + \\text{1 slice of Cheese} \\rightarrow \\text{1 Grilled Cheese}$$",
+            "start": 572,
+            "end": 663
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* If you have **8 slices of bread** (and plenty of cheese), how many sandwiches can you make? **4 sandwiches.**",
+            "start": 665,
+            "end": 776
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* If you want to make **10 sandwiches**, how many slices of bread do you need? **20 slices.**",
+            "start": 777,
+            "end": 870
+          },
+          {
+            "id": "p11",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Congratulations—you just did stoichiometry! ",
+            "start": 872,
+            "end": 916
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "In chemistry, our \"recipe\" is a **balanced chemical equation**. ",
+            "start": 918,
+            "end": 982
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Look at how water is made:",
+            "start": 983,
+            "end": 1009
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2\\text{H}_2 + \\text{O}_2 \\rightarrow 2\\text{H}_2\\text{O}$$",
+            "start": 1011,
+            "end": 1071
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This tells us: **2 molecules of hydrogen** react with **1 molecule of oxygen** to make **2 molecules of water**. The numbers in front (the coefficients) are just the recipe's ingredient ratios.",
+            "start": 1073,
+            "end": 1266
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1268,
+            "end": 1271
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately illustrates how stoichiometric coefficients function as ingredient ratios, mapped directly onto the formation reaction of water.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The necessity of the mole due to atomic mass differences",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why mass ratios cannot directly replace particle ratios in stoichiometry due to differences in atomic mass among elements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p18",
+              "quote": "In the kitchen, you can physically count 2 slices of bread."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 2: The Problem (We Can't Count Atoms)",
+            "start": 1273,
+            "end": 1319
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "In the kitchen, you can physically count 2 slices of bread. But in a chemistry lab, atoms are way too tiny to see or count. You can't say, *\"Let me grab 200 hydrogen atoms.\"* ",
+            "start": 1321,
+            "end": 1496
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Instead, chemists **weigh** things on a scale in grams. ",
+            "start": 1498,
+            "end": 1554
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "However, you can't just say *\"2 grams of hydrogen + 1 gram of oxygen = 2 grams of water.\"* Why? Because an oxygen atom is **16 times heavier** than a hydrogen atom! 100 grams of hydrogen has way more atoms in it than 100 grams of oxygen.",
+            "start": 1556,
+            "end": 1793
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "To fix this, chemists invented a unit called **The Mole**.",
+            "start": 1795,
+            "end": 1853
+          },
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1855,
+            "end": 1858
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The text accurately explains that atoms cannot be counted directly and that equal masses of different elements do not contain equal numbers of atoms, necessitating a bridging counting unit.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "The mole concept and molar mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines the mole as Avogadro's number using the dozen analogy and explains how the periodic table provides the molar mass to convert grams to moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p25",
+              "quote": "A dozen eggs = 12 eggs."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 3: The Secret Tool — The \"Mole\"",
+            "start": 1860,
+            "end": 1900
+          },
+          {
+            "id": "p24",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Think of the word **\"dozen.\"** When I say \"a dozen,\" you think of the number **12**. ",
+            "start": 1902,
+            "end": 1987
+          },
+          {
+            "id": "p25",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* A dozen eggs = 12 eggs. ",
+            "start": 1988,
+            "end": 2014
+          },
+          {
+            "id": "p26",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* A dozen cars = 12 cars. ",
+            "start": 2015,
+            "end": 2041
+          },
+          {
+            "id": "p27",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The cars weigh a lot more than the eggs, but there are still 12 of each.",
+            "start": 2042,
+            "end": 2114
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**A \"mole\" is just a chemist's dozen.** It’s just a specific number: **$6.022 \\times 10^{23}$** (a huge number, because atoms are tiny). ",
+            "start": 2116,
+            "end": 2253
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The best part? You can convert grams into moles using the **Periodic Table**:",
+            "start": 2255,
+            "end": 2332
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Find Oxygen on the table: its mass is about **16 grams**. That means $1 \\text{ mole of Oxygen atoms} = 16 \\text{ grams}$.",
+            "start": 2333,
+            "end": 2456
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2458,
+            "end": 2461
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The mole is accurately defined using Avogadro's constant (6.022 x 10^23) and connected correctly to atomic/molar mass from the periodic table.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "PROCEDURE",
+        "label": "Three-step stoichiometry problem-solving map",
+        "attributes": {},
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a reusable general procedure for converting from grams of a reactant to grams of a product via mole conversions and the mole ratio.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 4: The Master Plan (The Stoichiometry Map)",
+            "start": 2463,
+            "end": 2514
+          },
+          {
+            "id": "p33",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Whenever you get a stoichiometry problem, it almost always follows this **3-step journey**:",
+            "start": 2516,
+            "end": 2607
+          },
+          {
+            "id": "p34",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Grams of A} \\xrightarrow{\\text{Step 1}} \\text{Moles of A} \\xrightarrow{\\text{Step 2}} \\text{Moles of B} \\xrightarrow{\\text{Step 3}} \\text{Grams of B}$$",
+            "start": 2609,
+            "end": 2768
+          },
+          {
+            "id": "p35",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Grams to Moles:** Weigh your starting chemical and convert it to moles (using the Periodic Table).",
+            "start": 2770,
+            "end": 2873
+          },
+          {
+            "id": "p36",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Mole to Mole (The Recipe Bridge):** Use the numbers from your balanced equation to switch from Chemical A to Chemical B.",
+            "start": 2874,
+            "end": 2999
+          },
+          {
+            "id": "p37",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Moles to Grams:** Convert your new moles back into grams so you know what it weighs (using the Periodic Table again).",
+            "start": 3000,
+            "end": 3122
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3124,
+            "end": 3127
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The 3-step sequence (mass A -> moles A -> moles B -> mass B) accurately outlines the standard algorithmic pathway for mass-mass stoichiometry calculations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked mass-to-mass calculation of water production from oxygen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5",
+          "s6"
+        ],
+        "rationale": "Walks through a complete calculation determining the mass of water formed from 32 grams of oxygen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Let's Do a Real Example Together!",
+            "start": 3129,
+            "end": 3166
+          },
+          {
+            "id": "p40",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Question:** How many grams of water ($\\text{H}_2\\text{O}$) can you make from **32 grams of Oxygen gas ($\\text{O}_2$)**?",
+            "start": 3168,
+            "end": 3289
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**The Recipe:** ",
+            "start": 3291,
+            "end": 3307
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2\\text{H}_2 + 1\\text{O}_2 \\rightarrow 2\\text{H}_2\\text{O}$$",
+            "start": 3308,
+            "end": 3369
+          },
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### **Step 1: Convert Grams of $\\text{O}_2$ to Moles of $\\text{O}_2$**",
+            "start": 3371,
+            "end": 3442
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* One Oxygen atom is 16g. Since $\\text{O}_2$ has two, the molar mass is $16 \\times 2 = 32\\text{ g/mol}$.",
+            "start": 3443,
+            "end": 3547
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* You have 32 grams:",
+            "start": 3548,
+            "end": 3568
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\frac{32\\text{ g}}{32\\text{ g/mol}} = \\mathbf{1\\text{ mole of } O_2}$$",
+            "start": 3569,
+            "end": 3641
+          },
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### **Step 2: Use the Recipe (Mole Ratio)**",
+            "start": 3643,
+            "end": 3687
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Look at the coefficients in the reaction:",
+            "start": 3688,
+            "end": 3731
+          },
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  * For every **$1\\text{ O}_2$**, you produce **$2\\text{ H}_2\\text{O}$**.",
+            "start": 3732,
+            "end": 3805
+          },
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* So, if you have $1\\text{ mole of } \\text{O}_2$, you will make:",
+            "start": 3806,
+            "end": 3870
+          },
+          {
+            "id": "p51",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$1 \\times 2 = \\mathbf{2\\text{ moles of } H_2O}$$",
+            "start": 3871,
+            "end": 3920
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### **Step 3: Convert Moles of $\\text{H}_2\\text{O}$ to Grams**",
+            "start": 3922,
+            "end": 3985
+          },
+          {
+            "id": "p53",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Let’s find the weight of 1 mole of water using the Periodic Table:",
+            "start": 3986,
+            "end": 4054
+          },
+          {
+            "id": "p54",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  * $\\text{Hydrogen} = 1\\text{ g} \\times 2 = 2\\text{ g}$",
+            "start": 4055,
+            "end": 4111
+          },
+          {
+            "id": "p55",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  * $\\text{Oxygen} = 16\\text{ g}$",
+            "start": 4112,
+            "end": 4145
+          },
+          {
+            "id": "p56",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  * Water ($\\text{H}_2\\text{O}$) weighs $2 + 16 = 18\\text{ g/mol}$.",
+            "start": 4146,
+            "end": 4213
+          },
+          {
+            "id": "p57",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Since you made 2 moles:",
+            "start": 4214,
+            "end": 4239
+          },
+          {
+            "id": "p58",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2\\text{ moles} \\times 18\\text{ g/mol} = \\mathbf{36\\text{ grams of water!}}$$",
+            "start": 4240,
+            "end": 4318
+          },
+          {
+            "id": "p59",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Answer:** 32 grams of oxygen will give you 36 grams of water.",
+            "start": 4320,
+            "end": 4383
+          },
+          {
+            "id": "p60",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4385,
+            "end": 4388
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations, molar masses (32 g/mol for O2, 18 g/mol for H2O), mole ratios (1:2), and the final result of 36 grams of water are mathematically and scientifically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary checklist and problem-solving tips",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a concluding checklist of tips and study strategies for approaching stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p62",
+              "quote": "You can't bake without an accurate recipe."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p61",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Summary Checklist for Success:",
+            "start": 4390,
+            "end": 4424
+          },
+          {
+            "id": "p62",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Always balance your equation first.** You can't bake without an accurate recipe.",
+            "start": 4425,
+            "end": 4510
+          },
+          {
+            "id": "p63",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Convert to moles.** You cannot cross from one chemical to another using grams. Moles are the only universal bridge!",
+            "start": 4511,
+            "end": 4631
+          },
+          {
+            "id": "p64",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Cancel your units.** When writing your math out, make sure the units on top and bottom cancel out. ",
+            "start": 4632,
+            "end": 4736
+          },
+          {
+            "id": "p65",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Does this make the concept feel a little more approachable?",
+            "start": 4738,
+            "end": 4797
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The tips accurately highlight fundamental requirements in stoichiometry: starting with a balanced equation, converting masses through moles, and checking unit cancellations.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\run-001-003-5fd323407369.json",
+    "original_sha256": "cdffdd7201c591a3059ef32dbe9de08cc93fd20026c52c01e4d3b4f1eb76b57e",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 65,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 65,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "everyday": 5,
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

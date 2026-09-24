@@ -1,0 +1,1222 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "af15a0642638d01724b13ecc3cda3cea941f3c7942f1b539fa7892caa1cb1cfc",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10"
+      ],
+      "reason": "The text directly and comprehensively explains stoichiometry, covering its definition, balanced chemical equations, mole ratios, calculation procedures, a worked example, limiting reactants, yields, tips, and an everyday analogy.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Scope of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Chemical Equations and Mole Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "The Mole Concept in Stoichiometry"
+      },
+      {
+        "id": "s4",
+        "label": "Stoichiometry Calculation Procedure"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Stoichiometry Calculations"
+      },
+      {
+        "id": "s6",
+        "label": "Limiting and Excess Reactants"
+      },
+      {
+        "id": "s7",
+        "label": "Theoretical and Percent Yield"
+      },
+      {
+        "id": "s8",
+        "label": "Problem-Solving Strategies"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and Scope of Stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as quantitative relationships in chemical reactions and explains what practical questions it answers.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Stoichiometry: A Complete Guide",
+            "start": 0,
+            "end": 33
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## What is Stoichiometry?",
+            "start": 35,
+            "end": 60
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry (pronounced \"stoy-kee-OM-eh-tree\") is the branch of chemistry that deals with the **quantitative relationships** between reactants and products in a chemical reaction. Think of it as the \"math of chemistry\" — it helps us answer questions like:",
+            "start": 62,
+            "end": 319
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- How much product will I get?",
+            "start": 321,
+            "end": 351
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- How much reactant do I need?",
+            "start": 352,
+            "end": 382
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Will I have leftover materials?",
+            "start": 383,
+            "end": 416
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 418,
+            "end": 421
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines stoichiometry and its scope in answering quantitative chemical reaction questions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Balanced Chemical Equations as the Foundation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why balanced chemical equations are essential for stoichiometry based on the Law of Conservation of Mass and demonstrates how coefficients provide mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## The Foundation: Balanced Equations",
+            "start": 423,
+            "end": 460
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Before doing any stoichiometry, you need a **balanced chemical equation**. This is crucial because of the **Law of Conservation of Mass** — matter cannot be created or destroyed.",
+            "start": 462,
+            "end": 640
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Example:**",
+            "start": 642,
+            "end": 654
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 655,
+            "end": 687
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This tells us:",
+            "start": 689,
+            "end": 703
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 molecules of hydrogen react with 1 molecule of oxygen",
+            "start": 704,
+            "end": 761
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- to produce 2 molecules of water",
+            "start": 762,
+            "end": 795
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The coefficients (2, 1, 2) give us **mole ratios** — the key to all stoichiometry calculations.",
+            "start": 797,
+            "end": 892
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 894,
+            "end": 897
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately connects the requirement for balanced equations to the Law of Conservation of Mass and describes how reaction coefficients establish mole ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The Mole Concept and Mole Ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the definition of a mole as chemistry's counting unit and demonstrates how balanced equation coefficients translate to mole relationships.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Key Concept: The Mole",
+            "start": 899,
+            "end": 923
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The **mole** is chemistry's counting unit (like \"dozen\" = 12, \"mole\" = 6.022 × 10²³ particles).",
+            "start": 925,
+            "end": 1020
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry works because coefficients in a balanced equation represent **mole ratios**, not just molecule ratios.",
+            "start": 1022,
+            "end": 1138
+          },
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "So in $2H_2 + O_2 \\rightarrow 2H_2O$:",
+            "start": 1140,
+            "end": 1177
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 moles H₂ react with 1 mole O₂ to give 2 moles H₂O",
+            "start": 1178,
+            "end": 1231
+          },
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1233,
+            "end": 1236
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines the mole (including Avogadro's number) and explains its role in stoichiometry calculations via mole ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Stoichiometry Problem-Solving Roadmap",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a reusable step-by-step conversion pathway and procedure for solving mass-to-mass stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## The Stoichiometry \"Roadmap\"",
+            "start": 1238,
+            "end": 1268
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Most problems follow this path:",
+            "start": 1270,
+            "end": 1301
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 1303,
+            "end": 1306
+          },
+          {
+            "id": "p26",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "Grams (A) → Moles (A) → Moles (B) → Grams (B)",
+            "start": 1307,
+            "end": 1352
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 1353,
+            "end": 1356
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Step-by-step process:**",
+            "start": 1358,
+            "end": 1383
+          },
+          {
+            "id": "p29",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Convert given quantity to moles** (using molar mass)",
+            "start": 1385,
+            "end": 1442
+          },
+          {
+            "id": "p30",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Use mole ratio** from balanced equation to switch substances",
+            "start": 1443,
+            "end": 1508
+          },
+          {
+            "id": "p31",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **Convert moles back to desired unit** (grams, liters, particles, etc.)",
+            "start": 1509,
+            "end": 1583
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1585,
+            "end": 1588
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately maps the standard stoichiometry conversion chain: grams to moles, mole ratio conversion, and moles to target unit.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked Example: Gram-to-Gram Water Formation",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Works through a complete numerical problem calculating the mass of water produced from a given mass of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Worked Example",
+            "start": 1590,
+            "end": 1607
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Question:** How many grams of water are produced when 4 grams of H₂ react completely with excess O₂?",
+            "start": 1609,
+            "end": 1711
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Reaction:** $2H_2 + O_2 \\rightarrow 2H_2O$",
+            "start": 1713,
+            "end": 1757
+          },
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Step 1: Convert grams of H₂ to moles**",
+            "start": 1759,
+            "end": 1799
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$4 \\text{ g H}_2 \\times \\frac{1 \\text{ mol H}_2}{2 \\text{ g H}_2} = 2 \\text{ mol H}_2$$",
+            "start": 1800,
+            "end": 1888
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Step 2: Use mole ratio to find moles of H₂O**",
+            "start": 1890,
+            "end": 1937
+          },
+          {
+            "id": "p39",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2 \\text{ mol H}_2 \\times \\frac{2 \\text{ mol H}_2O}{2 \\text{ mol H}_2} = 2 \\text{ mol H}_2O$$",
+            "start": 1938,
+            "end": 2032
+          },
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Step 3: Convert moles of H₂O to grams**",
+            "start": 2034,
+            "end": 2075
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2 \\text{ mol H}_2O \\times \\frac{18 \\text{ g H}_2O}{1 \\text{ mol H}_2O} = 36 \\text{ g H}_2O$$",
+            "start": 2076,
+            "end": 2170
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Answer: 36 grams of water** ✅",
+            "start": 2172,
+            "end": 2203
+          },
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2205,
+            "end": 2208
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations, unit cancellations, molar masses, and the final answer (36 g H2O) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Limiting and Excess Reactants",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Defines what a limiting reactant and an excess reactant are in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Important Related Concepts",
+            "start": 2210,
+            "end": 2239
+          },
+          {
+            "id": "p45",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. **Limiting Reactant**",
+            "start": 2241,
+            "end": 2269
+          },
+          {
+            "id": "p46",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The reactant that runs out first — it *limits* how much product can form. The other reactant is \"in excess.\"",
+            "start": 2270,
+            "end": 2378
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines limiting and excess reactants.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Theoretical Yield",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Defines theoretical yield as the maximum possible product calculated via stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. **Theoretical Yield**",
+            "start": 2380,
+            "end": 2408
+          },
+          {
+            "id": "p48",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The maximum amount of product possible (calculated using stoichiometry).",
+            "start": 2409,
+            "end": 2481
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines theoretical yield.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Percent Yield",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Defines percent yield and states its mathematical formula comparing actual yield to theoretical yield.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. **Percent Yield**",
+            "start": 2483,
+            "end": 2507
+          },
+          {
+            "id": "p50",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Compares actual yield (from lab) to theoretical yield:",
+            "start": 2508,
+            "end": 2562
+          },
+          {
+            "id": "p51",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\% \\text{Yield} = \\frac{\\text{Actual Yield}}{\\text{Theoretical Yield}} \\times 100$$",
+            "start": 2563,
+            "end": 2648
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2650,
+            "end": 2653
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the relationship and formula for calculating percent yield.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Tips for Solving Stoichiometry Problems",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Provides a list of best practices, strategies, and checks for students when tackling stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p53",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Quick Tips for Students",
+            "start": 2655,
+            "end": 2681
+          },
+          {
+            "id": "p54",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "✅ **Always balance the equation first**",
+            "start": 2683,
+            "end": 2722
+          },
+          {
+            "id": "p55",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "✅ **Convert everything to moles before comparing substances**",
+            "start": 2723,
+            "end": 2784
+          },
+          {
+            "id": "p56",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "✅ **Use dimensional analysis** (unit conversion chains) to avoid mistakes",
+            "start": 2785,
+            "end": 2858
+          },
+          {
+            "id": "p57",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "✅ **Check units** at each step — they should cancel out properly",
+            "start": 2859,
+            "end": 2923
+          },
+          {
+            "id": "p58",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "✅ **Watch for limiting reactant problems** — calculate product from BOTH reactants and pick the smaller answer",
+            "start": 2924,
+            "end": 3034
+          },
+          {
+            "id": "p59",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3036,
+            "end": 3039
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All tips represent scientifically sound and standard problem-solving strategies for stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "ANALOGY",
+        "label": "Sandwich Recipe Analogy for Limiting Reactants",
+        "attributes": {},
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Uses a cross-domain comparison of making sandwiches from bread and cheese to explain the limiting reactant concept.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p61",
+              "quote": "Think of a recipe for making sandwiches:"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p60",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Analogy to Remember",
+            "start": 3041,
+            "end": 3063
+          },
+          {
+            "id": "p61",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Think of a recipe for making sandwiches:",
+            "start": 3065,
+            "end": 3105
+          },
+          {
+            "id": "p62",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> 2 bread slices + 1 cheese slice → 1 sandwich",
+            "start": 3106,
+            "end": 3152
+          },
+          {
+            "id": "p63",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "If you have 10 bread slices and 3 cheese slices, cheese is your \"limiting reactant\" — you can only make 3 sandwiches, even though you have enough bread for 5!",
+            "start": 3154,
+            "end": 3312
+          },
+          {
+            "id": "p64",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry works exactly the same way, just with atoms and molecules instead of sandwiches. 🥪⚗️",
+            "start": 3314,
+            "end": 3412
+          },
+          {
+            "id": "p65",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Would you like me to walk through a practice problem together, or explain limiting reactants in more depth?",
+            "start": 3414,
+            "end": 3521
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately maps the stoichiometry concept of limiting reactants to an everyday recipe analogy.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\run-001-004-cfec59f0ab1f.json",
+    "original_sha256": "fe9f07addc28b343f9f56ddb514e35ebb1100342ad6fe1b350c6aaf99ed76332",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 10,
+    "substantive_content_units": 10,
+    "total_passages": 65,
+    "content_unit_kinds": {
+      "CONCEPT": 6,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1,
+      "ANALOGY": 1
+    },
+    "nested_passages": 65,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "none": 9,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 10
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

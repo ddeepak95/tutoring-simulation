@@ -1,0 +1,2413 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "b27227e2618fccb31f631cf921c2a02619a7a75f1c982e7a293a37c21aca0d20",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12",
+        "u13"
+      ],
+      "reason": "The entire response directly and thoroughly explains stoichiometry, covering chemical equations, mole ratios, molar mass, calculation pathways, a worked example, dimensional analysis, limiting reactants, common mistakes, and summary recaps.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and Definition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Equations and Mole Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "The Mole and Molar Mass"
+      },
+      {
+        "id": "s4",
+        "label": "Stoichiometric Calculation Methods and Worked Example"
+      },
+      {
+        "id": "s5",
+        "label": "Limiting and Excess Reactants"
+      },
+      {
+        "id": "s6",
+        "label": "Common Mistakes and Summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as using balanced chemical equations to determine reactant and product amounts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Stoichiometry: The Chemistry of “How Much?”",
+            "start": 0,
+            "end": 46
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Stoichiometry** is the part of chemistry that uses a balanced chemical equation to calculate how much of each substance reacts or is produced.",
+            "start": 48,
+            "end": 192
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry is chemically standard and accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Baking Recipe Analogy for Chemical Equations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses a cookie recipe comparison to introduce the concept of fixed stoichiometric ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "- A recipe might say: **2 eggs + 1 cup flour → 12 cookies**"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "It is like using a recipe:",
+            "start": 194,
+            "end": 220
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- A recipe might say: **2 eggs + 1 cup flour → 12 cookies**",
+            "start": 222,
+            "end": 281
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- A chemical equation might say: **2 molecules of hydrogen + 1 molecule of oxygen → 2 molecules of water**",
+            "start": 282,
+            "end": 388
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The numbers in front of substances tell us the required ratios.",
+            "start": 390,
+            "end": 453
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 455,
+            "end": 458
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy correctly represents stoichiometric coefficients as recipe-like proportion ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Balanced Chemical Equations and Mole Ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains how coefficients in a balanced chemical equation establish the mole ratios of reactants and products, using water formation as an illustration.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 1. Start with a Balanced Chemical Equation",
+            "start": 460,
+            "end": 505
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For example:",
+            "start": 507,
+            "end": 519
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 521,
+            "end": 523
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 524,
+            "end": 552
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 553,
+            "end": 555
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This means:",
+            "start": 557,
+            "end": 568
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 molecules (or moles) of hydrogen gas react with",
+            "start": 570,
+            "end": 621
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 molecule (or mole) of oxygen gas to make",
+            "start": 622,
+            "end": 666
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 molecules (or moles) of water.",
+            "start": 667,
+            "end": 701
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "So the mole ratio is:",
+            "start": 703,
+            "end": 724
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 726,
+            "end": 728
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\text{ mol } H_2 : 1 \\text{ mol } O_2 : 2 \\text{ mol } H_2O",
+            "start": 729,
+            "end": 790
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 791,
+            "end": 793
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The coefficients—**2, 1, and 2**—are essential in stoichiometry.",
+            "start": 795,
+            "end": 859
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation, its mole ratio (2 mol H2 : 1 mol O2 : 2 mol H2O), and the interpretation of stoichiometric coefficients are fully accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CAVEAT",
+        "label": "Distinguishing Subscripts from Coefficients",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Warns against confusing molecular formula subscripts with mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> Never use the small numbers inside chemical formulas as mole ratios.  ",
+            "start": 861,
+            "end": 933
+          },
+          {
+            "id": "p23",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> For example, the 2 in \\(H_2\\) means each hydrogen molecule has two hydrogen atoms. It does not mean “2 moles.”",
+            "start": 934,
+            "end": 1046
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1048,
+            "end": 1051
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly clarifies that subscripts denote atom counts per molecule, not mole ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "The Mole as Chemistry's Counting Unit",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why moles are used to count microscopic particles and connects the mole to Avogadro's number and balanced equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 2. The Mole: Chemistry’s Counting Unit",
+            "start": 1053,
+            "end": 1094
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Atoms and molecules are too tiny to count individually, so chemists use the **mole**.",
+            "start": 1096,
+            "end": 1181
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1183,
+            "end": 1185
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mole} = 6.022 \\times 10^{23} \\text{ particles}",
+            "start": 1186,
+            "end": 1241
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1242,
+            "end": 1244
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "A mole can refer to atoms, molecules, ions, or formula units.",
+            "start": 1246,
+            "end": 1307
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For stoichiometry, moles are important because balanced equations compare substances in **moles**.",
+            "start": 1309,
+            "end": 1407
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1409,
+            "end": 1412
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Avogadro's number and the conceptual rationale for using the mole are accurately explained.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Molar Mass and Conversions Between Grams and Moles",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the role of molar mass in bridging laboratory mass measurements and mole amounts, illustrated by the molar mass of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 3. Molar Mass Connects Grams and Moles",
+            "start": 1414,
+            "end": 1455
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "In a laboratory, substances are usually measured in grams, not moles. To convert between grams and moles, use **molar mass**.",
+            "start": 1457,
+            "end": 1582
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1584,
+            "end": 1586
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{moles} = \\frac{\\text{mass in grams}}{\\text{molar mass in g/mol}}",
+            "start": 1587,
+            "end": 1657
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1658,
+            "end": 1660
+          },
+          {
+            "id": "p38",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For example, the molar mass of water, \\(H_2O\\), is:",
+            "start": 1662,
+            "end": 1713
+          },
+          {
+            "id": "p39",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1715,
+            "end": 1717
+          },
+          {
+            "id": "p40",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "(2 \\times 1.01) + 16.00 = 18.02 \\text{ g/mol}",
+            "start": 1718,
+            "end": 1763
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1764,
+            "end": 1766
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "So:",
+            "start": 1768,
+            "end": 1771
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1773,
+            "end": 1775
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } H_2O = 18.02 \\text{ g}",
+            "start": 1776,
+            "end": 1813
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1814,
+            "end": 1816
+          },
+          {
+            "id": "p46",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1818,
+            "end": 1821
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The conversion formula and the calculation for the molar mass of water (18.02 g/mol) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "PROCEDURE",
+        "label": "The Core Stoichiometric Calculation Pathway",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents the standard multi-step sequence (grams to moles to moles to grams) for solving stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# The Main Stoichiometry Pathway",
+            "start": 1823,
+            "end": 1855
+          },
+          {
+            "id": "p48",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Most stoichiometry questions follow this pattern:",
+            "start": 1857,
+            "end": 1906
+          },
+          {
+            "id": "p49",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1908,
+            "end": 1910
+          },
+          {
+            "id": "p50",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{grams} \\rightarrow \\text{moles} \\rightarrow \\text{moles} \\rightarrow \\text{grams}}",
+            "start": 1911,
+            "end": 2006
+          },
+          {
+            "id": "p51",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2007,
+            "end": 2009
+          },
+          {
+            "id": "p52",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "More specifically:",
+            "start": 2011,
+            "end": 2029
+          },
+          {
+            "id": "p53",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Balance the equation.**",
+            "start": 2031,
+            "end": 2059
+          },
+          {
+            "id": "p54",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Convert the given amount to moles.**",
+            "start": 2060,
+            "end": 2101
+          },
+          {
+            "id": "p55",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **Use the mole ratio from the balanced equation.**",
+            "start": 2102,
+            "end": 2155
+          },
+          {
+            "id": "p56",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **Convert the answer into the unit requested**, often grams.",
+            "start": 2156,
+            "end": 2219
+          },
+          {
+            "id": "p57",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2221,
+            "end": 2224
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The 4-step sequence (balance, convert to moles, mole ratio, convert to target units) is the standard stoichiometry algorithm.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Calculating Grams of Water Formed",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates the complete 4-step calculation to find grams of water formed from 4.00 g of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p58",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Example: How Many Grams of Water Form?",
+            "start": 2226,
+            "end": 2267
+          },
+          {
+            "id": "p59",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Question:",
+            "start": 2269,
+            "end": 2278
+          },
+          {
+            "id": "p60",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> How many grams of water are produced when 4.00 g of hydrogen gas reacts completely with oxygen?",
+            "start": 2280,
+            "end": 2377
+          },
+          {
+            "id": "p61",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 1: Write the balanced equation",
+            "start": 2379,
+            "end": 2418
+          },
+          {
+            "id": "p62",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2420,
+            "end": 2422
+          },
+          {
+            "id": "p63",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 2423,
+            "end": 2451
+          },
+          {
+            "id": "p64",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2452,
+            "end": 2454
+          },
+          {
+            "id": "p65",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 2: Convert grams of hydrogen to moles",
+            "start": 2456,
+            "end": 2502
+          },
+          {
+            "id": "p66",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Molar mass of \\(H_2\\):",
+            "start": 2504,
+            "end": 2526
+          },
+          {
+            "id": "p67",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2528,
+            "end": 2530
+          },
+          {
+            "id": "p68",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2.02 \\text{ g/mol}",
+            "start": 2531,
+            "end": 2549
+          },
+          {
+            "id": "p69",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2550,
+            "end": 2552
+          },
+          {
+            "id": "p70",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2554,
+            "end": 2556
+          },
+          {
+            "id": "p71",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "4.00 \\text{ g } H_2 \\times \\frac{1 \\text{ mol } H_2}{2.02 \\text{ g } H_2}",
+            "start": 2557,
+            "end": 2630
+          },
+          {
+            "id": "p72",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= 1.98 \\text{ mol } H_2",
+            "start": 2631,
+            "end": 2654
+          },
+          {
+            "id": "p73",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2655,
+            "end": 2657
+          },
+          {
+            "id": "p74",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 3: Use the mole ratio",
+            "start": 2659,
+            "end": 2689
+          },
+          {
+            "id": "p75",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "From the balanced equation:",
+            "start": 2691,
+            "end": 2718
+          },
+          {
+            "id": "p76",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2720,
+            "end": 2722
+          },
+          {
+            "id": "p77",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\text{ mol } H_2 \\rightarrow 2 \\text{ mol } H_2O",
+            "start": 2723,
+            "end": 2773
+          },
+          {
+            "id": "p78",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2774,
+            "end": 2776
+          },
+          {
+            "id": "p79",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The ratio is:",
+            "start": 2778,
+            "end": 2791
+          },
+          {
+            "id": "p80",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2793,
+            "end": 2795
+          },
+          {
+            "id": "p81",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{2 \\text{ mol } H_2O}{2 \\text{ mol } H_2}",
+            "start": 2796,
+            "end": 2842
+          },
+          {
+            "id": "p82",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2843,
+            "end": 2845
+          },
+          {
+            "id": "p83",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2847,
+            "end": 2849
+          },
+          {
+            "id": "p84",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1.98 \\text{ mol } H_2 \\times \\frac{2 \\text{ mol } H_2O}{2 \\text{ mol } H_2}",
+            "start": 2850,
+            "end": 2925
+          },
+          {
+            "id": "p85",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= 1.98 \\text{ mol } H_2O",
+            "start": 2926,
+            "end": 2950
+          },
+          {
+            "id": "p86",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2951,
+            "end": 2953
+          },
+          {
+            "id": "p87",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Step 4: Convert moles of water to grams",
+            "start": 2955,
+            "end": 2998
+          },
+          {
+            "id": "p88",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Molar mass of water:",
+            "start": 3000,
+            "end": 3020
+          },
+          {
+            "id": "p89",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3022,
+            "end": 3024
+          },
+          {
+            "id": "p90",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "18.02 \\text{ g/mol}",
+            "start": 3025,
+            "end": 3044
+          },
+          {
+            "id": "p91",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3045,
+            "end": 3047
+          },
+          {
+            "id": "p92",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3049,
+            "end": 3051
+          },
+          {
+            "id": "p93",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1.98 \\text{ mol } H_2O \\times \\frac{18.02 \\text{ g } H_2O}{1 \\text{ mol } H_2O}",
+            "start": 3052,
+            "end": 3131
+          },
+          {
+            "id": "p94",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= 35.7 \\text{ g } H_2O",
+            "start": 3132,
+            "end": 3154
+          },
+          {
+            "id": "p95",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3155,
+            "end": 3157
+          },
+          {
+            "id": "p96",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Final Answer",
+            "start": 3159,
+            "end": 3175
+          },
+          {
+            "id": "p97",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3177,
+            "end": 3179
+          },
+          {
+            "id": "p98",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{35.7 \\text{ g of water}}",
+            "start": 3180,
+            "end": 3211
+          },
+          {
+            "id": "p99",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3212,
+            "end": 3214
+          },
+          {
+            "id": "p100",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3216,
+            "end": 3219
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All steps and calculations (4.00 g / 2.02 g/mol = 1.98 mol H2; 1:1 ratio yields 1.98 mol H2O; 1.98 mol * 18.02 g/mol = 35.7 g H2O) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "PROCEDURE",
+        "label": "Dimensional Analysis Setup for Stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Shows how to chain conversion factors in a single line so units systematically cancel.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p101",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Dimensional Analysis: Let Units Guide You",
+            "start": 3221,
+            "end": 3264
+          },
+          {
+            "id": "p102",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "A useful way to set up stoichiometry is to write conversion factors so that units cancel.",
+            "start": 3266,
+            "end": 3355
+          },
+          {
+            "id": "p103",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3357,
+            "end": 3359
+          },
+          {
+            "id": "p104",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "4.00 \\text{ g } H_2",
+            "start": 3360,
+            "end": 3379
+          },
+          {
+            "id": "p105",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\times",
+            "start": 3380,
+            "end": 3386
+          },
+          {
+            "id": "p106",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{1 \\text{ mol } H_2}{2.02 \\text{ g } H_2}",
+            "start": 3387,
+            "end": 3433
+          },
+          {
+            "id": "p107",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\times",
+            "start": 3434,
+            "end": 3440
+          },
+          {
+            "id": "p108",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{2 \\text{ mol } H_2O}{2 \\text{ mol } H_2}",
+            "start": 3441,
+            "end": 3487
+          },
+          {
+            "id": "p109",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\times",
+            "start": 3488,
+            "end": 3494
+          },
+          {
+            "id": "p110",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{18.02 \\text{ g } H_2O}{1 \\text{ mol } H_2O}",
+            "start": 3495,
+            "end": 3544
+          },
+          {
+            "id": "p111",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3545,
+            "end": 3547
+          },
+          {
+            "id": "p112",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Everything cancels except grams of water:",
+            "start": 3549,
+            "end": 3590
+          },
+          {
+            "id": "p113",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3592,
+            "end": 3594
+          },
+          {
+            "id": "p114",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{g } H_2 \\rightarrow \\text{mol } H_2 \\rightarrow \\text{mol } H_2O \\rightarrow \\text{g } H_2O",
+            "start": 3595,
+            "end": 3692
+          },
+          {
+            "id": "p115",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3693,
+            "end": 3695
+          },
+          {
+            "id": "p116",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This helps prevent mistakes.",
+            "start": 3697,
+            "end": 3725
+          },
+          {
+            "id": "p117",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3727,
+            "end": 3730
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The unit-cancellation setup is mathematically and chemically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "CONCEPT",
+        "label": "Concept of Limiting Reactant",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines what a limiting reactant is and explains that it dictates the maximum possible product formed.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p118",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Limiting Reactant",
+            "start": 3732,
+            "end": 3751
+          },
+          {
+            "id": "p119",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Sometimes you are given amounts of **two reactants**. One may run out first. This substance is called the **limiting reactant**.",
+            "start": 3753,
+            "end": 3881
+          },
+          {
+            "id": "p120",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The limiting reactant determines the maximum amount of product that can form.",
+            "start": 3883,
+            "end": 3960
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines limiting reactant and its governing role over theoretical yield.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Determining the Limiting and Excess Reactants",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Works through a specific reaction scenario comparing 2 moles of H2 and 2 moles of O2 to identify the limiting reactant and excess reactant.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p121",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For example:",
+            "start": 3962,
+            "end": 3974
+          },
+          {
+            "id": "p122",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3976,
+            "end": 3978
+          },
+          {
+            "id": "p123",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 3979,
+            "end": 4007
+          },
+          {
+            "id": "p124",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4008,
+            "end": 4010
+          },
+          {
+            "id": "p125",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "If you have:",
+            "start": 4012,
+            "end": 4024
+          },
+          {
+            "id": "p126",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 moles of \\(H_2\\)",
+            "start": 4026,
+            "end": 4046
+          },
+          {
+            "id": "p127",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 moles of \\(O_2\\)",
+            "start": 4047,
+            "end": 4067
+          },
+          {
+            "id": "p128",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The equation needs only 1 mole of \\(O_2\\) for every 2 moles of \\(H_2\\). Therefore:",
+            "start": 4069,
+            "end": 4151
+          },
+          {
+            "id": "p129",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 moles of \\(H_2\\) use 1 mole of \\(O_2\\)",
+            "start": 4153,
+            "end": 4195
+          },
+          {
+            "id": "p130",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- You have 2 moles of \\(O_2\\), so 1 mole is left over",
+            "start": 4196,
+            "end": 4249
+          },
+          {
+            "id": "p131",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Hydrogen runs out first",
+            "start": 4250,
+            "end": 4275
+          },
+          {
+            "id": "p132",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Therefore, \\(H_2\\) is the **limiting reactant**.",
+            "start": 4277,
+            "end": 4325
+          },
+          {
+            "id": "p133",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The leftover reactant is called the **excess reactant**.",
+            "start": 4327,
+            "end": 4383
+          },
+          {
+            "id": "p134",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4385,
+            "end": 4388
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly deduces that 2 moles of H2 will consume 1 mole of O2, leaving 1 mole of O2 in excess, correctly identifying H2 as limiting.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u12",
+        "kind": "CAVEAT",
+        "label": "Common Stoichiometry Mistakes",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Details five frequent misconceptions and procedural errors students make in stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p135",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Common Stoichiometry Mistakes",
+            "start": 4390,
+            "end": 4421
+          },
+          {
+            "id": "p136",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Not balancing the equation first**  ",
+            "start": 4423,
+            "end": 4464
+          },
+          {
+            "id": "p137",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Always balance before calculating mole ratios.",
+            "start": 4465,
+            "end": 4514
+          },
+          {
+            "id": "p138",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Using grams directly in the mole ratio**  ",
+            "start": 4516,
+            "end": 4563
+          },
+          {
+            "id": "p139",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Coefficients compare **moles**, not grams.",
+            "start": 4564,
+            "end": 4609
+          },
+          {
+            "id": "p140",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **Using subscripts instead of coefficients**  ",
+            "start": 4611,
+            "end": 4660
+          },
+          {
+            "id": "p141",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   In \\(2H_2 + O_2 \\rightarrow 2H_2O\\), use the coefficients 2, 1, and 2.",
+            "start": 4661,
+            "end": 4734
+          },
+          {
+            "id": "p142",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **Forgetting molar mass**  ",
+            "start": 4736,
+            "end": 4766
+          },
+          {
+            "id": "p143",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   You usually need molar mass to change grams into moles or moles into grams.",
+            "start": 4767,
+            "end": 4845
+          },
+          {
+            "id": "p144",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "5. **Reversing a conversion factor**  ",
+            "start": 4847,
+            "end": 4885
+          },
+          {
+            "id": "p145",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Make sure unwanted units cancel.",
+            "start": 4886,
+            "end": 4921
+          },
+          {
+            "id": "p146",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4923,
+            "end": 4926
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All five listed pitfalls are accurate warnings for high school stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u13",
+        "kind": "STUDY_SUPPORT",
+        "label": "Quick Summary of Stoichiometry",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Summarizes the definition, general calculation pathway, and overarching recipe analogy.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p157",
+              "quote": "Think of the balanced equation as a recipe, and moles as the quantities needed to follow that recipe."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p147",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Quick Summary",
+            "start": 4928,
+            "end": 4944
+          },
+          {
+            "id": "p148",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry uses a balanced chemical equation to calculate amounts of substances in a reaction.",
+            "start": 4946,
+            "end": 5043
+          },
+          {
+            "id": "p149",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The key sequence is:",
+            "start": 5045,
+            "end": 5065
+          },
+          {
+            "id": "p150",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 5067,
+            "end": 5069
+          },
+          {
+            "id": "p151",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{Balance} \\rightarrow \\text{Convert to moles} \\rightarrow \\text{Use mole ratio} \\rightarrow \\text{Convert units}}",
+            "start": 5070,
+            "end": 5195
+          },
+          {
+            "id": "p152",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 5196,
+            "end": 5198
+          },
+          {
+            "id": "p153",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The most common pattern is:",
+            "start": 5200,
+            "end": 5227
+          },
+          {
+            "id": "p154",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 5229,
+            "end": 5231
+          },
+          {
+            "id": "p155",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{grams of A} \\rightarrow \\text{moles of A} \\rightarrow \\text{moles of B} \\rightarrow \\text{grams of B}}",
+            "start": 5232,
+            "end": 5347
+          },
+          {
+            "id": "p156",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 5348,
+            "end": 5350
+          },
+          {
+            "id": "p157",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Think of the balanced equation as a recipe, and moles as the quantities needed to follow that recipe.",
+            "start": 5352,
+            "end": 5453
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately consolidates the central stoichiometry workflow and conceptual model.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\run-001-001-69b66cb561b3.json",
+    "original_sha256": "ae0066acb3a4628a746431dfe9e7a6e97f34dc53ccbe068b646872efa5b99833",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 13,
+    "substantive_content_units": 13,
+    "total_passages": 157,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "ANALOGY": 1,
+      "CAVEAT": 2,
+      "PROCEDURE": 2,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 157,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 11,
+      "everyday": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 13
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

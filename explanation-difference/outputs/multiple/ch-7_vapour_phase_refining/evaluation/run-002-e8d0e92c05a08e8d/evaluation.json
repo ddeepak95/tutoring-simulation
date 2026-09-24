@@ -1,0 +1,146 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "aae2c19bf15b707dc871b0cd6c9998dbb4db5374e8e0474c49932f2dc5a3cd3e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "simple distillation of water",
+      "topic_match": "off_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2"
+      ],
+      "reason": "The requested topic is 'vapour phase refining' in Chemistry, which is a metallurgical purification technique in which an impure metal is converted into a volatile compound and then decomposed to yield pure metal (such as the Mond process for nickel or the Van Arkel process for titanium and zirconium). The response instead describes the physical phase changes of water and the simple distillation of salt water, which is completely off-topic.",
+      "major_task_failure": true
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Purported definition of vapour phase refining via water phase change"
+      },
+      {
+        "id": "s2",
+        "label": "Separation of salt water by evaporation and condensation"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of vapour phase refining as water evaporation and condensation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "The unit introduces the response and presents an erroneous conceptual definition claiming that heating liquid water to vapour and condensing it back to liquid is vapour phase refining.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "கொடுக்கப்பட்டுள்ள வினாவிற்கு விடை அளிக்கும் வகையில் விளக்கம் அளிக்கப்படுகிறது.",
+            "start": 0,
+            "end": 78
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "நீர்ம நிலையில் இருக்கும் நீர், வெப்பப்படுத்தும் போது ஆவி நிலையை அடைகிறது. இந்த ஆவி நிலையில் உள்ள நீரானது மீண்டும் நீர்ம நிலைக்கு மாறும் நிகழ்வு தான் ஆவி நிலைமை தூய்மையாக்கல் ஆகும். ",
+            "start": 80,
+            "end": 261
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "The content is not assessed for accuracy because the response is off-topic, explaining water evaporation and condensation instead of metallurgical vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Distillation of salt water as an illustrative example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "The unit provides an illustrative example using salt water to demonstrate separating water from salt by heating and cooling.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "உதாரணமாக, உப்பு நீரை எடுத்துக்கொள்வோம். உப்புநீரில் உப்பு மற்றும் நீர் ஆகிய இரண்டும் உள்ளன. இந்த உப்பு நீரை வெப்பப்படுத்தும் போது நீரானது ஆவியாகி விடும். ஆனால், உப்பு ஆவியாகாது. ஆவியாகி வெளியேறும் நீராவியை ஒரு குளிர்விக்கும் அமைப்பில் செலுத்தி குளிர்விக்கும் போது, மீண்டும் நீர்ம நிலைக்கு மாறுகிறது. இந்த நீரானது உப்பு இல்லாத தூய நீராகும். இவ்வாறு பிரித்தெடுக்கப்படும் நீரானது தூய்மையான நீர் ஆகும். இந்த முறையில் நடைபெறும் தூய்மையாக்கல் ஆவி நிலைமை தூய்மையாக்கல் எனப்படுகிறது.",
+            "start": 262,
+            "end": 737
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "The content is not assessed for accuracy because the response is off-topic, illustrating simple distillation of salt water rather than vapour phase refining.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\run-002-e8d0e92c05a08e8d.json",
+    "original_sha256": "9507e1f57d9c9f90339d1d933ab2c3003a7f7dada36f1ccef295adc57cbd36ac",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 2,
+    "substantive_content_units": 2,
+    "total_passages": 3,
+    "content_unit_kinds": {
+      "CONCEPT": 1,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 3,
+    "unique_subtopics": 2,
+    "contextualization": {
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "not_assessed_due_to_topic_mismatch": 2
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

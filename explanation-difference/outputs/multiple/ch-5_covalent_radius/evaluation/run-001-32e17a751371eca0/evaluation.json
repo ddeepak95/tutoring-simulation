@@ -1,0 +1,576 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "09e184d923acfcc0476be40b0ec840472b88f8e73c361cbb74a15c4e75cfc670",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response directly explains covalent radius, including its definition, formula, worked calculation examples, physical rationale, periodic trends, and key characteristics.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Calculation of Covalent Radius"
+      },
+      {
+        "id": "s2",
+        "label": "Physical Basis of Atomic Radius"
+      },
+      {
+        "id": "s3",
+        "label": "Periodic Trends of Covalent Radius"
+      },
+      {
+        "id": "s4",
+        "label": "Summary and Practice"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and formula of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines covalent radius as half the internuclear distance between identical atoms joined by a single covalent bond and provides an explanation and formula for computing it.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Covalent Radius",
+            "start": 0,
+            "end": 17
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Definition",
+            "start": 19,
+            "end": 32
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Covalent radius** is defined as **half the distance between the nuclei of two identical atoms that are joined together by a single covalent bond**.",
+            "start": 34,
+            "end": 183
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## A Simple Way to Picture It",
+            "start": 185,
+            "end": 214
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine two identical atoms bonded together, like in a chlorine molecule (Cl–Cl). If you measure the distance between the centers (nuclei) of the two chlorine atoms, and then divide that distance by 2, you get the covalent radius of chlorine.",
+            "start": 216,
+            "end": 458
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Covalent radius} = \\frac{\\text{Distance between nuclei of bonded atoms}}{2}$$",
+            "start": 460,
+            "end": 545
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and calculation formula for covalent radius are standard and scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Calculating the covalent radius of chlorine",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Provides a worked calculation of the covalent radius of chlorine from the experimental bond length of Cl2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Example:**",
+            "start": 547,
+            "end": 559
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- The bond length in a Cl₂ molecule is 198 pm (picometers)",
+            "start": 560,
+            "end": 618
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Covalent radius of Cl = 198/2 = **99 pm**",
+            "start": 619,
+            "end": 662
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Cl-Cl bond length (198 pm) and resulting covalent radius of Cl (99 pm) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Physical rationale for the covalent radius concept",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why covalent radius is defined via internuclear distance rather than direct boundary measurement due to diffuse electron clouds.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Why Do We Need This Concept?",
+            "start": 664,
+            "end": 695
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Atoms don't have a fixed, sharply defined boundary (electrons are spread out in probability clouds), so we can't measure the \"size\" of an atom directly like we would measure a ball. Instead, scientists measure the distance between two bonded atoms and use that to define atomic size.",
+            "start": 697,
+            "end": 980
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately explains that atoms lack sharp boundaries due to electron probability distributions, necessitating operational definitions of atomic size.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Periodic trends in covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Details the trends of covalent radius across periods and down groups in the periodic table along with physical explanations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Trends in the Periodic Table",
+            "start": 982,
+            "end": 1013
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Covalent radius follows predictable patterns:",
+            "start": 1015,
+            "end": 1060
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Direction | Trend | Reason |",
+            "start": 1062,
+            "end": 1092
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "separator",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|-----------|-------|--------|",
+            "start": 1093,
+            "end": 1123
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Across a period (left to right)** | Decreases | Nuclear charge increases, pulling electrons closer to the nucleus |",
+            "start": 1124,
+            "end": 1243
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Down a group (top to bottom)** | Increases | New electron shells are added, increasing the size |",
+            "start": 1244,
+            "end": 1345
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Periodic trends across periods (decrease due to increasing nuclear charge) and down groups (increase due to addition of shells) are accurately described.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Key points recap for covalent radius",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Summarizes key properties, scope, units of measurement, and applications of covalent radius.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Key Points to Remember",
+            "start": 1347,
+            "end": 1372
+          },
+          {
+            "id": "p19",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. It applies specifically to **covalently bonded** atoms (not ionic or metallic bonds)",
+            "start": 1374,
+            "end": 1461
+          },
+          {
+            "id": "p20",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. It's usually measured in **picometers (pm)** or **angstroms (Å)**",
+            "start": 1462,
+            "end": 1530
+          },
+          {
+            "id": "p21",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. It helps us compare and predict the relative sizes of atoms",
+            "start": 1531,
+            "end": 1593
+          },
+          {
+            "id": "p22",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. It's used to calculate bond lengths in different molecules",
+            "start": 1594,
+            "end": 1655
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All summary points regarding covalent radius are factually accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Quick check practice question on bromine covalent radius",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a practice question calculating the covalent radius of bromine from Br2 bond length, along with the correct answer and a polite concluding offer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Quick Check Question",
+            "start": 1657,
+            "end": 1680
+          },
+          {
+            "id": "p24",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "If the bond length between two identical bromine atoms (Br–Br) is 228 pm, what is the covalent radius of bromine?",
+            "start": 1681,
+            "end": 1794
+          },
+          {
+            "id": "p25",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Answer: 228 ÷ 2 = 114 pm)*",
+            "start": 1796,
+            "end": 1824
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Would you like me to explain how this compares to other types of atomic radii, like ionic or metallic radius?",
+            "start": 1826,
+            "end": 1935
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The practice question givens and calculation (228 pm / 2 = 114 pm) are factually and mathematically correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\run-001-32e17a751371eca0.json",
+    "original_sha256": "0a9193f174092157d01baf4dafd7c7337041b6c8e5bb1dcf808ff44974e6b730",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 26,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 2
+    },
+    "nested_passages": 26,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

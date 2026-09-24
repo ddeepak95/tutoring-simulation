@@ -1,0 +1,435 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "a61f0e0e68ce7bf9eb015a2b5755313952c782512cfd0c90e8340d5693f83d5d",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The text explains redox reactions in Tamil, covering their classical definition, electron-transfer definition, oxidizing and reducing agents, and multiple illustrative examples.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Classical Definition of Redox Reactions"
+      },
+      {
+        "id": "s2",
+        "label": "Electron Transfer Model of Redox Reactions"
+      },
+      {
+        "id": "s3",
+        "label": "Oxidizing and Reducing Agents"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and etymology of redox reactions",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the topic, breaks down the etymology (reduction + oxidation), and defines redox reactions as reactions where oxidation and reduction occur simultaneously.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "வணக்கம். இன்று நாம் ரெடாக்ஸ் வினைகளைப் பற்றி படிக்க போகிறோம். ரெடாக்ஸ் என்றால் என்ன? ரெடாக்ஸ் என்ற ஆங்கிலச் சொல் reduction (குறைப்பு) மற்றும் oxidation (ஆக்சிஜனேற்றம்) ஆகிய இரண்டு சொற்களின் கலவையாகும். ஒரு வேதிவினையில் ஒரு தனிமம் ஆக்சிஜனேற்றம் அடைவதும், மற்றொரு தனிமம் குறைப்பு அடைவதுமான வினைகள் ஒரே நேரத்தில் நடைபெறும் வினைகள் ரெடாக்ஸ் வினைகள் எனப்படும். ஒரு பொருள் ஆக்சிஜனேற்றம் அடையும் போது மற்றொரு பொருள் குறைப்பு அடைகிறது. ஆக்சிஜனேற்ற வினை, குறைப்பு வினை ஆகிய இரண்டும் ஒன்றாக நடைபெறும் வினை ரெடாக்ஸ் வினை எனவும் கூறலாம்.",
+            "start": 0,
+            "end": 525
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The etymology and foundational definition of redox reactions are correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Reduction of copper(II) oxide by hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Walks through the chemical equation between CuO and H2, identifying the reduction of copper and oxidation of hydrogen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இதை ஒரு உதாரணத்தின் மூலம் பார்ப்போம்.",
+            "start": 527,
+            "end": 564
+          },
+          {
+            "id": "p3",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CuO   +   H2   →   Cu  +  H2O",
+            "start": 566,
+            "end": 595
+          },
+          {
+            "id": "p4",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த வேதி வினையில் CuO வில் உள்ள காப்பர் ஆக்சிஜனுடன் இணைந்துள்ளது. இங்கு காப்பர் குறைக்கப்பட்டு தனிமமாகவும் ஹைட்ரஜன் ஆக்சிஜனேற்றம் அடைந்து நீராகவும் மாறுகிறது. இவ்வாறு ஒரே நேரத்தில் குறைப்பு மற்றும் ஆக்சிஜனேற்றம் நடைபெறுவதால் இது ஒரு ரெடாக்ஸ் வினையாகும்.",
+            "start": 597,
+            "end": 851
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction and the respective reduction of CuO and oxidation of H2 are correctly described.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Redox reactions in terms of electron transfer",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains oxidation as electron loss and reduction as electron gain occurring concurrently.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இன்னும் எளிமையாக சொல்ல வேண்டுமென்றால் எலக்ட்ரான் கொடுக்கப்படும் வினை ஆக்சிஜனேற்ற வினை என்றும், எலக்ட்ரான் பெறப்படும் வினை குறைப்பு வினை என்றும் அழைக்கப்படுகிறது. ஒரு வேதி வினையில் எலக்ட்ரான் கொடுக்கப்படுவதும், எலக்ட்ரான் பெறப்படுவதும் ஒரே சமயத்தில் நிகழ்வதால் அவை ரெடாக்ஸ் வினைகள் எனப்படுகின்றன.",
+            "start": 853,
+            "end": 1148
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The electron transfer definition of oxidation and reduction is standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Reaction between zinc and copper ions",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Demonstrates electron transfer in the reaction Zn + Cu2+ -> Zn2+ + Cu.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இதை விளங்கிக் கொள்ள மேலும் சில எடுத்துக்காட்டுகளைப் பார்ப்போம்.",
+            "start": 1150,
+            "end": 1213
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "Zn  +  Cu2+   →  Zn2+  +  Cu",
+            "start": 1215,
+            "end": 1243
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த வேதி வினையில் Zn, Zn2+ ஆக மாறுகிறது. அதாவது, Zn எலக்ட்ரான்களை இழந்து Zn2+ ஆக ஆக்சிஜனேற்றம் அடைகிறது. Cu2+  இரண்டு எலக்ட்ரான்களைப் பெற்று Cu ஆக குறைக்கப்படுகிறது. எனவே இது ஒரு ரெடாக்ஸ் வினையாகும்.",
+            "start": 1245,
+            "end": 1445
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The electron transfer roles for Zn oxidation and Cu2+ reduction are accurately identified.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Definition of reducing and oxidizing agents",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines reducing agents as electron donors and oxidizing agents as electron acceptors.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இதில் கவனிக்க வேண்டிய முக்கியமான விடயம் என்னவென்றால் எலக்ட்ரான்களை விட்டுக்கொடுக்கும் பொருள் ஒரு ரிட்யூசிங் ஏஜெண்டாகவும் (குறைப்புக் காரணி), எலக்ட்ரான்களை ஏற்கும் பொருள் ஆக்ஸிடைசிங் ஏஜெண்டாகவும் (ஆக்சிஜனேற்றக் காரணி) செயல்படுகிறது.",
+            "start": 1447,
+            "end": 1678
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definitions of oxidizing and reducing agents are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Formation of sodium chloride as a redox reaction",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2",
+          "s3"
+        ],
+        "rationale": "Works through the reaction 2Na + Cl2 -> 2NaCl using half-reactions and identifies the oxidizing and reducing agents, ending with concluding remarks.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இதைப் போலவே பல வேதி வினைகளை நாம் எடுத்துக்காட்டாக எடுத்துக் கொள்ள முடியும்.",
+            "start": 1680,
+            "end": 1755
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2Na   +   Cl2   →   2NaCl",
+            "start": 1757,
+            "end": 1782
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த வேதி வினையில்,",
+            "start": 1784,
+            "end": 1803
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2Na  →  2Na+ + 2e–  (ஆக்சிஜனேற்றம்)",
+            "start": 1805,
+            "end": 1840
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cl2 + 2e–  →  2Cl–  (குறைப்பு)",
+            "start": 1842,
+            "end": 1872
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்விரு வினைகளும் சேர்ந்தது ரெடாக்ஸ் வினையாகும்.",
+            "start": 1874,
+            "end": 1922
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இங்கு சோடியம் ஆக்சிஜனேற்றமடைந்து குளோரினுடன் இணைந்து சோடியம் குளோரைடைத் தருகிறது. ஆக்சிஜனேற்றம் அடைவதால் சோடியம் ரிட்யூசிங் ஏஜெண்டாகவும் (குறைப்புக் காரணி), குளோரின் ஆக்ஸிடைசிங் ஏஜெண்டாகவும் (ஆக்சிஜனேற்றக் காரணி) செயல்படுகிறது.",
+            "start": 1924,
+            "end": 2151
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இவ்வாறு ரெடாக்ஸ் வினைகளில் ஆக்சிஜனேற்றம் அடைவதும், குறைப்பு அடைவதும் ஒரே நேரத்தில் நடைபெறுகின்றன. இன்றைய பாடத்தில் ரெடாக்ஸ் வினைகள் பற்றி இத்துடன் நிறைவு செய்கிறோம். அடுத்த பாடத்தில் மீண்டும் சந்திக்கலாம் வணக்கம்.",
+            "start": 2153,
+            "end": 2366
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The half-reactions, net reaction, and agent identifications are completely correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\run-003-090cff8f5ac35b46.json",
+    "original_sha256": "a22c9ae47ac346868845a0e98aa4a44cf5f14adf660c1ab0bb0c766fd2ff8252",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 17,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 3
+    },
+    "nested_passages": 17,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

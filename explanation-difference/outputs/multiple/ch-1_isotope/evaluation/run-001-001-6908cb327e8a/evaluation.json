@@ -1,0 +1,303 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "d8bca95cf84e31fc9ee5446a28e348a288b1d9ae3c7ed68ebc2b92970927268b",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "Isotopes: definition, carbon example, and stability/radioactivity",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "reason": "The explanation directly addresses the requested topic of isotopes, covering their definition, an illustrative example with carbon isotopes, and their classification into stable and radioactive types.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and nuclear composition of isotopes"
+      },
+      {
+        "id": "s2",
+        "label": "Carbon isotopes comparison"
+      },
+      {
+        "id": "s3",
+        "label": "Stable and radioactive isotopes"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and nuclear structure of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what an isotope is and explains the relationship between protons determining the element, varying neutrons, and resulting differences in atomic mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "An **isotope** is a version of an element that has the same number of **protons** but a different number of **neutrons**.",
+            "start": 0,
+            "end": 121
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- The number of **protons** decides which element it is.",
+            "start": 123,
+            "end": 179
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- The number of **neutrons** can change without changing the element.",
+            "start": 180,
+            "end": 249
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Therefore, isotopes of the same element have different **masses**.",
+            "start": 250,
+            "end": 318
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately states that isotopes share proton numbers but differ in neutron counts and atomic masses.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Carbon isotopes (Carbon-12, Carbon-13, and Carbon-14)",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents a real-world chemistry example comparing the subatomic particle compositions of three natural carbon isotopes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Example: Carbon isotopes",
+            "start": 320,
+            "end": 348
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Every carbon atom has **6 protons**. However, carbon can have different numbers of neutrons:",
+            "start": 350,
+            "end": 442
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Isotope | Protons | Neutrons | Mass number |",
+            "start": 444,
+            "end": 490
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---|---:|---:|---:|",
+            "start": 491,
+            "end": 511
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbon-12 | 6 | 6 | 12 |",
+            "start": 512,
+            "end": 538
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbon-13 | 6 | 7 | 13 |",
+            "start": 539,
+            "end": 565
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbon-14 | 6 | 8 | 14 |",
+            "start": 566,
+            "end": 592
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "All three are carbon because they all contain 6 protons. But they are different isotopes because their numbers of neutrons are different.",
+            "start": 594,
+            "end": 731
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The proton counts (6), neutron counts (6, 7, 8), and mass numbers (12, 13, 14) for carbon isotopes are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Isotope stability and radioactivity",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the distinction between stable and radioactive isotopes and notes the archaeological dating application of carbon-14.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Some isotopes are **stable**, meaning they do not change over time. Others are **radioactive**, meaning they slowly break down and release radiation. For example, carbon-14 is radioactive and is used to estimate the age of ancient bones, wood, and fossils.",
+            "start": 733,
+            "end": 989
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The descriptions of stability, radioactivity, and radiocarbon dating of organic matter and fossils are factually correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\run-001-001-6908cb327e8a.json",
+    "original_sha256": "61e74c0bad9ebac183c27bcc0e1ded6b3616117a903b07982791d5b99488cb8e",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 3,
+    "substantive_content_units": 3,
+    "total_passages": 13,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 13,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 3
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}
