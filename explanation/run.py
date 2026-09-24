@@ -9,6 +9,7 @@ import itertools
 import json
 import os
 import sys
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from string import Formatter
@@ -114,11 +115,16 @@ def output_text(response):
                      if part.get("type") == "output_text")
 
 
-async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None):
+async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None, request_builder=None, log_calls=False):
     if call is None:
         from litellm import aresponses
         call = aresponses
     semaphore = asyncio.Semaphore(concurrency)
+
+    def log_event(event):
+        if log_calls:
+            with (output / "api_calls.jsonl").open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(event, ensure_ascii=False) + "\n")
 
     async def one(job):
         result_path = output / f"{job['job_id']}.json"
@@ -127,8 +133,11 @@ async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None
             if previous.get("status") == "completed" and previous.get("job") == job:
                 return previous
         async with semaphore:
-            request = request_for(job)
+            request = (request_builder or request_for)(job)
             result = dict(job=job, request=request, started_at=now())
+            attempt_id = uuid.uuid4().hex
+            log_event(dict(event="request", attempt_id=attempt_id, job_id=job["job_id"],
+                           timestamp=result["started_at"], request=request, timeout=timeout))
             try:
                 row = next((row for row in catalog["models"] if row["litellm_model"] == job["resolved_model"]), {})
                 params = {key: os.path.expandvars(value) if isinstance(value, str) else value
@@ -148,6 +157,9 @@ async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None
                 result.update(status="failed", error={"type": type(exc).__name__,
                               "status_code": getattr(exc, "status_code", None)})
             result["finished_at"] = now()
+            log_event(dict(event="response" if "response" in result else "error",
+                           attempt_id=attempt_id, job_id=job["job_id"], timestamp=result["finished_at"],
+                           status=result["status"], response=result.get("response"), error=result.get("error")))
             write_json(result_path, result)
             print(f"{job['job_id']}: {result['status']}", flush=True)
             return result

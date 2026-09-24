@@ -20,6 +20,11 @@ def read(path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=EXPLANATION_ROOT / 'outputs/all-languages-comparison-six-topics')
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument('--words-only', action='store_true', help='Update only the standalone word-count plot')
+    scope.add_argument('--combined-only', action='store_true', help='Update only the combined plot')
+    parser.add_argument('--hide-topic-dots', action='store_true')
+    parser.add_argument('--english-median', action='store_true', help='Add an English median reference line')
     args = parser.parse_args()
     words = read(args.root / 'word-count-medians/paired_counts.csv')
     headings = read(args.root / 'heading-counts/counts.csv')
@@ -33,10 +38,11 @@ def main():
     assert len(topics) == 6
     out = args.root / 'boxplots'
     out.mkdir(exist_ok=True)
-    with (out / 'plotted_data.csv').open('w', encoding='utf-8-sig', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(combined[0]))
-        writer.writeheader()
-        writer.writerows(combined)
+    if not (args.words_only or args.combined_only):
+        with (out / 'plotted_data.csv').open('w', encoding='utf-8-sig', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(combined[0]))
+            writer.writeheader()
+            writer.writerows(combined)
     colors = ['#286caa', '#c16a28']
 
     def panel(ax, key, title):
@@ -55,8 +61,12 @@ def main():
                     medianprops=dict(color=color, linewidth=2),
                     whiskerprops=dict(color=color), capprops=dict(color=color))
                 # Every observation is shown, including observations beyond whiskers.
-                ax.scatter(position + np.linspace(-.095, .095, 6), values,
-                           color=color, s=23, alpha=.85, zorder=3)
+                if not args.hide_topic_dots:
+                    ax.scatter(position + np.linspace(-.095, .095, 6), values,
+                               color=color, s=23, alpha=.85, zorder=3)
+        if args.english_median:
+            baseline = float(np.median([r[key] for r in combined if r['condition'] == 'English']))
+            ax.axhline(baseline, color='#555555', linestyle='--', linewidth=1.6, zorder=2)
         ax.set_xticks(range(len(languages)), languages, rotation=25, ha='right')
         ax.set_xlim(-.6, len(languages)-.4)
         ax.set_ylim(bottom=0)
@@ -68,21 +78,46 @@ def main():
 
     legend = [Patch(facecolor=c, edgecolor=c, alpha=.4, label=label)
               for c, label in zip(colors, ['Native prompt / English', 'Code-mixed prompt'])]
-    legend.append(Line2D([], [], linestyle='', marker='o', color='#555555', label='Individual topic'))
+    if not args.hide_topic_dots:
+        legend.append(Line2D([], [], linestyle='', marker='o', color='#555555', label='Individual topic'))
+    if args.english_median:
+        baseline = float(np.median([r['words'] for r in combined if r['condition'] == 'English']))
+        legend.append(Line2D([], [], linestyle='--', color='#555555', linewidth=1.6,
+                             label=f'English median: {baseline:g} words' if args.words_only else 'English median'))
 
     def save(fig, name):
         for extension in ['png', 'svg', 'pdf']:
             fig.savefig(out / f'{name}.{extension}', dpi=180, bbox_inches='tight')
         plt.close(fig)
 
+    if args.words_only:
+        fig, ax = plt.subplots(figsize=(12, 5.5))
+        panel(ax, 'words', 'Words per answer')
+        fig.legend(handles=legend, loc='upper center', ncol=len(legend), frameon=False)
+        if args.hide_topic_dots:
+            fig.text(.5, .012, 'Six topics per condition. Boxes: Q1–Q3; line: median; whiskers: 1.5 × IQR. Individual observations and outlier markers omitted.',
+                     ha='center', fontsize=8)
+        fig.tight_layout(rect=[0, .045, 1, .91])
+        save(fig, 'words')
+        print(f'Saved word-count PNG/SVG/PDF plots to {out}')
+        return
+
     fig, axes = plt.subplots(2, 1, figsize=(12, 10))
     panel(axes[0], 'words', 'Words per answer')
     panel(axes[1], 'content_headings', 'Content headings per answer')
     fig.suptitle('Explanation length and organization across languages\nSix matched topics per prompt condition', fontsize=15, y=.99)
     fig.legend(handles=legend, loc='upper center', bbox_to_anchor=(.5, .932), ncol=3, frameon=False)
-    fig.text(.5, .012, 'Boxes: Q1–Q3; line: median; whiskers: observations within 1.5 × IQR. Dots include all six answers.\nHeadings exclude titles and recaps; include example sections and nested headings.', ha='center', fontsize=9)
+    observations = 'Individual observations and outlier markers omitted.' if args.hide_topic_dots else 'Dots include all six answers.'
+    baseline_note = ''
+    if args.english_median:
+        heading_median = float(np.median([r['content_headings'] for r in combined if r['condition'] == 'English']))
+        baseline_note = f'\nEnglish medians: {baseline:g} words; {heading_median:g} content headings.'
+    fig.text(.5, .012, 'Boxes: Q1–Q3; line: median; whiskers: observations within 1.5 × IQR. ' + observations + '\nHeadings exclude titles and recaps; include example sections and nested headings.' + baseline_note, ha='center', fontsize=9)
     fig.tight_layout(rect=[0, .055, 1, .90], h_pad=2)
     save(fig, 'words_and_headings')
+    if args.combined_only:
+        print(f'Saved combined PNG/SVG/PDF plots to {out}')
+        return
     for key, title in [('words', 'Words per answer'), ('content_headings', 'Content headings per answer')]:
         fig, ax = plt.subplots(figsize=(12, 5.5))
         panel(ax, key, title)
