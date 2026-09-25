@@ -1,0 +1,131 @@
+{
+  "topic_relevance": {
+    "requested_topic": "covalent radius",
+    "observed_topic": "definition, calculation example, factors affecting, and applications of covalent radius",
+    "topic_match": "on_topic",
+    "reason": "The response directly and thoroughly explains covalent radius, provides a calculation example using H2, details the factors affecting it, and outlines its applications.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of covalent radius and its relationship to bond length",
+      "excerpts": [
+        {
+          "text": "نصف القطر التساهمي هو نصف القطر بين نواتي ذرتين مرتبطتين برابطة تساهمية. وهو مقياس لحجم الذرة عند ارتباطها بذرة أخرى.\n\nعندما ترتبط ذرتان برابطة تساهمية، فإن المسافة بين نواتيهما تسمى طول الرابطة. نصف القطر التساهمي هو نصف هذه المسافة.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text states 'نصف القطر بين نواتي ذرتين' instead of 'نصف المسافة' (half the distance), and omits the requirement that the two bonded atoms must be identical (homonuclear) for half the bond length to represent the covalent radius.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "نصف القطر التساهمي هو نصف القطر بين نواتي ذرتين مرتبطتين برابطة تساهمية."
+              }
+            ],
+            "description": "The phrasing 'نصف القطر بين نواتي ذرتين' (radius between the two nuclei) is a terminological error for 'نصف المسافة بين نواتي ذرتين' (half the distance between the two nuclei). Furthermore, it fails to specify that the two atoms must be identical (homonuclear); dividing bond length by two does not yield the covalent radius of either atom if the bonded atoms are different.",
+            "correction": "نصف القطر التساهمي هو نصف المسافة بين نواتي ذرتين متماثلتين مرتبطتين برابطة تساهمية.",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Calculation of covalent radius in the hydrogen molecule",
+      "excerpts": [
+        {
+          "text": "على سبيل المثال، إذا كان طول الرابطة بين ذرتي هيدروجين في جزيء الهيدروجين (H2) هو 74 بيكومتر، فإن نصف القطر التساهمي لذرة الهيدروجين هو 37 بيكومتر.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The bond length of H2 (74 pm) and the resulting covalent radius of hydrogen (37 pm) are factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Factors influencing covalent radius",
+      "excerpts": [
+        {
+          "text": "نصف القطر التساهمي يختلف من عنصر إلى آخر، ويتأثر بعدة عوامل، مثل:\n\n1. **عدد الطبقات الإلكترونية**: كلما زاد عدد الطبقات الإلكترونية، زاد نصف القطر التساهمي.\n2. **الشحنة النووية**: كلما زادت الشحنة النووية، قل نصف القطر التساهمي.\n3. **نوع الرابطة**: نصف القطر التساهمي يختلف حسب نوع الرابطة (أحادية، ثنائية، ثلاثية).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The stated relationships regarding number of shells, nuclear charge, and bond multiplicity correctly describe the trends affecting covalent radius.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Applications and physical significance of covalent radius",
+      "excerpts": [
+        {
+          "text": "نصف القطر التساهمي مهم في فهم العديد من الخصائص الكيميائية والفيزيائية للعناصر والمركبات، مثل:\n\n1. **حجم الجزيئات**: يمكن استخدام نصف القطر التساهمي لتقدير حجم الجزيئات.\n2. **طول الرابطة**: يمكن استخدام نصف القطر التساهمي لتقدير طول الرابطة بين ذرتين.\n3. **التركيب البلوري**: يمكن استخدام نصف القطر التساهمي لفهم التركيب البلوري للمواد.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Covalent radius is indeed used to estimate molecular dimensions, predict bond lengths, and model crystal packing in covalent solids.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "Whether the three bullet points describing applications of covalent radius should be treated as three separate EXAMPLE units or kept as a single CONCEPT unit.",
+      "proposed_resolution": "Kept as a single CONCEPT unit because the text presents them as general abstract statements/areas of utility rather than specific, concrete application cases with worked data."
+    }
+  ]
+}

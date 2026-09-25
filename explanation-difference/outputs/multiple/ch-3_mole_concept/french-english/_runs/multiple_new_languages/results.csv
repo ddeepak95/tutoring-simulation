@@ -1,0 +1,478 @@
+﻿job_id,lang_id,prompt_type,topic,model,reasoning,web_search,status,text,input_tokens,output_tokens,total_tokens
+run-english_prompt-en-fr-429624b4f650d28e,en,language_template,mole concept,gpt-5.6-terra,,False,completed,"## Le concept de mole
+
+En chimie, les atomes, molécules et ions sont **beaucoup trop petits** pour être comptés un par un. On utilise donc une unité de comptage appelée la **mole**.
+
+C’est comme une **douzaine** :
+
+- 1 douzaine = 12 objets ;
+- 1 mole = \(6{,}022 \times 10^{23}\) objets.
+
+Ce très grand nombre s’appelle la **constante d’Avogadro**, notée \(N_A\).
+
+\[
+N_A = 6{,}022 \times 10^{23}\ \text{mol}^{-1}
+\]
+
+Ainsi :
+
+- 1 mol d’atomes de fer contient \(6{,}022 \times 10^{23}\) atomes de fer ;
+- 1 mol de molécules d’eau contient \(6{,}022 \times 10^{23}\) molécules d’eau ;
+- 1 mol d’ions sodium contient \(6{,}022 \times 10^{23}\) ions sodium.
+
+Il faut toujours préciser **ce que l’on compte** : atomes, molécules, ions, électrons, etc.
+
+---
+
+## 1. Relier le nombre de particules et la quantité de matière
+
+La quantité de matière se note généralement \(n\) et s’exprime en **moles** (mol).
+
+Le nombre de particules se note \(N\).
+
+La relation est :
+
+\[
+\boxed{N = n \times N_A}
+\]
+
+ou, pour trouver le nombre de moles :
+
+\[
+\boxed{n = \frac{N}{N_A}}
+\]
+
+### Exemple
+
+Combien y a-t-il de molécules dans \(2{,}0\) mol d’eau ?
+
+\[
+N = n \times N_A
+\]
+
+\[
+N = 2{,}0 \times 6{,}022 \times 10^{23}
+\]
+
+\[
+N = 1{,}20 \times 10^{24}
+\]
+
+Il y a donc environ :
+
+\[
+\boxed{1{,}20 \times 10^{24}\ \text{molécules d’eau}}
+\]
+
+---
+
+## 2. La masse molaire
+
+La **masse molaire** est la masse d’une mole de substance. Elle se note \(M\) et s’exprime en :
+
+\[
+\text{g·mol}^{-1}
+\]
+
+Par exemple :
+
+- masse molaire de l’hydrogène : \(M(\text{H}) \approx 1{,}0\ \text{g·mol}^{-1}\)
+- masse molaire de l’oxygène : \(M(\text{O}) \approx 16{,}0\ \text{g·mol}^{-1}\)
+- masse molaire de l’eau : \(M(\text{H}_2\text{O}) = 18{,}0\ \text{g·mol}^{-1}\)
+
+Cela signifie que :
+
+\[
+1\ \text{mol d’eau} = 18{,}0\ \text{g d’eau}
+\]
+
+### Calculer une masse molaire
+
+Pour l’eau, \(\text{H}_2\text{O}\) :
+
+- il y a 2 atomes d’hydrogène ;
+- il y a 1 atome d’oxygène.
+
+\[
+M(\text{H}_2\text{O}) = 2 \times M(\text{H}) + M(\text{O})
+\]
+
+\[
+M(\text{H}_2\text{O}) = 2 \times 1{,}0 + 16{,}0 = 18{,}0\ \text{g·mol}^{-1}
+\]
+
+---
+
+## 3. Relier la masse et la quantité de matière
+
+La relation principale est :
+
+\[
+\boxed{n = \frac{m}{M}}
+\]
+
+avec :
+
+- \(n\) : quantité de matière, en mol ;
+- \(m\) : masse, en g ;
+- \(M\) : masse molaire, en g·mol\(^{-1}\).
+
+On peut aussi écrire :
+
+\[
+\boxed{m = n \times M}
+\]
+
+### Exemple
+
+Quelle quantité de matière représente \(36{,}0\) g d’eau ?
+
+On sait que :
+
+\[
+M(\text{H}_2\text{O}) = 18{,}0\ \text{g·mol}^{-1}
+\]
+
+Donc :
+
+\[
+n = \frac{m}{M} = \frac{36{,}0}{18{,}0}
+\]
+
+\[
+\boxed{n = 2{,}0\ \text{mol}}
+\]
+
+Ainsi, 36 g d’eau correspondent à 2 mol d’eau.
+
+Le nombre de molécules correspondant est :
+
+\[
+N = n \times N_A
+\]
+
+\[
+N = 2{,}0 \times 6{,}022 \times 10^{23}
+\]
+
+\[
+\boxed{N \approx 1{,}20 \times 10^{24}\ \text{molécules}}
+\]
+
+---
+
+## 4. Dans une solution : la concentration molaire
+
+Pour une solution, on utilise souvent la **concentration molaire**, notée \(C\).
+
+\[
+\boxed{C = \frac{n}{V}}
+\]
+
+avec :
+
+- \(C\) en mol·L\(^{-1}\) ;
+- \(n\) en mol ;
+- \(V\) en L.
+
+Donc :
+
+\[
+\boxed{n = C \times V}
+\]
+
+### Exemple
+
+On possède \(0{,}500\) L d’une solution de chlorure de sodium de concentration :
+
+\[
+C = 0{,}20\ \text{mol·L}^{-1}
+\]
+
+La quantité de matière de chlorure de sodium est :
+
+\[
+n = C \times V
+\]
+
+\[
+n = 0{,}20 \times 0{,}500
+\]
+
+\[
+\boxed{n = 0{,}100\ \text{mol}}
+\]
+
+---
+
+## 5. Attention aux formules chimiques
+
+Une mole de molécules peut contenir plusieurs moles d’atomes.
+
+Par exemple, une molécule d’eau est \(\text{H}_2\text{O}\) :
+
+- 1 mol de molécules d’eau contient 2 mol d’atomes d’hydrogène ;
+- 1 mol de molécules d’eau contient 1 mol d’atomes d’oxygène.
+
+Donc :
+
+\[
+1\ \text{mol de H}_2\text{O} \Rightarrow 2\ \text{mol de H} + 1\ \text{mol de O}
+\]
+
+De même, pour le dioxyde de carbone \(\text{CO}_2\) :
+
+\[
+1\ \text{mol de CO}_2 \Rightarrow 1\ \text{mol de C} + 2\ \text{mol de O}
+\]
+
+---
+
+## À retenir
+
+| Grandeur | Symbole | Unité | Formule |
+|---|---:|---:|---|
+| Quantité de matière | \(n\) | mol | \(n = \frac{m}{M}\) |
+| Masse | \(m\) | g | \(m = nM\) |
+| Masse molaire | \(M\) | g·mol\(^{-1}\) | calculée avec le tableau périodique |
+| Nombre de particules | \(N\) | sans unité | \(N = nN_A\) |
+| Concentration molaire | \(C\) | mol·L\(^{-1}\) | \(C = \frac{n}{V}\) |
+
+L’idée essentielle est donc :
+
+> La mole permet de passer du monde visible et mesurable (grammes, litres) au monde microscopique (atomes, molécules, ions).",23,1838,1861
+run-english_prompt-en-fr-a0ed2b58782edc14,en,language_template,mole concept,grok-4.3,,False,completed,"Bonjour ! Je suis ton professeur de chimie et je vais t’expliquer le concept de la mole de façon simple et progressive, comme si nous étions en classe.
+
+Imagine que tu veux compter des objets très petits : des grains de sable, des billes minuscules ou… des atomes et des molécules. Ces derniers sont tellement petits qu’on ne peut pas les compter un par un. Les chimistes ont donc inventé une « grande unité de comptage » : la **mole**.
+
+Une **mole** correspond toujours au même nombre de particules :  
+**6,022 × 10²³** particules (atomes, molécules, ions, etc.).  
+Ce nombre s’appelle le **nombre d’Avogadro** (ou constante d’Avogadro). C’est un nombre énorme, un peu comme une « super-douzaine » !
+
+**Petite comparaison** :  
+- 1 douzaine = 12 œufs  
+- 1 mole = 6,022 × 10²³ particules  
+
+Que tu aies 1 mole d’atomes de fer ou 1 mole de molécules d’eau, tu as toujours le même nombre de particules.
+
+### Pourquoi c’est utile ? La masse molaire
+Chaque substance a une **masse molaire** : c’est la masse d’exactement 1 mole de cette substance. On l’exprime en g/mol.
+
+Exemples :  
+- Carbone (C) : masse molaire = 12 g/mol → 1 mole d’atomes de carbone pèse 12 g.  
+- Eau (H₂O) : masse molaire = 18 g/mol → 1 mole de molécules d’eau pèse 18 g.  
+- Oxygène (O₂) : masse molaire = 32 g/mol → 1 mole de molécules d’oxygène pèse 32 g.
+
+### Formules simples à retenir
+1. Nombre de moles à partir de la masse :  
+   **n = m / M**  
+   (n = nombre de moles, m = masse en grammes, M = masse molaire en g/mol)
+
+2. Nombre de particules :  
+   **Nombre de particules = n × 6,022 × 10²³**
+
+### Exemple concret
+Tu as 36 g d’eau. Combien y a-t-il de moles ?  
+M(H₂O) = 18 g/mol  
+n = 36 g / 18 g/mol = **2 moles** d’eau.  
+Donc tu as 2 × 6,022 × 10²³ = 1,2044 × 10²⁴ molécules d’eau.
+
+Dans les réactions chimiques, on utilise toujours les moles pour équilibrer les équations, car les atomes se combinent en nombre entier de moles.
+
+Tu as compris l’idée ? Veux-tu qu’on fasse ensemble un exercice de calcul (par exemple avec du dioxyde de carbone ou du sel) ? Dis-moi ce qui te pose encore question !",352,1713,2065
+run-english_prompt-en-fr-a72144cc8c021f09,en,language_template,mole concept,gemini-3.8-flash,,False,completed,"Bonjour ! Installe-toi. La mole, c’est souvent la bête noire des élèves de lycée, mais tu vas voir qu’en réalité, **c'est une idée toute simple.**
+
+Pour bien la comprendre, oublie la chimie deux minutes.
+
+---
+
+### 1. L’analogie du quotidien : Les ""paquets""
+
+Imagine que tu travailles dans une fabrique d’œufs. Si un client te demande des œufs, tu ne vas pas les compter un par un (""un, deux, trois...""). Tu vas utiliser un mot magique : **une douzaine**.
+* Une douzaine = 12 œufs.
+* Deux douzaines = 24 œufs.
+
+Si tu achètes des feuilles de papier pour l'imprimante, tu achètes **une rame** (un paquet de 500 feuilles).
+
+Eh bien, en chimie, **la mole, c'est exactement la même chose : c'est un ""paquet"".**
+
+---
+
+### 2. Pourquoi les chimistes ont-ils inventé ce paquet ?
+
+Les atomes et les molécules sont **infiniment petits**. 
+Si tu bois une seule petite gorgée d'eau, tu avales environ :
+$1000000000000000000000000$ molécules d'eau (un 1 suivi de 24 zéros !).
+
+C'est un nombre tellement gigantesque que c'est impossible et inutile de compter les molécules une par une. Les chimistes ont donc dit : 
+> *""Créons un paquet géant pour compter ces objets minuscules.""*
+
+Ce paquet s'appelle **la mole** (symbole : **mol**).
+
+---
+
+### 3. Combien y a-t-il d'objets dans ""une mole"" ?
+
+Dans une douzaine, il y a 12 objets. 
+Dans une mole, il y a toujours :
+
+$$6,022 \times 10^{23} \text{ objets}$$
+
+Ce nombre s'appelle le **Nombre d'Avogadro** (noté $N_A$). 
+C'est un 6 suivi de 23 zéros ! 
+
+* **1 mole d'atomes de carbone** = $6,02 \times 10^{23}$ atomes de carbone.
+* **1 mole de molécules d'eau** = $6,02 \times 10^{23}$ molécules d'eau.
+* **1 mole d'élèves** = $6,02 \times 10^{23}$ élèves (la Terre exploserait, c'est beaucoup trop !).
+
+On appelle le nombre de moles la **quantité de matière**, notée **$n$**.
+
+---
+
+### 4. Le tour de magie : Le lien avec la balance (La Masse Molaire)
+
+Tu te demandes sûrement : *« D'accord, mais au laboratoire, je ne peux pas voir ces paquets, comment je fais ? »*
+
+C'est là que la mole devient géniale. **Elle fait le pont entre le monde invisible (les atomes) et notre monde (la balance).**
+
+Regarde ton tableau périodique. Tu verras que le Carbone a une masse de **12**.
+Les chimistes ont fait exprès de choisir le nombre d'Avogadro pour que :
+* **1 mole d'atomes de carbone pèse exactement 12 grammes !**
+
+Cette masse s'appelle la **Masse Molaire** (notée **$M$**, en grammes par mole : $\text{g/mol}$).
+
+* Si tu veux 1 mole de Carbone ($6,02 \times 10^{23}$ atomes), tu prends une balance et tu pèses **12 g**.
+* Pour l'eau ($H_2O$) : la masse molaire est de $18\text{ g/mol}$. Si tu pèses **18 g** d'eau, tu as exactement 1 mole d'eau dans ton verre !
+
+---
+
+### 5. La formule magique à retenir pour tes devoirs
+
+C'est la formule la plus importante de la chimie au lycée :
+
+$$n = \frac{m}{M}$$
+
+* **$n$** : la quantité de matière (en **moles**, mol) $\rightarrow$ *le nombre de paquets*
+* **$m$** : la masse de ton échantillon (en **grammes**, g) $\rightarrow$ *ce que dit la balance*
+* **$M$** : la masse molaire (en **g/mol**) $\rightarrow$ *le poids d'un seul paquet (trouvé dans le tableau périodique)*
+
+#### Un petit exemple rapide :
+Tu as un morceau de fer de **112 g**. La masse molaire du fer est $M = 56\text{ g/mol}$. Combien as-tu de moles ?
+
+$$n = \frac{112}{56} = 2\text{ moles}$$
+
+Tu as **2 moles** de fer (soit 2 fois le paquet d'Avogadro d'atomes de fer).
+
+---
+
+### En résumé :
+La mole n'a rien de mystique. C'est simplement **l'unité des chimistes pour compter par gros paquets** ce qui est trop petit pour être compté à l'unité. 
+
+Est-ce que cette image du ""paquet"" te paraît claire ?",18,2367,2385
+run-english_prompt-en-fr-3c6976ce843e6d46,en,language_template,mole concept,claude-sonnet-5,,False,completed,"# Le Concept de Mole (La Mole)
+
+Bonjour ! Je vais t'expliquer le concept de la mole de façon simple et claire.
+
+## 1. Pourquoi a-t-on besoin de la mole ?
+
+Les atomes et les molécules sont **extrêmement petits**. Si tu veux compter les atomes dans un échantillon de matière, tu en aurais des milliards de milliards ! Il nous fallait donc une unité pratique pour compter de très grandes quantités de particules, un peu comme on utilise ""une douzaine"" pour compter 12 objets.
+
+## 2. Définition de la mole
+
+**La mole (mol)** est l'unité de mesure de la **quantité de matière** dans le Système International.
+
+> **1 mole = 6,022 × 10²³ entités** (atomes, molécules, ions, électrons...)
+
+Ce nombre s'appelle le **nombre d'Avogadro** (noté N_A), en l'honneur du scientifique Amedeo Avogadro.
+
+## 3. Une analogie simple
+
+Imagine que :
+- **1 douzaine** = 12 objets
+- **1 centaine** = 100 objets
+- **1 mole** = 6,022 × 10²³ objets
+
+C'est juste un **nombre**, mais un nombre gigantesque, adapté à l'échelle atomique !
+
+## 4. La masse molaire
+
+Chaque mole d'une substance a une masse spécifique, appelée **masse molaire (M)**, exprimée en **g/mol**.
+
+**Exemples :**
+- 1 mole d'atomes de carbone (C) = 12 g
+- 1 mole de molécules d'eau (H₂O) = 18 g
+- 1 mole d'atomes d'oxygène (O) = 16 g
+
+Cette masse correspond à la masse atomique (ou moléculaire) trouvée dans le tableau périodique.
+
+## 5. La formule clé
+
+$$n = \frac{m}{M}$$
+
+Où :
+- **n** = quantité de matière (en moles)
+- **m** = masse de la substance (en grammes)
+- **M** = masse molaire (en g/mol)
+
+### Exemple concret :
+Combien de moles y a-t-il dans 36 g d'eau (H₂O) ?
+
+- Masse molaire de l'eau : M = 18 g/mol
+- Calcul : n = m/M = 36/18 = **2 moles**
+
+## 6. Pourquoi c'est important ?
+
+La mole permet de :
+- ✅ **Compter** les atomes/molécules facilement
+- ✅ **Peser** des quantités précises en chimie
+- ✅ **Faire des calculs** dans les réactions chimiques (stœchiométrie)
+
+## Résumé simple
+
+| Concept | Explication |
+|---------|-------------|
+| Mole | Unité pour compter les particules |
+| N_A | 6,022 × 10²³ (nombre d'Avogadro) |
+| Masse molaire | Masse d'une mole (g/mol) |
+| Formule | n = m/M |
+
+---
+
+**As-tu des questions sur un point particulier ?** Je peux te donner plus d'exercices pratiques si tu veux ! 😊",32,1060,1092
+run-english_prompt-en-fr-da9fbb08a9b4013d,en,language_template,mole concept,llama-4-maverick,,False,completed,"Bonjour ! Aujourd'hui, nous allons explorer un concept fondamental en chimie : la notion de mole. (Hello! Today, we're going to explore a fundamental concept in chemistry: the mole concept.)
+
+**Qu'est-ce qu'une mole ?** (What is a mole?)
+
+Une mole est une unité de mesure qui représente une quantité de substance. (A mole is a unit of measurement that represents a quantity of substance.) C'est une façon de compter les particules, comme les atomes ou les molécules, qui constituent une substance. (It's a way to count the particles, like atoms or molecules, that make up a substance.)
+
+**Définition officielle** (Official definition)
+
+La mole est définie comme la quantité de substance qui contient autant d'entités élémentaires (atomes, molécules, ions, etc.) qu'il y a d'atomes dans 0,012 kilogramme de carbone 12. (The mole is defined as the amount of substance that contains as many elementary entities (atoms, molecules, ions, etc.) as there are atoms in 0.012 kilograms of carbon 12.)
+
+**Le nombre d'Avogadro** (Avogadro's number)
+
+Le nombre d'Avogadro est une constante qui représente le nombre d'entités élémentaires contenues dans une mole. (Avogadro's number is a constant that represents the number of elementary entities contained in a mole.) Il est égal à 6,022 x 10^23 particules. (It is equal to 6.022 x 10^23 particles.)
+
+**Exemple** (Example)
+
+Prenons l'exemple de l'oxygène (O2). Une mole d'oxygène contient 6,022 x 10^23 molécules d'oxygène. (Let's take the example of oxygen (O2). One mole of oxygen contains 6.022 x 10^23 oxygen molecules.) Cela signifie que si vous avez une mole d'oxygène, vous avez 6,022 x 10^23 molécules qui pèsent environ 32 grammes. (This means that if you have one mole of oxygen, you have 6.022 x 10^23 molecules that weigh approximately 32 grams.)
+
+**Calcul de la masse molaire** (Calculating molar mass)
+
+La masse molaire est la masse d'une mole d'une substance. (Molar mass is the mass of one mole of a substance.) Pour calculer la masse molaire, il faut additionner les masses atomiques des atomes qui composent la molécule. (To calculate the molar mass, we need to add up the atomic masses of the atoms that make up the molecule.)
+
+Par exemple, pour l'eau (H2O), la masse molaire est : (For example, for water (H2O), the molar mass is:)
+
+2 x masse atomique de l'hydrogène (H) + masse atomique de l'oxygène (O)
+= 2 x 1 g/mol + 16 g/mol
+= 18 g/mol
+
+**Importance de la mole** (Importance of the mole)
+
+La notion de mole est essentielle en chimie car elle permet de : (The mole concept is essential in chemistry because it allows us to:)
+
+* Compter les particules (Count particles)
+* Calculer les quantités de substances nécessaires pour une réaction chimique (Calculate the amounts of substances needed for a chemical reaction)
+* Déterminer la composition d'un mélange (Determine the composition of a mixture)
+
+Voilà, maintenant vous avez une bonne compréhension de la notion de mole ! (There you have it, now you have a good understanding of the mole concept!)",28,756,784

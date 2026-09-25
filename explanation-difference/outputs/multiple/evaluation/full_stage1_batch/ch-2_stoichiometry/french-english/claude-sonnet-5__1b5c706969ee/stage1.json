@@ -1,0 +1,178 @@
+{
+  "topic_relevance": {
+    "requested_topic": "stoichiometry",
+    "observed_topic": "stoichiometry in chemical reactions, including equation interpretation, calculation steps, a worked problem, and limiting reactants",
+    "topic_match": "on_topic",
+    "reason": "The text explains the fundamental definition and principles of stoichiometry, provides equation interpretations, details a step-by-step problem-solving procedure with a worked example, and explains limiting reactants.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and basic principle of stoichiometry",
+      "excerpts": [
+        {
+          "text": "La stœchiométrie, c'est l'étude des **quantités de matière** qui interviennent dans une réaction chimique. C'est un peu comme une **recette de cuisine** : pour faire un gâteau, tu as besoin de proportions précises d'ingrédients. En chimie, c'est pareil !\n\n## Le principe de base\n\nQuand des substances réagissent ensemble, elles le font selon des **proportions bien définies**, données par les **coefficients** de l'équation chimique équilibrée.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "C'est un peu comme une **recette de cuisine** : pour faire un gâteau, tu as besoin de proportions précises d'ingrédients."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition and the explanation connecting reaction proportions to balanced equation coefficients are chemically accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Microscopic interpretation of stoichiometric coefficients in water synthesis",
+      "excerpts": [
+        {
+          "text": "Prenons la formation de l'eau :\n\n$$2H_2 + O_2 \\rightarrow 2H_2O$$\n\nCette équation nous dit que :\n- **2 molécules** de dihydrogène réagissent avec **1 molécule** de dioxygène\n- pour former **2 molécules** d'eau",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The balanced chemical equation and its molecular interpretation are correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "PROCEDURE",
+      "label": "General procedure for solving a stoichiometry problem",
+      "excerpts": [
+        {
+          "text": "### 1️⃣ Équilibrer l'équation chimique\nVérifier que le nombre d'atomes est le même de chaque côté.\n\n### 2️⃣ Convertir en moles\nUtiliser la formule :\n$$n = \\frac{m}{M}$$\n\noù :\n- *n* = quantité de matière (en mol)\n- *m* = masse (en g)\n- *M* = masse molaire (en g/mol)\n\n### 3️⃣ Utiliser les rapports stœchiométriques\nLes coefficients de l'équation donnent le rapport entre les moles de chaque substance.\n\n### 4️⃣ Convertir le résultat dans l'unité demandée",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The stated four-step sequence and the mole conversion formula are standard and accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Worked example calculating water produced from a given mass of hydrogen",
+      "excerpts": [
+        {
+          "text": "**Question :** Combien de grammes d'eau obtient-on à partir de 4g de dihydrogène (H₂) ?\n\n**Étape 1 :** L'équation est déjà équilibrée :\n$$2H_2 + O_2 \\rightarrow 2H_2O$$\n\n**Étape 2 :** Calculer les moles de H₂\n$$n(H_2) = \\frac{4g}{2g/mol} = 2 \\text{ mol}$$\n\n**Étape 3 :** Utiliser le rapport stœchiométrique\nD'après l'équation : 2 mol H₂ → 2 mol H₂O (rapport 1:1)\n\nDonc : n(H₂O) = 2 mol\n\n**Étape 4 :** Convertir en grammes\n$$m(H_2O) = n \\times M = 2 \\times 18 = 36g$$",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "All calculations, molar masses, stoichiometric ratios, and final units are correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CAVEAT",
+      "label": "Warning against treating stoichiometric coefficients as direct mass ratios",
+      "excerpts": [
+        {
+          "text": "> **Les coefficients stœchiométriques représentent des rapports de moles, jamais des rapports de masses directement !**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "misconception"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately corrects the common student misconception that coefficients directly reflect mass ratios.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "CONCEPT",
+      "label": "Concept and method for identifying the limiting reactant",
+      "excerpts": [
+        {
+          "text": "Parfois, un réactif est en **quantité insuffisante** et limite la réaction : c'est le **réactif limitant**. L'autre réactif, présent en excès, ne sera pas totalement consommé.\n\n**Astuce :** Pour identifier le réactif limitant, calcule combien de produit chaque réactif pourrait former séparément — celui qui en donne le moins est le réactif limitant !",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines limiting and excess reagents and outlines a valid operational method for identifying the limiting reagent.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "The baking recipe comparison in u1 could be treated as an ANALOGY unit rather than being integrated into the introductory CONCEPT unit.",
+      "proposed_resolution": "Kept together within u1 because the analogy is brief (two sentences) and directly supports the definition of stoichiometry without being developed into an independent teaching episode."
+    },
+    {
+      "unit_ids": [
+        "u5"
+      ],
+      "issue": "u5 is introduced under the heading 'Point clé à retenir 🔑', which could suggest a STUDY_SUPPORT unit (subtype: recap).",
+      "proposed_resolution": "Classified as CAVEAT (subtype: misconception) because its explicit substantive content warns against the specific misconception that stoichiometric coefficients represent mass ratios directly."
+    }
+  ]
+}

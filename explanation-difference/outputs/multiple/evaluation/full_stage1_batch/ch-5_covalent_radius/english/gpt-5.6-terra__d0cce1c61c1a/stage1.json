@@ -1,0 +1,150 @@
+{
+  "topic_relevance": {
+    "requested_topic": "covalent radius",
+    "observed_topic": "Definition, calculation example, periodic trends, and bond-order dependence of covalent radius",
+    "topic_match": "on_topic",
+    "reason": "The text directly defines covalent radius, illustrates how it is calculated using Cl₂, explains its periodic trends across periods and down groups, and discusses the effect of bond order.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and explanation of covalent radius",
+      "excerpts": [
+        {
+          "text": "**Covalent radius** is a measure of the size of an atom when it is joined to another atom by a **covalent bond**.\n\nA covalent bond forms when two atoms **share electrons**. Because atoms do not have sharp outer edges, scientists cannot directly measure the “edge” of one atom. Instead, they use the distance between the nuclei of two bonded atoms.\n\n### Definition\nThe covalent radius of an atom is:\n\n> **Half the distance between the nuclei of two identical atoms joined by a single covalent bond.**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition and the explanation of why internuclear distance is used instead of a direct edge measurement are standard and chemically accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Calculation of the covalent radius of chlorine from the internuclear distance in Cl₂",
+      "excerpts": [
+        {
+          "text": "For example, in a chlorine molecule, Cl₂, the two chlorine atoms are joined by a covalent bond. If the distance between their nuclei is 198 pm (picometres), then:\n\n\\[\n\\text{Covalent radius of Cl} = \\frac{198}{2} = 99\\text{ pm}\n\\]\n\nA **picometre (pm)** is \\(10^{-12}\\) metres, so atomic radii are extremely small.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The internuclear distance of Cl₂ (198 pm) and the resulting covalent radius of Cl (99 pm) are standard textbook values and correctly calculated.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Periodic trends of covalent radius across periods and down groups",
+      "excerpts": [
+        {
+          "text": "### Trends in the periodic table\n\n- **Across a period (left to right):** covalent radius generally **decreases**.  \n  This happens because the number of protons increases, pulling the outer electrons closer to the nucleus.\n\n- **Down a group (top to bottom):** covalent radius generally **increases**.  \n  This is because each element has an additional electron shell, making the atom larger.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The trends across a period (nuclear charge increase pulling electrons in) and down a group (addition of electron shells) are correctly described and explained.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CAVEAT",
+      "label": "Qualification that covalent radius varies with bond order",
+      "excerpts": [
+        {
+          "text": "### Important note\nThe covalent radius can depend slightly on the type of bond:\n- A **single bond** is longer, so it gives a larger radius.\n- A **double bond** is shorter.\n- A **triple bond** is even shorter.\n\nFor example, carbon has a slightly smaller effective radius in a triple bond than in a single bond because the atoms are pulled closer together.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "qualification"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Multiple bonds have shorter bond lengths, meaning effective covalent radii differ for single, double, and triple bonds, as illustrated with carbon.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of the meaning of covalent radius",
+      "excerpts": [
+        {
+          "text": "In short, covalent radius tells us the approximate size of an atom when it forms covalent bonds.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately summarizes the core takeaway of covalent radius.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "u4 could be viewed as a CONCEPT explaining how bond multiplicity affects covalent radius rather than a CAVEAT.",
+      "proposed_resolution": "Classified as CAVEAT (qualification) because it is explicitly introduced under '### Important note' to qualify the earlier strict single-bond definition."
+    },
+    {
+      "unit_ids": [
+        "u5"
+      ],
+      "issue": "u5 is a brief concluding sentence that could either be merged with u4 / treated as closing prose or isolated as a STUDY_SUPPORT recap.",
+      "proposed_resolution": "Separated as STUDY_SUPPORT with subtype 'recap' because 'In short, ...' serves as an explicit summary of the main concept."
+    }
+  ]
+}

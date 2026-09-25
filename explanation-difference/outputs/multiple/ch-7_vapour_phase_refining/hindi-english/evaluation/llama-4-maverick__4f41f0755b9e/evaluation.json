@@ -1,0 +1,348 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "32fba6bb28f09a6bb5e32d215be64800c21084ead4f474060c5613c794290a79",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "वाष्प प्रावस्था परिष्करण (Vapour phase refining)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response explains vapour phase refining in Hindi, including its general concept, purported steps, specific industrial methods (Mond process and Van Arkel process), and its significance.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "वाष्प प्रावस्था परिष्करण की परिभाषा एवं सिद्धांत"
+      },
+      {
+        "id": "s2",
+        "label": "प्रक्रिया के चरण"
+      },
+      {
+        "id": "s3",
+        "label": "मोंड प्रक्रम"
+      },
+      {
+        "id": "s4",
+        "label": "वान आर्केल प्रक्रम"
+      },
+      {
+        "id": "s5",
+        "label": "महत्व एवं अनुप्रयोग"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "वाष्प प्रावस्था परिष्करण की परिभाषा और सिद्धांत",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and explains the principle of vapour phase refining.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "वाष्प प्रावस्था परिष्करण (Vapour Phase Refining) एक ऐसी प्रक्रिया है जिसमें धातुओं को शुद्ध करने के लिए उनके वाष्प का उपयोग किया जाता है।",
+            "start": 0,
+            "end": 137
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस प्रक्रिया में, धातु को पहले वाष्प में बदला जाता है, और फिर इस वाष्प को ठंडा करके शुद्ध धातु प्राप्त की जाती है। यह प्रक्रिया उन धातुओं के लिए उपयुक्त है जो आसानी से वाष्प में बदल जाती हैं और जिनके अशुद्धियों के वाष्पीकरण बिंदु अलग होते हैं।",
+            "start": 139,
+            "end": 382
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Passage p2 confuses vapour phase refining with simple distillation by stating that the metal is converted into its vapour and then condensed based on boiling point differences.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p2"
+              ],
+              "description": "The text describes vapour phase refining as a physical evaporation and condensation process based on differences in boiling points. In metallurgy, vapour phase refining requires reacting the metal with a suitable reagent to form a volatile chemical compound, which is subsequently decomposed at higher temperatures to give pure metal. Simply vaporizing and condensing the metal is distillation (आसवन).",
+              "correction": "वाष्प प्रावस्था परिष्करण में धातु को सीधे वाष्पीकृत करके संघनित नहीं किया जाता; बल्कि धातु को किसी अभिकर्मक के साथ क्रिया कराकर एक वाष्पशील यौगिक में बदला जाता है, जिसे बाद में उच्च ताप पर अपघटित करके शुद्ध धातु प्राप्त की जाती है।",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "PROCEDURE",
+        "label": "वाष्प प्रावस्था परिष्करण के चरण",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents a sequence of steps describing how the process is carried out.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose",
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "वाष्प प्रावस्था परिष्करण की प्रक्रिया निम्नलिखित है:",
+            "start": 384,
+            "end": 436
+          },
+          {
+            "id": "p4",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **वाष्पीकरण**: धातु को गर्म करके वाष्प में बदला जाता है।",
+            "start": 438,
+            "end": 497
+          },
+          {
+            "id": "p5",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **वाष्प का पृथक्करण**: वाष्प को अशुद्धियों से अलग किया जाता है, जो या तो वाष्प में नहीं बदलती हैं या अलग वाष्पीकरण बिंदु पर वाष्प में बदलती हैं।",
+            "start": 498,
+            "end": 645
+          },
+          {
+            "id": "p6",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **वाष्प का संघनन**: शुद्ध धातु के वाष्प को ठंडा करके तरल या ठोस में बदला जाता है, जिससे शुद्ध धातु प्राप्त होती है।",
+            "start": 646,
+            "end": 764
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The procedural steps provided (evaporation, separation of vapour, and condensation) describe physical distillation rather than the two fundamental steps of chemical vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p4",
+                "p5",
+                "p6"
+              ],
+              "description": "The listed steps (vaporization, separation of vapours, and condensation into liquid/solid) depict distillation. Vapour phase refining involves: (1) conversion of the impure metal into a volatile compound using a specific reagent, and (2) thermal decomposition of that volatile compound to recover the pure metal.",
+              "correction": "वाष्प प्रावस्था परिष्करण के वास्तविक चरण हैं: (1) अशुद्ध धातु की उपयुक्त अभिकर्मक से क्रिया कराकर वाष्पशील यौगिक बनाना, और (2) उस वाष्पशील यौगिक को उच्च ताप पर अपघटित करके शुद्ध धातु प्राप्त करना।",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "मोंड प्रक्रम द्वारा निकेल का शोधन",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates vapour phase refining using the Mond process for purifying nickel.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose",
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "वाष्प प्रावस्था परिष्करण के उदाहरणों में शामिल हैं:",
+            "start": 766,
+            "end": 817
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **मोंड प्रक्रिया**: निकेल को शुद्ध करने के लिए उपयोग की जाने वाली एक प्रक्रिया, जिसमें निकेल को कार्बन मोनोऑक्साइड के साथ मिलाकर निकेल कार्बोनिल बनाया जाता है, जो एक वाष्प है। इस वाष्प को गर्म करके शुद्ध निकेल प्राप्त किया जाता है।",
+            "start": 819,
+            "end": 1052
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The description of the Mond process (reacting nickel with carbon monoxide to form volatile nickel carbonyl and heating it to obtain pure nickel) is factually accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "वान आर्केल प्रक्रम द्वारा ज़िरकोनियम और टाइटेनियम का शोधन",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Illustrates vapour phase refining using the Van Arkel process for purifying zirconium and titanium.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **वान आर्केल प्रक्रिया**: ज़िरकोनियम और टाइटेनियम जैसी धातुओं को शुद्ध करने के लिए उपयोग की जाने वाली एक प्रक्रिया, जिसमें धातु को आयोडीन के साथ मिलाकर एक वाष्प बनाया जाता है, जिसे बाद में शुद्ध धातु में बदला जाता है।",
+            "start": 1053,
+            "end": 1272
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The description of the Van Arkel method (forming a volatile iodide with iodine and decomposing it to yield pure metal) is factually accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "वाष्प प्रावस्था परिष्करण का औद्योगिक महत्व",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "States the practical significance of vapour phase refining in yielding high-purity metals.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "वाष्प प्रावस्था परिष्करण एक महत्वपूर्ण प्रक्रिया है जो उच्च शुद्धता वाली धातुओं को प्राप्त करने में मदद करती है, जो विभिन्न औद्योगिक अनुप्रयोगों में उपयोग की जाती हैं।",
+            "start": 1274,
+            "end": 1441
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately highlights that vapour phase refining is used to obtain metals with very high purity for industrial applications.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\hindi-english\\llama-4-maverick__4f41f0755b9e.json",
+    "original_sha256": "bbedfa88232aa311ef1a2b43d3843259d404362e2c58b72932f705a9802c1b35",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 10,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "PROCEDURE": 1,
+      "EXAMPLE": 2
+    },
+    "nested_passages": 10,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 2,
+      "accurate": 3
+    },
+    "proposed_error_records": 2,
+    "proposed_error_severity": {
+      "major": 2
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

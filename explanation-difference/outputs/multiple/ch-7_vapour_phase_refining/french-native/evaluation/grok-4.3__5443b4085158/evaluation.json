@@ -1,0 +1,550 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "ff74f775610b2a8ea64097575560a77d1233a5008e7d77fdf910efe386d46ec3",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining (raffinage en phase vapeur, notamment via le procédé Mond pour le nickel)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The explanation directly covers the principles, mechanism, and classic industrial example (the Mond process for nickel) of vapour phase refining.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Principe général du raffinage en phase vapeur"
+      },
+      {
+        "id": "s2",
+        "label": "Exemple d'application : le procédé Mond pour le nickel"
+      },
+      {
+        "id": "s3",
+        "label": "Avantages et caractéristiques clés de la méthode"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition et principe fondamental du raffinage en phase vapeur",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces vapour phase refining as a purification technique where an impure metal is temporarily transformed into a volatile compound to separate it from solid impurities before thermal decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le raffinage en phase vapeur est une méthode de purification utilisée principalement pour certains métaux (comme le nickel). Je vais t’expliquer cela simplement, comme en cours de chimie de lycée.",
+            "start": 0,
+            "end": 196
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Principe de base",
+            "start": 198,
+            "end": 218
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On ne purifie pas le métal directement. À la place, on le transforme temporairement en un **composé volatil** (qui passe facilement à l’état de gaz ou de vapeur). Ce composé peut ensuite être transporté ailleurs et décomposé pour récupérer le métal **pur**.",
+            "start": 219,
+            "end": 476
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The basic principle of converting the metal into a volatile compound and later decomposing it to retrieve the pure metal is correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Analogie du tri de billes transformées en fumée",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses a pedagogical analogy comparing the selective volatilization of the metal from its impurities to turning mixed marbles into smoke that separates and recondenses elsewhere.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "C’est un peu comme si tu voulais trier des billes d’un sac mélangé : tu les transformais en « fumée » sélective qui s’envole toute seule, en laissant les impuretés au sol, puis tu refais apparaître les billes propres plus loin."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C’est un peu comme si tu voulais trier des billes d’un sac mélangé : tu les transformais en « fumée » sélective qui s’envole toute seule, en laissant les impuretés au sol, puis tu refais apparaître les billes propres plus loin.",
+            "start": 478,
+            "end": 705
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately conveys the qualitative physical idea of selective volatilization and reconversion without introducing misconceptions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Procédé Mond pour la purification du nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents the classic worked example of the Mond process: reaction of nickel with carbon monoxide at 50 °C to form nickel tetracarbonyl vapour, followed by thermal decomposition at 200 °C to obtain pure nickel.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple classique : le nickel (procédé Mond)",
+            "start": 707,
+            "end": 755
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C’est le cas le plus connu au lycée.",
+            "start": 756,
+            "end": 792
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Réaction de formation du composé volatil**  ",
+            "start": 794,
+            "end": 843
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Le nickel impur (avec des impuretés comme du fer, du cuivre, etc.) est mis en contact avec du monoxyde de carbone (CO) à environ 50 °C :",
+            "start": 844,
+            "end": 983
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\[",
+            "start": 984,
+            "end": 989
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\ce{Ni (impur) + 4 CO -> Ni(CO)4 (gaz)}",
+            "start": 990,
+            "end": 1032
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\]",
+            "start": 1033,
+            "end": 1038
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Le tétracarbonyle de nickel, \\(\\ce{Ni(CO)4}\\), est un gaz incolore qui s’évapore facilement. Les impuretés, elles, ne forment pas de composé volatil avec le CO : elles restent solides.",
+            "start": 1039,
+            "end": 1226
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Décomposition et récupération du métal pur**  ",
+            "start": 1228,
+            "end": 1279
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   On chauffe le gaz \\(\\ce{Ni(CO)4}\\) à environ 200 °C. Il se décompose :",
+            "start": 1280,
+            "end": 1353
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\[",
+            "start": 1354,
+            "end": 1359
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\ce{Ni(CO)4 (gaz) -> Ni (pur) + 4 CO}",
+            "start": 1360,
+            "end": 1400
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   \\]",
+            "start": 1401,
+            "end": 1406
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Le nickel pur se dépose sous forme de billes ou de poudre brillante, et le monoxyde de carbone est récupéré pour être réutilisé.",
+            "start": 1407,
+            "end": 1538
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction equations, stoichiometric coefficients, intermediate compound Ni(CO)4, and approximate operational temperatures (~50 °C for formation, ~200 °C for decomposition) are chemically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Raisons de l'efficacité et avantages du procédé",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why vapour phase refining is effective: physical separation facilitated by phase change, lower energy consumption compared to smelting or electrolysis, and the carrier role of the reagent.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Pourquoi ça marche bien ?",
+            "start": 1540,
+            "end": 1569
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Le composé volatil permet une **séparation physique** très efficace (le gaz s’éloigne des impuretés solides).",
+            "start": 1570,
+            "end": 1681
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- On évite les méthodes classiques de fusion ou d’électrolyse qui consomment beaucoup d’énergie.",
+            "start": 1682,
+            "end": 1778
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Le monoxyde de carbone joue le rôle de « transporteur » : il vient chercher le nickel et le ramène pur.",
+            "start": 1779,
+            "end": 1884
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The technical explanations of phase separation and cyclic utilization of the carrier gas are scientifically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Récapitulatif des points clés à retenir",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1",
+          "s3"
+        ],
+        "rationale": "Summarizes key takeaways (difference from classical distillation, chemical selectivity, limitations to certain metals) and provides an interactive closing prompt.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Points importants à retenir",
+            "start": 1886,
+            "end": 1917
+          },
+          {
+            "id": "p24",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Ce n’est pas une distillation classique (on ne sépare pas des liquides). C’est une réaction chimique qui crée un gaz intermédiaire.",
+            "start": 1918,
+            "end": 2051
+          },
+          {
+            "id": "p25",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Le procédé fonctionne seulement pour les métaux capables de former des composés volatils stables (nickel, et dans une moindre mesure cobalt ou fer).",
+            "start": 2052,
+            "end": 2202
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- C’est une méthode très sélective : les impuretés qui ne réagissent pas restent derrière.",
+            "start": 2203,
+            "end": 2293
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as compris le principe ? Si tu veux, je peux te faire un schéma simple, te donner les équations avec les états physiques, ou comparer avec d’autres méthodes de raffinage (électrolyse, fusion par zone…). Dis-moi ce qui t’intéresse !",
+            "start": 2295,
+            "end": 2529
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap correctly summarizes the distinction from physical distillation and the high selectivity of the chemical reaction.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-native\\grok-4.3__5443b4085158.json",
+    "original_sha256": "6ab09c5e259a77fdd5479e6612d351036583756220928e58bd3c329ab596309c",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 27,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "ANALOGY": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 27,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 4,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,556 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "5775ef0aea0c63e5ad3d5bcb07156ed34aa2a9e4aadd96f39ccdd94784ecb97a",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "Vapour phase refining of metals (principles, Mond process, advantages, and limitations)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The explanation directly addresses vapour phase refining in metallurgy, including its general operating principle, the Mond process for nickel, its benefits, and its specific applicability.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "General principle of vapour phase refining"
+      },
+      {
+        "id": "s2",
+        "label": "Salt water boiling analogy"
+      },
+      {
+        "id": "s3",
+        "label": "Chemical mechanism of vapour phase refining"
+      },
+      {
+        "id": "s4",
+        "label": "The Mond process for nickel purification"
+      },
+      {
+        "id": "s5",
+        "label": "Advantages of vapour phase refining"
+      },
+      {
+        "id": "s6",
+        "label": "Scope and limitations of vapour phase refining"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Basic principle of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains the fundamental concept behind vapour phase refining: converting an impure metal into a gas and condensing/re-solidifying it elsewhere in pure form.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Le raffinage en phase vapeur",
+            "start": 0,
+            "end": 30
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Le principe de base",
+            "start": 32,
+            "end": 54
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu as un métal impur, mélangé à d'autres substances, et que tu veuilles obtenir ce métal **très pur**. Le raffinage en phase vapeur est une technique astucieuse qui utilise un principe simple : ",
+            "start": 56,
+            "end": 262
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**On transforme le métal en gaz, puis on le refait redevenir solide (ou liquide) ailleurs, pur.**",
+            "start": 264,
+            "end": 361
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The introductory summary accurately states the core principle of vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Distillation of salt water analogy",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Compares vapour phase refining to the distillation of salt water, where boiling produces pure water vapor leaving behind impurities.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "Pense à l'eau salée. Si tu la fais bouillir, la vapeur d'eau qui s'échappe ne contient **pas de sel** ! Le sel reste dans le récipient. Si tu récupères cette vapeur et que tu la refroidis, tu obtiens de l'eau pure, sans sel."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Une analogie simple",
+            "start": 363,
+            "end": 385
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pense à l'eau salée. Si tu la fais bouillir, la vapeur d'eau qui s'échappe ne contient **pas de sel** ! Le sel reste dans le récipient. Si tu récupères cette vapeur et que tu la refroidis, tu obtiens de l'eau pure, sans sel.",
+            "start": 387,
+            "end": 611
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C'est exactement le même principe pour purifier certains métaux !",
+            "start": 613,
+            "end": 678
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy of boiling salt water to leave non-volatile salts behind accurately parallels the separation based on volatility.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Chemical mechanism of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains how the metal is converted via chemical reaction into a volatile compound and then regenerated in pure solid form by reversing the reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Comment ça marche concrètement ?",
+            "start": 680,
+            "end": 715
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le métal impur est transformé en un **composé volatil** (qui se transforme facilement en gaz), grâce à une réaction chimique. Ce gaz est ensuite transporté vers un autre endroit, où on inverse la réaction pour récupérer le métal **pur** sous forme solide.",
+            "start": 717,
+            "end": 972
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately presents the general two-step chemical mechanism of vapour phase refining (formation of volatile compound and subsequent decomposition).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Mond process for the purification of nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Illustrates vapour phase refining using the classic industrial Mond process for nickel with specific reaction steps, conditions, and word equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple célèbre : le procédé Mond (purification du nickel)",
+            "start": 974,
+            "end": 1036
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Étape 1 - Formation du gaz** : On fait réagir du nickel impur avec du monoxyde de carbone (CO) à une température modérée (environ 50-60°C) :",
+            "start": 1038,
+            "end": 1183
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Nickel (impur) + CO → Tétracarbonyle de nickel (gaz)",
+            "start": 1188,
+            "end": 1243
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Les impuretés, elles, ne réagissent pas avec le CO et restent solides !",
+            "start": 1245,
+            "end": 1319
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Étape 2 - Transport** : Ce gaz est envoyé dans une autre zone.",
+            "start": 1321,
+            "end": 1388
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Étape 3 - Décomposition** : À une température plus élevée (environ 200°C), le gaz se décompose et redonne :",
+            "start": 1390,
+            "end": 1502
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Tétracarbonyle de nickel → Nickel (pur, solide) + CO (qui repart pour un nouveau cycle !)",
+            "start": 1504,
+            "end": 1596
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction temperatures (50-60°C for tetracarbonylnickel formation, ~200°C for decomposition) and reaction stages accurately reflect the Mond process.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Advantages of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents three key advantages of vapour phase refining: high purity, cost-effectiveness through reagent recycling, and chemical selectivity.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Pourquoi cette méthode est-elle intéressante ?",
+            "start": 1598,
+            "end": 1647
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Très efficace** : on peut obtenir des métaux avec une pureté supérieure à 99,9% !",
+            "start": 1649,
+            "end": 1734
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Économique** : le monoxyde de carbone est récupéré et réutilisé en boucle.",
+            "start": 1735,
+            "end": 1813
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Sélective** : seul le métal qu'on veut purifier forme le composé volatil, les impuretés restent derrière.",
+            "start": 1814,
+            "end": 1923
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The advantages of high product purity (>99.9%), reagent recyclability (CO), and selective volatile compound formation are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CAVEAT",
+        "label": "Applicability and limitations of vapour phase refining",
+        "attributes": {
+          "subtype": "limitation"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Notes that the method is not universal and only applies to metals capable of forming volatile compounds under accessible conditions (e.g., Ni, Ti, Zr).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Un point clé à retenir",
+            "start": 1925,
+            "end": 1950
+          },
+          {
+            "id": "p22",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "limitation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cette technique fonctionne uniquement pour les métaux capables de former des **composés volatils** avec certains gaz (comme le CO). Ce n'est donc pas une méthode universelle, mais elle est parfaite pour certains métaux comme le **nickel**, le **titane** ou le **zirconium**.",
+            "start": 1952,
+            "end": 2226
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2228,
+            "end": 2231
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce que cette explication te semble claire ? Veux-tu que j'approfondisse un exemple en particulier ou que je te parle d'autres méthodes de purification des métaux ?",
+            "start": 2233,
+            "end": 2400
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the primary constraint (formation of a volatile compound) and cites valid examples (nickel via Mond process; titanium and zirconium via Van Arkel-de Boer process).",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-native\\claude-sonnet-5__eacd841d6757.json",
+    "original_sha256": "b5e09afaf455a87626c92d8394a27d83f8490191c793435dcdd0e1ea8fca7f8f",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 24,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "EXAMPLE": 1,
+      "CAVEAT": 1
+    },
+    "nested_passages": 24,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 5,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,4 +1,4 @@
-"""Translate English/Tamil experiment responses and extract content inventories."""
+"""Translate multilingual experiment responses and extract content inventories."""
 import argparse
 import asyncio
 import csv
@@ -83,7 +83,7 @@ async def process(stage, source, model, output, timeout, call=None):
     record = dict(stage=stage, fingerprint=signature, source_path=source['path'],
                   source_sha256=source['source_sha256'], job=source['job'], model=model['id'],
                   started_at=api.now(), status='failed')
-    if stage == 'translate' and not translation.needs_translation(source['text']):
+    if stage == 'translate' and not translation.needs_translation(source['text'], source['job'].get('response_language_name')):
         record.update(status='completed', mode='english_passthrough', english_text=source['text'],
                       finished_at=api.now())
         api.write_json(path, record)
@@ -91,7 +91,7 @@ async def process(stage, source, model, output, timeout, call=None):
     instructions = translation.PROMPT if stage == 'translate' else extraction.PROMPT
     request = dict(model=model['litellm_model'], store=False,
                    input=[{'role': 'system', 'content': instructions},
-                          {'role': 'user', 'content': json.dumps({'explanation': source['text'] if stage == 'translate' else english}, ensure_ascii=False)}])
+                          {'role': 'user', 'content': json.dumps(translation.payload(source['text'], source['job'].get('response_language_name'), source['job'].get('subject')) if stage == 'translate' else {'explanation': english}, ensure_ascii=False)}])
     if previous and previous.get('status') == 'failed' and previous.get('response'):
         last_text = api.output_text(previous['response'])
         feedback = 'The previous attempt failed validation. Return a complete replacement.'
@@ -104,7 +104,7 @@ async def process(stage, source, model, output, timeout, call=None):
                          'including Markdown bold markers, LaTeX escapes and whitespace. Use shorter '
                          'quotes if needed. Do not paraphrase evidence. Retain the full inventory.')
         else:
-            feedback += ' Translate every Tamil word, including parenthetical terms, into English.'
+            feedback += ' Translate all prose into English, preserving source strings only as allowed by the system prompt.'
         request['input'].extend([{'role': 'assistant', 'content': last_text},
                                  {'role': 'user', 'content': feedback}])
     attempt = uuid.uuid4().hex
@@ -206,7 +206,7 @@ def main(argv=None):
         items = items[:args.limit]
     models = {'translate': model_config(args.translator), 'extract': model_config(args.judge)}
     stages = ['translate', 'extract'] if args.stage == 'all' else [args.stage]
-    print(f"Sources: {len(items)}; Tamil/mixed: {sum(translation.needs_translation(s['text']) for s in items)}; output: {output}")
+    print(f"Sources: {len(items)}; Translation candidates: {sum(translation.needs_translation(s['text'], s['job'].get('response_language_name')) for s in items)}; output: {output}")
     if args.dry_run:
         print('Validated sources and model configuration. No API calls or writes.')
         return 0

@@ -1,0 +1,229 @@
+{
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and rationale of covalent radius",
+      "excerpts": [
+        {
+          "text": "Covalent radius is a way to measure the size of an atom when it forms a covalent bond with another atom.\n\nThink of an atom as a tiny nucleus (made of protons and neutrons) surrounded by a fuzzy cloud of electrons. Atoms don’t have a hard edge like a basketball, so scientists need a practical way to say “this atom is this big.” One common way is to look at atoms that are actually bonded together.\n\nWhen two identical atoms share electrons in a covalent bond (like the two chlorine atoms in a Cl₂ molecule), they sit at a certain distance from each other. That distance is called the bond length. The covalent radius is simply **half** of that bond length.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Atoms don’t have a hard edge like a basketball"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition of covalent radius as half the internuclear distance between two identical covalently bonded atoms, along with the explanation of why atomic boundaries cannot be measured directly due to fuzzy electron clouds, is scientifically accurate.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 0,
+          "end": 657,
+          "text": "Covalent radius is a way to measure the size of an atom when it forms a covalent bond with another atom.\n\nThink of an atom as a tiny nucleus (made of protons and neutrons) surrounded by a fuzzy cloud of electrons. Atoms don’t have a hard edge like a basketball, so scientists need a practical way to say “this atom is this big.” One common way is to look at atoms that are actually bonded together.\n\nWhen two identical atoms share electrons in a covalent bond (like the two chlorine atoms in a Cl₂ molecule), they sit at a certain distance from each other. That distance is called the bond length. The covalent radius is simply **half** of that bond length."
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Worked calculation of chlorine covalent radius",
+      "excerpts": [
+        {
+          "text": "- In a chlorine molecule, the two nuclei are 198 picometers apart.\n- Half of that distance = 99 picometers.\n- So the covalent radius of chlorine is 99 pm.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The experimental bond length of Cl2 is 198 pm, and half this distance gives 99 pm, which is the standard accepted covalent radius of chlorine.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 678,
+          "end": 832,
+          "text": "- In a chlorine molecule, the two nuclei are 198 picometers apart.\n- Half of that distance = 99 picometers.\n- So the covalent radius of chlorine is 99 pm."
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Illustrative example of hydrogen covalent radius",
+      "excerpts": [
+        {
+          "text": "This works for other non-metal elements too. For hydrogen in H₂, the covalent radius is about 31 pm.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The covalent radius specifically derived from the H2 molecule is half the H-H bond distance (74 pm), which is 37 pm, rather than 31 pm.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "For hydrogen in H₂, the covalent radius is about 31 pm."
+              }
+            ],
+            "description": "In an H₂ molecule, the internuclear distance (bond length) is approximately 74 pm, so half that distance is approximately 37 pm. The value of 31 pm is an empirical single-bond covalent radius derived from statistical crystal database analyses (e.g., Cordero et al., 2008), not the covalent radius calculated from H₂ as claimed.",
+            "correction": "For hydrogen in H₂, the bond length is about 74 pm, so its covalent radius is about 37 pm (or note that tabulated single-bond covalent radii across various molecules give about 31–32 pm).",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 834,
+          "end": 934,
+          "text": "This works for other non-metal elements too. For hydrogen in H₂, the covalent radius is about 31 pm."
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Illustrative example of oxygen covalent radius",
+      "excerpts": [
+        {
+          "text": "For oxygen in O₂, it’s about 66 pm.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text attributes the covalent radius of 66 pm to O2, but O2 has a double bond (length ~121 pm, half ~60.5 pm); 66 pm is the single-bond covalent radius of oxygen.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "For oxygen in O₂, it’s about 66 pm."
+              }
+            ],
+            "description": "In an O₂ molecule, the oxygen atoms share a double bond with a bond length of approximately 121 pm, half of which is about 60.5 pm. The value of 66 pm is the single-bond covalent radius of oxygen, which is derived from single-bonded molecules (such as H₂O₂ or single-bonded carbon-oxygen compounds), not from O₂.",
+            "correction": "For oxygen, the single-bond covalent radius is about 66 pm (measured from single bonds), whereas half of the double-bond length in O₂ is about 60.5 pm.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 935,
+          "end": 970,
+          "text": "For oxygen in O₂, it’s about 66 pm."
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "kind": "CONCEPT",
+      "label": "Significance and periodic trends of covalent radius",
+      "excerpts": [
+        {
+          "text": "Covalent radius helps us predict:\n- How big atoms are when they form molecules\n- How long bonds will be\n- Trends across the periodic table (atoms get smaller as you move right across a row because the nucleus pulls the electrons tighter; they get bigger as you go down a column because extra electron shells are added)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The predictive utility and the periodic trends across periods and down groups, including the underlying reasons (increasing effective nuclear charge pulling electrons tighter across a row, and addition of electron shells down a column), are factually correct.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 993,
+          "end": 1311,
+          "text": "Covalent radius helps us predict:\n- How big atoms are when they form molecules\n- How long bonds will be\n- Trends across the periodic table (atoms get smaller as you move right across a row because the nucleus pulls the electrons tighter; they get bigger as you go down a column because extra electron shells are added)"
+        }
+      ]
+    },
+    {
+      "id": "u6",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of covalent radius definition",
+      "excerpts": [
+        {
+          "text": "So, in short: covalent radius = half the distance between two identical atoms that are covalently bonded. It’s a practical “size” we assign to an atom based on real chemical bonds rather than trying to measure a single, isolated atom.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The recap accurately synthesizes the core operational definition and rationale of covalent radius.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1313,
+          "end": 1547,
+          "text": "So, in short: covalent radius = half the distance between two identical atoms that are covalently bonded. It’s a practical “size” we assign to an atom based on real chemical bonds rather than trying to measure a single, isolated atom."
+        }
+      ]
+    }
+  ],
+  "unassigned_spans": [
+    {
+      "start": 657,
+      "end": 678,
+      "text": "\n\n### Simple Example\n"
+    },
+    {
+      "start": 970,
+      "end": 993,
+      "text": "\n\n### Why This Matters\n"
+    }
+  ],
+  "note": "Gaps require semantic review; exact alignment does not prove correct boundaries."
+}

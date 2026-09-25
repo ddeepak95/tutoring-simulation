@@ -1,0 +1,166 @@
+{
+  "topic_relevance": {
+    "requested_topic": "covalent radius",
+    "observed_topic": "Definition, calculation method, worked example, and significance of covalent radius",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly addresses covalent radius, explaining its qualitative definition, the method used to determine it from internuclear distance, an illustrative worked example with Cl2, and its significance in chemistry.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of covalent radius and covalent bond",
+      "excerpts": [
+        {
+          "text": "**Qu'est-ce qu'un rayon covalent ?**\n\nLe rayon covalent est une mesure de la taille d'un atome lorsqu'il est lié à d'autres atomes par des liaisons covalentes. Mais qu'est-ce qu'une liaison covalente ? C'est une liaison chimique qui se forme lorsque deux atomes partagent des électrons pour former une molécule.\n\n**Comment définir le rayon covalent ?**\n\nImagine que tu as deux atomes qui se lient pour former une molécule. Le rayon covalent est la distance entre le noyau de l'atome et le point où les électrons sont partagés avec l'autre atome. C'est comme si tu mesurais la \"taille\" de l'atome lorsqu'il est lié à un autre atome.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The unit introduces covalent radius and covalent bonding appropriately for high school level. While electron sharing occurs across a molecular orbital region rather than at a single sharp point, this is an acceptable introductory conceptual simplification.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "PROCEDURE",
+      "label": "Method for calculating covalent radius",
+      "excerpts": [
+        {
+          "text": "**Comment calculer le rayon covalent ?**\n\nLe rayon covalent est généralement calculé en mesurant la distance entre les noyaux de deux atomes liés par une liaison covalente. On divise ensuite cette distance par 2 pour obtenir le rayon covalent de chaque atome.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The stated procedure omits the essential condition that the bonded atoms must be identical (a homonuclear bond). Dividing the internuclear distance between two different bonded atoms by 2 does not yield the covalent radius of each atom.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "mesurant la distance entre les noyaux de deux atomes liés par une liaison covalente. On divise ensuite cette distance par 2 pour obtenir le rayon covalent de chaque atome."
+              }
+            ],
+            "description": "The method states that dividing the distance between any two bonded atoms by 2 yields the covalent radius of each atom. This rule is strictly valid only when the two bonded atoms are identical (homonuclear covalent bond). For heteronuclear bonds, dividing by 2 does not give the covalent radius of either atom.",
+            "correction": "Le rayon covalent est généralement déterminé en mesurant la distance entre les noyaux de deux atomes identiques liés par une liaison covalente simple, puis en divisant cette distance par 2.",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Calculation of the covalent radius of chlorine in Cl2",
+      "excerpts": [
+        {
+          "text": "**Exemple concret**\n\nPrenons l'exemple de la molécule de chlore (Cl2). La distance entre les deux noyaux de chlore est d'environ 0,198 nanomètres (nm). Pour calculer le rayon covalent du chlore, on divise cette distance par 2, ce qui nous donne un rayon covalent d'environ 0,099 nm.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The bond length (0.198 nm) and calculated covalent radius of chlorine (0.099 nm = 99 pm) are factually correct and properly calculated.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Importance of covalent radius in predicting molecular structure and properties",
+      "excerpts": [
+        {
+          "text": "**Pourquoi le rayon covalent est-il important ?**\n\nLe rayon covalent est important car il nous aide à comprendre la structure des molécules et la façon dont les atomes s'agencent dans l'espace. Cela nous permet également de prédire les propriétés physiques et chimiques des substances.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The unit correctly states the utility of covalent radius in understanding molecular geometry and predicting properties.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of covalent radius definition, calculation, and utility",
+      "excerpts": [
+        {
+          "text": "**En résumé**\n\n* Le rayon covalent est une mesure de la taille d'un atome lorsqu'il est lié à d'autres atomes par des liaisons covalentes.\n* Il est calculé en mesurant la distance entre les noyaux de deux atomes liés et en divisant cette distance par 2.\n* Le rayon covalent est important pour comprendre la structure des molécules et prédire les propriétés des substances.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The second bullet repeats the omission that the two bonded atoms must be identical for the calculation to be valid.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "Il est calculé en mesurant la distance entre les noyaux de deux atomes liés et en divisant cette distance par 2."
+              }
+            ],
+            "description": "Repeats the erroneous claim that dividing the internuclear distance of any two bonded atoms by 2 gives the covalent radius, omitting that the atoms must be identical.",
+            "correction": "Il est calculé en mesurant la distance entre les noyaux de deux atomes identiques liés et en divisant cette distance par 2.",
+            "severity": "minor"
+          }
+        ]
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1",
+        "u2"
+      ],
+      "issue": "Whether the calculation section ('Comment calculer le rayon covalent ?') should be merged with the definition as a single CONCEPT unit or split into a PROCEDURE unit.",
+      "proposed_resolution": "Separated into a PROCEDURE unit because it explicitly presents a general, reusable two-step operational method for finding the numerical value, distinguishing it from the conceptual definitions in u1."
+    }
+  ]
+}

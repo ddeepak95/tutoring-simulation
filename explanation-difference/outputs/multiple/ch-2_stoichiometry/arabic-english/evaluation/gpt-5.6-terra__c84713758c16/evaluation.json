@@ -1,0 +1,3240 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7bfaa1c048939b7c781680d8be9da8eb3fdbe22f69e20dad857a0d34f3afa49e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12",
+        "u13",
+        "u14",
+        "u15",
+        "u16",
+        "u17"
+      ],
+      "reason": "The entire response is dedicated to explaining stoichiometry in Arabic, covering chemical balancing, the mole concept, molar mass, calculation procedures, worked examples, mole ratios, limiting reactants, and reaction yields.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Chemical Equations and Coefficients"
+      },
+      {
+        "id": "s3",
+        "label": "The Mole Concept and Avogadro's Number"
+      },
+      {
+        "id": "s4",
+        "label": "Molar Mass"
+      },
+      {
+        "id": "s5",
+        "label": "Steps for Solving Stoichiometry Problems"
+      },
+      {
+        "id": "s6",
+        "label": "Worked Stoichiometric Calculations"
+      },
+      {
+        "id": "s7",
+        "label": "Mole Ratios"
+      },
+      {
+        "id": "s8",
+        "label": "Limiting Reactants"
+      },
+      {
+        "id": "s9",
+        "label": "Theoretical, Actual, and Percent Yield"
+      },
+      {
+        "id": "s10",
+        "label": "Stoichiometry Summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of Stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry and explains its core purpose in relating quantities of reactants and products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الستويكيومترية (Stoichiometry)** هي فرع من الكيمياء يشرح **العلاقات الكمية بين المواد المتفاعلة والنواتج** في التفاعل الكيميائي.  ",
+            "start": 0,
+            "end": 132
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بعبارة بسيطة: تساعدنا على معرفة **كمية مادة نحتاجها** أو **كمية مادة ستتكوّن** عند حدوث تفاعل.",
+            "start": 133,
+            "end": 227
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately states that stoichiometry studies the quantitative relationships between reactants and products in chemical reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Importance of Balanced Equations and Coefficients",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why chemical equations must be balanced and defines stoichiometric coefficients using the formation of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 229,
+            "end": 232
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 1. لماذا نحتاج إلى معادلة كيميائية موزونة؟",
+            "start": 234,
+            "end": 279
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "انظر إلى تفاعل تكوين الماء:",
+            "start": 281,
+            "end": 308
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 310,
+            "end": 312
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2 + O_2 \\rightarrow H_2O",
+            "start": 313,
+            "end": 339
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 340,
+            "end": 342
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذه المعادلة غير موزونة؛ لأن عدد ذرات الأكسجين ليس متساوياً:",
+            "start": 344,
+            "end": 404
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- في اليسار: ذرتان أكسجين في \\(O_2\\)",
+            "start": 406,
+            "end": 442
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- في اليمين: ذرة أكسجين واحدة في \\(H_2O\\)",
+            "start": 443,
+            "end": 484
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المعادلة الموزونة هي:",
+            "start": 486,
+            "end": 507
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 509,
+            "end": 511
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 512,
+            "end": 540
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 541,
+            "end": 543
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ومعناها:",
+            "start": 545,
+            "end": 553
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **2 مول** من غاز الهيدروجين تتفاعل مع",
+            "start": 555,
+            "end": 594
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **1 مول** من غاز الأكسجين لتنتج",
+            "start": 595,
+            "end": 628
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **2 مول** من الماء.",
+            "start": 629,
+            "end": 650
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الأرقام الموجودة أمام الصيغ الكيميائية تسمى **المعاملات**، وهي أساس مسائل الستويكيومترية.",
+            "start": 652,
+            "end": 741
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation of balancing the water synthesis reaction, the mole relationships, and the role of coefficients is chemically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CAVEAT",
+        "label": "Misconception: Modifying Chemical Subscripts",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Warns students against changing chemical subscripts rather than adjusting stoichiometric coefficients.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> ملاحظة مهمة: لا نغيّر الأرقام الصغيرة داخل الصيغة، مثل \\(H_2O\\)، لأن ذلك يغيّر المادة نفسها. نغيّر فقط المعاملات أمام المواد.",
+            "start": 743,
+            "end": 870
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Subscripts in chemical formulas define identity and cannot be altered when balancing equations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "The Mole and Avogadro's Number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the mole as a counting unit in chemistry using Avogadro's number and compares it to a dozen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p24",
+              "quote": "مثلما نستخدم “الدزينة” لعدّ 12 قطعة"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 872,
+            "end": 875
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 2. ما هو المول؟",
+            "start": 877,
+            "end": 895
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المول هو وحدة تستخدم لقياس كمية المادة، مثلما نستخدم “الدزينة” لعدّ 12 قطعة.",
+            "start": 897,
+            "end": 973
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لكن:",
+            "start": 975,
+            "end": 979
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 981,
+            "end": 983
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ مول} = 6.02 \\times 10^{23}",
+            "start": 984,
+            "end": 1019
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1020,
+            "end": 1022
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "جسيمًا، مثل ذرات أو جزيئات أو أيونات.",
+            "start": 1024,
+            "end": 1061
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذا العدد يسمى **عدد أفوجادرو**.",
+            "start": 1063,
+            "end": 1095
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole and Avogadro's number (6.02 * 10^23 particles) is accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Avogadro's Number Applied to Iron Atoms",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the mole concept for elemental iron atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "مثال:",
+            "start": 1097,
+            "end": 1102
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من ذرات الحديد = \\(6.02 \\times 10^{23}\\) ذرة حديد.",
+            "start": 1104,
+            "end": 1162
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "One mole of iron atoms contains 6.02 * 10^23 iron atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Avogadro's Number Applied to Water Molecules",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the mole concept for molecular water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من جزيئات الماء = \\(6.02 \\times 10^{23}\\) جزيء ماء.",
+            "start": 1163,
+            "end": 1222
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "One mole of water molecules contains 6.02 * 10^23 water molecules.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Concept of Molar Mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines molar mass, specifies its unit (g/mol), and explains that it is computed from periodic table atomic masses.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1224,
+            "end": 1227
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 3. الكتلة المولية",
+            "start": 1229,
+            "end": 1249
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الكتلة المولية** هي كتلة مول واحد من المادة، وتقاس بوحدة:",
+            "start": 1251,
+            "end": 1310
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1312,
+            "end": 1314
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{غرام/مول } (g/mol)",
+            "start": 1315,
+            "end": 1339
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1340,
+            "end": 1342
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نحسبها باستخدام الكتل الذرية من الجدول الدوري.",
+            "start": 1344,
+            "end": 1390
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of molar mass as the mass of one mole in grams per mole is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Calculating Molar Mass of Water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Works through calculating the molar mass of H2O from constituent atomic masses.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال: الكتلة المولية للماء \\(H_2O\\)",
+            "start": 1392,
+            "end": 1431
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- كتلة الهيدروجين \\(H = 1\\ g/mol\\)",
+            "start": 1433,
+            "end": 1467
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- كتلة الأكسجين \\(O = 16\\ g/mol\\)",
+            "start": 1468,
+            "end": 1501
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1503,
+            "end": 1505
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(H_2O) = 2(1) + 16 = 18\\ g/mol",
+            "start": 1506,
+            "end": 1537
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1538,
+            "end": 1540
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذن كتلة مول واحد من الماء تساوي:",
+            "start": 1542,
+            "end": 1575
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1577,
+            "end": 1579
+          },
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "18\\ g",
+            "start": 1580,
+            "end": 1585
+          },
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1586,
+            "end": 1588
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculation 2(1) + 16 = 18 g/mol is fully correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "PROCEDURE",
+        "label": "Steps to Solve Stoichiometry Problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents the general algorithmic steps and pathway for solving stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p51",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1590,
+            "end": 1593
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# 4. خطوات حل مسائل الستويكيومترية",
+            "start": 1595,
+            "end": 1629
+          },
+          {
+            "id": "p53",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في أغلب المسائل نتبع هذا المسار:",
+            "start": 1631,
+            "end": 1663
+          },
+          {
+            "id": "p54",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1665,
+            "end": 1667
+          },
+          {
+            "id": "p55",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{الكتلة} \\rightarrow \\text{المولات} \\rightarrow \\text{النسبة المولية} \\rightarrow \\text{المولات المطلوبة} \\rightarrow \\text{الكتلة}",
+            "start": 1668,
+            "end": 1804
+          },
+          {
+            "id": "p56",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1805,
+            "end": 1807
+          },
+          {
+            "id": "p57",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أي:",
+            "start": 1809,
+            "end": 1812
+          },
+          {
+            "id": "p58",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **وازن المعادلة الكيميائية.**",
+            "start": 1814,
+            "end": 1846
+          },
+          {
+            "id": "p59",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. حوّل الكتلة المعطاة إلى عدد مولات.",
+            "start": 1847,
+            "end": 1884
+          },
+          {
+            "id": "p60",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. استخدم معاملات المعادلة لإيجاد النسبة المولية.",
+            "start": 1885,
+            "end": 1934
+          },
+          {
+            "id": "p61",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. حوّل عدد المولات الناتج إلى كتلة أو حجم أو عدد جسيمات، حسب المطلوب.",
+            "start": 1935,
+            "end": 2005
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The standard sequence (balance equation -> convert to moles -> mole ratio -> convert to desired quantity) is completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Water Produced from Hydrogen Gas",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Demonstrates calculating product mass from reactant mass: calculating mass of H2O formed from 4 g of H2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p62",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2007,
+            "end": 2010
+          },
+          {
+            "id": "p63",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# مثال 1: حساب كتلة ناتج من كتلة متفاعل",
+            "start": 2012,
+            "end": 2051
+          },
+          {
+            "id": "p64",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لدينا التفاعل:",
+            "start": 2053,
+            "end": 2067
+          },
+          {
+            "id": "p65",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2069,
+            "end": 2071
+          },
+          {
+            "id": "p66",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 2072,
+            "end": 2100
+          },
+          {
+            "id": "p67",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2101,
+            "end": 2103
+          },
+          {
+            "id": "p68",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذا تفاعل **4 غرامات من الهيدروجين** بشكل كامل، فما كتلة الماء الناتجة؟",
+            "start": 2105,
+            "end": 2176
+          },
+          {
+            "id": "p69",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## الخطوة 1: تحويل كتلة الهيدروجين إلى مولات",
+            "start": 2178,
+            "end": 2222
+          },
+          {
+            "id": "p70",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الكتلة المولية للهيدروجين الجزيئي \\(H_2\\):",
+            "start": 2224,
+            "end": 2266
+          },
+          {
+            "id": "p71",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2268,
+            "end": 2270
+          },
+          {
+            "id": "p72",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(H_2)=2\\ g/mol",
+            "start": 2271,
+            "end": 2286
+          },
+          {
+            "id": "p73",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2287,
+            "end": 2289
+          },
+          {
+            "id": "p74",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2291,
+            "end": 2293
+          },
+          {
+            "id": "p75",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{عدد مولات } H_2 = \\frac{4}{2}=2\\ mol",
+            "start": 2294,
+            "end": 2336
+          },
+          {
+            "id": "p76",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2337,
+            "end": 2339
+          },
+          {
+            "id": "p77",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## الخطوة 2: استخدام النسبة المولية",
+            "start": 2341,
+            "end": 2376
+          },
+          {
+            "id": "p78",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "من المعادلة:",
+            "start": 2378,
+            "end": 2390
+          },
+          {
+            "id": "p79",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2392,
+            "end": 2394
+          },
+          {
+            "id": "p80",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 \\rightarrow 2H_2O",
+            "start": 2395,
+            "end": 2417
+          },
+          {
+            "id": "p81",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2418,
+            "end": 2420
+          },
+          {
+            "id": "p82",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "النسبة بين \\(H_2\\) و\\(H_2O\\) هي:",
+            "start": 2422,
+            "end": 2454
+          },
+          {
+            "id": "p83",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2456,
+            "end": 2458
+          },
+          {
+            "id": "p84",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{2\\ mol\\ H_2O}{2\\ mol\\ H_2}=1",
+            "start": 2459,
+            "end": 2493
+          },
+          {
+            "id": "p85",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2494,
+            "end": 2496
+          },
+          {
+            "id": "p86",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذن:",
+            "start": 2498,
+            "end": 2502
+          },
+          {
+            "id": "p87",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2504,
+            "end": 2506
+          },
+          {
+            "id": "p88",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2\\ mol\\ H_2 \\rightarrow 2\\ mol\\ H_2O",
+            "start": 2507,
+            "end": 2543
+          },
+          {
+            "id": "p89",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2544,
+            "end": 2546
+          },
+          {
+            "id": "p90",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## الخطوة 3: تحويل مولات الماء إلى كتلة",
+            "start": 2548,
+            "end": 2587
+          },
+          {
+            "id": "p91",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الكتلة المولية للماء:",
+            "start": 2589,
+            "end": 2610
+          },
+          {
+            "id": "p92",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2612,
+            "end": 2614
+          },
+          {
+            "id": "p93",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(H_2O)=18\\ g/mol",
+            "start": 2615,
+            "end": 2632
+          },
+          {
+            "id": "p94",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2633,
+            "end": 2635
+          },
+          {
+            "id": "p95",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2637,
+            "end": 2639
+          },
+          {
+            "id": "p96",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{كتلة الماء} = 2 \\times 18 = 36\\ g",
+            "start": 2640,
+            "end": 2679
+          },
+          {
+            "id": "p97",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2680,
+            "end": 2682
+          },
+          {
+            "id": "p98",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الإجابة:",
+            "start": 2684,
+            "end": 2696
+          },
+          {
+            "id": "p99",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2698,
+            "end": 2700
+          },
+          {
+            "id": "p100",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{36\\ غرامًا من الماء}",
+            "start": 2701,
+            "end": 2728
+          },
+          {
+            "id": "p101",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2729,
+            "end": 2731
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations are exact: 4 g / 2 g/mol = 2 mol H2; mole ratio 2:2 gives 2 mol H2O; 2 mol * 18 g/mol = 36 g H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Carbon Dioxide from Methane Combustion",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Demonstrates finding mass of CO2 produced by the combustion of 16 g of CH4.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p102",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2733,
+            "end": 2736
+          },
+          {
+            "id": "p103",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# مثال 2: من كتلة مادة إلى كتلة مادة أخرى",
+            "start": 2738,
+            "end": 2779
+          },
+          {
+            "id": "p104",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "احتراق الميثان:",
+            "start": 2781,
+            "end": 2796
+          },
+          {
+            "id": "p105",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2798,
+            "end": 2800
+          },
+          {
+            "id": "p106",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CH_4 + 2O_2 \\rightarrow CO_2 + 2H_2O",
+            "start": 2801,
+            "end": 2837
+          },
+          {
+            "id": "p107",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2838,
+            "end": 2840
+          },
+          {
+            "id": "p108",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذا احترق \\(16\\ g\\) من الميثان \\(CH_4\\)، فما كتلة ثاني أكسيد الكربون \\(CO_2\\) الناتجة؟",
+            "start": 2842,
+            "end": 2928
+          },
+          {
+            "id": "p109",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 1. حساب مولات الميثان",
+            "start": 2930,
+            "end": 2954
+          },
+          {
+            "id": "p110",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الكتلة المولية للميثان:",
+            "start": 2956,
+            "end": 2979
+          },
+          {
+            "id": "p111",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2981,
+            "end": 2983
+          },
+          {
+            "id": "p112",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(CH_4)=12+4(1)=16\\ g/mol",
+            "start": 2984,
+            "end": 3009
+          },
+          {
+            "id": "p113",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3010,
+            "end": 3012
+          },
+          {
+            "id": "p114",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3014,
+            "end": 3016
+          },
+          {
+            "id": "p115",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{مولات } CH_4 = \\frac{16}{16}=1\\ mol",
+            "start": 3017,
+            "end": 3058
+          },
+          {
+            "id": "p116",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3059,
+            "end": 3061
+          },
+          {
+            "id": "p117",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 2. استخدام النسبة المولية",
+            "start": 3063,
+            "end": 3091
+          },
+          {
+            "id": "p118",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "من المعادلة:",
+            "start": 3093,
+            "end": 3105
+          },
+          {
+            "id": "p119",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3107,
+            "end": 3109
+          },
+          {
+            "id": "p120",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1CH_4 \\rightarrow 1CO_2",
+            "start": 3110,
+            "end": 3133
+          },
+          {
+            "id": "p121",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3134,
+            "end": 3136
+          },
+          {
+            "id": "p122",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذن:",
+            "start": 3138,
+            "end": 3142
+          },
+          {
+            "id": "p123",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3144,
+            "end": 3146
+          },
+          {
+            "id": "p124",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1\\ mol\\ CH_4 \\rightarrow 1\\ mol\\ CO_2",
+            "start": 3147,
+            "end": 3184
+          },
+          {
+            "id": "p125",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3185,
+            "end": 3187
+          },
+          {
+            "id": "p126",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 3. تحويل مولات \\(CO_2\\) إلى كتلة",
+            "start": 3189,
+            "end": 3224
+          },
+          {
+            "id": "p127",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3226,
+            "end": 3228
+          },
+          {
+            "id": "p128",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(CO_2)=12+2(16)=44\\ g/mol",
+            "start": 3229,
+            "end": 3255
+          },
+          {
+            "id": "p129",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3256,
+            "end": 3258
+          },
+          {
+            "id": "p130",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3260,
+            "end": 3262
+          },
+          {
+            "id": "p131",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{كتلة } CO_2=1 \\times 44=44\\ g",
+            "start": 3263,
+            "end": 3298
+          },
+          {
+            "id": "p132",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3299,
+            "end": 3301
+          },
+          {
+            "id": "p133",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الإجابة:",
+            "start": 3303,
+            "end": 3315
+          },
+          {
+            "id": "p134",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3317,
+            "end": 3319
+          },
+          {
+            "id": "p135",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{44\\ غرامًا من ثاني أكسيد الكربون}",
+            "start": 3320,
+            "end": 3360
+          },
+          {
+            "id": "p136",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3361,
+            "end": 3363
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Molar mass calculations and mole conversions are correct: 16 g CH4 = 1 mol; 1 mol CH4 yields 1 mol CO2; 1 mol CO2 * 44 g/mol = 44 g CO2.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u12",
+        "kind": "CONCEPT",
+        "label": "Constructing and Selecting Mole Ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Defines mole ratio and illustrates possible ratios from the Haber process reaction (N2 + 3H2 -> 2NH3).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p137",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3365,
+            "end": 3368
+          },
+          {
+            "id": "p138",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# 5. النسبة المولية",
+            "start": 3370,
+            "end": 3389
+          },
+          {
+            "id": "p139",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "النسبة المولية هي النسبة بين معاملات المواد في المعادلة الموزونة.",
+            "start": 3391,
+            "end": 3456
+          },
+          {
+            "id": "p140",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "مثلاً في المعادلة:",
+            "start": 3458,
+            "end": 3476
+          },
+          {
+            "id": "p141",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3478,
+            "end": 3480
+          },
+          {
+            "id": "p142",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N_2 + 3H_2 \\rightarrow 2NH_3",
+            "start": 3481,
+            "end": 3509
+          },
+          {
+            "id": "p143",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3510,
+            "end": 3512
+          },
+          {
+            "id": "p144",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "يمكننا كتابة عدة نسب مولية، مثل:",
+            "start": 3514,
+            "end": 3546
+          },
+          {
+            "id": "p145",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3548,
+            "end": 3550
+          },
+          {
+            "id": "p146",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{3\\ mol\\ H_2}{1\\ mol\\ N_2}",
+            "start": 3551,
+            "end": 3582
+          },
+          {
+            "id": "p147",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3583,
+            "end": 3585
+          },
+          {
+            "id": "p148",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أو:",
+            "start": 3587,
+            "end": 3590
+          },
+          {
+            "id": "p149",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3592,
+            "end": 3594
+          },
+          {
+            "id": "p150",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{2\\ mol\\ NH_3}{3\\ mol\\ H_2}",
+            "start": 3595,
+            "end": 3627
+          },
+          {
+            "id": "p151",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3628,
+            "end": 3630
+          },
+          {
+            "id": "p152",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أو:",
+            "start": 3632,
+            "end": 3635
+          },
+          {
+            "id": "p153",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3637,
+            "end": 3639
+          },
+          {
+            "id": "p154",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{2\\ mol\\ NH_3}{1\\ mol\\ N_2}",
+            "start": 3640,
+            "end": 3672
+          },
+          {
+            "id": "p155",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3673,
+            "end": 3675
+          },
+          {
+            "id": "p156",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نختار النسبة التي تساعدنا على التحويل من المادة المعطاة إلى المادة المطلوبة.",
+            "start": 3677,
+            "end": 3753
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of mole ratios and the derived conversion factors for the Haber process are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u13",
+        "kind": "CONCEPT",
+        "label": "Concept of the Limiting Reactant",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Defines limiting reactant and explains how it is determined by calculating the minimum yield of product.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p157",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3755,
+            "end": 3758
+          },
+          {
+            "id": "p158",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# 6. المتفاعل المحدِّد",
+            "start": 3760,
+            "end": 3782
+          },
+          {
+            "id": "p159",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أحيانًا تكون لدينا كميات من أكثر من متفاعل، لكن أحدها ينفد أولًا. هذا يسمى:",
+            "start": 3784,
+            "end": 3859
+          },
+          {
+            "id": "p160",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3861,
+            "end": 3863
+          },
+          {
+            "id": "p161",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\textbf{المتفاعل المحدِّد}",
+            "start": 3864,
+            "end": 3890
+          },
+          {
+            "id": "p162",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3891,
+            "end": 3893
+          },
+          {
+            "id": "p163",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "وهو الذي يحدد كمية الناتج النهائي.",
+            "start": 3895,
+            "end": 3929
+          },
+          {
+            "id": "p168",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في الكيمياء، نحدد المتفاعل المحدِّد بحساب كمية الناتج التي يمكن أن يعطيها كل متفاعل. المتفاعل الذي يعطي **أقل كمية من الناتج** هو المتفاعل المحدِّد.",
+            "start": 4113,
+            "end": 4261
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the limiting reactant as the reagent consumed first and yielding the lowest theoretical product is chemically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u14",
+        "kind": "ANALOGY",
+        "label": "Sandwich Analogy for Limiting Reactants",
+        "attributes": {},
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Uses a cross-domain analogy of making cheese sandwiches to explain how a limiting component dictates the maximum yield.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p167",
+              "quote": "إذا كان لديك 10 شرائح خبز و3 قطع جبن، فيمكنك صنع 3 شطائر فقط؛ لأن الجبن سينفد أولًا. الجبن هنا هو العامل المحدِّد."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p164",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "مثال بسيط: لصنع شطيرة تحتاج إلى:",
+            "start": 3931,
+            "end": 3963
+          },
+          {
+            "id": "p165",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- شريحتين خبز",
+            "start": 3965,
+            "end": 3978
+          },
+          {
+            "id": "p166",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- قطعة جبن واحدة",
+            "start": 3979,
+            "end": 3995
+          },
+          {
+            "id": "p167",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذا كان لديك 10 شرائح خبز و3 قطع جبن، فيمكنك صنع 3 شطائر فقط؛ لأن الجبن سينفد أولًا. الجبن هنا هو العامل المحدِّد.",
+            "start": 3997,
+            "end": 4111
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy clearly and correctly demonstrates the limiting reactant principle using bread slices and cheese slices.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u15",
+        "kind": "CONCEPT",
+        "label": "Theoretical Yield, Actual Yield, and Percent Yield",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s9"
+        ],
+        "rationale": "Defines theoretical yield, actual yield, and provides the formula for calculating percent yield.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p169",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4263,
+            "end": 4266
+          },
+          {
+            "id": "p170",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# 7. المردود النظري والمردود الفعلي",
+            "start": 4268,
+            "end": 4303
+          },
+          {
+            "id": "p171",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في التجارب الواقعية، لا نحصل غالبًا على الكمية الكاملة المتوقعة من الناتج.",
+            "start": 4305,
+            "end": 4379
+          },
+          {
+            "id": "p172",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **المردود النظري:** أكبر كمية يمكن توقعها حسابيًا من المعادلة.",
+            "start": 4381,
+            "end": 4445
+          },
+          {
+            "id": "p173",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **المردود الفعلي:** الكمية التي نحصل عليها فعليًا في المختبر.",
+            "start": 4446,
+            "end": 4509
+          },
+          {
+            "id": "p174",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **النسبة المئوية للمردود:**",
+            "start": 4510,
+            "end": 4539
+          },
+          {
+            "id": "p175",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4541,
+            "end": 4543
+          },
+          {
+            "id": "p176",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\%\\text{المردود}=",
+            "start": 4544,
+            "end": 4561
+          },
+          {
+            "id": "p177",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{\\text{المردود الفعلي}}{\\text{المردود النظري}}",
+            "start": 4562,
+            "end": 4613
+          },
+          {
+            "id": "p178",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\times100",
+            "start": 4614,
+            "end": 4623
+          },
+          {
+            "id": "p179",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4624,
+            "end": 4626
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Definitions of actual yield, theoretical yield, and the percent yield formula (actual / theoretical * 100) are standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u16",
+        "kind": "EXAMPLE",
+        "label": "Calculating Percent Yield",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s9"
+        ],
+        "rationale": "Applies the percent yield formula to calculate 75% yield given 15 g actual and 20 g theoretical yield.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p180",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "مثال: إذا كان المردود النظري \\(20\\ g\\)، لكنك حصلت فعليًا على \\(15\\ g\\):",
+            "start": 4628,
+            "end": 4699
+          },
+          {
+            "id": "p181",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4701,
+            "end": 4703
+          },
+          {
+            "id": "p182",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\%\\text{المردود}=\\frac{15}{20}\\times100=75\\%",
+            "start": 4704,
+            "end": 4748
+          },
+          {
+            "id": "p183",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4749,
+            "end": 4751
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculation (15 / 20) * 100 = 75% is mathematically and conceptually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u17",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of Stoichiometric Problem-Solving",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s10"
+        ],
+        "rationale": "Provides a concluding bulleted checklist and schematic flow diagram summarizing stoichiometric calculations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p184",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4753,
+            "end": 4756
+          },
+          {
+            "id": "p185",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# ملخص سريع",
+            "start": 4758,
+            "end": 4769
+          },
+          {
+            "id": "p186",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لحل أي مسألة ستويكيومترية:",
+            "start": 4771,
+            "end": 4797
+          },
+          {
+            "id": "p187",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. اكتب المعادلة الكيميائية **الموزونة**.",
+            "start": 4799,
+            "end": 4840
+          },
+          {
+            "id": "p188",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. حوّل المعطيات إلى **مولات**.",
+            "start": 4841,
+            "end": 4872
+          },
+          {
+            "id": "p189",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. استخدم **النسبة المولية** من المعادلة.",
+            "start": 4873,
+            "end": 4914
+          },
+          {
+            "id": "p190",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. حوّل النتيجة إلى الوحدة المطلوبة: غرامات، مولات، جزيئات، أو حجم غاز.",
+            "start": 4915,
+            "end": 4986
+          },
+          {
+            "id": "p191",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "5. إذا وُجد أكثر من متفاعل، تحقق من **المتفاعل المحدِّد**.",
+            "start": 4987,
+            "end": 5045
+          },
+          {
+            "id": "p192",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "يمكن تلخيص المسار الأساسي هكذا:",
+            "start": 5047,
+            "end": 5078
+          },
+          {
+            "id": "p193",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 5080,
+            "end": 5082
+          },
+          {
+            "id": "p194",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{",
+            "start": 5083,
+            "end": 5090
+          },
+          {
+            "id": "p195",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{غرامات المادة المعطاة}",
+            "start": 5091,
+            "end": 5119
+          },
+          {
+            "id": "p196",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\rightarrow",
+            "start": 5120,
+            "end": 5131
+          },
+          {
+            "id": "p197",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{مولات}",
+            "start": 5132,
+            "end": 5144
+          },
+          {
+            "id": "p198",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\rightarrow",
+            "start": 5145,
+            "end": 5156
+          },
+          {
+            "id": "p199",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{نسبة مولية}",
+            "start": 5157,
+            "end": 5174
+          },
+          {
+            "id": "p200",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\rightarrow",
+            "start": 5175,
+            "end": 5186
+          },
+          {
+            "id": "p201",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{مولات المادة المطلوبة}",
+            "start": 5187,
+            "end": 5215
+          },
+          {
+            "id": "p202",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\rightarrow",
+            "start": 5216,
+            "end": 5227
+          },
+          {
+            "id": "p203",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{غرامات المادة المطلوبة}",
+            "start": 5228,
+            "end": 5257
+          },
+          {
+            "id": "p204",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "}",
+            "start": 5258,
+            "end": 5259
+          },
+          {
+            "id": "p205",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 5260,
+            "end": 5262
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes the main steps and flow of solving stoichiometry problems.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\arabic-english\\gpt-5.6-terra__c84713758c16.json",
+    "original_sha256": "a5d57edff4d85f49abd245c39a89bdfd20533d6fb5b3f9c70967863767444678",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 17,
+    "substantive_content_units": 17,
+    "total_passages": 205,
+    "content_unit_kinds": {
+      "CONCEPT": 7,
+      "CAVEAT": 1,
+      "EXAMPLE": 6,
+      "PROCEDURE": 1,
+      "ANALOGY": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 205,
+    "unique_subtopics": 10,
+    "contextualization": {
+      "none": 15,
+      "everyday": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 17
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "32d95ee9f80c173ff92428ef5743e3a2a94e28f488165a65f7e0cfb7b9068dac",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "Linguistic definition of the Arabic plural 'نظائر' (analogues/counterparts) and its scientific application to isotopes of chemical elements",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "reason": "The response addresses the linguistic origin and scientific meaning of isotopes ('نظائر') in chemistry, fulfilling the requested topic.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Linguistic meaning of the plural 'نظائر'"
+      },
+      {
+        "id": "s2",
+        "label": "Isotopes in chemistry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Linguistic definition of 'نظائر'",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "States the linguistic forms and general meaning of the plural word 'نظائر' in the Arabic language.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p1",
+              "quote": "في اللغة العربية، تُستخدم كلمة \"نَظائر\" للدلالة على مجموعة من الأشياء التي تشترك في خاصية أو صفة معينة."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "جمع كلمة \"نَظِير\" هو \"نُظَرَاء\" أو \"نَظائر\". عندما نقول \"نَظائر\"، نعني بها أشياء متشابهة أو متطابقة في الصفات أو الخصائص. في اللغة العربية، تُستخدم كلمة \"نَظائر\" للدلالة على مجموعة من الأشياء التي تشترك في خاصية أو صفة معينة.",
+            "start": 0,
+            "end": 225
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The linguistic explanation of the plural forms and meaning of 'نظير' in Arabic is factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Chemical isotopes as an application of 'نظائر'",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates how the term 'نظائر' is applied in a specific scientific context, namely isotopes of chemical elements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "على سبيل المثال، إذا قلنا \"نَظائر العناصر الكيميائية\"، فإننا نشير إلى عناصر كيميائية لها نفس العدد الذري ولكنها تختلف في الكتلة الذرية بسبب اختلاف عدد النيوترونات في نواتها.",
+            "start": 227,
+            "end": 400
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of chemical isotopes having identical atomic numbers but differing atomic masses due to varying neutron counts is scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of contextual usage of 'نظائر'",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Concludes and summarizes the general versatility of using the term across various contexts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لذا، يمكن استخدام \"نَظائر\" في سياقات مختلفة لتعبر عن أشياء متشابهة أو متماثلة في بعض الجوانب.",
+            "start": 402,
+            "end": 495
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The concluding summary accurately synthesizes the previous explanations.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\arabic-native\\llama-4-maverick__af23e6d9066d.json",
+    "original_sha256": "11bf21644b8bfb1d862ad11a8a705c9070a7a83b2114063ec6b8e4bab57f7077",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 3,
+    "substantive_content_units": 3,
+    "total_passages": 3,
+    "content_unit_kinds": {
+      "CONCEPT": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 3,
+    "unique_subtopics": 2,
+    "contextualization": {
+      "localized": 1,
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 3
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

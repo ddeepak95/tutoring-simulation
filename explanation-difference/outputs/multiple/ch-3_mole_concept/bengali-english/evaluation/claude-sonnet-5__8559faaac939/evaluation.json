@@ -1,0 +1,1290 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "ae92d15edf306054a975a68ff64e5fb004157c51d63253b8297b789192e377c5",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12",
+        "u13"
+      ],
+      "reason": "The entire response directly and accurately explains the mole concept in Bengali, including its definition, Avogadro's number, molar mass, key calculation formulas, a worked practice example, molar volume at STP, a recap summary, and the importance of the concept in chemistry.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction to counting units and need for the mole"
+      },
+      {
+        "id": "s2",
+        "label": "Definition of mole and Avogadro's number"
+      },
+      {
+        "id": "s3",
+        "label": "Analogous counting units comparison"
+      },
+      {
+        "id": "s4",
+        "label": "Representative particle examples of one mole"
+      },
+      {
+        "id": "s5",
+        "label": "Molar mass definition and principle"
+      },
+      {
+        "id": "s6",
+        "label": "Molar mass examples"
+      },
+      {
+        "id": "s7",
+        "label": "Mole calculation formulas"
+      },
+      {
+        "id": "s8",
+        "label": "Worked practice problem on moles and molecules"
+      },
+      {
+        "id": "s9",
+        "label": "Molar volume of gases at STP"
+      },
+      {
+        "id": "s10",
+        "label": "Summary recap of the mole relationships"
+      },
+      {
+        "id": "s11",
+        "label": "Significance of the mole concept in chemistry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Analogy of everyday counting units (dozen, ream) to the mole",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the need for the mole by comparing it to everyday counting units like dozens for eggs and reams for paper.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "- ডিম গণনা করি **ডজন** (১২টি) হিসেবে"
+            },
+            {
+              "passage_id": "p5",
+              "quote": "- কাগজ গণনা করি **রিম** (৫০০ শীট) হিসেবে"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# মোল ধারণা (Mole Concept)",
+            "start": 0,
+            "end": 26
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ভূমিকা",
+            "start": 28,
+            "end": 37
+          },
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আমরা যখন কোনো জিনিস গণনা করি, তখন কিছু সুবিধাজনক একক ব্যবহার করি। যেমন:",
+            "start": 39,
+            "end": 110
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ডিম গণনা করি **ডজন** (১২টি) হিসেবে",
+            "start": 111,
+            "end": 147
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- কাগজ গণনা করি **রিম** (৫০০ শীট) হিসেবে",
+            "start": 148,
+            "end": 188
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কিন্তু পরমাণু বা অণু এত ক্ষুদ্র যে এদের সংখ্যা গণনা করতে হলে অনেক বড় একক দরকার। এই কারণেই রসায়নবিদরা **মোল (Mole)** নামক একক ব্যবহার করেন।",
+            "start": 190,
+            "end": 330
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 332,
+            "end": 335
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The comparison accurately motivates the need for a large counting unit like the mole for extremely small particles such as atoms and molecules.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition of mole and Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines what a mole is as a unit of measurement for amount of substance and introduces Avogadro's number (6.022 × 10²³).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মোল কী?",
+            "start": 337,
+            "end": 347
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**মোল** হলো পদার্থের পরিমাণ পরিমাপের একটি একক, যা দিয়ে আমরা পরমাণু, অণু, আয়ন বা কণার সংখ্যা প্রকাশ করি।",
+            "start": 349,
+            "end": 454
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### সংজ্ঞা:",
+            "start": 456,
+            "end": 467
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> ১ মোল = 6.022 × 10²³ টি কণা (পরমাণু, অণু, আয়ন ইত্যাদি)",
+            "start": 468,
+            "end": 525
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সংখ্যাটিকে বলা হয় **অ্যাভোগাড্রো সংখ্যা (Avogadro's Number)**, যা N_A দ্বারা প্রকাশ করা হয়।",
+            "start": 527,
+            "end": 623
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$N_A = 6.022 \\times 10^{23}$$",
+            "start": 625,
+            "end": 655
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 657,
+            "end": 660
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole and the numerical value and symbol for Avogadro's constant are standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "ANALOGY",
+        "label": "Tabular comparison of counting units (dozen, gross, mole)",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents a comparison table contrasting common fixed counting units (dozen, gross) with the mole.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p18",
+              "quote": "| ১ ডজন | ১২ |"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সহজ উদাহরণ দিয়ে বোঝা যাক",
+            "start": 662,
+            "end": 690
+          },
+          {
+            "id": "p16",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| একক | সংখ্যা |",
+            "start": 692,
+            "end": 708
+          },
+          {
+            "id": "p17",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|------|--------|",
+            "start": 709,
+            "end": 726
+          },
+          {
+            "id": "p18",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ১ ডজন | ১২ |",
+            "start": 727,
+            "end": 741
+          },
+          {
+            "id": "p19",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ১ গ্রস | ১৪৪ |",
+            "start": 742,
+            "end": 758
+          },
+          {
+            "id": "p20",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ১ মোল | 6.022 × 10²³ |",
+            "start": 759,
+            "end": 783
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The numerical values for 1 dozen (12), 1 gross (144), and 1 mole (6.022 × 10²³) are accurately stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Example of one mole of carbon atoms",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Illustrates the mole concept applied to a specific elemental substance: carbon atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**উদাহরণ:** ",
+            "start": 785,
+            "end": 797
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ১ মোল কার্বন পরমাণু = 6.022 × 10²³ টি কার্বন পরমাণু",
+            "start": 798,
+            "end": 851
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "1 mole of carbon atoms correctly contains 6.022 × 10²³ carbon atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Example of one mole of water molecules",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Illustrates the mole concept applied to a molecular compound: water molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ১ মোল পানির অণু = 6.022 × 10²³ টি পানির অণু",
+            "start": 852,
+            "end": 897
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 899,
+            "end": 902
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "1 mole of water molecules correctly contains 6.022 × 10²³ water molecules.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Definition and principle of molar mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains molar mass as the mass of 1 mole of a substance in g/mol and its connection to atomic/molecular mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মোলার ভর (Molar Mass)",
+            "start": 904,
+            "end": 928
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কোনো পদার্থের **১ মোল** পরিমাণের ভরকে বলা হয় **মোলার ভর**, যার একক হলো গ্রাম/মোল (g/mol)।",
+            "start": 930,
+            "end": 1020
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**নিয়ম:** কোনো মৌলের পারমাণবিক ভর (g/mol এককে) = সেই মৌলের ১ মোলের ভর",
+            "start": 1022,
+            "end": 1092
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of molar mass and its numerical equivalence to atomic/molecular mass in grams/mole is accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Molar mass of carbon",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Demonstrates the molar mass calculation and mass of 1 mole for carbon.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### উদাহরণ:",
+            "start": 1094,
+            "end": 1105
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- কার্বনের পারমাণবিক ভর = 12",
+            "start": 1106,
+            "end": 1134
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- তাই, **১ মোল কার্বনের ভর = 12 গ্রাম**",
+            "start": 1135,
+            "end": 1174
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Carbon's atomic mass is 12, so the mass of 1 mole of carbon atoms is accurately given as 12 grams.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Molar mass of water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Demonstrates the molecular mass calculation and mass of 1 mole for water (H₂O).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- পানির আণবিক ভর (H₂O) = 2(1) + 16 = 18",
+            "start": 1176,
+            "end": 1215
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- তাই, **১ মোল পানির ভর = 18 গ্রাম**",
+            "start": 1216,
+            "end": 1252
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1254,
+            "end": 1257
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Water's molecular mass is correctly calculated as 2(1) + 16 = 18, and 1 mole of water has a mass of 18 grams.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "CONCEPT",
+        "label": "Formulas for calculating moles and number of particles",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Presents the mathematical formulas relating mass, molar mass, mole count (n = W/M), and number of particles (N = n × N_A).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## গুরুত্বপূর্ণ সূত্র",
+            "start": 1259,
+            "end": 1280
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{মোল সংখ্যা (n)} = \\frac{\\text{প্রদত্ত ভর (গ্রাম)}}{\\text{মোলার ভর (g/mol)}}$$",
+            "start": 1282,
+            "end": 1367
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{W}{M}$$",
+            "start": 1369,
+            "end": 1388
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এছাড়াও:",
+            "start": 1390,
+            "end": 1398
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{কণার সংখ্যা} = n \\times N_A$$",
+            "start": 1400,
+            "end": 1437
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1439,
+            "end": 1442
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equations n = W/M and number of particles = n × N_A are standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "EXAMPLE",
+        "label": "Worked problem calculating moles and molecule count in 36 g of water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Solves a step-by-step problem finding the number of moles and molecules in 36 g of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## অনুশীলনী উদাহরণ",
+            "start": 1444,
+            "end": 1462
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**প্রশ্ন:** 36 গ্রাম পানিতে কত মোল পানি আছে? এবং কতগুলো অণু আছে?",
+            "start": 1464,
+            "end": 1528
+          },
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমাধান:**",
+            "start": 1530,
+            "end": 1541
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- পানির মোলার ভর (M) = 18 g/mol",
+            "start": 1542,
+            "end": 1573
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- প্রদত্ত ভর (W) = 36 g",
+            "start": 1574,
+            "end": 1597
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{W}{M} = \\frac{36}{18} = 2 \\text{ মোল}$$",
+            "start": 1599,
+            "end": 1650
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অণুর সংখ্যা = n × N_A = 2 × 6.022 × 10²³ = **1.2044 × 10²⁴ টি অণু**",
+            "start": 1652,
+            "end": 1719
+          },
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1721,
+            "end": 1724
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculations n = 36/18 = 2 moles and total molecules = 2 × 6.022 × 10²³ = 1.2044 × 10²⁴ molecules are fully correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "CONCEPT",
+        "label": "Molar volume of gases at STP",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s9"
+        ],
+        "rationale": "Defines molar volume and states that 1 mole of any ideal gas occupies 22.4 liters at STP.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## গ্যাসের ক্ষেত্রে মোল (STP-তে)",
+            "start": 1726,
+            "end": 1758
+          },
+          {
+            "id": "p49",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "STP (Standard Temperature and Pressure) অবস্থায়:",
+            "start": 1760,
+            "end": 1809
+          },
+          {
+            "id": "p50",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **১ মোল যেকোনো গ্যাসের আয়তন = 22.4 লিটার**",
+            "start": 1810,
+            "end": 1855
+          },
+          {
+            "id": "p51",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এটাকে বলে **মোলার আয়তন (Molar Volume)**।",
+            "start": 1857,
+            "end": 1898
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1900,
+            "end": 1903
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The standard high-school convention that 1 mole of any gas at STP occupies 22.4 liters is correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u12",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap summary of the mole relationships",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s10"
+        ],
+        "rationale": "Provides a concise summary block consolidating the three primary equivalents of 1 mole: particle count, molar mass, and molar volume at STP.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p53",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সংক্ষেপে মনে রাখার কৌশল",
+            "start": 1905,
+            "end": 1931
+          },
+          {
+            "id": "p54",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 1933,
+            "end": 1936
+          },
+          {
+            "id": "p55",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "১ মোল = 6.022 × 10²³ কণা (অ্যাভোগাড্রো সংখ্যা)",
+            "start": 1937,
+            "end": 1983
+          },
+          {
+            "id": "p56",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "       = মৌল/যৌগের আণবিক/পারমাণবিক ভরের সমান গ্রাম (মোলার ভর)",
+            "start": 1984,
+            "end": 2045
+          },
+          {
+            "id": "p57",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "       = 22.4 লিটার (গ্যাসের ক্ষেত্রে, STP-তে)",
+            "start": 2046,
+            "end": 2092
+          },
+          {
+            "id": "p58",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 2093,
+            "end": 2096
+          },
+          {
+            "id": "p59",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2098,
+            "end": 2101
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary correctly binds 1 mole to 6.022 × 10²³ particles, molar mass in grams, and 22.4 L at STP.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u13",
+        "kind": "CONCEPT",
+        "label": "Importance of the mole concept in chemistry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s11"
+        ],
+        "rationale": "Explains why the mole concept is essential in chemistry: counting submicroscopic entities, stoichiometric calculations, and bridging mass, volume, and particle count.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p60",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## কেন মোল ধারণা গুরুত্বপূর্ণ?",
+            "start": 2103,
+            "end": 2133
+          },
+          {
+            "id": "p61",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. পরমাণু-অণুর মতো ক্ষুদ্র কণা গণনা সহজ করে",
+            "start": 2135,
+            "end": 2178
+          },
+          {
+            "id": "p62",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. রাসায়নিক বিক্রিয়ার হিসাব (Stoichiometry) করতে সাহায্য করে",
+            "start": 2179,
+            "end": 2241
+          },
+          {
+            "id": "p63",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. ভর, আয়তন ও কণার সংখ্যার মধ্যে সেতুবন্ধন তৈরি করে",
+            "start": 2242,
+            "end": 2294
+          },
+          {
+            "id": "p64",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আশা করি এই ব্যাখ্যা থেকে মোল ধারণা সম্পর্কে স্পষ্ট ধারণা পেয়েছ। কোনো অংশ নিয়ে আরও প্রশ্ন থাকলে জিজ্ঞেস করতে পারো! 😊",
+            "start": 2296,
+            "end": 2413
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The stated reasons for the importance of the mole concept are standard and conceptually sound.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\bengali-english\\claude-sonnet-5__8559faaac939.json",
+    "original_sha256": "990f030f95c35c0bd025c6ffc0f16c0bce1d0b9c318ee2fa5c9a8d4ce432ed50",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 13,
+    "substantive_content_units": 13,
+    "total_passages": 64,
+    "content_unit_kinds": {
+      "ANALOGY": 2,
+      "CONCEPT": 5,
+      "EXAMPLE": 5,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 64,
+    "unique_subtopics": 11,
+    "contextualization": {
+      "everyday": 2,
+      "none": 11
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 13
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

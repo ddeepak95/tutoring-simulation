@@ -1,0 +1,1847 @@
+{
+  "run_set": {
+    "version": 2,
+    "keywords_file": "../content/keywords.csv",
+    "prompt_structures_file": "../content/prompt-structures.json",
+    "defaults": {
+      "topics": [
+        "ch-1",
+        "ch-2",
+        "ch-3",
+        "ch-4",
+        "ch-5",
+        "ch-6",
+        "ch-7"
+      ],
+      "models": [
+        "gpt-5.6-terra",
+        "grok-4.3",
+        "gemini-3.8-flash",
+        "claude-sonnet-5",
+        "llama-4-maverick"
+      ]
+    },
+    "target_languages": [
+      "hi",
+      "bn",
+      "ar",
+      "fr"
+    ],
+    "conditions": [
+      {
+        "id": "native_prompt",
+        "prompt_language": "$target",
+        "response_language": "$target"
+      },
+      {
+        "id": "english_prompt",
+        "prompt_language": "en",
+        "response_language": "$target"
+      }
+    ],
+    "output_dir": "../outputs/multiple"
+  },
+  "jobs": [
+    {
+      "run_index": 8,
+      "lang_id": "en",
+      "language": "fr",
+      "prompt_type": "language_template",
+      "topic": "stoichiometry",
+      "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "model": "gpt-5.6-terra",
+      "reasoning": null,
+      "web_search": false,
+      "condition_id": "english_prompt",
+      "prompt_language": "en",
+      "topic_language": "en",
+      "response_language": "fr",
+      "response_language_name": "French",
+      "topic_id": "ch-2",
+      "topic_name": "stoichiometry",
+      "subject": "chemistry",
+      "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+      "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+      "job_id": "run-english_prompt-en-fr-1699adaa692f0c7d",
+      "resolved_model": "openai/gpt-5.6-terra"
+    },
+    {
+      "run_index": 8,
+      "lang_id": "en",
+      "language": "fr",
+      "prompt_type": "language_template",
+      "topic": "stoichiometry",
+      "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "model": "grok-4.3",
+      "reasoning": null,
+      "web_search": false,
+      "condition_id": "english_prompt",
+      "prompt_language": "en",
+      "topic_language": "en",
+      "response_language": "fr",
+      "response_language_name": "French",
+      "topic_id": "ch-2",
+      "topic_name": "stoichiometry",
+      "subject": "chemistry",
+      "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+      "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+      "job_id": "run-english_prompt-en-fr-e9fbaed69e4a4ee9",
+      "resolved_model": "openai/xai/grok-4.3"
+    },
+    {
+      "run_index": 8,
+      "lang_id": "en",
+      "language": "fr",
+      "prompt_type": "language_template",
+      "topic": "stoichiometry",
+      "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "model": "gemini-3.8-flash",
+      "reasoning": null,
+      "web_search": false,
+      "condition_id": "english_prompt",
+      "prompt_language": "en",
+      "topic_language": "en",
+      "response_language": "fr",
+      "response_language_name": "French",
+      "topic_id": "ch-2",
+      "topic_name": "stoichiometry",
+      "subject": "chemistry",
+      "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+      "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+      "job_id": "run-english_prompt-en-fr-eb289e054c282070",
+      "resolved_model": "gemini/gemini-3.8-flash"
+    },
+    {
+      "run_index": 8,
+      "lang_id": "en",
+      "language": "fr",
+      "prompt_type": "language_template",
+      "topic": "stoichiometry",
+      "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "model": "claude-sonnet-5",
+      "reasoning": null,
+      "web_search": false,
+      "condition_id": "english_prompt",
+      "prompt_language": "en",
+      "topic_language": "en",
+      "response_language": "fr",
+      "response_language_name": "French",
+      "topic_id": "ch-2",
+      "topic_name": "stoichiometry",
+      "subject": "chemistry",
+      "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+      "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+      "job_id": "run-english_prompt-en-fr-f9d64af7f5d3aacf",
+      "resolved_model": "vertex_ai/claude-sonnet-5"
+    },
+    {
+      "run_index": 8,
+      "lang_id": "en",
+      "language": "fr",
+      "prompt_type": "language_template",
+      "topic": "stoichiometry",
+      "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "model": "llama-4-maverick",
+      "reasoning": null,
+      "web_search": false,
+      "condition_id": "english_prompt",
+      "prompt_language": "en",
+      "topic_language": "en",
+      "response_language": "fr",
+      "response_language_name": "French",
+      "topic_id": "ch-2",
+      "topic_name": "stoichiometry",
+      "subject": "chemistry",
+      "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+      "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+      "job_id": "run-english_prompt-en-fr-62646f0caea72dcb",
+      "resolved_model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas"
+    }
+  ],
+  "requests": [
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को समस्थानिक के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को समस्थानिक के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को समस्थानिक के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को समस्थानिक के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को समस्थानिक के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रससमीकरणमिति के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रससमीकरणमिति के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रससमीकरणमिति के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रससमीकरणमिति के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रससमीकरणमिति के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को मोल संकल्पना के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को मोल संकल्पना के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को मोल संकल्पना के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को मोल संकल्पना के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को मोल संकल्पना के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रेडॉक्स अभिक्रियाएँ के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रेडॉक्स अभिक्रियाएँ के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रेडॉक्स अभिक्रियाएँ के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रेडॉक्स अभिक्रियाएँ के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को रेडॉक्स अभिक्रियाएँ के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को सहसंयोजक त्रिज्या के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को सहसंयोजक त्रिज्या के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को सहसंयोजक त्रिज्या के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को सहसंयोजक त्रिज्या के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को सहसंयोजक त्रिज्या के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को क्षारीय मृदा धातुएं के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को क्षारीय मृदा धातुएं के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को क्षारीय मृदा धातुएं के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को क्षारीय मृदा धातुएं के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को क्षारीय मृदा धातुएं के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को वाष्प प्रावस्था परिष्करण के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को वाष्प प्रावस्था परिष्करण के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को वाष्प प्रावस्था परिष्करण के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को वाष्प प्रावस्था परिष्करण के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "आप एक उत्कृष्ट शिक्षक हैं। एक हाई स्कूल के छात्र को वाष्प प्रावस्था परिष्करण के बारे में हिंदी में समझाइए।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Hindi.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Hindi.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Hindi.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমস্থানিক সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমস্থানিক সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমস্থানিক সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমস্থানিক সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমস্থানিক সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে মোল ধারণা সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে মোল ধারণা সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে মোল ধারণা সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে মোল ধারণা সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে মোল ধারণা সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রেডক্স বিক্রিয়া সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রেডক্স বিক্রিয়া সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রেডক্স বিক্রিয়া সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রেডক্স বিক্রিয়া সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রেডক্স বিক্রিয়া সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমযোজী ব্যাসার্ধ সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমযোজী ব্যাসার্ধ সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমযোজী ব্যাসার্ধ সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমযোজী ব্যাসার্ধ সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে সমযোজী ব্যাসার্ধ সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে বাষ্পীয় দশা বিশোধন সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে বাষ্পীয় দশা বিশোধন সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে বাষ্পীয় দশা বিশোধন সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে বাষ্পীয় দশা বিশোধন সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে বাষ্পীয় দশা বিশোধন সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Bengali.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Bengali.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Bengali.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح جمع: نظائر لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح جمع: نظائر لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح جمع: نظائر لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح جمع: نظائر لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح جمع: نظائر لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح الحسابات الكيميائية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح الحسابات الكيميائية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح الحسابات الكيميائية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح الحسابات الكيميائية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح الحسابات الكيميائية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح مفهوم المول لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح مفهوم المول لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح مفهوم المول لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح مفهوم المول لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح مفهوم المول لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح تفاعلات الأكسدة والاختزال لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح تفاعلات الأكسدة والاختزال لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح تفاعلات الأكسدة والاختزال لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح تفاعلات الأكسدة والاختزال لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح تفاعلات الأكسدة والاختزال لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح نصف القطر التساهمي لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح نصف القطر التساهمي لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح نصف القطر التساهمي لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح نصف القطر التساهمي لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح نصف القطر التساهمي لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح فلزات قلوية ترابية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح فلزات قلوية ترابية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح فلزات قلوية ترابية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح فلزات قلوية ترابية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح فلزات قلوية ترابية لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "أنت معلم ممتاز. اشرح التنقية بالطور البخاري لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "أنت معلم ممتاز. اشرح التنقية بالطور البخاري لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "أنت معلم ممتاز. اشرح التنقية بالطور البخاري لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "أنت معلم ممتاز. اشرح التنقية بالطور البخاري لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "أنت معلم ممتاز. اشرح التنقية بالطور البخاري لطالب في المرحلة الثانوية باللغة العربية.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Arabic.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Arabic.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in Arabic.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Isotope à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Isotope à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Isotope à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Isotope à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Isotope à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Concept de mole à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Concept de mole à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Concept de mole à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Concept de mole à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Concept de mole à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Réactions d'oxydoréduction à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Réactions d'oxydoréduction à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Réactions d'oxydoréduction à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Réactions d'oxydoréduction à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Réactions d'oxydoréduction à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Métaux alcalino-terreux à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Métaux alcalino-terreux à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Métaux alcalino-terreux à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Métaux alcalino-terreux à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Métaux alcalino-terreux à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "Vous êtes un excellent professeur. Expliquez Raffinage en phase vapeur à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "Vous êtes un excellent professeur. Expliquez Raffinage en phase vapeur à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "Vous êtes un excellent professeur. Expliquez Raffinage en phase vapeur à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "Vous êtes un excellent professeur. Expliquez Raffinage en phase vapeur à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "Vous êtes un excellent professeur. Expliquez Raffinage en phase vapeur à un élève de lycée en français.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain isotope in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain mole concept in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain redox reactions in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain covalent radius in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain alkaline earth metals in French.",
+      "store": false
+    },
+    {
+      "model": "openai/gpt-5.6-terra",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in French.",
+      "store": false
+    },
+    {
+      "model": "openai/xai/grok-4.3",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in French.",
+      "store": false
+    },
+    {
+      "model": "gemini/gemini-3.8-flash",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/claude-sonnet-5",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in French.",
+      "store": false
+    },
+    {
+      "model": "vertex_ai/meta/llama-4-maverick-17b-128e-instruct-maas",
+      "input": "You are an expert teacher teaching an high school student. Explain vapour phase refining in French.",
+      "store": false
+    }
+  ],
+  "model_catalog_sha256": "bd78945174e5bfdc9d5d7631b275d30abbd413d6da6488f6ed0619808e35ca9d",
+  "layout": "topic-language-condition-v1",
+  "response_files": {
+    "run-native_prompt-hi-hi-01f2e96f51fbd4e4": "ch-1_isotope/hindi-native/gpt-5.6-terra__41c4eb5c4b6d.json",
+    "run-native_prompt-hi-hi-c122d79ff5d57804": "ch-1_isotope/hindi-native/grok-4.3__cb64d67a40e1.json",
+    "run-native_prompt-hi-hi-7ee98f8a340dab5f": "ch-1_isotope/hindi-native/gemini-3.8-flash__7f0aa08ad287.json",
+    "run-native_prompt-hi-hi-e5666c70434ef437": "ch-1_isotope/hindi-native/claude-sonnet-5__24f733633bcb.json",
+    "run-native_prompt-hi-hi-53650bc9aab3b34f": "ch-1_isotope/hindi-native/llama-4-maverick__9968eff46619.json",
+    "run-native_prompt-hi-hi-c2d721a850813236": "ch-2_stoichiometry/hindi-native/gpt-5.6-terra__dc0112c58fd8.json",
+    "run-native_prompt-hi-hi-545a0114790fff3a": "ch-2_stoichiometry/hindi-native/grok-4.3__dbbe726d06b8.json",
+    "run-native_prompt-hi-hi-d73cecde1a9c06e6": "ch-2_stoichiometry/hindi-native/gemini-3.8-flash__dfcf7746daff.json",
+    "run-native_prompt-hi-hi-fd68970951269652": "ch-2_stoichiometry/hindi-native/claude-sonnet-5__0c99f08b89ca.json",
+    "run-native_prompt-hi-hi-442d52855e50faa4": "ch-2_stoichiometry/hindi-native/llama-4-maverick__0051a456a205.json",
+    "run-native_prompt-hi-hi-e395feb3defe0334": "ch-3_mole_concept/hindi-native/gpt-5.6-terra__9efcff44a8a2.json",
+    "run-native_prompt-hi-hi-5a80abfc807c6b00": "ch-3_mole_concept/hindi-native/grok-4.3__9338feb8d817.json",
+    "run-native_prompt-hi-hi-3ea351fc7a04aa85": "ch-3_mole_concept/hindi-native/gemini-3.8-flash__e365ea8a7f5b.json",
+    "run-native_prompt-hi-hi-166d9d5abce73652": "ch-3_mole_concept/hindi-native/claude-sonnet-5__420f3c90d17c.json",
+    "run-native_prompt-hi-hi-5aa18b1cc8bb476e": "ch-3_mole_concept/hindi-native/llama-4-maverick__3f9a0bbef076.json",
+    "run-native_prompt-hi-hi-5113c8e7915d2481": "ch-4_redox_reactions/hindi-native/gpt-5.6-terra__8a7baf93744f.json",
+    "run-native_prompt-hi-hi-24e6019d76d6ef93": "ch-4_redox_reactions/hindi-native/grok-4.3__ac9037b21d43.json",
+    "run-native_prompt-hi-hi-ae0f9727c65cef9f": "ch-4_redox_reactions/hindi-native/gemini-3.8-flash__cad353ff4ce2.json",
+    "run-native_prompt-hi-hi-e6729fc37c27059b": "ch-4_redox_reactions/hindi-native/claude-sonnet-5__aa9e1966e0c4.json",
+    "run-native_prompt-hi-hi-6a4c4253300adfda": "ch-4_redox_reactions/hindi-native/llama-4-maverick__dd933cedf847.json",
+    "run-native_prompt-hi-hi-522bfa4e785e3a51": "ch-5_covalent_radius/hindi-native/gpt-5.6-terra__c24bdb069f4f.json",
+    "run-native_prompt-hi-hi-5505ae8d9c127f2b": "ch-5_covalent_radius/hindi-native/grok-4.3__1fa700d4e127.json",
+    "run-native_prompt-hi-hi-0096ad444c2679c7": "ch-5_covalent_radius/hindi-native/gemini-3.8-flash__f3616d4aa34c.json",
+    "run-native_prompt-hi-hi-89722b2c84a83f6c": "ch-5_covalent_radius/hindi-native/claude-sonnet-5__bde25a0c1167.json",
+    "run-native_prompt-hi-hi-8373637c5f7f79a0": "ch-5_covalent_radius/hindi-native/llama-4-maverick__f6df543de7c7.json",
+    "run-native_prompt-hi-hi-2158695317466f01": "ch-6_alkaline_earth_metals/hindi-native/gpt-5.6-terra__89a2797dccd9.json",
+    "run-native_prompt-hi-hi-9c74e1bbded3d551": "ch-6_alkaline_earth_metals/hindi-native/grok-4.3__ac11a85423d0.json",
+    "run-native_prompt-hi-hi-613649b8a5a20319": "ch-6_alkaline_earth_metals/hindi-native/gemini-3.8-flash__992ca96ae670.json",
+    "run-native_prompt-hi-hi-70429bfc0bed01ab": "ch-6_alkaline_earth_metals/hindi-native/claude-sonnet-5__dba268447935.json",
+    "run-native_prompt-hi-hi-36dbc1d41d4773ef": "ch-6_alkaline_earth_metals/hindi-native/llama-4-maverick__967fafa115df.json",
+    "run-native_prompt-hi-hi-a11c9223e1d2e73a": "ch-7_vapour_phase_refining/hindi-native/gpt-5.6-terra__6078ce8e064b.json",
+    "run-native_prompt-hi-hi-c1ef7f59ea84efca": "ch-7_vapour_phase_refining/hindi-native/grok-4.3__bb7483adb19f.json",
+    "run-native_prompt-hi-hi-9b41b4f1f09c5397": "ch-7_vapour_phase_refining/hindi-native/gemini-3.8-flash__93cf05880cde.json",
+    "run-native_prompt-hi-hi-d5acf927a4a698ac": "ch-7_vapour_phase_refining/hindi-native/claude-sonnet-5__8601d54c059f.json",
+    "run-native_prompt-hi-hi-67d96198b7fb4569": "ch-7_vapour_phase_refining/hindi-native/llama-4-maverick__f1e1887a2326.json",
+    "run-english_prompt-en-hi-1712969965b84e4b": "ch-1_isotope/hindi-english/gpt-5.6-terra__ac01c0cb3345.json",
+    "run-english_prompt-en-hi-17d54bb6195125d9": "ch-1_isotope/hindi-english/grok-4.3__48bcc2949e77.json",
+    "run-english_prompt-en-hi-96e16f0c0ba5ea8c": "ch-1_isotope/hindi-english/gemini-3.8-flash__9cd4caaf77c0.json",
+    "run-english_prompt-en-hi-111b9cf30d15b17b": "ch-1_isotope/hindi-english/claude-sonnet-5__2ec5b353d7ef.json",
+    "run-english_prompt-en-hi-35695bc9ab3e0a7e": "ch-1_isotope/hindi-english/llama-4-maverick__15939d15aa93.json",
+    "run-english_prompt-en-hi-9471c798986aee18": "ch-2_stoichiometry/hindi-english/gpt-5.6-terra__a35a9e495acb.json",
+    "run-english_prompt-en-hi-b4449d87a367bb51": "ch-2_stoichiometry/hindi-english/grok-4.3__294e932d7890.json",
+    "run-english_prompt-en-hi-7a80e92d866e7a27": "ch-2_stoichiometry/hindi-english/gemini-3.8-flash__9749b7a02fa3.json",
+    "run-english_prompt-en-hi-f189208d547e0703": "ch-2_stoichiometry/hindi-english/claude-sonnet-5__2f02270e4dca.json",
+    "run-english_prompt-en-hi-99f7f84df0ac726a": "ch-2_stoichiometry/hindi-english/llama-4-maverick__57a56205e96a.json",
+    "run-english_prompt-en-hi-157b3c8560ef051c": "ch-3_mole_concept/hindi-english/gpt-5.6-terra__b87572016787.json",
+    "run-english_prompt-en-hi-d092527b0eec4831": "ch-3_mole_concept/hindi-english/grok-4.3__71019d352927.json",
+    "run-english_prompt-en-hi-16b48b4cbf2e4340": "ch-3_mole_concept/hindi-english/gemini-3.8-flash__3231b7c53740.json",
+    "run-english_prompt-en-hi-1a88a6ab3293ea6b": "ch-3_mole_concept/hindi-english/claude-sonnet-5__c7b61483c875.json",
+    "run-english_prompt-en-hi-63be049b841bd1c0": "ch-3_mole_concept/hindi-english/llama-4-maverick__233e55523507.json",
+    "run-english_prompt-en-hi-50dd10fd31331098": "ch-4_redox_reactions/hindi-english/gpt-5.6-terra__fdcbe7b8b6b2.json",
+    "run-english_prompt-en-hi-ced331e79d370d30": "ch-4_redox_reactions/hindi-english/grok-4.3__a461646e522d.json",
+    "run-english_prompt-en-hi-437b7b8cc8dc8f4c": "ch-4_redox_reactions/hindi-english/gemini-3.8-flash__d7bab2e8ee6a.json",
+    "run-english_prompt-en-hi-203162395379f6e4": "ch-4_redox_reactions/hindi-english/claude-sonnet-5__cea8c6599a4d.json",
+    "run-english_prompt-en-hi-cce556aa316593ed": "ch-4_redox_reactions/hindi-english/llama-4-maverick__b4e010872283.json",
+    "run-english_prompt-en-hi-99bd6808a31c0e4b": "ch-5_covalent_radius/hindi-english/gpt-5.6-terra__cd290e5fbb81.json",
+    "run-english_prompt-en-hi-4d3fd77dd321710c": "ch-5_covalent_radius/hindi-english/grok-4.3__80c16b39ba39.json",
+    "run-english_prompt-en-hi-b4033aafc7ae6e4f": "ch-5_covalent_radius/hindi-english/gemini-3.8-flash__1ac0218dd2fc.json",
+    "run-english_prompt-en-hi-c1da01baa8599359": "ch-5_covalent_radius/hindi-english/claude-sonnet-5__0110143e683b.json",
+    "run-english_prompt-en-hi-16c5a8ce6b96638c": "ch-5_covalent_radius/hindi-english/llama-4-maverick__4683abdafc6f.json",
+    "run-english_prompt-en-hi-ab0f1eb2f95652eb": "ch-6_alkaline_earth_metals/hindi-english/gpt-5.6-terra__3c6cc19725ad.json",
+    "run-english_prompt-en-hi-0ca1c96eff2131e3": "ch-6_alkaline_earth_metals/hindi-english/grok-4.3__f64cccd100df.json",
+    "run-english_prompt-en-hi-d59235b7b008c9fc": "ch-6_alkaline_earth_metals/hindi-english/gemini-3.8-flash__ca42c806e07b.json",
+    "run-english_prompt-en-hi-8803ba6465350dfa": "ch-6_alkaline_earth_metals/hindi-english/claude-sonnet-5__5d3dba5b9cac.json",
+    "run-english_prompt-en-hi-56f1e3f357d1f233": "ch-6_alkaline_earth_metals/hindi-english/llama-4-maverick__5652cde20e3a.json",
+    "run-english_prompt-en-hi-ed53f3a8b019d64b": "ch-7_vapour_phase_refining/hindi-english/gpt-5.6-terra__57580d3f61ea.json",
+    "run-english_prompt-en-hi-ee04074942868a9e": "ch-7_vapour_phase_refining/hindi-english/grok-4.3__3d371560275e.json",
+    "run-english_prompt-en-hi-84826196e67c1804": "ch-7_vapour_phase_refining/hindi-english/gemini-3.8-flash__de3b468a9887.json",
+    "run-english_prompt-en-hi-155e9a01035bbc7c": "ch-7_vapour_phase_refining/hindi-english/claude-sonnet-5__1a43976ebedf.json",
+    "run-english_prompt-en-hi-d340499911f3e3df": "ch-7_vapour_phase_refining/hindi-english/llama-4-maverick__4f41f0755b9e.json",
+    "run-native_prompt-bn-bn-d0a86b06a263df55": "ch-1_isotope/bengali-native/gpt-5.6-terra__ba016c1ab43c.json",
+    "run-native_prompt-bn-bn-03f0a2b89ded58e2": "ch-1_isotope/bengali-native/grok-4.3__125febf29835.json",
+    "run-native_prompt-bn-bn-769b28c90b607106": "ch-1_isotope/bengali-native/gemini-3.8-flash__926e0654a00e.json",
+    "run-native_prompt-bn-bn-fc0606c868b4ca0f": "ch-1_isotope/bengali-native/claude-sonnet-5__d06138c866ec.json",
+    "run-native_prompt-bn-bn-2675d6b8393ca12b": "ch-1_isotope/bengali-native/llama-4-maverick__a7e6a1daaec4.json",
+    "run-native_prompt-bn-bn-9e25a58ba995aae5": "ch-2_stoichiometry/bengali-native/gpt-5.6-terra__bc341516cea4.json",
+    "run-native_prompt-bn-bn-a18f903b412c6da4": "ch-2_stoichiometry/bengali-native/grok-4.3__446eb243613a.json",
+    "run-native_prompt-bn-bn-06f94d45d89a8f12": "ch-2_stoichiometry/bengali-native/gemini-3.8-flash__dea053afc4bd.json",
+    "run-native_prompt-bn-bn-3baca4c3d2816fb9": "ch-2_stoichiometry/bengali-native/claude-sonnet-5__416a8b6035d4.json",
+    "run-native_prompt-bn-bn-27bc867aaf0d7434": "ch-2_stoichiometry/bengali-native/llama-4-maverick__69170cb88028.json",
+    "run-native_prompt-bn-bn-299e283cda60f1ce": "ch-3_mole_concept/bengali-native/gpt-5.6-terra__2e9ff7b4d891.json",
+    "run-native_prompt-bn-bn-db99b4566733fdda": "ch-3_mole_concept/bengali-native/grok-4.3__5eec7afdcbb9.json",
+    "run-native_prompt-bn-bn-58d613eeb9a13f42": "ch-3_mole_concept/bengali-native/gemini-3.8-flash__a5716c4f6e1d.json",
+    "run-native_prompt-bn-bn-8d12d8b512d13190": "ch-3_mole_concept/bengali-native/claude-sonnet-5__0fa5fac173b7.json",
+    "run-native_prompt-bn-bn-f1cbf436684d1e81": "ch-3_mole_concept/bengali-native/llama-4-maverick__33cd4b60c62c.json",
+    "run-native_prompt-bn-bn-e857e40a8d4c7f67": "ch-4_redox_reactions/bengali-native/gpt-5.6-terra__85829021c9df.json",
+    "run-native_prompt-bn-bn-186ac4c3eff3eecd": "ch-4_redox_reactions/bengali-native/grok-4.3__a364b2c70b65.json",
+    "run-native_prompt-bn-bn-ee36c5f5c4447191": "ch-4_redox_reactions/bengali-native/gemini-3.8-flash__67d4cf2eaec6.json",
+    "run-native_prompt-bn-bn-8c47f5d0b89428de": "ch-4_redox_reactions/bengali-native/claude-sonnet-5__cb8795cb0842.json",
+    "run-native_prompt-bn-bn-6721b7fb4caed495": "ch-4_redox_reactions/bengali-native/llama-4-maverick__145faf6eddee.json",
+    "run-native_prompt-bn-bn-dd1dac76ece6fc1b": "ch-5_covalent_radius/bengali-native/gpt-5.6-terra__cfc0c0481d75.json",
+    "run-native_prompt-bn-bn-da62f36bf8224233": "ch-5_covalent_radius/bengali-native/grok-4.3__01514885efa3.json",
+    "run-native_prompt-bn-bn-201acaf03d7954e7": "ch-5_covalent_radius/bengali-native/gemini-3.8-flash__e210310b6fa1.json",
+    "run-native_prompt-bn-bn-5b00b87866144311": "ch-5_covalent_radius/bengali-native/claude-sonnet-5__1c0a815dfb7d.json",
+    "run-native_prompt-bn-bn-ab74cf80947ebf1d": "ch-5_covalent_radius/bengali-native/llama-4-maverick__0dee218449fa.json",
+    "run-native_prompt-bn-bn-be9c0dd2fdd90571": "ch-6_alkaline_earth_metals/bengali-native/gpt-5.6-terra__8d31d7a37346.json",
+    "run-native_prompt-bn-bn-88b6768e16a23a53": "ch-6_alkaline_earth_metals/bengali-native/grok-4.3__55de9ebbc991.json",
+    "run-native_prompt-bn-bn-c5386d81502d4349": "ch-6_alkaline_earth_metals/bengali-native/gemini-3.8-flash__3d06c373ce2e.json",
+    "run-native_prompt-bn-bn-a0528c3c752a48bb": "ch-6_alkaline_earth_metals/bengali-native/claude-sonnet-5__8a38dd27755d.json",
+    "run-native_prompt-bn-bn-0670b30232651efb": "ch-6_alkaline_earth_metals/bengali-native/llama-4-maverick__7ebdc22639fc.json",
+    "run-native_prompt-bn-bn-3b50ec16f928b6e6": "ch-7_vapour_phase_refining/bengali-native/gpt-5.6-terra__797ca92af0b9.json",
+    "run-native_prompt-bn-bn-8fdfe208cf32653c": "ch-7_vapour_phase_refining/bengali-native/grok-4.3__cde139037a76.json",
+    "run-native_prompt-bn-bn-a583c864d898d92f": "ch-7_vapour_phase_refining/bengali-native/gemini-3.8-flash__815896e1d899.json",
+    "run-native_prompt-bn-bn-dadfd0f832294926": "ch-7_vapour_phase_refining/bengali-native/claude-sonnet-5__ad08f2d0a344.json",
+    "run-native_prompt-bn-bn-c7b32682a6c20174": "ch-7_vapour_phase_refining/bengali-native/llama-4-maverick__80b5616b6974.json",
+    "run-english_prompt-en-bn-84fee7ef03808673": "ch-1_isotope/bengali-english/gpt-5.6-terra__bde96ecab03b.json",
+    "run-english_prompt-en-bn-38ccfdf1287dfadb": "ch-1_isotope/bengali-english/grok-4.3__27f332e26d9d.json",
+    "run-english_prompt-en-bn-bc11271d1880dfc9": "ch-1_isotope/bengali-english/gemini-3.8-flash__1617ce42bc08.json",
+    "run-english_prompt-en-bn-e11f5e9a0b9eeed0": "ch-1_isotope/bengali-english/claude-sonnet-5__a2d3eb1dc829.json",
+    "run-english_prompt-en-bn-28a0ae52ed116a34": "ch-1_isotope/bengali-english/llama-4-maverick__4b101f39322e.json",
+    "run-english_prompt-en-bn-ecf4e2da632ccb26": "ch-2_stoichiometry/bengali-english/gpt-5.6-terra__1b10a45881ec.json",
+    "run-english_prompt-en-bn-f35a536ec2b80fb0": "ch-2_stoichiometry/bengali-english/grok-4.3__092159d7e9bd.json",
+    "run-english_prompt-en-bn-7660d3baa9a264d9": "ch-2_stoichiometry/bengali-english/gemini-3.8-flash__42f7a83aea6e.json",
+    "run-english_prompt-en-bn-33df4438829fd88a": "ch-2_stoichiometry/bengali-english/claude-sonnet-5__dd92481b9fa9.json",
+    "run-english_prompt-en-bn-b52558ed5e57972b": "ch-2_stoichiometry/bengali-english/llama-4-maverick__3d3a45597f92.json",
+    "run-english_prompt-en-bn-0c0d640978fd1e18": "ch-3_mole_concept/bengali-english/gpt-5.6-terra__da18d2e51701.json",
+    "run-english_prompt-en-bn-b2e64bd33700b51d": "ch-3_mole_concept/bengali-english/grok-4.3__59abd9fd8638.json",
+    "run-english_prompt-en-bn-0ec9716a9b0b4359": "ch-3_mole_concept/bengali-english/gemini-3.8-flash__fc393e90784e.json",
+    "run-english_prompt-en-bn-314ba73f3a47557d": "ch-3_mole_concept/bengali-english/claude-sonnet-5__8559faaac939.json",
+    "run-english_prompt-en-bn-10c8fe5fc3cf328c": "ch-3_mole_concept/bengali-english/llama-4-maverick__99003b414307.json",
+    "run-english_prompt-en-bn-72a5cbc93571afb0": "ch-4_redox_reactions/bengali-english/gpt-5.6-terra__7ef140902a8f.json",
+    "run-english_prompt-en-bn-4bd115229a4b4f27": "ch-4_redox_reactions/bengali-english/grok-4.3__30c288d8d78c.json",
+    "run-english_prompt-en-bn-78bae9164dbaeec2": "ch-4_redox_reactions/bengali-english/gemini-3.8-flash__c1a852ed3ef6.json",
+    "run-english_prompt-en-bn-4a0301b7a39ecdcc": "ch-4_redox_reactions/bengali-english/claude-sonnet-5__e8861d78e0ef.json",
+    "run-english_prompt-en-bn-25d6a3244d6312fd": "ch-4_redox_reactions/bengali-english/llama-4-maverick__e31c0fb367bb.json",
+    "run-english_prompt-en-bn-8309ee5fe1f4e126": "ch-5_covalent_radius/bengali-english/gpt-5.6-terra__1627088f3a7f.json",
+    "run-english_prompt-en-bn-d8697967184c5a2e": "ch-5_covalent_radius/bengali-english/grok-4.3__ea5e34564d85.json",
+    "run-english_prompt-en-bn-7ef00b7158f92bf3": "ch-5_covalent_radius/bengali-english/gemini-3.8-flash__dde0b6b3d321.json",
+    "run-english_prompt-en-bn-93ff272ab4633cc3": "ch-5_covalent_radius/bengali-english/claude-sonnet-5__946201b94b4f.json",
+    "run-english_prompt-en-bn-2d22bdfdff4ad815": "ch-5_covalent_radius/bengali-english/llama-4-maverick__30a8c7daf232.json",
+    "run-english_prompt-en-bn-7c7fb4bbafe56f1e": "ch-6_alkaline_earth_metals/bengali-english/gpt-5.6-terra__0db4cc4abeab.json",
+    "run-english_prompt-en-bn-679d6598f872d239": "ch-6_alkaline_earth_metals/bengali-english/grok-4.3__ca170fd4d0c4.json",
+    "run-english_prompt-en-bn-be64ae90a832e9be": "ch-6_alkaline_earth_metals/bengali-english/gemini-3.8-flash__07331ed44ff0.json",
+    "run-english_prompt-en-bn-3987c8801f6eea52": "ch-6_alkaline_earth_metals/bengali-english/claude-sonnet-5__1483ba57015d.json",
+    "run-english_prompt-en-bn-a890370759e9bcef": "ch-6_alkaline_earth_metals/bengali-english/llama-4-maverick__2d5200297901.json",
+    "run-english_prompt-en-bn-eb968e6461ca9548": "ch-7_vapour_phase_refining/bengali-english/gpt-5.6-terra__1a94d634796b.json",
+    "run-english_prompt-en-bn-32537bc27e329843": "ch-7_vapour_phase_refining/bengali-english/grok-4.3__39ebe3f97316.json",
+    "run-english_prompt-en-bn-da712f5d94c7d189": "ch-7_vapour_phase_refining/bengali-english/gemini-3.8-flash__8999378d6b64.json",
+    "run-english_prompt-en-bn-c26bf0ae1b77f44f": "ch-7_vapour_phase_refining/bengali-english/claude-sonnet-5__672314dfb8a9.json",
+    "run-english_prompt-en-bn-c5b26144cabfbf50": "ch-7_vapour_phase_refining/bengali-english/llama-4-maverick__438b413ddd2a.json",
+    "run-native_prompt-ar-ar-04e1a4686188791e": "ch-1_isotope/arabic-native/gpt-5.6-terra__1621f9211be3.json",
+    "run-native_prompt-ar-ar-80b2a9499f75f155": "ch-1_isotope/arabic-native/grok-4.3__60e6a4a4cfa1.json",
+    "run-native_prompt-ar-ar-bb5ef9456e49d5cd": "ch-1_isotope/arabic-native/gemini-3.8-flash__7514b40d56e9.json",
+    "run-native_prompt-ar-ar-91620181b37fa77b": "ch-1_isotope/arabic-native/claude-sonnet-5__66d3c9f292d7.json",
+    "run-native_prompt-ar-ar-b444a1cf85ecc6bb": "ch-1_isotope/arabic-native/llama-4-maverick__af23e6d9066d.json",
+    "run-native_prompt-ar-ar-5d7e569239a84ac9": "ch-2_stoichiometry/arabic-native/gpt-5.6-terra__4c0cc4c79bcc.json",
+    "run-native_prompt-ar-ar-f0dbafc1a9fbd1ea": "ch-2_stoichiometry/arabic-native/grok-4.3__e9e6bcbf2eec.json",
+    "run-native_prompt-ar-ar-a3b9a0f46b3495a8": "ch-2_stoichiometry/arabic-native/gemini-3.8-flash__11f818a531af.json",
+    "run-native_prompt-ar-ar-dec758b6d3c8f1e8": "ch-2_stoichiometry/arabic-native/claude-sonnet-5__b6bfd983527c.json",
+    "run-native_prompt-ar-ar-243d3341fdad31e7": "ch-2_stoichiometry/arabic-native/llama-4-maverick__9a86abc7eec1.json",
+    "run-native_prompt-ar-ar-dd71421aca1ea7e0": "ch-3_mole_concept/arabic-native/gpt-5.6-terra__61362604525e.json",
+    "run-native_prompt-ar-ar-97648eab5f6836c8": "ch-3_mole_concept/arabic-native/grok-4.3__b4666d6106af.json",
+    "run-native_prompt-ar-ar-56105a2f67184578": "ch-3_mole_concept/arabic-native/gemini-3.8-flash__c7ddd186e0e9.json",
+    "run-native_prompt-ar-ar-ab08331a44f297db": "ch-3_mole_concept/arabic-native/claude-sonnet-5__0529c84b108c.json",
+    "run-native_prompt-ar-ar-2408945191755ba2": "ch-3_mole_concept/arabic-native/llama-4-maverick__7158c85044df.json",
+    "run-native_prompt-ar-ar-a30f21050443dba3": "ch-4_redox_reactions/arabic-native/gpt-5.6-terra__625c4f7c46d3.json",
+    "run-native_prompt-ar-ar-1cee0a030766cd6d": "ch-4_redox_reactions/arabic-native/grok-4.3__e5ce7f93f7d5.json",
+    "run-native_prompt-ar-ar-21e6f55fb9664b0c": "ch-4_redox_reactions/arabic-native/gemini-3.8-flash__5a0b87a906fb.json",
+    "run-native_prompt-ar-ar-f74119f424a3703b": "ch-4_redox_reactions/arabic-native/claude-sonnet-5__2f6df8a7681c.json",
+    "run-native_prompt-ar-ar-8e0b9c3428f9c96e": "ch-4_redox_reactions/arabic-native/llama-4-maverick__297f674f2264.json",
+    "run-native_prompt-ar-ar-dcf71dca98d4e034": "ch-5_covalent_radius/arabic-native/gpt-5.6-terra__7d71dd23b8f3.json",
+    "run-native_prompt-ar-ar-14f8c2f149255815": "ch-5_covalent_radius/arabic-native/grok-4.3__038d74e8df44.json",
+    "run-native_prompt-ar-ar-bbf4b17233afd9b5": "ch-5_covalent_radius/arabic-native/gemini-3.8-flash__ce11780bdce2.json",
+    "run-native_prompt-ar-ar-2e537ca7b1915cdf": "ch-5_covalent_radius/arabic-native/claude-sonnet-5__100a6a04dbc9.json",
+    "run-native_prompt-ar-ar-510a60808316af9d": "ch-5_covalent_radius/arabic-native/llama-4-maverick__0a6167adc3dd.json",
+    "run-native_prompt-ar-ar-30d1d826ca9a882b": "ch-6_alkaline_earth_metals/arabic-native/gpt-5.6-terra__ca8008c3d1f5.json",
+    "run-native_prompt-ar-ar-f7c530c563dd066a": "ch-6_alkaline_earth_metals/arabic-native/grok-4.3__23e60e367490.json",
+    "run-native_prompt-ar-ar-38abe59b7bcfbd31": "ch-6_alkaline_earth_metals/arabic-native/gemini-3.8-flash__57626a8cefa1.json",
+    "run-native_prompt-ar-ar-f81aa8be696257c7": "ch-6_alkaline_earth_metals/arabic-native/claude-sonnet-5__4a306852a9cf.json",
+    "run-native_prompt-ar-ar-640c04af57be53d8": "ch-6_alkaline_earth_metals/arabic-native/llama-4-maverick__9e2c1e4bc448.json",
+    "run-native_prompt-ar-ar-8c57b6ab426396d4": "ch-7_vapour_phase_refining/arabic-native/gpt-5.6-terra__5a1fcb9450db.json",
+    "run-native_prompt-ar-ar-2a5365ab94da7835": "ch-7_vapour_phase_refining/arabic-native/grok-4.3__9c7fdcb82a15.json",
+    "run-native_prompt-ar-ar-e270b966acec7416": "ch-7_vapour_phase_refining/arabic-native/gemini-3.8-flash__9867037c0262.json",
+    "run-native_prompt-ar-ar-83524784b51e5fab": "ch-7_vapour_phase_refining/arabic-native/claude-sonnet-5__fc7003d50af6.json",
+    "run-native_prompt-ar-ar-6166bc379e8fedcd": "ch-7_vapour_phase_refining/arabic-native/llama-4-maverick__c372d3b90cb9.json",
+    "run-english_prompt-en-ar-113295fe420d7446": "ch-1_isotope/arabic-english/gpt-5.6-terra__3f9a915af0d2.json",
+    "run-english_prompt-en-ar-870754d3691dfb89": "ch-1_isotope/arabic-english/grok-4.3__2f3e8017b8ac.json",
+    "run-english_prompt-en-ar-2a5eec4eed572ed1": "ch-1_isotope/arabic-english/gemini-3.8-flash__b035fcd6c13f.json",
+    "run-english_prompt-en-ar-b23c75ffd5496582": "ch-1_isotope/arabic-english/claude-sonnet-5__bde180d94e2a.json",
+    "run-english_prompt-en-ar-10f72112df185c70": "ch-1_isotope/arabic-english/llama-4-maverick__b353a3dc1055.json",
+    "run-english_prompt-en-ar-7303153eef719502": "ch-2_stoichiometry/arabic-english/gpt-5.6-terra__c84713758c16.json",
+    "run-english_prompt-en-ar-958c9547c47096bf": "ch-2_stoichiometry/arabic-english/grok-4.3__cf931baabdc0.json",
+    "run-english_prompt-en-ar-2f545b4c7300c2ac": "ch-2_stoichiometry/arabic-english/gemini-3.8-flash__68a52868f408.json",
+    "run-english_prompt-en-ar-4acd5c3ff2816078": "ch-2_stoichiometry/arabic-english/claude-sonnet-5__38c8a5405ec3.json",
+    "run-english_prompt-en-ar-26b23828a7a65cb6": "ch-2_stoichiometry/arabic-english/llama-4-maverick__b8bda956cefe.json",
+    "run-english_prompt-en-ar-998f406d312650b8": "ch-3_mole_concept/arabic-english/gpt-5.6-terra__14911809aec9.json",
+    "run-english_prompt-en-ar-2392e55a0de0c883": "ch-3_mole_concept/arabic-english/grok-4.3__e402dc77133a.json",
+    "run-english_prompt-en-ar-a1fb8036d9f3e3d0": "ch-3_mole_concept/arabic-english/gemini-3.8-flash__0937c98d2bf1.json",
+    "run-english_prompt-en-ar-5adcc87d58a782fa": "ch-3_mole_concept/arabic-english/claude-sonnet-5__a1f11eb64893.json",
+    "run-english_prompt-en-ar-0f91e0566b05677e": "ch-3_mole_concept/arabic-english/llama-4-maverick__90915903be20.json",
+    "run-english_prompt-en-ar-bf9f6f858bd64fed": "ch-4_redox_reactions/arabic-english/gpt-5.6-terra__06c0e71d1caa.json",
+    "run-english_prompt-en-ar-42be457832a95d6c": "ch-4_redox_reactions/arabic-english/grok-4.3__3dc67445ad7d.json",
+    "run-english_prompt-en-ar-1fc4de103302282d": "ch-4_redox_reactions/arabic-english/gemini-3.8-flash__f2fb6bd48012.json",
+    "run-english_prompt-en-ar-7f54ac9d4ae9bfea": "ch-4_redox_reactions/arabic-english/claude-sonnet-5__a5831e50eec5.json",
+    "run-english_prompt-en-ar-8f0432afa70f9fc0": "ch-4_redox_reactions/arabic-english/llama-4-maverick__d16a6719fa8e.json",
+    "run-english_prompt-en-ar-c2c175951658f33d": "ch-5_covalent_radius/arabic-english/gpt-5.6-terra__df78f263dafb.json",
+    "run-english_prompt-en-ar-2bd6853146544a41": "ch-5_covalent_radius/arabic-english/grok-4.3__7d3130f113fe.json",
+    "run-english_prompt-en-ar-e3d6b0b4489a5fd0": "ch-5_covalent_radius/arabic-english/gemini-3.8-flash__6e8222a70f9d.json",
+    "run-english_prompt-en-ar-2cb3145228c8ec87": "ch-5_covalent_radius/arabic-english/claude-sonnet-5__b5d1714ba065.json",
+    "run-english_prompt-en-ar-9fcbc64b5c9c4885": "ch-5_covalent_radius/arabic-english/llama-4-maverick__778404ba11cb.json",
+    "run-english_prompt-en-ar-a77fadc714a6db2e": "ch-6_alkaline_earth_metals/arabic-english/gpt-5.6-terra__e8f24748de20.json",
+    "run-english_prompt-en-ar-f7d13be4c9fa704e": "ch-6_alkaline_earth_metals/arabic-english/grok-4.3__1f608b7350e0.json",
+    "run-english_prompt-en-ar-78126a3210a6c74e": "ch-6_alkaline_earth_metals/arabic-english/gemini-3.8-flash__743c37c4ca01.json",
+    "run-english_prompt-en-ar-56c528bd00115caf": "ch-6_alkaline_earth_metals/arabic-english/claude-sonnet-5__9ca6e503738e.json",
+    "run-english_prompt-en-ar-24d40734f71dc482": "ch-6_alkaline_earth_metals/arabic-english/llama-4-maverick__d1d8203abccf.json",
+    "run-english_prompt-en-ar-e998ff0779c4e4b2": "ch-7_vapour_phase_refining/arabic-english/gpt-5.6-terra__8a1bb795dad8.json",
+    "run-english_prompt-en-ar-848a7f5dde824d0b": "ch-7_vapour_phase_refining/arabic-english/grok-4.3__e0d0042425a5.json",
+    "run-english_prompt-en-ar-3c88bd398461dc20": "ch-7_vapour_phase_refining/arabic-english/gemini-3.8-flash__36c068b11a1e.json",
+    "run-english_prompt-en-ar-3a7b4786d446dfc5": "ch-7_vapour_phase_refining/arabic-english/claude-sonnet-5__154431f11be6.json",
+    "run-english_prompt-en-ar-33b1a008ab15b750": "ch-7_vapour_phase_refining/arabic-english/llama-4-maverick__487ee3cad779.json",
+    "run-native_prompt-fr-fr-58bfbe2f6e1a9408": "ch-1_isotope/french-native/gpt-5.6-terra__c5e8f9a3704d.json",
+    "run-native_prompt-fr-fr-11caf2c58b786123": "ch-1_isotope/french-native/grok-4.3__1134b69d729f.json",
+    "run-native_prompt-fr-fr-aee054fbc0b3a5d3": "ch-1_isotope/french-native/gemini-3.8-flash__0080f70fcc5d.json",
+    "run-native_prompt-fr-fr-3cf0356de10974a8": "ch-1_isotope/french-native/claude-sonnet-5__34a02b664f1b.json",
+    "run-native_prompt-fr-fr-1a7c73232796b236": "ch-1_isotope/french-native/llama-4-maverick__3e5e28b1017d.json",
+    "run-native_prompt-fr-fr-10921b19c733ec1a": "ch-2_stoichiometry/french-native/gpt-5.6-terra__7bf477f29784.json",
+    "run-native_prompt-fr-fr-50e165017cdcae7a": "ch-2_stoichiometry/french-native/grok-4.3__93b9856d5cff.json",
+    "run-native_prompt-fr-fr-1aa3f452f546f82a": "ch-2_stoichiometry/french-native/gemini-3.8-flash__f4a50cb4e33a.json",
+    "run-native_prompt-fr-fr-6548dbe67f73f038": "ch-2_stoichiometry/french-native/claude-sonnet-5__4f01f0e1bb93.json",
+    "run-native_prompt-fr-fr-66dd96ea6d1002e8": "ch-2_stoichiometry/french-native/llama-4-maverick__657131a3a9b9.json",
+    "run-native_prompt-fr-fr-331e6d83e7714648": "ch-3_mole_concept/french-native/gpt-5.6-terra__c39060e892c0.json",
+    "run-native_prompt-fr-fr-d29b6a8df6376efb": "ch-3_mole_concept/french-native/grok-4.3__4e7af7c7ec4c.json",
+    "run-native_prompt-fr-fr-72a146b7e11bb3d0": "ch-3_mole_concept/french-native/gemini-3.8-flash__43a6b907944c.json",
+    "run-native_prompt-fr-fr-0c92f48f24923017": "ch-3_mole_concept/french-native/claude-sonnet-5__299e104f83ca.json",
+    "run-native_prompt-fr-fr-935df23afab88541": "ch-3_mole_concept/french-native/llama-4-maverick__b0825592b0d7.json",
+    "run-native_prompt-fr-fr-3c16a7de3da46bbc": "ch-4_redox_reactions/french-native/gpt-5.6-terra__7dd6e7598291.json",
+    "run-native_prompt-fr-fr-efdfd8ae53b76875": "ch-4_redox_reactions/french-native/grok-4.3__b45976264ce4.json",
+    "run-native_prompt-fr-fr-0c3917396ca97930": "ch-4_redox_reactions/french-native/gemini-3.8-flash__e96a078f8342.json",
+    "run-native_prompt-fr-fr-fc4ba04364ccdd9d": "ch-4_redox_reactions/french-native/claude-sonnet-5__9b36d38d9082.json",
+    "run-native_prompt-fr-fr-3b2fde2b285f2bec": "ch-4_redox_reactions/french-native/llama-4-maverick__0dbc232cd51c.json",
+    "run-native_prompt-fr-fr-b5a4fad10ae5ea2e": "ch-5_covalent_radius/french-native/gpt-5.6-terra__ab2abd3b995d.json",
+    "run-native_prompt-fr-fr-a8bf7bfa23b74f32": "ch-5_covalent_radius/french-native/grok-4.3__ac448eec0d70.json",
+    "run-native_prompt-fr-fr-c4e493b70e0e2cd1": "ch-5_covalent_radius/french-native/gemini-3.8-flash__178f39154a61.json",
+    "run-native_prompt-fr-fr-9f3cc408df52efc9": "ch-5_covalent_radius/french-native/claude-sonnet-5__2babbd8a032b.json",
+    "run-native_prompt-fr-fr-8c05ee22446f77d0": "ch-5_covalent_radius/french-native/llama-4-maverick__30af5b71b781.json",
+    "run-native_prompt-fr-fr-dd39abd232d9bf0a": "ch-6_alkaline_earth_metals/french-native/gpt-5.6-terra__f36dd63be07d.json",
+    "run-native_prompt-fr-fr-43c0caff53e6ca41": "ch-6_alkaline_earth_metals/french-native/grok-4.3__7251a7061890.json",
+    "run-native_prompt-fr-fr-f063731e61d3dba3": "ch-6_alkaline_earth_metals/french-native/gemini-3.8-flash__f1914249e91e.json",
+    "run-native_prompt-fr-fr-02ff0803200b9e8e": "ch-6_alkaline_earth_metals/french-native/claude-sonnet-5__1d3214ad7a30.json",
+    "run-native_prompt-fr-fr-65a8d195035934b8": "ch-6_alkaline_earth_metals/french-native/llama-4-maverick__6fa81ce2b5ef.json",
+    "run-native_prompt-fr-fr-cf28066a90ec6a66": "ch-7_vapour_phase_refining/french-native/gpt-5.6-terra__06fbe8f3f2dd.json",
+    "run-native_prompt-fr-fr-7736d51b1625d88b": "ch-7_vapour_phase_refining/french-native/grok-4.3__5443b4085158.json",
+    "run-native_prompt-fr-fr-3f46fd9fc2ec2516": "ch-7_vapour_phase_refining/french-native/gemini-3.8-flash__487678930ee2.json",
+    "run-native_prompt-fr-fr-dd10a87d75a5a130": "ch-7_vapour_phase_refining/french-native/claude-sonnet-5__eacd841d6757.json",
+    "run-native_prompt-fr-fr-f20091e7b7a586f4": "ch-7_vapour_phase_refining/french-native/llama-4-maverick__f8113bbab9f0.json",
+    "run-english_prompt-en-fr-79f274323169738a": "ch-1_isotope/french-english/gpt-5.6-terra__18b7401bcb47.json",
+    "run-english_prompt-en-fr-df927beb2824119d": "ch-1_isotope/french-english/grok-4.3__5b387b380b4c.json",
+    "run-english_prompt-en-fr-2ef81c625da9413e": "ch-1_isotope/french-english/gemini-3.8-flash__2e59f2487cc8.json",
+    "run-english_prompt-en-fr-ec78079b7772131d": "ch-1_isotope/french-english/claude-sonnet-5__825261af1d2b.json",
+    "run-english_prompt-en-fr-173ae9553bdef554": "ch-1_isotope/french-english/llama-4-maverick__9eb64c8cec63.json",
+    "run-english_prompt-en-fr-1699adaa692f0c7d": "ch-2_stoichiometry/french-english/gpt-5.6-terra__d498ac6e7da8.json",
+    "run-english_prompt-en-fr-e9fbaed69e4a4ee9": "ch-2_stoichiometry/french-english/grok-4.3__0393b379f408.json",
+    "run-english_prompt-en-fr-eb289e054c282070": "ch-2_stoichiometry/french-english/gemini-3.8-flash__f4ca841d3a00.json",
+    "run-english_prompt-en-fr-f9d64af7f5d3aacf": "ch-2_stoichiometry/french-english/claude-sonnet-5__1b5c706969ee.json",
+    "run-english_prompt-en-fr-62646f0caea72dcb": "ch-2_stoichiometry/french-english/llama-4-maverick__db3c4e55be79.json",
+    "run-english_prompt-en-fr-429624b4f650d28e": "ch-3_mole_concept/french-english/gpt-5.6-terra__f34edbef7d42.json",
+    "run-english_prompt-en-fr-a0ed2b58782edc14": "ch-3_mole_concept/french-english/grok-4.3__c24338970ad2.json",
+    "run-english_prompt-en-fr-a72144cc8c021f09": "ch-3_mole_concept/french-english/gemini-3.8-flash__e3cff4fac54d.json",
+    "run-english_prompt-en-fr-3c6976ce843e6d46": "ch-3_mole_concept/french-english/claude-sonnet-5__0c858bff3424.json",
+    "run-english_prompt-en-fr-da9fbb08a9b4013d": "ch-3_mole_concept/french-english/llama-4-maverick__b5967914b747.json",
+    "run-english_prompt-en-fr-978ff6cfebbda9ec": "ch-4_redox_reactions/french-english/gpt-5.6-terra__8f38a52ddcfc.json",
+    "run-english_prompt-en-fr-67188f957b9e5d06": "ch-4_redox_reactions/french-english/grok-4.3__25cab2c1927c.json",
+    "run-english_prompt-en-fr-cec6b8ab03509a0a": "ch-4_redox_reactions/french-english/gemini-3.8-flash__600c0e408398.json",
+    "run-english_prompt-en-fr-7a16e430e0503f94": "ch-4_redox_reactions/french-english/claude-sonnet-5__2e5db42cd5aa.json",
+    "run-english_prompt-en-fr-606df7ac626f40af": "ch-4_redox_reactions/french-english/llama-4-maverick__a1fc6d0bd16f.json",
+    "run-english_prompt-en-fr-b0a0f6de1389f087": "ch-5_covalent_radius/french-english/gpt-5.6-terra__2700e71aeb6a.json",
+    "run-english_prompt-en-fr-5ce2757837ed234e": "ch-5_covalent_radius/french-english/grok-4.3__2befe244ca67.json",
+    "run-english_prompt-en-fr-0f2c7b76b433073d": "ch-5_covalent_radius/french-english/gemini-3.8-flash__e8252c9982d5.json",
+    "run-english_prompt-en-fr-0f820eec603c5f7e": "ch-5_covalent_radius/french-english/claude-sonnet-5__601687d4f341.json",
+    "run-english_prompt-en-fr-1568554e758de9a3": "ch-5_covalent_radius/french-english/llama-4-maverick__3156d1bd8bd4.json",
+    "run-english_prompt-en-fr-430f93acf29424bd": "ch-6_alkaline_earth_metals/french-english/gpt-5.6-terra__0ce1eb08132e.json",
+    "run-english_prompt-en-fr-9f5661df555faa42": "ch-6_alkaline_earth_metals/french-english/grok-4.3__47cc2f02e2e2.json",
+    "run-english_prompt-en-fr-54bf0f2638bb0850": "ch-6_alkaline_earth_metals/french-english/gemini-3.8-flash__a6b821115777.json",
+    "run-english_prompt-en-fr-7f9de0aab9001964": "ch-6_alkaline_earth_metals/french-english/claude-sonnet-5__0c682bde587f.json",
+    "run-english_prompt-en-fr-c042cbfc9692b2a6": "ch-6_alkaline_earth_metals/french-english/llama-4-maverick__09f1d4cef0ea.json",
+    "run-english_prompt-en-fr-0c16bade3950b79d": "ch-7_vapour_phase_refining/french-english/gpt-5.6-terra__826756148527.json",
+    "run-english_prompt-en-fr-67084991e2812e2e": "ch-7_vapour_phase_refining/french-english/grok-4.3__cd91d15d6269.json",
+    "run-english_prompt-en-fr-d2f6a9c490da0e11": "ch-7_vapour_phase_refining/french-english/gemini-3.8-flash__295c010f6a7e.json",
+    "run-english_prompt-en-fr-addbb72d5a357b26": "ch-7_vapour_phase_refining/french-english/claude-sonnet-5__a916209f7576.json",
+    "run-english_prompt-en-fr-139ed55292df0fd6": "ch-7_vapour_phase_refining/french-english/llama-4-maverick__3ab8635a7961.json"
+  }
+}

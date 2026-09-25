@@ -1,0 +1,1085 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "85f8e316d95347f7f1cc55dfa575b7d3e10f3849ecd5358e6d4359a62a0ca540",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The response provides a comprehensive and accurate explanation of the mole concept in Bengali, covering its conceptual foundation through everyday counting analogies, Avogadro's number, molar mass, molar volume at STP, calculation formulas, a worked practice problem, and a summary.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction to the Mole as a Counting Unit via Analogies"
+      },
+      {
+        "id": "s2",
+        "label": "Avogadro's Number and Particle Counting"
+      },
+      {
+        "id": "s3",
+        "label": "Relationship Between Mole and Mass (Molar Mass)"
+      },
+      {
+        "id": "s4",
+        "label": "Molar Volume of Gases at STP"
+      },
+      {
+        "id": "s5",
+        "label": "Formulas for Mole Calculations"
+      },
+      {
+        "id": "s6",
+        "label": "Mole Calculation Practice Problem"
+      },
+      {
+        "id": "s7",
+        "label": "Summary of the Mole Concept"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Conceptual definition of mole as a counting unit using familiar analogies",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the mole by explaining why chemists need a collective unit to count extremely small atoms and molecules, drawing analogies to everyday counting units such as dozen, hali, and pair.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "যদি বলো, \" **এক হালি** লেবু দিন\", দোকানদার দেবে **৪টি**।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "হ্যালো! রসায়ন (Chemistry)-এর অন্যতম গুরুত্বপূর্ণ এবং মজার একটি বিষয় হলো **'মোল ধারণা' (Mole Concept)**। এটি প্রথম দিকে একটু কঠিন মনে হলেও, একবার বুঝে গেলে খুব সহজ। ",
+            "start": 0,
+            "end": 164
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "চলো, একদম সহজভাবে বিষয়টাকে বুঝে নেওয়া যাক।",
+            "start": 166,
+            "end": 208
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 210,
+            "end": 213
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ১. 'মোল' আসলে কী? (একটি সহজ উদাহরণ)",
+            "start": 215,
+            "end": 254
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তুমি যখন বাজারে গিয়ে বলো, \"আমাকে **এক ডজন** ডিম দিন\", দোকানদার তোমাকে কয়টি ডিম দেয়? **১২টি**।",
+            "start": 255,
+            "end": 348
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যদি বলো, \" **এক হালি** লেবু দিন\", দোকানদার দেবে **৪টি**।",
+            "start": 349,
+            "end": 405
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যদি বলো, \" **এক জোড়া** জুতো দিন\", তুমি পাবে **২টি**।",
+            "start": 406,
+            "end": 458
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রসায়নে পরমাণু (atom) বা অণু (molecule)-রা এত ছোট যে তাদের একটা-দুটো করে গোনা অসম্ভব। সামান্য এক ফোঁটা জলেও কোটি কোটি অণু থাকে! তাই বিজ্ঞানীদের এমন একটা বড় \"প্যাকেট\" বা \"একক\" দরকার ছিল, যা দিয়ে পরমাণু বা অণু গোনা যায়।",
+            "start": 460,
+            "end": 676
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রসায়নের সেই \"ডজন\"-এর মতো এককটাই হলো **'মোল' (Mole)**।",
+            "start": 678,
+            "end": 731
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 733,
+            "end": 736
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly defines the mole as a macroscopic counting packet for submicroscopic particles using intuitive counting analogies.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Avogadro's number and particle count in one mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines the precise number of particles contained in one mole as Avogadro's number (6.022 x 10^23) and illustrates its application to atoms, molecules, and macroscopic items.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p17",
+              "quote": "*   এমনকি তুমি যদি ১ মোল ক্রিকেট বল নাও, তার মানে তোমার কাছে $6.022 \\times 10^{23}$ টি বল আছে!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ২. ১ মোলে কয়টি কণা থাকে? (অ্যাভোগাড্রো সংখ্যা)",
+            "start": 738,
+            "end": 788
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "১ ডজন মানে যেমন সবসময় ১২টি, তেমনই রসায়নে:",
+            "start": 789,
+            "end": 830
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **১ মোল = $6.022 \\times 10^{23}$ টি কণা (পরমাণু, অণু বা আয়ন)।**",
+            "start": 831,
+            "end": 896
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই বিশাল সংখ্যাটিকে বলা হয় **অ্যাভোগাড্রো সংখ্যা (Avogadro's Number)**, যাকে সংক্ষেপে **$N_A$** লেখা হয়। ",
+            "start": 898,
+            "end": 1003
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   ১ মোল হাইড্রোজেন পরমাণু = $6.022 \\times 10^{23}$ টি হাইড্রোজেন পরমাণু।",
+            "start": 1005,
+            "end": 1079
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   ১ মোল জল ($H_2O$) = $6.022 \\times 10^{23}$ টি জলের অণু।",
+            "start": 1080,
+            "end": 1139
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   এমনকি তুমি যদি ১ মোল ক্রিকেট বল নাও, তার মানে তোমার কাছে $6.022 \\times 10^{23}$ টি বল আছে!",
+            "start": 1140,
+            "end": 1234
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1236,
+            "end": 1239
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states Avogadro's number as 6.022 x 10^23 particles per mole and demonstrates its consistency regardless of whether the particle is an atom, molecule, or object.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Relationship between mole and mass (molar mass)",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains how molar mass bridges counting particles and measuring mass in the laboratory by expressing atomic or molecular mass in grams.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৩. মোলের সাথে ভরের (Mass) সম্পর্ক কী?",
+            "start": 1241,
+            "end": 1282
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ল্যাবরেটরিতে তো আর কণা গুণে গুণে কাজ করা যায় না, সেখানে আমাদের ভর (weight) মাপতে হয়। তাহলে ১ মোলের ওজন কত গ্রাম হবে?",
+            "start": 1283,
+            "end": 1399
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "নিয়মটি খুব সহজ: **কোনো মৌল বা যৌগের পারমাণবিক ভর (Atomic mass) বা আণবিক ভরকে (Molecular mass) গ্রামে প্রকাশ করলেই ১ মোল পাওয়া যায়।** একে **মোলার ভর (Molar Mass)** বলে।",
+            "start": 1401,
+            "end": 1568
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines molar mass as the atomic or molecular mass expressed in grams.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Molar mass calculation example: Carbon",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the molar mass concept using atomic carbon, showing that 12 grams corresponds to 1 mole of carbon atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**উদাহরণ দিয়ে বুঝি:**",
+            "start": 1570,
+            "end": 1591
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **কার্বন ($C$):** কার্বনের পারমাণবিক ভর হলো ১২। ",
+            "start": 1592,
+            "end": 1643
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * সুতরাং, **১২ গ্রাম কার্বন = ১ মোল কার্বন** (যার মধ্যে $6.022 \\times 10^{23}$ টি কার্বন পরমাণু আছে)।",
+            "start": 1644,
+            "end": 1748
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Carbon's atomic mass is 12, so 12 g of carbon equals 1 mole containing 6.022 x 10^23 atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Molar mass calculation example: Water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a worked calculation of the molecular mass of water from hydrogen and oxygen and connects 18 grams to 1 mole of water molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **জল ($H_2O$):** ",
+            "start": 1749,
+            "end": 1769
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * হাইড্রোজেনের ভর = ১, অক্সিজেনের ভর = ১৬।",
+            "start": 1770,
+            "end": 1815
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * জলের আণবিক ভর = $(1 \\times 2) + 16 = 18$।",
+            "start": 1816,
+            "end": 1862
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * সুতরাং, **১৮ গ্রাম জল = ১ মোল জল** (যার মধ্যে $6.022 \\times 10^{23}$ টি জলের অণু আছে)।",
+            "start": 1863,
+            "end": 1954
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1956,
+            "end": 1959
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molecular mass calculation (1x2 + 16 = 18) and the deduction that 18 g H2O corresponds to 1 mole containing 6.022 x 10^23 molecules are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Molar volume of gases at STP",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains the molar volume relationship for gases at STP (22.4 L per mole) and illustrates it using oxygen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৪. গ্যাসের ক্ষেত্রে মোলের আয়তন (Molar Volume)",
+            "start": 1961,
+            "end": 2010
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যদি কোনো পদার্থ গ্যাসীয় অবস্থায় থাকে, তবে প্রমাণ তাপমাত্রা ও চাপে (STP - Standard Temperature and Pressure):",
+            "start": 2011,
+            "end": 2119
+          },
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **যেকোনো গ্যাসের ১ মোলের আয়তন হবে ২২.৪ লিটার (22.4 L)।**",
+            "start": 2120,
+            "end": 2178
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তার মানে, STP-তে ২২.৪ লিটার অক্সিজেন ($O_2$) গ্যাস মানেই হলো সেখানে ১ মোল বা $6.022 \\times 10^{23}$ টি অক্সিজেন অণু আছে এবং তার ভর ৩২ গ্রাম।",
+            "start": 2180,
+            "end": 2320
+          },
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2322,
+            "end": 2325
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Standard high school introductory chemistry standard temperature and pressure (0 °C, 1 atm) correctly attributes 22.4 L to 1 mole of gas, and oxygen (O2) molar mass is accurately 32 g.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Core mathematical formulas for calculating moles",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents three primary formulas for finding the number of moles from mass, number of particles, and gas volume at STP.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৫. অংক করার জন্য জাদুকরী সূত্র (Formulas):",
+            "start": 2327,
+            "end": 2373
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "মোল সংখ্যাকে আমরা ছোট হাতের **$n$** দিয়ে প্রকাশ করি।",
+            "start": 2375,
+            "end": 2427
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. ভর দেওয়া থাকলে:",
+            "start": 2429,
+            "end": 2447
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$n = \\frac{w}{M}$$",
+            "start": 2448,
+            "end": 2470
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   *(এখানে, $w$ = দেওয়া ভর গ্রামে, $M$ = মোলার ভর)*",
+            "start": 2471,
+            "end": 2522
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. কণার সংখ্যা দেওয়া থাকলে:",
+            "start": 2524,
+            "end": 2551
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$n = \\frac{N}{N_A}$$",
+            "start": 2552,
+            "end": 2576
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   *(এখানে, $N$ = মোট কণার সংখ্যা, $N_A = 6.022 \\times 10^{23}$)*",
+            "start": 2577,
+            "end": 2642
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. STP-তে গ্যাসের আয়তন দেওয়া থাকলে:",
+            "start": 2644,
+            "end": 2679
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$n = \\frac{V}{22.4}$$",
+            "start": 2680,
+            "end": 2705
+          },
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   *(এখানে, $V$ = লিটারে দেওয়া আয়তন)*",
+            "start": 2706,
+            "end": 2743
+          },
+          {
+            "id": "p46",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2745,
+            "end": 2748
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All three formulas (n = w/M, n = N/NA, n = V/22.4) correctly represent the standard mathematical definitions for finding the number of moles.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Worked practice problem calculating moles in 36 grams of water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a practice problem with a fully worked solution calculating the number of moles in 36 grams of water using n = w/M.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### একটি ছোট্ট টেস্ট (Practice Problem):",
+            "start": 2750,
+            "end": 2790
+          },
+          {
+            "id": "p48",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**প্রশ্ন:** ৩৬ গ্রাম জলে ($H_2O$) কত মোল জল আছে?",
+            "start": 2791,
+            "end": 2839
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**সমাধান:**",
+            "start": 2841,
+            "end": 2852
+          },
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* আমরা জানি, জলের মোলার ভর ($M$) = ১৮ গ্রাম/মোল।",
+            "start": 2853,
+            "end": 2901
+          },
+          {
+            "id": "p51",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* দেওয়া ভর ($w$) = ৩৬ গ্রাম।",
+            "start": 2902,
+            "end": 2930
+          },
+          {
+            "id": "p52",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* সূত্র: $n = \\frac{w}{M} = \\frac{৩৬}{১৮} = \\mathbf{২\\text{ মোল}}$।",
+            "start": 2931,
+            "end": 2998
+          },
+          {
+            "id": "p53",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(তার মানে ৩৬ গ্রাম জলে $2 \\times 6.022 \\times 10^{23}$ টি জলের অণু আছে!)*",
+            "start": 2999,
+            "end": 3073
+          },
+          {
+            "id": "p54",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3075,
+            "end": 3078
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The givens (w = 36 g, M = 18 g/mol) and calculation (n = 36/18 = 2 moles, corresponding to 2 x 6.022 x 10^23 molecules) are entirely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of the mole concept as a central connector",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a concise single-line recap characterizing the mole as a conceptual bridge between mass, particle count, and gas volume, followed by a closing remark.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p55",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**এক লাইনে সারসংক্ষেপ:**",
+            "start": 3079,
+            "end": 3103
+          },
+          {
+            "id": "p56",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "মোল হলো রসায়নের এমন একটি সেতু, যা ভর (গ্রাম), কণার সংখ্যা (অ্যাভোগাড্রো সংখ্যা) এবং গ্যাসের আয়তন (২২.৪ লিটার)-কে একে অপরের সাথে যুক্ত করে।",
+            "start": 3104,
+            "end": 3242
+          },
+          {
+            "id": "p57",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "বিষয়টি কি পরিষ্কার হয়েছে, নাকি কোনো জায়গায় বুঝতে অসুবিধা আছে? দ্বিধা না করে বলো!",
+            "start": 3244,
+            "end": 3324
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately synthesizes the core role of the mole concept in stoichiometry.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\bengali-english\\gemini-3.8-flash__fc393e90784e.json",
+    "original_sha256": "ccb1e2984ed4faccf5cfd07201a38b1f6a3a4347a370e15adfbc63877163e1d0",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 57,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "EXAMPLE": 3,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 57,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "localized": 1,
+      "everyday": 1,
+      "none": 7
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

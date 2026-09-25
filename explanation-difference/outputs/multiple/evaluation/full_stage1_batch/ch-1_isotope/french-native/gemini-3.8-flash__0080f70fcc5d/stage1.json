@@ -1,0 +1,266 @@
+{
+  "topic_relevance": {
+    "requested_topic": "isotope",
+    "observed_topic": "Definition, atomic structure background, examples, etymology, and applications of isotopes",
+    "topic_match": "on_topic",
+    "reason": "The response clearly and thoroughly explains the concept of isotopes, including definition, examples (carbon isotopes), etymology, and real-world applications.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7",
+      "u8",
+      "u9"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "ANALOGY",
+      "label": "Twin brothers analogy for isotopes",
+      "excerpts": [
+        {
+          "text": "### 1. L'analogie des jumeaux\n\nImagine deux frères jumeaux. Ils ont exactement la même tête, le même ADN, ils portent le même nom de famille et s'habillent pareil. Impossible de les distinguer au premier coup d'œil. \nMais l'un d'eux a décidé de mettre des haltères dans son sac à dos. \n\nSi tu les fais monter sur une balance : l'un est plus lourd que l'autre. Pourtant, **ce sont fondamentalement les mêmes personnes**.\n\nEn chimie, c'est exactement ça, un **isotope**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Imagine deux frères jumeaux. Ils ont exactement la même tête, le même ADN, ils portent le même nom de famille et s'habillent pareil. Impossible de les distinguer au premier coup d'œil. \nMais l'un d'eux a décidé de mettre des haltères dans son sac à dos."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The analogy accurately captures that isotopes are the same chemical element sharing fundamental identity but with different masses.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Review of atomic structure",
+      "excerpts": [
+        {
+          "text": "### 2. Le rappel express sur l'atome\n\nDans un atome, tu as :\n1. **Les protons** : C'est la **carte d'identité** de l'atome (le numéro $Z$). Si un atome a 6 protons, c'est *obligatoirement* du carbone. S'il en a 7, c'est de l'azote. On ne peut pas y toucher.\n2. **Les électrons** : Ils tournent autour, ce sont eux qui gèrent les réactions chimiques.\n3. **Les neutrons** : Ils sont dans le noyau avec les protons. Ils n'ont pas de charge électrique. En gros... ils servent de colle pour stabiliser le noyau et ils pèsent lourd.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The basic atomic constituents (protons, neutrons, electrons) and their roles are described correctly for an introductory high school level.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Definition and properties of isotopes",
+      "excerpts": [
+        {
+          "text": "> **Des isotopes sont des atomes qui ont le même nombre de protons (donc c'est le même élément chimique), mais un nombre DIFFÉRENT de neutrons.**\n\nComme ils ont le même nombre de protons et d'électrons, **ils ont exactement les mêmes propriétés chimiques** (ils réagissent de la même façon). La seule chose qui change, c'est leur **masse** (leur poids).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition is standard and the explanation correctly links identical proton and electron counts to identical chemical properties, and differing neutron numbers to differing masses.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Comparison of Carbon-12 and Carbon-14",
+      "excerpts": [
+        {
+          "text": "#### L'exemple classique : Le Carbone\n\nDans la nature, le carbone existe principalement sous deux formes :\n* **Le Carbone 12 ($^{12}_{6}\\text{C}$)** : 6 protons, 6 neutrons. (Masse = 12). C'est le carbone ultra-majoritaire (99% de ce qui t'entoure).\n* **Le Carbone 14 ($^{14}_{6}\\text{C}$)** : 6 protons... mais **8 neutrons** ! (Masse = 14). Il a deux neutrons de trop dans son sac à dos.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text states that in nature carbon exists mainly under two forms: Carbon-12 and Carbon-14. In reality, the second natural, stable, and significant isotope making up the remaining ~1% of natural carbon is Carbon-13, whereas Carbon-14 is only present in minute trace quantities (about 1 part per trillion).",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "Dans la nature, le carbone existe principalement sous deux formes :\n* **Le Carbone 12 ($^{12}_{6}\\text{C}$)** : 6 protons, 6 neutrons. (Masse = 12). C'est le carbone ultra-majoritaire (99% de ce qui t'entoure).\n* **Le Carbone 14 ($^{14}_{6}\\text{C}$)** : 6 protons... mais **8 neutrons** ! (Masse = 14)."
+              }
+            ],
+            "description": "Carbon in nature exists primarily as carbon-12 (~98.9%) and carbon-13 (~1.1%). Carbon-14 is not one of the two main natural isotopes; it is an unstable trace isotope (~10^-10%).",
+            "correction": "Dans la nature, le carbone stable existe principalement sous deux formes : le Carbone 12 (~99%) et le Carbone 13 (~1%), tandis que le Carbone 14 n'est présent qu'à l'état de traces.",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "STUDY_SUPPORT",
+      "label": "Etymological memory aid for the word isotope",
+      "excerpts": [
+        {
+          "text": "### 4. Mais pourquoi le mot \"Isotope\" ?\n\nUne petite astuce étymologique pour briller en classe :\nEn grec, *Iso* veut dire \"même\", et *Topos* veut dire \"lieu\".\nLes isotopes sont à la **\"même place\"** dans le tableau périodique de Mendeleïev. Tu n'as pas une case pour le Carbone 12 et une case pour le Carbone 14. Ils partagent la même case : celle du Carbone ($C$).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "mnemonic"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The etymology (iso = same, topos = place, coined because they occupy the same position in the periodic table) is historically and conceptually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "EXAMPLE",
+      "label": "Application of carbon-14 in archaeology",
+      "excerpts": [
+        {
+          "text": "1. **L'archéologie (Datation au Carbone 14) :** Le carbone 14, avec ses neutrons en trop, est instable : il est *radioactif*. Il se désintègre à un rythme ultra-précis au fil des siècles. En mesurant ce qu'il en reste dans un os de mammouth ou un morceau de bois antique, on peut savoir exactement quand il est mort !",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Radiocarbon dating based on radioactive decay of C-14 in ancient organic remains is accurately summarized.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "EXAMPLE",
+      "label": "Application of radioactive isotopes in medicine",
+      "excerpts": [
+        {
+          "text": "2. **La médecine :** On injecte parfois des isotopes radioactifs inoffensifs dans le corps (des traceurs) pour illuminer des tumeurs ou voir le fonctionnement du cœur au scanner.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The use of radioisotopes as medical imaging tracers is accurately described.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u8",
+      "kind": "EXAMPLE",
+      "label": "Application of Uranium-235 in nuclear power",
+      "excerpts": [
+        {
+          "text": "3. **L'énergie nucléaire :** Dans les centrales, on utilise un isotope très précis de l'Uranium : **l'Uranium 235** (car il se casse facilement pour libérer de l'énergie), alors que l'Uranium 238, son grand frère, ne le fait pas.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The distinction between fissile U-235 used in nuclear reactors and non-fissile (by thermal neutrons) U-238 is correctly conveyed in simplified terms.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u9",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap for exam review",
+      "excerpts": [
+        {
+          "text": "### Le récap' pour le bac :\nSi tu dois retenir une seule phrase : \n**\"Même numéro atomique $Z$ (même élément), mais nombre de masse $A$ différent (nombre de neutrons différent).\"**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The recap accurately synthesizes the core definition using standard high-school chemistry notation (atomic number Z, mass number A).",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u5"
+      ],
+      "issue": "Unit u5 teaches the etymology of 'isotope' ('iso' = same, 'topos' = place). This can be classified as a STUDY_SUPPORT (mnemonic / 'astuce') or as a CONCEPT (explaining the term via periodic table organization).",
+      "proposed_resolution": "Classified as STUDY_SUPPORT with subtype 'mnemonic' because the source explicitly introduces it as 'Une petite astuce étymologique pour briller en classe'."
+    },
+    {
+      "unit_ids": [
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "issue": "Section 5 lists three applications under one heading. They could be merged into a single multi-application unit or split into three distinct EXAMPLE units.",
+      "proposed_resolution": "Split into three independent EXAMPLE units (u6, u7, u8) following the boundary rule that independent applications in a list represent distinct teaching cases."
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\llms\vertex_ai\gemini\vertex_and_google_ai_studio_gemini.py", line 2851, in async_completion
+    response: Final = await client.post(
+                      ^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\litellm_core_utils\logging_utils.py", line 336, in async_wrapper
+    result: Final = await func(*args, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\llms\custom_httpx\http_handler.py", line 807, in post
+    await _raise_masked_async_error(e, stream)
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\llms\custom_httpx\http_handler.py", line 506, in _raise_masked_async_error
+    raise MaskedHTTPStatusError(e, message=_text, text=_text) from None
+litellm.llms.custom_httpx.http_handler.MaskedHTTPStatusError: Server error '503 Service Unavailable' for url 'https://generativelanguage.googleapis.com/v1alpha/models/gemini-3.8-flash:generateContent'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\main.py", line 648, in acompletion
+    response = await _resolve_dispatched_chat_response(init_response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\main.py", line 713, in _resolve_dispatched_chat_response
+    return await pending
+           ^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\llms\vertex_ai\gemini\vertex_and_google_ai_studio_gemini.py", line 2860, in async_completion
+    raise VertexAIError(
+    ...<3 lines>...
+    )
+litellm.llms.vertex_ai.common_utils.VertexAIError: {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\evaluate_v3.py", line 203, in <module>
+    if __name__=='__main__': asyncio.run(main())
+                             ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\evaluate_v3.py", line 161, in main
+    response=await aresponses(**request,timeout=240)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\utils.py", line 2152, in wrapper_async
+    raise e
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\utils.py", line 1964, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\responses\main.py", line 719, in aresponses
+    raise litellm.exception_type(
+    ...<5 lines>...
+    )
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\responses\main.py", line 699, in aresponses
+    response = await init_response
+               ^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\responses\litellm_completion_transformation\handler.py", line 110, in async_response_api_handler
+    litellm_completion_response: Final[ModelResponse | litellm.CustomStreamWrapper] = await litellm.acompletion(
+                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **acompletion_args,
+        ^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\utils.py", line 2152, in wrapper_async
+    raise e
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\utils.py", line 1964, in wrapper_async
+    result = await original_function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\main.py", line 701, in acompletion
+    raise exception_type(
+          ~~~~~~~~~~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        extra_kwargs=kwargs,
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2678, in exception_type
+    raise e  # it's already mapped
+    ^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 2503, in exception_type
+    _map_vertex_exception(
+    ~~~~~~~~~~~~~~~~~~~~~^
+        model=model,
+        ^^^^^^^^^^^^
+    ...<5 lines>...
+        extra_information=extra_information,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\.venv\Lib\site-packages\litellm\litellm_core_utils\exception_mapping_utils.py", line 1333, in _map_vertex_exception
+    raise ServiceUnavailableError(
+    ...<3 lines>...
+    )
+litellm.exceptions.ServiceUnavailableError: litellm.ServiceUnavailableError: GeminiException - {
+  "error": {
+    "code": 503,
+    "message": "This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.",
+    "status": "UNAVAILABLE"
+  }
+}
+

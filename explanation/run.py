@@ -115,7 +115,7 @@ def output_text(response):
                      if part.get("type") == "output_text")
 
 
-async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None, request_builder=None, log_calls=False):
+async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None, request_builder=None, log_calls=False, result_path_builder=None):
     if call is None:
         from litellm import aresponses
         call = aresponses
@@ -127,7 +127,8 @@ async def execute(jobs, output, catalog, concurrency, timeout, resume, call=None
                 handle.write(json.dumps(event, ensure_ascii=False) + "\n")
 
     async def one(job):
-        result_path = output / f"{job['job_id']}.json"
+        result_path = result_path_builder(job) if result_path_builder else output / f"{job['job_id']}.json"
+        result_path.parent.mkdir(parents=True, exist_ok=True)
         if resume and result_path.exists():
             previous = read_json(result_path)
             if previous.get("status") == "completed" and previous.get("job") == job:

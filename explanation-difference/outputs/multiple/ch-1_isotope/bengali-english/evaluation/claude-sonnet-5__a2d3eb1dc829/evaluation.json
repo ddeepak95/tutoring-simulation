@@ -1,0 +1,611 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "b3b9fc94e9421779491a8d6492acdd1171f511e89e6d6bc99cb149d4f5874da5",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "isotope",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The entire response directly explains isotopes, their definition, examples (hydrogen and carbon), physical and chemical properties, an explanatory analogy, and a memory rule in Bengali.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of isotopes"
+      },
+      {
+        "id": "s2",
+        "label": "Examples of isotopes"
+      },
+      {
+        "id": "s3",
+        "label": "Analogy for isotopes"
+      },
+      {
+        "id": "s4",
+        "label": "Properties and etymology of isotopes"
+      },
+      {
+        "id": "s5",
+        "label": "Mnemonic and summary for isotopes"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and basic mechanism of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what an isotope is and explains the relationship between atomic number (protons), neutrons, and mass number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# আইসোটোপ (Isotope) - ব্যাখ্যা",
+            "start": 0,
+            "end": 30
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আচ্ছা, চলো আমরা খুব সহজভাবে **আইসোটোপ** কী তা বুঝি।",
+            "start": 32,
+            "end": 83
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## আইসোটোপ কী?",
+            "start": 85,
+            "end": 99
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**আইসোটোপ** হলো একই মৌলের এমন পরমাণু যাদের:",
+            "start": 101,
+            "end": 144
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **প্রোটন সংখ্যা (পারমাণবিক সংখ্যা) একই** ✅",
+            "start": 145,
+            "end": 189
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- কিন্তু **নিউট্রন সংখ্যা ভিন্ন** ❌",
+            "start": 190,
+            "end": 225
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ফলে **ভর সংখ্যা (Mass Number) আলাদা** হয়",
+            "start": 226,
+            "end": 269
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition correctly notes identical proton counts, differing neutron counts, and distinct mass numbers.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Isotopes of hydrogen",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents protium, deuterium, and tritium as concrete illustrations of isotopes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সহজ উদাহরণ দিয়ে বুঝি",
+            "start": 271,
+            "end": 295
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### হাইড্রোজেনের আইসোটোপ:",
+            "start": 297,
+            "end": 322
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| নাম | প্রোটন | নিউট্রন | ভর সংখ্যা |",
+            "start": 324,
+            "end": 362
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|------|--------|---------|-----------|",
+            "start": 363,
+            "end": 402
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| প্রোটিয়াম (¹H) | 1 | 0 | 1 |",
+            "start": 403,
+            "end": 434
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ডিউটেরিয়াম (²H) | 1 | 1 | 2 |",
+            "start": 435,
+            "end": 467
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ট্রিটিয়াম (³H) | 1 | 2 | 3 |",
+            "start": 468,
+            "end": 499
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "লক্ষ্য করো - **তিনটিরই প্রোটন সংখ্যা 1**, তাই তিনটিই হাইড্রোজেন। কিন্তু নিউট্রন সংখ্যা ভিন্ন হওয়ায় এদের ভর আলাদা।",
+            "start": 501,
+            "end": 616
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The proton, neutron, and mass numbers for protium, deuterium, and tritium are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "ANALOGY",
+        "label": "Three brothers analogy",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Uses an everyday family comparison (three brothers of the same parents having different body weights) to illustrate isotopes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p17",
+              "quote": "ধরো, তিন ভাই - একই বাবা-মায়ের সন্তান (একই মৌল), কিন্তু তাদের ওজন ভিন্ন (ভর সংখ্যা ভিন্ন)। তারা \"ভাই\" পরিচয়ে এক, কিন্তু শারীরিক গঠনে (ওজনে) আলাদা।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## একটি সহজ উপমা (Analogy)",
+            "start": 618,
+            "end": 644
+          },
+          {
+            "id": "p17",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ধরো, তিন ভাই - একই বাবা-মায়ের সন্তান (একই মৌল), কিন্তু তাদের ওজন ভিন্ন (ভর সংখ্যা ভিন্ন)। তারা \"ভাই\" পরিচয়ে এক, কিন্তু শারীরিক গঠনে (ওজনে) আলাদা।",
+            "start": 646,
+            "end": 793
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately maps same identity/element to same parents and varying mass to varying weights.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Chemical and physical properties and periodic table placement",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains why chemical properties are similar (same electron count), why physical properties differ, and the Greek root meaning behind the name isotope.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## গুরুত্বপূর্ণ পয়েন্ট",
+            "start": 795,
+            "end": 818
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **রাসায়নিক ধর্ম প্রায় একই** — কারণ ইলেকট্রন সংখ্যা একই থাকে",
+            "start": 820,
+            "end": 884
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **ভৌত ধর্ম ভিন্ন** — যেমন ঘনত্ব, ভর ইত্যাদি ভিন্ন হয়",
+            "start": 885,
+            "end": 941
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. পর্যায় সারণিতে আইসোটোপগুলো **একই স্থানে** অবস্থান করে (তাই নাম \"iso\" = same, \"topos\" = place)",
+            "start": 942,
+            "end": 1039
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Chemical properties depend largely on electron configurations, physical properties depend on mass/density, and the etymology (iso = same, topos = place) is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Isotopes of carbon",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Lists Carbon-12, Carbon-13, and Carbon-14 with their proton and neutron numbers and notes C-14's application in radiocarbon dating.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## আরেকটি উদাহরণ - কার্বনের আইসোটোপ",
+            "start": 1041,
+            "end": 1076
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **C-12**: 6 প্রোটন + 6 নিউট্রন (সবচেয়ে সাধারণ)",
+            "start": 1078,
+            "end": 1127
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **C-13**: 6 প্রোটন + 7 নিউট্রন",
+            "start": 1128,
+            "end": 1160
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **C-14**: 6 প্রোটন + 8 নিউট্রন (তেজস্ক্রিয়, প্রত্নতাত্ত্বিক বয়স নির্ণয়ে ব্যবহৃত হয়)",
+            "start": 1161,
+            "end": 1250
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The nuclear compositions and characteristics of C-12, C-13, and C-14 are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Mnemonic rule for remembering isotopes",
+        "attributes": {
+          "subtype": "mnemonic"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a concise memory phrase ('একই প্রোটন, ভিন্ন নিউট্রন = আইসোটোপ') to remember the core criterion of isotopes, followed by closing remarks.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সংক্ষেপে মনে রাখার সূত্র",
+            "start": 1252,
+            "end": 1279
+          },
+          {
+            "id": "p27",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **\"একই প্রোটন, ভিন্ন নিউট্রন = আইসোটোপ\"**",
+            "start": 1281,
+            "end": 1324
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1326,
+            "end": 1329
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তোমার কি এই বিষয়ে আরও কোনো প্রশ্ন আছে? যেমন - আইসোটোপের ব্যবহার সম্পর্কে জানতে চাও?",
+            "start": 1331,
+            "end": 1415
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The mnemonic formula correctly captures the essential condition defining isotopes.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\bengali-english\\claude-sonnet-5__a2d3eb1dc829.json",
+    "original_sha256": "a66211242a753a36abec54f2f3c5c8dcd1818e633b26721280d60309e31d6be3",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 29,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 2,
+      "ANALOGY": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 29,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

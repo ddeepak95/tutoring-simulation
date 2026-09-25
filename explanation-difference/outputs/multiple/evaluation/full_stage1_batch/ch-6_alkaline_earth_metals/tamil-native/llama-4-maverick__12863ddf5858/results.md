@@ -1,0 +1,531 @@
+# Stage 1: Tamil / alkaline earth metals
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "alkaline earth metals",
+  "observed_topic": "Properties, reactions, and periodic trends of alkaline earth metals (Group 2 elements)",
+  "topic_match": "on_topic",
+  "reason": "The source systematically describes the alkaline earth metals (Be, Mg, Ca, Sr, Ba, Ra), detailing their electronic configuration, oxidation states, chemical reactions, and compound solubility trends.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6",
+    "u7",
+    "u8",
+    "u9",
+    "u10",
+    "u11",
+    "u12",
+    "u13",
+    "u14",
+    "u15",
+    "u16",
+    "u17"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition and list of alkaline earth metal elements | {"depth": "statement"} | accurate |
+| u2 | CONCEPT | Basic nature of oxides and reaction with water | {"depth": "explanation"} | accurate |
+| u3 | CONCEPT | Electronic configuration, oxidation state, ionic nature, and reducing ability | {"depth": "explanation"} | accurate |
+| u4 | CONCEPT | Reaction with oxygen and nitrogen to form oxides and nitrides | {"depth": "statement"} | accurate |
+| u5 | CONCEPT | Reaction with hydrogen and hydride formation | {"depth": "explanation"} | accurate |
+| u6 | CONCEPT | Covalent character of beryllium compounds versus ionic character of other group members | {"depth": "statement"} | accurate |
+| u7 | CONCEPT | Solubility trend of alkaline earth metal hydroxides | {"depth": "statement"} | accurate |
+| u8 | CONCEPT | Acid-base character of alkaline earth metal oxides | {"depth": "statement"} | contains_error |
+| u9 | CONCEPT | Polymeric nature and solubility of beryllium chloride | {"depth": "statement"} | accurate |
+| u10 | CONCEPT | Relative solubility of oxides versus hydroxides | {"depth": "statement"} | accurate |
+| u11 | CONCEPT | Solubility trend of alkaline earth metal sulfates | {"depth": "statement"} | accurate |
+| u12 | CONCEPT | Solubility trend of alkaline earth metal carbonates | {"depth": "statement"} | contains_error |
+| u13 | CONCEPT | Hydration of beryllium and magnesium ions due to small ionic size | {"depth": "explanation"} | accurate |
+| u14 | CONCEPT | Assertion regarding hydration of Be2+ ions and covalency in BeCl2 | {"depth": "explanation"} | contains_error |
+| u15 | CONCEPT | Relative chemical reactivity compared to alkali metals | {"depth": "statement"} | accurate |
+| u16 | CONCEPT | Reactivity of beryllium and magnesium with acids and alkalis | {"depth": "statement"} | contains_error |
+| u17 | CONCEPT | Reactivity of calcium, strontium, and barium with cold water | {"depth": "statement"} | accurate |
+
+## u1: Definition and list of alkaline earth metal elements
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Group 2 elements (Be, Mg, Ca, Sr, Ba, Ra) are indeed known as alkaline earth metals and are all metals.",
+    "errors": []
+  }
+}
+```
+
+```text
+காரமண் உலோகங்கள்:
+இரண்டாம் நெடுவரிசையில் உள்ள தனிமங்கள் Be, Mg, Ca, Sr, Ba மற்றும் Ra ஆகியவை காரமண் உலோகங்கள் என அழைக்கப்படுகின்றன. 
+இவை அனைத்தும் உலோகங்கள் ஆகும்.
+```
+
+
+## u2: Basic nature of oxides and reaction with water
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Alkaline earth metal oxides generally exhibit basic character and dissolve/react with water to form hydroxides, illustrated accurately by the reaction of calcium oxide with water.",
+    "errors": []
+  }
+}
+```
+
+```text
+இவற்றின் ஆக்சைடுகள் காரத்தன்மை உடையவை மேலும், இவை நீரில் கரந்து காரங்களைத் தருகின்றன.
+எ.கா: CaO + H2O → Ca(OH)2
+```
+
+
+## u3: Electronic configuration, oxidation state, ionic nature, and reducing ability
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Group 2 elements have an ns2 valence configuration, predominantly adopt a +2 oxidation state in compounds, form mostly ionic compounds with colorless M2+ ions, and are strong reducing agents.",
+    "errors": []
+  }
+}
+```
+
+```text
+இவற்றின் வெளிக்கூட்டில் இரண்டு எலக்ட்ரான்கள் உள்ளன. எனவே இவை +2 ஆக்ஸிஜனேற்ற நிலையில் சேர்மங்களை உருவாக்குகின்றன. 
+இவை தங்களது சேர்வைகளில் அதிக அளவு அயனித் தன்மையைப் பெற்றுள்ளன. 
+இவற்றின் அயனிகள் நிறமற்றவை. 
+இவை வலிமை மிக்க ஒடுக்கும் முகவர்கள் ஆகும்.
+```
+
+```text
+இவை அனைத்தும் தங்களது சேர்மங்களில் +2 ஆக்ஸிஜனேற்ற நிலையைப் பெற்றுள்ளன.
+```
+
+
+## u4: Reaction with oxygen and nitrogen to form oxides and nitrides
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Alkaline earth metals burn in oxygen to yield oxides and react with nitrogen gas to yield ionic nitrides of the formula M3N2.",
+    "errors": []
+  }
+}
+```
+
+```text
+இவை எரிந்து ஆக்சைடுகளைத் தருகின்றன. 
+இவை நைட்ரஜனுடன் வினைபுரிந்து நைட்ரைடுகளைத் தருகின்றன. 
+3Ca + N2 → Ca3N2
+```
+
+
+## u5: Reaction with hydrogen and hydride formation
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Beryllium does not react directly with hydrogen; magnesium requires high pressure/catalysts or does not combine readily under normal conditions, whereas Ca, Sr, and Ba directly combine with H2 upon heating to form ionic/salt-like hydrides (MH2).",
+    "errors": []
+  }
+}
+```
+
+```text
+இவை ஹைட்ரஜனுடன் சேர்ந்து ஹைட்ரைடுகளைத் தருகின்றன. 
+Ca + H2 → CaH2 
+Be மற்றும் Mg ஆகியவை நேரடியாக ஹைட்ரஜனுடன் வினைபுரிவதில்லை. ஆனால், Ca, Sr மற்றும் Ba ஆகியவை ஹைட்ரஜனுடன் வினைபுரிந்து உப்பு போன்ற ஹைட்ரைடுகளைத் தருகின்றன.
+```
+
+
+## u6: Covalent character of beryllium compounds versus ionic character of other group members
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Due to its small ionic radius and high polarizing power (Fajans' rules), Be forms largely covalent compounds, while other alkaline earth metals predominantly form ionic compounds.",
+    "errors": []
+  }
+}
+```
+
+```text
+Be ஆனது அதன் சேர்மங்களில் சகப்பிணைப்பைத் தருகிறது. மற்றவை அயனிப்பிணைப்பைத் தருகின்றன.
+```
+
+
+## u7: Solubility trend of alkaline earth metal hydroxides
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The solubility of alkaline earth metal hydroxides increases down the group from Be(OH)2 and Mg(OH)2 (which are sparingly/poorly soluble) to Ba(OH)2 (which is readily soluble).",
+    "errors": []
+  }
+}
+```
+
+```text
+Be மற்றும் Mg ஆகியவற்றின் ஹைட்ராக்சைடுகள் குறைவான கரைதிறனைப் பெற்றுள்ளன. மற்றவற்றின் ஹைட்ராக்சைடுகள் நல்ல கரைதிறனைப் பெற்றுள்ளன.
+```
+
+
+## u8: Acid-base character of alkaline earth metal oxides
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "Only beryllium oxide (BeO) is amphoteric. Magnesium oxide (MgO) is basic, not amphoteric.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Be மற்றும் Mg ஆக்சைடுகள் ஆம்போடெரிக் தன்மை கொண்டவை."
+          }
+        ],
+        "description": "Magnesium oxide (MgO) is basic, not amphoteric. Only beryllium oxide (BeO) among Group 2 oxides exhibits amphoteric character.",
+        "correction": "Be ஆக்சைடு மட்டுமே ஆம்போடெரிக் (ஈரியல்பு) தன்மை கொண்டது; Mg ஆக்சைடு மற்றும் பிற ஆக்சைடுகள் காரத்தன்மை கொண்டவை.",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+Be மற்றும் Mg ஆக்சைடுகள் ஆம்போடெரிக் தன்மை கொண்டவை. மற்றவை காரத்தன்மை கொண்டவை.
+```
+
+
+## u9: Polymeric nature and solubility of beryllium chloride
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "BeCl2 is covalent, dissolves in organic solvents, and forms a polymeric chain structure in the solid state via chlorine bridges.",
+    "errors": []
+  }
+}
+```
+
+```text
+BeCl2 கரிமக் கரைப்பான்களில் கரைகிறது. மேலும், இது பாலிமரைசேஷன் அடைந்துள்ளது.
+```
+
+
+## u10: Relative solubility of oxides versus hydroxides
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Group 2 oxides have very high lattice enthalpies and when reacted/compared, their solubility as oxides is generally lower than the corresponding hydroxides down the group.",
+    "errors": []
+  }
+}
+```
+
+```text
+காரமண் உலோகங்களின் ஆக்சைடுகளின் கரைதிறன், ஹைட்ராக்சைடுகளின் கரைதிறனை விடக் குறைவு.
+```
+
+
+## u11: Solubility trend of alkaline earth metal sulfates
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The solubility of alkaline earth sulfates decreases down the group; BeSO4 and MgSO4 are readily soluble, while CaSO4, SrSO4, and BaSO4 have low solubility (BaSO4 being practically insoluble).",
+    "errors": []
+  }
+}
+```
+
+```text
+BeSO4 மற்றும் MgSO4 ஆகியவை நல்ல கரைதிறனைப் பெற்றுள்ளன. ஆனால், CaSO4, SrSO4 மற்றும் BaSO4 ஆகியவை குறைந்த கரைதிறனைப் பெற்றுள்ளன.
+```
+
+
+## u12: Solubility trend of alkaline earth metal carbonates
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The claim that BeCO3 and MgCO3 have lower solubility than the others contradicts the actual group trend. Carbonate solubility decreases down the group (BeCO3 is the most soluble, while BaCO3 is least soluble). BeCO3 is soluble in water, whereas BaCO3 is virtually insoluble.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "BeCO3 மற்றும் MgCO3 ஆகியவை குறைந்த கரைதிறனைப் பெற்றுள்ளன."
+          }
+        ],
+        "description": "Carbonate solubility decreases down Group 2 from Be to Ba. Beryllium and magnesium carbonates have higher solubilities compared to calcium, strontium, and barium carbonates, not lower.",
+        "correction": "காரமண் உலோகக் கார்பனேட்டுகளின் கரைதிறன் தொகுதியில் கீழிறங்கும் போது குறைகிறது; BeCO3 மற்றும் MgCO3 ஆகியவை மற்ற கார்பனேட்டுகளை விட அதிக கரைதிறன் கொண்டவை.",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+காரமண் உலோகங்களின் கார்பனேடுகளின் கரைதிறன் Ca, Sr மற்றும் Ba ஆகியவற்றில் குறைகிறது. 
+BeCO3 மற்றும் MgCO3 ஆகியவை குறைந்த கரைதிறனைப் பெற்றுள்ளன.
+```
+
+
+## u13: Hydration of beryllium and magnesium ions due to small ionic size
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Due to their small ionic radii, Be2+ and Mg2+ have very high charge densities and thus exhibit high enthalpies of hydration in aqueous solution.",
+    "errors": []
+  }
+}
+```
+
+```text
+Be2+ மற்றும் Mg2+ அயனிகள் தண்ணீரில் நீரேற்றமடைகின்றன. ஏனெனில், அவை குறைவான அயனி அளவைப் பெற்றுள்ளன.
+```
+
+
+## u14: Assertion regarding hydration of Be2+ ions and covalency in BeCl2
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "Hydration of Be2+ occurs because of its high charge-to-size ratio (charge density) and vacant orbitals forming coordination complexes [Be(H2O)4]2+, not because of covalent bonding in BeCl2.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Be2+ அயனிகள் BeCl2 இல் காணப்படும் சகப்பிணைப்பின் காரணமாக நீரேற்றமடைகின்றன."
+          }
+        ],
+        "description": "The hydration of Be2+ ions is driven by the small ionic size and high charge density forming hydrated complexes, not caused by covalent bonding present in BeCl2.",
+        "correction": "Be2+ அயனிகள் நீரேற்றமடைவது அவற்றின் மிகச்சிறிய உருவளவு மற்றும் அதிக மின்சுமை அடர்த்தியின் காரணமாகும், BeCl2 இன் சகப்பிணைப்பினால் அல்ல.",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+Be2+ அயனிகள் BeCl2 இல் காணப்படும் சகப்பிணைப்பின் காரணமாக நீரேற்றமடைகின்றன.
+```
+
+
+## u15: Relative chemical reactivity compared to alkali metals
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Alkaline earth metals have higher ionization enthalpies and smaller sizes than corresponding alkali metals, making them less reactive than alkali metals.",
+    "errors": []
+  }
+}
+```
+
+```text
+கார உலோகங்களை விடக் காரமண் உலோகங்கள் குறைவான வினைத்திறனைப் பெற்றுள்ளன.
+```
+
+
+## u16: Reactivity of beryllium and magnesium with acids and alkalis
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "Beryllium is amphoteric and readily reacts with aqueous alkalis (such as NaOH) to liberate hydrogen gas and form beryllate ions ([Be(OH)4]2-). Stating that Be does not react with alkalis to liberate hydrogen is factually incorrect.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Be ஆனது அமிலங்களுடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுகிறது. ஆனால், காரங்களுடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுவதில்லை."
+          }
+        ],
+        "description": "Beryllium is amphoteric and dissolves in both acids and alkalis with the evolution of hydrogen gas (forming beryllate in basic solutions). It does react with alkalis to liberate hydrogen.",
+        "correction": "Be ஈரியல்புத்தன்மை கொண்டதால், அது அமிலங்கள் மற்றும் காரங்கள் இரண்டினுடனும் வினைபுரிந்து ஹைட்ரஜன் வாயுவை வெளியிடுகிறது.",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+Be ஆனது அமிலங்களுடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுகிறது. ஆனால், காரங்களுடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுவதில்லை. 
+Mg ஆனது காரங்களுடன் வினைபுரிவதில்லை. ஆனால், அமிலங்களுடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுகிறது.
+```
+
+
+## u17: Reactivity of calcium, strontium, and barium with cold water
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Ca, Sr, and Ba readily react with cold water to form hydroxides and liberate hydrogen gas.",
+    "errors": []
+  }
+}
+```
+
+```text
+Ca, Sr மற்றும் Ba ஆகியவை குளிர்ந்த நீருடன் வினைபுரிந்து ஹைட்ரஜனை வெளியிடுகிறது.
+```
+
+## Ambiguities
+
+```json
+[]
+```
+
+## Unassigned text for coverage review

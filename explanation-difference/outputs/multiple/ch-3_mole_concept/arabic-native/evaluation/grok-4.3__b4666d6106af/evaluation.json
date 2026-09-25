@@ -1,0 +1,615 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "6f42000681aa1b26247ade31d1fb8a5c00b690189b3876b3214a48c439256457",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept in chemistry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The entire response directly addresses the requested mole concept in chemistry, covering its definition, relationship to Avogadro's number, molar mass, a worked conversion example, and a summary.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and everyday analogy for the mole"
+      },
+      {
+        "id": "s2",
+        "label": "Necessity and rationale for using the mole"
+      },
+      {
+        "id": "s3",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s4",
+        "label": "Relationship between moles, mass, and molar mass"
+      },
+      {
+        "id": "s5",
+        "label": "Worked example calculating moles and atom count from mass"
+      },
+      {
+        "id": "s6",
+        "label": "Summary recap of the mole concept"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Analogy of the mole to a dozen and kilogram",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the concept of the mole as a counting/measuring unit by comparing it to everyday counting units like a dozen for eggs and standard units like a kilogram for weight.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p1",
+              "quote": "تمامًا مثلما نستخدم \"الدزينة\" لقياس عدد البيض (12 بيضة) أو \"الكيلو\" لقياس الوزن."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المول هو مفهوم أساسي في الكيمياء، وهو ببساطة \"وحدة قياس\" لكمية المادة، تمامًا مثلما نستخدم \"الدزينة\" لقياس عدد البيض (12 بيضة) أو \"الكيلو\" لقياس الوزن.",
+            "start": 0,
+            "end": 151
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The comparison between the mole as a macroscopic grouping unit for particles and a dozen as a grouping unit for items is standard, clear, and scientifically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Why chemists need the mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why the mole was introduced: atoms and molecules are far too minute to count individually, and even tiny amounts of matter contain vast numbers of particles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "فمثلاً، في ملعقة صغيرة من الماء يوجد ملايين الملايين من جزيئات الماء."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### لماذا نحتاج إلى المول؟",
+            "start": 153,
+            "end": 179
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الذرات والجزيئات صغيرة جدًا، لا نستطيع عدّها واحدة واحدة. فمثلاً، في ملعقة صغيرة من الماء يوجد ملايين الملايين من جزيئات الماء. لذلك اخترع العلماء وحدة كبيرة تسمى **المول** للتعامل مع هذه الأعداد الضخمة بسهولة.",
+            "start": 181,
+            "end": 391
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation accurately rationalizes the necessity of the mole concept to bridge the microscopic and macroscopic scales.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definition of the mole and Avogadro's number",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines the mole numerically using Avogadro's constant (6.02 × 10²³) and clarifies what one mole corresponds to for carbon, water, and iron.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### تعريف المول",
+            "start": 393,
+            "end": 408
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**المول** هو كمية من المادة تحتوي على **6.02 × 10²³** جسيم (ذرة أو جزيء أو أيون).  ",
+            "start": 410,
+            "end": 493
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذا العدد يُسمى **عدد أفوغادرو**.",
+            "start": 494,
+            "end": 527
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "يعني ذلك:",
+            "start": 529,
+            "end": 538
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من ذرات الكربون = 6.02 × 10²³ ذرة كربون",
+            "start": 539,
+            "end": 586
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من جزيئات الماء = 6.02 × 10²³ جزيء ماء",
+            "start": 587,
+            "end": 633
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من ذرات الحديد = 6.02 × 10²³ ذرة حديد",
+            "start": 634,
+            "end": 679
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition matches the standard introductory chemistry definition of the mole and Avogadro's number, correctly illustrating particles as atoms or molecules.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Molar mass and relationship to atomic mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines molar mass, gives representative values for carbon, water, and oxygen gas, and explains that molar mass in grams numerically equals atomic/molecular mass from the periodic table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### العلاقة بين المول والكتلة (الكتلة المولية)",
+            "start": 681,
+            "end": 727
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "كل عنصر أو مركب له كتلة معينة لموله الواحد، وتُسمى **الكتلة المولية**.",
+            "start": 729,
+            "end": 799
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الكتلة المولية للكربون = 12 غرام (أي أن 1 مول من الكربون = 12 غرام).",
+            "start": 801,
+            "end": 871
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الكتلة المولية للماء (H₂O) = 18 غرام (أي أن 1 مول من الماء = 18 غرام).",
+            "start": 872,
+            "end": 944
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الكتلة المولية للأكسجين (O₂) = 32 غرام.",
+            "start": 945,
+            "end": 986
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ملاحظة مهمة**:  ",
+            "start": 988,
+            "end": 1006
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الكتلة المولية بالجرامات تساوي الكتلة الذرية أو الجزيئية للمادة. يمكنك إيجادها مباشرة من الجدول الدوري.",
+            "start": 1007,
+            "end": 1110
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass values (C: 12 g/mol, H2O: 18 g/mol, O2: 32 g/mol) and their numerical equivalence to atomic and molecular weights are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Calculation of moles and atoms in 24 g of carbon",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a fully worked two-step problem converting 24 grams of carbon to moles (2 mol) and then to the number of individual carbon atoms (1.204 × 10²⁴ atoms).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال توضيحي بسيط",
+            "start": 1112,
+            "end": 1132
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "تخيل أنك تريد حساب عدد ذرات الكربون في 24 غرام من الكربون:",
+            "start": 1134,
+            "end": 1192
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 24 غرام كربون = 2 مول (لأن 1 مول = 12 غرام).",
+            "start": 1194,
+            "end": 1240
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 مول = 2 × 6.02 × 10²³ ذرة = 1.204 × 10²⁴ ذرة.",
+            "start": 1241,
+            "end": 1290
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بدون مفهوم المول، كان سيكون من الصعب جدًا التعامل مع هذا العدد الهائل.",
+            "start": 1292,
+            "end": 1362
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations are mathematically and chemically accurate: 24 g / 12 g/mol = 2 mol, and 2 mol × 6.02 × 10²³ atoms/mol = 1.204 × 10²⁴ atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of the mole concept and closing question",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Provides a concise bulleted recap of the key points for the student, ending with an interactive closing question offering further practice.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ملخص سريع للطالب",
+            "start": 1364,
+            "end": 1384
+          },
+          {
+            "id": "p24",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **المول** = وحدة لقياس \"عدد الجسيمات\" بطريقة عملية.",
+            "start": 1386,
+            "end": 1439
+          },
+          {
+            "id": "p25",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول = 6.02 × 10²³ جسيم.",
+            "start": 1440,
+            "end": 1467
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 مول من أي مادة له كتلة تساوي كتلته المولية بالجرامات.",
+            "start": 1468,
+            "end": 1525
+          },
+          {
+            "id": "p27",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- يُستخدم المول كثيرًا في حسابات التفاعلات الكيميائية (المعادلات الكيميائية).",
+            "start": 1526,
+            "end": 1603
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل تريد أن أشرح لك الآن كيف نستخدم المول في حسابات التفاعلات الكيميائية (مثل حساب كمية المنتج) بمثال بسيط؟",
+            "start": 1605,
+            "end": 1711
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes all core points presented in the lesson.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\arabic-native\\grok-4.3__b4666d6106af.json",
+    "original_sha256": "969f1c91406a3c4e41878b6e43530187aec50f1d10daa4c6f745fbea286fe4db",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 28,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 3,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 28,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 2,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

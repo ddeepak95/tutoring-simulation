@@ -1,0 +1,998 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "74bb9397e7816b526ab3417e1d3c76c08b2534706bbc48ff1497d02f4e3db019",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The entire response explains stoichiometry in Hindi using analogies, formal definitions, etymology, balanced equations, a step-by-step problem-solving procedure, and a worked numerical example.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Kitchen Analogy for Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Definition of Stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Etymology of Stoichiometry"
+      },
+      {
+        "id": "s4",
+        "label": "Requirement of Balanced Chemical Equations"
+      },
+      {
+        "id": "s5",
+        "label": "Interpreting Stoichiometric Coefficients"
+      },
+      {
+        "id": "s6",
+        "label": "Procedure for Stoichiometric Calculations"
+      },
+      {
+        "id": "s7",
+        "label": "Worked Numerical Stoichiometry Example"
+      },
+      {
+        "id": "s8",
+        "label": "Stoichiometry Summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Kitchen tea recipe analogy for stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces stoichiometry by drawing a cross-domain comparison to making and scaling a recipe for tea.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "मान लीजिए आपको **चाय** बनानी है:"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नमस्ते! आज हम केमिस्ट्री का एक बहुत ही महत्वपूर्ण और दिलचस्प टॉपिक समझने जा रहे हैं — **स्टोइकियोमेट्री (Stoichiometry)**। ",
+            "start": 0,
+            "end": 123
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नाम सुनकर डरने की बिल्कुल जरूरत नहीं है, यह सुनने में जितना मुश्किल लगता है, समझने में उतना ही आसान है!",
+            "start": 125,
+            "end": 228
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 230,
+            "end": 233
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. आसान शब्दों में Stoichiometry क्या है? (The Kitchen Analogy)",
+            "start": 235,
+            "end": 302
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मान लीजिए आपको **चाय** बनानी है:",
+            "start": 304,
+            "end": 336
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **रेसिपी:** 1 कप दूध + 1 चम्मच चीनी + 1 चम्मच चायपत्ती = **1 कप चाय**",
+            "start": 337,
+            "end": 408
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अगर आपके घर 5 मेहमान आ जाएं (यानी आपको 5 कप चाय बनानी हो), तो आप क्या करेंगे? आप सभी चीजों को 5 से गुणा कर देंगे:",
+            "start": 410,
+            "end": 523
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* 5 कप दूध + 5 चम्मच चीनी + 5 चम्मच चायपत्ती = **5 कप चाय**",
+            "start": 524,
+            "end": 583
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**बस, यही Stoichiometry है!** ",
+            "start": 585,
+            "end": 615
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "किचन में इसे हम \"रेसिपी\" कहते हैं, और केमिस्ट्री की भाषा में इसे **Stoichiometry** कहा जाता है। ",
+            "start": 616,
+            "end": 712
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately illustrates proportional relationships between recipe ingredients and product amounts.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Formal definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "States the formal definition of stoichiometry as the mathematical relationship between amounts of reactants and products in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **परिभाषा:** किसी रासायनिक अभिक्रिया (Chemical Reaction) में अभिकारकों (Reactants) और उत्पादों (Products) की मात्राओं (Mass, Moles, Volume) के बीच के गणितीय संबंध को **Stoichiometry** कहते हैं।",
+            "start": 714,
+            "end": 909
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition correctly describes stoichiometry in terms of relationships between quantities of reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Etymology of the term stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the Greek roots of the term: stoicheion (element) and metron (measure).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 911,
+            "end": 914
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. यह शब्द आया कहाँ से?",
+            "start": 916,
+            "end": 943
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यह ग्रीक भाषा के दो शब्दों से मिलकर बना है:",
+            "start": 944,
+            "end": 987
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Stoicheion** = तत्व (Element)",
+            "start": 988,
+            "end": 1021
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Metron** = मापना (Measure)",
+            "start": 1022,
+            "end": 1052
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यानी **\"तत्वों को मापना\"**।",
+            "start": 1053,
+            "end": 1080
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Greek etymology provided for 'stoicheion' and 'metron' is factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Requirement of a balanced equation and conservation of mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains why chemical equations must be balanced before solving stoichiometry problems, grounded in the Law of Conservation of Mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1082,
+            "end": 1085
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Stoichiometry का सबसे बड़ा नियम: संतुलित समीकरण (Balanced Equation)",
+            "start": 1087,
+            "end": 1161
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "स्टोइकियोमेट्री का कोई भी सवाल हल करने के लिए पहली शर्त यह है कि आपकी **रासायनिक समीकरण संतुलित (Balanced) होनी चाहिए** (क्योंकि द्रव्यमान संरक्षण का नियम / Law of Conservation of Mass कहता है कि द्रव्यमान न तो बनाया जा सकता है, न नष्ट किया जा सकता है)।",
+            "start": 1162,
+            "end": 1415
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the prerequisite of equation balancing based on the conservation of mass.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Interpreting stoichiometric coefficients in water formation",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Illustrates how coefficients in the reaction 2H2 + O2 -> 2H2O map onto molecules, moles, and masses.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उदाहरण देखते हैं:** पानी बनने की अभिक्रिया",
+            "start": 1417,
+            "end": 1461
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1462,
+            "end": 1494
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यहाँ जो आगे नंबर लिखे हैं ($H_2$ के आगे **2**, $O_2$ के आगे **1** (छुपा हुआ), और $H_2O$ के आगे **2**), इन्हें **Stoichiometric Coefficients** कहते हैं।",
+            "start": 1496,
+            "end": 1647
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसका मतलब क्या है?",
+            "start": 1649,
+            "end": 1667
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **अणुओं (Molecules) के रूप में:**",
+            "start": 1668,
+            "end": 1704
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * हाइड्रोजन के 2 अणु + ऑक्सीजन का 1 अणु = पानी के 2 अणु",
+            "start": 1705,
+            "end": 1763
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **मोल (Moles) के रूप में (सबसे महत्वपूर्ण):**",
+            "start": 1764,
+            "end": 1812
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * **2 मोल $H_2$ + 1 मोल $O_2$ $\\rightarrow$ 2 मोल $H_2O$**",
+            "start": 1813,
+            "end": 1874
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **द्रव्यमान (Mass) के रूप में:**",
+            "start": 1875,
+            "end": 1910
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * $2 \\times 2\\text{ g } (H_2) + 32\\text{ g } (O_2) = 2 \\times 18\\text{ g } (H_2O)$",
+            "start": 1911,
+            "end": 1996
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * यानी **$4\\text{ g } H_2 + 32\\text{ g } O_2 = 36\\text{ g } H_2O$** (दोनों तरफ कुल 36 ग्राम है!)",
+            "start": 1997,
+            "end": 2096
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations and interpretations across molecular, molar, and mass levels are completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "PROCEDURE",
+        "label": "Four golden steps to solve stoichiometry problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a reusable four-step method for solving stoichiometry problems on high school exams.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2098,
+            "end": 2101
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. एग्जाम में सवाल कैसे हल करें? (4 Golden Steps)",
+            "start": 2103,
+            "end": 2156
+          },
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अगर परीक्षा में Stoichiometry का कोई सवाल आ जाए, तो बस ये 4 कदम याद रखना:",
+            "start": 2158,
+            "end": 2231
+          },
+          {
+            "id": "p35",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Step 1:** समीकरण को **बैलेंस (संतुलित)** करो।",
+            "start": 2233,
+            "end": 2282
+          },
+          {
+            "id": "p36",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Step 2:** जो भी मात्रा (Grams या Litres में) दी गई है, उसे **मोल्स (Moles)** में बदलो।  ",
+            "start": 2283,
+            "end": 2375
+          },
+          {
+            "id": "p37",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  $$\\text{Moles} = \\frac{\\text{दिया गया भार (Given Mass)}}{\\text{मोलर द्रव्यमान (Molar Mass)}}$$",
+            "start": 2376,
+            "end": 2472
+          },
+          {
+            "id": "p38",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Step 3:** समीकरण के **अनुपात (Mole Ratio)** का इस्तेमाल करके पता लगाओ कि दूसरे पदार्थ के कितने मोल्स बनेंगे या चाहिए।",
+            "start": 2473,
+            "end": 2594
+          },
+          {
+            "id": "p39",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **Step 4:** अंत में, पूछे गए उत्तर के अनुसार मोल्स को वापस **ग्राम या लीटर** में बदल लो।",
+            "start": 2595,
+            "end": 2685
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The four-step algorithm accurately reflects the standard stoichiometry conversion pathway (balance -> moles -> mole ratio -> desired units).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Worked problem calculating required oxygen mass",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a complete step-by-step worked solution determining the mass of O2 needed to react completely with 8 g of H2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2687,
+            "end": 2690
+          },
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### एक छोटा-सा सवाल करके देखते हैं:",
+            "start": 2692,
+            "end": 2727
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**सवाल:** $8\\text{ ग्राम } H_2$ को पूरी तरह जलाने के लिए कितने ग्राम $O_2$ की आवश्यकता होगी?",
+            "start": 2728,
+            "end": 2820
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **समीकरण:** $2H_2 + O_2 \\rightarrow 2H_2O$",
+            "start": 2822,
+            "end": 2867
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **मोल्स निकालो:** $H_2$ का मोलर द्रव्यमान = $2\\text{ g/mol}$  ",
+            "start": 2868,
+            "end": 2933
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * $H_2$ के मोल्स = $\\frac{8}{2} = 4\\text{ मोल्स}$",
+            "start": 2934,
+            "end": 2986
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **अनुपात देखो:** समीकरण कहता है कि **2 मोल $H_2$** के लिए **1 मोल $O_2$** चाहिए (यानी आधा)।  ",
+            "start": 2987,
+            "end": 3083
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * तो **4 मोल $H_2$** के लिए कितने मोल $O_2$ चाहिए होंगे? = $2\\text{ मोल्स } O_2$",
+            "start": 3084,
+            "end": 3167
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **ग्राम में बदलो:** $O_2$ का मोलर द्रव्यमान = $32\\text{ g/mol}$  ",
+            "start": 3168,
+            "end": 3236
+          },
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * $O_2$ का भार = $2\\text{ मोल} \\times 32\\text{ g/mol} = \\mathbf{64\\text{ ग्राम}}$।",
+            "start": 3237,
+            "end": 3322
+          },
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उत्तर:** हमें **64 ग्राम** ऑक्सीजन की जरूरत होगी!",
+            "start": 3324,
+            "end": 3375
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations are entirely correct: 8 g H2 / 2 g/mol = 4 mol H2; 4 mol H2 requires 2 mol O2; 2 mol * 32 g/mol = 64 g O2.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of stoichiometry",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Summarizes the fundamental intuition of stoichiometry and highlights the central importance of the mole.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p51",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3377,
+            "end": 3380
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### सारांश (Summary)",
+            "start": 3382,
+            "end": 3402
+          },
+          {
+            "id": "p53",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry सिर्फ इतना बताती है कि **\"अगर इतना डालोगे, तो कितना बनेगा\"** या **\"इतना बनाने के लिए, कितना डालना पड़ेगा\"**। इसका दिल **'मोल' (Mole)** है। ",
+            "start": 3403,
+            "end": 3555
+          },
+          {
+            "id": "p54",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "क्या आपको यह समझ आया, या हम इसका एक और उदाहरण हल करें?",
+            "start": 3557,
+            "end": 3611
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately captures the essence of stoichiometric analysis and the central role of the mole.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\hindi-english\\gemini-3.8-flash__9749b7a02fa3.json",
+    "original_sha256": "20356a1ba6dca1cbf882f65f47bbf149ef6e63e304286133155369b2070754a3",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 54,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 3,
+      "EXAMPLE": 2,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 54,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "everyday": 1,
+      "none": 7
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

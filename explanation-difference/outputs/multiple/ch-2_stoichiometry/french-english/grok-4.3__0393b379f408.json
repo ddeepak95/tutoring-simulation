@@ -1,0 +1,138 @@
+{
+  "job": {
+    "run_index": 8,
+    "lang_id": "en",
+    "language": "fr",
+    "prompt_type": "language_template",
+    "topic": "stoichiometry",
+    "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+    "model": "grok-4.3",
+    "reasoning": null,
+    "web_search": false,
+    "condition_id": "english_prompt",
+    "prompt_language": "en",
+    "topic_language": "en",
+    "response_language": "fr",
+    "response_language_name": "French",
+    "topic_id": "ch-2",
+    "topic_name": "stoichiometry",
+    "subject": "chemistry",
+    "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+    "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+    "job_id": "run-english_prompt-en-fr-e9fbaed69e4a4ee9",
+    "resolved_model": "openai/xai/grok-4.3"
+  },
+  "request": {
+    "model": "openai/xai/grok-4.3",
+    "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in French.",
+    "store": false
+  },
+  "started_at": "2026-09-24T23:55:29.783854+00:00",
+  "response": {
+    "id": "resp_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDpOb25lO3Jlc3BvbnNlX2lkOmNkMTViNTNjLWQ1YjktNDFmYi04NzIyLTkyNmQxNTg1MTI5MA==",
+    "created_at": 1790294130,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {
+      "system_fingerprint": "fp_39c5j0a3e9"
+    },
+    "model": "xai/grok-4.3",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_cd15b53c-d5b9-41fb-8722-926d15851290",
+        "content": [
+          {
+            "annotations": [],
+            "text": "Bonjour ! Je suis ravi de t'expliquer la **stœchiométrie** de manière simple et claire, comme si nous étions en cours de chimie au lycée. On va y aller étape par étape, avec des exemples concrets.\n\n### Qu’est-ce que la stœchiométrie ?\nLa stœchiométrie est la partie de la chimie qui permet de calculer les **quantités** (en masse, en moles ou en volume) des substances qui réagissent et qui sont produites dans une réaction chimique. \n\nElle repose sur deux principes fondamentaux :\n- La **conservation de la masse** (loi de Lavoisier) : rien ne se perd, rien ne se crée, tout se transforme. La masse totale des réactifs est égale à celle des produits.\n- Les **rapports en moles** donnés par l’équation chimique équilibrée.\n\nEn gros, c’est comme une recette de cuisine : si tu veux doubler la quantité de gâteau, tu doubles tous les ingrédients selon les proportions exactes.\n\n### 1. L’équation chimique équilibrée (point de départ)\nAvant tout calcul, l’équation doit être **équilibrée** (le nombre d’atomes de chaque élément doit être le même à gauche et à droite).\n\nExemple classique :\n\\[\n2\\,\\ce{H2} + \\ce{O2} \\rightarrow 2\\,\\ce{H2O}\n\\]\n\nInterprétation :\n- 2 molécules d’hydrogène (H₂) réagissent avec 1 molécule d’oxygène (O₂)\n- Pour former 2 molécules d’eau (H₂O)\n\nEn termes de **moles** (l’unité de quantité de matière) :\n- Rapport molaire = **2 : 1 : 2**\n\nCela signifie que pour 2 moles d’H₂, il faut 1 mole d’O₂ et on obtient 2 moles d’H₂O.\n\n### 2. Les calculs stœchiométriques\nOn utilise les rapports molaires pour passer d’une substance à une autre.\n\n**Exemple** : Combien de grammes d’eau peut-on obtenir avec 8 g d’hydrogène (H₂) ?\n\n1. Calculer le nombre de moles d’H₂ :\n   - Masse molaire de H₂ = 2 g/mol\n   - \\( n = \\frac{m}{M} = \\frac{8}{2} = 4 \\) moles d’H₂\n\n2. Utiliser le rapport : 2 moles d’H₂ → 2 moles d’H₂O (rapport 1:1)\n   - Donc 4 moles d’H₂ donnent **4 moles** d’H₂O\n\n3. Calculer la masse d’eau :\n   - Masse molaire de H₂O = 18 g/mol\n   - \\( m = n \\times M = 4 \\times 18 = 72 \\) g d’eau\n\n### 3. Le réactif limitant (un peu plus avancé)\nParfois, un des réactifs est en quantité insuffisante. C’est lui qui « limite » la réaction.\n\nExemple : Tu as 4 moles d’H₂ et 3 moles d’O₂. Quel est le réactif limitant ?\n\n- Selon l’équation : 2 moles H₂ nécessitent 1 mole O₂\n- Avec 4 moles H₂, il faudrait 2 moles O₂\n- Mais tu as 3 moles d’O₂ (en excès)\n- Donc H₂ est limitant : on ne peut produire que 4 moles d’eau (et il restera 1 mole d’O₂ inutilisée).\n\n### Pourquoi c’est important ?\nLa stœchiométrie sert dans :\n- L’industrie (fabrication d’engrais, de médicaments, d’essence)\n- La pharmacie (dosage des médicaments)\n- L’environnement (calcul des émissions de CO₂)\n- Les expériences en labo (savoir exactement combien peser de chaque produit)\n\n### Astuce pour réussir\n1. Toujours équilibrer l’équation d’abord.\n2. Convertir les masses en moles.\n3. Utiliser les coefficients stœchiométriques comme des « multiplicateurs ».\n4. Reconvertir en masse ou volume si nécessaire.\n\nTu as compris le principe ? Veux-tu qu’on fasse un exercice ensemble (par exemple avec une combustion ou une réaction acide-base) ? Ou as-tu une question sur un point précis ?",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": null
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 0.7,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 0.95,
+    "max_output_tokens": null,
+    "previous_response_id": null,
+    "reasoning": {
+      "effort": "medium",
+      "summary": "detailed"
+    },
+    "status": "completed",
+    "text": {
+      "format": {
+        "type": "text"
+      }
+    },
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 351,
+      "input_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0,
+        "text_tokens": null
+      },
+      "output_tokens": 1793,
+      "output_tokens_details": {
+        "audio_tokens": null,
+        "reasoning_tokens": 857,
+        "text_tokens": null
+      },
+      "total_tokens": 2144,
+      "cost": null,
+      "extra_properties": {
+        "google": {
+          "traffic_type": "ON_DEMAND"
+        }
+      },
+      "num_server_side_tools_used": 0,
+      "num_sources_used": 0
+    },
+    "user": null,
+    "store": false,
+    "background": false,
+    "completed_at": 1790294139,
+    "frequency_penalty": 0,
+    "max_tool_calls": null,
+    "presence_penalty": 0,
+    "prompt_cache_key": null,
+    "safety_identifier": null,
+    "service_tier": "default",
+    "top_logprobs": 0
+  },
+  "text": "Bonjour ! Je suis ravi de t'expliquer la **stœchiométrie** de manière simple et claire, comme si nous étions en cours de chimie au lycée. On va y aller étape par étape, avec des exemples concrets.\n\n### Qu’est-ce que la stœchiométrie ?\nLa stœchiométrie est la partie de la chimie qui permet de calculer les **quantités** (en masse, en moles ou en volume) des substances qui réagissent et qui sont produites dans une réaction chimique. \n\nElle repose sur deux principes fondamentaux :\n- La **conservation de la masse** (loi de Lavoisier) : rien ne se perd, rien ne se crée, tout se transforme. La masse totale des réactifs est égale à celle des produits.\n- Les **rapports en moles** donnés par l’équation chimique équilibrée.\n\nEn gros, c’est comme une recette de cuisine : si tu veux doubler la quantité de gâteau, tu doubles tous les ingrédients selon les proportions exactes.\n\n### 1. L’équation chimique équilibrée (point de départ)\nAvant tout calcul, l’équation doit être **équilibrée** (le nombre d’atomes de chaque élément doit être le même à gauche et à droite).\n\nExemple classique :\n\\[\n2\\,\\ce{H2} + \\ce{O2} \\rightarrow 2\\,\\ce{H2O}\n\\]\n\nInterprétation :\n- 2 molécules d’hydrogène (H₂) réagissent avec 1 molécule d’oxygène (O₂)\n- Pour former 2 molécules d’eau (H₂O)\n\nEn termes de **moles** (l’unité de quantité de matière) :\n- Rapport molaire = **2 : 1 : 2**\n\nCela signifie que pour 2 moles d’H₂, il faut 1 mole d’O₂ et on obtient 2 moles d’H₂O.\n\n### 2. Les calculs stœchiométriques\nOn utilise les rapports molaires pour passer d’une substance à une autre.\n\n**Exemple** : Combien de grammes d’eau peut-on obtenir avec 8 g d’hydrogène (H₂) ?\n\n1. Calculer le nombre de moles d’H₂ :\n   - Masse molaire de H₂ = 2 g/mol\n   - \\( n = \\frac{m}{M} = \\frac{8}{2} = 4 \\) moles d’H₂\n\n2. Utiliser le rapport : 2 moles d’H₂ → 2 moles d’H₂O (rapport 1:1)\n   - Donc 4 moles d’H₂ donnent **4 moles** d’H₂O\n\n3. Calculer la masse d’eau :\n   - Masse molaire de H₂O = 18 g/mol\n   - \\( m = n \\times M = 4 \\times 18 = 72 \\) g d’eau\n\n### 3. Le réactif limitant (un peu plus avancé)\nParfois, un des réactifs est en quantité insuffisante. C’est lui qui « limite » la réaction.\n\nExemple : Tu as 4 moles d’H₂ et 3 moles d’O₂. Quel est le réactif limitant ?\n\n- Selon l’équation : 2 moles H₂ nécessitent 1 mole O₂\n- Avec 4 moles H₂, il faudrait 2 moles O₂\n- Mais tu as 3 moles d’O₂ (en excès)\n- Donc H₂ est limitant : on ne peut produire que 4 moles d’eau (et il restera 1 mole d’O₂ inutilisée).\n\n### Pourquoi c’est important ?\nLa stœchiométrie sert dans :\n- L’industrie (fabrication d’engrais, de médicaments, d’essence)\n- La pharmacie (dosage des médicaments)\n- L’environnement (calcul des émissions de CO₂)\n- Les expériences en labo (savoir exactement combien peser de chaque produit)\n\n### Astuce pour réussir\n1. Toujours équilibrer l’équation d’abord.\n2. Convertir les masses en moles.\n3. Utiliser les coefficients stœchiométriques comme des « multiplicateurs ».\n4. Reconvertir en masse ou volume si nécessaire.\n\nTu as compris le principe ? Veux-tu qu’on fasse un exercice ensemble (par exemple avec une combustion ou une réaction acide-base) ? Ou as-tu une question sur un point précis ?",
+  "usage": {
+    "input_tokens": 351,
+    "input_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0,
+      "text_tokens": null
+    },
+    "output_tokens": 1793,
+    "output_tokens_details": {
+      "audio_tokens": null,
+      "reasoning_tokens": 857,
+      "text_tokens": null
+    },
+    "total_tokens": 2144,
+    "cost": null,
+    "extra_properties": {
+      "google": {
+        "traffic_type": "ON_DEMAND"
+      }
+    },
+    "num_server_side_tools_used": 0,
+    "num_sources_used": 0
+  },
+  "status": "completed",
+  "finished_at": "2026-09-24T23:55:38.645845+00:00"
+}

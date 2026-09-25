@@ -1,0 +1,697 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "2c2bb90759d2863db10761d8a290c41cd8ee68e27d7cd8abb84bd718d27655b1",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The response clearly and directly explains the mole concept, Avogadro's number, molar mass, calculation formulas, and a worked example in high school chemistry.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s2",
+        "label": "Molar mass"
+      },
+      {
+        "id": "s3",
+        "label": "Mole formulas and calculation"
+      },
+      {
+        "id": "s4",
+        "label": "Role of moles in chemical reactions"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "The mole as a counting unit and Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the mole as a macroscopic counting unit invented because atoms and molecules are too small to count individually, and defines Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p2",
+              "quote": "grains de sable, des billes minuscules"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Je suis ton professeur de chimie et je vais t’expliquer le concept de la mole de façon simple et progressive, comme si nous étions en classe.",
+            "start": 0,
+            "end": 151
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu veux compter des objets très petits : des grains de sable, des billes minuscules ou… des atomes et des molécules. Ces derniers sont tellement petits qu’on ne peut pas les compter un par un. Les chimistes ont donc inventé une « grande unité de comptage » : la **mole**.",
+            "start": 153,
+            "end": 436
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Une **mole** correspond toujours au même nombre de particules :  ",
+            "start": 438,
+            "end": 503
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**6,022 × 10²³** particules (atomes, molécules, ions, etc.).  ",
+            "start": 504,
+            "end": 566
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ce nombre s’appelle le **nombre d’Avogadro** (ou constante d’Avogadro). C’est un nombre énorme, un peu comme une « super-douzaine » !",
+            "start": 567,
+            "end": 700
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines the mole and identifies Avogadro's number with the standard value 6.022 × 10²³.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Dozen analogy for the mole",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses the familiar concept of a dozen eggs to illustrate that a mole represents a fixed count regardless of the substance.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p7",
+              "quote": "1 douzaine = 12 œufs"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Petite comparaison** :  ",
+            "start": 702,
+            "end": 728
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 douzaine = 12 œufs  ",
+            "start": 729,
+            "end": 753
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole = 6,022 × 10²³ particules  ",
+            "start": 754,
+            "end": 790
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Que tu aies 1 mole d’atomes de fer ou 1 mole de molécules d’eau, tu as toujours le même nombre de particules.",
+            "start": 792,
+            "end": 901
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately conveys the counting-unit nature of the mole across different chemical species.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definition of molar mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines molar mass as the mass of one mole of a substance, expressed in g/mol.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Pourquoi c’est utile ? La masse molaire",
+            "start": 903,
+            "end": 946
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chaque substance a une **masse molaire** : c’est la masse d’exactement 1 mole de cette substance. On l’exprime en g/mol.",
+            "start": 947,
+            "end": 1067
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of molar mass and its unit (g/mol) are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Molar mass of carbon",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates molar mass using atomic carbon.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Exemples :  ",
+            "start": 1069,
+            "end": 1081
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Carbone (C) : masse molaire = 12 g/mol → 1 mole d’atomes de carbone pèse 12 g.  ",
+            "start": 1082,
+            "end": 1164
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of carbon rounded to 12 g/mol is standard for introductory chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Molar mass of water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates molar mass using molecular water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Eau (H₂O) : masse molaire = 18 g/mol → 1 mole de molécules d’eau pèse 18 g.  ",
+            "start": 1165,
+            "end": 1244
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of water is accurately given as 18 g/mol.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Molar mass of oxygen gas",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates molar mass using diatomic oxygen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Oxygène (O₂) : masse molaire = 32 g/mol → 1 mole de molécules d’oxygène pèse 32 g.",
+            "start": 1245,
+            "end": 1329
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of O2 is accurately given as 32 g/mol.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Basic mole calculation formulas",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "States the key algebraic formulas connecting mass, molar mass, moles, and particle count.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Formules simples à retenir",
+            "start": 1331,
+            "end": 1361
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Nombre de moles à partir de la masse :  ",
+            "start": 1362,
+            "end": 1405
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   **n = m / M**  ",
+            "start": 1406,
+            "end": 1424
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   (n = nombre de moles, m = masse en grammes, M = masse molaire en g/mol)",
+            "start": 1425,
+            "end": 1499
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Nombre de particules :  ",
+            "start": 1501,
+            "end": 1528
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   **Nombre de particules = n × 6,022 × 10²³**",
+            "start": 1529,
+            "end": 1575
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Both formulas (n = m / M and N = n × 6.022 × 10²³) and their variable definitions are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Worked calculation with 36 g of water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Applies the formulas to calculate the number of moles and molecules in 36 g of water with explicit steps.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple concret",
+            "start": 1577,
+            "end": 1596
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as 36 g d’eau. Combien y a-t-il de moles ?  ",
+            "start": 1597,
+            "end": 1644
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(H₂O) = 18 g/mol  ",
+            "start": 1645,
+            "end": 1664
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "n = 36 g / 18 g/mol = **2 moles** d’eau.  ",
+            "start": 1665,
+            "end": 1707
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "Donc tu as 2 × 6,022 × 10²³ = 1,2044 × 10²⁴ molécules d’eau.",
+            "start": 1708,
+            "end": 1768
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculations 36 / 18 = 2 moles and 2 × 6.022 × 10²³ = 1.2044 × 10²⁴ molecules are mathematically and physically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "CONCEPT",
+        "label": "Application to chemical reaction stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains how moles are used to balance equations in chemical reactions, followed by closing conversational remarks.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Dans les réactions chimiques, on utilise toujours les moles pour équilibrer les équations, car les atomes se combinent en nombre entier de moles.",
+            "start": 1770,
+            "end": 1915
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as compris l’idée ? Veux-tu qu’on fasse ensemble un exercice de calcul (par exemple avec du dioxyde de carbone ou du sel) ? Dis-moi ce qui te pose encore question !",
+            "start": 1917,
+            "end": 2084
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The unit contains a minor conceptual error regarding how atoms combine during chemical reactions.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p27"
+              ],
+              "description": "The passage claims that atoms combine in integer numbers of moles ('les atomes se combinent en nombre entier de moles'). In reality, atoms combine in integer ratios of individual atoms/particles, which translates macroscopically to fixed molar ratios (stoichiometric ratios); chemical reactions do not require integer quantities of moles.",
+              "correction": "Les atomes (ou molécules) se combinent selon des proportions stœchiométriques précises (en rapports entiers de particules), ce qui se traduit par des rapports de quantités de matière (moles), mais les quantités en jeu ne sont pas nécessairement des nombres entiers de moles.",
+              "severity": "minor"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\french-english\\grok-4.3__c24338970ad2.json",
+    "original_sha256": "0f601a88edd044bbdc087955c8c0c2b1fd049b81bdd7108927c6208d1d8ff972",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 28,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "ANALOGY": 1,
+      "EXAMPLE": 4
+    },
+    "nested_passages": 28,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "everyday": 2,
+      "none": 7
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8,
+      "contains_error": 1
+    },
+    "proposed_error_records": 1,
+    "proposed_error_severity": {
+      "minor": 1
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

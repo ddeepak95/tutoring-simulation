@@ -1,0 +1,213 @@
+{
+  "topic_relevance": {
+    "requested_topic": "mole concept",
+    "observed_topic": "The mole concept in chemistry, including its definition, Avogadro's number, molar mass calculation, and practical importance.",
+    "topic_match": "on_topic",
+    "reason": "The text directly explains the mole concept, the Avogadro constant, how to calculate molar mass, and why the mole is used in chemistry.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "General definition of the mole as a unit for amount of substance",
+      "excerpts": [
+        {
+          "text": "**Qu'est-ce qu'une mole ?** (What is a mole?)\n\nUne mole est une unité de mesure qui représente une quantité de substance. (A mole is a unit of measurement that represents a quantity of substance.) C'est une façon de compter les particules, comme les atomes ou les molécules, qui constituent une substance. (It's a way to count the particles, like atoms or molecules, that make up a substance.)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately introduces the mole as the SI unit representing amount of substance and as a way to count microscopic particles in bulk.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Official definition of the mole based on Carbon-12",
+      "excerpts": [
+        {
+          "text": "**Définition officielle** (Official definition)\n\nLa mole est définie comme la quantité de substance qui contient autant d'entités élémentaires (atomes, molécules, ions, etc.) qu'il y a d'atomes dans 0,012 kilogramme de carbone 12. (The mole is defined as the amount of substance that contains as many elementary entities (atoms, molecules, ions, etc.) as there are atoms in 0.012 kilograms of carbon 12.)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "Presents the pre-2019 SI definition referencing 0.012 kg of carbon-12 as the current official definition.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "La mole est définie comme la quantité de substance qui contient autant d'entités élémentaires (atomes, molécules, ions, etc.) qu'il y a d'atomes dans 0,012 kilogramme de carbone 12. (The mole is defined as the amount of substance that contains as many elementary entities (atoms, molecules, ions, etc.) as there are atoms in 0.012 kilograms of carbon 12.)"
+              }
+            ],
+            "description": "The definition based on the number of atoms in 0.012 kg of carbon-12 was superseded by the 2019 SI redefinition. Since May 2019, the mole is officially defined by setting the numerical value of the Avogadro constant to exactly 6.02214076 x 10^23 elementary entities.",
+            "correction": "Depuis la redéfinition du Système international d'unités (SI) en 2019, la mole est définie en fixant la valeur numérique exacte de la constante d'Avogadro à 6,02214076 × 10^23 entités élémentaires (la définition basée sur 0,012 kg de carbone 12 étant l'ancienne définition officielle).",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Definition and value of Avogadro's number",
+      "excerpts": [
+        {
+          "text": "**Le nombre d'Avogadro** (Avogadro's number)\n\nLe nombre d'Avogadro est une constante qui représente le nombre d'entités élémentaires contenues dans une mole. (Avogadro's number is a constant that represents the number of elementary entities contained in a mole.) Il est égal à 6,022 x 10^23 particules. (It is equal to 6.022 x 10^23 particles.)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines Avogadro's number as the number of elementary entities in one mole and gives the standard high school approximation 6.022 x 10^23.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Illustrative example of one mole of oxygen gas",
+      "excerpts": [
+        {
+          "text": "**Exemple** (Example)\n\nPrenons l'exemple de l'oxygène (O2). Une mole d'oxygène contient 6,022 x 10^23 molécules d'oxygène. (Let's take the example of oxygen (O2). One mole of oxygen contains 6.022 x 10^23 oxygen molecules.) Cela signifie que si vous avez une mole d'oxygène, vous avez 6,022 x 10^23 molécules qui pèsent environ 32 grammes. (This means that if you have one mole of oxygen, you have 6.022 x 10^23 molecules that weigh approximately 32 grams.)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly states that one mole of molecular oxygen (O2) contains 6.022 x 10^23 molecules and has a mass of approximately 32 grams.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CONCEPT",
+      "label": "Definition and calculation principle of molar mass",
+      "excerpts": [
+        {
+          "text": "**Calcul de la masse molaire** (Calculating molar mass)\n\nLa masse molaire est la masse d'une mole d'une substance. (Molar mass is the mass of one mole of a substance.) Pour calculer la masse molaire, il faut additionner les masses atomiques des atomes qui composent la molécule. (To calculate the molar mass, we need to add up the atomic masses of the atoms that make up the molecule.)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately defines molar mass as the mass of one mole of a substance and explains that molecular molar mass is obtained by summing the atomic masses of its constituent atoms.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "EXAMPLE",
+      "label": "Worked calculation of the molar mass of water",
+      "excerpts": [
+        {
+          "text": "Par exemple, pour l'eau (H2O), la masse molaire est : (For example, for water (H2O), the molar mass is:)\n\n2 x masse atomique de l'hydrogène (H) + masse atomique de l'oxygène (O)\n= 2 x 1 g/mol + 16 g/mol\n= 18 g/mol",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The worked steps and calculation for the molar mass of water (2 x 1 g/mol + 16 g/mol = 18 g/mol) are factually and mathematically correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "CONCEPT",
+      "label": "Significance and practical uses of the mole in chemistry",
+      "excerpts": [
+        {
+          "text": "**Importance de la mole** (Importance of the mole)\n\nLa notion de mole est essentielle en chimie car elle permet de : (The mole concept is essential in chemistry because it allows us to:)\n\n* Compter les particules (Count particles)\n* Calculer les quantités de substances nécessaires pour une réaction chimique (Calculate the amounts of substances needed for a chemical reaction)\n* Déterminer la composition d'un mélange (Determine the composition of a mixture)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly states the primary roles of the mole in stoichiometry, particle counting, and mixture analysis.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1",
+        "u2"
+      ],
+      "issue": "Units u1 and u2 could be merged into a single CONCEPT unit defining the mole. They were separated because the source presents them under distinct headings, treating the intuitive concept of the mole as a counting unit separately from the formal benchmark definition referencing carbon-12.",
+      "proposed_resolution": "Separated into u1 (intuitive concept) and u2 (formal benchmark definition) following the author's clear division of teaching jobs."
+    },
+    {
+      "unit_ids": [
+        "u5",
+        "u6"
+      ],
+      "issue": "Units u5 and u6 could be combined into a single worked EXAMPLE unit where the definition and rule of molar mass serve as setup. Alternatively, u5 could be viewed as a PROCEDURE.",
+      "proposed_resolution": "Kept separate because the source first teaches a general definition and principle of molar mass (u5, CONCEPT) and then independently presents a specific worked calculation for water (u6, EXAMPLE)."
+    }
+  ]
+}

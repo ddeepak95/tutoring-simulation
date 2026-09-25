@@ -1,0 +1,266 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "2cd262c13153be04b173a294a911d35960d2c55457f50f7257dd868cc08b8a62",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "Isotopes (সমস্থানিক)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response directly explains isotopes in Bengali, covering their definition, structural basis (protons, neutrons, and mass number), and examples such as hydrogen and carbon.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and fundamental properties of isotopes"
+      },
+      {
+        "id": "s2",
+        "label": "Examples of isotopes (hydrogen and carbon)"
+      },
+      {
+        "id": "s3",
+        "label": "Atomic number, mass number, and neutron calculation"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and properties of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains what isotopes are in terms of nuclei, atomic number, and neutron count, and attempts to explain their properties based on proton count.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমস্থানিক বা আইসোটোপ হলো একই মৌলিক পদার্থের ভিন্ন ভিন্ন নিউক্লিয়াস-বিশিষ্ট পরমাণু যাদের পারমাণবিক সংখ্যা একই কিন্তু নিউক্লিয়াসে নিউট্রন সংখ্যা ভিন্ন। অর্থাৎ, ভর সংখ্যা ভিন্ন কিন্তু পারমাণবিক সংখ্যা একই। প্রোটনের সংখ্যা একই থাকায় তাদের রাসায়নিক ও ভৌত ধর্মে অনেক সাদৃশ্য বিদ্যমান।",
+            "start": 0,
+            "end": 282
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The passage incorrectly states that isotopes have significant similarity in their physical properties due to having the same number of protons.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p1"
+              ],
+              "description": "The passage asserts that because the number of protons is the same, isotopes exhibit great similarity in both their chemical and physical properties ('তাদের রাসায়নিক ও ভৌত ধর্মে অনেক সাদৃশ্য বিদ্যমান'). While isotopes have virtually identical chemical properties due to having identical electron configurations, their physical properties (such as density, mass, boiling point, and melting point) differ due to differences in neutron count and atomic mass.",
+              "correction": "Isotopes have nearly identical chemical properties because they have the same atomic number and electron configuration, but their physical properties differ because they have different mass numbers.",
+              "severity": "minor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Isotopes of hydrogen",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates the concept of isotopes using the three isotopes of hydrogen (protium, deuterium, and tritium).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যেমন: হাইড্রোজেনের তিনটি আইসোটোপ বা সমস্থানিক রয়েছে—প্রোটিয়াম বা হাইড্রোজেন-১ (প্রতীক: ১H), ডিউটেরিয়াম বা হাইড্রোজেন-২ (প্রতীক: ২H বা D), ট্রিটিয়াম বা হাইড্রোজেন-৩ (প্রতীক: ৩H বা T)। এদের প্রত্যেকেরই পারমাণবিক সংখ্যা ১ কিন্তু ভর সংখ্যা যথাক্রমে ১, ২ ও ৩।",
+            "start": 284,
+            "end": 542
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The descriptions, names, symbols, atomic numbers, and mass numbers for protium, deuterium, and tritium are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Isotopes of carbon and radiocarbon dating",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides carbon isotopes as another concrete example, mentioning stability and the application of carbon-14 in dating ancient artifacts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কার্বনের তিনটি সমস্থানিক রয়েছে— ১২C, ১৩C, ১৪C। এদের মধ্যে প্রথম দুটি স্থায়ী কিন্তু তৃতীয়টি অস্থায়ী বা তেজস্ক্রিয়। ১৪C দিয়ে প্রাচীন নিদর্শনের বয়স নির্ধারণ করা হয়।",
+            "start": 544,
+            "end": 713
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the three main isotopes of carbon (12C, 13C, 14C), their relative stability, and the use of 14C in radiocarbon dating.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Relationship between mass number, atomic number, and neutron number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines atomic number (Z) and mass number (A), and explains the mathematical formula used to determine the number of neutrons (A - Z).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "কোনো মৌলের যেকোনো একটি সমস্থানিকের নিউক্লিয়াসে প্রোটন ও নিউট্রন সংখ্যা একত্রে মোট যত হয় তাকে ভর সংখ্যা বলে। ভর সংখ্যাকে A দ্বারা প্রকাশ করা হয়। নিউক্লিয়াসে উপস্থিত প্রোটনের সংখ্যাকে পারমাণবিক সংখ্যা বলে। একে Z দ্বারা প্রকাশ করা হয়। সুতরাং, নিউক্লিয়াসে নিউট্রনের সংখ্যা = A – Z।",
+            "start": 715,
+            "end": 998
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definitions of atomic number (Z), mass number (A), and the formula for neutron count (A - Z) are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Reiterated definition and example of isotopes",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1",
+          "s2"
+        ],
+        "rationale": "Restates the core concept that atoms of an element share atomic numbers but differ in neutron and mass numbers, repeating the hydrogen example as a summary.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "একটি মৌলের সকল পরমাণুর পারমাণবিক সংখ্যা বা প্রোটন সংখ্যা একই হলেও নিউট্রন সংখ্যা ভিন্ন হতে পারে। পারমাণবিক সংখ্যা একই থাকলেও যেসব পরমাণুর ভর সংখ্যা ভিন্ন হয় তাদেরকে পরস্পরের সমস্থানিক বলে। যেমন— হাইড্রোজেনের তিনটি আইসোটোপ বা সমস্থানিক হলো ১H, ২H ও ৩H। এদের পারমাণবিক সংখ্যা একই (১) কিন্তু ভর সংখ্যা যথাক্রমে ১, ২ ও ৩।",
+            "start": 1000,
+            "end": 1318
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reiterated definition and the accompanying hydrogen example are scientifically accurate.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\bengali-native\\llama-4-maverick__a7e6a1daaec4.json",
+    "original_sha256": "2cbfbdd0e9ecd1725d7d0091f0aa235dbe03c08f45ec229092529bafad97699e",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 5,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 2
+    },
+    "nested_passages": 5,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 1,
+      "accurate": 4
+    },
+    "proposed_error_records": 1,
+    "proposed_error_severity": {
+      "minor": 1
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

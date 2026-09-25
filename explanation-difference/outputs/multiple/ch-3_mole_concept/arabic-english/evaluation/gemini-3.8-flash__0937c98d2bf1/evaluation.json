@@ -1,0 +1,901 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "1e3ee85717209ce401998a1b9f648cdf019f8f95ba5f072643f76d69f9f1b15e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept (definition, Avogadro's number, molar mass, and mole-mass calculations)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response provides a comprehensive explanation of the mole concept tailored to a high school student in Arabic, addressing why the mole is necessary, defining Avogadro's number, explaining molar mass, presenting the mass-mole formula, and working through an illustrative calculation.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Need for the mole unit in chemistry"
+      },
+      {
+        "id": "s2",
+        "label": "The mole as a counting unit and Avogadro's number"
+      },
+      {
+        "id": "s3",
+        "label": "Molar mass and the periodic table"
+      },
+      {
+        "id": "s4",
+        "label": "Mole-mass conversion formula and calculation"
+      },
+      {
+        "id": "s5",
+        "label": "Core summary of the mole concept"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Why chemists need the mole unit (counting by weighing)",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why the mole concept is necessary in chemistry: because atoms are too microscopic to count individually, chemists use bulk measurement units analogous to buying grains of rice by kilogram.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "تخيل أنني طلبت منك أن تذهب إلى البقالة وتشتري لي **\"500,000 حبة أرز\"**! "
+            },
+            {
+              "passage_id": "p6",
+              "quote": "ماذا تفعل بدلاً من ذلك؟ تطلب **\"كيلوغراماً\"** من الأرز؛ لأنك تزن كمية كبيرة تحتوي على ملايين الحبات دون أن تعدها."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أهلاً بك يا بطل! اعتبرني معلمك الخاص اليوم، وسأشرح لك **\"مفهوم المول\" (The Mole Concept)** بطريقة تجعلك لا تنساه أبداً، لأنه في الحقيقة فكرة ذكية جداً وبسيطة، لكنها أساس الكيمياء كلها.",
+            "start": 0,
+            "end": 184
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 186,
+            "end": 189
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. المشكلة: لماذا نحتاج \"المول\" أصلاً؟",
+            "start": 191,
+            "end": 233
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "تخيل أنني طلبت منك أن تذهب إلى البقالة وتشتري لي **\"500,000 حبة أرز\"**! ",
+            "start": 234,
+            "end": 306
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل ستجلس في المحل لتعد حبات الأرز حبة حبة؟ مستحيل، صح؟ ",
+            "start": 307,
+            "end": 362
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ماذا تفعل بدلاً من ذلك؟ تطلب **\"كيلوغراماً\"** من الأرز؛ لأنك تزن كمية كبيرة تحتوي على ملايين الحبات دون أن تعدها.",
+            "start": 363,
+            "end": 476
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نفس المشكلة تواجه الكيميائيين: الذرات والجزيئات صغيرة جداً جداً، ومستحيل رؤيتها أو عدّها بالواحدة في المختبر. لذلك، اخترع العلماء وحدة قياس جديدة للتعامل مع هذه الأعداد الضخمة، وسموها: **\"المول\"**.",
+            "start": 478,
+            "end": 675
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation accurately conveys the macroscopic-to-microscopic rationale behind introducing the mole concept.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "The mole as a counting unit and Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Introduces the mole as a fixed counting unit analogous to a dozen, defining 1 mole as 6.022 x 10^23 particles and identifying this quantity as Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p10",
+              "quote": "أنت تعرف كلمة **\"دزينة\" أو \"دستة\" (Dozen)**، صح؟"
+            },
+            {
+              "passage_id": "p11",
+              "quote": "* إذا قلت لك: \"دستة بيض\" = كم بيضة؟ ستقول لي فوراً: **12**."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 677,
+            "end": 680
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. التشبيه السحري: \"دستة الكيميائيين\"",
+            "start": 682,
+            "end": 723
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أنت تعرف كلمة **\"دزينة\" أو \"دستة\" (Dozen)**، صح؟",
+            "start": 724,
+            "end": 772
+          },
+          {
+            "id": "p11",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* إذا قلت لك: \"دستة بيض\" = كم بيضة؟ ستقول لي فوراً: **12**.",
+            "start": 773,
+            "end": 832
+          },
+          {
+            "id": "p12",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* \"دستة سيارات\" = **12**.",
+            "start": 833,
+            "end": 858
+          },
+          {
+            "id": "p13",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* \"دستة أقلام\" = **12**.",
+            "start": 859,
+            "end": 883
+          },
+          {
+            "id": "p14",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "كلمة **\"مول\"** هي بالضبط مثل كلمة \"دستة\"، لكنها خاصة بالعلماء، ولأن الذرات صغيرة جداً، فدستة الكيميائيين رقمها كبير جداً جداً!",
+            "start": 885,
+            "end": 1011
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**المول الواحد من أي مادة = $6.022 \\times 10^{23}$ من الجسيمات (ذرات، أو جزيئات).**",
+            "start": 1013,
+            "end": 1096
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذا الرقم العملاق يسمى **\"عدد أفوجادرو\" (Avogadro's Number)** تكريماً للعالم الذي ساهم في اكتشافه.",
+            "start": 1098,
+            "end": 1196
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(تخيل الرقم: 6 وأمامها 23 صفراً! رقم فلكي).*",
+            "start": 1197,
+            "end": 1242
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole, the numerical value of Avogadro's number (6.022 x 10^23), and the comparison to a dozen are scientifically accurate and clear.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Molar mass and atomic mass variation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why equal numbers of moles of different substances have different masses (molar mass) using an egg vs. watermelon comparison and elemental examples (H vs. C), and links this to the periodic table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p21",
+              "quote": "* هل وزن \"دستة بيض\" يساوي وزن \"دستة بطيخ\"؟"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1244,
+            "end": 1247
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. هل أوزان المولات متساوية؟ (الكتلة المولية)",
+            "start": 1249,
+            "end": 1298
+          },
+          {
+            "id": "p20",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لنرجع لمثال الدستة:",
+            "start": 1299,
+            "end": 1318
+          },
+          {
+            "id": "p21",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* هل وزن \"دستة بيض\" يساوي وزن \"دستة بطيخ\"؟",
+            "start": 1319,
+            "end": 1361
+          },
+          {
+            "id": "p22",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* كلاهما 12 حبة، لكن البطيخ أثقل بكثير!",
+            "start": 1362,
+            "end": 1401
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نفس الشيء في الكيمياء:",
+            "start": 1403,
+            "end": 1425
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **1 مول من الهيدروجين** فيه $6.022 \\times 10^{23}$ ذرة، ووزنه = **1 جرام** فقط.",
+            "start": 1426,
+            "end": 1507
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **1 مول من الكربون** فيه نفس العدد ($6.022 \\times 10^{23}$ ذرة)، لكن وزنه = **12 جرام**.",
+            "start": 1508,
+            "end": 1598
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "وزن المول الواحد من أي مادة يسمى **\"الكتلة المولية\" (Molar Mass)**، ووحدته هي **(g/mol - جرام/مول)**.",
+            "start": 1600,
+            "end": 1701
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**من أين نحصل على هذا الرقم؟** من **الجدول الدوري**! هو نفس \"العدد الكتلي\" المكتوب أسفل كل عنصر.",
+            "start": 1702,
+            "end": 1798
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines molar mass with unit g/mol and explains why 1 mole of hydrogen (approx 1 g) has a different mass from 1 mole of carbon (approx 12 g). Mentioning the mass number/atomic weight from the periodic table is an acceptable standard introductory simplification.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Formula relating moles, mass, and molar mass",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents the standard formula n = m / M and explicitly defines each variable and its units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1800,
+            "end": 1803
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. القانون الذهبي لحل المسائل:",
+            "start": 1805,
+            "end": 1839
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في الامتحانات، هناك مثلث سحري ستستخدمه دائماً للتحويل بين ما تراه بعينك (الجرامات على الميزان) وما يحدث في عالم الذرات (المولات):",
+            "start": 1840,
+            "end": 1969
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{m}{M}$$",
+            "start": 1971,
+            "end": 1990
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "حيث:",
+            "start": 1992,
+            "end": 1996
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **$n$**: عدد المولات (Mole).",
+            "start": 1997,
+            "end": 2027
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **$m$**: الكتلة بالجرام (التي تزنها في المختبر).",
+            "start": 2028,
+            "end": 2078
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **$M$**: الكتلة المولية (من الجدول الدوري، g/mol).",
+            "start": 2079,
+            "end": 2131
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation n = m / M and the accompanying variable definitions are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked example: calculating moles of water in 36 g",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Walks through a step-by-step calculation to find the number of moles in 36 g of water (H2O), first calculating molar mass (18 g/mol) and then applying the formula to obtain 2 moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2133,
+            "end": 2136
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 5. مثال عملي سريع لنقفل به الفكرة:",
+            "start": 2138,
+            "end": 2176
+          },
+          {
+            "id": "p38",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**سؤال:** كم عدد مولات الماء ($H_2O$) الموجودة في **36 جرام** من الماء؟",
+            "start": 2177,
+            "end": 2248
+          },
+          {
+            "id": "p39",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **نحسب الكتلة المولية للماء ($M$) من الجدول الدوري:**",
+            "start": 2250,
+            "end": 2306
+          },
+          {
+            "id": "p40",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * الهيدروجين ($H$) = 1، والأكسجين ($O$) = 16.",
+            "start": 2307,
+            "end": 2355
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * جزيء الماء فيه ذرتين $H$ وذرة $O$:",
+            "start": 2356,
+            "end": 2395
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * $M = (2 \\times 1) + 16 = 18 \\text{ g/mol}$.",
+            "start": 2396,
+            "end": 2444
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **نطبق القانون الذهبي:**",
+            "start": 2445,
+            "end": 2472
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * عدد المولات ($n$) = الكتلة ($m$) ÷ الكتلة المولية ($M$)",
+            "start": 2473,
+            "end": 2533
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * $n = \\frac{36}{18} = 2 \\text{ mol}$.",
+            "start": 2534,
+            "end": 2575
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**النتيجة:** في 36 جرام ماء، يوجد **2 مول** من جزيئات الماء (أي ضعف عدد أفوجادرو)!",
+            "start": 2577,
+            "end": 2659
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations and values for calculating the moles of water in 36 g are correct (M = 18 g/mol, n = 2 mol).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary recap of the mole concept",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a one-sentence summary capturing the core concept of the mole as a bridge between the microscopic atomic world and macroscopic laboratory measurements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2661,
+            "end": 2664
+          },
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخلاصة (في جملة واحدة):",
+            "start": 2666,
+            "end": 2694
+          },
+          {
+            "id": "p49",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**المول هو مجرد \"جسر\" يربط بين العالم المجهري الصغير جداً الذي لا نراه (الذرات)، والعالم الحقيقي الذي نقيسه على الميزان في المختبر (الجرامات).**",
+            "start": 2695,
+            "end": 2839
+          },
+          {
+            "id": "p50",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل النقطة واضحة الآن، أم تحب أن نأخذ مسألة أخرى لنتدرب عليها معاً؟",
+            "start": 2841,
+            "end": 2907
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes the mole's function as a conceptual bridge between microscopic particle count and macroscopic mass.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\arabic-english\\gemini-3.8-flash__0937c98d2bf1.json",
+    "original_sha256": "373322e56df575efd5a4079dfe362e80ba83d4118aa8b8db8d50543a7e7a0392",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 50,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 50,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "everyday": 3,
+      "none": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

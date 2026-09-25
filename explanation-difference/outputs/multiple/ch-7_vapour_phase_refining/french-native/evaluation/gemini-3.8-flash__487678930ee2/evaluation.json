@@ -1,0 +1,758 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "dd986ee0cab33ff4236dab09c47b3e8ae5e10c9decc11d64de4e33e6448b42c6",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "Vapour phase refining in metallurgy",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The entire response directly and accurately explains vapour phase refining, including its core principles, necessary conditions, the two-stage process, and classic industrial examples (Mond process and Van Arkel-de Boer process).",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Taxi analogy for vapour phase refining"
+      },
+      {
+        "id": "s2",
+        "label": "Principles and operating conditions of vapour phase refining"
+      },
+      {
+        "id": "s3",
+        "label": "The Mond process for refining nickel"
+      },
+      {
+        "id": "s4",
+        "label": "The Van Arkel-de Boer process"
+      },
+      {
+        "id": "s5",
+        "label": "Key takeaways and summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Taxi analogy explaining the principle of vapour phase refining",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the overall principle of vapour phase refining using an intuitive analogy of a fleet of chemical taxis picking up only metal atoms and leaving sand/impurities behind.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "Le **raffinage en phase vapeur**, c'est comme si tu envoyais une flotte de petits « taxis » chimiques (un gaz) qui ne prennent **que** les atomes de métal à leur bord, en ignorant totalement le sable."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! C’est une excellente question de chimie et de métallurgie. Ne t'en fais pas, le nom a l’air barbare, mais le principe est en réalité très élégant et logique. ",
+            "start": 0,
+            "end": 168
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Installe-toi, je t’explique tout simplement.",
+            "start": 170,
+            "end": 214
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 216,
+            "end": 219
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. La grande idée (L'analogie du taxi)",
+            "start": 221,
+            "end": 263
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu aies un tas de sable mélangé à des pépites de métal, et que ce soit impossible de les trier à la main. ",
+            "start": 265,
+            "end": 383
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le **raffinage en phase vapeur**, c'est comme si tu envoyais une flotte de petits « taxis » chimiques (un gaz) qui ne prennent **que** les atomes de métal à leur bord, en ignorant totalement le sable. ",
+            "start": 385,
+            "end": 586
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Le métal monte dans le taxi $\\rightarrow$ il devient un gaz lui aussi et s'envole, laissant le sable derrière.",
+            "start": 587,
+            "end": 700
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. On fait rouler le taxi un peu plus loin dans une autre pièce.",
+            "start": 701,
+            "end": 765
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. On force le métal à descendre du taxi $\\rightarrow$ le métal redevient solide, totalement pur, et le taxi repart chercher d'autres atomes.",
+            "start": 766,
+            "end": 907
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En résumé : **on purifie un métal solide en le transformant temporairement en gaz, pour le séparer de ses impuretés.**",
+            "start": 909,
+            "end": 1027
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The taxi analogy accurately reflects the selective volatilization and subsequent decomposition steps of vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Requirements and two-step mechanism of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Details the theoretical mechanism, the two necessary conditions (volatility of intermediate compound and ease of decomposition), and the two sequential steps (volatilization at T1 and thermal decomposition at T2).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1029,
+            "end": 1032
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. Comment ça marche en pratique ? (Les 2 étapes clés)",
+            "start": 1034,
+            "end": 1092
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ce procédé repose sur une réaction chimique **réversible** (qui peut aller dans un sens puis dans l'autre) contrôlée par la **température**.",
+            "start": 1094,
+            "end": 1234
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il y a deux conditions absolues pour que ça marche :",
+            "start": 1236,
+            "end": 1288
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Le métal doit réagir avec un réactif pour former un composé **volatil** (qui s'évapore facilement).",
+            "start": 1289,
+            "end": 1391
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Ce composé gazeux doit pouvoir se décomposer facilement pour redonner le métal pur.",
+            "start": 1392,
+            "end": 1478
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### Étape 1 : La volatilisation (On fait monter le métal dans le gaz)",
+            "start": 1480,
+            "end": 1550
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On prend le métal impur (solide). On fait passer un gaz dessus à une **température $T_1$**.",
+            "start": 1551,
+            "end": 1642
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le métal réagit avec le gaz et forme une nouvelle molécule... gazeuse ! ",
+            "start": 1643,
+            "end": 1715
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les impuretés, elles, ne réagissent pas et restent au fond sous forme solide. On a réussi la séparation.",
+            "start": 1716,
+            "end": 1820
+          },
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### Étape 2 : La décomposition (On récupère le métal pur)",
+            "start": 1822,
+            "end": 1880
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On aspire ce nouveau gaz vers un autre endroit du réacteur et on change la température (généralement, on **chauffe beaucoup plus**, à une température $T_2$).",
+            "start": 1881,
+            "end": 2038
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "À cette nouvelle température, la molécule devient instable : elle se « casse ». Le métal redevient un solide ultra-pur qui se dépose sur les parois, et le gaz initial est libéré (puis réutilisé).",
+            "start": 2039,
+            "end": 2234
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The two fundamental criteria and the temperature-dependent reversible reaction mechanism are chemically correct and standard.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Mond process for the purification of nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the application of vapour phase refining via the classic Mond process for nickel with balanced equations and reaction temperatures.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2236,
+            "end": 2239
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. L'exemple classique du lycée : Le Procédé Mond (pour le Nickel)",
+            "start": 2241,
+            "end": 2311
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C’est l'exemple historique parfait découvert à la fin du XIXᵉ siècle pour purifier le **Nickel (Ni)** :",
+            "start": 2313,
+            "end": 2416
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **La capture (à ~50 °C) :**",
+            "start": 2418,
+            "end": 2448
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   On fait passer du monoxyde de carbone ($CO$, un gaz) sur du nickel impur. ",
+            "start": 2449,
+            "end": 2526
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$\\text{Ni (solide, impur)} + 4\\text{CO (gaz)} \\xrightarrow{50^\\circ\\text{C}} \\text{Ni(CO)}_4 \\text{ (gaz)}$$",
+            "start": 2527,
+            "end": 2639
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Le produit formé s'appelle le *tétracarbonyle de nickel*. C'est un gaz ! Les impuretés restent solides dans le four.",
+            "start": 2640,
+            "end": 2759
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **La libération (à ~230 °C) :**",
+            "start": 2761,
+            "end": 2795
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   On envoie ce gaz dans une autre cuve beaucoup plus chaude. La molécule éclate :",
+            "start": 2796,
+            "end": 2878
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$\\text{Ni(CO)}_4 \\text{ (gaz)} \\xrightarrow{230^\\circ\\text{C}} \\text{Ni (solide, PUR à 99,99 %)} + 4\\text{CO (gaz)}$$",
+            "start": 2879,
+            "end": 3000
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Le nickel pur se dépose sous forme de petites billes métalliques, et le gaz $CO$ est renvoyé au début pour recommencer le cycle.",
+            "start": 3001,
+            "end": 3132
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction equations, temperatures (~50 °C for tetracarbonylnickel formation, ~230 °C for decomposition), and physical states are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Van Arkel-de Boer process for titanium and zirconium",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a brief illustrative mention of the Van Arkel-de Boer process using iodine for refining titanium or zirconium.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Autre exemple célèbre pour ta culture : le procédé **Van Arkel-de Boer**, qui utilise du diiode $I_2$ pour purifier le Titane ou le Zirconium pour l'industrie aérospatiale et nucléaire).*",
+            "start": 3134,
+            "end": 3323
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Van Arkel-de Boer process correctly uses iodine (I2) to refine titanium and zirconium into high-purity metals for aerospace and nuclear applications.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of essential points for high school study",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Recapitulates the main takeaways for a student: the meaning of vapour phase, high purity justification, and the role of temperature control.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3325,
+            "end": 3328
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### À retenir pour ton cours :",
+            "start": 3330,
+            "end": 3360
+          },
+          {
+            "id": "p38",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **Pourquoi \"phase vapeur\" ?** Parce que la séparation se fait en transformant le métal en gaz.",
+            "start": 3362,
+            "end": 3458
+          },
+          {
+            "id": "p39",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **Pourquoi on l'utilise ?** Parce qu'il permet d'obtenir des métaux d'une **pureté extrême** (plus de 99,9 %), indispensable pour les semi-conducteurs (électronique) ou l'aéronautique.",
+            "start": 3459,
+            "end": 3645
+          },
+          {
+            "id": "p40",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **Le secret ?** Jouer sur la **température** pour faire réagir le métal dans un sens, puis dans l'autre.",
+            "start": 3646,
+            "end": 3752
+          },
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce que c'est plus clair pour toi présenté comme ça ?",
+            "start": 3754,
+            "end": 3810
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary points accurately capture the rationale, mechanism, and applications of vapour phase refining.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-native\\gemini-3.8-flash__487678930ee2.json",
+    "original_sha256": "626787c70d7f89cc58f78e63f52bf2df907e00e405bb7d7e559d01821c24376a",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 41,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 41,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "everyday": 1,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

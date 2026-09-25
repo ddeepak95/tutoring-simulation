@@ -1,0 +1,560 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7c89b41cd34cadca1354b6cf970be8da060cb15ba03acc8a301b68453adcb2f4",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "isotope",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "reason": "The response explains what isotopes are, illustrates them using carbon isotopes and standard nuclear notation, and discusses their chemical properties and radioactive decay.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of isotopes and atomic structure"
+      },
+      {
+        "id": "s2",
+        "label": "Example of carbon isotopes and isotopic notation"
+      },
+      {
+        "id": "s3",
+        "label": "Chemical properties and radioactivity of isotopes"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and nuclear composition of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what an isotope is and explains how atoms of the same element share the same number of protons while differing in neutron count and mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Un **isotope** est une version différente d’un même élément chimique.",
+            "start": 0,
+            "end": 69
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tous les atomes d’un même élément ont le même nombre de **protons** dans leur noyau. C’est ce nombre qui définit l’élément.",
+            "start": 71,
+            "end": 194
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En revanche, les isotopes d’un même élément n’ont pas forcément le même nombre de **neutrons**.",
+            "start": 196,
+            "end": 291
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Même nombre de protons → même élément chimique.",
+            "start": 293,
+            "end": 342
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Nombre de neutrons différent → isotope différent.",
+            "start": 343,
+            "end": 394
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Donc leur masse peut être différente.",
+            "start": 395,
+            "end": 434
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation that isotopes of an element share the same proton number but differ in neutron number and atomic mass is factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Isotopes of carbon",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides a concrete example comparing Carbon-12, Carbon-13, and Carbon-14 in terms of proton and neutron counts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple : le carbone",
+            "start": 436,
+            "end": 460
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le carbone possède toujours **6 protons**. Il existe notamment :",
+            "start": 462,
+            "end": 526
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Carbone-12** : 6 protons et 6 neutrons  ",
+            "start": 528,
+            "end": 572
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Carbone-13** : 6 protons et 7 neutrons  ",
+            "start": 573,
+            "end": 617
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Carbone-14** : 6 protons et 8 neutrons  ",
+            "start": 618,
+            "end": 662
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les trois sont des atomes de carbone, car ils ont tous 6 protons. Mais ils sont des isotopes car leur nombre de neutrons varie.",
+            "start": 664,
+            "end": 791
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The proton and neutron numbers for carbon-12, carbon-13, and carbon-14 are correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Mass number and isotopic notation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains how the mass number is defined as the sum of protons and neutrons, and demonstrates how it is written in standard isotopic notation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le nombre après le nom, par exemple dans « carbone-14 », correspond au **nombre total de nucléons** :",
+            "start": 793,
+            "end": 894
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 896,
+            "end": 898
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{nombre de masse} = \\text{protons} + \\text{neutrons}",
+            "start": 899,
+            "end": 956
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 957,
+            "end": 959
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ainsi, pour le carbone-14 :",
+            "start": 961,
+            "end": 988
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 990,
+            "end": 992
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "6\\ \\text{protons} + 8\\ \\text{neutrons} = 14",
+            "start": 993,
+            "end": 1036
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1037,
+            "end": 1039
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On peut aussi l’écrire ainsi :",
+            "start": 1041,
+            "end": 1071
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1073,
+            "end": 1075
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "{}^{14}_{6}\\text{C}",
+            "start": 1076,
+            "end": 1095
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1096,
+            "end": 1098
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 14 est le nombre total de nucléons ;",
+            "start": 1100,
+            "end": 1138
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 6 est le nombre de protons.",
+            "start": 1139,
+            "end": 1168
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of mass number (A = Z + N) and the standard notation for carbon-14 are fully accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Properties and radioactive dating",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the similarity in chemical properties among isotopes and introduces instability/radioactivity along with the real-world application of carbon-14 dating.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p29",
+              "quote": "Par exemple, le carbone-14 est radioactif et sert à dater des objets anciens, comme des ossements ou du bois."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Propriétés",
+            "start": 1170,
+            "end": 1184
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les isotopes ont presque les mêmes propriétés chimiques, car ils possèdent le même nombre d’électrons et de protons. Cependant, certains isotopes sont **radioactifs**, c’est-à-dire que leur noyau est instable et se transforme avec le temps.",
+            "start": 1186,
+            "end": 1426
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Par exemple, le carbone-14 est radioactif et sert à dater des objets anciens, comme des ossements ou du bois.",
+            "start": 1428,
+            "end": 1537
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Isotopes share essentially identical chemical behavior due to identical electronic configuration, and radioactive isotopes like carbon-14 are indeed used for radiocarbon dating of organic matter.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\french-english\\gpt-5.6-terra__18b7401bcb47.json",
+    "original_sha256": "448a4fde75157c7616d88dc158e4c354601ccc762866d39cfbd83976863440af",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 4,
+    "substantive_content_units": 4,
+    "total_passages": 29,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 29,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 3,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 4
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

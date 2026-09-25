@@ -1,0 +1,297 @@
+{
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and basic mechanism of isotopes",
+      "excerpts": [
+        {
+          "text": "**সমস্থানিক** বলতে আমরা একই মৌলের বিভিন্ন রূপকে বুঝি, যাদের **প্রোটনের সংখ্যা একই**, কিন্তু **নিউট্রনের সংখ্যা ভিন্ন**। \n\nফলে তাদের **পারমাণবিক সংখ্যা (Z)** একই থাকে, তাই তারা পর্যায় সারণিতে একই স্থানে থাকে (এজন্যই নাম “সমস্থানিক”)। কিন্তু **ভর সংখ্যা (A)** ভিন্ন হয়।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines isotopes as atoms of the same element having the same number of protons (atomic number Z) and periodic table position, but differing in neutron count and mass number A.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 82,
+          "end": 349,
+          "text": "**সমস্থানিক** বলতে আমরা একই মৌলের বিভিন্ন রূপকে বুঝি, যাদের **প্রোটনের সংখ্যা একই**, কিন্তু **নিউট্রনের সংখ্যা ভিন্ন**। \n\nফলে তাদের **পারমাণবিক সংখ্যা (Z)** একই থাকে, তাই তারা পর্যায় সারণিতে একই স্থানে থাকে (এজন্যই নাম “সমস্থানিক”)। কিন্তু **ভর সংখ্যা (A)** ভিন্ন হয়।"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Worked comparison of hydrogen isotopes",
+      "excerpts": [
+        {
+          "text": "**হাইড্রোজেন** মৌলের তিনটি সমস্থানিক আছে:\n\n| সমস্থানিক | প্রোটন | নিউট্রন | ভর সংখ্যা | নাম |\n|-----------|--------|---------|-----------|-----|\n| ¹H        | 1      | 0       | 1         | প্রোটিয়াম |\n| ²H        | 1      | 1       | 2         | ডিউটেরিয়াম |\n| ³H        | 1      | 2       | 3         | ট্রিটিয়াম |\n\n- তিনটিরই প্রোটন ১টি করে → একই মৌল।\n- কিন্তু নিউট্রনের সংখ্যা আলাদা → ভর আলাদা।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The proton, neutron, and mass numbers, along with names (protium, deuterium, tritium), are correctly tabulated and deduced.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 377,
+          "end": 774,
+          "text": "**হাইড্রোজেন** মৌলের তিনটি সমস্থানিক আছে:\n\n| সমস্থানিক | প্রোটন | নিউট্রন | ভর সংখ্যা | নাম |\n|-----------|--------|---------|-----------|-----|\n| ¹H        | 1      | 0       | 1         | প্রোটিয়াম |\n| ²H        | 1      | 1       | 2         | ডিউটেরিয়াম |\n| ³H        | 1      | 2       | 3         | ট্রিটিয়াম |\n\n- তিনটিরই প্রোটন ১টি করে → একই মৌল।\n- কিন্তু নিউট্রনের সংখ্যা আলাদা → ভর আলাদা।"
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Chlorine isotopes and average atomic mass",
+      "excerpts": [
+        {
+          "text": "এরকম আরেকটা উদাহরণ: **ক্লোরিন**। সাধারণত ক্লোরিনের দুটি সমস্থানিক পাওয়া যায় — ³⁵Cl এবং ³⁷Cl। এজন্যই ক্লোরিনের পারমাণবিক ভর ৩৫.৫ দেখায় (দুটির গড়)।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text states that the atomic mass of chlorine is 35.5 because it is the average ('দুটির গড়') of chlorine-35 and chlorine-37. However, the simple arithmetic mean of 35 and 37 is 36; 35.5 is a weighted average based on relative natural abundance (~75% Cl-35 and ~25% Cl-37).",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "(দুটির গড়)"
+              }
+            ],
+            "description": "The atomic mass of chlorine (35.5) is described as the average of 35 and 37, but the arithmetic mean of 35 and 37 is 36. 35.5 is a weighted average based on isotopic abundances (approx. 75% Cl-35 and 25% Cl-37).",
+            "correction": "ক্লোরিনের পারমাণবিক ভর ৩৫.৫ হওয়ার কারণ এটি এদের প্রাচুর্য অনুযায়ী ভরযুক্ত গড় (weighted average), সাধারণ গড় নয় (যা ৩৬ হতো)।",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 776,
+          "end": 921,
+          "text": "এরকম আরেকটা উদাহরণ: **ক্লোরিন**। সাধারণত ক্লোরিনের দুটি সমস্থানিক পাওয়া যায় — ³⁵Cl এবং ³⁷Cl। এজন্যই ক্লোরিনের পারমাণবিক ভর ৩৫.৫ দেখায় (দুটির গড়)।"
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Properties of isotopes",
+      "excerpts": [
+        {
+          "text": "- **রাসায়নিক ধর্ম** একই থাকে (কারণ প্রোটন সংখ্যা একই, তাই ইলেকট্রন সংখ্যাও একই)।\n- **ভৌত ধর্ম** (যেমন: ভর, ঘনত্ব) একটু ভিন্ন হয়।\n- কিছু সমস্থানিক স্থায়ী, আবার কিছু তেজস্ক্রিয় (যেমন ট্রিটিয়াম, কার্বন-১৪)।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately explains why chemical properties remain identical (same electron configuration due to same proton number), physical properties differ due to mass differences, and notes the existence of stable and radioactive isotopes.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 950,
+          "end": 1153,
+          "text": "- **রাসায়নিক ধর্ম** একই থাকে (কারণ প্রোটন সংখ্যা একই, তাই ইলেকট্রন সংখ্যাও একই)।\n- **ভৌত ধর্ম** (যেমন: ভর, ঘনত্ব) একটু ভিন্ন হয়।\n- কিছু সমস্থানিক স্থায়ী, আবার কিছু তেজস্ক্রিয় (যেমন ট্রিটিয়াম, কার্বন-১৪)।"
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "kind": "EXAMPLE",
+      "label": "Application in cancer treatment",
+      "excerpts": [
+        {
+          "text": "- তেজস্ক্রিয় সমস্থানিক ব্যবহার করে ক্যান্সারের চিকিৎসা করা হয়।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Radioisotopes are widely used in radiation therapy and diagnostics for cancer.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1176,
+          "end": 1238,
+          "text": "- তেজস্ক্রিয় সমস্থানিক ব্যবহার করে ক্যান্সারের চিকিৎসা করা হয়।"
+        }
+      ]
+    },
+    {
+      "id": "u6",
+      "kind": "EXAMPLE",
+      "label": "Application in radiocarbon dating",
+      "excerpts": [
+        {
+          "text": "- প্রত্নতত্ত্বে কার্বন-১৪ দিয়ে প্রাচীন জিনিসের বয়স বের করা হয়।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Carbon-14 dating is an established archaeological method for determining the age of organic materials.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1239,
+          "end": 1301,
+          "text": "- প্রত্নতত্ত্বে কার্বন-১৪ দিয়ে প্রাচীন জিনিসের বয়স বের করা হয়।"
+        }
+      ]
+    },
+    {
+      "id": "u7",
+      "kind": "EXAMPLE",
+      "label": "Application in nuclear power",
+      "excerpts": [
+        {
+          "text": "- পারমাণবিক বিদ্যুৎকেন্দ্রে ইউরেনিয়াম-২৩৫ ব্যবহার হয়।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Uranium-235 is standard fissile fuel in nuclear power reactors.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1302,
+          "end": 1355,
+          "text": "- পারমাণবিক বিদ্যুৎকেন্দ্রে ইউরেনিয়াম-২৩৫ ব্যবহার হয়।"
+        }
+      ]
+    },
+    {
+      "id": "u8",
+      "kind": "ANALOGY",
+      "label": "Siblings analogy for isotopes",
+      "excerpts": [
+        {
+          "text": "সমস্থানিক হলো “একই পরিবারের ভাই-বোন” — চেহারা (রাসায়নিক ধর্ম) একই, কিন্তু ওজন (ভর) আলাদা।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "“একই পরিবারের ভাই-বোন”"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The analogy maps familial resemblance to identical chemical properties and differing body weights to different isotopic mass numbers.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1371,
+          "end": 1460,
+          "text": "সমস্থানিক হলো “একই পরিবারের ভাই-বোন” — চেহারা (রাসায়নিক ধর্ম) একই, কিন্তু ওজন (ভর) আলাদা।"
+        }
+      ]
+    }
+  ],
+  "unassigned_spans": [
+    {
+      "start": 0,
+      "end": 82,
+      "text": "একজন ভালো শিক্ষক হিসেবে আমি তোমাকে খুব সহজ ভাষায় বুঝিয়ে বলছি।\n\n### সমস্থানিক কী?\n\n"
+    },
+    {
+      "start": 349,
+      "end": 377,
+      "text": "\n\n### সহজ উদাহরণ দিয়ে বুঝি\n\n"
+    },
+    {
+      "start": 921,
+      "end": 950,
+      "text": "\n\n### সমস্থানিকের বৈশিষ্ট্য\n\n"
+    },
+    {
+      "start": 1153,
+      "end": 1176,
+      "text": "\n\n### কেন জানা দরকার?\n\n"
+    },
+    {
+      "start": 1355,
+      "end": 1371,
+      "text": "\n\n**সারকথা:**  \n"
+    },
+    {
+      "start": 1460,
+      "end": 1536,
+      "text": "\n\nএখন বলো, কোন অংশটা আরেকটু বিস্তারিত বুঝতে চাও? নাকি আরও কোনো উদাহরণ দরকার?"
+    }
+  ],
+  "note": "Gaps require semantic review; exact alignment does not prove correct boundaries."
+}

@@ -1,0 +1,763 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "a2af7431b54f42ba57c953d81217f001bbf42c2f3f8f4ff875c1dc1fc3ce1096",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The text explains covalent radius in French, detailing its definition, formula, a calculation example using dihydrogen, trends in the periodic table, dependence on bond multiplicity, and a final recap.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Définition et formule du rayon covalent"
+      },
+      {
+        "id": "s2",
+        "label": "Exemple de calcul pour le dihydrogène"
+      },
+      {
+        "id": "s3",
+        "label": "Évolution dans le tableau périodique"
+      },
+      {
+        "id": "s4",
+        "label": "Influence de l'ordre de liaison"
+      },
+      {
+        "id": "s5",
+        "label": "Synthèse et utilité du rayon covalent"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition et mesure du rayon covalent",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why atomic boundaries cannot be measured directly and how covalent radius is defined as half the internuclear distance between two identical bonded atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le **rayon covalent** est une mesure qui donne une idée de la taille d’un atome lorsqu’il est lié à un autre atome par une **liaison covalente**.",
+            "start": 0,
+            "end": 145
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Définition",
+            "start": 147,
+            "end": 161
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Une liaison covalente se forme lorsque deux atomes **partagent des électrons**.",
+            "start": 163,
+            "end": 242
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On ne peut pas vraiment mesurer le « bord » d’un atome, car le nuage électronique n’a pas de limite nette. Pour définir sa taille, on utilise donc la distance entre les noyaux de deux atomes liés.",
+            "start": 244,
+            "end": 440
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour deux atomes identiques liés entre eux :",
+            "start": 442,
+            "end": 486
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 488,
+            "end": 490
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{rayon covalent} = \\frac{\\text{distance entre les deux noyaux}}{2}",
+            "start": 491,
+            "end": 562
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 563,
+            "end": 565
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the covalent radius as half the distance between the nuclei of two identical bonded atoms is standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Calcul du rayon covalent de l'hydrogène dans H2",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Walks through a step-by-step numerical calculation of the covalent radius of hydrogen using the bond length in dihydrogen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple : la molécule de dihydrogène \\(H_2\\)",
+            "start": 567,
+            "end": 615
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Dans la molécule \\(H_2\\), deux atomes d’hydrogène sont liés par une liaison covalente.",
+            "start": 617,
+            "end": 703
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La distance entre leurs noyaux est d’environ **74 pm** (picomètres).",
+            "start": 705,
+            "end": 773
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 775,
+            "end": 777
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1\\ \\text{pm} = 10^{-12}\\ \\text{m}",
+            "start": 778,
+            "end": 811
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 812,
+            "end": 814
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc le rayon covalent de l’hydrogène vaut environ :",
+            "start": 816,
+            "end": 868
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 870,
+            "end": 872
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\frac{74}{2} = 37\\ \\text{pm}",
+            "start": 873,
+            "end": 901
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 902,
+            "end": 904
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chaque atome d’hydrogène « occupe » donc environ 37 pm dans la liaison.",
+            "start": 906,
+            "end": 977
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The bond length of 74 pm for H2 and the resulting covalent radius of 37 pm are physically accurate and correctly computed.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Tendances du rayon covalent dans le tableau périodique",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains how and why the covalent radius changes across periods (nuclear charge increase) and down groups (additional electron shells).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 979,
+            "end": 982
+          },
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Variation dans le tableau périodique",
+            "start": 984,
+            "end": 1024
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le rayon covalent varie selon la position de l’élément dans le tableau périodique.",
+            "start": 1026,
+            "end": 1108
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **De gauche à droite dans une période** : le rayon covalent diminue généralement.  ",
+            "start": 1110,
+            "end": 1195
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  Les protons sont plus nombreux dans le noyau, qui attire plus fortement les électrons.",
+            "start": 1196,
+            "end": 1284
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **De haut en bas dans une colonne** : le rayon covalent augmente généralement.  ",
+            "start": 1286,
+            "end": 1368
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  Les atomes possèdent davantage de couches électroniques, donc ils deviennent plus grands.",
+            "start": 1369,
+            "end": 1460
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The stated periodic trends (decrease across a period due to increased effective nuclear charge, increase down a group due to additional shells) are scientifically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Comparaison entre le fluor et le chlore",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the group trend using the comparison between halogen elements fluorine and chlorine.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Par exemple :",
+            "start": 1462,
+            "end": 1475
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- le fluor est assez petit ;",
+            "start": 1477,
+            "end": 1505
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- le chlore est plus grand que le fluor, car il possède une couche électronique supplémentaire.",
+            "start": 1506,
+            "end": 1601
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Chlorine is indeed larger than fluorine due to having an additional electron shell.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CAVEAT",
+        "label": "Dépendance du rayon selon la multiplicité de la liaison",
+        "attributes": {
+          "subtype": "qualification"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Clarifies that covalent radius is not an immutable value for a given element, as bond length and covalent radius decrease with increasing bond order.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1603,
+            "end": 1606
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Attention : le rayon dépend du type de liaison",
+            "start": 1608,
+            "end": 1658
+          },
+          {
+            "id": "p32",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le rayon covalent n’est pas toujours exactement le même pour un même atome :",
+            "start": 1660,
+            "end": 1736
+          },
+          {
+            "id": "p33",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **liaison simple** est plus longue ;",
+            "start": 1738,
+            "end": 1780
+          },
+          {
+            "id": "p34",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **liaison double** est plus courte ;",
+            "start": 1781,
+            "end": 1823
+          },
+          {
+            "id": "p35",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **liaison triple** est encore plus courte.",
+            "start": 1824,
+            "end": 1872
+          },
+          {
+            "id": "p36",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ainsi, quand deux atomes sont liés plus fortement, ils sont généralement plus proches l’un de l’autre.",
+            "start": 1874,
+            "end": 1976
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Single bonds are longer than double bonds, which are in turn longer than triple bonds; the qualification is accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Récapitulatif de la notion",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Summarizes the essential definition of covalent radius and its practical utility in comparing atomic sizes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1978,
+            "end": 1981
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### À retenir",
+            "start": 1983,
+            "end": 1996
+          },
+          {
+            "id": "p39",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> Le **rayon covalent** est la moitié de la distance entre les noyaux de deux atomes identiques unis par une liaison covalente.",
+            "start": 1998,
+            "end": 2125
+          },
+          {
+            "id": "p40",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il permet de comparer la taille des atomes lorsqu’ils forment des molécules.",
+            "start": 2127,
+            "end": 2203
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary correctly restates the fundamental concept and its purpose.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\french-native\\gpt-5.6-terra__ab2abd3b995d.json",
+    "original_sha256": "eb61ed8433fc6f2f6851ff77dde63bcfe97e98d019222226a78964c9e221c50b",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 40,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 2,
+      "CAVEAT": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 40,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,506 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "c7d6518695a355deb208ce7305ce2f402ba7761439a7ba8a58c33f4698757f8e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining (conflated with distillation refining)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response directly addresses the requested topic of vapour phase refining, though it incorrectly explains the underlying process by describing physical distillation rather than chemical vapour phase transport.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and scope of vapour phase refining"
+      },
+      {
+        "id": "s2",
+        "label": "Process mechanism and steps"
+      },
+      {
+        "id": "s3",
+        "label": "Advantages and metallurgical applications"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and scope of vapour phase refining",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines the concept of vapour phase refining and mentions candidate metals.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bien sûr ! Je vais t'expliquer le raffinage en phase vapeur de manière simple.",
+            "start": 0,
+            "end": 78
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Qu'est-ce que le raffinage en phase vapeur ?**",
+            "start": 80,
+            "end": 128
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le raffinage en phase vapeur est un procédé utilisé pour purifier les métaux, notamment les métaux comme le zinc, le mercure et le magnésium. Mais pour simplifier, nous allons prendre l'exemple du zinc.",
+            "start": 130,
+            "end": 332
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The passage confuses vapour phase refining with simple distillation refining and incorrectly cites zinc, mercury, and magnesium as typical examples of vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p3"
+              ],
+              "description": "The text defines vapour phase refining as a direct distillation method for low-boiling metals like zinc, mercury, and magnesium. In metallurgical chemistry, vapour phase refining refers to converting a metal into a volatile chemical compound with a reagent and decomposing it elsewhere (e.g., Mond process for nickel, Van Arkel process for titanium/zirconium), whereas zinc and mercury are purified by physical distillation.",
+              "correction": "Vapour phase refining is a chemical purification method where an impure metal reacts to form a volatile intermediate compound that is subsequently decomposed at higher temperature to yield the pure metal.",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Operating principle of the refining method",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains the physical principle claimed to govern the separation process.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Comment ça marche ?**",
+            "start": 334,
+            "end": 357
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Principe de base** : Le raffinage en phase vapeur repose sur le principe que les impuretés présentes dans un métal n'ont pas la même pression de vapeur que le métal lui-même. En d'autres termes, certains éléments se vaporisent plus facilement que d'autres.",
+            "start": 359,
+            "end": 620
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Explains the principle as differences in vapor pressure between the elemental metal and impurities, which describes distillation rather than vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p5"
+              ],
+              "description": "States that vapour phase refining is based purely on differing vapor pressures of elements (direct differential vaporization). This is the principle of distillation refining, not vapour phase refining.",
+              "correction": "Vapour phase refining relies on selective chemical reaction of the metal to form an unstable volatile compound followed by its thermal decomposition, rather than simple physical evaporation based on elemental vapor pressure.",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "Operational steps of the purification process",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Outlines the sequential operational steps (heating, selective vaporization, condensation, and collection).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Étapes du processus** :",
+            "start": 622,
+            "end": 650
+          },
+          {
+            "id": "p7",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - **Chauffage** : On chauffe le métal impur jusqu'à ce qu'il se vaporise. La température de chauffage est choisie de telle sorte que le métal que l'on veut purifier se vaporise, mais pas les impuretés qui ont un point d'ébullition plus élevé.",
+            "start": 651,
+            "end": 896
+          },
+          {
+            "id": "p8",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - **Vaporisation sélective** : Lorsque le métal impur est chauffé, il se transforme en vapeur. Les impuretés qui ont un point d'ébullition plus élevé restent solides.",
+            "start": 897,
+            "end": 1066
+          },
+          {
+            "id": "p9",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - **Condensation** : Les vapeurs du métal sont ensuite dirigées vers une zone plus froide où elles se condensent pour former des cristaux ou des gouttelettes du métal purifié.",
+            "start": 1067,
+            "end": 1245
+          },
+          {
+            "id": "p10",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - **Collecte** : Le métal purifié est ensuite collecté.",
+            "start": 1246,
+            "end": 1304
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Presents the procedural steps of physical distillation instead of the steps of chemical vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p7",
+                "p8",
+                "p9",
+                "p10"
+              ],
+              "description": "Describes the steps as directly heating the impure metal to boiling, selective vaporization, and condensation. In vapour phase refining, the steps involve reacting the metal with a reagent to form a volatile compound, transporting that vapour, and thermally decomposing it.",
+              "correction": "The procedure for vapour phase refining consists of: (1) reacting the impure metal with a suitable reagent at a moderate temperature to form a volatile compound, leaving non-volatile impurities behind; (2) transferring the gaseous compound to another zone; and (3) decomposing the compound at an elevated temperature to deposit the pure metal.",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Advantages and suitability of the process",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents the claimed advantages and criteria for applying the purification process.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Avantages** :",
+            "start": 1306,
+            "end": 1321
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Ce procédé permet d'obtenir des métaux de très haute pureté, ce qui est essentiel pour de nombreuses applications industrielles et technologiques.",
+            "start": 1322,
+            "end": 1470
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Il est particulièrement utile pour les métaux qui ont un point d'ébullition relativement bas.",
+            "start": 1471,
+            "end": 1566
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Incorrectly states that the process is particularly suitable for metals with low boiling points.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p13"
+              ],
+              "description": "Claims that vapour phase refining is particularly useful for metals with a relatively low boiling point. This is true for distillation refining, whereas vapour phase refining is used for high-boiling metals (such as nickel, titanium, and zirconium) that cannot easily be boiled directly.",
+              "correction": "Vapour phase refining is primarily used for metals with high melting and boiling points by converting them into low-boiling volatile derivatives, whereas low-boiling metals are purified by direct distillation.",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Example of zinc purification",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides an illustrative industrial example of heating zinc to vaporize and condense it.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Exemple avec le zinc** :",
+            "start": 1568,
+            "end": 1594
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le zinc est souvent raffiné en utilisant ce procédé. Le zinc impur est chauffé dans un four sous vide ou dans une atmosphère contrôlée jusqu'à vaporisation. Les vapeurs de zinc sont ensuite condensées et collectées sous forme de zinc pur.",
+            "start": 1595,
+            "end": 1833
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Provides distillation of zinc as an example of vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p15"
+              ],
+              "description": "Cites heating zinc to vaporization under vacuum and condensing it as an example of vapour phase refining. This is an example of distillation refining.",
+              "correction": "Standard examples of vapour phase refining are the Mond process for nickel (formation and decomposition of nickel tetracarbonyl) and the Van Arkel-de Boer method for zirconium or titanium (formation and decomposition of tetraiodides).",
+              "severity": "major"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of the purification method",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1",
+          "s2"
+        ],
+        "rationale": "Summarizes the key takeaways of the explanation in the conclusion.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Conclusion** :",
+            "start": 1835,
+            "end": 1851
+          },
+          {
+            "id": "p17",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le raffinage en phase vapeur est une technique puissante pour purifier les métaux. En exploitant les différences de pression de vapeur entre les métaux et leurs impuretés, il permet d'obtenir des produits de haute pureté essentiels pour diverses applications industrielles. C'est un exemple de la façon dont la compréhension des propriétés physiques des matériaux peut être utilisée pour développer des méthodes de purification efficaces.",
+            "start": 1852,
+            "end": 2290
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Reiterates the erroneous principle that vapour phase refining functions by exploiting differences in physical vapour pressure between metals and impurities.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p17"
+              ],
+              "description": "Concludes that vapour phase refining operates by exploiting differences in vapour pressure of physical materials, reinforcing the confusion with distillation.",
+              "correction": "Vapour phase refining operates through reversible chemical reactions forming volatile compounds rather than purely physical vapour pressure differences.",
+              "severity": "major"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-native\\llama-4-maverick__f8113bbab9f0.json",
+    "original_sha256": "095f29235be6316fdcc2a57a2f9be76be68c1aa094bc74c31655eb7010b1b543",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 17,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 17,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 6
+    },
+    "proposed_error_records": 6,
+    "proposed_error_severity": {
+      "major": 6
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,977 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "07d241201e23b24b43376ea52dfee763572bcdec3594ad04d894c5742db8eb79",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The entire response directly and thoroughly explains stoichiometry in chemistry, including definition, balanced equations, molar ratios, mass-to-mole calculations, limiting reactants, real-world applications, and problem-solving steps.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and principles of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Cooking recipe analogy for stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Balanced chemical equation and molar ratios"
+      },
+      {
+        "id": "s4",
+        "label": "Stoichiometric calculations with mass and moles"
+      },
+      {
+        "id": "s5",
+        "label": "Concept of limiting reactant"
+      },
+      {
+        "id": "s6",
+        "label": "Limiting reactant example"
+      },
+      {
+        "id": "s7",
+        "label": "Applications and importance of stoichiometry"
+      },
+      {
+        "id": "s8",
+        "label": "Step-by-step procedure for stoichiometric calculations"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and core principles of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry and explains its underlying physical principles (conservation of mass and mole ratios from balanced equations). Includes the introductory greeting and section heading.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Je suis ravi de t'expliquer la **stœchiométrie** de manière simple et claire, comme si nous étions en cours de chimie au lycée. On va y aller étape par étape, avec des exemples concrets.",
+            "start": 0,
+            "end": 196
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Qu’est-ce que la stœchiométrie ?",
+            "start": 198,
+            "end": 234
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stœchiométrie est la partie de la chimie qui permet de calculer les **quantités** (en masse, en moles ou en volume) des substances qui réagissent et qui sont produites dans une réaction chimique. ",
+            "start": 235,
+            "end": 434
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Elle repose sur deux principes fondamentaux :",
+            "start": 436,
+            "end": 481
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- La **conservation de la masse** (loi de Lavoisier) : rien ne se perd, rien ne se crée, tout se transforme. La masse totale des réactifs est égale à celle des produits.",
+            "start": 482,
+            "end": 651
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Les **rapports en moles** donnés par l’équation chimique équilibrée.",
+            "start": 652,
+            "end": 722
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines stoichiometry and references Lavoisier's conservation of mass and balanced chemical equations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Cooking recipe analogy for stoichiometric proportions",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Compares stoichiometric proportions to doubling ingredients in a recipe for baking a cake.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p7",
+              "quote": "En gros, c’est comme une recette de cuisine : si tu veux doubler la quantité de gâteau, tu doubles tous les ingrédients selon les proportions exactes."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En gros, c’est comme une recette de cuisine : si tu veux doubler la quantité de gâteau, tu doubles tous les ingrédients selon les proportions exactes.",
+            "start": 724,
+            "end": 874
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The kitchen recipe analogy is a standard, correct high school pedagogical tool to explain stoichiometric ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Balanced equation and molar interpretation of water synthesis",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates how balanced reaction coefficients translate to molecular and molar ratios using the water synthesis equation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. L’équation chimique équilibrée (point de départ)",
+            "start": 876,
+            "end": 931
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Avant tout calcul, l’équation doit être **équilibrée** (le nombre d’atomes de chaque élément doit être le même à gauche et à droite).",
+            "start": 932,
+            "end": 1065
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Exemple classique :",
+            "start": 1067,
+            "end": 1086
+          },
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1087,
+            "end": 1089
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2\\,\\ce{H2} + \\ce{O2} \\rightarrow 2\\,\\ce{H2O}",
+            "start": 1090,
+            "end": 1134
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1135,
+            "end": 1137
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Interprétation :",
+            "start": 1139,
+            "end": 1155
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- 2 molécules d’hydrogène (H₂) réagissent avec 1 molécule d’oxygène (O₂)",
+            "start": 1156,
+            "end": 1228
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Pour former 2 molécules d’eau (H₂O)",
+            "start": 1229,
+            "end": 1266
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En termes de **moles** (l’unité de quantité de matière) :",
+            "start": 1268,
+            "end": 1325
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Rapport molaire = **2 : 1 : 2**",
+            "start": 1326,
+            "end": 1359
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cela signifie que pour 2 moles d’H₂, il faut 1 mole d’O₂ et on obtient 2 moles d’H₂O.",
+            "start": 1361,
+            "end": 1446
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation 2 H2 + O2 -> 2 H2O is correctly balanced, and the 2:1:2 molar and molecular ratios are accurately stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked mass-to-mass stoichiometric calculation",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a fully worked multi-step stoichiometric calculation starting from 8 g of H2 to calculate the resulting mass of H2O.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. Les calculs stœchiométriques",
+            "start": 1448,
+            "end": 1483
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On utilise les rapports molaires pour passer d’une substance à une autre.",
+            "start": 1484,
+            "end": 1557
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Exemple** : Combien de grammes d’eau peut-on obtenir avec 8 g d’hydrogène (H₂) ?",
+            "start": 1559,
+            "end": 1641
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Calculer le nombre de moles d’H₂ :",
+            "start": 1643,
+            "end": 1680
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - Masse molaire de H₂ = 2 g/mol",
+            "start": 1681,
+            "end": 1715
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - \\( n = \\frac{m}{M} = \\frac{8}{2} = 4 \\) moles d’H₂",
+            "start": 1716,
+            "end": 1771
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Utiliser le rapport : 2 moles d’H₂ → 2 moles d’H₂O (rapport 1:1)",
+            "start": 1773,
+            "end": 1840
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - Donc 4 moles d’H₂ donnent **4 moles** d’H₂O",
+            "start": 1841,
+            "end": 1889
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. Calculer la masse d’eau :",
+            "start": 1891,
+            "end": 1919
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - Masse molaire de H₂O = 18 g/mol",
+            "start": 1920,
+            "end": 1956
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   - \\( m = n \\times M = 4 \\times 18 = 72 \\) g d’eau",
+            "start": 1957,
+            "end": 2009
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations (molar masses, mole conversions, mole ratios, final mass of 72 g) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Definition and concept of limiting reactant",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines what a limiting reactant is and explains how it limits the extent of the reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Le réactif limitant (un peu plus avancé)",
+            "start": 2011,
+            "end": 2058
+          },
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Parfois, un des réactifs est en quantité insuffisante. C’est lui qui « limite » la réaction.",
+            "start": 2059,
+            "end": 2151
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately introduces the concept of the limiting reactant.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked example identifying limiting and excess reactants",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Works through an example with 4 moles of H2 and 3 moles of O2 to determine the limiting reagent and leftover excess reactant.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Exemple : Tu as 4 moles d’H₂ et 3 moles d’O₂. Quel est le réactif limitant ?",
+            "start": 2153,
+            "end": 2229
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Selon l’équation : 2 moles H₂ nécessitent 1 mole O₂",
+            "start": 2231,
+            "end": 2284
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Avec 4 moles H₂, il faudrait 2 moles O₂",
+            "start": 2285,
+            "end": 2326
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Mais tu as 3 moles d’O₂ (en excès)",
+            "start": 2327,
+            "end": 2363
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Donc H₂ est limitant : on ne peut produire que 4 moles d’eau (et il restera 1 mole d’O₂ inutilisée).",
+            "start": 2364,
+            "end": 2466
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations and logical deductions are completely correct: 4 mol H2 consumes 2 mol O2, leaving 1 mol O2 in excess, and producing 4 mol H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Real-world applications and importance of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Lists diverse domains where stoichiometry is applied, including industry, pharmacy, environmental science, and laboratory work.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Pourquoi c’est important ?",
+            "start": 2468,
+            "end": 2498
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stœchiométrie sert dans :",
+            "start": 2499,
+            "end": 2527
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- L’industrie (fabrication d’engrais, de médicaments, d’essence)",
+            "start": 2528,
+            "end": 2592
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- La pharmacie (dosage des médicaments)",
+            "start": 2593,
+            "end": 2632
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- L’environnement (calcul des émissions de CO₂)",
+            "start": 2633,
+            "end": 2680
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Les expériences en labo (savoir exactement combien peser de chaque produit)",
+            "start": 2681,
+            "end": 2758
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately represents the practical and scientific importance of stoichiometric calculations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "PROCEDURE",
+        "label": "Step-by-step problem-solving strategy for stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Presents a general reusable 4-step sequence for solving stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Astuce pour réussir",
+            "start": 2760,
+            "end": 2783
+          },
+          {
+            "id": "p45",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Toujours équilibrer l’équation d’abord.",
+            "start": 2784,
+            "end": 2826
+          },
+          {
+            "id": "p46",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Convertir les masses en moles.",
+            "start": 2827,
+            "end": 2860
+          },
+          {
+            "id": "p47",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. Utiliser les coefficients stœchiométriques comme des « multiplicateurs ».",
+            "start": 2861,
+            "end": 2937
+          },
+          {
+            "id": "p48",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. Reconvertir en masse ou volume si nécessaire.",
+            "start": 2938,
+            "end": 2986
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps correspond to standard, correct high school methodology for stoichiometric problem solving.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Offer for practice exercises and follow-up questions",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Offers interactive follow-up practice with combustion or acid-base reactions and invites questions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p49",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as compris le principe ? Veux-tu qu’on fasse un exercice ensemble (par exemple avec une combustion ou une réaction acide-base) ? Ou as-tu une question sur un point précis ?",
+            "start": 2988,
+            "end": 3163
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Valid pedagogical conversational prompt offering relevant chemistry practice topics.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\french-english\\grok-4.3__0393b379f408.json",
+    "original_sha256": "25d42d74cc593f8d075e9cbd9e15fe6fc35062a177a6d6c8eafbf0a632dbe5b8",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 49,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "EXAMPLE": 3,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 49,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "none": 8,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

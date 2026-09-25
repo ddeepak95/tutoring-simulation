@@ -1,0 +1,153 @@
+{
+  "topic_relevance": {
+    "requested_topic": "isotope",
+    "observed_topic": "Definition of isotopes, subatomic particle composition, examples of carbon and hydrogen isotopes, and their stability and applications",
+    "topic_match": "on_topic",
+    "reason": "The response directly defines isotopes in terms of protons and neutrons, illustrates them with carbon and hydrogen examples, and explains their stability and uses.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of isotopes and atomic structure",
+      "excerpts": [
+        {
+          "text": "**Isotopes** are like different versions of the same element.\n\nEvery atom has three main particles:\n- **Protons** (positive charge) — these decide what element the atom is.\n- **Neutrons** (no charge) — these add weight but don’t change the element.\n- **Electrons** (negative charge) — these orbit around the nucleus.\n\nAn **isotope** is an atom that has the **same number of protons** (so it’s the same element) but a **different number of neutrons** (so it has a different mass).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines protons, neutrons, and electrons and how differences in neutron count yield isotopes of the same element with different masses.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Isotopes of carbon",
+      "excerpts": [
+        {
+          "text": "### Simple Example: Carbon\nAll carbon atoms have **6 protons**. That’s what makes them carbon.\n\nBut they can have different numbers of neutrons:\n- Carbon-12: 6 protons + 6 neutrons (most common, stable)\n- Carbon-13: 6 protons + 7 neutrons\n- Carbon-14: 6 protons + 8 neutrons (radioactive, used for dating old objects)\n\nEven though they have different weights, they all behave chemically the same way because they still have 6 protons and 6 electrons.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately compares Carbon-12, Carbon-13, and Carbon-14 in proton and neutron counts and correctly explains why their chemical behavior is identical.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Isotopes of hydrogen",
+      "excerpts": [
+        {
+          "text": "### Another Easy Example: Hydrogen\n- **Protium** (normal hydrogen): 1 proton, 0 neutrons\n- **Deuterium**: 1 proton, 1 neutron (used in heavy water)\n- **Tritium**: 1 proton, 2 neutrons (radioactive, used in some watches and nuclear tests)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "used in some watches"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly identifies protium, deuterium, and tritium along with their proton and neutron counts and notable real-world uses.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Significance of isotopes: stability and radioactivity",
+      "excerpts": [
+        {
+          "text": "### Why do isotopes matter?\n- Some are stable (they don’t change).\n- Some are radioactive (they slowly break down and release energy — this is useful in medicine, energy, and dating ancient artifacts like the Shroud of Turin or dinosaur bones).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The unit misclassifies dinosaur bones as 'artifacts' and implies that dinosaur bones are directly dated via radiometric dating in the same manner as archaeological artifacts like the Shroud of Turin.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "dating ancient artifacts like the Shroud of Turin or dinosaur bones"
+              }
+            ],
+            "description": "Dinosaur bones are fossils, not human-made 'artifacts'. Furthermore, organic radiocarbon dating (used on artifacts like the Shroud of Turin) cannot date dinosaur fossils, which are tens of millions of years old; dinosaur ages are determined by dating surrounding volcanic/sedimentary rock strata using long-lived radioisotopes.",
+            "correction": "dating ancient artifacts like the Shroud of Turin or dating rock layers surrounding dinosaur fossils using long-lived radioisotopes.",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of isotopes",
+      "excerpts": [
+        {
+          "text": "**Key point to remember**:  \nIsotopes = same element, different number of neutrons → different mass, but usually very similar behavior.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately summarizes the core defining features of isotopes.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": []
+}

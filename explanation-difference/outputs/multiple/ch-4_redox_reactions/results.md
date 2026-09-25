@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-97569270d004d013.json](run-001-97569270d004d013.json)
+**Source:** [run-001-97569270d004d013.json](english/gpt-5.6-terra__1c81f267623c.json)
 
 A **redox reaction** is a chemical reaction in which **electrons are transferred** between substances.
 
@@ -278,7 +278,7 @@ A final memory aid:
 
 **Status:** completed
 
-**Source:** [run-001-6ca9e42ade7873d9.json](run-001-6ca9e42ade7873d9.json)
+**Source:** [run-001-6ca9e42ade7873d9.json](english/grok-4.3__4d3447a415d0.json)
 
 **Redox Reactions Explained Simply**
 
@@ -348,7 +348,7 @@ Once you can identify what’s losing and gaining electrons, you’ve mastered t
 
 **Status:** completed
 
-**Source:** [run-001-c961b7fd8ecb8b97.json](run-001-c961b7fd8ecb8b97.json)
+**Source:** [run-001-c961b7fd8ecb8b97.json](english/gemini-3.8-flash__2a8bacb1143e.json)
 
 Welcome to chemistry class! Today, we are going to tackle one of the most important concepts in science: **Redox Reactions**. 
 
@@ -452,7 +452,7 @@ Imagine you have an atom of Magnesium ($\text{Mg}$) that loses two electrons to 
 
 **Status:** completed
 
-**Source:** [run-001-c7bea64c2c8a45b4.json](run-001-c7bea64c2c8a45b4.json)
+**Source:** [run-001-c7bea64c2c8a45b4.json](english/claude-sonnet-5__83e2a3b51afc.json)
 
 # Redox Reactions Explained
 
@@ -550,7 +550,7 @@ Would you like me to walk through a practice problem to test your understanding?
 
 **Status:** completed
 
-**Source:** [run-001-cb1009486230fe9d.json](run-001-cb1009486230fe9d.json)
+**Source:** [run-001-cb1009486230fe9d.json](english/llama-4-maverick__1420345e3485.json)
 
 Redox reactions! A fundamental concept in chemistry that can seem a bit tricky at first, but trust me, it's actually quite straightforward once you understand the basics.
 
@@ -625,7 +625,7 @@ Now, do you have any questions or would you like to practice some examples?
 
 **Status:** completed
 
-**Source:** [run-002-68c5a4d58c0795ba.json](run-002-68c5a4d58c0795ba.json)
+**Source:** [run-002-68c5a4d58c0795ba.json](tamil-native/gpt-5.6-terra__81de0014b956.json)
 
 ## ஆக்சிஜனேற்றம் – ஒடுக்கம் வினைகள் (Redox Reactions)
 
@@ -816,7 +816,7 @@ CH_4 + 2O_2 \rightarrow CO_2 + 2H_2O
 
 **Status:** completed
 
-**Source:** [run-002-a237a107bf861ccc.json](run-002-a237a107bf861ccc.json)
+**Source:** [run-002-a237a107bf861ccc.json](tamil-native/grok-4.3__e9e859fc115c.json)
 
 வணக்கம்! நான் உங்களுக்கு ஆக்சிஜனேற்றம்-ஒடுக்க வினைகளை (Redox Reactions) மிக எளிமையாகவும், பள்ளி மாணவருக்கு ஏற்ற விதத்திலும் விளக்குகிறேன்.
 
@@ -876,7 +876,7 @@ Zn + CuSO₄ → ZnSO₄ + Cu
 
 **Status:** completed
 
-**Source:** [run-002-669d34490611e2ff.json](run-002-669d34490611e2ff.json)
+**Source:** [run-002-669d34490611e2ff.json](tamil-native/gemini-3.8-flash__d105b60261a7.json)
 
 வணக்கம் மாணவரே! நலமாக இருக்கிறீர்களா? 
 
@@ -955,7 +955,7 @@ Zn + CuSO₄ → ZnSO₄ + Cu
 
 **Status:** completed
 
-**Source:** [run-002-6e205aae6abd67f6.json](run-002-6e205aae6abd67f6.json)
+**Source:** [run-002-6e205aae6abd67f6.json](tamil-native/claude-sonnet-5__3884e8d4c759.json)
 
 # ஆக்சிஜனேற்ற - ஒடுக்க வினைகள் (Redox Reactions)
 
@@ -1034,7 +1034,7 @@ $$Fe_2O_3 + 2Al \rightarrow Al_2O_3 + 2Fe$$
 
 **Status:** completed
 
-**Source:** [run-002-33b05b04613c502f.json](run-002-33b05b04613c502f.json)
+**Source:** [run-002-33b05b04613c502f.json](tamil-native/llama-4-maverick__0de945498fd3.json)
 
 கண்டிப்பாக, ஆக்சிஜனேற்ற - ஒடுக்க வினைகள் பற்றி விளக்க ஆரம்பிக்கலாம்.
 
@@ -1079,7 +1079,7 @@ $$Fe_2O_3 + 2Al \rightarrow Al_2O_3 + 2Fe$$
 
 **Status:** completed
 
-**Source:** [run-003-411171c06a9c46c6.json](run-003-411171c06a9c46c6.json)
+**Source:** [run-003-411171c06a9c46c6.json](tamil-english/gpt-5.6-terra__c83234f3b4f6.json)
 
 ## ரெடாக்ஸ் வினைகள் (Redox Reactions) என்றால் என்ன?
 
@@ -1278,7 +1278,7 @@ Zn
 
 **Status:** completed
 
-**Source:** [run-003-45767110e80ca073.json](run-003-45767110e80ca073.json)
+**Source:** [run-003-45767110e80ca073.json](tamil-english/grok-4.3__f179cd7a87a8.json)
 
 வணக்கம் மாணவர்களே! இன்று நாம் **ரெடாக்ஸ் வினைகள்** (Redox reactions) பற்றி எளிதாகவும் தெளிவாகவும் புரிந்துகொள்ளும் வகையில் கற்பிப்பேன். உயர்நிலைப் பள்ளி மட்டத்தில் தேவையான அளவுக்கு மட்டும் எடுத்துக்கொள்வோம்.
 
@@ -1344,7 +1344,7 @@ Zn + CuSO₄ → ZnSO₄ + Cu
 
 **Status:** completed
 
-**Source:** [run-003-b4aabb1c4c7d6ed0.json](run-003-b4aabb1c4c7d6ed0.json)
+**Source:** [run-003-b4aabb1c4c7d6ed0.json](tamil-english/gemini-3.8-flash__8795c63b6cc8.json)
 
 வணக்கம்! வேதியியலில் மிக முக்கியமான மற்றும் சுவாரஸ்யமான ஒரு தலைப்பான **"Redox Reactions" (ஆக்ஸிஜனேற்ற - ஒடுக்க வினைகள்)** பற்றி இன்று மிக எளிமையாகப் பார்க்கலாம்.
 
@@ -1415,7 +1415,7 @@ $$2Na + Cl_2 \rightarrow 2NaCl$$
 
 **Status:** completed
 
-**Source:** [run-003-c4a94d9096640bb5.json](run-003-c4a94d9096640bb5.json)
+**Source:** [run-003-c4a94d9096640bb5.json](tamil-english/claude-sonnet-5__24ffc2a278c9.json)
 
 # ஆக்சிஜனேற்ற-ஒடுக்க வினைகள் (Redox Reactions)
 
@@ -1506,7 +1506,7 @@ $$Zn + CuSO_4 \rightarrow ZnSO_4 + Cu$$
 
 **Status:** completed
 
-**Source:** [run-003-090cff8f5ac35b46.json](run-003-090cff8f5ac35b46.json)
+**Source:** [run-003-090cff8f5ac35b46.json](tamil-english/llama-4-maverick__c318042eec14.json)
 
 வணக்கம். இன்று நாம் ரெடாக்ஸ் வினைகளைப் பற்றி படிக்க போகிறோம். ரெடாக்ஸ் என்றால் என்ன? ரெடாக்ஸ் என்ற ஆங்கிலச் சொல் reduction (குறைப்பு) மற்றும் oxidation (ஆக்சிஜனேற்றம்) ஆகிய இரண்டு சொற்களின் கலவையாகும். ஒரு வேதிவினையில் ஒரு தனிமம் ஆக்சிஜனேற்றம் அடைவதும், மற்றொரு தனிமம் குறைப்பு அடைவதுமான வினைகள் ஒரே நேரத்தில் நடைபெறும் வினைகள் ரெடாக்ஸ் வினைகள் எனப்படும். ஒரு பொருள் ஆக்சிஜனேற்றம் அடையும் போது மற்றொரு பொருள் குறைப்பு அடைகிறது. ஆக்சிஜனேற்ற வினை, குறைப்பு வினை ஆகிய இரண்டும் ஒன்றாக நடைபெறும் வினை ரெடாக்ஸ் வினை எனவும் கூறலாம்.
 

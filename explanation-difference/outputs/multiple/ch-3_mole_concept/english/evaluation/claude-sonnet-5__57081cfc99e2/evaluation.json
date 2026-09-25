@@ -1,0 +1,1097 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "653daa8fcf55cdf90f6b363f68410feda548817a06a6a01fec3dd9787526fb4a",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "The mole concept, Avogadro's number, molar mass relationships, and stoichiometric conversions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The text directly and thoroughly explains the mole concept, including why it is needed, its definition via Avogadro's number, the connection to atomic mass and molar mass, conversion formulas, a worked calculation example, and a summary.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Need for the Mole as a Counting Unit"
+      },
+      {
+        "id": "s2",
+        "label": "Definition of the Mole and Avogadro's Number"
+      },
+      {
+        "id": "s3",
+        "label": "Relationship Between Molar Mass and Atomic Mass"
+      },
+      {
+        "id": "s4",
+        "label": "Mole Conversion Relationships and Formulas"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Mole Calculations"
+      },
+      {
+        "id": "s6",
+        "label": "Summary of the Mole Concept"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Why Chemists Need the Mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why a macroscopic counting unit is necessary when dealing with microscopic particles, drawing parallels to everyday grouping units such as dozens and pairs.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "Imagine trying to count grains of sand on a beach one by one — impossible, right?"
+            },
+            {
+              "passage_id": "p5",
+              "quote": "- **1 dozen** = 12 items"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# The Mole Concept",
+            "start": 0,
+            "end": 18
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Why Do We Need the Mole?",
+            "start": 20,
+            "end": 47
+          },
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine trying to count grains of sand on a beach one by one — impossible, right? Similarly, atoms and molecules are so incredibly tiny that we can't count them individually. If you have a small drop of water, it contains billions of billions of molecules! ",
+            "start": 49,
+            "end": 306
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chemists needed a convenient \"counting unit\" for these tiny particles — just like we use:",
+            "start": 308,
+            "end": 397
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **1 dozen** = 12 items",
+            "start": 398,
+            "end": 422
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **1 pair** = 2 items",
+            "start": 423,
+            "end": 445
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **1 gross** = 144 items",
+            "start": 446,
+            "end": 471
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For atoms and molecules, chemists created **1 mole**.",
+            "start": 473,
+            "end": 526
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 528,
+            "end": 531
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately introduces the physical motivation for the mole as a macroscopic counting unit for microscopic entities.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition of the Mole and Avogadro's Number",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "States the formal definition of the mole as representing 6.022 x 10^23 particles and introduces Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p14",
+              "quote": "So, just like \"1 dozen\" always means 12 items (whether it's 12 eggs or 12 pencils):"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## What is a Mole?",
+            "start": 533,
+            "end": 551
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**A mole is simply a number** — a very large number that represents a fixed quantity of particles.",
+            "start": 553,
+            "end": 651
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\boxed{1 \\text{ mole} = 6.022 \\times 10^{23} \\text{ particles}}$$",
+            "start": 653,
+            "end": 720
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This number is called **Avogadro's Number** (or Avogadro's Constant), named after the Italian scientist Amedeo Avogadro.",
+            "start": 722,
+            "end": 842
+          },
+          {
+            "id": "p14",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "So, just like \"1 dozen\" always means 12 items (whether it's 12 eggs or 12 pencils):",
+            "start": 844,
+            "end": 927
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**1 mole always means 6.022 × 10²³ particles** (whether it's atoms, molecules, ions, or electrons)",
+            "start": 929,
+            "end": 1027
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1029,
+            "end": 1032
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines the mole as 6.022 x 10^23 entities (Avogadro's number) regardless of particle type.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Rationale for Avogadro's Number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the physical reason Avogadro's number was chosen so that 1 mole of atoms in grams equals the element's atomic mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Why This Specific Number?",
+            "start": 1034,
+            "end": 1062
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This number isn't random! It was chosen because:",
+            "start": 1064,
+            "end": 1112
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**1 mole of atoms of any element = the atomic mass of that element in grams**",
+            "start": 1114,
+            "end": 1191
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately explains the connection between atomic mass in unified atomic mass units and mass in grams for 1 mole of atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Illustration: Carbon Mass and Atom Count",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the mole-to-mass principle using carbon, showing that 12 grams of carbon contains 6.022 x 10^23 atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Example:",
+            "start": 1193,
+            "end": 1205
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Atomic mass of Carbon = 12 u (atomic mass units)",
+            "start": 1206,
+            "end": 1256
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- So, **12 grams of Carbon** contains exactly **6.022 × 10²³ atoms**",
+            "start": 1257,
+            "end": 1325
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- This gives us an easy way to convert between the *microscopic world* (atoms) and the *macroscopic world* (grams we can measure on a scale)!",
+            "start": 1326,
+            "end": 1467
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1469,
+            "end": 1472
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The introductory illustrative example with carbon-12 (12 u = 12 g/mol) is standard, simplified, and factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "The Three Key Relationships and Conversion Formulas",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains how the mole acts as a central hub converting between number of particles, mass, and molar gas volume at STP, accompanied by explicit conversion formulas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## The Three Key Relationships",
+            "start": 1474,
+            "end": 1504
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The mole connects three important quantities:",
+            "start": 1506,
+            "end": 1551
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 1553,
+            "end": 1556
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "        NUMBER OF PARTICLES",
+            "start": 1557,
+            "end": 1584
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "              ↑    ↓",
+            "start": 1585,
+            "end": 1605
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "         (× or ÷ by 6.022×10²³)",
+            "start": 1606,
+            "end": 1637
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "              ↑    ↓",
+            "start": 1638,
+            "end": 1658
+          },
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "            MOLES  ←→  MASS (grams)",
+            "start": 1659,
+            "end": 1694
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "              ↑    ↓         (× or ÷ by molar mass)",
+            "start": 1695,
+            "end": 1746
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "         (× or ÷ by 22.4 L)",
+            "start": 1747,
+            "end": 1774
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "              ↑    ↓",
+            "start": 1775,
+            "end": 1795
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "      VOLUME (for gases at STP)",
+            "start": 1796,
+            "end": 1827
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 1828,
+            "end": 1831
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Key Formulas:",
+            "start": 1833,
+            "end": 1850
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| To Find | Formula |",
+            "start": 1852,
+            "end": 1873
+          },
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---------|---------|",
+            "start": 1874,
+            "end": 1895
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Number of particles** | Moles × 6.022 × 10²³ |",
+            "start": 1896,
+            "end": 1946
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Mass** | Moles × Molar Mass |",
+            "start": 1947,
+            "end": 1980
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Volume of gas at STP** | Moles × 22.4 L |",
+            "start": 1981,
+            "end": 2026
+          },
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2028,
+            "end": 2031
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All conversion factors and formulas (Avogadro's number for particles, molar mass for grams, and 22.4 L/mol at STP for gas volume) are scientifically accurate within standard high school chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Calculating Atoms from Mass of Carbon",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a step-by-step worked problem calculating the number of carbon atoms in a given mass (24 g).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p45",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Worked Example",
+            "start": 2033,
+            "end": 2050
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Question:** How many atoms are present in 24 grams of Carbon? (Atomic mass of C = 12)",
+            "start": 2052,
+            "end": 2139
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Step 1:** Find moles of Carbon",
+            "start": 2141,
+            "end": 2173
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Moles} = \\frac{\\text{Given Mass}}{\\text{Molar Mass}} = \\frac{24}{12} = 2 \\text{ moles}$$",
+            "start": 2174,
+            "end": 2270
+          },
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Step 2:** Find number of atoms",
+            "start": 2272,
+            "end": 2304
+          },
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Number of atoms} = \\text{Moles} \\times 6.022 \\times 10^{23}$$",
+            "start": 2305,
+            "end": 2374
+          },
+          {
+            "id": "p51",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$= 2 \\times 6.022 \\times 10^{23} = 1.2044 \\times 10^{24} \\text{ atoms}$$",
+            "start": 2375,
+            "end": 2448
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2450,
+            "end": 2453
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The worked calculations for moles (24 / 12 = 2 mol) and number of atoms (2 * 6.022 x 10^23 = 1.2044 x 10^24 atoms) are entirely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Quick Summary of the Mole Concept",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Recapitulates the main takeaways of the mole concept in bullet points for easy revision.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p57",
+              "quote": "even \"moles of pens\" if you wanted!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p53",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Quick Summary",
+            "start": 2455,
+            "end": 2471
+          },
+          {
+            "id": "p54",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ **Mole** = A counting unit for extremely small particles  ",
+            "start": 2473,
+            "end": 2533
+          },
+          {
+            "id": "p55",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ **1 mole** = 6.022 × 10²³ particles (Avogadro's Number)  ",
+            "start": 2534,
+            "end": 2593
+          },
+          {
+            "id": "p56",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ It bridges the gap between **atoms/molecules** (too small to weigh) and **grams** (which we can measure)  ",
+            "start": 2594,
+            "end": 2702
+          },
+          {
+            "id": "p57",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ Works for **any particle**: atoms, molecules, ions, electrons — even \"moles of pens\" if you wanted!",
+            "start": 2703,
+            "end": 2804
+          },
+          {
+            "id": "p58",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2806,
+            "end": 2809
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly summarizes the core principles of the mole concept.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "ANALOGY",
+        "label": "Dozen vs Mole Comparison Callout",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2",
+          "s6"
+        ],
+        "rationale": "Reiterates the universal nature of the mole using a cross-domain comparison to a dozen of eggs or oranges.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p59",
+              "quote": "Just like a \"dozen\" doesn't care whether you're counting eggs or oranges"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p59",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**💡 Remember:** Just like a \"dozen\" doesn't care whether you're counting eggs or oranges, a \"mole\" doesn't care whether you're counting atoms, molecules, or ions — it's ALWAYS 6.022 × 10²³ of them!",
+            "start": 2811,
+            "end": 3008
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately captures that a mole is a fixed quantity regardless of the nature of the particle counted.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\english\\claude-sonnet-5__57081cfc99e2.json",
+    "original_sha256": "bf6a11cf0c8f73cb44c1d7ed624dfbc2c93d8f1719a4e570e642a66cca9c3da7",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 59,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1,
+      "ANALOGY": 1
+    },
+    "nested_passages": 59,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 4,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

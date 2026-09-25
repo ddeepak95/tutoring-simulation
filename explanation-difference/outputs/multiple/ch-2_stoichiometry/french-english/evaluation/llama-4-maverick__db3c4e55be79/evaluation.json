@@ -1,0 +1,494 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "4f17157072c83d6b0c48363ae4d708e7bf3c7aa950bdf287a452456d4ba5e928",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry in chemistry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The explanation defines stoichiometry, explains foundational principles (conservation of mass and balanced chemical equations), outlines a four-step problem-solving procedure, provides a worked calculation example with moles, and summarizes the topic.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and etymology of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Fundamental principles: mass conservation and balanced equations"
+      },
+      {
+        "id": "s3",
+        "label": "Step-by-step procedure for solving stoichiometry problems"
+      },
+      {
+        "id": "s4",
+        "label": "Worked stoichiometric calculation example"
+      },
+      {
+        "id": "s5",
+        "label": "Review and conclusion"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and etymological origin of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the topic, defines stoichiometry as the study of quantitative relationships in chemical reactions, and explains the Greek roots of the term.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Aujourd'hui, nous allons explorer un concept fondamental en chimie : la stœchiométrie. La stœchiométrie est la partie de la chimie qui étudie les quantités relatives des réactifs et des produits dans les réactions chimiques.",
+            "start": 0,
+            "end": 234
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Qu'est-ce que la stœchiométrie ?**",
+            "start": 236,
+            "end": 272
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stœchiométrie vient du grec \"stoikheion\" qui signifie \"élément\" et \"metron\" qui signifie \"mesure\". Il s'agit donc de mesurer les quantités des éléments qui réagissent et qui sont produits lors d'une réaction chimique.",
+            "start": 274,
+            "end": 494
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and etymology (stoikheion meaning element and metron meaning measure) are scientifically and linguistically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Underlying principles of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains the two core principles underpinning stoichiometry: the law of conservation of mass and the requirement for balanced chemical equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Les principes de base**",
+            "start": 496,
+            "end": 521
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour comprendre la stœchiométrie, il faut connaître quelques principes de base :",
+            "start": 523,
+            "end": 603
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **La loi de conservation de la masse** : lors d'une réaction chimique, la masse totale des réactifs est égale à la masse totale des produits. Cela signifie que la matière n'est ni créée ni détruite, mais simplement transformée.",
+            "start": 605,
+            "end": 835
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Les équations chimiques équilibrées** : une équation chimique représente une réaction chimique. Pour que l'équation soit équilibrée, il faut que le nombre d'atomes de chaque élément soit le même du côté des réactifs et du côté des produits.",
+            "start": 836,
+            "end": 1081
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The law of conservation of mass and the concept of balanced chemical equations are correctly described.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "General method for solving stoichiometry problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a reusable four-step sequence to approach and solve standard stoichiometric problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Comment appliquer la stœchiométrie ?**",
+            "start": 1083,
+            "end": 1123
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour résoudre un problème de stœchiométrie, il faut suivre ces étapes :",
+            "start": 1125,
+            "end": 1196
+          },
+          {
+            "id": "p10",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Écrire l'équation chimique équilibrée** : il faut d'abord écrire l'équation chimique qui représente la réaction étudiée, puis l'équilibrer pour que le nombre d'atomes de chaque élément soit le même des deux côtés.",
+            "start": 1198,
+            "end": 1416
+          },
+          {
+            "id": "p11",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Identifier les quantités données** : il faut identifier les quantités de réactifs ou de produits qui sont données dans le problème.",
+            "start": 1417,
+            "end": 1553
+          },
+          {
+            "id": "p12",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **Utiliser les coefficients stœchiométriques** : les coefficients stœchiométriques sont les nombres qui précèdent les formules des réactifs et des produits dans l'équation équilibrée. Ils indiquent les proportions relatives des différentes espèces chimiques.",
+            "start": 1554,
+            "end": 1815
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **Calculer les quantités inconnues** : en utilisant les coefficients stœchiométriques et les quantités données, on peut calculer les quantités inconnues.",
+            "start": 1816,
+            "end": 1972
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps correctly detail balancing the equation, identifying givens, utilizing stoichiometric ratios, and calculating unknown amounts.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked mole calculation for the synthesis of NaCl",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates the step-by-step problem-solving method applied to find the moles of Cl2 required to react with 4 moles of Na.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Exemple**",
+            "start": 1974,
+            "end": 1985
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Supposons que nous voulions produire 2 moles de chlorure de sodium (NaCl) à partir de la réaction entre le sodium (Na) et le chlore (Cl2). L'équation équilibrée est :",
+            "start": 1987,
+            "end": 2153
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 Na + Cl2 → 2 NaCl",
+            "start": 2155,
+            "end": 2174
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si nous avons 4 moles de sodium, combien de moles de chlore sont nécessaires ?",
+            "start": 2176,
+            "end": 2254
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. L'équation est déjà équilibrée.",
+            "start": 2256,
+            "end": 2290
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. La quantité donnée est 4 moles de sodium.",
+            "start": 2291,
+            "end": 2335
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. Le coefficient stœchiométrique de Na est 2 et celui de Cl2 est 1.",
+            "start": 2336,
+            "end": 2404
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "4. On peut calculer la quantité de Cl2 nécessaire : 4 moles de Na × (1 mole de Cl2 / 2 moles de Na) = 2 moles de Cl2.",
+            "start": 2405,
+            "end": 2522
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction 2 Na + Cl2 -> 2 NaCl and the stoichiometric calculation yielding 2 moles of Cl2 for 4 moles of Na are chemically and mathematically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of stoichiometry and concluding remarks",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Summarizes the practical importance of stoichiometry and provides concluding encouragement.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Conclusion**",
+            "start": 2524,
+            "end": 2538
+          },
+          {
+            "id": "p23",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stœchiométrie est un outil essentiel en chimie qui permet de prédire les quantités de produits qui seront formés ou de réactifs qui seront nécessaires lors d'une réaction chimique. En comprenant les principes de base et en appliquant les étapes pour résoudre les problèmes, tu pourras résoudre des problèmes de stœchiométrie avec confiance.",
+            "start": 2540,
+            "end": 2883
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The concluding summary accurately reiterates the role and utility of stoichiometry.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\french-english\\llama-4-maverick__db3c4e55be79.json",
+    "original_sha256": "ff8c249465ca376fe6657cef39cabcf2e9b3099520861cbdacc739d32f04e46b",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 23,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 23,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

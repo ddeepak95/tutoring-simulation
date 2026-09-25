@@ -1,0 +1,26 @@
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_stage1.py", line 85, in <module>
+    if __name__=='__main__':asyncio.run(main())
+                            ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_stage1.py", line 67, in main
+    d=json.loads(re.sub(r'^```(?:json)?\s*|\s*```$','',answer));resolved=validate(d,text,payload['topic_name_en']);break
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Invalid \escape: line 123 column 132 (char 4828)

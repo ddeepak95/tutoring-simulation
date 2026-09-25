@@ -1,0 +1,982 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7f9af6542218e4b021d759592ac4bfcf9f85fca8646148737b0423a068743a98",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "Le concept de mole en chimie",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response comprehensively explains the mole concept in chemistry for a high school student, covering counting units by analogy, the microscopic necessity of moles, Avogadro's number, molar mass, and the calculation formula n = m / M with a worked example.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Analogie du paquet et définition intuitive de la mole"
+      },
+      {
+        "id": "s2",
+        "label": "Nécessité de la mole à l'échelle microscopique"
+      },
+      {
+        "id": "s3",
+        "label": "Nombre d'Avogadro et ordre de grandeur"
+      },
+      {
+        "id": "s4",
+        "label": "Distinction entre quantité et masse (masse molaire)"
+      },
+      {
+        "id": "s5",
+        "label": "Relation mathématique entre quantité de matière et masse (n = m / M)"
+      },
+      {
+        "id": "s6",
+        "label": "Application numérique et calcul de quantité de matière"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "L'analogie des paquets du quotidien pour introduire la mole",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the mole conceptually by drawing an analogy to familiar everyday grouping units (dozen, pair, ream).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "Si je te demande d’aller acheter des œufs et que je te dis : « Prends une **douzaine** d'œufs », tu sais exactement combien il y en a : **12**."
+            },
+            {
+              "passage_id": "p6",
+              "quote": "Si je te parle d'une **paire** de chaussures, tu penses à **2**."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Installe-toi. Je sais que la mole est souvent la « bête noire » des élèves au lycée, mais tu vas voir : **c'est en réalité une idée toute simple.**",
+            "start": 0,
+            "end": 157
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour bien la comprendre, oublie la chimie deux minutes et viens faire des courses avec moi.",
+            "start": 159,
+            "end": 250
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 252,
+            "end": 255
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. L’analogie des œufs (ou le « paquet » du chimiste)",
+            "start": 257,
+            "end": 314
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si je te demande d’aller acheter des œufs et que je te dis : « Prends une **douzaine** d'œufs », tu sais exactement combien il y en a : **12**.",
+            "start": 316,
+            "end": 459
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si je te parle d'une **paire** de chaussures, tu penses à **2**.",
+            "start": 460,
+            "end": 524
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si je te parle d'une **rame** de papier, tu penses à **500** feuilles.",
+            "start": 525,
+            "end": 595
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ces mots (« douzaine », « paire », « rame ») sont juste des **mots pratiques pour désigner des paquets d’objets**.",
+            "start": 597,
+            "end": 711
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Eh bien, pour un chimiste :",
+            "start": 713,
+            "end": 740
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **Une mole, c’est juste un paquet.**",
+            "start": 741,
+            "end": 779
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The comparison of chemical moles to counting collections like dozens or reams is standard, pedagogical, and factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Raison d'être de la mole liée à l'échelle atomique",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why chemists need a distinct, extremely large unit rather than ordinary units, citing the minuscule size and immense number of atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p14",
+              "quote": "Si tu devais compter les atomes dans une simple gorgée d'eau, tu te retrouverais avec des milliards de milliards de milliards d'atomes."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. Pourquoi créer un nouveau paquet ?",
+            "start": 781,
+            "end": 822
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pourquoi ne pas utiliser la « douzaine » en chimie ?",
+            "start": 824,
+            "end": 876
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Parce que les atomes et les molécules sont **infiniment petits**.",
+            "start": 877,
+            "end": 942
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si tu devais compter les atomes dans une simple gorgée d'eau, tu te retrouverais avec des milliards de milliards de milliards d'atomes. C'est impossible à manipuler ! Les chimistes ont donc créé un « paquet géant », adapté à la taille minuscule des atomes.",
+            "start": 944,
+            "end": 1200
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly explains the physical rationale for adopting a macroscopic counting unit for entities at the atomic scale.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Valeur du nombre d'Avogadro et exemples d'entités",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents the exact numerical magnitude of Avogadro's number (6.022 x 10^23) and gives illustrative examples of what 1 mole represents.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p20",
+              "quote": "une mole d'atomes de carbone, par exemple, ça tient dans le creux de ta main."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Combien y a-t-il d'objets dans une mole ?",
+            "start": 1202,
+            "end": 1250
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Dans **une mole**, il y a toujours :",
+            "start": 1252,
+            "end": 1288
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**$6,022 \\times 10^{23}$ objets.**",
+            "start": 1289,
+            "end": 1323
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(C'est ce qu'on appelle le **Nombre d'Avogadro**, noté $N_A$)*.",
+            "start": 1325,
+            "end": 1389
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C'est un 6 suivi de 23 zéros : **602 200 000 000 000 000 000 000 !**",
+            "start": 1391,
+            "end": 1459
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C'est un nombre gigantesque. Si tu avais une mole de billes, elles recouvriraient toute la surface de la Terre sur une hauteur de plusieurs kilomètres ! Mais comme les atomes sont minuscules, une mole d'atomes de carbone, par exemple, ça tient dans le creux de ta main.",
+            "start": 1460,
+            "end": 1729
+          },
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Retiens bien :",
+            "start": 1731,
+            "end": 1747
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * 1 mole de fer = $6,022 \\times 10^{23}$ atomes de fer.",
+            "start": 1748,
+            "end": 1805
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * 1 mole d'eau = $6,022 \\times 10^{23}$ molécules d'eau.",
+            "start": 1806,
+            "end": 1864
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * 1 mole d'élèves = $6,022 \\times 10^{23}$ élèves (ça ferait beaucoup trop de copies à corriger !).",
+            "start": 1865,
+            "end": 1966
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "Passage p19 states that 6.022 x 10^23 is 'un 6 suivi de 23 zéros', which would be 6 x 10^23; in reality, it is a 6 followed by 23 digits (specifically 022 followed by 20 zeros, as correctly written immediately afterwards in fully expanded notation).",
+          "errors": [
+            {
+              "passage_ids": [
+                "p19"
+              ],
+              "description": "The text states that 6.022 x 10^23 is 'un 6 suivi de 23 zéros', but 6 followed by 23 zeros equals 6 x 10^23. For 6.022 x 10^23, the digit 6 is followed by 23 decimal digits, of which only 20 are trailing zeros (602 200... with 20 zeros).",
+              "correction": "Say 'un 6 suivi de 23 chiffres' or '6022 suivi de 20 zéros'.",
+              "severity": "minor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CAVEAT",
+        "label": "Confusion fréquente entre nombre d'entités et masse (masse molaire)",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Clarifies the common student misconception that a mole always has the same weight, explaining that while the entity count is identical, molar masses vary between elements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p27",
+              "quote": "Est-ce qu'une douzaine d'œufs pèse le même poids qu'une douzaine d'éléphants ?"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. Le piège à éviter : Le poids du paquet !",
+            "start": 1968,
+            "end": 2015
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Attention, c'est là que beaucoup d'élèves se trompent :",
+            "start": 2017,
+            "end": 2072
+          },
+          {
+            "id": "p27",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce qu'une douzaine d'œufs pèse le même poids qu'une douzaine d'éléphants ?",
+            "start": 2073,
+            "end": 2151
+          },
+          {
+            "id": "p28",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Non, bien sûr.** Il y a 12 individus à chaque fois, mais un éléphant est plus lourd qu'un œuf.",
+            "start": 2152,
+            "end": 2248
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En chimie, c'est pareil :",
+            "start": 2250,
+            "end": 2275
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Une mole contient **toujours le même nombre** d'atomes ($6,022 \\times 10^{23}$).",
+            "start": 2276,
+            "end": 2358
+          },
+          {
+            "id": "p31",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Mais **chaque mole a sa propre masse**, parce que certains atomes sont plus lourds que d'autres.",
+            "start": 2359,
+            "end": 2457
+          },
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La masse d'une mole s'appelle la **Masse Molaire** (notée $M$, en grammes par mole ou $\\text{g/mol}$) :",
+            "start": 2459,
+            "end": 2562
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* 1 mole de Carbone pèse **12 g**.",
+            "start": 2563,
+            "end": 2597
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* 1 mole d'Oxygène pèse **16 g**.",
+            "start": 2598,
+            "end": 2631
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* 1 mole d'Or pèse **197 g** (l'atome d'or est beaucoup plus lourd !).",
+            "start": 2632,
+            "end": 2702
+          },
+          {
+            "id": "p36",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Toutes ces valeurs sont écrites dans la classification périodique, tu n'as jamais à les apprendre par cœur).*",
+            "start": 2703,
+            "end": 2814
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The distinction between counting entities and molar mass is accurately explained, and the molar masses cited (C: 12 g/mol, O: 16 g/mol, Au: 197 g/mol) are standard values.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Formule fondamentale reliant masse, masse molaire et quantité de matière",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents the bridge formula n = m / M used in high school practical laboratory work and defines each variable with its associated units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 5. À quoi ça sert dans les exercices ? (La formule magique)",
+            "start": 2816,
+            "end": 2879
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Au laboratoire, on ne peut pas compter les atomes un par un. Par contre, on a une balance !",
+            "start": 2881,
+            "end": 2972
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La mole est **le pont entre le monde invisible (les atomes) et notre monde (les grammes sur la balance).**",
+            "start": 2973,
+            "end": 3079
+          },
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Quand tu es en TP, tu utilises la formule reine du lycée :",
+            "start": 3081,
+            "end": 3139
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{m}{M}$$",
+            "start": 3140,
+            "end": 3159
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   $n$ = la **quantité de matière** (le nombre de \"paquets\", c'est-à-dire le nombre de **moles**, noté en **mol**).",
+            "start": 3161,
+            "end": 3277
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   $m$ = la **masse** de ton échantillon (ce que tu pèses sur la balance, en **grammes**).",
+            "start": 3278,
+            "end": 3369
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   $M$ = la **masse molaire** (le poids d'un seul \"paquet\", que tu trouves dans le tableau périodique, en **$\\text{g/mol}$**).",
+            "start": 3370,
+            "end": 3497
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation n = m / M and the definitions and units of n (mol), m (g), and M (g/mol) are accurately stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Calcul de la quantité de matière dans un échantillon de carbone",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Demonstrates a worked numerical calculation determining the number of moles from a given sample mass of 24 g of carbon.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p45",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Un exemple concret :**",
+            "start": 3499,
+            "end": 3523
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu pèses $24\\text{ g}$ de carbone. Combien as-tu de paquets (de moles) ?",
+            "start": 3524,
+            "end": 3596
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Puisqu'un paquet pèse $12\\text{ g}$ ($M = 12\\text{ g/mol}$), tu fais :",
+            "start": 3597,
+            "end": 3667
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "$n = \\frac{24}{12} = 2\\text{ moles}$.",
+            "start": 3668,
+            "end": 3705
+          },
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as 2 paquets de carbone (soit $2 \\times 6,022 \\times 10^{23}$ atomes).",
+            "start": 3706,
+            "end": 3779
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The arithmetic (24 / 12 = 2 mol) and entity conversion (2 * 6.022 * 10^23) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Récapitulatif final et conclusion",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Summarizes the core takeaway of the mole as a standardized grouping box for microscopic entities, closing the lesson.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p50",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### En résumé :",
+            "start": 3781,
+            "end": 3796
+          },
+          {
+            "id": "p51",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La mole n'est rien d'autre qu'une **boîte standard** que le chimiste utilise pour regrouper les atomes par milliards, afin de pouvoir facilement les peser et faire ses recettes de cuisine chimique.",
+            "start": 3797,
+            "end": 3994
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce que cette image du \"paquet\" te paraît plus claire ?",
+            "start": 3996,
+            "end": 4054
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary provides an accurate, accessible closing synthesis of the concept.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\french-native\\gemini-3.8-flash__43a6b907944c.json",
+    "original_sha256": "1b09142ffaa4054db9c9f54b12186fb20e84a19a0e467e25ddd103a8ecb4b3e1",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 52,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 3,
+      "CAVEAT": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 52,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 4,
+      "none": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6,
+      "contains_error": 1
+    },
+    "proposed_error_records": 1,
+    "proposed_error_severity": {
+      "minor": 1
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,851 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "f1888c985fe1730fe5b1c47201eca4fa4bb211af2194a83cd6374180a740ba1e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11"
+      ],
+      "reason": "The text directly and comprehensively explains the mole concept, Avogadro's number, molar mass, and its application in stoichiometry for high school chemistry.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction to mole and Avogadro's number"
+      },
+      {
+        "id": "s2",
+        "label": "Mole and atomic/molecular mass relationship"
+      },
+      {
+        "id": "s3",
+        "label": "Molar mass definition and units"
+      },
+      {
+        "id": "s4",
+        "label": "Application of mole concept in chemical reactions"
+      },
+      {
+        "id": "s5",
+        "label": "Summary of key takeaways"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Analogy of counting by the dozen to introduce the mole",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses the familiar daily-life concept of counting eggs in dozens (1 dozen = 12) as an analogy to help students understand counting units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "सोचो, जब हम अंडे गिनते हैं तो कहते हैं — “एक **दर्जन** अंडे”।  "
+            },
+            {
+              "passage_id": "p4",
+              "quote": "एक दर्जन = **12** अंडे।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नमस्ते! आज मैं तुम्हें बहुत आसान और रोचक तरीके से **मोल संकल्पना** समझाता हूँ। यह हाई स्कूल के केमिस्ट्री का सबसे महत्वपूर्ण और बुनियादी टॉपिक है।",
+            "start": 0,
+            "end": 146
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### मोल क्या है? (सरल उदाहरण से समझो)",
+            "start": 148,
+            "end": 185
+          },
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "सोचो, जब हम अंडे गिनते हैं तो कहते हैं — “एक **दर्जन** अंडे”।  ",
+            "start": 187,
+            "end": 250
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "एक दर्जन = **12** अंडे।",
+            "start": 251,
+            "end": 274
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately describes the concept of a dozen as 12 items.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition of mole and Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines a mole as 6.022 × 10²³ particles, defines Avogadro's number, and explains why such a large number is required due to the small size of subatomic particles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसी तरह, जब वैज्ञानिक बहुत छोटे-छोटे कणों (परमाणु, अणु या आयन) को गिनना चाहते हैं, तो वे **मोल** नाम की इकाई का इस्तेमाल करते हैं।",
+            "start": 276,
+            "end": 406
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**1 मोल = 6.022 × 10²³ कण**",
+            "start": 408,
+            "end": 435
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस संख्या को **अवोगाद्रो संख्या** (Avogadro’s number) कहते हैं।  ",
+            "start": 437,
+            "end": 502
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यह इतनी बड़ी संख्या इसलिए है क्योंकि परमाणु और अणु इतने छोटे होते हैं कि हम उन्हें आम तौर पर गिन नहीं सकते।",
+            "start": 503,
+            "end": 609
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of mole, the value of Avogadro's constant, and the rationale for its magnitude are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Relationship between atomic mass, grams, and one mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains how atomic mass expressed in atomic mass units (u) relates to the mass in grams containing one mole (6.022 × 10²³) of atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### मोल और द्रव्यमान का संबंध (सबसे महत्वपूर्ण बात)",
+            "start": 611,
+            "end": 662
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "प्रत्येक तत्व का एक निश्चित **परमाणु द्रव्यमान** (Atomic mass) होता है, जिसे हम आवर्त सारणी में u (atomic mass unit) में देखते हैं।",
+            "start": 664,
+            "end": 795
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- अगर हम उस तत्व का **परमाणु द्रव्यमान** जितने ग्राम ले लें, तो उसमें ठीक **6.022 × 10²³** परमाणु होंगे।",
+            "start": 797,
+            "end": 901
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- इस मात्रा को **1 मोल** कहते हैं।",
+            "start": 902,
+            "end": 936
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately connects atomic mass in u to the mass in grams for 1 mole of atoms containing Avogadro's number of particles.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Carbon mole-mass and particle count example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates the relationship between atomic mass (12 u), mass of 1 mole (12 g), and number of carbon atoms (6.022 × 10²³).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**उदाहरण:**",
+            "start": 938,
+            "end": 949
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| पदार्थ       | परमाणु/अणु द्रव्यमान | 1 मोल का द्रव्यमान | 1 मोल में कणों की संख्या     |",
+            "start": 951,
+            "end": 1042
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|-------------|---------------------|---------------------|-----------------------------|",
+            "start": 1043,
+            "end": 1132
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| कार्बन (C)   | 12 u                | 12 ग्राम            | 6.022 × 10²³ परमाणु         |",
+            "start": 1133,
+            "end": 1223
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Carbon-12 atomic mass is 12 u, corresponding to 12 g and 6.022 × 10²³ atoms in 1 mole.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Oxygen gas mole-mass and particle count example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates the relationship for molecular oxygen (O₂): molecular mass 32 u, mass of 1 mole 32 g, and particle count 6.022 × 10²³ molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ऑक्सीजन (O₂) | 32 u                | 32 ग्राम            | 6.022 × 10²³ अणु             |",
+            "start": 1224,
+            "end": 1315
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molecular mass and mole-mass correspondence for diatomic oxygen (O₂) is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Water mole-mass and particle count example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates the relationship for water (H₂O): molecular mass 18 u, mass of 1 mole 18 g, and particle count 6.022 × 10²³ molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| पानी (H₂O)   | 18 u                | 18 ग्राम            | 6.022 × 10²³ अणु             |",
+            "start": 1316,
+            "end": 1407
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molecular mass of H₂O (18 u) and mass of 1 mole (18 g) with 6.022 × 10²³ molecules is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Sodium mole-mass and particle count example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates the relationship for sodium (Na): atomic mass 23 u, mass of 1 mole 23 g, and particle count 6.022 × 10²³ atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| सोडियम (Na)  | 23 u                | 23 ग्राम            | 6.022 × 10²³ परमाणु         |",
+            "start": 1408,
+            "end": 1498
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The atomic mass of Na (23 u) and mass of 1 mole (23 g) containing 6.022 × 10²³ atoms is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Molar mass definition, units, and values",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines molar mass as the mass in grams of 1 mole of any substance, provides its SI unit (g/mol), and gives specific molar mass values for carbon and water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### मोलर द्रव्यमान क्या है?",
+            "start": 1500,
+            "end": 1527
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "किसी भी पदार्थ के **1 मोल** का द्रव्यमान (ग्राम में) उसे **मोलर द्रव्यमान** कहते हैं।  ",
+            "start": 1529,
+            "end": 1616
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसकी इकाई **ग्राम प्रति मोल** (g/mol) होती है।",
+            "start": 1617,
+            "end": 1663
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- कार्बन का मोलर द्रव्यमान = 12 g/mol  ",
+            "start": 1665,
+            "end": 1704
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- पानी का मोलर द्रव्यमान = 18 g/mol",
+            "start": 1705,
+            "end": 1740
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition, unit (g/mol), and stated molar masses (carbon = 12 g/mol, water = 18 g/mol) are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "CONCEPT",
+        "label": "Practical need for the mole concept in chemical reactions",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains why moles are necessary: individual atoms/molecules cannot be counted directly during reactions, so moles bridge microscopic counts to measurable quantities.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### मोल क्यों जरूरी है? (व्यावहारिक उपयोग)",
+            "start": 1742,
+            "end": 1784
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रासायनिक अभिक्रियाओं में हम परमाणुओं या अणुओं को सीधे नहीं गिन सकते। इसलिए हम **मोल** का इस्तेमाल करते हैं।",
+            "start": 1786,
+            "end": 1893
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately explains the practical purpose of using the mole concept in chemical stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "EXAMPLE",
+        "label": "Stoichiometric reaction example: H₂ + Cl₂ → 2HCl",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Walks through the reaction of 1 mole of hydrogen gas (2 g) with 1 mole of chlorine gas (71 g) to produce 2 moles of HCl (73 g), illustrating reaction stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**उदाहरण:**",
+            "start": 1895,
+            "end": 1906
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H₂ + Cl₂ → 2HCl",
+            "start": 1907,
+            "end": 1922
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस अभिक्रिया में:",
+            "start": 1924,
+            "end": 1941
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- 1 मोल हाइड्रोजन गैस (2 ग्राम) + 1 मोल क्लोरीन गैस (71 ग्राम) → 2 मोल HCl (73 ग्राम) बनाता है।",
+            "start": 1942,
+            "end": 2037
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस तरह हम आसानी से बता सकते हैं कि कितना पदार्थ कितने पदार्थ से क्रिया करेगा और कितना उत्पाद बनेगा।",
+            "start": 2039,
+            "end": 2138
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction stoichiometry and mass conservation (2 g H₂ + 71 g Cl₂ = 73 g HCl) are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap of key points and offer for further study",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Summarizes key takeaways regarding Avogadro's number, molar mass, and connecting particle counts, mass, and gas volume, followed by teacher closing remarks.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### याद रखने वाली मुख्य बातें",
+            "start": 2140,
+            "end": 2169
+          },
+          {
+            "id": "p33",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **1 मोल** = 6.022 × 10²³ कण (अवोगाद्रो संख्या)",
+            "start": 2171,
+            "end": 2220
+          },
+          {
+            "id": "p34",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. किसी पदार्थ का **मोलर द्रव्यमान** = उसके अणुभार के बराबर ग्राम में",
+            "start": 2221,
+            "end": 2290
+          },
+          {
+            "id": "p35",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. मोल का इस्तेमाल करके हम परमाणुओं/अणुओं की संख्या, द्रव्यमान और आयतन (गैसों के लिए) के बीच संबंध स्थापित करते हैं।",
+            "start": 2291,
+            "end": 2407
+          },
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अगर तुम्हें अब कोई खास हिस्सा और विस्तार से समझना हो — जैसे मोल से द्रव्यमान निकालना, मोल से कणों की संख्या निकालना, या गैसों का मोलर आयतन — तो बता देना। मैं और उदाहरणों के साथ समझा दूंगा!",
+            "start": 2409,
+            "end": 2597
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately restates the core principles of the mole concept.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\hindi-native\\grok-4.3__9338feb8d817.json",
+    "original_sha256": "b76308b67486ad6b1cc320af11e92d764a9b8c666d1c235a906cf86160281953",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 11,
+    "substantive_content_units": 11,
+    "total_passages": 36,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 4,
+      "EXAMPLE": 5,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 36,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "everyday": 1,
+      "none": 10
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 11
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

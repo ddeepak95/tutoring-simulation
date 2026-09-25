@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-001-69b66cb561b3.json](run-001-001-69b66cb561b3.json)
+**Source:** [run-001-001-69b66cb561b3.json](english/gpt-5.6-terra__df092e2dc70c.json)
 
 ## Stoichiometry: The Chemistry of “How Much?”
 
@@ -302,7 +302,7 @@ Think of the balanced equation as a recipe, and moles as the quantities needed t
 
 **Status:** completed
 
-**Source:** [run-001-002-4a322a50f09a.json](run-001-002-4a322a50f09a.json)
+**Source:** [run-001-002-4a322a50f09a.json](english/grok-4.3__3b9f00f2ff5e.json)
 
 Stoichiometry is basically the "math of chemistry." It helps you figure out exactly how much stuff (reactants) you need to make a certain amount of product in a chemical reaction—or how much product you can make from what you have. Think of it like a recipe in baking: if the recipe says "2 cups flour + 1 cup sugar makes 12 cookies," you can scale it up or down to figure out how many cookies you'll get from 4 cups of flour.
 
@@ -381,7 +381,7 @@ Want me to walk through another example (like making ammonia or burning propane)
 
 **Status:** completed
 
-**Source:** [run-001-003-5fd323407369.json](run-001-003-5fd323407369.json)
+**Source:** [run-001-003-5fd323407369.json](english/gemini-3.8-flash__16a10050885b.json)
 
 Welcome to chemistry class! 
 
@@ -497,7 +497,7 @@ Does this make the concept feel a little more approachable?
 
 **Status:** completed
 
-**Source:** [run-001-004-cfec59f0ab1f.json](run-001-004-cfec59f0ab1f.json)
+**Source:** [run-001-004-cfec59f0ab1f.json](english/claude-sonnet-5__c2657941e8bd.json)
 
 # Stoichiometry: A Complete Guide
 
@@ -616,7 +616,7 @@ Would you like me to walk through a practice problem together, or explain limiti
 
 **Status:** completed
 
-**Source:** [run-001-005-4986d934d93c.json](run-001-005-4986d934d93c.json)
+**Source:** [run-001-005-4986d934d93c.json](english/llama-4-maverick__604a671598b6.json)
 
 Stoichiometry! It's a fundamental concept in chemistry that can seem daunting at first, but trust me, it's actually quite straightforward once you grasp the basics. So, let's dive in!
 
@@ -679,7 +679,7 @@ Stoichiometry is all about understanding the quantitative relationships between 
 
 **Status:** completed
 
-**Source:** [run-002-001-9d6752998794.json](run-002-001-9d6752998794.json)
+**Source:** [run-002-001-9d6752998794.json](tamil-native/gpt-5.6-terra__a13389fad3d2.json)
 
 வேதி வினையில் **வினைக் கூறுகளின் விகிதம்** என்பது, ஒரு வேதி வினை சரியாக நடைபெற வினைப்பொருட்கள் எவ்வளவு அளவில் சேர வேண்டும் என்பதைக் காட்டுகிறது. இந்த விகிதம், **சமநிலைப்படுத்தப்பட்ட வேதி சமன்பாட்டில்** உள்ள எண்களால் (குணகங்கள்) அறியப்படுகிறது.
 
@@ -823,7 +823,7 @@ H_2 : O_2 = 4:32 = 1:8
 
 **Status:** completed
 
-**Source:** [run-002-002-1f4d5de9bd15.json](run-002-002-1f4d5de9bd15.json)
+**Source:** [run-002-002-1f4d5de9bd15.json](tamil-native/grok-4.3__0d266c4f28a2.json)
 
 வணக்கம் மாணவரே! நீங்கள் வேதி வினைக் கூறுகளின் விகிதம் (stoichiometric ratio) பற்றி கேட்டீர்கள். இதை ஒரு நல்ல ஆசிரியர் மாதிரி, எளிய உதாரணங்களுடன் படிப்படியாக விளக்குகிறேன்.
 
@@ -888,7 +888,7 @@ CH₄ + O₂ → CO₂ + H₂O
 
 **Status:** completed
 
-**Source:** [run-002-003-0743b7993860.json](run-002-003-0743b7993860.json)
+**Source:** [run-002-003-0743b7993860.json](tamil-native/gemini-3.8-flash__383499f4aeda.json)
 
 வணக்கம்! வாருங்கள், வேதியியலின் மிக முக்கியமான, அதே சமயம் மிகவும் சுவாரசியமான ஒரு தலைப்பைப் பற்றி இன்று நாம் எளிமையாகப் புரிந்து கொள்ளலாம்.
 
@@ -979,7 +979,7 @@ $$2H_2 + O_2 \rightarrow 2H_2O$$
 
 **Status:** completed
 
-**Source:** [run-002-004-4038061198e9.json](run-002-004-4038061198e9.json)
+**Source:** [run-002-004-4038061198e9.json](tamil-native/claude-sonnet-5__4e54f47a7848.json)
 
 # வேதி வினைக் கூறுகளின் விகிதம் (Stoichiometry)
 
@@ -1049,7 +1049,7 @@ $$\text{மோல் எண்ணிக்கை} = \frac{\text{கொடுக�
 
 **Status:** completed
 
-**Source:** [run-002-005-a8632b149023.json](run-002-005-a8632b149023.json)
+**Source:** [run-002-005-a8632b149023.json](tamil-native/llama-4-maverick__8049a3d295b6.json)
 
 வணக்கம் மாணவர்களே!
 
@@ -1098,7 +1098,7 @@ $$\text{மோல் எண்ணிக்கை} = \frac{\text{கொடுக�
 
 **Status:** completed
 
-**Source:** [run-003-001-2d695f369cf5.json](run-003-001-2d695f369cf5.json)
+**Source:** [run-003-001-2d695f369cf5.json](tamil-english/gpt-5.6-terra__c60296b94917.json)
 
 ## ஸ்டாய்கியோமெட்ரி (Stoichiometry) என்றால் என்ன?
 
@@ -1368,7 +1368,7 @@ CO_2 = 12 + (2 \times 16) = 44 \text{ g/mol}
 
 **Status:** completed
 
-**Source:** [run-003-002-2fec4bc33a5b.json](run-003-002-2fec4bc33a5b.json)
+**Source:** [run-003-002-2fec4bc33a5b.json](tamil-english/grok-4.3__54ed13b31295.json)
 
 ஸ்டோய்கியோமெட்ரி என்றால் என்ன?
 
@@ -1448,7 +1448,7 @@ CO_2 = 12 + (2 \times 16) = 44 \text{ g/mol}
 
 **Status:** completed
 
-**Source:** [run-003-003-4a1e5d2518a3.json](run-003-003-4a1e5d2518a3.json)
+**Source:** [run-003-003-4a1e5d2518a3.json](tamil-english/gemini-3.8-flash__41ad2eb4684b.json)
 
 வணக்கம்! **Stoichiometry (வேதிவினை அளவியல்)** என்பதைப் பற்றி மிக எளிமையாகவும், சுவாரஸ்யமாகவும் பார்க்கலாம். 
 
@@ -1549,7 +1549,7 @@ $$2H_2 + O_2 \rightarrow 2H_2O$$
 
 **Status:** completed
 
-**Source:** [run-003-004-ddc1c31605b6.json](run-003-004-ddc1c31605b6.json)
+**Source:** [run-003-004-ddc1c31605b6.json](tamil-english/claude-sonnet-5__10a186887f75.json)
 
 # Stoichiometry - ஒரு எளிய விளக்கம் (High School Student களுக்கு)
 
@@ -1624,7 +1624,7 @@ $$2H_2 + O_2 \rightarrow 2H_2O$$
 
 **Status:** completed
 
-**Source:** [run-003-005-6ab37b53249f.json](run-003-005-6ab37b53249f.json)
+**Source:** [run-003-005-6ab37b53249f.json](tamil-english/llama-4-maverick__06b82dd6e52e.json)
 
 வணக்கம்! இன்று நாம் ஸ்டோயிகியோமெட்ரி (stoichiometry) பற்றி படிக்க போகிறோம். ஸ்டோயிகியோமெட்ரி என்றால் என்ன? அது எவ்வாறு வேதியியல் சமன்பாடுகளில் பயன்படுத்தப்படுகிறது என்பதை தெரிந்து கொள்வோம்.
 

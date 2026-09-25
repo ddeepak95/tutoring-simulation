@@ -1,0 +1,307 @@
+# covalent radius / french-native: model responses
+
+5 requests. Response text is preserved from the saved JSON results.
+
+Source: [manifest.json](manifest.json)
+
+## Contents
+
+- [Prompt 7 (fr)](#prompt-7)
+  - [gpt-5.6-terra](#run-native_prompt-fr-fr-b5a4fad10ae5ea2e)
+  - [grok-4.3](#run-native_prompt-fr-fr-a8bf7bfa23b74f32)
+  - [gemini-3.8-flash](#run-native_prompt-fr-fr-c4e493b70e0e2cd1)
+  - [claude-sonnet-5](#run-native_prompt-fr-fr-9f3cc408df52efc9)
+  - [llama-4-maverick](#run-native_prompt-fr-fr-8c05ee22446f77d0)
+
+---
+
+<a id="prompt-7"></a>
+
+## Prompt 7 (fr)
+
+**Prompt**
+
+> Vous êtes un excellent professeur. Expliquez Rayon covalent à un élève de lycée en français.
+
+---
+
+<a id="run-native_prompt-fr-fr-b5a4fad10ae5ea2e"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed
+
+**Source:** [gpt-5.6-terra__ab2abd3b995d.json](../../gpt-5.6-terra__ab2abd3b995d.json)
+
+Le **rayon covalent** est une mesure qui donne une idée de la taille d’un atome lorsqu’il est lié à un autre atome par une **liaison covalente**.
+
+### Définition
+
+Une liaison covalente se forme lorsque deux atomes **partagent des électrons**.
+
+On ne peut pas vraiment mesurer le « bord » d’un atome, car le nuage électronique n’a pas de limite nette. Pour définir sa taille, on utilise donc la distance entre les noyaux de deux atomes liés.
+
+Pour deux atomes identiques liés entre eux :
+
+\[
+\text{rayon covalent} = \frac{\text{distance entre les deux noyaux}}{2}
+\]
+
+### Exemple : la molécule de dihydrogène \(H_2\)
+
+Dans la molécule \(H_2\), deux atomes d’hydrogène sont liés par une liaison covalente.
+
+La distance entre leurs noyaux est d’environ **74 pm** (picomètres).
+
+\[
+1\ \text{pm} = 10^{-12}\ \text{m}
+\]
+
+Donc le rayon covalent de l’hydrogène vaut environ :
+
+\[
+\frac{74}{2} = 37\ \text{pm}
+\]
+
+Chaque atome d’hydrogène « occupe » donc environ 37 pm dans la liaison.
+
+---
+
+### Variation dans le tableau périodique
+
+Le rayon covalent varie selon la position de l’élément dans le tableau périodique.
+
+- **De gauche à droite dans une période** : le rayon covalent diminue généralement.  
+  Les protons sont plus nombreux dans le noyau, qui attire plus fortement les électrons.
+
+- **De haut en bas dans une colonne** : le rayon covalent augmente généralement.  
+  Les atomes possèdent davantage de couches électroniques, donc ils deviennent plus grands.
+
+Par exemple :
+
+- le fluor est assez petit ;
+- le chlore est plus grand que le fluor, car il possède une couche électronique supplémentaire.
+
+---
+
+### Attention : le rayon dépend du type de liaison
+
+Le rayon covalent n’est pas toujours exactement le même pour un même atome :
+
+- une **liaison simple** est plus longue ;
+- une **liaison double** est plus courte ;
+- une **liaison triple** est encore plus courte.
+
+Ainsi, quand deux atomes sont liés plus fortement, ils sont généralement plus proches l’un de l’autre.
+
+---
+
+### À retenir
+
+> Le **rayon covalent** est la moitié de la distance entre les noyaux de deux atomes identiques unis par une liaison covalente.
+
+Il permet de comparer la taille des atomes lorsqu’ils forment des molécules.
+
+
+---
+
+<a id="run-native_prompt-fr-fr-a8bf7bfa23b74f32"></a>
+
+### grok-4.3
+
+**Status:** completed
+
+**Source:** [grok-4.3__ac448eec0d70.json](../../grok-4.3__ac448eec0d70.json)
+
+Le rayon covalent est une façon de mesurer la taille d’un atome quand il forme une liaison covalente avec un autre atome.
+
+### Définition simple
+Quand deux atomes identiques se lient par une liaison covalente simple (ils partagent une paire d’électrons), on mesure la distance entre leurs deux noyaux. Le **rayon covalent** est la moitié de cette distance.
+
+On divise par deux parce que chaque atome apporte « sa part » à la liaison. Si les deux atomes sont exactement les mêmes, chacun occupe la moitié de l’espace entre les noyaux.
+
+### Exemple concret : le dichlore (Cl₂)
+- Dans la molécule Cl₂, les deux atomes de chlore sont reliés par une liaison covalente.
+- La distance entre les deux noyaux de chlore est de 198 pm (picomètres).
+- Le rayon covalent du chlore = 198 ÷ 2 = **99 pm**.
+
+C’est comme si chaque atome de chlore « occupait » 99 pm de rayon dans cette liaison.
+
+### Pourquoi on utilise le rayon covalent ?
+- Il permet de comparer la taille des atomes.
+- Il aide à prévoir la longueur d’une liaison dans d’autres molécules. Par exemple, si tu connais le rayon covalent du carbone (77 pm) et celui de l’hydrogène (37 pm), tu peux estimer que la liaison C–H fera environ 77 + 37 = 114 pm (valeur réelle très proche).
+
+### Remarques importantes
+- On parle de **rayon covalent** uniquement quand les atomes sont liés par une liaison covalente (partage d’électrons). Ce n’est pas la même chose que le rayon de van der Waals (quand les atomes ne sont pas liés) ni que le rayon ionique (quand l’atome a gagné ou perdu des électrons).
+- Les valeurs sont données en picomètres (pm) : 1 pm = 10⁻¹² m. Ce sont des distances extrêmement petites !
+
+### Petite astuce pour retenir
+Plus un atome a beaucoup de couches électroniques (en descendant dans le tableau périodique), plus son rayon covalent est grand. À l’inverse, dans une même période, plus le numéro atomique augmente, plus les électrons sont attirés vers le noyau et plus le rayon covalent diminue.
+
+Tu veux que je t’explique maintenant comment le rayon covalent varie dans le tableau périodique avec des exemples précis ?
+
+
+---
+
+<a id="run-native_prompt-fr-fr-c4e493b70e0e2cd1"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed
+
+**Source:** [gemini-3.8-flash__178f39154a61.json](../../gemini-3.8-flash__178f39154a61.json)
+
+Bonjour ! C’est une excellente question, et rassure-toi, c'est une notion très visuelle une fois qu'on a la bonne image en tête.
+
+Pour bien comprendre le **rayon covalent**, faisons un petit détour par un problème fondamental en chimie.
+
+---
+
+### 1. Le problème : Un atome n'a pas de bord net !
+
+Si je te demande de mesurer le rayon d'une bille de billard, c'est facile : elle a un bord dur et bien défini. 
+Mais un atome, ce n'est pas une bille rigide. C'est un noyau minuscule entouré d'un **nuage d'électrons**. Ce nuage est un peu comme du brouillard : plus on s'éloigne du centre, plus il devient flou, sans jamais s'arrêter d'un coup net. On ne peut donc pas poser une règle pour mesurer où s'arrête l'atome.
+
+Alors, comment font les chimistes ? **Ils mesurent les atomes quand ils sont attachés ensemble !**
+
+---
+
+### 2. La solution : Le rayon covalent
+
+Quand deux atomes identiques partagent des électrons pour former une **liaison covalente** (par exemple, deux atomes de chlore dans la molécule $\text{Cl}_2$, ou deux atomes de carbone), ils se rapprochent tellement que leurs nuages électroniques fusionnent un peu.
+
+Les chimistes sont capables de mesurer très précisément la **distance entre les deux noyaux** (appelons-la $D$).
+
+Le **rayon covalent ($r_{\text{cov}}$)**, c'est tout simplement **la moitié de cette distance** :
+
+$$r_{\text{cov}} = \frac{D}{2}$$
+
+> **L'analogie de la balle en mousse :**
+> Imagine deux balles en mousse qu'on presse l'une contre l'autre. Elles s'écrasent un peu au point de contact. Le rayon covalent, c'est la moitié de la distance entre les centres de ces deux balles pressées.
+
+---
+
+### 3. Comment varie-t-il dans le tableau périodique ? (Très utile pour les devoirs !)
+
+Le rayon covalent n'est pas le même pour tous les éléments, et il suit une logique formidable sur le tableau périodique :
+
+1. **Quand on descend dans une colonne $\downarrow$ : le rayon AUGMENTE.**
+   * *Pourquoi ?* À chaque ligne, on ajoute une nouvelle couche d'électrons (comme si on rajoutait une épaisseur à un oignon). L'atome devient mécaniquement plus gros.
+2. **Quand on va de gauche à droite sur une ligne $\rightarrow$ : le rayon DIMINUE.**
+   * *Pourquoi ? (Attention, c'est contre-intuitif !)* Sur une même ligne, on a le même nombre de couches, mais le noyau gagne de plus en plus de protons (+). Ce noyau plus puissant attire les électrons (-) plus fortement vers lui. Résultat : l'atome "s'auto-compacte" et rétrécit !
+
+---
+
+### En résumé :
+
+* Le **rayon covalent**, c'est la moitié de la distance entre les noyaux de deux atomes identiques liés par une liaison covalente simple.
+* C'est la façon dont les chimistes définissent la "taille" pratique d'un atome engagé dans une molécule.
+* Il s'exprime souvent en **picomètres** ($1 \text{ pm} = 10^{-12} \text{ m}$) ou en **angströms** ($1 \text{ Å} = 10^{-10} \text{ m}$).
+
+Est-ce que cette image te semble claire, ou aimerais-tu qu'on applique ça à un exemple précis (comme la molécule de dihydrogène $\text{H}_2$) ?
+
+
+---
+
+<a id="run-native_prompt-fr-fr-9f3cc408df52efc9"></a>
+
+### claude-sonnet-5
+
+**Status:** completed
+
+**Source:** [claude-sonnet-5__2babbd8a032b.json](../../claude-sonnet-5__2babbd8a032b.json)
+
+# Le rayon covalent
+
+## Définition simple
+
+Le **rayon covalent** représente la taille d'un atome lorsqu'il est engagé dans une **liaison covalente** avec un autre atome (une liaison où deux atomes partagent une paire d'électrons).
+
+## Comment le mesure-t-on ?
+
+On ne peut pas mesurer directement la taille d'un seul atome isolé (les électrons n'ont pas de "bord" net). Alors les scientifiques utilisent une astuce :
+
+1. On mesure la distance entre les noyaux de deux atomes identiques liés par une liaison covalente
+2. On divise cette distance par 2
+
+**Exemple concret :** Dans la molécule de dichlore (Cl–Cl), la distance entre les deux noyaux de chlore est de 198 pm (picomètres). 
+
+Le rayon covalent du chlore = 198 / 2 = **99 pm**
+
+## Une image pour comprendre
+
+Imagine deux ballons de baudruche qui se touchent. La distance entre leurs centres, divisée par 2, te donne le "rayon" de chaque ballon. C'est le même principe avec les atomes !
+
+## Pourquoi c'est important ?
+
+Le rayon covalent permet de :
+
+- **Prédire les tailles des molécules**
+- **Comparer les atomes entre eux** : plus un atome est gros, plus son rayon covalent est grand
+- **Comprendre les tendances dans le tableau périodique** :
+  - Le rayon covalent **diminue** quand on va de gauche à droite sur une ligne (période)
+  - Le rayon covalent **augmente** quand on descend dans une colonne (groupe)
+
+## Petit tableau d'exemples
+
+| Atome | Rayon covalent (pm) |
+|-------|---------------------|
+| H     | 31                  |
+| C     | 77                  |
+| N     | 75                  |
+| O     | 73                  |
+| Cl    | 99                  |
+
+## À retenir
+
+Le rayon covalent n'est pas une valeur fixe absolue : elle dépend légèrement du type de liaison (simple, double, triple) et des atomes environnants. C'est une **valeur moyenne** très utile pour comparer et prédire les propriétés des molécules !
+
+---
+
+As-tu des questions sur ce concept, ou veux-tu qu'on regarde comment il évolue dans le tableau périodique ? 😊
+
+
+---
+
+<a id="run-native_prompt-fr-fr-8c05ee22446f77d0"></a>
+
+### llama-4-maverick
+
+**Status:** completed
+
+**Source:** [llama-4-maverick__30af5b71b781.json](../../llama-4-maverick__30af5b71b781.json)
+
+**Bienvenue dans le monde de la chimie !**
+
+Aujourd'hui, nous allons explorer un concept fondamental en chimie : le rayon covalent. Ne t'inquiète pas si cela te semble compliqué, je vais t'expliquer cela de manière simple et claire.
+
+**Qu'est-ce qu'un rayon covalent ?**
+
+Le rayon covalent est une mesure de la taille d'un atome lorsqu'il est lié à d'autres atomes par des liaisons covalentes. Mais qu'est-ce qu'une liaison covalente ? C'est une liaison chimique qui se forme lorsque deux atomes partagent des électrons pour former une molécule.
+
+**Comment définir le rayon covalent ?**
+
+Imagine que tu as deux atomes qui se lient pour former une molécule. Le rayon covalent est la distance entre le noyau de l'atome et le point où les électrons sont partagés avec l'autre atome. C'est comme si tu mesurais la "taille" de l'atome lorsqu'il est lié à un autre atome.
+
+**Comment calculer le rayon covalent ?**
+
+Le rayon covalent est généralement calculé en mesurant la distance entre les noyaux de deux atomes liés par une liaison covalente. On divise ensuite cette distance par 2 pour obtenir le rayon covalent de chaque atome.
+
+**Exemple concret**
+
+Prenons l'exemple de la molécule de chlore (Cl2). La distance entre les deux noyaux de chlore est d'environ 0,198 nanomètres (nm). Pour calculer le rayon covalent du chlore, on divise cette distance par 2, ce qui nous donne un rayon covalent d'environ 0,099 nm.
+
+**Pourquoi le rayon covalent est-il important ?**
+
+Le rayon covalent est important car il nous aide à comprendre la structure des molécules et la façon dont les atomes s'agencent dans l'espace. Cela nous permet également de prédire les propriétés physiques et chimiques des substances.
+
+**En résumé**
+
+* Le rayon covalent est une mesure de la taille d'un atome lorsqu'il est lié à d'autres atomes par des liaisons covalentes.
+* Il est calculé en mesurant la distance entre les noyaux de deux atomes liés et en divisant cette distance par 2.
+* Le rayon covalent est important pour comprendre la structure des molécules et prédire les propriétés des substances.
+
+**Conclusion**
+
+J'espère que cette explication t'a aidé à comprendre le concept de rayon covalent. N'hésite pas à me poser des questions si tu as besoin de clarifications supplémentaires. La chimie peut sembler complexe, mais avec de la patience et de la pratique, tu deviendras un expert dans ce domaine !
+

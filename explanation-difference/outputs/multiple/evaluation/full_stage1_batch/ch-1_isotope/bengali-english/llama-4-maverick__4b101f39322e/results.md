@@ -1,0 +1,231 @@
+# Stage 1: Bengali / isotope
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "isotope",
+  "observed_topic": "Concept, subatomic composition, hydrogen examples, and applications of isotopes",
+  "topic_match": "on_topic",
+  "reason": "The explanation defines isotopes based on proton and neutron numbers, provides hydrogen isotopes as a concrete example, and discusses their properties and applications.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition and subatomic basis of isotopes | {"depth": "explanation"} | accurate |
+| u2 | EXAMPLE | Comparison of hydrogen isotopes (protium, deuterium, and tritium) | {"context": "abstract_or_hypothetical", "treatment": "illustrative"} | accurate |
+| u3 | CONCEPT | Variation in physical properties among isotopes and their practical significance | {"depth": "statement"} | accurate |
+| u4 | EXAMPLE | Radiocarbon dating as an application of isotopes | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u5 | EXAMPLE | Nuclear medicine as an application of isotopes | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u6 | EXAMPLE | Physics research as an application of isotopes | {"context": "real_world", "treatment": "illustrative"} | accurate |
+
+## u1: Definition and subatomic basis of isotopes
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The definition of isotopes as atoms of the same element having identical atomic/proton numbers but different mass/neutron numbers is scientifically accurate.",
+    "errors": []
+  }
+}
+```
+
+```text
+প্রথমে, তোমাকে একটি প্রশ্ন করি। তুমি কি জানো যে একই মৌলের বিভিন্ন পরমাণুর নিউক্লিয়াসে প্রোটনের সংখ্যা একই থাকে, কিন্তু নিউট্রনের সংখ্যা ভিন্ন হতে পারে?
+
+হ্যাঁ, এটাই সত্যি। একই মৌলের বিভিন্ন পরমাণুর মধ্যে এই পার্থক্যের কারণে আইসোটোপ তৈরি হয়।
+
+আইসোটোপ হলো একই মৌলের বিভিন্ন পরমাণু যাদের পারমাণবিক সংখ্যা একই, কিন্তু ভর সংখ্যা ভিন্ন। অর্থাৎ, তাদের নিউক্লিয়াসে প্রোটনের সংখ্যা একই, কিন্তু নিউট্রনের সংখ্যা ভিন্ন।
+```
+
+
+## u2: Comparison of hydrogen isotopes (protium, deuterium, and tritium)
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The symbols, names, and proton/neutron breakdowns for protium, deuterium, and tritium are completely correct.",
+    "errors": []
+  }
+}
+```
+
+```text
+উদাহরণস্বরূপ, হাইড্রোজেনের তিনটি আইসোটোপ রয়েছে: প্রোটিয়াম (¹H), ডিউটেরিয়াম (²H বা D), এবং ট্রিটিয়াম (³H বা T)। এদের সবারই একটি করে প্রোটন আছে, কিন্তু নিউট্রনের সংখ্যা ভিন্ন: প্রোটিয়ামে কোনো নিউট্রন নেই, ডিউটেরিয়ামে একটি নিউট্রন আছে, এবং ট্রিটিয়ামে দুটি নিউট্রন আছে।
+```
+
+
+## u3: Variation in physical properties among isotopes and their practical significance
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly states that isotopes have different physical properties such as mass and nuclear spin, which enable various practical applications.",
+    "errors": []
+  }
+}
+```
+
+```text
+আইসোটোপের ধারণাটি রসায়ন এবং পদার্থবিদ্যায় খুবই গুরুত্বপূর্ণ। বিভিন্ন আইসোটোপের বিভিন্ন বৈশিষ্ট্য থাকতে পারে, যেমন বিভিন্ন ভর, বিভিন্ন নিউক্লিয়ার স্পিন, ইত্যাদি। এই বৈশিষ্ট্যগুলি বিভিন্ন ক্ষেত্রে ব্যবহৃত হয়
+```
+
+
+## u4: Radiocarbon dating as an application of isotopes
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Radiocarbon dating is a legitimate, well-known real-world application of carbon isotopes.",
+    "errors": []
+  }
+}
+```
+
+```text
+রেডিওকার্বন ডেটিং
+```
+
+
+## u5: Nuclear medicine as an application of isotopes
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Nuclear medicine is an established medical application utilizing radioisotopes.",
+    "errors": []
+  }
+}
+```
+
+```text
+নিউক্লিয়ার মেডিসিন
+```
+
+
+## u6: Physics research as an application of isotopes
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Isotopes are widely used in fundamental and applied physics research.",
+    "errors": []
+  }
+}
+```
+
+```text
+পদার্থবিদ্যার গবেষণায়
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "issue": "Whether the listed applications of isotopes (radiocarbon dating, nuclear medicine, and physics research) should be split into distinct illustrative EXAMPLE units or kept inside the surrounding CONCEPT unit (u3) as part of a single discussion of isotope importance.",
+    "proposed_resolution": "Following the explicit rule that a list naming independent applications constitutes separate EXAMPLE units even when sharing a sentence, they were separated into u4, u5, and u6, while the preceding assertion of differing properties was kept as CONCEPT unit u3."
+  },
+  {
+    "unit_ids": [
+      "u2"
+    ],
+    "issue": "Whether the hydrogen isotopes example has treatment 'illustrative' or 'worked'.",
+    "proposed_resolution": "Classified as 'illustrative' because the passage simply lists the subatomic counts for each hydrogen isotope rather than setting up a problem and walking through operations or derivations to infer them."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+আসসালামু আলাইকুম/নমস্কার, প্রিয় ছাত্র। আজকে আমরা আইসোটোপ সম্পর্কে আলোচনা করব।
+
+
+```
+
+```text
+, যেমন 
+```
+
+```text
+, 
+```
+
+```text
+, এবং 
+```
+
+```text
+।
+
+এখন, তোমার কি আইসোটোপ সম্পর্কে কোনো প্রশ্ন আছে?
+```

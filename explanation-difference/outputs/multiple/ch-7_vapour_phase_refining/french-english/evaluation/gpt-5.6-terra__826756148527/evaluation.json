@@ -1,0 +1,687 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "c16a08027a20c78be938471fb1ebb23b3c60bc56ae7629c8aff6afed2625fa31",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response accurately and directly explains vapour phase refining in French, detailing its general principles, industrial examples (the Mond process and the Van Arkel-de Boer process), advantages, and limitations.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Principe général du raffinage en phase vapeur"
+      },
+      {
+        "id": "s2",
+        "label": "Procédé Mond (raffinage du nickel)"
+      },
+      {
+        "id": "s3",
+        "label": "Procédé de Van Arkel (purification du titane et du zirconium)"
+      },
+      {
+        "id": "s4",
+        "label": "Avantages du raffinage en phase vapeur"
+      },
+      {
+        "id": "s5",
+        "label": "Limites et inconvénients du raffinage en phase vapeur"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition et principe général du raffinage en phase vapeur",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains the definition and mechanism of vapour phase refining: formation of a volatile compound from impure metal, separation from impurities, and thermal decomposition to yield pure metal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le **raffinage en phase vapeur** est une méthode utilisée pour purifier certains métaux. Elle repose sur l’idée suivante : on transforme le métal impur en un **composé volatil** (qui peut facilement passer à l’état gazeux), puis on décompose ce gaz pour récupérer le métal très pur.",
+            "start": 0,
+            "end": 282
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Principe général",
+            "start": 284,
+            "end": 303
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Le métal impur réagit avec un gaz ou une substance chimique**  ",
+            "start": 305,
+            "end": 373
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Il forme un composé volatil.",
+            "start": 374,
+            "end": 405
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Le composé est séparé des impuretés**  ",
+            "start": 407,
+            "end": 451
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Les impuretés ne forment généralement pas de vapeur avec ce réactif et restent donc dans le récipient.",
+            "start": 452,
+            "end": 557
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Le composé volatil est chauffé ou décomposé**  ",
+            "start": 559,
+            "end": 611
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   Il redonne le métal pur, qui se dépose sur une surface.",
+            "start": 612,
+            "end": 670
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On peut résumer ainsi :",
+            "start": 672,
+            "end": 695
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 697,
+            "end": 699
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{Métal impur} \\rightarrow \\text{composé volatil} \\rightarrow \\text{métal pur}",
+            "start": 700,
+            "end": 782
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 783,
+            "end": 785
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and 3-step general principle correctly characterize vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Exemple du procédé Mond pour le raffinage du nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides a real-world industrial example illustrating the refining of nickel via nickel tetracarbonyl and subsequent thermal decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Exemple : raffinage du nickel (procédé Mond)",
+            "start": 787,
+            "end": 834
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le nickel impur réagit avec du monoxyde de carbone, CO, à environ 50–60 °C :",
+            "start": 836,
+            "end": 912
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 914,
+            "end": 916
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{Ni} + 4\\text{CO} \\rightarrow \\text{Ni(CO)}_4",
+            "start": 917,
+            "end": 967
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 968,
+            "end": 970
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On obtient du **tétracarbonyle de nickel**, un gaz volatil.",
+            "start": 972,
+            "end": 1031
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ensuite, ce gaz est chauffé vers 180–200 °C. Il se décompose alors :",
+            "start": 1033,
+            "end": 1101
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1103,
+            "end": 1105
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{Ni(CO)}_4 \\rightarrow \\text{Ni pur} + 4\\text{CO}",
+            "start": 1106,
+            "end": 1160
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1161,
+            "end": 1163
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le nickel pur se dépose, tandis que le monoxyde de carbone peut être réutilisé.",
+            "start": 1165,
+            "end": 1244
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The temperatures, chemical species, and equations for the Mond process are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Exemple de la purification du titane ou du zirconium",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the Van Arkel-de Boer method for purifying titanium and zirconium using iodine to form volatile iodides decomposed on a hot filament.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Exemple : purification du titane ou du zirconium",
+            "start": 1246,
+            "end": 1297
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le titane impur peut réagir avec l’iode pour former un iodure volatil. Celui-ci est ensuite chauffé sur un filament très chaud, où il se décompose et dépose du titane très pur.",
+            "start": 1299,
+            "end": 1475
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Van Arkel process is correctly described as forming a volatile iodide that decomposes on a hot filament.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Avantages du raffinage en phase vapeur",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Lists the primary advantages of vapour phase refining, including high purity product output.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Avantages",
+            "start": 1477,
+            "end": 1489
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Permet d’obtenir des métaux de **très grande pureté**.",
+            "start": 1491,
+            "end": 1547
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Les impuretés sont facilement séparées.",
+            "start": 1548,
+            "end": 1589
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Utile pour des métaux comme le nickel, le titane ou le zirconium.",
+            "start": 1590,
+            "end": 1657
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The stated benefits of vapour phase refining are standard and accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CAVEAT",
+        "label": "Limites de la méthode",
+        "attributes": {
+          "subtype": "limitation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Identifies the practical and chemical limitations of vapour phase refining (specificity to certain metals, toxicity of gases, and high cost).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Limites",
+            "start": 1659,
+            "end": 1669
+          },
+          {
+            "id": "p31",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "limitation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Cette méthode ne convient pas à tous les métaux.",
+            "start": 1671,
+            "end": 1721
+          },
+          {
+            "id": "p32",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "limitation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Certains gaz utilisés peuvent être dangereux, par exemple le monoxyde de carbone.",
+            "start": 1722,
+            "end": 1805
+          },
+          {
+            "id": "p33",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "limitation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Elle peut être coûteuse.",
+            "start": 1806,
+            "end": 1832
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The limitations are scientifically accurate and appropriate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Résumé final",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Provides a concise concluding summary recapping the core mechanism of vapour phase refining.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En résumé, le raffinage en phase vapeur purifie un métal en le faisant passer temporairement sous forme de gaz, puis en le récupérant sous forme de métal pur.",
+            "start": 1834,
+            "end": 1992
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes the process.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-english\\gpt-5.6-terra__826756148527.json",
+    "original_sha256": "824cb68c3fb1c65b23af8452ee68fc1d57df0f631e88230e6faf3e72858193d8",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 34,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 2,
+      "CAVEAT": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 34,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

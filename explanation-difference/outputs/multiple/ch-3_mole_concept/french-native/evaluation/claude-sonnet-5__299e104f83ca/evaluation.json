@@ -1,0 +1,745 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "22b8fe033f0da368f145064c8a3f13a10d9853501c2feeb1f1f3ca3f1d1ca074",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "The mole concept in chemistry, including Avogadro's number, molar mass, and the relation between mass and amount of substance.",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response clearly and accurately explains the mole concept for a high school audience, covering the need for a macroscopic counting unit, Avogadro's constant, the bridge between microscopic and macroscopic scales, and the formula n = m/M.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Need for a counting unit in chemistry"
+      },
+      {
+        "id": "s2",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s3",
+        "label": "Bridging microscopic and macroscopic scales"
+      },
+      {
+        "id": "s4",
+        "label": "Molar mass and calculation formula"
+      },
+      {
+        "id": "s5",
+        "label": "Summary and review of the mole concept"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Rationale for grouping microscopic particles into packets",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why chemists need to group microscopic particles into packets (like tens or dozens) due to their unimaginably small size and immense number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "grains de sable sur une plage, ou des molécules d'eau dans un verre"
+            },
+            {
+              "passage_id": "p6",
+              "quote": "les œufs !"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Le concept de mole",
+            "start": 0,
+            "end": 20
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Pourquoi a-t-on besoin de la mole ?",
+            "start": 22,
+            "end": 60
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu veuilles compter des grains de sable sur une plage, ou des molécules d'eau dans un verre. Ces particules sont tellement **petites** et tellement **nombreuses** qu'il est impossible de les compter une par une !",
+            "start": 62,
+            "end": 286
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les chimistes ont donc inventé une astuce : regrouper les particules par **paquets**, un peu comme on utilise :",
+            "start": 288,
+            "end": 399
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **dizaine** pour compter par 10",
+            "start": 400,
+            "end": 437
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **douzaine** pour compter par 12 (les œufs !)",
+            "start": 438,
+            "end": 489
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- une **mole** pour compter par... un nombre gigantesque !",
+            "start": 490,
+            "end": 548
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly justifies the introduction of the mole using familiar counting analogies.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition of the mole and Avogadro's constant",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines the mole numerically and states Avogadro's constant along with its symbol and units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Qu'est-ce qu'une mole exactement ?",
+            "start": 550,
+            "end": 587
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Une mole = un paquet de 6,02 × 10²³ éléments**",
+            "start": 589,
+            "end": 637
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ce nombre s'appelle le **nombre d'Avogadro** (noté $N_A$).",
+            "start": 639,
+            "end": 697
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$N_A = 6,02 \\times 10^{23} \\text{ mol}^{-1}$$",
+            "start": 699,
+            "end": 745
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Avogadro's constant and the definition of a mole of elementary entities are stated correctly with standard units (mol⁻¹).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Rice grain illustration of Avogadro's number",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses a hypothetical thought experiment involving rice grains covering the Earth to illustrate the enormous magnitude of Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p13",
+              "quote": "grains de riz"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C'est un nombre absolument colossal ! Pour te donner une idée :",
+            "start": 747,
+            "end": 810
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Si tu avais une mole de grains de riz, tu pourrais recouvrir toute la surface de la Terre sur plusieurs mètres d'épaisseur !",
+            "start": 811,
+            "end": 937
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The order-of-magnitude estimation is physically reasonable (one mole of rice grains would indeed cover Earth's surface several meters deep).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Bridging microscopic and macroscopic worlds",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains that the mole serves as the practical bridge between unseeable microscopic particles and measurable macroscopic quantities.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## À quoi ça sert concrètement ?",
+            "start": 939,
+            "end": 971
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La mole permet de faire le lien entre :",
+            "start": 973,
+            "end": 1012
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 🔬 le monde **microscopique** (atomes, molécules)",
+            "start": 1013,
+            "end": 1063
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ⚖️ le monde **macroscopique** (ce qu'on peut peser, mesurer)",
+            "start": 1064,
+            "end": 1126
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately frames the central role of the mole concept in connecting microscopic particle numbers to macroscopic measurements.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked application with water molar mass",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3",
+          "s4"
+        ],
+        "rationale": "Provides a worked real-world example with water, showing how 18 g translates to 1 mole and 6.02 × 10²³ molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p22",
+              "quote": "si tu pèses 18 g d'eau sur une balance"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple concret",
+            "start": 1128,
+            "end": 1147
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La masse molaire de l'eau (H₂O) est **18 g/mol**.",
+            "start": 1149,
+            "end": 1198
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cela signifie que :",
+            "start": 1200,
+            "end": 1219
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$18 \\text{ g d'eau} = 1 \\text{ mole d'eau} = 6,02 \\times 10^{23} \\text{ molécules d'eau}$$",
+            "start": 1220,
+            "end": 1311
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc si tu pèses 18 g d'eau sur une balance, tu sais que tu as exactement 602 000 milliards de milliards de molécules d'eau ! Sans avoir besoin de les compter une par une.",
+            "start": 1313,
+            "end": 1484
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of water (18 g/mol) and the conversion to 1 mole containing 6.02 × 10²³ molecules (expressed colloquially as 602 000 milliards de milliards) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "The formula n = m / M",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents the foundational mathematical formula relating amount of substance, mass, and molar mass with their respective standard units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## La formule à retenir",
+            "start": 1486,
+            "end": 1509
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{m}{M}$$",
+            "start": 1511,
+            "end": 1530
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "où :",
+            "start": 1532,
+            "end": 1536
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- $n$ = quantité de matière (en **mol**)",
+            "start": 1537,
+            "end": 1577
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- $m$ = masse (en **g**)",
+            "start": 1578,
+            "end": 1602
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- $M$ = masse molaire (en **g/mol**)",
+            "start": 1603,
+            "end": 1639
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation n = m/M and the units for each variable are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary table and takeaway",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Recapitulates the main conceptual points using a comparison table between eggs/dozens and molecules/moles, concluding with a summarizing takeaway and a closing offer to practice.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p32",
+              "quote": "Œufs"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## En résumé",
+            "start": 1641,
+            "end": 1653
+          },
+          {
+            "id": "p30",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Analogie | Unité | Quantité |",
+            "start": 1655,
+            "end": 1686
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|----------|-------|----------|",
+            "start": 1687,
+            "end": 1718
+          },
+          {
+            "id": "p32",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Œufs | Douzaine | 12 |",
+            "start": 1719,
+            "end": 1743
+          },
+          {
+            "id": "p33",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Atomes/molécules | **Mole** | **6,02 × 10²³** |",
+            "start": 1744,
+            "end": 1793
+          },
+          {
+            "id": "p34",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La mole, c'est simplement une **unité de comptage** adaptée à l'infiniment petit ! 🧪",
+            "start": 1795,
+            "end": 1879
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu veux qu'on fasse un exercice ensemble pour t'entraîner ?",
+            "start": 1881,
+            "end": 1940
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately reinforces the core concept of the mole as a macroscopic counting unit for microscopic entities.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\french-native\\claude-sonnet-5__299e104f83ca.json",
+    "original_sha256": "37f7595c8b5e35769ab92fa2cc8311465567103e2f327a0dc2141ab5785c6a72",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 35,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 35,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "everyday": 4,
+      "none": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

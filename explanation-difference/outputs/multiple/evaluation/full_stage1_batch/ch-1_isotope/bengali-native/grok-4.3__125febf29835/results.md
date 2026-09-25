@@ -1,0 +1,328 @@
+# Stage 1: Bengali / isotope
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "isotope",
+  "observed_topic": "Definition, examples, properties, and applications of isotopes",
+  "topic_match": "on_topic",
+  "reason": "The explanation defines isotopes (same atomic number/protons, different mass number/neutrons), provides illustrative examples (hydrogen, chlorine), explains their chemical and physical properties, and lists key applications.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6",
+    "u7",
+    "u8"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition and basic mechanism of isotopes | {"depth": "explanation"} | accurate |
+| u2 | EXAMPLE | Worked comparison of hydrogen isotopes | {"context": "abstract_or_hypothetical", "treatment": "worked"} | accurate |
+| u3 | EXAMPLE | Chlorine isotopes and average atomic mass | {"context": "abstract_or_hypothetical", "treatment": "illustrative"} | contains_error |
+| u4 | CONCEPT | Properties of isotopes | {"depth": "explanation"} | accurate |
+| u5 | EXAMPLE | Application in cancer treatment | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u6 | EXAMPLE | Application in radiocarbon dating | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u7 | EXAMPLE | Application in nuclear power | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u8 | ANALOGY | Siblings analogy for isotopes | {} | accurate |
+
+## u1: Definition and basic mechanism of isotopes
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly defines isotopes as atoms of the same element having the same number of protons (atomic number Z) and periodic table position, but differing in neutron count and mass number A.",
+    "errors": []
+  }
+}
+```
+
+```text
+**সমস্থানিক** বলতে আমরা একই মৌলের বিভিন্ন রূপকে বুঝি, যাদের **প্রোটনের সংখ্যা একই**, কিন্তু **নিউট্রনের সংখ্যা ভিন্ন**। 
+
+ফলে তাদের **পারমাণবিক সংখ্যা (Z)** একই থাকে, তাই তারা পর্যায় সারণিতে একই স্থানে থাকে (এজন্যই নাম “সমস্থানিক”)। কিন্তু **ভর সংখ্যা (A)** ভিন্ন হয়।
+```
+
+
+## u2: Worked comparison of hydrogen isotopes
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The proton, neutron, and mass numbers, along with names (protium, deuterium, tritium), are correctly tabulated and deduced.",
+    "errors": []
+  }
+}
+```
+
+```text
+**হাইড্রোজেন** মৌলের তিনটি সমস্থানিক আছে:
+
+| সমস্থানিক | প্রোটন | নিউট্রন | ভর সংখ্যা | নাম |
+|-----------|--------|---------|-----------|-----|
+| ¹H        | 1      | 0       | 1         | প্রোটিয়াম |
+| ²H        | 1      | 1       | 2         | ডিউটেরিয়াম |
+| ³H        | 1      | 2       | 3         | ট্রিটিয়াম |
+
+- তিনটিরই প্রোটন ১টি করে → একই মৌল।
+- কিন্তু নিউট্রনের সংখ্যা আলাদা → ভর আলাদা।
+```
+
+
+## u3: Chlorine isotopes and average atomic mass
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The text states that the atomic mass of chlorine is 35.5 because it is the average ('দুটির গড়') of chlorine-35 and chlorine-37. However, the simple arithmetic mean of 35 and 37 is 36; 35.5 is a weighted average based on relative natural abundance (~75% Cl-35 and ~25% Cl-37).",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "(দুটির গড়)"
+          }
+        ],
+        "description": "The atomic mass of chlorine (35.5) is described as the average of 35 and 37, but the arithmetic mean of 35 and 37 is 36. 35.5 is a weighted average based on isotopic abundances (approx. 75% Cl-35 and 25% Cl-37).",
+        "correction": "ক্লোরিনের পারমাণবিক ভর ৩৫.৫ হওয়ার কারণ এটি এদের প্রাচুর্য অনুযায়ী ভরযুক্ত গড় (weighted average), সাধারণ গড় নয় (যা ৩৬ হতো)।",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+এরকম আরেকটা উদাহরণ: **ক্লোরিন**। সাধারণত ক্লোরিনের দুটি সমস্থানিক পাওয়া যায় — ³⁵Cl এবং ³⁷Cl। এজন্যই ক্লোরিনের পারমাণবিক ভর ৩৫.৫ দেখায় (দুটির গড়)।
+```
+
+
+## u4: Properties of isotopes
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Accurately explains why chemical properties remain identical (same electron configuration due to same proton number), physical properties differ due to mass differences, and notes the existence of stable and radioactive isotopes.",
+    "errors": []
+  }
+}
+```
+
+```text
+- **রাসায়নিক ধর্ম** একই থাকে (কারণ প্রোটন সংখ্যা একই, তাই ইলেকট্রন সংখ্যাও একই)।
+- **ভৌত ধর্ম** (যেমন: ভর, ঘনত্ব) একটু ভিন্ন হয়।
+- কিছু সমস্থানিক স্থায়ী, আবার কিছু তেজস্ক্রিয় (যেমন ট্রিটিয়াম, কার্বন-১৪)।
+```
+
+
+## u5: Application in cancer treatment
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Radioisotopes are widely used in radiation therapy and diagnostics for cancer.",
+    "errors": []
+  }
+}
+```
+
+```text
+- তেজস্ক্রিয় সমস্থানিক ব্যবহার করে ক্যান্সারের চিকিৎসা করা হয়।
+```
+
+
+## u6: Application in radiocarbon dating
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Carbon-14 dating is an established archaeological method for determining the age of organic materials.",
+    "errors": []
+  }
+}
+```
+
+```text
+- প্রত্নতত্ত্বে কার্বন-১৪ দিয়ে প্রাচীন জিনিসের বয়স বের করা হয়।
+```
+
+
+## u7: Application in nuclear power
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Uranium-235 is standard fissile fuel in nuclear power reactors.",
+    "errors": []
+  }
+}
+```
+
+```text
+- পারমাণবিক বিদ্যুৎকেন্দ্রে ইউরেনিয়াম-২৩৫ ব্যবহার হয়।
+```
+
+
+## u8: Siblings analogy for isotopes
+
+```json
+{
+  "attributes": {},
+  "contextualization": {
+    "value": "everyday",
+    "evidence": [
+      {
+        "excerpt_index": 0,
+        "quote": "“একই পরিবারের ভাই-বোন”"
+      }
+    ]
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The analogy maps familial resemblance to identical chemical properties and differing body weights to different isotopic mass numbers.",
+    "errors": []
+  }
+}
+```
+
+```text
+সমস্থানিক হলো “একই পরিবারের ভাই-বোন” — চেহারা (রাসায়নিক ধর্ম) একই, কিন্তু ওজন (ভর) আলাদা।
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u5",
+      "u6",
+      "u7"
+    ],
+    "issue": "Whether the three bulleted applications under 'কেন জানা দরকার?' should be grouped into a single EXAMPLE unit or separated into distinct EXAMPLE units.",
+    "proposed_resolution": "Separated into individual units following the guideline that distinct applications (such as radiocarbon dating and cancer treatment) constitute separate EXAMPLE units even when presented as a list under one heading."
+  },
+  {
+    "unit_ids": [
+      "u8"
+    ],
+    "issue": "Whether the summary sentence is primarily a STUDY_SUPPORT recap or an ANALOGY.",
+    "proposed_resolution": "Classified as ANALOGY because its core explanatory mechanism is mapping relationships between domains (siblings in a family sharing looks but differing in weight mapped to isotopes sharing chemical properties but differing in atomic mass)."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+একজন ভালো শিক্ষক হিসেবে আমি তোমাকে খুব সহজ ভাষায় বুঝিয়ে বলছি।
+
+### সমস্থানিক কী?
+
+
+```
+
+```text
+
+
+### সহজ উদাহরণ দিয়ে বুঝি
+
+
+```
+
+```text
+
+
+### সমস্থানিকের বৈশিষ্ট্য
+
+
+```
+
+```text
+
+
+### কেন জানা দরকার?
+
+
+```
+
+```text
+
+
+**সারকথা:**  
+
+```
+
+```text
+
+
+এখন বলো, কোন অংশটা আরেকটু বিস্তারিত বুঝতে চাও? নাকি আরও কোনো উদাহরণ দরকার?
+```

@@ -1,0 +1,138 @@
+{
+  "job": {
+    "run_index": 6,
+    "lang_id": "en",
+    "language": "ar",
+    "prompt_type": "language_template",
+    "topic": "stoichiometry",
+    "prompt": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+    "model": "grok-4.3",
+    "reasoning": null,
+    "web_search": false,
+    "condition_id": "english_prompt",
+    "prompt_language": "en",
+    "topic_language": "en",
+    "response_language": "ar",
+    "response_language_name": "Arabic",
+    "topic_id": "ch-2",
+    "topic_name": "stoichiometry",
+    "subject": "chemistry",
+    "prompt_template": "You are an expert teacher teaching an high school student. Explain {topic} in {response_language_name_en}.",
+    "prompt_template_sha256": "5964b4a36042453a234c5b1d8158975bd900f3c9662770b310b7b041920c4025",
+    "job_id": "run-english_prompt-en-ar-958c9547c47096bf",
+    "resolved_model": "openai/xai/grok-4.3"
+  },
+  "request": {
+    "model": "openai/xai/grok-4.3",
+    "input": "You are an expert teacher teaching an high school student. Explain stoichiometry in Arabic.",
+    "store": false
+  },
+  "started_at": "2026-09-24T23:50:43.162247+00:00",
+  "response": {
+    "id": "resp_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOm9wZW5haTttb2RlbF9pZDpOb25lO3Jlc3BvbnNlX2lkOjBlNWQ5ODEzLThmMTMtNGEyOS1hMDdmLTBhN2I5NjM4OGZjZA==",
+    "created_at": 1790293844,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {
+      "system_fingerprint": "fp_39c5j0a3e9"
+    },
+    "model": "xai/grok-4.3",
+    "object": "response",
+    "output": [
+      {
+        "id": "msg_0e5d9813-8f13-4a29-a07f-0a7b96388fcd",
+        "content": [
+          {
+            "annotations": [],
+            "text": "الستوكيومترية (أو علم القياس الكيميائي) هي فرع من الكيمياء يهتم بدراسة **الكميات** الدقيقة للمواد المتفاعلة والمواد الناتجة في التفاعلات الكيميائية. تخيل أن التفاعل الكيميائي مثل وصفة طبخ: تحتاج كميات محددة من كل مكون حتى ينجح الطبق، وإلا ستحصل على نتيجة مختلفة أو ستتبقى مواد زائدة.\n\nسأشرحها لك خطوة بخطوة بطريقة مبسطة تناسب المرحلة الثانوية.\n\n### 1. الأساس الذي تعتمد عليه الستوكيومترية\n- **قانون حفظ الكتلة**: الكتلة لا تفنى ولا تُستحدث من العدم، بل تتحول فقط. لذلك يجب أن تكون المعادلة الكيميائية **موزونة** (متوازنة) قبل أي حساب.\n- **المول (Mole)**: وحدة قياس كمية المادة. المول الواحد يحتوي على 6.02 × 10²³ جسيم (ذرة أو جزيء). يُستخدم المول لأن الذرات صغيرة جداً ولا يمكن عدّها مباشرة.\n- **الكتلة المولية**: كتلة مول واحد من المادة (تقاس بوحدة جرام/مول). مثلاً: الكتلة المولية للماء (H₂O) = 18 جم/مول.\n\n### 2. المعادلة الموزونة ونسب المولات\nابدأ دائماً بوزن المعادلة. من المعادلة الموزونة تستخرج **نسب المولات** (Mole Ratios) التي تعمل مثل \"خريطة\" للحسابات.\n\nمثال بسيط:\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\n- نسب المولات:\n  - H₂ : O₂ = 2 : 1\n  - H₂ : H₂O = 2 : 2 (أي 1 : 1)\n  - O₂ : H₂O = 1 : 2\n\nهذه النسب تخبرك: \"لكل 2 مول هيدروجين تحتاج 1 مول أكسجين لإنتاج 2 مول ماء\".\n\n### 3. كيف تحسب الكميات؟ (مثال عملي)\n**السؤال**: إذا تفاعل 8 جرام من الهيدروجين (H₂) مع كمية كافية من الأكسجين، فكم جراماً من الماء ينتج؟\n\n**الحل خطوة بخطوة**:\n\n1. حوّل الكتلة إلى مولات:\n   - الكتلة المولية لـ H₂ = 2 جم/مول\n   - عدد المولات = الكتلة ÷ الكتلة المولية = 8 ÷ 2 = **4 مول** من H₂\n\n2. استخدم نسبة المولات من المعادلة:\n   - من المعادلة: 2 مول H₂ → 2 مول H₂O\n   - إذن 4 مول H₂ → **4 مول** H₂O\n\n3. حوّل المولات إلى كتلة:\n   - الكتلة المولية لـ H₂O = 18 جم/مول\n   - الكتلة = عدد المولات × الكتلة المولية = 4 × 18 = **72 جرام**\n\nالنتيجة: ينتج 72 جرام ماء.\n\n### 4. المتفاعل المحدد (Limiting Reactant)\nأحياناً تكون الكميات غير متناسبة مع النسب. في هذه الحالة، المادة التي تنفد أولاً هي التي \"تحدد\" كمية المنتج.\n\nمثال سريع:\n- لديك 4 مول H₂ و 3 مول O₂.\n- حسب المعادلة تحتاج 2 H₂ : 1 O₂.\n- 4 مول H₂ تحتاج فقط 2 مول O₂، لكن لديك 3 مول O₂ (زائد).\n- إذن H₂ هو المتفاعل المحدد، وسينتج 4 مول ماء فقط (وليس 6 مول كما لو كان O₂ كافياً).\n\n### نصائح سريعة للطلاب\n- وزن المعادلة أولاً دائماً.\n- حوّل دائماً إلى مولات قبل استخدام النسب.\n- استخدم الآلة الحاسبة لحساب الكتل المولية بدقة.\n- تدرب على أمثلة من كتابك المدرسي (مثل احتراق الميثان أو تفاعل الصوديوم مع الكلور).\n\nهل تريد أن أشرح مثالاً آخر (مثل حساب المتفاعل المحدد بالتفصيل) أو أعطيك تمريناً بسيطاً تحله؟",
+            "type": "output_text",
+            "logprobs": []
+          }
+        ],
+        "role": "assistant",
+        "status": "completed",
+        "type": "message",
+        "phase": null
+      }
+    ],
+    "parallel_tool_calls": true,
+    "temperature": 0.7,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": 0.95,
+    "max_output_tokens": null,
+    "previous_response_id": null,
+    "reasoning": {
+      "effort": "medium",
+      "summary": "detailed"
+    },
+    "status": "completed",
+    "text": {
+      "format": {
+        "type": "text"
+      }
+    },
+    "truncation": "disabled",
+    "usage": {
+      "input_tokens": 351,
+      "input_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0,
+        "text_tokens": null
+      },
+      "output_tokens": 2729,
+      "output_tokens_details": {
+        "audio_tokens": null,
+        "reasoning_tokens": 1490,
+        "text_tokens": null
+      },
+      "total_tokens": 3080,
+      "cost": null,
+      "extra_properties": {
+        "google": {
+          "traffic_type": "ON_DEMAND"
+        }
+      },
+      "num_server_side_tools_used": 0,
+      "num_sources_used": 0
+    },
+    "user": null,
+    "store": false,
+    "background": false,
+    "completed_at": 1790293858,
+    "frequency_penalty": 0,
+    "max_tool_calls": null,
+    "presence_penalty": 0,
+    "prompt_cache_key": null,
+    "safety_identifier": null,
+    "service_tier": "default",
+    "top_logprobs": 0
+  },
+  "text": "الستوكيومترية (أو علم القياس الكيميائي) هي فرع من الكيمياء يهتم بدراسة **الكميات** الدقيقة للمواد المتفاعلة والمواد الناتجة في التفاعلات الكيميائية. تخيل أن التفاعل الكيميائي مثل وصفة طبخ: تحتاج كميات محددة من كل مكون حتى ينجح الطبق، وإلا ستحصل على نتيجة مختلفة أو ستتبقى مواد زائدة.\n\nسأشرحها لك خطوة بخطوة بطريقة مبسطة تناسب المرحلة الثانوية.\n\n### 1. الأساس الذي تعتمد عليه الستوكيومترية\n- **قانون حفظ الكتلة**: الكتلة لا تفنى ولا تُستحدث من العدم، بل تتحول فقط. لذلك يجب أن تكون المعادلة الكيميائية **موزونة** (متوازنة) قبل أي حساب.\n- **المول (Mole)**: وحدة قياس كمية المادة. المول الواحد يحتوي على 6.02 × 10²³ جسيم (ذرة أو جزيء). يُستخدم المول لأن الذرات صغيرة جداً ولا يمكن عدّها مباشرة.\n- **الكتلة المولية**: كتلة مول واحد من المادة (تقاس بوحدة جرام/مول). مثلاً: الكتلة المولية للماء (H₂O) = 18 جم/مول.\n\n### 2. المعادلة الموزونة ونسب المولات\nابدأ دائماً بوزن المعادلة. من المعادلة الموزونة تستخرج **نسب المولات** (Mole Ratios) التي تعمل مثل \"خريطة\" للحسابات.\n\nمثال بسيط:\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\n- نسب المولات:\n  - H₂ : O₂ = 2 : 1\n  - H₂ : H₂O = 2 : 2 (أي 1 : 1)\n  - O₂ : H₂O = 1 : 2\n\nهذه النسب تخبرك: \"لكل 2 مول هيدروجين تحتاج 1 مول أكسجين لإنتاج 2 مول ماء\".\n\n### 3. كيف تحسب الكميات؟ (مثال عملي)\n**السؤال**: إذا تفاعل 8 جرام من الهيدروجين (H₂) مع كمية كافية من الأكسجين، فكم جراماً من الماء ينتج؟\n\n**الحل خطوة بخطوة**:\n\n1. حوّل الكتلة إلى مولات:\n   - الكتلة المولية لـ H₂ = 2 جم/مول\n   - عدد المولات = الكتلة ÷ الكتلة المولية = 8 ÷ 2 = **4 مول** من H₂\n\n2. استخدم نسبة المولات من المعادلة:\n   - من المعادلة: 2 مول H₂ → 2 مول H₂O\n   - إذن 4 مول H₂ → **4 مول** H₂O\n\n3. حوّل المولات إلى كتلة:\n   - الكتلة المولية لـ H₂O = 18 جم/مول\n   - الكتلة = عدد المولات × الكتلة المولية = 4 × 18 = **72 جرام**\n\nالنتيجة: ينتج 72 جرام ماء.\n\n### 4. المتفاعل المحدد (Limiting Reactant)\nأحياناً تكون الكميات غير متناسبة مع النسب. في هذه الحالة، المادة التي تنفد أولاً هي التي \"تحدد\" كمية المنتج.\n\nمثال سريع:\n- لديك 4 مول H₂ و 3 مول O₂.\n- حسب المعادلة تحتاج 2 H₂ : 1 O₂.\n- 4 مول H₂ تحتاج فقط 2 مول O₂، لكن لديك 3 مول O₂ (زائد).\n- إذن H₂ هو المتفاعل المحدد، وسينتج 4 مول ماء فقط (وليس 6 مول كما لو كان O₂ كافياً).\n\n### نصائح سريعة للطلاب\n- وزن المعادلة أولاً دائماً.\n- حوّل دائماً إلى مولات قبل استخدام النسب.\n- استخدم الآلة الحاسبة لحساب الكتل المولية بدقة.\n- تدرب على أمثلة من كتابك المدرسي (مثل احتراق الميثان أو تفاعل الصوديوم مع الكلور).\n\nهل تريد أن أشرح مثالاً آخر (مثل حساب المتفاعل المحدد بالتفصيل) أو أعطيك تمريناً بسيطاً تحله؟",
+  "usage": {
+    "input_tokens": 351,
+    "input_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0,
+      "text_tokens": null
+    },
+    "output_tokens": 2729,
+    "output_tokens_details": {
+      "audio_tokens": null,
+      "reasoning_tokens": 1490,
+      "text_tokens": null
+    },
+    "total_tokens": 3080,
+    "cost": null,
+    "extra_properties": {
+      "google": {
+        "traffic_type": "ON_DEMAND"
+      }
+    },
+    "num_server_side_tools_used": 0,
+    "num_sources_used": 0
+  },
+  "status": "completed",
+  "finished_at": "2026-09-24T23:50:58.063915+00:00"
+}

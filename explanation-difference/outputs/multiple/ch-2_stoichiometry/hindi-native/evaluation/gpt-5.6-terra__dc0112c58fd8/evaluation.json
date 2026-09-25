@@ -1,0 +1,2279 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "c0a9db8eeb64ba95c486ba42fa9e6ec1fc3c65ff5bbf8994fa99aa3bd8247e60",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10"
+      ],
+      "reason": "The explanation thoroughly introduces stoichiometry in Hindi, explaining core concepts such as balanced equations, the mole concept, molar mass, calculation steps, worked examples, and limiting reactants.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Chemical Equations and Mole Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "Mole Concept and Avogadro's Number"
+      },
+      {
+        "id": "s4",
+        "label": "Molar Mass"
+      },
+      {
+        "id": "s5",
+        "label": "Steps for Solving Stoichiometry Problems"
+      },
+      {
+        "id": "s6",
+        "label": "Stoichiometry Worked Example (Water Synthesis)"
+      },
+      {
+        "id": "s7",
+        "label": "Limiting Reactant"
+      },
+      {
+        "id": "s8",
+        "label": "Key Formulas"
+      },
+      {
+        "id": "s9",
+        "label": "Stoichiometry Worked Example (Decomposition of Calcium Carbonate)"
+      },
+      {
+        "id": "s10",
+        "label": "Summary and Key Takeaways"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and scope of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains what stoichiometry is, how it relates quantities of reactants and products, and its dependence on balanced chemical equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## रासायनिक समीकरणमिति (Stoichiometry) क्या है?",
+            "start": 0,
+            "end": 47
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**रासायनिक समीकरणमिति** रसायन विज्ञान की वह शाखा है जिसमें हम किसी रासायनिक अभिक्रिया में पदार्थों की **मात्रा** का हिसाब लगाते हैं।  ",
+            "start": 49,
+            "end": 183
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "सरल शब्दों में:",
+            "start": 184,
+            "end": 199
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> यदि हमें पता हो कि कितनी मात्रा में एक पदार्थ अभिक्रिया कर रहा है, तो हम पता लगा सकते हैं कि दूसरे पदार्थ की कितनी मात्रा चाहिए या कितनी बनेगी।",
+            "start": 201,
+            "end": 346
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यह गणना हमेशा **संतुलित रासायनिक समीकरण** पर आधारित होती है।",
+            "start": 348,
+            "end": 408
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 410,
+            "end": 413
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry and its reliance on balanced chemical equations are accurately stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Role of balanced chemical equations and mole ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why balanced equations are needed (conservation of mass/atoms) and how coefficients represent mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 1. संतुलित रासायनिक समीकरण क्यों जरूरी है?",
+            "start": 415,
+            "end": 460
+          },
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "उदाहरण:",
+            "start": 462,
+            "end": 469
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 471,
+            "end": 473
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 474,
+            "end": 502
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 503,
+            "end": 505
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसका अर्थ है:",
+            "start": 507,
+            "end": 520
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 अणु (या 2 मोल) हाइड्रोजन",
+            "start": 522,
+            "end": 550
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 अणु (या 1 मोल) ऑक्सीजन से",
+            "start": 551,
+            "end": 580
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 अणु (या 2 मोल) पानी बनता है।",
+            "start": 581,
+            "end": 613
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यहाँ गुणांक \\(2:1:2\\) पदार्थों का **मोल अनुपात (mole ratio)** बताते हैं।",
+            "start": 615,
+            "end": 687
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ध्यान रखें: अभिक्रिया में परमाणु न तो बनते हैं, न नष्ट होते हैं। इसलिए समीकरण का संतुलित होना आवश्यक है।",
+            "start": 689,
+            "end": 793
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 795,
+            "end": 798
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The relationship between balanced chemical coefficients, molecular ratios, and mole ratios is correctly explained, alongside the conservation of atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Mole concept and Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines the mole as a counting unit for chemical entities and introduces Avogadro's number with illustrative examples.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 2. मोल (Mole) क्या होता है?",
+            "start": 800,
+            "end": 830
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रसायन विज्ञान में बहुत छोटे कणों—परमाणुओं और अणुओं—की गिनती के लिए **मोल** का उपयोग किया जाता है।",
+            "start": 832,
+            "end": 929
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 931,
+            "end": 933
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ मोल} = 6.022 \\times 10^{23} \\text{ कण}",
+            "start": 934,
+            "end": 981
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 982,
+            "end": 984
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसे एवोगैड्रो संख्या कहते हैं।",
+            "start": 986,
+            "end": 1016
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "उदाहरण:",
+            "start": 1018,
+            "end": 1025
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 मोल \\(H_2O\\) = \\(6.022 \\times 10^{23}\\) पानी के अणु",
+            "start": 1027,
+            "end": 1082
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 मोल कार्बन = \\(6.022 \\times 10^{23}\\) कार्बन परमाणु",
+            "start": 1083,
+            "end": 1138
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1140,
+            "end": 1143
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of mole and Avogadro's number (6.022 x 10^23 particles) is scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Molar mass definition and calculation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines molar mass, specifies its units (g/mol), and demonstrates how to calculate molar mass for H2O and CO2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 3. मोलर द्रव्यमान (Molar Mass)",
+            "start": 1145,
+            "end": 1178
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "किसी पदार्थ के **1 मोल का द्रव्यमान** उसका मोलर द्रव्यमान कहलाता है। इसकी इकाई **g/mol** होती है।",
+            "start": 1180,
+            "end": 1277
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "उदाहरण:",
+            "start": 1279,
+            "end": 1286
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### पानी \\((H_2O)\\)",
+            "start": 1288,
+            "end": 1307
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- H का परमाणु द्रव्यमान = 1",
+            "start": 1309,
+            "end": 1336
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- O का परमाणु द्रव्यमान = 16",
+            "start": 1337,
+            "end": 1365
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1367,
+            "end": 1369
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2O = 2(1) + 16 = 18 \\text{ g/mol}",
+            "start": 1370,
+            "end": 1405
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1406,
+            "end": 1408
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अर्थात:",
+            "start": 1410,
+            "end": 1417
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1419,
+            "end": 1421
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ मोल पानी} = 18 \\text{ ग्राम}",
+            "start": 1422,
+            "end": 1459
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1460,
+            "end": 1462
+          },
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### कार्बन डाइऑक्साइड \\((CO_2)\\)",
+            "start": 1464,
+            "end": 1496
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1498,
+            "end": 1500
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CO_2 = 12 + 2(16) = 44 \\text{ g/mol}",
+            "start": 1501,
+            "end": 1537
+          },
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1538,
+            "end": 1540
+          },
+          {
+            "id": "p46",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अर्थात 1 मोल \\(CO_2\\) का द्रव्यमान 44 ग्राम है।",
+            "start": 1542,
+            "end": 1589
+          },
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1591,
+            "end": 1594
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and calculation of molar masses for water (18 g/mol) and carbon dioxide (44 g/mol) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "PROCEDURE",
+        "label": "General procedure for stoichiometric calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a reusable step-by-step method and a flowchart for converting between mass, moles, mole ratios, and product mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 4. समीकरणमिति हल करने की मुख्य विधि",
+            "start": 1596,
+            "end": 1634
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अधिकांश प्रश्नों में यह क्रम अपनाएँ:",
+            "start": 1636,
+            "end": 1672
+          },
+          {
+            "id": "p50",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **रासायनिक समीकरण लिखें।**",
+            "start": 1674,
+            "end": 1703
+          },
+          {
+            "id": "p51",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **समीकरण को संतुलित करें।**",
+            "start": 1704,
+            "end": 1734
+          },
+          {
+            "id": "p52",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. दिए गए द्रव्यमान को **मोल** में बदलें।",
+            "start": 1735,
+            "end": 1776
+          },
+          {
+            "id": "p53",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. संतुलित समीकरण से **मोल अनुपात** लगाएँ।",
+            "start": 1777,
+            "end": 1819
+          },
+          {
+            "id": "p54",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "5. आवश्यक हो तो मोल को फिर **ग्राम**, **कणों**, या **गैस के आयतन** में बदलें।",
+            "start": 1820,
+            "end": 1897
+          },
+          {
+            "id": "p55",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसे संक्षेप में ऐसे याद रख सकते हैं:",
+            "start": 1899,
+            "end": 1935
+          },
+          {
+            "id": "p56",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1937,
+            "end": 1939
+          },
+          {
+            "id": "p57",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{ग्राम} \\rightarrow \\text{मोल} \\rightarrow \\text{मोल अनुपात} \\rightarrow \\text{ग्राम}",
+            "start": 1940,
+            "end": 2030
+          },
+          {
+            "id": "p58",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2031,
+            "end": 2033
+          },
+          {
+            "id": "p59",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2035,
+            "end": 2038
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The standard sequence of steps (write equation, balance, convert to moles, apply mole ratio, convert to target quantity) is accurate and standard in stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked example calculating water produced from hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Applies the stoichiometric calculation procedure to determine mass of water produced from 4 g of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p60",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 5. उदाहरण: पानी बनने की मात्रा",
+            "start": 2040,
+            "end": 2073
+          },
+          {
+            "id": "p61",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण:",
+            "start": 2075,
+            "end": 2082
+          },
+          {
+            "id": "p62",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2084,
+            "end": 2086
+          },
+          {
+            "id": "p63",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 2087,
+            "end": 2115
+          },
+          {
+            "id": "p64",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2116,
+            "end": 2118
+          },
+          {
+            "id": "p65",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "प्रश्न: यदि 4 ग्राम हाइड्रोजन पूरी तरह अभिक्रिया करे, तो कितना पानी बनेगा?",
+            "start": 2120,
+            "end": 2194
+          },
+          {
+            "id": "p66",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### चरण 1: हाइड्रोजन के मोल ज्ञात करें",
+            "start": 2196,
+            "end": 2234
+          },
+          {
+            "id": "p67",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "\\(H_2\\) का मोलर द्रव्यमान:",
+            "start": 2236,
+            "end": 2262
+          },
+          {
+            "id": "p68",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2264,
+            "end": 2266
+          },
+          {
+            "id": "p69",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2 = 2 \\text{ g/mol}",
+            "start": 2267,
+            "end": 2288
+          },
+          {
+            "id": "p70",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2289,
+            "end": 2291
+          },
+          {
+            "id": "p71",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2293,
+            "end": 2295
+          },
+          {
+            "id": "p72",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{मोल } H_2 = \\frac{4}{2} = 2 \\text{ mol}",
+            "start": 2296,
+            "end": 2341
+          },
+          {
+            "id": "p73",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2342,
+            "end": 2344
+          },
+          {
+            "id": "p74",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### चरण 2: मोल अनुपात देखें",
+            "start": 2346,
+            "end": 2373
+          },
+          {
+            "id": "p75",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण में:",
+            "start": 2375,
+            "end": 2386
+          },
+          {
+            "id": "p76",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2388,
+            "end": 2390
+          },
+          {
+            "id": "p77",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 \\rightarrow 2H_2O",
+            "start": 2391,
+            "end": 2413
+          },
+          {
+            "id": "p78",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2414,
+            "end": 2416
+          },
+          {
+            "id": "p79",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अर्थात:",
+            "start": 2418,
+            "end": 2425
+          },
+          {
+            "id": "p80",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2427,
+            "end": 2429
+          },
+          {
+            "id": "p81",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\text{ mol } H_2 \\rightarrow 2 \\text{ mol } H_2O",
+            "start": 2430,
+            "end": 2480
+          },
+          {
+            "id": "p82",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2481,
+            "end": 2483
+          },
+          {
+            "id": "p83",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसलिए 2 मोल \\(H_2\\) से 2 मोल \\(H_2O\\) बनेंगे।",
+            "start": 2485,
+            "end": 2530
+          },
+          {
+            "id": "p84",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### चरण 3: पानी के मोल को ग्राम में बदलें",
+            "start": 2532,
+            "end": 2573
+          },
+          {
+            "id": "p85",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2575,
+            "end": 2577
+          },
+          {
+            "id": "p86",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } H_2O = 18 \\text{ g}",
+            "start": 2578,
+            "end": 2612
+          },
+          {
+            "id": "p87",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2613,
+            "end": 2615
+          },
+          {
+            "id": "p88",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2617,
+            "end": 2619
+          },
+          {
+            "id": "p89",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\text{ mol } H_2O = 2 \\times 18 = 36 \\text{ g}",
+            "start": 2620,
+            "end": 2668
+          },
+          {
+            "id": "p90",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2669,
+            "end": 2671
+          },
+          {
+            "id": "p91",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उत्तर: 4 ग्राम हाइड्रोजन से 36 ग्राम पानी बनेगा**, यदि ऑक्सीजन पर्याप्त मात्रा में उपलब्ध हो।",
+            "start": 2673,
+            "end": 2768
+          },
+          {
+            "id": "p92",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2770,
+            "end": 2773
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations (moles of H2 = 2 mol, mole ratio 2:2, mass of H2O = 2 * 18 = 36 g) are correctly worked out.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Limiting reactant concept and identification",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Defines the limiting reactant and explains how to determine it using the water synthesis reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p93",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 6. सीमित अभिकारक (Limiting Reactant)",
+            "start": 2775,
+            "end": 2814
+          },
+          {
+            "id": "p94",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "कई बार अभिक्रिया में एक पदार्थ कम पड़ जाता है। जो पदार्थ सबसे पहले समाप्त हो जाता है, उसे **सीमित अभिकारक** कहते हैं।",
+            "start": 2816,
+            "end": 2933
+          },
+          {
+            "id": "p95",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "उदाहरण:",
+            "start": 2935,
+            "end": 2942
+          },
+          {
+            "id": "p96",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2944,
+            "end": 2946
+          },
+          {
+            "id": "p97",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 2947,
+            "end": 2975
+          },
+          {
+            "id": "p98",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2976,
+            "end": 2978
+          },
+          {
+            "id": "p99",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मान लीजिए आपके पास:",
+            "start": 2980,
+            "end": 2999
+          },
+          {
+            "id": "p100",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 मोल \\(H_2\\)",
+            "start": 3001,
+            "end": 3016
+          },
+          {
+            "id": "p101",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 मोल \\(O_2\\)",
+            "start": 3017,
+            "end": 3032
+          },
+          {
+            "id": "p102",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण के अनुसार 2 मोल \\(H_2\\) को केवल 1 मोल \\(O_2\\) चाहिए।  ",
+            "start": 3034,
+            "end": 3095
+          },
+          {
+            "id": "p103",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसलिए \\(H_2\\) पूरा खर्च हो जाएगा और 1 मोल \\(O_2\\) बच जाएगा।",
+            "start": 3096,
+            "end": 3155
+          },
+          {
+            "id": "p104",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यहाँ \\(H_2\\) **सीमित अभिकारक** है, क्योंकि वही पानी बनने की अधिकतम मात्रा तय करेगा।",
+            "start": 3157,
+            "end": 3240
+          },
+          {
+            "id": "p105",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3242,
+            "end": 3245
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of limiting reactant and the deduction that 2 mol H2 limits 2 mol O2 are scientifically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Key formulas for stoichiometric conversions",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Lists core formulas for calculating moles, mass, and number of particles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p106",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 7. कुछ महत्वपूर्ण सूत्र",
+            "start": 3247,
+            "end": 3273
+          },
+          {
+            "id": "p107",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### मोल निकालने का सूत्र",
+            "start": 3275,
+            "end": 3299
+          },
+          {
+            "id": "p108",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3301,
+            "end": 3303
+          },
+          {
+            "id": "p109",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{मोल} = \\frac{\\text{दिया गया द्रव्यमान (g)}}{\\text{मोलर द्रव्यमान (g/mol)}}",
+            "start": 3304,
+            "end": 3384
+          },
+          {
+            "id": "p110",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3385,
+            "end": 3387
+          },
+          {
+            "id": "p111",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### द्रव्यमान निकालने का सूत्र",
+            "start": 3389,
+            "end": 3419
+          },
+          {
+            "id": "p112",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3421,
+            "end": 3423
+          },
+          {
+            "id": "p113",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{द्रव्यमान} = \\text{मोल} \\times \\text{मोलर द्रव्यमान}",
+            "start": 3424,
+            "end": 3482
+          },
+          {
+            "id": "p114",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3483,
+            "end": 3485
+          },
+          {
+            "id": "p115",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### कणों की संख्या",
+            "start": 3487,
+            "end": 3505
+          },
+          {
+            "id": "p116",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3507,
+            "end": 3509
+          },
+          {
+            "id": "p117",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{कणों की संख्या} = \\text{मोल} \\times 6.022 \\times 10^{23}",
+            "start": 3510,
+            "end": 3572
+          },
+          {
+            "id": "p118",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3573,
+            "end": 3575
+          },
+          {
+            "id": "p119",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3577,
+            "end": 3580
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Formulas relating moles, mass, molar mass, and Avogadro's number are mathematically and conceptually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "EXAMPLE",
+        "label": "Worked example calculating carbon dioxide from calcium carbonate decomposition",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s9"
+        ],
+        "rationale": "Shows a worked calculation determining grams of CO2 produced from 100 g CaCO3 decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p120",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 8. एक और छोटा उदाहरण",
+            "start": 3582,
+            "end": 3605
+          },
+          {
+            "id": "p121",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3607,
+            "end": 3609
+          },
+          {
+            "id": "p122",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CaCO_3 \\rightarrow CaO + CO_2",
+            "start": 3610,
+            "end": 3639
+          },
+          {
+            "id": "p123",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3640,
+            "end": 3642
+          },
+          {
+            "id": "p124",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "प्रश्न: 100 ग्राम कैल्शियम कार्बोनेट \\((CaCO_3)\\) से कितना \\(CO_2\\) बनेगा?",
+            "start": 3644,
+            "end": 3718
+          },
+          {
+            "id": "p125",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मोलर द्रव्यमान:",
+            "start": 3720,
+            "end": 3735
+          },
+          {
+            "id": "p126",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3737,
+            "end": 3739
+          },
+          {
+            "id": "p127",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CaCO_3 = 40 + 12 + 3(16) = 100 \\text{ g/mol}",
+            "start": 3740,
+            "end": 3784
+          },
+          {
+            "id": "p128",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3785,
+            "end": 3787
+          },
+          {
+            "id": "p129",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अतः 100 ग्राम \\(CaCO_3\\) = 1 मोल \\(CaCO_3\\)",
+            "start": 3789,
+            "end": 3832
+          },
+          {
+            "id": "p130",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण के अनुसार:",
+            "start": 3834,
+            "end": 3851
+          },
+          {
+            "id": "p131",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3853,
+            "end": 3855
+          },
+          {
+            "id": "p132",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } CaCO_3 \\rightarrow 1 \\text{ mol } CO_2",
+            "start": 3856,
+            "end": 3909
+          },
+          {
+            "id": "p133",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3910,
+            "end": 3912
+          },
+          {
+            "id": "p134",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "\\(CO_2\\) का मोलर द्रव्यमान = 44 g/mol",
+            "start": 3914,
+            "end": 3951
+          },
+          {
+            "id": "p135",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसलिए:",
+            "start": 3953,
+            "end": 3959
+          },
+          {
+            "id": "p136",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3961,
+            "end": 3963
+          },
+          {
+            "id": "p137",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } CO_2 = 44 \\text{ g}",
+            "start": 3964,
+            "end": 3998
+          },
+          {
+            "id": "p138",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3999,
+            "end": 4001
+          },
+          {
+            "id": "p139",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उत्तर: 100 ग्राम \\(CaCO_3\\) से 44 ग्राम \\(CO_2\\) बनेगा।**",
+            "start": 4003,
+            "end": 4062
+          },
+          {
+            "id": "p140",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4064,
+            "end": 4067
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations for the thermal decomposition of CaCO3 yielding 44 g CO2 from 100 g CaCO3 are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary tips and key takeaways",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s10"
+        ],
+        "rationale": "Summarizes important rules to remember (balancing equations, mole ratios vs mass, units) when doing stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p141",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## याद रखने योग्य बातें",
+            "start": 4069,
+            "end": 4092
+          },
+          {
+            "id": "p142",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- सबसे पहले समीकरण को **संतुलित** करें।",
+            "start": 4094,
+            "end": 4133
+          },
+          {
+            "id": "p143",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- समीकरण के गुणांक द्रव्यमान नहीं, बल्कि **मोल अनुपात** बताते हैं।",
+            "start": 4134,
+            "end": 4200
+          },
+          {
+            "id": "p144",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ग्राम से सीधे तुलना नहीं करें; पहले उन्हें **मोल** में बदलें।",
+            "start": 4201,
+            "end": 4264
+          },
+          {
+            "id": "p145",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- सीमित अभिकारक ही उत्पाद की वास्तविक मात्रा निर्धारित करता है।",
+            "start": 4265,
+            "end": 4328
+          },
+          {
+            "id": "p146",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- इकाइयों—ग्राम, मोल, g/mol—का ध्यान रखें।",
+            "start": 4329,
+            "end": 4371
+          },
+          {
+            "id": "p147",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रासायनिक समीकरणमिति वास्तव में “रसायनों की मात्रा का गणित” है। अभ्यास के साथ यह बहुत आसान हो जाती है।",
+            "start": 4373,
+            "end": 4474
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All recap points and takeaways correctly reinforce proper stoichiometric problem-solving practices.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\hindi-native\\gpt-5.6-terra__dc0112c58fd8.json",
+    "original_sha256": "dafa6038b35ad9b33606aef87b6ff73f53e82068fa3c67dedcbb80e0692d8d38",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 10,
+    "substantive_content_units": 10,
+    "total_passages": 147,
+    "content_unit_kinds": {
+      "CONCEPT": 6,
+      "PROCEDURE": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 147,
+    "unique_subtopics": 10,
+    "contextualization": {
+      "none": 10
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 10
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,690 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7fe1ab014fb42aa56a4d4e3f75429feffb5351a65f31b871bcbb4c72e84eb808",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The response directly addresses the requested topic of redox reactions, detailing their definition, electron transfer, oxidation numbers, worked chemical examples, fundamental conservation principles, and real-world applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of redox reactions"
+      },
+      {
+        "id": "s2",
+        "label": "Definitions of oxidation and reduction"
+      },
+      {
+        "id": "s3",
+        "label": "Worked chemical examples of redox reactions"
+      },
+      {
+        "id": "s4",
+        "label": "Core principles of redox reactions"
+      },
+      {
+        "id": "s5",
+        "label": "Applications and occurrences of redox reactions"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Introduction and general definition of redox reactions",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces redox reactions by defining them in terms of simultaneous electron transfer between reacting substances.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بالطبع. تفاعلات الأكسدة والاختزال هي نوع من التفاعلات الكيميائية التي تنطوي على انتقال الإلكترونات بين المواد المتفاعلة. في هذه التفاعلات، تفقد إحدى المواد بعض الإلكترونات (تتأكسد) بينما تكتسب مادة أخرى تلك الإلكترونات (تختزل).",
+            "start": 0,
+            "end": 227
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines redox reactions as processes involving the transfer of electrons where one substance loses electrons (oxidized) and another gains them (reduced).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition of oxidation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines oxidation as the loss of electrons and explains how it correlates with an increase in oxidation state.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الأكسدة:",
+            "start": 229,
+            "end": 241
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- هي عملية فقدان الإلكترونات من قبل جزيء أو ذرة أو أيون.",
+            "start": 242,
+            "end": 298
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- عندما تتأكسد مادة ما، يزداد عدد أكسدتها (تزداد شحنتها الموجبة أو تصبح أقل سالبية).",
+            "start": 299,
+            "end": 383
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines oxidation as electron loss accompanied by an increase in oxidation number.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definition of reduction",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines reduction as the gain of electrons and explains how it corresponds to a decrease in oxidation state.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الاختزال:",
+            "start": 385,
+            "end": 398
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- هو عملية اكتساب الإلكترونات من قبل جزيء أو ذرة أو أيون.",
+            "start": 399,
+            "end": 456
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- عندما تختزل مادة ما، ينخفض عدد أكسدتها (تصبح أقل إيجابية أو أكثر سالبية).",
+            "start": 457,
+            "end": 532
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines reduction as electron gain accompanied by a decrease in oxidation number.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Combustion of hydrogen to form water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Walks through the combustion reaction of hydrogen with oxygen, showing explicit changes in oxidation states for each element.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال بسيط:",
+            "start": 534,
+            "end": 548
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لنأخذ تفاعل احتراق الهيدروجين لتكوين الماء كمثال:",
+            "start": 549,
+            "end": 598
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H₂ + O₂ → 2H₂O",
+            "start": 600,
+            "end": 615
+          },
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في هذا التفاعل:",
+            "start": 617,
+            "end": 632
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- يتفاعل الهيدروجين (H₂) مع الأكسجين (O₂) ليتكون الماء (H₂O).",
+            "start": 633,
+            "end": 694
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- الهيدروجين يتأكسد (يفقد إلكترونات) لأن حالة أكسدته تزداد من 0 في H₂ إلى +1 في H₂O.",
+            "start": 695,
+            "end": 779
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- الأكسجين يختزل (يكتسب إلكترونات) لأن حالة أكسدته تنخفض من 0 في O₂ إلى -2 في H₂O.",
+            "start": 780,
+            "end": 862
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately balances the reaction 2H2 + O2 -> 2H2O and correctly tracks oxidation numbers (H: 0 to +1, O: 0 to -2).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Reaction between iron and copper(II) ions",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a worked single-displacement ionic reaction showing the transfer of two electrons from iron to copper ions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال آخر:",
+            "start": 864,
+            "end": 877
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "تفاعل بين الحديد (Fe) وأيونات النحاس (Cu²⁺):",
+            "start": 878,
+            "end": 922
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "Fe + Cu²⁺ → Fe²⁺ + Cu",
+            "start": 924,
+            "end": 945
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هنا:",
+            "start": 947,
+            "end": 951
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- الحديد (Fe) يتأكسد إلى Fe²⁺ بفقدان إلكترونين.",
+            "start": 952,
+            "end": 999
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Cu²⁺ يختزل إلى Cu باكتساب إلكترونين.",
+            "start": 1000,
+            "end": 1038
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation Fe + Cu2+ -> Fe2+ + Cu correctly identifies iron losing two electrons and copper(II) gaining two electrons.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Core principles: simultaneity and electron conservation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains the foundational rules of redox reactions: oxidation and reduction must occur together, and the number of electrons lost must equal electrons gained.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ملاحظات هامة:",
+            "start": 1040,
+            "end": 1057
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **تحدث تفاعلات الأكسدة والاختزال دائمًا معًا**: لا يمكن أن يحدث أحدهما دون الآخر. عندما تتأكسد مادة ما، يجب أن يكون هناك مادة أخرى تختزل.",
+            "start": 1058,
+            "end": 1198
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **عدد الإلكترونات المفقودة يساوي عدد الإلكترونات المكتسبة**: في أي تفاعل أكسدة واختزال، يجب أن يكون إجمالي الإلكترونات المفقودة من قبل العامل المختزل مساويًا لإجمالي الإلكترونات المكتسبة من قبل العامل المؤكسد.",
+            "start": 1199,
+            "end": 1411
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately conveys that redox reactions are paired processes and that total electrons lost by the reducing agent must equal total electrons gained by the oxidizing agent.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Application: electrochemical cells and batteries",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents electrochemical cells and everyday batteries as a key application converting chemical energy to electrical energy via redox reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p25",
+              "quote": "مثل البطاريات"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### تطبيقات تفاعلات الأكسدة والاختزال:",
+            "start": 1413,
+            "end": 1451
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **الخلايا الكهروكيميائية**: مثل البطاريات، حيث يتم تحويل الطاقة الكيميائية إلى طاقة كهربائية من خلال تفاعلات الأكسدة والاختزال.",
+            "start": 1452,
+            "end": 1581
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states that electrochemical cells and batteries convert chemical energy to electrical energy via redox reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Application: corrosion and rusting of iron",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Illustrates corrosion through the familiar process of iron rusting in the presence of oxygen and moisture.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p26",
+              "quote": "مثل صدأ الحديد، حيث يتأكسد الحديد في وجود الأكسجين والرطوبة."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **عمليات التآكل**: مثل صدأ الحديد، حيث يتأكسد الحديد في وجود الأكسجين والرطوبة.",
+            "start": 1582,
+            "end": 1663
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes corrosion (specifically rusting) as an oxidation of iron requiring oxygen and moisture.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "EXAMPLE",
+        "label": "Application: biological cellular respiration",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides cellular respiration as a biological application of redox reactions and concludes the response.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **العمليات البيولوجية**: مثل التنفس الخلوي، حيث يتم أكسدة الجلوكوز لإنتاج الطاقة.",
+            "start": 1664,
+            "end": 1747
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بهذه الطريقة، يمكن فهم تفاعلات الأكسدة والاختزال كعمليات أساسية في الكيمياء والبيولوجيا، وتلعب دورًا حاسمًا في العديد من الظواهر الطبيعية والتطبيقات التكنولوجية.",
+            "start": 1749,
+            "end": 1910
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly describes cellular respiration as a redox process where glucose is oxidized to produce energy.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\arabic-native\\llama-4-maverick__297f674f2264.json",
+    "original_sha256": "6328106fa3037a92d6fcc0566c3c5c56e35584a68d17b429ef5cc6990dbc7419",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 28,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 5
+    },
+    "nested_passages": 28,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 7,
+      "everyday": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,228 @@
+# Stage 1: French / covalent radius
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "covalent radius",
+  "observed_topic": "Definition, calculation, application, periodic trends, and physical meaning of covalent radius",
+  "topic_match": "on_topic",
+  "reason": "The text directly defines covalent radius, illustrates its calculation with Cl2, explains how to estimate bond lengths, outlines periodic trends, and clarifies that atoms do not have rigid boundaries.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition of covalent radius as half the distance between two bonded identical nuclei | {"depth": "explanation"} | accurate |
+| u2 | EXAMPLE | Calculation of the covalent radius of chlorine from Cl2 internuclear distance | {"context": "abstract_or_hypothetical", "treatment": "worked"} | accurate |
+| u3 | CONCEPT | Estimation of bond lengths using additive covalent radii | {"depth": "explanation"} | accurate |
+| u4 | EXAMPLE | Estimation of the C-H bond length from carbon and hydrogen covalent radii | {"context": "abstract_or_hypothetical", "treatment": "worked"} | accurate |
+| u5 | CONCEPT | Periodic trends of covalent radius across periods and down groups | {"depth": "explanation"} | accurate |
+| u6 | CAVEAT | Absence of a rigid atomic boundary and operational nature of covalent radius | {"subtype": "misconception"} | accurate |
+
+## u1: Definition of covalent radius as half the distance between two bonded identical nuclei
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The definition of covalent radius as half the internuclear distance between two identical covalently bonded atoms is standard and correct.",
+    "errors": []
+  }
+}
+```
+
+```text
+Le **rayon covalent** est une mesure de la taille d’un atome lorsqu’il est lié à un autre atome par une **liaison covalente**.
+
+Une liaison covalente se forme lorsque deux atomes **partagent des électrons**. Par exemple, dans une molécule de dichlore \(Cl_2\), les deux atomes de chlore partagent une paire d’électrons.
+
+On définit le rayon covalent ainsi :
+
+\[
+\text{rayon covalent} = \frac{\text{distance entre les noyaux de deux atomes identiques liés}}{2}
+\]
+```
+
+
+## u2: Calculation of the covalent radius of chlorine from Cl2 internuclear distance
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The experimental internuclear distance in Cl2 is indeed approximately 198 pm, yielding a single-bond covalent radius of 99 pm for chlorine.",
+    "errors": []
+  }
+}
+```
+
+```text
+Par exemple, si la distance entre les deux noyaux dans \(Cl_2\) vaut \(198\ \text{pm}\) (picomètres), alors :
+
+\[
+r_{\text{covalent}}(Cl)=\frac{198}{2}=99\ \text{pm}
+\]
+
+Un picomètre vaut :
+
+\[
+1\ \text{pm}=10^{-12}\ \text{m}
+\]
+```
+
+
+## u3: Estimation of bond lengths using additive covalent radii
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The additivity of covalent radii to estimate single covalent bond lengths is standard in introductory chemistry.",
+    "errors": []
+  }
+}
+```
+
+```text
+### Pourquoi cette notion est-elle utile ?
+
+Le rayon covalent permet de comparer la taille des atomes et d’estimer la longueur des liaisons chimiques. En général, pour une liaison simple entre deux atomes A et B :
+
+\[
+\text{longueur de liaison A-B} \approx r_{\text{cov}}(A)+r_{\text{cov}}(B)
+\]
+```
+
+
+## u4: Estimation of the C-H bond length from carbon and hydrogen covalent radii
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The calculation accurately adds typical covalent radii for C and H to obtain ~107 pm, matching standard literature values for aliphatic C-H bond lengths (around 109 pm).",
+    "errors": []
+  }
+}
+```
+
+```text
+Par exemple, si le rayon covalent du carbone est environ \(76\ \text{pm}\) et celui de l’hydrogène environ \(31\ \text{pm}\), une liaison C–H mesure approximativement :
+
+\[
+76+31=107\ \text{pm}
+\]
+```
+
+
+## u5: Periodic trends of covalent radius across periods and down groups
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The periodic trends and the associated explanations (effective nuclear charge across a period, number of electron shells down a group) are correct.",
+    "errors": []
+  }
+}
+```
+
+```text
+### Évolution dans le tableau périodique
+
+- **De gauche à droite dans une période**, le rayon covalent diminue généralement.  
+  Les noyaux ont de plus en plus de protons et attirent donc plus fortement les électrons.
+
+- **De haut en bas dans une colonne**, le rayon covalent augmente généralement.  
+  Les atomes possèdent davantage de couches électroniques, donc ils sont plus grands.
+```
+
+
+## u6: Absence of a rigid atomic boundary and operational nature of covalent radius
+
+```json
+{
+  "attributes": {
+    "subtype": "misconception"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly addresses the common misconception of atoms having a rigid physical boundary by explaining that electron clouds have no distinct edge.",
+    "errors": []
+  }
+}
+```
+
+```text
+### Attention
+
+Le rayon covalent n’est pas une frontière parfaitement nette de l’atome : le nuage électronique n’a pas de bord précis. C’est donc une grandeur définie à partir de mesures de distances dans les molécules.
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u3",
+      "u4"
+    ],
+    "issue": "Whether the general rule for estimating bond lengths (u3) and the specific numerical C-H calculation (u4) should be kept together as a single EXAMPLE unit or separated into a CONCEPT unit and an EXAMPLE unit.",
+    "proposed_resolution": "Separated into u3 (CONCEPT: explaining the general utility and additive formula for bond lengths) and u4 (EXAMPLE: worked calculation for a C-H bond) because each has a distinct teaching function."
+  }
+]
+```
+
+## Unassigned text for coverage review

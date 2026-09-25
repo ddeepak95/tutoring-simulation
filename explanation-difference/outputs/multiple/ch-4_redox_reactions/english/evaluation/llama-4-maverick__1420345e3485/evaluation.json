@@ -1,0 +1,792 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "d6705dc19d903718166577ef7ef33edfe78288fece0a5c1646b5f3fb6d2fc2d5",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10"
+      ],
+      "reason": "The response directly and clearly explains redox reactions, covering electron transfer, definitions of oxidation and reduction, oxidation states, and real-world applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and definition of redox reactions"
+      },
+      {
+        "id": "s2",
+        "label": "Rusting of iron as an introductory redox example"
+      },
+      {
+        "id": "s3",
+        "label": "Definitions of oxidation and reduction"
+      },
+      {
+        "id": "s4",
+        "label": "Core principles of redox reactions"
+      },
+      {
+        "id": "s5",
+        "label": "Oxidation states and assignment"
+      },
+      {
+        "id": "s6",
+        "label": "Applications and examples of redox reactions"
+      },
+      {
+        "id": "s7",
+        "label": "Recap and review of redox concepts"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of redox reactions",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces redox reactions and defines them through the simultaneous loss and gain of electrons between substances.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Redox reactions! A fundamental concept in chemistry that can seem a bit tricky at first, but trust me, it's actually quite straightforward once you understand the basics.",
+            "start": 0,
+            "end": 170
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**What are Redox Reactions?**",
+            "start": 172,
+            "end": 201
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Redox is short for \"reduction-oxidation.\" A redox reaction is a type of chemical reaction where one substance loses electrons (oxidized), while another substance gains electrons (reduced). In other words, it's a reaction that involves the transfer of electrons from one substance to another.",
+            "start": 203,
+            "end": 494
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines redox as reduction-oxidation and explains that it entails the transfer of electrons between substances.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Rusting of iron as a redox reaction",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates redox reactions step-by-step using the familiar phenomenon of iron rusting in air.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "Imagine you have a piece of iron (Fe) and you leave it outside in the air. Over time, it rusts."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Let's Break it Down**",
+            "start": 496,
+            "end": 519
+          },
+          {
+            "id": "p5",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "To understand redox reactions, let's consider a simple example. Imagine you have a piece of iron (Fe) and you leave it outside in the air. Over time, it rusts. That's a redox reaction!",
+            "start": 521,
+            "end": 705
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Here's what happens:",
+            "start": 707,
+            "end": 727
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* The iron (Fe) reacts with oxygen (O2) in the air to form iron oxide (Fe2O3), also known as rust.",
+            "start": 729,
+            "end": 827
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* In this reaction, the iron loses electrons to form Fe3+ ions. This is called oxidation.",
+            "start": 828,
+            "end": 917
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* At the same time, the oxygen gains electrons to form O2- ions. This is called reduction.",
+            "start": 918,
+            "end": 1008
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Provides an introductory-level, accurate description of the oxidation of iron to Fe3+ and the reduction of oxygen to O2- to form rust.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definitions of oxidation and reduction",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains oxidation as electron loss and reduction as electron gain, noting the resulting change in oxidation states.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Oxidation and Reduction**",
+            "start": 1010,
+            "end": 1037
+          },
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let's dive deeper into these two processes:",
+            "start": 1039,
+            "end": 1082
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Oxidation**: When a substance loses one or more electrons, it's said to be oxidized. This can result in a change in its oxidation state (more on that later). Think of it like losing something valuable – in this case, electrons!",
+            "start": 1084,
+            "end": 1316
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Reduction**: When a substance gains one or more electrons, it's said to be reduced. Again, this can result in a change in its oxidation state. Think of it like gaining something valuable – electrons!",
+            "start": 1317,
+            "end": 1521
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines oxidation as the loss of electrons and reduction as the gain of electrons.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Key principles of redox reactions",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Outlines three fundamental principles: coupled oxidation-reduction, electron transfer, and oxidation state changes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Key Points to Remember**",
+            "start": 1523,
+            "end": 1549
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Oxidation and reduction occur together**: You can't have one without the other. When one substance is oxidized, another substance must be reduced.",
+            "start": 1551,
+            "end": 1702
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Electrons are transferred**: Redox reactions involve the transfer of electrons from one substance to another.",
+            "start": 1703,
+            "end": 1817
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Oxidation states change**: The oxidation state of a substance changes when it's oxidized or reduced.",
+            "start": 1818,
+            "end": 1923
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states that oxidation and reduction are coupled, involve electron transfer, and alter oxidation states.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Concept of oxidation states",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines what oxidation states/numbers are and their utility in tracking electron transfer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Oxidation States**",
+            "start": 1925,
+            "end": 1945
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "To keep track of the electrons, we use oxidation states (or oxidation numbers). An oxidation state is a number assigned to an element in a compound that represents the number of electrons it's gained or lost.",
+            "start": 1947,
+            "end": 2155
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Provides a standard introductory description of oxidation numbers as book-keeping tools for electron transfer.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Tracking oxidation states in iron-oxygen reaction",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Shows how oxidation states shift from neutral elements (0) to their ionic charges (+3 for Fe, -2 for O) upon reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For example, in the reaction between iron and oxygen:",
+            "start": 2157,
+            "end": 2210
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Iron (Fe) has an oxidation state of 0 (it's neutral).",
+            "start": 2212,
+            "end": 2267
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* When it loses electrons to form Fe3+, its oxidation state becomes +3.",
+            "start": 2268,
+            "end": 2339
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Oxygen (O2) has an oxidation state of 0 (it's neutral).",
+            "start": 2340,
+            "end": 2397
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* When it gains electrons to form O2-, its oxidation state becomes -2.",
+            "start": 2398,
+            "end": 2468
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately identifies initial oxidation states as 0 for elemental Fe and O2, and final states as +3 and -2 respectively.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Redox application: Batteries",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents battery operation as a real-world application of electron transfer generating electricity.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p26",
+              "quote": "Redox reactions are all around us:"
+            },
+            {
+              "passage_id": "p27",
+              "quote": "Batteries work on the principle of redox reactions, where electrons flow from one substance to another, generating electricity."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Examples and Applications**",
+            "start": 2470,
+            "end": 2499
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Redox reactions are all around us:",
+            "start": 2501,
+            "end": 2535
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Batteries work on the principle of redox reactions, where electrons flow from one substance to another, generating electricity.",
+            "start": 2537,
+            "end": 2666
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states that batteries generate electricity via electrochemical redox reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Redox application: Photosynthesis",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents photosynthesis in plants converting carbon dioxide and water into glucose and oxygen as a biological redox reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Photosynthesis is a complex redox reaction that occurs in plants, where light energy is used to convert CO2 and H2O into glucose and O2.",
+            "start": 2667,
+            "end": 2805
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately identifies photosynthesis as a biological redox process converting CO2 and H2O into glucose and O2 using light energy.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "EXAMPLE",
+        "label": "Redox application: Corrosion",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Mentions corrosion as a redox phenomenon that degrades metals.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p29",
+              "quote": "Corrosion (like rusting) is a redox reaction that can damage metals."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* Corrosion (like rusting) is a redox reaction that can damage metals.",
+            "start": 2806,
+            "end": 2876
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Corrosion is accurately identified as a damaging redox process.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap of redox concepts",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Recaps the main definitions of redox reactions, oxidation, and reduction, concluding with an invitation to practice.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Recap**",
+            "start": 2878,
+            "end": 2887
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Redox reactions involve the transfer of electrons from one substance to another, resulting in a change in their oxidation states. Oxidation is the loss of electrons, while reduction is the gain of electrons. Understanding redox reactions is crucial in chemistry, as they play a vital role in many natural processes and technological applications.",
+            "start": 2889,
+            "end": 3235
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Now, do you have any questions or would you like to practice some examples?",
+            "start": 3237,
+            "end": 3312
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes the core definitions and importance of redox reactions.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\english\\llama-4-maverick__1420345e3485.json",
+    "original_sha256": "0f4504663cbb19f4f6b612c4dd493976d4ca82a7b4175118bd4bf9ccf3e3dcd6",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 10,
+    "substantive_content_units": 10,
+    "total_passages": 32,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 5,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 32,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "none": 7,
+      "everyday": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 10
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

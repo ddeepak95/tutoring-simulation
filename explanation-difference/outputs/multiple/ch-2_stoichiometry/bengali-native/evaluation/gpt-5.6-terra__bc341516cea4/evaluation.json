@@ -1,0 +1,3279 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7947312a07899771866b3272d3ee14d04ef53c3cd2b49573f0feea0266811c54",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12"
+      ],
+      "reason": "The response provides a clear, comprehensive introduction to stoichiometry for high school students in Bengali, covering mole ratios, balanced equations, molar mass, standard stoichiometry calculations, limiting reagents, and molar gas volume.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Chemical Equations and Mole Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "Balancing Chemical Equations"
+      },
+      {
+        "id": "s4",
+        "label": "The Mole Concept and Avogadro's Number"
+      },
+      {
+        "id": "s5",
+        "label": "Molar Mass"
+      },
+      {
+        "id": "s6",
+        "label": "Stoichiometric Calculation Steps"
+      },
+      {
+        "id": "s7",
+        "label": "Worked Stoichiometric Calculations"
+      },
+      {
+        "id": "s8",
+        "label": "Limiting Reagents"
+      },
+      {
+        "id": "s9",
+        "label": "Molar Volume of Gases"
+      },
+      {
+        "id": "s10",
+        "label": "Formula Reference and Summary"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what stoichiometry is in terms of quantitative relationships between reactants and products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক **সমীকরণমিতি** (Stoichiometry) হলো রাসায়নিক বিক্রিয়ায় বিক্রিয়ক (reactant) ও উৎপাদ (product)-এর **পরিমাণগত সম্পর্ক** নিয়ে হিসাব করার পদ্ধতি। সহজভাবে বললে—",
+            "start": 0,
+            "end": 168
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> একটি বিক্রিয়ায় কত গ্রাম পদার্থ লাগবে, কত গ্রাম উৎপন্ন হবে, বা কত মোল গ্যাস তৈরি হবে—এসব বের করাই সমীকরণমিতি।",
+            "start": 170,
+            "end": 282
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 284,
+            "end": 287
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines stoichiometry as the calculation of quantitative relationships among reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Role of chemical equations and mole ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains how stoichiometric coefficients in a chemical equation represent mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ১. রাসায়নিক সমীকরণ কেন গুরুত্বপূর্ণ?",
+            "start": 289,
+            "end": 329
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ধরা যাক, হাইড্রোজেন ও অক্সিজেন বিক্রিয়া করে পানি তৈরি করে।",
+            "start": 331,
+            "end": 390
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 392,
+            "end": 394
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 395,
+            "end": 423
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 424,
+            "end": 426
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখানে সংখ্যাগুলোকে **সহগ** (coefficient) বলে।",
+            "start": 428,
+            "end": 473
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এর অর্থ হলো:",
+            "start": 475,
+            "end": 487
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 মোল \\(H_2\\)",
+            "start": 489,
+            "end": 504
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 মোল \\(O_2\\)",
+            "start": 505,
+            "end": 520
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- বিক্রিয়া করে",
+            "start": 521,
+            "end": 536
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 মোল \\(H_2O\\) তৈরি করে।",
+            "start": 537,
+            "end": 563
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ মোলের অনুপাত:",
+            "start": 565,
+            "end": 585
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 587,
+            "end": 589
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2 : O_2 : H_2O = 2 : 1 : 2",
+            "start": 590,
+            "end": 618
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 619,
+            "end": 621
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতির সব হিসাবের মূল চাবিকাঠি হলো এই **মোল অনুপাত**।",
+            "start": 623,
+            "end": 681
+          },
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 683,
+            "end": 686
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly interprets reaction coefficients as mole ratios for 2H2 + O2 -> 2H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Balancing chemical equations",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the necessity of balancing equations based on conservation of mass and atom counting.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ২. সমীকরণ অবশ্যই সাম্যাবস্থায় (Balanced) হতে হবে",
+            "start": 688,
+            "end": 740
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক বিক্রিয়ায় কোনো পরমাণু সৃষ্টি বা ধ্বংস হয় না। তাই বিক্রিয়ার দুই পাশে প্রতিটি মৌলের পরমাণুর সংখ্যা সমান থাকতে হবে।",
+            "start": 742,
+            "end": 868
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ:",
+            "start": 870,
+            "end": 877
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 879,
+            "end": 881
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2 + O_2 \\rightarrow H_2O",
+            "start": 882,
+            "end": 908
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 909,
+            "end": 911
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এটি অসমতাযুক্ত, কারণ বাম পাশে অক্সিজেন 2টি, ডান পাশে 1টি।",
+            "start": 913,
+            "end": 970
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সাম্য করলে:",
+            "start": 972,
+            "end": 983
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 985,
+            "end": 987
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 988,
+            "end": 1016
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1017,
+            "end": 1019
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখন—",
+            "start": 1021,
+            "end": 1025
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| মৌল | বাম পাশ | ডান পাশ |",
+            "start": 1027,
+            "end": 1054
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---|---:|---:|",
+            "start": 1055,
+            "end": 1070
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| H | 4 | 4 |",
+            "start": 1071,
+            "end": 1084
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| O | 2 | 2 |",
+            "start": 1085,
+            "end": 1098
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তাই এটি সঠিক সাম্যযুক্ত সমীকরণ।",
+            "start": 1100,
+            "end": 1131
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1133,
+            "end": 1136
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately connects the conservation of atoms to the balancing of chemical equations, with a correct demonstration.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "The mole and Avogadro's number",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines 1 mole as 6.02 x 10^23 particles (Avogadro's number) with basic examples.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ৩. মোল কী?",
+            "start": 1138,
+            "end": 1151
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**1 মোল** কোনো পদার্থের এমন পরিমাণ যাতে থাকে:",
+            "start": 1153,
+            "end": 1198
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1200,
+            "end": 1202
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "6.02 \\times 10^{23}",
+            "start": 1203,
+            "end": 1222
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1223,
+            "end": 1225
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "টি কণা (পরমাণু, অণু বা আয়ন)।",
+            "start": 1227,
+            "end": 1256
+          },
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সংখ্যাকে অ্যাভোগাড্রো সংখ্যা বলে।",
+            "start": 1258,
+            "end": 1294
+          },
+          {
+            "id": "p46",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ:",
+            "start": 1296,
+            "end": 1303
+          },
+          {
+            "id": "p47",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 মোল কার্বন পরমাণু = \\(6.02 \\times 10^{23}\\) টি কার্বন পরমাণু",
+            "start": 1305,
+            "end": 1369
+          },
+          {
+            "id": "p48",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 মোল পানি = \\(6.02 \\times 10^{23}\\) টি পানির অণু",
+            "start": 1370,
+            "end": 1421
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1423,
+            "end": 1426
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines 1 mole and cites Avogadro's constant as 6.02 x 10^23 particles.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Molar mass definition and calculations",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines molar mass, demonstrates how to calculate it for water using atomic masses, and tabulates common values.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p50",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ৪. মোলার ভর",
+            "start": 1428,
+            "end": 1442
+          },
+          {
+            "id": "p51",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কোনো পদার্থের 1 মোলের ভরকে তার **মোলার ভর** বলে। একক: g/mol।",
+            "start": 1444,
+            "end": 1504
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ:",
+            "start": 1506,
+            "end": 1513
+          },
+          {
+            "id": "p53",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### পানির মোলার ভর",
+            "start": 1515,
+            "end": 1533
+          },
+          {
+            "id": "p54",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1535,
+            "end": 1537
+          },
+          {
+            "id": "p55",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2O",
+            "start": 1538,
+            "end": 1542
+          },
+          {
+            "id": "p56",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1543,
+            "end": 1545
+          },
+          {
+            "id": "p57",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- H-এর পারমাণবিক ভর = 1",
+            "start": 1547,
+            "end": 1570
+          },
+          {
+            "id": "p58",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- O-এর পারমাণবিক ভর = 16",
+            "start": 1571,
+            "end": 1595
+          },
+          {
+            "id": "p59",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তাই,",
+            "start": 1597,
+            "end": 1601
+          },
+          {
+            "id": "p60",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1603,
+            "end": 1605
+          },
+          {
+            "id": "p61",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H_2O = (2 \\times 1) + 16 = 18 \\text{ g/mol}",
+            "start": 1606,
+            "end": 1649
+          },
+          {
+            "id": "p62",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1650,
+            "end": 1652
+          },
+          {
+            "id": "p63",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ,",
+            "start": 1654,
+            "end": 1661
+          },
+          {
+            "id": "p64",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1663,
+            "end": 1665
+          },
+          {
+            "id": "p65",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } H_2O = 18 \\text{ g}",
+            "start": 1666,
+            "end": 1700
+          },
+          {
+            "id": "p66",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1701,
+            "end": 1703
+          },
+          {
+            "id": "p67",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আরও কিছু উদাহরণ:",
+            "start": 1705,
+            "end": 1721
+          },
+          {
+            "id": "p68",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| পদার্থ | মোলার ভর |",
+            "start": 1723,
+            "end": 1744
+          },
+          {
+            "id": "p69",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---|---:|",
+            "start": 1745,
+            "end": 1755
+          },
+          {
+            "id": "p70",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| \\(H_2\\) | 2 g/mol |",
+            "start": 1756,
+            "end": 1777
+          },
+          {
+            "id": "p71",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| \\(O_2\\) | 32 g/mol |",
+            "start": 1778,
+            "end": 1800
+          },
+          {
+            "id": "p72",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| \\(CO_2\\) | 44 g/mol |",
+            "start": 1801,
+            "end": 1824
+          },
+          {
+            "id": "p73",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| \\(NaCl\\) | 58.5 g/mol |",
+            "start": 1825,
+            "end": 1850
+          },
+          {
+            "id": "p74",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1852,
+            "end": 1855
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines molar mass with unit g/mol and gives standard values for H2O, H2, O2, CO2, and NaCl.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "PROCEDURE",
+        "label": "Core steps of stoichiometric calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents the general workflow: mass -> mole -> mole ratio -> mole -> mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p75",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ৫. সমীকরণমিতির মূল ধাপ",
+            "start": 1857,
+            "end": 1882
+          },
+          {
+            "id": "p76",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সাধারণত এই ক্রমে হিসাব করা হয়:",
+            "start": 1884,
+            "end": 1915
+          },
+          {
+            "id": "p77",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1917,
+            "end": 1919
+          },
+          {
+            "id": "p78",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{গ্রাম} \\rightarrow \\text{মোল} \\rightarrow \\text{মোল অনুপাত} \\rightarrow \\text{মোল} \\rightarrow \\text{গ্রাম}",
+            "start": 1920,
+            "end": 2033
+          },
+          {
+            "id": "p79",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2034,
+            "end": 2036
+          },
+          {
+            "id": "p80",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ—",
+            "start": 2038,
+            "end": 2045
+          },
+          {
+            "id": "p81",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. রাসায়নিক সমীকরণ সাম্য করো।",
+            "start": 2047,
+            "end": 2077
+          },
+          {
+            "id": "p82",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. দেওয়া ভরকে মোল-এ রূপান্তর করো।",
+            "start": 2078,
+            "end": 2112
+          },
+          {
+            "id": "p83",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. সমীকরণের সহগ থেকে মোল অনুপাত ব্যবহার করো।",
+            "start": 2113,
+            "end": 2157
+          },
+          {
+            "id": "p84",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. প্রয়োজনীয় পদার্থের মোল বের করো।",
+            "start": 2158,
+            "end": 2194
+          },
+          {
+            "id": "p85",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "5. দরকার হলে মোলকে গ্রামে রূপান্তর করো।",
+            "start": 2195,
+            "end": 2234
+          },
+          {
+            "id": "p86",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2236,
+            "end": 2239
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly describes the standard step-by-step algorithm for mass-mass stoichiometric conversions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Worked example: Mass of water produced from 4 g hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Step-by-step worked calculation converting 4 g H2 to 36 g H2O via mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p87",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# উদাহরণ ১: 4 গ্রাম হাইড্রোজেন থেকে কত গ্রাম পানি তৈরি হবে?",
+            "start": 2241,
+            "end": 2300
+          },
+          {
+            "id": "p88",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ:",
+            "start": 2302,
+            "end": 2309
+          },
+          {
+            "id": "p89",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2311,
+            "end": 2313
+          },
+          {
+            "id": "p90",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 2314,
+            "end": 2342
+          },
+          {
+            "id": "p91",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2343,
+            "end": 2345
+          },
+          {
+            "id": "p92",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ১: \\(H_2\\)-এর মোল বের করি",
+            "start": 2347,
+            "end": 2380
+          },
+          {
+            "id": "p93",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "\\(H_2\\)-এর মোলার ভর = 2 g/mol",
+            "start": 2382,
+            "end": 2411
+          },
+          {
+            "id": "p94",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2413,
+            "end": 2415
+          },
+          {
+            "id": "p95",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{মোল} = \\frac{\\text{ভর}}{\\text{মোলার ভর}}",
+            "start": 2416,
+            "end": 2462
+          },
+          {
+            "id": "p96",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2463,
+            "end": 2465
+          },
+          {
+            "id": "p97",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2467,
+            "end": 2469
+          },
+          {
+            "id": "p98",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= \\frac{4}{2} = 2 \\text{ mol}",
+            "start": 2470,
+            "end": 2499
+          },
+          {
+            "id": "p99",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2500,
+            "end": 2502
+          },
+          {
+            "id": "p100",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ 4 g হাইড্রোজেন = 2 mol \\(H_2\\)",
+            "start": 2504,
+            "end": 2541
+          },
+          {
+            "id": "p101",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ২: মোল অনুপাত ব্যবহার করি",
+            "start": 2543,
+            "end": 2576
+          },
+          {
+            "id": "p102",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ থেকে:",
+            "start": 2578,
+            "end": 2590
+          },
+          {
+            "id": "p103",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2592,
+            "end": 2594
+          },
+          {
+            "id": "p104",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\text{ mol } H_2 \\rightarrow 2 \\text{ mol } H_2O",
+            "start": 2595,
+            "end": 2645
+          },
+          {
+            "id": "p105",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2646,
+            "end": 2648
+          },
+          {
+            "id": "p106",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তাই 2 mol \\(H_2\\) থেকে তৈরি হবে 2 mol \\(H_2O\\)।",
+            "start": 2650,
+            "end": 2697
+          },
+          {
+            "id": "p107",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ৩: পানির ভর বের করি",
+            "start": 2699,
+            "end": 2726
+          },
+          {
+            "id": "p108",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "\\(H_2O\\)-এর মোলার ভর = 18 g/mol",
+            "start": 2728,
+            "end": 2759
+          },
+          {
+            "id": "p109",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2761,
+            "end": 2763
+          },
+          {
+            "id": "p110",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{ভর} = \\text{মোল} \\times \\text{মোলার ভর}",
+            "start": 2764,
+            "end": 2809
+          },
+          {
+            "id": "p111",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2810,
+            "end": 2812
+          },
+          {
+            "id": "p112",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2814,
+            "end": 2816
+          },
+          {
+            "id": "p113",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= 2 \\times 18 = 36 \\text{ g}",
+            "start": 2817,
+            "end": 2845
+          },
+          {
+            "id": "p114",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2846,
+            "end": 2848
+          },
+          {
+            "id": "p115",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### উত্তর:",
+            "start": 2850,
+            "end": 2860
+          },
+          {
+            "id": "p116",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2862,
+            "end": 2864
+          },
+          {
+            "id": "p117",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{4 \\text{ g } H_2 \\text{ থেকে } 36 \\text{ g } H_2O \\text{ তৈরি হবে}}",
+            "start": 2865,
+            "end": 2939
+          },
+          {
+            "id": "p118",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2940,
+            "end": 2942
+          },
+          {
+            "id": "p119",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "শর্ত: অক্সিজেন পর্যাপ্ত পরিমাণে থাকতে হবে।",
+            "start": 2944,
+            "end": 2986
+          },
+          {
+            "id": "p120",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2988,
+            "end": 2991
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations (moles of H2 = 2 mol, moles of H2O = 2 mol, mass of H2O = 36 g) are mathematically and chemically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Worked example: Thermal decomposition of 100 g calcium carbonate",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Step-by-step worked calculation converting 100 g CaCO3 to 44 g CO2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p121",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# উদাহরণ ২: ক্যালসিয়াম কার্বোনেট উত্তপ্ত করলে কত কার্বন ডাই-অক্সাইড তৈরি হবে?",
+            "start": 2993,
+            "end": 3071
+          },
+          {
+            "id": "p122",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ:",
+            "start": 3073,
+            "end": 3080
+          },
+          {
+            "id": "p123",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3082,
+            "end": 3084
+          },
+          {
+            "id": "p124",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CaCO_3 \\rightarrow CaO + CO_2",
+            "start": 3085,
+            "end": 3114
+          },
+          {
+            "id": "p125",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3115,
+            "end": 3117
+          },
+          {
+            "id": "p126",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ধরা যাক, 100 g \\(CaCO_3\\) উত্তপ্ত করা হলো।",
+            "start": 3119,
+            "end": 3161
+          },
+          {
+            "id": "p127",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ১: \\(CaCO_3\\)-এর মোলার ভর",
+            "start": 3163,
+            "end": 3196
+          },
+          {
+            "id": "p128",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3198,
+            "end": 3200
+          },
+          {
+            "id": "p129",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CaCO_3 = 40 + 12 + (3 \\times 16)",
+            "start": 3201,
+            "end": 3233
+          },
+          {
+            "id": "p130",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3234,
+            "end": 3236
+          },
+          {
+            "id": "p131",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3238,
+            "end": 3240
+          },
+          {
+            "id": "p132",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "= 100 \\text{ g/mol}",
+            "start": 3241,
+            "end": 3260
+          },
+          {
+            "id": "p133",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3261,
+            "end": 3263
+          },
+          {
+            "id": "p134",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ,",
+            "start": 3265,
+            "end": 3272
+          },
+          {
+            "id": "p135",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3274,
+            "end": 3276
+          },
+          {
+            "id": "p136",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "100 \\text{ g } CaCO_3 = 1 \\text{ mol}",
+            "start": 3277,
+            "end": 3314
+          },
+          {
+            "id": "p137",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3315,
+            "end": 3317
+          },
+          {
+            "id": "p138",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ২: মোল অনুপাত",
+            "start": 3319,
+            "end": 3340
+          },
+          {
+            "id": "p139",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ থেকে:",
+            "start": 3342,
+            "end": 3354
+          },
+          {
+            "id": "p140",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3356,
+            "end": 3358
+          },
+          {
+            "id": "p141",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } CaCO_3 \\rightarrow 1 \\text{ mol } CO_2",
+            "start": 3359,
+            "end": 3412
+          },
+          {
+            "id": "p142",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3413,
+            "end": 3415
+          },
+          {
+            "id": "p143",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তাই 1 mol \\(CaCO_3\\) থেকে 1 mol \\(CO_2\\) তৈরি হবে।",
+            "start": 3417,
+            "end": 3467
+          },
+          {
+            "id": "p144",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ৩: \\(CO_2\\)-এর ভর",
+            "start": 3469,
+            "end": 3494
+          },
+          {
+            "id": "p145",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3496,
+            "end": 3498
+          },
+          {
+            "id": "p146",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "CO_2 = 12 + (2 \\times 16) = 44 \\text{ g/mol}",
+            "start": 3499,
+            "end": 3543
+          },
+          {
+            "id": "p147",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3544,
+            "end": 3546
+          },
+          {
+            "id": "p148",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অতএব,",
+            "start": 3548,
+            "end": 3553
+          },
+          {
+            "id": "p149",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3555,
+            "end": 3557
+          },
+          {
+            "id": "p150",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol } CO_2 = 44 \\text{ g}",
+            "start": 3558,
+            "end": 3592
+          },
+          {
+            "id": "p151",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3593,
+            "end": 3595
+          },
+          {
+            "id": "p152",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### উত্তর:",
+            "start": 3597,
+            "end": 3607
+          },
+          {
+            "id": "p153",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3609,
+            "end": 3611
+          },
+          {
+            "id": "p154",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{100 \\text{ g } CaCO_3 \\text{ থেকে } 44 \\text{ g } CO_2 \\text{ তৈরি হবে}}",
+            "start": 3612,
+            "end": 3691
+          },
+          {
+            "id": "p155",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3692,
+            "end": 3694
+          },
+          {
+            "id": "p156",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3696,
+            "end": 3699
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations of CaCO3 molar mass (100 g/mol), mole conversion, and yield of CO2 (44 g) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "CONCEPT",
+        "label": "Limiting reagent concept",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Defines limiting reagents and explains how the reactant that is fully consumed limits the amount of product formed.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p157",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ৬. সীমাবদ্ধ বিক্রিয়ক (Limiting Reagent)",
+            "start": 3701,
+            "end": 3744
+          },
+          {
+            "id": "p158",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অনেক সময় দুটি বিক্রিয়কই দেওয়া থাকে, কিন্তু একটি পদার্থ আগে শেষ হয়ে যায়। যে পদার্থটি আগে শেষ হয়, তাকে **সীমাবদ্ধ বিক্রিয়ক** বলে।",
+            "start": 3746,
+            "end": 3880
+          },
+          {
+            "id": "p159",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ:",
+            "start": 3882,
+            "end": 3889
+          },
+          {
+            "id": "p160",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3891,
+            "end": 3893
+          },
+          {
+            "id": "p161",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H_2 + O_2 \\rightarrow 2H_2O",
+            "start": 3894,
+            "end": 3922
+          },
+          {
+            "id": "p162",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3923,
+            "end": 3925
+          },
+          {
+            "id": "p163",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ধরা যাক, আছে—",
+            "start": 3927,
+            "end": 3940
+          },
+          {
+            "id": "p164",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 mol \\(H_2\\)",
+            "start": 3942,
+            "end": 3957
+          },
+          {
+            "id": "p165",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 mol \\(O_2\\)",
+            "start": 3958,
+            "end": 3973
+          },
+          {
+            "id": "p166",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ অনুযায়ী 2 mol \\(H_2\\)-এর জন্য দরকার মাত্র 1 mol \\(O_2\\)।",
+            "start": 3975,
+            "end": 4039
+          },
+          {
+            "id": "p167",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখানে \\(H_2\\) পুরোটা শেষ হয়ে যাবে, কিন্তু \\(O_2\\)-এর 1 mol অতিরিক্ত থাকবে। তাই—",
+            "start": 4041,
+            "end": 4121
+          },
+          {
+            "id": "p168",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4123,
+            "end": 4125
+          },
+          {
+            "id": "p169",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{H_2 \\text{ হলো সীমাবদ্ধ বিক্রিয়ক}}",
+            "start": 4126,
+            "end": 4168
+          },
+          {
+            "id": "p170",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4169,
+            "end": 4171
+          },
+          {
+            "id": "p171",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এবং যত পানি তৈরি হবে, তা নির্ধারণ করবে \\(H_2\\)-এর পরিমাণ।",
+            "start": 4173,
+            "end": 4230
+          },
+          {
+            "id": "p172",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4232,
+            "end": 4235
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines limiting reagent and illustrates it with 2 mol H2 and 2 mol O2, correctly identifying H2 as limiting.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "CONCEPT",
+        "label": "Molar volume of gas at STP",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s9"
+        ],
+        "rationale": "Explains the molar volume of an ideal gas at STP (22.4 L/mol) with a calculation for 2 mol oxygen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p173",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ৭. গ্যাসের ক্ষেত্রে মোলার আয়তন",
+            "start": 4237,
+            "end": 4271
+          },
+          {
+            "id": "p174",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সাধারণ তাপমাত্রা ও চাপে (STP) 1 মোল আদর্শ গ্যাসের আয়তন প্রায়:",
+            "start": 4273,
+            "end": 4336
+          },
+          {
+            "id": "p175",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4338,
+            "end": 4340
+          },
+          {
+            "id": "p176",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "22.4 \\text{ L}",
+            "start": 4341,
+            "end": 4355
+          },
+          {
+            "id": "p177",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4356,
+            "end": 4358
+          },
+          {
+            "id": "p178",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "অর্থাৎ,",
+            "start": 4360,
+            "end": 4367
+          },
+          {
+            "id": "p179",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4369,
+            "end": 4371
+          },
+          {
+            "id": "p180",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1 \\text{ mol gas} = 22.4 \\text{ L at STP}",
+            "start": 4372,
+            "end": 4413
+          },
+          {
+            "id": "p181",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4414,
+            "end": 4416
+          },
+          {
+            "id": "p182",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ: 2 mol অক্সিজেন গ্যাসের আয়তন—",
+            "start": 4418,
+            "end": 4455
+          },
+          {
+            "id": "p183",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4457,
+            "end": 4459
+          },
+          {
+            "id": "p184",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 \\times 22.4 = 44.8 \\text{ L}",
+            "start": 4460,
+            "end": 4490
+          },
+          {
+            "id": "p185",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4491,
+            "end": 4493
+          },
+          {
+            "id": "p186",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4495,
+            "end": 4498
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately gives the traditional standard molar volume of 22.4 L at STP and calculates volume for 2 mol O2.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "STUDY_SUPPORT",
+        "label": "Formula cheat sheet",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s10"
+        ],
+        "rationale": "Provides a quick reference list of conversion formulas for moles, mass, particle count, and gas volume.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p187",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মনে রাখার সহজ সূত্র",
+            "start": 4500,
+            "end": 4522
+          },
+          {
+            "id": "p188",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### মোল বের করতে:",
+            "start": 4524,
+            "end": 4541
+          },
+          {
+            "id": "p189",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4543,
+            "end": 4545
+          },
+          {
+            "id": "p190",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{মোল} = \\frac{\\text{ভর}}{\\text{মোলার ভর}}}",
+            "start": 4546,
+            "end": 4600
+          },
+          {
+            "id": "p191",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4601,
+            "end": 4603
+          },
+          {
+            "id": "p192",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ভর বের করতে:",
+            "start": 4605,
+            "end": 4621
+          },
+          {
+            "id": "p193",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4623,
+            "end": 4625
+          },
+          {
+            "id": "p194",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{ভর} = \\text{মোল} \\times \\text{মোলার ভর}}",
+            "start": 4626,
+            "end": 4679
+          },
+          {
+            "id": "p195",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4680,
+            "end": 4682
+          },
+          {
+            "id": "p196",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### কণার সংখ্যা বের করতে:",
+            "start": 4684,
+            "end": 4709
+          },
+          {
+            "id": "p197",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4711,
+            "end": 4713
+          },
+          {
+            "id": "p198",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{কণার সংখ্যা} = \\text{মোল} \\times 6.02 \\times 10^{23}}",
+            "start": 4714,
+            "end": 4780
+          },
+          {
+            "id": "p199",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4781,
+            "end": 4783
+          },
+          {
+            "id": "p200",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### STP-তে গ্যাসের আয়তন বের করতে:",
+            "start": 4785,
+            "end": 4819
+          },
+          {
+            "id": "p201",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 4821,
+            "end": 4823
+          },
+          {
+            "id": "p202",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{আয়তন} = \\text{মোল} \\times 22.4 \\text{ L}}",
+            "start": 4824,
+            "end": 4879
+          },
+          {
+            "id": "p203",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 4880,
+            "end": 4882
+          },
+          {
+            "id": "p204",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 4884,
+            "end": 4887
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All listed formulas for mole, mass, particles, and volume are mathematically and physically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u12",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary recap of stoichiometry",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s10"
+        ],
+        "rationale": "Summarizes the key takeaways of the lesson, emphasizing the central importance of mole ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p205",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সংক্ষিপ্ত সারাংশ",
+            "start": 4889,
+            "end": 4908
+          },
+          {
+            "id": "p206",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতিতে প্রধান বিষয়গুলো হলো:",
+            "start": 4910,
+            "end": 4944
+          },
+          {
+            "id": "p207",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- আগে রাসায়নিক সমীকরণ সাম্য করতে হবে।",
+            "start": 4946,
+            "end": 4984
+          },
+          {
+            "id": "p208",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- গ্রাম থেকে মোল-এ যেতে হবে।",
+            "start": 4985,
+            "end": 5013
+          },
+          {
+            "id": "p209",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- সমীকরণের সহগ ব্যবহার করে মোলের অনুপাত নিতে হবে।",
+            "start": 5014,
+            "end": 5063
+          },
+          {
+            "id": "p210",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- তারপর প্রয়োজন অনুযায়ী গ্রাম, কণা সংখ্যা বা গ্যাসের আয়তন বের করতে হবে।",
+            "start": 5064,
+            "end": 5138
+          },
+          {
+            "id": "p211",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- একাধিক বিক্রিয়ক থাকলে সীমাবদ্ধ বিক্রিয়ক চিহ্নিত করতে হবে।",
+            "start": 5139,
+            "end": 5200
+          },
+          {
+            "id": "p212",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সবচেয়ে গুরুত্বপূর্ণ কথা:",
+            "start": 5202,
+            "end": 5227
+          },
+          {
+            "id": "p213",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 5229,
+            "end": 5231
+          },
+          {
+            "id": "p214",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\boxed{\\text{সমীকরণমিতির কেন্দ্রবিন্দু হলো “মোল অনুপাত”}}",
+            "start": 5232,
+            "end": 5289
+          },
+          {
+            "id": "p215",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 5290,
+            "end": 5292
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Recaps the essential steps of stoichiometric problem solving clearly and correctly.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-native\\gpt-5.6-terra__bc341516cea4.json",
+    "original_sha256": "e71c4cb7a74eea13c6bcc369a1ae1ecd11913a9859f2b639df24dc514a493aff",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 12,
+    "substantive_content_units": 12,
+    "total_passages": 215,
+    "content_unit_kinds": {
+      "CONCEPT": 7,
+      "PROCEDURE": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 2
+    },
+    "nested_passages": 215,
+    "unique_subtopics": 10,
+    "contextualization": {
+      "none": 12
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 12
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

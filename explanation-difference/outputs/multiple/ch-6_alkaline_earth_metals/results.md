@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-a2b5c9910abd8a1c.json](run-001-a2b5c9910abd8a1c.json)
+**Source:** [run-001-a2b5c9910abd8a1c.json](english/gpt-5.6-terra__99440811a779.json)
 
 ## Alkaline Earth Metals
 
@@ -253,7 +253,7 @@ Alkaline earth metals are Group 2 metals with two outer-shell electrons. They fo
 
 **Status:** completed
 
-**Source:** [run-001-60e80a99e3f0b705.json](run-001-60e80a99e3f0b705.json)
+**Source:** [run-001-60e80a99e3f0b705.json](english/grok-4.3__b311aa7d13de.json)
 
 **Alkaline Earth Metals – A Simple Explanation**
 
@@ -320,7 +320,7 @@ Alkaline earth metals share these traits:
 
 **Status:** completed
 
-**Source:** [run-001-4556e1d43bd78897.json](run-001-4556e1d43bd78897.json)
+**Source:** [run-001-4556e1d43bd78897.json](english/gemini-3.8-flash__58f5e66074c8.json)
 
 Welcome to chemistry class! Today, we are going to explore a very famous family on the periodic table: **The Alkaline Earth Metals**. 
 
@@ -407,7 +407,7 @@ Do you have any questions about their electron shells, or would you like to see 
 
 **Status:** completed
 
-**Source:** [run-001-1beda26d67e6061e.json](run-001-1beda26d67e6061e.json)
+**Source:** [run-001-1beda26d67e6061e.json](english/claude-sonnet-5__6bc9b78bb3c7.json)
 
 # Alkaline Earth Metals
 
@@ -474,7 +474,7 @@ Think of Group 2 metals like people who are willing to give away **exactly two**
 
 **Status:** completed
 
-**Source:** [run-001-39f40728683856f6.json](run-001-39f40728683856f6.json)
+**Source:** [run-001-39f40728683856f6.json](english/llama-4-maverick__b9846008a7f0.json)
 
 The alkaline earth metals! A fascinating group of elements in the periodic table. Let's dive in and explore their properties and characteristics.
 
@@ -546,7 +546,7 @@ Let's discuss your answers and explore more about these fascinating elements!
 
 **Status:** completed
 
-**Source:** [run-002-9baf7202ffae9581.json](run-002-9baf7202ffae9581.json)
+**Source:** [run-002-9baf7202ffae9581.json](tamil-native/gpt-5.6-terra__4a3c91946fcc.json)
 
 **கார உலோகங்கள்** (Alkali Metals) என்பது கால அட்டவணையின் **1-ஆம் தொகுதியில்** உள்ள உலோகங்கள் ஆகும். இவை நீருடன் வினைபுரிந்து **காரத் தன்மை கொண்ட கரைசலை** உருவாக்குவதால் இப்பெயர் பெற்றன.
 
@@ -664,7 +664,7 @@ Li < Na < K < Rb < Cs
 
 **Status:** completed
 
-**Source:** [run-002-88a5a788d042bf2d.json](run-002-88a5a788d042bf2d.json)
+**Source:** [run-002-88a5a788d042bf2d.json](tamil-native/grok-4.3__d7dfd3ee47d3.json)
 
 நீங்கள் ஒரு சிறந்த ஆசிரியர் என்று கேட்டீர்கள். எனவே, உயர்நிலைப் பள்ளி மாணவருக்கு எளிய மொழியில், படிப்படியாக விளக்குகிறேன்.
 
@@ -736,7 +736,7 @@ Li < Na < K < Rb < Cs
 
 **Status:** completed
 
-**Source:** [run-002-939c50596b93be1c.json](run-002-939c50596b93be1c.json)
+**Source:** [run-002-939c50596b93be1c.json](tamil-native/gemini-3.8-flash__9fdd1d8641c3.json)
 
 வணக்கம்! வாருங்கள், இன்று வேதியியலில் மிக முக்கியமான மற்றும் சுவாரசியமான ஒரு குடும்பத்தைப் பற்றிப் பார்ப்போம். 
 
@@ -806,7 +806,7 @@ Li < Na < K < Rb < Cs
 
 **Status:** completed
 
-**Source:** [run-002-8ebbae32bcf22333.json](run-002-8ebbae32bcf22333.json)
+**Source:** [run-002-8ebbae32bcf22333.json](tamil-native/claude-sonnet-5__191191fa69a5.json)
 
 # காரமண் உலோகங்கள் (Alkaline Earth Metals)
 
@@ -874,7 +874,7 @@ $$Mg + 2HCl \rightarrow MgCl_2 + H_2$$
 
 **Status:** completed
 
-**Source:** [run-002-4b2edadaaa0c4867.json](run-002-4b2edadaaa0c4867.json)
+**Source:** [run-002-4b2edadaaa0c4867.json](tamil-native/llama-4-maverick__12863ddf5858.json)
 
 காரமண் உலோகங்கள்:
 இரண்டாம் நெடுவரிசையில் உள்ள தனிமங்கள் Be, Mg, Ca, Sr, Ba மற்றும் Ra ஆகியவை காரமண் உலோகங்கள் என அழைக்கப்படுகின்றன. 
@@ -926,7 +926,7 @@ Ca, Sr மற்றும் Ba ஆகியவை குளிர்ந்த �
 
 **Status:** completed
 
-**Source:** [run-003-68da8ed11cdb48ff.json](run-003-68da8ed11cdb48ff.json)
+**Source:** [run-003-68da8ed11cdb48ff.json](tamil-english/gpt-5.6-terra__13df4f32312c.json)
 
 ## காரத் தர உலோகங்கள் (Alkaline Earth Metals)
 
@@ -1167,7 +1167,7 @@ MgO
 
 **Status:** completed
 
-**Source:** [run-003-958619d74a81f888.json](run-003-958619d74a81f888.json)
+**Source:** [run-003-958619d74a81f888.json](tamil-english/grok-4.3__b5486845234c.json)
 
 வணக்கம் மாணவரே! நான் உங்கள் வேதியியல் ஆசிரியர். இன்று நாம் **ஆல்கலைன் எர்த் உலோகங்கள்** (கார மண் உலோகங்கள்) பற்றி எளிமையாகவும் தெளிவாகவும் படிப்படியாகப் பார்ப்போம்.
 
@@ -1227,7 +1227,7 @@ MgO
 
 **Status:** completed
 
-**Source:** [run-003-37227cf2902a80bb.json](run-003-37227cf2902a80bb.json)
+**Source:** [run-003-37227cf2902a80bb.json](tamil-english/gemini-3.8-flash__87dbd24c756c.json)
 
 வணக்கம்! வேதியியல் பாடத்தை மிக எளிமையாகவும் ஆர்வமூட்டும் வகையிலும் கற்பதுதான் சிறந்தது. இன்று நாம் தனிம வரிசை அட்டவணையில் (Periodic Table) உள்ள மிக முக்கியமான ஒரு குடும்பத்தைப் பற்றிப் பார்க்கப் போகிறோம். அதுதான் **"காரமண் உலோகங்கள்" (Alkaline Earth Metals)**. 
 
@@ -1297,7 +1297,7 @@ MgO
 
 **Status:** completed
 
-**Source:** [run-003-8627c70c5a0e0e89.json](run-003-8627c70c5a0e0e89.json)
+**Source:** [run-003-8627c70c5a0e0e89.json](tamil-english/claude-sonnet-5__67d5d4622566.json)
 
 # அல்கலைன் எர்த் மெட்டல்கள் (Alkaline Earth Metals) - தமிழில் விளக்கம்
 
@@ -1368,7 +1368,7 @@ $$2Mg + O_2 \rightarrow 2MgO$$
 
 **Status:** completed
 
-**Source:** [run-003-ff8937557f67dc22.json](run-003-ff8937557f67dc22.json)
+**Source:** [run-003-ff8937557f67dc22.json](tamil-english/llama-4-maverick__95e6ef724560.json)
 
 வணக்கம் மாணவரே! இன்று நாம் கார ஒடுங்கிய மண் உலோகங்களைப் பற்றி படிக்க போகிறோம்.
 

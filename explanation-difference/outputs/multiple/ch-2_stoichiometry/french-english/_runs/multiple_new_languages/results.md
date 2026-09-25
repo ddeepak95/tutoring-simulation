@@ -1,0 +1,674 @@
+# stoichiometry / french-english: model responses
+
+5 requests. Response text is preserved from the saved JSON results.
+
+Source: [manifest.json](manifest.json)
+
+## Contents
+
+- [Prompt 8 (en)](#prompt-8)
+  - [gpt-5.6-terra](#run-english_prompt-en-fr-1699adaa692f0c7d)
+  - [grok-4.3](#run-english_prompt-en-fr-e9fbaed69e4a4ee9)
+  - [gemini-3.8-flash](#run-english_prompt-en-fr-eb289e054c282070)
+  - [claude-sonnet-5](#run-english_prompt-en-fr-f9d64af7f5d3aacf)
+  - [llama-4-maverick](#run-english_prompt-en-fr-62646f0caea72dcb)
+
+---
+
+<a id="prompt-8"></a>
+
+## Prompt 8 (en)
+
+**Prompt**
+
+> You are an expert teacher teaching an high school student. Explain stoichiometry in French.
+
+---
+
+<a id="run-english_prompt-en-fr-1699adaa692f0c7d"></a>
+
+### gpt-5.6-terra
+
+**Status:** completed
+
+**Source:** [gpt-5.6-terra__d498ac6e7da8.json](../../gpt-5.6-terra__d498ac6e7da8.json)
+
+La **stœchiométrie** est la partie de la chimie qui permet de calculer les **quantités de réactifs et de produits** impliquées dans une réaction chimique.
+
+En bref : elle répond à des questions comme :
+
+- Quelle masse de produit peut-on fabriquer ?
+- Quelle quantité de réactif faut-il utiliser ?
+- Quel réactif va manquer en premier ?
+- Quel volume de gaz sera produit ?
+
+---
+
+## 1. L’idée principale : une recette chimique
+
+Une équation chimique équilibrée fonctionne comme une recette.
+
+Par exemple :
+
+\[
+2H_2 + O_2 \rightarrow 2H_2O
+\]
+
+Cela signifie que :
+
+- 2 molécules de dihydrogène \(H_2\)
+- réagissent avec 1 molécule de dioxygène \(O_2\)
+- pour former 2 molécules d’eau \(H_2O\).
+
+Mais en laboratoire, on ne compte pas les molécules une par une. On utilise une unité appelée la **mole**.
+
+On peut donc aussi lire l’équation ainsi :
+
+\[
+2\ \text{mol de } H_2 + 1\ \text{mol de } O_2 \rightarrow 2\ \text{mol de } H_2O
+\]
+
+Les nombres devant les formules, appelés **coefficients stœchiométriques**, indiquent les proportions.
+
+---
+
+## 2. Toujours commencer par équilibrer l’équation
+
+Une équation chimique doit respecter la conservation des atomes : on ne crée pas et on ne détruit pas d’atomes.
+
+Exemple non équilibré :
+
+\[
+H_2 + O_2 \rightarrow H_2O
+\]
+
+À gauche, il y a 2 atomes d’oxygène ; à droite, seulement 1. Ce n’est pas équilibré.
+
+On ajoute donc des coefficients :
+
+\[
+2H_2 + O_2 \rightarrow 2H_2O
+\]
+
+Vérification :
+
+| Élément | À gauche | À droite |
+|---|---:|---:|
+| H | 4 | 4 |
+| O | 2 | 2 |
+
+L’équation est équilibrée.
+
+> Attention : on ne change jamais les indices dans les formules chimiques.  
+> Par exemple, on ne transforme pas \(H_2O\) en \(H_2O_2\). On ajoute seulement des coefficients devant les formules.
+
+---
+
+## 3. La mole et la masse molaire
+
+La **mole** est une unité de quantité de matière, notée \(n\).
+
+La relation essentielle est :
+
+\[
+n = \frac{m}{M}
+\]
+
+avec :
+
+- \(n\) : quantité de matière, en moles (mol) ;
+- \(m\) : masse, en grammes (g) ;
+- \(M\) : masse molaire, en g·mol\(^{-1}\).
+
+### Exemple : masse molaire de l’eau
+
+Pour \(H_2O\) :
+
+- H : environ \(1\ \text{g·mol}^{-1}\)
+- O : environ \(16\ \text{g·mol}^{-1}\)
+
+Donc :
+
+\[
+M(H_2O) = 2 \times 1 + 16 = 18\ \text{g·mol}^{-1}
+\]
+
+Une mole d’eau a donc une masse de 18 g.
+
+---
+
+## 4. Méthode générale pour un exercice de stœchiométrie
+
+Voici la méthode à suivre presque tout le temps :
+
+1. **Écrire et équilibrer l’équation chimique.**
+2. **Transformer les données en moles**, si elles sont données en grammes, litres, etc.
+3. **Utiliser le rapport des coefficients** de l’équation équilibrée.
+4. **Convertir le résultat** dans l’unité demandée : grammes, litres, moles…
+5. Vérifier si un **réactif limitant** est présent.
+
+---
+
+# Exemple 1 : Calculer une masse de produit
+
+On fait réagir 4,0 g de dihydrogène \(H_2\) avec suffisamment de dioxygène. Quelle masse d’eau peut-on produire ?
+
+### Étape 1 : équation équilibrée
+
+\[
+2H_2 + O_2 \rightarrow 2H_2O
+\]
+
+### Étape 2 : calculer la quantité de matière de \(H_2\)
+
+La masse molaire du dihydrogène est :
+
+\[
+M(H_2) = 2 \times 1 = 2\ \text{g·mol}^{-1}
+\]
+
+Donc :
+
+\[
+n(H_2) = \frac{m}{M} = \frac{4,0}{2,0} = 2,0\ \text{mol}
+\]
+
+### Étape 3 : utiliser les coefficients stœchiométriques
+
+Dans l’équation :
+
+\[
+2H_2 \rightarrow 2H_2O
+\]
+
+Le rapport est donc :
+
+\[
+2\ \text{mol de } H_2 \rightarrow 2\ \text{mol de } H_2O
+\]
+
+Ainsi :
+
+\[
+n(H_2O) = 2,0\ \text{mol}
+\]
+
+### Étape 4 : convertir en masse
+
+\[
+M(H_2O) = 18\ \text{g·mol}^{-1}
+\]
+
+\[
+m(H_2O) = n \times M
+\]
+
+\[
+m(H_2O) = 2,0 \times 18 = 36\ \text{g}
+\]
+
+**Réponse : on peut produire 36 g d’eau.**
+
+---
+
+# Exemple 2 : Utiliser un rapport différent
+
+Considérons la réaction :
+
+\[
+N_2 + 3H_2 \rightarrow 2NH_3
+\]
+
+Le diazote \(N_2\) réagit avec le dihydrogène \(H_2\) pour former de l’ammoniac \(NH_3\).
+
+Supposons que l’on possède 6,0 mol de \(H_2\), avec du \(N_2\) en excès. Combien de moles de \(NH_3\) peut-on former ?
+
+D’après l’équation :
+
+\[
+3\ \text{mol de } H_2 \rightarrow 2\ \text{mol de } NH_3
+\]
+
+Donc :
+
+\[
+n(NH_3) = 6,0 \times \frac{2}{3}
+\]
+
+\[
+n(NH_3) = 4,0\ \text{mol}
+\]
+
+**Réponse : 6,0 mol de \(H_2\) permettent de former 4,0 mol de \(NH_3\).**
+
+---
+
+## 5. Le réactif limitant
+
+Le **réactif limitant** est celui qui est entièrement consommé en premier. Il limite donc la quantité maximale de produits formés.
+
+Imagine une recette de sandwich :
+
+- 2 tranches de pain + 1 tranche de fromage → 1 sandwich.
+
+Si tu as :
+
+- 10 tranches de pain,
+- 3 tranches de fromage,
+
+tu peux faire seulement 3 sandwichs. Le fromage est le **facteur limitant**.
+
+En chimie, c’est pareil.
+
+### Exemple
+
+\[
+2H_2 + O_2 \rightarrow 2H_2O
+\]
+
+On possède :
+
+- \(3,0\) mol de \(H_2\),
+- \(2,0\) mol de \(O_2\).
+
+L’équation exige :
+
+\[
+2\ \text{mol de } H_2 \text{ pour } 1\ \text{mol de } O_2
+\]
+
+Pour faire réagir 3,0 mol de \(H_2\), il faut :
+
+\[
+n(O_2) = 3,0 \times \frac{1}{2} = 1,5\ \text{mol}
+\]
+
+Or on a 2,0 mol de \(O_2\), donc il y en a assez. C’est le \(H_2\) qui manque en premier.
+
+**Le dihydrogène \(H_2\) est le réactif limitant.**
+
+Puisque \(2H_2 \rightarrow 2H_2O\), les 3,0 mol de \(H_2\) produisent :
+
+\[
+3,0\ \text{mol de } H_2O
+\]
+
+---
+
+## 6. Cas des gaz : volume molaire
+
+Pour les gaz, on peut parfois utiliser le **volume molaire**.
+
+À température et pression données :
+
+\[
+V = n \times V_m
+\]
+
+avec :
+
+- \(V\) : volume du gaz ;
+- \(n\) : quantité de matière ;
+- \(V_m\) : volume molaire.
+
+Souvent, dans les exercices au lycée, on donne \(V_m\), par exemple :
+
+\[
+V_m = 24,0\ \text{L·mol}^{-1}
+\]
+
+Cela signifie qu’une mole de gaz occupe 24,0 L dans ces conditions.
+
+---
+
+## 7. Formules importantes à connaître
+
+### Pour passer de la masse aux moles
+
+\[
+n = \frac{m}{M}
+\]
+
+### Pour passer des moles à la masse
+
+\[
+m = n \times M
+\]
+
+### Pour un gaz
+
+\[
+n = \frac{V}{V_m}
+\]
+
+ou
+
+\[
+V = n \times V_m
+\]
+
+---
+
+## 8. Résumé
+
+La stœchiométrie repose sur trois idées :
+
+1. **Équilibrer l’équation chimique.**
+2. **Utiliser les coefficients comme rapports entre les moles.**
+3. **Convertir entre masse, quantité de matière et volume selon la situation.**
+
+Le chemin typique est :
+
+\[
+\text{masse du réactif} \rightarrow \text{moles du réactif} \rightarrow \text{moles du produit} \rightarrow \text{masse ou volume du produit}
+\]
+
+La chose la plus importante à retenir est que les coefficients de l’équation équilibrée donnent les proportions de la réaction.
+
+
+---
+
+<a id="run-english_prompt-en-fr-e9fbaed69e4a4ee9"></a>
+
+### grok-4.3
+
+**Status:** completed
+
+**Source:** [grok-4.3__0393b379f408.json](../../grok-4.3__0393b379f408.json)
+
+Bonjour ! Je suis ravi de t'expliquer la **stœchiométrie** de manière simple et claire, comme si nous étions en cours de chimie au lycée. On va y aller étape par étape, avec des exemples concrets.
+
+### Qu’est-ce que la stœchiométrie ?
+La stœchiométrie est la partie de la chimie qui permet de calculer les **quantités** (en masse, en moles ou en volume) des substances qui réagissent et qui sont produites dans une réaction chimique. 
+
+Elle repose sur deux principes fondamentaux :
+- La **conservation de la masse** (loi de Lavoisier) : rien ne se perd, rien ne se crée, tout se transforme. La masse totale des réactifs est égale à celle des produits.
+- Les **rapports en moles** donnés par l’équation chimique équilibrée.
+
+En gros, c’est comme une recette de cuisine : si tu veux doubler la quantité de gâteau, tu doubles tous les ingrédients selon les proportions exactes.
+
+### 1. L’équation chimique équilibrée (point de départ)
+Avant tout calcul, l’équation doit être **équilibrée** (le nombre d’atomes de chaque élément doit être le même à gauche et à droite).
+
+Exemple classique :
+\[
+2\,\ce{H2} + \ce{O2} \rightarrow 2\,\ce{H2O}
+\]
+
+Interprétation :
+- 2 molécules d’hydrogène (H₂) réagissent avec 1 molécule d’oxygène (O₂)
+- Pour former 2 molécules d’eau (H₂O)
+
+En termes de **moles** (l’unité de quantité de matière) :
+- Rapport molaire = **2 : 1 : 2**
+
+Cela signifie que pour 2 moles d’H₂, il faut 1 mole d’O₂ et on obtient 2 moles d’H₂O.
+
+### 2. Les calculs stœchiométriques
+On utilise les rapports molaires pour passer d’une substance à une autre.
+
+**Exemple** : Combien de grammes d’eau peut-on obtenir avec 8 g d’hydrogène (H₂) ?
+
+1. Calculer le nombre de moles d’H₂ :
+   - Masse molaire de H₂ = 2 g/mol
+   - \( n = \frac{m}{M} = \frac{8}{2} = 4 \) moles d’H₂
+
+2. Utiliser le rapport : 2 moles d’H₂ → 2 moles d’H₂O (rapport 1:1)
+   - Donc 4 moles d’H₂ donnent **4 moles** d’H₂O
+
+3. Calculer la masse d’eau :
+   - Masse molaire de H₂O = 18 g/mol
+   - \( m = n \times M = 4 \times 18 = 72 \) g d’eau
+
+### 3. Le réactif limitant (un peu plus avancé)
+Parfois, un des réactifs est en quantité insuffisante. C’est lui qui « limite » la réaction.
+
+Exemple : Tu as 4 moles d’H₂ et 3 moles d’O₂. Quel est le réactif limitant ?
+
+- Selon l’équation : 2 moles H₂ nécessitent 1 mole O₂
+- Avec 4 moles H₂, il faudrait 2 moles O₂
+- Mais tu as 3 moles d’O₂ (en excès)
+- Donc H₂ est limitant : on ne peut produire que 4 moles d’eau (et il restera 1 mole d’O₂ inutilisée).
+
+### Pourquoi c’est important ?
+La stœchiométrie sert dans :
+- L’industrie (fabrication d’engrais, de médicaments, d’essence)
+- La pharmacie (dosage des médicaments)
+- L’environnement (calcul des émissions de CO₂)
+- Les expériences en labo (savoir exactement combien peser de chaque produit)
+
+### Astuce pour réussir
+1. Toujours équilibrer l’équation d’abord.
+2. Convertir les masses en moles.
+3. Utiliser les coefficients stœchiométriques comme des « multiplicateurs ».
+4. Reconvertir en masse ou volume si nécessaire.
+
+Tu as compris le principe ? Veux-tu qu’on fasse un exercice ensemble (par exemple avec une combustion ou une réaction acide-base) ? Ou as-tu une question sur un point précis ?
+
+
+---
+
+<a id="run-english_prompt-en-fr-eb289e054c282070"></a>
+
+### gemini-3.8-flash
+
+**Status:** completed
+
+**Source:** [gemini-3.8-flash__f4ca841d3a00.json](../../gemini-3.8-flash__f4ca841d3a00.json)
+
+Bonjour ! Installe-toi. Ne te laisse pas impressionner par ce mot un peu barbare : **la stœchiométrie** (prononce *sté-kio-mé-tri*). 
+
+En réalité, c'est un concept très logique. Si tu sais suivre une recette de cuisine, tu as déjà compris 80 % du travail. **La stœchiométrie, c'est simplement la recette de cuisine de la chimie.**
+
+Voici comment ça marche, étape par étape.
+
+---
+
+### 1. L'analogie du grilled-cheese (ou du sandwich)
+
+Imagine que tu prépares des sandwichs au fromage. La "recette", c'est :
+> **2 tranches de pain + 1 tranche de fromage $\rightarrow$ 1 sandwich**
+
+Si je te donne **10 tranches de pain**, combien de tranches de fromage te faut-il pour ne rien gaspiller ? 
+Il t'en faut **5**, et tu obtiendras **5 sandwichs**. 
+
+Félicitations, tu viens de faire de la stœchiométrie ! Tu as calculé les proportions nécessaires pour que la réaction se fasse parfaitement.
+
+---
+
+### 2. Le passage à la chimie : Les coefficients
+
+En chimie, les ingrédients sont les **réactifs**, et le plat final est le **produit**.
+
+Prenons la fabrication de l'eau :
+$$\text{2 H}_2 + \text{O}_2 \rightarrow \text{2 H}_2\text{O}$$
+
+Regarde les grands chiffres devant les molécules (on les appelle les **coefficients stœchiométriques**) :
+* Le **2** devant $\text{H}_2$
+* Le **1** sous-entendu devant $\text{O}_2$
+* Le **2** devant $\text{H}_2\text{O}$
+
+Cela se lit exactement comme la recette du sandwich : 
+*"Il me faut 2 molécules de dihydrogène et 1 molécule de dioxygène pour fabriquer 2 molécules d'eau."*
+
+> **Règle d'or de Lavoisier :** *"Rien ne se perd, rien ne se crée, tout se transforme."* Tu dois toujours avoir le même nombre d'atomes à gauche (réactifs) et à droite (produits). Ici, on a 4 hydrogènes et 2 oxygènes des deux côtés. L'équation est dite **équilibrée**.
+
+---
+
+### 3. Le problème de la balance : La Mole
+
+Dans la vraie vie, au laboratoire, on ne peut pas attraper "deux molécules" avec une pince à épiler, c'est beaucoup trop petit. On pèse des grammes avec une balance.
+
+Pour faire le pont entre le monde microscopique (les atomes) et notre monde (les grammes), les chimistes utilisent un "paquet" géant : **la mole**. 
+* C'est comme quand tu achètes des œufs : tu ne les achètes pas à l'unité, tu achètes une *douzaine* (paquet de 12).
+* Une mole, c'est un paquet d'environ $6{,}022 \times 10^{23}$ molécules (le nombre d'Avogadro).
+
+Donc, dans notre équation :
+$$\text{2 H}_2 + \text{O}_2 \rightarrow \text{2 H}_2\text{O}$$
+On lit maintenant : 
+*"**2 moles** de $\text{H}_2$ réagissent avec **1 mole** de $\text{O}_2$ pour donner **2 moles** de $\text{H}_2\text{O}$."*
+
+---
+
+### 4. Le piège classique : Le réactif limitant
+
+Reprenons les sandwichs :
+Tu as **10 tranches de pain**, mais seulement **2 tranches de fromage** dans ton frigo. Combien de sandwichs peux-tu faire ?
+Seulement **2**. 
+
+Il te restera 6 tranches de pain sur les bras. 
+* Le fromage est ce qu'on appelle le **réactif limitant** : c'est lui qui s'épuise en premier et qui dicte l'arrêt de la réaction.
+* Le pain est le **réactif en excès**.
+
+En chimie, c'est pareil ! Le calcul stœchiométrique te permet de savoir quel ingrédient va manquer en premier.
+
+---
+
+### 5. La méthode infaillible pour résoudre un exercice
+
+Quand ton professeur te donne un problème de stœchiométrie (par exemple : *"Combien de grammes d'eau puis-je produire avec 8 grammes d'oxygène ?"*), suis toujours ces 4 étapes :
+
+1. **Équilibre l'équation chimique** (écris la bonne recette).
+2. **Convertis les grammes en moles** (car la recette parle en moles, pas en grammes ! Formule : $n = \frac{m}{M}$).
+3. **Utilise les proportions de la recette** (fais un produit en croix / règle de trois grâce aux coefficients).
+4. **Reconvertis les moles en grammes** si la question te demande une masse ($m = n \times M$).
+
+---
+
+**En résumé :** 
+La stœchiométrie n'est rien d'autre que l'art de compter les molécules par paquets (les moles) pour respecter les proportions d'une réaction chimique équilibrée.
+
+Est-ce que cette explication te semble claire ? Veux-tu qu'on essaie de faire un petit exemple de calcul ensemble ?
+
+
+---
+
+<a id="run-english_prompt-en-fr-f9d64af7f5d3aacf"></a>
+
+### claude-sonnet-5
+
+**Status:** completed
+
+**Source:** [claude-sonnet-5__1b5c706969ee.json](../../claude-sonnet-5__1b5c706969ee.json)
+
+# La Stœchiométrie
+
+## Qu'est-ce que la stœchiométrie ?
+
+La stœchiométrie, c'est l'étude des **quantités de matière** qui interviennent dans une réaction chimique. C'est un peu comme une **recette de cuisine** : pour faire un gâteau, tu as besoin de proportions précises d'ingrédients. En chimie, c'est pareil !
+
+## Le principe de base
+
+Quand des substances réagissent ensemble, elles le font selon des **proportions bien définies**, données par les **coefficients** de l'équation chimique équilibrée.
+
+### Exemple simple
+
+Prenons la formation de l'eau :
+
+$$2H_2 + O_2 \rightarrow 2H_2O$$
+
+Cette équation nous dit que :
+- **2 molécules** de dihydrogène réagissent avec **1 molécule** de dioxygène
+- pour former **2 molécules** d'eau
+
+## Les étapes pour résoudre un problème de stœchiométrie
+
+### 1️⃣ Équilibrer l'équation chimique
+Vérifier que le nombre d'atomes est le même de chaque côté.
+
+### 2️⃣ Convertir en moles
+Utiliser la formule :
+$$n = \frac{m}{M}$$
+
+où :
+- *n* = quantité de matière (en mol)
+- *m* = masse (en g)
+- *M* = masse molaire (en g/mol)
+
+### 3️⃣ Utiliser les rapports stœchiométriques
+Les coefficients de l'équation donnent le rapport entre les moles de chaque substance.
+
+### 4️⃣ Convertir le résultat dans l'unité demandée
+
+## Exemple concret
+
+**Question :** Combien de grammes d'eau obtient-on à partir de 4g de dihydrogène (H₂) ?
+
+**Étape 1 :** L'équation est déjà équilibrée :
+$$2H_2 + O_2 \rightarrow 2H_2O$$
+
+**Étape 2 :** Calculer les moles de H₂
+$$n(H_2) = \frac{4g}{2g/mol} = 2 \text{ mol}$$
+
+**Étape 3 :** Utiliser le rapport stœchiométrique
+D'après l'équation : 2 mol H₂ → 2 mol H₂O (rapport 1:1)
+
+Donc : n(H₂O) = 2 mol
+
+**Étape 4 :** Convertir en grammes
+$$m(H_2O) = n \times M = 2 \times 18 = 36g$$
+
+## Point clé à retenir 🔑
+
+> **Les coefficients stœchiométriques représentent des rapports de moles, jamais des rapports de masses directement !**
+
+## Le réactif limitant
+
+Parfois, un réactif est en **quantité insuffisante** et limite la réaction : c'est le **réactif limitant**. L'autre réactif, présent en excès, ne sera pas totalement consommé.
+
+**Astuce :** Pour identifier le réactif limitant, calcule combien de produit chaque réactif pourrait former séparément — celui qui en donne le moins est le réactif limitant !
+
+---
+
+Veux-tu qu'on pratique avec quelques exercices ?
+
+
+---
+
+<a id="run-english_prompt-en-fr-62646f0caea72dcb"></a>
+
+### llama-4-maverick
+
+**Status:** completed
+
+**Source:** [llama-4-maverick__db3c4e55be79.json](../../llama-4-maverick__db3c4e55be79.json)
+
+Bonjour ! Aujourd'hui, nous allons explorer un concept fondamental en chimie : la stœchiométrie. La stœchiométrie est la partie de la chimie qui étudie les quantités relatives des réactifs et des produits dans les réactions chimiques.
+
+**Qu'est-ce que la stœchiométrie ?**
+
+La stœchiométrie vient du grec "stoikheion" qui signifie "élément" et "metron" qui signifie "mesure". Il s'agit donc de mesurer les quantités des éléments qui réagissent et qui sont produits lors d'une réaction chimique.
+
+**Les principes de base**
+
+Pour comprendre la stœchiométrie, il faut connaître quelques principes de base :
+
+1. **La loi de conservation de la masse** : lors d'une réaction chimique, la masse totale des réactifs est égale à la masse totale des produits. Cela signifie que la matière n'est ni créée ni détruite, mais simplement transformée.
+2. **Les équations chimiques équilibrées** : une équation chimique représente une réaction chimique. Pour que l'équation soit équilibrée, il faut que le nombre d'atomes de chaque élément soit le même du côté des réactifs et du côté des produits.
+
+**Comment appliquer la stœchiométrie ?**
+
+Pour résoudre un problème de stœchiométrie, il faut suivre ces étapes :
+
+1. **Écrire l'équation chimique équilibrée** : il faut d'abord écrire l'équation chimique qui représente la réaction étudiée, puis l'équilibrer pour que le nombre d'atomes de chaque élément soit le même des deux côtés.
+2. **Identifier les quantités données** : il faut identifier les quantités de réactifs ou de produits qui sont données dans le problème.
+3. **Utiliser les coefficients stœchiométriques** : les coefficients stœchiométriques sont les nombres qui précèdent les formules des réactifs et des produits dans l'équation équilibrée. Ils indiquent les proportions relatives des différentes espèces chimiques.
+4. **Calculer les quantités inconnues** : en utilisant les coefficients stœchiométriques et les quantités données, on peut calculer les quantités inconnues.
+
+**Exemple**
+
+Supposons que nous voulions produire 2 moles de chlorure de sodium (NaCl) à partir de la réaction entre le sodium (Na) et le chlore (Cl2). L'équation équilibrée est :
+
+2 Na + Cl2 → 2 NaCl
+
+Si nous avons 4 moles de sodium, combien de moles de chlore sont nécessaires ?
+
+1. L'équation est déjà équilibrée.
+2. La quantité donnée est 4 moles de sodium.
+3. Le coefficient stœchiométrique de Na est 2 et celui de Cl2 est 1.
+4. On peut calculer la quantité de Cl2 nécessaire : 4 moles de Na × (1 mole de Cl2 / 2 moles de Na) = 2 moles de Cl2.
+
+**Conclusion**
+
+La stœchiométrie est un outil essentiel en chimie qui permet de prédire les quantités de produits qui seront formés ou de réactifs qui seront nécessaires lors d'une réaction chimique. En comprenant les principes de base et en appliquant les étapes pour résoudre les problèmes, tu pourras résoudre des problèmes de stœchiométrie avec confiance.
+

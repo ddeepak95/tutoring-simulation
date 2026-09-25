@@ -1,0 +1,924 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "41222e50bffc3880bba85a107ccea8204a851dde8f4254f3357fc2a3a52e9c3a",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response provides a comprehensive and accurate explanation of stoichiometry in Bengali, covering its definition, balanced chemical equations, mole ratios, a worked example, related concepts such as limiting reagents and percent yield, a problem-solving strategy, and a practice question.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Etymology of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Chemical Equations and Coefficients"
+      },
+      {
+        "id": "s3",
+        "label": "Mole Ratios"
+      },
+      {
+        "id": "s4",
+        "label": "Worked Example: Mass-to-Mass Stoichiometric Calculation"
+      },
+      {
+        "id": "s5",
+        "label": "Key Concepts: Limiting Reagent, Excess Reagent, and Yield"
+      },
+      {
+        "id": "s6",
+        "label": "Problem-Solving Roadmap"
+      },
+      {
+        "id": "s7",
+        "label": "Practice Exercise"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and Etymology of Stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the quantitative relationship between reactants and products in a chemical reaction and breaks down its Greek linguistic roots.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# স্টয়কিওমেট্রি (Stoichiometry) - সহজ ভাষায় ব্যাখ্যা",
+            "start": 0,
+            "end": 54
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আচ্ছা, আজকে আমরা রসায়নের একটি গুরুত্বপূর্ণ বিষয় **স্টয়কিওমেট্রি** নিয়ে আলোচনা করব।",
+            "start": 56,
+            "end": 142
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## স্টয়কিওমেট্রি কী?",
+            "start": 144,
+            "end": 165
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "স্টয়কিওমেট্রি হলো রসায়নের এমন একটি শাখা যেখানে আমরা **রাসায়নিক বিক্রিয়ায় বিভিন্ন পদার্থের পরিমাণগত সম্পর্ক** নিয়ে কাজ করি। অর্থাৎ, একটি বিক্রিয়ায় কতটুকু বিক্রিয়ক (Reactant) লাগবে এবং কতটুকু উৎপাদ (Product) তৈরি হবে - তা হিসাব করাই স্টয়কিওমেট্রির কাজ।",
+            "start": 167,
+            "end": 427
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**গ্রিক শব্দ থেকে এসেছে:**",
+            "start": 429,
+            "end": 455
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Stoicheion = উপাদান (Element)",
+            "start": 456,
+            "end": 487
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Metron = পরিমাপ (Measure)",
+            "start": 488,
+            "end": 515
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry and the Greek root words (stoicheion = element, metron = measure) are correctly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Balanced Chemical Equations as the Basis of Stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains that balanced chemical equations are the prerequisite for stoichiometry and that reaction coefficients denote molar proportions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মূল ভিত্তি: ভারসাম্যপূর্ণ সমীকরণ",
+            "start": 517,
+            "end": 552
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "স্টয়কিওমেট্রি বুঝতে হলে প্রথমে দরকার একটি **balanced chemical equation**।",
+            "start": 554,
+            "end": 628
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণ দেখি:",
+            "start": 630,
+            "end": 642
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 643,
+            "end": 675
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখানে সহগ (coefficient) গুলো (2, 1, 2) আমাদের বলে দেয়:",
+            "start": 677,
+            "end": 732
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **2 mol** হাইড্রোজেন + **1 mol** অক্সিজেন → **2 mol** পানি তৈরি করে",
+            "start": 733,
+            "end": 802
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes how the stoichiometric coefficients in 2H2 + O2 -> 2H2O relate molar amounts of reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Mole Ratios in Stoichiometric Calculations",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains mole ratios derived from a balanced equation and how they allow determination of unknown quantities from known quantities.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মোল অনুপাত (Mole Ratio) - স্টয়কিওমেট্রির প্রাণ",
+            "start": 804,
+            "end": 854
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উপরের সমীকরণ থেকে আমরা পাই:",
+            "start": 856,
+            "end": 883
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\frac{H_2}{O_2} = \\frac{2}{1}, \\quad \\frac{H_2}{H_2O} = \\frac{2}{2}, \\quad \\frac{O_2}{H_2O} = \\frac{1}{2}$$",
+            "start": 885,
+            "end": 994
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই অনুপাতগুলো ব্যবহার করেই আমরা যেকোনো একটি পদার্থের পরিমাণ জানলে বাকিগুলো বের করতে পারি।",
+            "start": 996,
+            "end": 1085
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The mole ratios for the water synthesis reaction are written correctly, and their role as conversion factors is accurately described.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked Example: Calculating Mass of Water Produced from Given Mass of Hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates a complete four-step calculation determining the mass of water formed from 4 grams of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সমস্যা সমাধানের ধাপসমূহ",
+            "start": 1087,
+            "end": 1113
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "চলো একটি উদাহরণ দিয়ে বুঝি:",
+            "start": 1115,
+            "end": 1142
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমস্যা:** 4 gram H₂ সম্পূর্ণ বিক্রিয়া করলে কত গ্রাম H₂O তৈরি হবে?",
+            "start": 1144,
+            "end": 1212
+          },
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ১: সমীকরণ লিখে ব্যালেন্স করো",
+            "start": 1214,
+            "end": 1250
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1251,
+            "end": 1283
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ২: দেওয়া ভরকে মোলে রূপান্তর করো",
+            "start": 1285,
+            "end": 1325
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{মোল} = \\frac{\\text{ভর}}{\\text{আণবিক ভর}}$$",
+            "start": 1326,
+            "end": 1376
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n(H_2) = \\frac{4g}{2 \\, g/mol} = 2 \\, mol$$",
+            "start": 1377,
+            "end": 1422
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ৩: মোল অনুপাত ব্যবহার করো",
+            "start": 1424,
+            "end": 1457
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ অনুযায়ী, 2 mol H₂ → 2 mol H₂O",
+            "start": 1458,
+            "end": 1495
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তাই, 2 mol H₂ থেকে **2 mol H₂O** তৈরি হবে।",
+            "start": 1497,
+            "end": 1539
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ধাপ ৪: মোলকে আবার ভরে রূপান্তর করো",
+            "start": 1541,
+            "end": 1579
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{ভর} = \\text{মোল} \\times \\text{আণবিক ভর}$$",
+            "start": 1580,
+            "end": 1629
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{ভর}(H_2O) = 2 \\, mol \\times 18 \\, g/mol = 36 \\, gram$$",
+            "start": 1630,
+            "end": 1692
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**উত্তর: 36 গ্রাম পানি উৎপন্ন হবে।**",
+            "start": 1694,
+            "end": 1730
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations (moles of H2 = 2 mol, moles of H2O = 2 mol, mass of H2O = 36 g) are mathematically and chemically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Key Concepts: Limiting Reagent, Excess Reagent, and Yields",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a summary table defining essential stoichiometric terms including limiting reagent, excess reagent, theoretical yield, actual yield, and percentage yield.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## গুরুত্বপূর্ণ ধারণা যা জানা দরকার",
+            "start": 1732,
+            "end": 1767
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ধারণা | ব্যাখ্যা |",
+            "start": 1769,
+            "end": 1789
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---|---|",
+            "start": 1790,
+            "end": 1799
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Limiting Reagent** | যে বিক্রিয়ক আগে শেষ হয়ে যায় এবং বিক্রিয়া থামিয়ে দেয় |",
+            "start": 1800,
+            "end": 1884
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Excess Reagent** | যে বিক্রিয়ক অতিরিক্ত থেকে যায় |",
+            "start": 1885,
+            "end": 1941
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Theoretical Yield** | তাত্ত্বিকভাবে যতটুকু উৎপাদ পাওয়া উচিত |",
+            "start": 1942,
+            "end": 2008
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Actual Yield** | বাস্তবে পরীক্ষাগারে যতটুকু পাওয়া যায় |",
+            "start": 2009,
+            "end": 2070
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **Percentage Yield** | $\\frac{\\text{Actual Yield}}{\\text{Theoretical Yield}} \\times 100\\%$ |",
+            "start": 2071,
+            "end": 2165
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All definitions and the percentage yield formula are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Problem-Solving Roadmap Trick",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Provides a high-level flowchart outlining the sequence of conversions required in stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মনে রাখার সহজ কৌশল (Trick)",
+            "start": 2167,
+            "end": 2196
+          },
+          {
+            "id": "p42",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "স্টয়কিওমেট্রি সমস্যা সমাধানের সময় সবসময় এই পথ অনুসরণ করো:",
+            "start": 2198,
+            "end": 2258
+          },
+          {
+            "id": "p43",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{ভর/আয়তন (দেওয়া)} \\rightarrow \\text{মোল (দেওয়া)} \\rightarrow \\text{মোল (চাওয়া)} \\rightarrow \\text{ভর/আয়তন (চাওয়া)}$$",
+            "start": 2260,
+            "end": 2389
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The conversion sequence from given mass/volume to given moles to desired moles to desired mass/volume is the standard stoichiometric pathway.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Stoichiometry Practice Exercise",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Presents a practice problem based on the Haber-Bosch ammonia synthesis reaction with hints on molecular weights.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## অনুশীলনের জন্য একটি প্রশ্ন",
+            "start": 2391,
+            "end": 2420
+          },
+          {
+            "id": "p45",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তুমি নিজে চেষ্টা করো:",
+            "start": 2422,
+            "end": 2443
+          },
+          {
+            "id": "p46",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$N_2 + 3H_2 \\rightarrow 2NH_3$$",
+            "start": 2444,
+            "end": 2476
+          },
+          {
+            "id": "p47",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যদি 28 gram N₂ বিক্রিয়া করে, তাহলে কত গ্রাম NH₃ উৎপন্ন হবে?",
+            "start": 2478,
+            "end": 2538
+          },
+          {
+            "id": "p48",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**(Hint: N₂ এর আণবিক ভর = 28, NH₃ এর আণবিক ভর = 17)**",
+            "start": 2540,
+            "end": 2593
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তুমি কি এই সমস্যাটি নিজে সমাধান করে দেখতে চাও? আমি তোমাকে সাহায্য করতে পারি! 😊",
+            "start": 2595,
+            "end": 2673
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation is balanced, the problem statement is well-defined, and the molecular masses provided in the hint (N2 = 28, NH3 = 17) are correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-english\\claude-sonnet-5__dd92481b9fa9.json",
+    "original_sha256": "7d7775f112d8aceb9dca414a7a29375cb8c6499c516ef7f848d66d27b0110054",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 49,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 2
+    },
+    "nested_passages": 49,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "none": 7
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

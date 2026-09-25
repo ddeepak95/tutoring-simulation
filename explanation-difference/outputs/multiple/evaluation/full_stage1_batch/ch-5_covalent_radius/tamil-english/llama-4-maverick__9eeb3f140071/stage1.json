@@ -1,0 +1,133 @@
+{
+  "topic_relevance": {
+    "requested_topic": "covalent radius",
+    "observed_topic": "Definition and calculation of covalent radius in homonuclear and heteronuclear molecules",
+    "topic_match": "on_topic",
+    "reason": "The explanation defines covalent radius and illustrates how it is calculated for homonuclear diatomic molecules (H2, O2) and heteronuclear diatomic molecules (HCl).",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of covalent radius for homonuclear molecules",
+      "excerpts": [
+        {
+          "text": "ஒரு பிணைப்பில் ஈடுபடும் இரு அணுக்களுக்கு இடையிலே உள்ள தொலைவின் பாதி அளவை பகிர்வு ஆரம் என்பர். ஒரே மாதிரியான இரு அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளத்தை பாதியாக பிரித்தால் அதை பகிர்வு ஆரம் எனலாம்.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition correctly explains that for homonuclear molecules, the covalent radius is half of the internuclear distance (bond length).",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Worked example calculating covalent radius of hydrogen in H2",
+      "excerpts": [
+        {
+          "text": "எடுத்துக்காட்டாக ஐதரசன் மூலக்கூறில் (H2) இரு ஐதரசன் அணுக்களுக்கு இடையே உள்ள தொலைவு 74 பிகோமீட்டர் என்றால் ஐதரசனின் பகிர்வு ஆரம் 37 பிகோமீட்டராக இருக்கும்.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The calculation 74 pm / 2 = 37 pm is correct for the covalent radius of hydrogen in H2.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Worked example calculating covalent radius of oxygen in O2",
+      "excerpts": [
+        {
+          "text": "அதேபோல் ஆக்சிஜன் மூலக்கூறில் (O2) ஆக்சிஜன் அணுக்களுக்கு இடையே உள்ள தொலைவு 144 பிகோமீட்டர் என்றால், ஆக்சிஜனின் பகிர்வு ஆரம் 74 பிகோமீட்டர்.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "An arithmetic error is present: half of 144 pm is 72 pm, not 74 pm.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "ஆக்சிஜன் அணுக்களுக்கு இடையே உள்ள தொலைவு 144 பிகோமீட்டர் என்றால், ஆக்சிஜனின் பகிர்வு ஆரம் 74 பிகோமீட்டர்."
+              }
+            ],
+            "description": "Dividing an internuclear distance of 144 pm by 2 yields 72 pm, not 74 pm.",
+            "correction": "144 பிகோமீட்டரை இரண்டால் வகுத்தால் ஆக்சிஜனின் பகிர்வு ஆரம் 72 பிகோமீட்டர் ஆகும் (74 அல்ல).",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Relationship between bond length and covalent radii in heteronuclear molecules",
+      "excerpts": [
+        {
+          "text": "ஆனால் ஐதரசன் குளோரைடு (HCl) போன்ற வேறுபட்ட அணுக்களால் ஆன மூலக்கூறுகளில், பிணைப்பு நீளம் என்பது அந்த இரு அணுக்களின் பகிர்வு ஆரங்களின் கூடுதலுக்கு சமம். அதாவது HCl ல் ஐதரசன் மற்றும் குளோரின் அணுக்களுக்கு இடையே உள்ள பிணைப்பு நீளம் = ஐதரசனின் பகிர்வு ஆரம் + குளோரினின் பகிர்வு ஆரம். இவ்வாறு பகிர்வு ஆரம் கணக்கிடப்படுகிறது.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The unit accurately conveys the basic additive relationship where internuclear bond distance in a heteronuclear diatomic molecule equals the sum of the covalent radii of the participating atoms.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u2",
+        "u3"
+      ],
+      "issue": "u2 and u3 could be considered two parallel steps of one comparative illustrative example list of homonuclear molecules.",
+      "proposed_resolution": "Separated into two distinct EXAMPLE units because each demonstrates a separate calculation independently rather than jointly contrasting a specific trend or relationship."
+    }
+  ]
+}

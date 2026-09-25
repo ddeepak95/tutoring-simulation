@@ -1,0 +1,307 @@
+{
+  "topic_relevance": {
+    "requested_topic": "stoichiometry",
+    "observed_topic": "Stoichiometry, including balancing equations, molar conversions, calculation procedure, and limiting reactants",
+    "topic_match": "on_topic",
+    "reason": "The explanation systematically covers the core aspects of stoichiometry: balancing chemical equations based on conservation of mass/atoms, mole concept and molar mass conversions, a general stoichiometric calculation procedure with a worked example, and determination of the limiting reactant.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7",
+      "u8",
+      "u9",
+      "u10",
+      "u11"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and scope of stoichiometry",
+      "excerpts": [
+        {
+          "text": "La **stœchiométrie** est la partie de la chimie qui permet de calculer les **quantités de réactifs** nécessaires et les **quantités de produits** formées lors d’une réaction chimique.\n\nEn résumé, elle répond à des questions comme :\n\n- Combien de grammes d’un produit peut-on obtenir ?\n- Quelle masse de réactif faut-il utiliser ?\n- Quel réactif va manquer en premier ?\n- Quel volume de gaz sera produit ?",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition accurately captures stoichiometry as the calculation of relative quantities of reactants and products in chemical reactions.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Meaning of stoichiometric coefficients and mole ratios",
+      "excerpts": [
+        {
+          "text": "## 1. Une réaction chimique est une « recette »\n\nOn peut comparer une équation chimique à une recette de cuisine.\n\nPar exemple :\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\nCette équation signifie que :\n\n- 2 molécules de dihydrogène \\(H_2\\)\n- réagissent avec 1 molécule de dioxygène \\(O_2\\)\n- pour former 2 molécules d’eau \\(H_2O\\).\n\nLes nombres placés devant les formules sont appelés les **coefficients stœchiométriques**.\n\nIci, le rapport est :\n\n\\[\n2 \\text{ mol } H_2 : 1 \\text{ mol } O_2 : 2 \\text{ mol } H_2O\n\\]\n\nAutrement dit :\n\n- 2 moles de \\(H_2\\) réagissent avec 1 mole de \\(O_2\\),\n- et produisent 2 moles de \\(H_2O\\).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "On peut comparer une équation chimique à une recette de cuisine."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly explains the physical meaning of stoichiometric coefficients at both microscopic (molecular) and macroscopic (molar) scales.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Conservation of atoms and balancing chemical equations",
+      "excerpts": [
+        {
+          "text": "## 2. Pourquoi faut-il équilibrer une équation ?\n\nLors d’une réaction chimique, les atomes ne disparaissent pas et ne sont pas créés : ils se réorganisent.\n\nC’est la **conservation des atomes**.\n\nPrenons la formation de l’eau :\n\n\\[\nH_2 + O_2 \\rightarrow H_2O\n\\]\n\nCette équation n’est pas équilibrée :\n\n- à gauche : 2 atomes d’oxygène ;\n- à droite : 1 atome d’oxygène.\n\nIl faut donc la corriger :\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\nVérification :\n\n| Élément | À gauche | À droite |\n|---|---:|---:|\n| H | 4 | 4 |\n| O | 2 | 2 |\n\nL’équation est équilibrée.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately explains the principle of conservation of atoms during a reaction and demonstrates how to balance the equation for water synthesis.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CAVEAT",
+      "label": "Do not modify chemical formula subscripts when balancing",
+      "excerpts": [
+        {
+          "text": "> Important : on ne modifie jamais les petits chiffres dans les formules chimiques.  \n> Par exemple, on ne transforme pas \\(H_2O\\) en \\(H_2O_2\\).  \n> On ajoute seulement des coefficients devant les espèces chimiques.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "misconception"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Directly addresses a common student misconception by highlighting that subscripts define chemical identity and must not be altered when balancing.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CONCEPT",
+      "label": "The mole as a unit of measurement in chemistry",
+      "excerpts": [
+        {
+          "text": "## 3. La mole : l’unité utilisée en stœchiométrie\n\nLes molécules sont beaucoup trop petites pour être comptées une à une. Les chimistes utilisent donc la **mole**.\n\nUne mole contient :\n\n\\[\nN_A = 6{,}02 \\times 10^{23}\n\\]\n\nentités chimiques (atomes, molécules, ions…).\n\nC’est un peu comme une douzaine :\n\n- une douzaine = 12 objets ;\n- une mole = \\(6{,}02 \\times 10^{23}\\) objets.\n\nOn note la quantité de matière :\n\n\\[\nn\n\\]\n\net son unité est la mole, notée **mol**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "C’est un peu comme une douzaine :\n\n- une douzaine = 12 objets ;\n- une mole = \\(6{,}02 \\times 10^{23}\\) objets."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately introduces the mole, Avogadro's constant, and the physical reason chemists use this counting unit.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "CONCEPT",
+      "label": "Mass-to-mole conversion formula and worked calculation",
+      "excerpts": [
+        {
+          "text": "## 4. Passer de la masse aux moles\n\nEn laboratoire, on mesure souvent une masse en grammes. Pour utiliser une équation chimique, il faut généralement convertir cette masse en quantité de matière.\n\nLa formule est :\n\n\\[\nn = \\frac{m}{M}\n\\]\n\navec :\n\n- \\(n\\) : quantité de matière, en mol ;\n- \\(m\\) : masse, en g ;\n- \\(M\\) : masse molaire, en g·mol\\(^{-1}\\).\n\n### Exemple\n\nCalculons la quantité de matière contenue dans 18 g d’eau.\n\nLa masse molaire de l’eau est :\n\n\\[\nM(H_2O)=2 \\times 1 + 16 = 18 \\text{ g·mol}^{-1}\n\\]\n\nDonc :\n\n\\[\nn(H_2O)=\\frac{18}{18}=1{,}0 \\text{ mol}\n\\]\n\nAinsi, 18 g d’eau correspondent à 1 mole d’eau.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The relationship n = m / M and the calculation of molar mass and amount of substance for 18 g of water are mathematically and physically correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "PROCEDURE",
+      "label": "General method for solving stoichiometry problems",
+      "excerpts": [
+        {
+          "text": "## 5. Méthode générale pour résoudre un exercice de stœchiométrie\n\nVoici la méthode à retenir.\n\n### Étape 1 : Écrire et équilibrer l’équation chimique\n\nExemple :\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\n### Étape 2 : Convertir les données en moles\n\nSi on donne une masse, utiliser :\n\n\\[\nn = \\frac{m}{M}\n\\]\n\nSi on donne une concentration et un volume de solution :\n\n\\[\nn = C \\times V\n\\]\n\navec :\n\n- \\(C\\) en mol·L\\(^{-1}\\),\n- \\(V\\) en L.\n\n### Étape 3 : Utiliser les coefficients de l’équation\n\nLes coefficients donnent les proportions en moles.\n\nDans :\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\non a :\n\n\\[\n\\frac{n(H_2)}{2} = \\frac{n(O_2)}{1} = \\frac{n(H_2O)}{2}\n\\]\n\n### Étape 4 : Reconvertir si nécessaire\n\nOn peut revenir à une masse grâce à :\n\n\\[\nm = n \\times M\n\\]",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The four-step algorithm provides a standard, chemically correct procedure for solving stoichiometry problems.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u8",
+      "kind": "EXAMPLE",
+      "label": "Complete worked stoichiometry problem calculating mass of water formed",
+      "excerpts": [
+        {
+          "text": "# Exemple complet\n\nOn fait réagir 4,0 g de dihydrogène \\(H_2\\) avec suffisamment de dioxygène. Quelle masse d’eau peut-on former ?\n\n### 1. Équation équilibrée\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\n### 2. Calcul de la quantité de matière de dihydrogène\n\nLa masse molaire de \\(H_2\\) est :\n\n\\[\nM(H_2)=2{,}0 \\text{ g·mol}^{-1}\n\\]\n\nDonc :\n\n\\[\nn(H_2)=\\frac{m}{M}=\\frac{4{,}0}{2{,}0}=2{,}0 \\text{ mol}\n\\]\n\n### 3. Utilisation des coefficients\n\nL’équation indique :\n\n\\[\n2 \\text{ mol } H_2 \\rightarrow 2 \\text{ mol } H_2O\n\\]\n\nDonc :\n\n\\[\nn(H_2O)=2{,}0 \\text{ mol}\n\\]\n\n### 4. Calcul de la masse d’eau formée\n\n\\[\nM(H_2O)=18{,}0 \\text{ g·mol}^{-1}\n\\]\n\n\\[\nm(H_2O)=n \\times M=2{,}0 \\times 18{,}0=36{,}0 \\text{ g}\n\\]\n\n**Réponse :** 4,0 g de dihydrogène peuvent former **36,0 g d’eau**, si le dioxygène est en quantité suffisante.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "All calculations, stoichiometric proportions, units, and final numerical values are completely correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u9",
+      "kind": "CONCEPT",
+      "label": "Concept of limiting reactant and worked example",
+      "excerpts": [
+        {
+          "text": "## 6. Le réactif limitant\n\nSouvent, les deux réactifs ne sont pas présents dans les bonnes proportions. Celui qui est entièrement consommé en premier s’appelle le **réactif limitant**.\n\nC’est lui qui limite la quantité de produit formé.\n\n### Exemple\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\nSupposons qu’on possède :\n\n- \\(3\\) mol de \\(H_2\\),\n- \\(2\\) mol de \\(O_2\\).\n\nD’après l’équation, il faut :\n\n\\[\n2 \\text{ mol } H_2 \\text{ pour } 1 \\text{ mol } O_2\n\\]\n\nPour faire réagir 3 mol de \\(H_2\\), il faudrait :\n\n\\[\n\\frac{3}{2}=1{,}5 \\text{ mol de } O_2\n\\]\n\nOr on possède 2 mol de \\(O_2\\), donc il y en a assez.\n\nLe dihydrogène \\(H_2\\) est donc le **réactif limitant**.\n\nIl restera :\n\n\\[\n2 - 1{,}5 = 0{,}5 \\text{ mol de } O_2\n\\]\n\nà la fin de la réaction.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition and the worked identification of the limiting reactant and excess reactant are accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u10",
+      "kind": "PROCEDURE",
+      "label": "Method for identifying the limiting reactant using stoichiometric ratios",
+      "excerpts": [
+        {
+          "text": "## 7. Astuce pour trouver le réactif limitant\n\nOn peut calculer, pour chaque réactif :\n\n\\[\n\\frac{n}{\\text{coefficient stœchiométrique}}\n\\]\n\nLe plus petit résultat correspond au réactif limitant.\n\nPar exemple :\n\n\\[\n2H_2 + O_2 \\rightarrow 2H_2O\n\\]\n\navec 3 mol de \\(H_2\\) et 2 mol de \\(O_2\\) :\n\n\\[\n\\frac{n(H_2)}{2}=\\frac{3}{2}=1{,}5\n\\]\n\n\\[\n\\frac{n(O_2)}{1}=\\frac{2}{1}=2\n\\]\n\nLe plus petit nombre est 1,5 : le réactif limitant est donc \\(H_2\\).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The shortcut method (comparing n/coefficient) is standard and valid for finding the limiting reagent.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u11",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of key stoichiometric concepts and steps",
+      "excerpts": [
+        {
+          "text": "# À retenir\n\n1. **Équilibrer l’équation** chimique.\n2. Les coefficients donnent les **proportions en moles**.\n3. Pour passer de grammes à moles :\n\n\\[\nn=\\frac{m}{M}\n\\]\n\n4. Pour passer de moles à grammes :\n\n\\[\nm=nM\n\\]\n\n5. Le **réactif limitant** est celui qui est consommé complètement en premier.\n6. La stœchiométrie ressemble à une recette : les coefficients indiquent les quantités nécessaires de chaque « ingrédient ».",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The summary points accurately recap the essential rules and definitions introduced in the text.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u6"
+      ],
+      "issue": "Section 4 introduces the formula n = m / M and follows immediately with a short worked numerical example with 18 g of water. This could be split into a CONCEPT unit for the formula and an EXAMPLE unit for the calculation.",
+      "proposed_resolution": "Kept together as a single CONCEPT unit because the 18 g water calculation directly supports and instantiates the formula n = m / M within the same subsection rather than functioning as an independent problem."
+    },
+    {
+      "unit_ids": [
+        "u9"
+      ],
+      "issue": "Section 6 defines the limiting reactant and provides an illustrative numerical example comparing 3 mol H2 and 2 mol O2. This could be split into a CONCEPT unit and an EXAMPLE unit.",
+      "proposed_resolution": "Retained as a single CONCEPT unit with explanatory depth because the example directly justifies and demonstrates the definition of limiting and excess reactants."
+    },
+    {
+      "unit_ids": [
+        "u10"
+      ],
+      "issue": "Section 7 is introduced as an 'Astuce' (tip/trick), which could be categorized as STUDY_SUPPORT (study_strategy) rather than PROCEDURE.",
+      "proposed_resolution": "Categorized as PROCEDURE because it provides an algorithmic, reusable calculation method (evaluating n/coefficient for each reactant to determine the minimum) to perform a specific chemical task."
+    }
+  ]
+}

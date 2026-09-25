@@ -1,0 +1,818 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "106270016a20ff54eadcab106d4f7c1bc434f36fa9a584fe5821805084de5a06",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining (concept, conditions, Mond process, and Van Arkel process)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The entire response directly addresses vapour phase refining in high school chemistry, explaining its general principle, required conditions, and standard examples (Mond and Van Arkel processes).",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and Analogy for Refining"
+      },
+      {
+        "id": "s2",
+        "label": "General Principle of Vapour Phase Refining"
+      },
+      {
+        "id": "s3",
+        "label": "General Operational Steps"
+      },
+      {
+        "id": "s4",
+        "label": "Requirements and Conditions for Success"
+      },
+      {
+        "id": "s5",
+        "label": "Mond Process for Nickel Refining"
+      },
+      {
+        "id": "s6",
+        "label": "Van Arkel Process for Titanium and Zirconium Refining"
+      },
+      {
+        "id": "s7",
+        "label": "Summary and Metaphor"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Silver ring analogy for atomic-level purification",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the challenge of atomic-level impurity mixing using an intuitive analogy of cleaning a silver ring dropped in mud, contrasting macroscopic washing with chemical separation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "لو كان لديك خاتم فضة ثمين ووقع في بركة من الطين والرمال، كيف ستنظفه؟ ببساطة ستغسله بالماء."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أهلاً بك يا بطل! يسعدني جداً شغفك بالتعلم. درس اليوم ممتع وشبيه بـ \"خدعة سحرية\" كيميائية تُستخدم للحصول على معادن فائقة النقاء.",
+            "start": 0,
+            "end": 127
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "دعنا نتخيل معاً هذا الموقف: ",
+            "start": 129,
+            "end": 157
+          },
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لو كان لديك خاتم فضة ثمين ووقع في بركة من الطين والرمال، كيف ستنظفه؟ ببساطة ستغسله بالماء. ",
+            "start": 158,
+            "end": 249
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لكن، ماذا لو كانت ذرات الطين **ممتزجة ومتشابكة** مع ذرات الفضة نفسها على المستوى الذري؟ هنا الماء لن ينفع، ونحتاج إلى حيلة كيميائية ذكية تسمى: **التنقية بالطور البخاري (Vapor Phase Refining)**.",
+            "start": 250,
+            "end": 443
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately distinguishes superficial physical dirt from atomic-level chemical impurities to motivate vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Core chemical mechanism of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains how the metal is converted into a volatile compound that evaporates away from non-volatile impurities and is then decomposed back into the pure metal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 445,
+            "end": 448
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ما هي فكرة \"التنقية بالطور البخاري\" ببساطة؟",
+            "start": 450,
+            "end": 497
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الفكرة باختصار هي: **\"تحويل المعدن إلى غاز ليهرب من الشوائب، ثم إعادته إلى حالته الصلبة نقياً تماماً\".**",
+            "start": 499,
+            "end": 603
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نحن نعلم أن المعادن صلبة ودرجات انصهارها وغليانها عالية جداً، فكيف نجعلها تتبخر؟ ",
+            "start": 605,
+            "end": 686
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**السر:** نحن لا نبخر المعدن نفسه بالتسخين المباشر، بل نجعله يتفاعل مع مادة كيميائية ليعطي **مُركباً غازياً يتطاير بسهولة**، تاركاً الشوائب الصلبة خلفه، ثم نقوم بتفكيك هذا الغاز لنستعيد المعدن نقياً 100%.",
+            "start": 687,
+            "end": 891
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly describes the underlying principle of forming a volatile compound and subsequently decomposing it.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "Two-step operational procedure of vapour phase refining",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Outlines the general two-step sequence: reaction with a reagent to form a volatile compound, followed by thermal decomposition to yield the pure element.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 893,
+            "end": 896
+          },
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### العملية تتم في خطوتين ذهبيتين:",
+            "start": 898,
+            "end": 932
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **الخطوة الأولى (الهروب):** ",
+            "start": 934,
+            "end": 965
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   نُفاعل الفلز غير النقي مع كاشف كيميائي مناسب عند درجة حرارة معينة، فيتكون **مركب متطاير (غاز)**، وتبقى الشوائب الصلبة مكانها لأنها لا تتفاعل.",
+            "start": 966,
+            "end": 1110
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **الخطوة الثانية (العودة):** ",
+            "start": 1111,
+            "end": 1143
+          },
+          {
+            "id": "p15",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   نأخذ هذا الغاز ونسخنه لدرجة حرارة أعلى، فيتفكك (يتحلل) المركب، ويعود الفلز إلى حالته الصلبة **وهو في قمة النقاء**، ويتحرر الغاز ليعاد استخدامه من جديد.",
+            "start": 1144,
+            "end": 1298
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps accurately represent the general methodology of vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CAVEAT",
+        "label": "Prerequisites and conditions for vapour phase refining",
+        "attributes": {
+          "subtype": "qualification"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Lists the two essential conditions required for the method to be viable: formation of a volatile compound while impurities remain unreactive, and ease of thermal decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1300,
+            "end": 1303
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### شروط نجاح هذه الطريقة (مهمة جداً للامتحان):",
+            "start": 1305,
+            "end": 1352
+          },
+          {
+            "id": "p18",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لكي تنجح هذه الطريقة، يجب أن يتوفر شرطان أساسيان:",
+            "start": 1353,
+            "end": 1402
+          },
+          {
+            "id": "p19",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. أن يتفاعل الفلز مع المادة المضافة ليعطي **مركباً متطايراً (يتحول لبخار بسهولة)**، بينما الشوائب لا تتفاعل.",
+            "start": 1403,
+            "end": 1512
+          },
+          {
+            "id": "p20",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. أن يكون هذا المركب المتطاير **سهل التفكك** بالحرارة لنستعيد الفلز بسهولة.",
+            "start": 1513,
+            "end": 1589
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Both stated prerequisites are the standard criteria taught in secondary school inorganic chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Mond process for nickel purification",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a worked real-world example detailing the Mond process for nickel with specific reaction temperatures, steps, and chemical equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1591,
+            "end": 1594
+          },
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### أشهر مثالين في منهج الكيمياء:",
+            "start": 1596,
+            "end": 1629
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### 1. طريقة موند (Mond Process) - لتنقية فلز النيكل ($Ni$):",
+            "start": 1631,
+            "end": 1692
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "النيكل معدن مهم جداً في صناعة البطاريات والسبائك، ولتنقيته:",
+            "start": 1693,
+            "end": 1752
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **الخطوة 1:** نُسخن النيكل غير النقي مع غاز أول أكسيد الكربون ($CO$) عند درجة حرارة دافئة نوعاً ما (حوالي $50^\\circ C$ إلى $60^\\circ C$).",
+            "start": 1753,
+            "end": 1892
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  ينتج غاز يسمى \"رباعي كربونيل النيكل\":",
+            "start": 1893,
+            "end": 1932
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "  $$Ni + 4CO \\rightarrow Ni(CO)_4 \\text{ (بخار/غاز)}$$",
+            "start": 1933,
+            "end": 1987
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  *(الشوائب تبقى في مكانها كراسب صلب لا قيمة له).*",
+            "start": 1988,
+            "end": 2038
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **الخطوة 2:** نأخذ هذا الغاز ونسخنه لدرجة حرارة أعلى (حوالي $200^\\circ C$). يتفكك الغاز فوراً:",
+            "start": 2040,
+            "end": 2136
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "  $$Ni(CO)_4 \\rightarrow Ni \\text{ (صلب ونقي جداً)} + 4CO$$",
+            "start": 2137,
+            "end": 2196
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The chemical reactions, stoichiometric equations, temperature ranges (50-60 °C and ~200 °C), and intermediate (nickel tetracarbonyl) are fully accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Van Arkel method for titanium and zirconium refining",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a worked real-world example of the Van Arkel-de Boer method for purifying titanium and zirconium using iodine vapour and a heated tungsten filament.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2198,
+            "end": 2201
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### 2. طريقة فان أركيل (Van Arkel Method) - لتنقية التيتانيوم ($Ti$) أو الزركونيوم ($Zr$):",
+            "start": 2203,
+            "end": 2294
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذه المعادن تُستخدم في مركبات الفضاء والطائرات، لذا يجب أن تكون خالية تماماً من الشوائب (خاصة الأكسجين والنيتروجين):",
+            "start": 2295,
+            "end": 2411
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **الخطوة 1:** نُسخن التيتانيوم غير النقي مع أبخرة **اليود ($I_2$)** في وعاء مفرغ، فيتكون غاز \"رباعي يوديد التيتانيوم\":",
+            "start": 2412,
+            "end": 2532
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "  $$Ti + 2I_2 \\rightarrow TiI_4 \\text{ (غاز متطاير)}$$",
+            "start": 2533,
+            "end": 2587
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **الخطوة 2:** يمر هذا الغاز على سلك متوهج وساخن جداً من **التنجستن** (حرارته حوالي $1400^\\circ C$). ",
+            "start": 2589,
+            "end": 2691
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  يتفكك المركب على السلك، ويترسب التيتانيوم النقي فوق سلك التنجستن، بينما يتحرر اليود ليعيد الدورة:",
+            "start": 2692,
+            "end": 2791
+          },
+          {
+            "id": "p38",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "  $$TiI_4 \\rightarrow Ti \\text{ (نقي تماماً)} + 2I_2$$",
+            "start": 2792,
+            "end": 2846
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equations, reaction partners, tungsten filament mechanism, and temperature conditions (~1400 °C) accurately depict the Van Arkel process.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "One-line teacher recap and concluding check",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a concise pedagogical summary using the metaphor of an 'invisible gaseous cloak' to reinforce the core idea, followed by a closing interactive offer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2848,
+            "end": 2851
+          },
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ملخص المعلم في سطر واحد:",
+            "start": 2853,
+            "end": 2881
+          },
+          {
+            "id": "p41",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "التنقية بالطور البخاري تشبه إعطاء الفلز **\"عباءة إخفاء غازية\"** تجعله يطير بعيداً عن الشوائب، ثم نزع العباءة عنه ليعود إلينا صلباً ونقياً!",
+            "start": 2882,
+            "end": 3020
+          },
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل النقطة واضحة الآن يا بطل؟ وإذا أردت، يمكنني اختبارك بسؤال سريع للتأكد من فهمك!",
+            "start": 3022,
+            "end": 3103
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap metaphor faithfully summarizes the two-step principle of vapour phase refining.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\arabic-native\\gemini-3.8-flash__9867037c0262.json",
+    "original_sha256": "a316205cf9e61c77d833980acef1134422cd3e65c67dbf6a9b70f62bd79e7dc2",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 42,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 1,
+      "PROCEDURE": 1,
+      "CAVEAT": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 42,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "everyday": 1,
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

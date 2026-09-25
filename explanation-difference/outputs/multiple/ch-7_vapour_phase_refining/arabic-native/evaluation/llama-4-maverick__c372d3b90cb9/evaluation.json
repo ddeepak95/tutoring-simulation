@@ -1,0 +1,347 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "db0450fbb61c3f236f9b445fe0f88177ba564b73c2520afcf345b5d7b58656c5",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "distillation",
+      "topic_match": "off_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The prompt asks for an explanation of vapour phase refining (a metallurgical refining process, such as the Mond process for nickel or the Van Arkel process for titanium/zirconium, where a metal forms a volatile compound that is subsequently decomposed). Instead, the response describes distillation (separation of substances based on boiling point differences, condensation into liquid, and examples such as petroleum distillation, alcohol production, and water purification).",
+      "major_task_failure": true
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Concept and Principle of Separation"
+      },
+      {
+        "id": "s2",
+        "label": "Process Steps"
+      },
+      {
+        "id": "s3",
+        "label": "Applications and Examples"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and principle of separation based on boiling points",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the core concept and mechanism of separation by heating a mixture to the boiling points of its components.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بالطبع، يسعدني أن أشرح لك التنقية بالطور البخاري بطريقة مبسطة.",
+            "start": 0,
+            "end": 62
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "التنقية بالطور البخاري هي تقنية تستخدم لفصل المواد بناءً على درجة غليانها. تعتمد هذه الطريقة على مبدأ أن كل مادة لها درجة غليان مختلفة. عندما تسخن خليطًا من مواد مختلفة، فإن المادة التي درجة غليانها أقل ستبدأ في الغليان أولاً وتتحول إلى بخار.",
+            "start": 64,
+            "end": 306
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the entire response is off-topic, explaining distillation rather than vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "PROCEDURE",
+        "label": "Basic steps of the thermal separation process",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Outlines the sequential procedural stages: heating, vaporizing, condensing, and collecting the purified distillate.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لنفهم العملية بشكل أفضل، دعنا نتابع الخطوات الأساسية للتنقية بالطور البخاري:",
+            "start": 308,
+            "end": 384
+          },
+          {
+            "id": "p4",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **التسخين**: يتم تسخين الخليط حتى يصل إلى درجة حرارة تجعل أحد مكوناته يغلي ويتحول إلى بخار.",
+            "start": 386,
+            "end": 480
+          },
+          {
+            "id": "p5",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **التبخير**: المادة التي غليانها أقل تتحول إلى بخار وتفصل عن باقي الخليط.",
+            "start": 482,
+            "end": 558
+          },
+          {
+            "id": "p6",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **التكثيف**: يتم تبريد البخار الناتج عن طريق تمريره عبر أنبوب مكثف، حيث يبرد ويتكثف مرة أخرى إلى سائل.",
+            "start": 560,
+            "end": 665
+          },
+          {
+            "id": "p7",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. **التجميع**: السائل المتكثف يتم جمعه في وعاء منفصل. هذا السائل المتجمع هو المادة التي تم تنقيتها.",
+            "start": 667,
+            "end": 767
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the entire response is off-topic, explaining distillation rather than vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Petroleum distillation application",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the process using petroleum fractionation based on boiling points.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "التنقية بالطور البخاري تُستخدم على نطاق واسع في العديد من التطبيقات، مثل:",
+            "start": 769,
+            "end": 842
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **تقطير النفط**: حيث يتم فصل مشتقات النفط المختلفة بناءً على درجات غليانها.",
+            "start": 844,
+            "end": 921
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the entire response is off-topic, explaining distillation rather than vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Alcoholic beverage distillation application",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the separation of alcohol from water and other compounds.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **صناعة المشروبات الكحولية**: حيث يتم استخدام التقطير لفصل الكحول عن الماء ومركبات أخرى.",
+            "start": 922,
+            "end": 1012
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the entire response is off-topic, explaining distillation rather than vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Water purification application",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the removal of impurities from water, followed by concluding remarks.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **تنقية المياه**: يمكن استخدام تقنيات مشابهة لإزالة الشوائب من الماء.",
+            "start": 1013,
+            "end": 1084
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذه التقنية تعتبر فعالة جدًا لتنقية المواد وتستخدم في العديد من الصناعات المختلفة. أتمنى أن يكون الشرح واضحًا ومفيدًا لك. هل لديك أي أسئلة إضافية حول هذا الموضوع؟",
+            "start": 1086,
+            "end": 1248
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the entire response is off-topic, explaining distillation rather than vapour phase refining.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\arabic-native\\llama-4-maverick__c372d3b90cb9.json",
+    "original_sha256": "40885be8a259f27a358658a17f843906b994f50c3c2646e6406c77d537ec9510",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 12,
+    "content_unit_kinds": {
+      "CONCEPT": 1,
+      "PROCEDURE": 1,
+      "EXAMPLE": 3
+    },
+    "nested_passages": 12,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "not_assessed_due_to_topic_mismatch": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "topic_relevance": {
+    "requested_topic": "vapour phase refining",
+    "observed_topic": "vapour phase refining of metals (principles, Mond process, and Van Arkel method)",
+    "topic_match": "on_topic",
+    "reason": "The text explains the fundamental principle and conditions of vapour phase refining, followed by detailed examples of the Mond and Van Arkel processes and a summary comparison.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Principle and requirements of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "## কেন এই পদ্ধতি দরকার?\n\nপ্রকৃতি থেকে আকরিক (ore) থেকে যে ধাতু পাওয়া যায়, তাতে অনেক সময় অন্যান্য অপদ্রব্য (impurities) মিশে থাকে। শিল্পক্ষেত্রে ব্যবহারের জন্য অনেক সময় ৯৯.৯৯% পর্যন্ত বিশুদ্ধ ধাতু দরকার হয়। এই অত্যন্ত উচ্চমানের বিশুদ্ধতা পেতে ব্যবহার করা হয় **বাষ্পীয় দশা বিশোধন** পদ্ধতি।\n\n## মূল নীতি\n\nএই পদ্ধতির পেছনের মূল ধারণাটি খুব সহজ:\n\n1. অপদ্রব্যযুক্ত ধাতুকে একটি উদ্বায়ী (volatile) যৌগে (compound) রূপান্তর করা হয়\n2. এই যৌগটিকে বাষ্পে পরিণত করা হয় (তাই নাম \"বাষ্পীয় দশা\")\n3. অপদ্রব্য থেকে আলাদা করার পর, এই যৌগকে পুনরায় বিয়োজিত (decompose) করে বিশুদ্ধ ধাতু পাওয়া যায়\n\n**শর্ত:** যে যৌগ তৈরি হবে, সেটা—\n- সহজে উদ্বায়ী হতে হবে (কম তাপমাত্রায় বাষ্পে পরিণত হবে)\n- সহজেই আবার বিয়োজিত হয়ে বিশুদ্ধ ধাতু দেবে",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately explains the industrial need for high-purity metal, the core definition and steps of vapour phase refining, and the two requisite chemical conditions.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Mond process for nickel purification",
+      "excerpts": [
+        {
+          "text": "## ১. মন্ড প্রক্রিয়া (Mond Process) — নিকেল বিশুদ্ধকরণ\n\n**ধাপ ১:** অপদ্রব্যযুক্ত নিকেল ধাতুকে প্রায় ৩৩০–৩৫০ কেলভিন তাপমাত্রায় কার্বন মনোক্সাইড (CO) গ্যাসের সাথে বিক্রিয়া করানো হয়:\n\n$$Ni + 4CO \\xrightarrow{330-350K} Ni(CO)_4$$\n\nএখানে **নিকেল কার্বোনিল** [Ni(CO)₄] নামক একটি উদ্বায়ী যৌগ তৈরি হয়। মজার ব্যাপার হলো অপদ্রব্যগুলো এই বিক্রিয়ায় অংশ নেয় না, তাই তারা পিছনে পড়ে থাকে।\n\n**ধাপ ২:** এই নিকেল কার্বোনিল বাষ্পকে আলাদা করে নিয়ে অনেক বেশি তাপমাত্রায় (৪৫০–৪৭০ কেলভিন) উত্তপ্ত করা হয়:\n\n$$Ni(CO)_4 \\xrightarrow{450-470K} Ni + 4CO$$\n\nএভাবে বিশুদ্ধ নিকেল পাওয়া যায়, আর CO গ্যাস আবার প্রথম ধাপে পুনরায় ব্যবহার করা যায়!",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly describes the reactions, stoichiometry, temperature conditions (330–350 K for formation of nickel tetracarbonyl and 450–470 K for its thermal decomposition), and separation rationale for the Mond process.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Van Arkel method for titanium and zirconium purification",
+      "excerpts": [
+        {
+          "text": "## ২. ভ্যান আর্কেল পদ্ধতি (Van Arkel Method) — টাইটানিয়াম/জিরকোনিয়াম বিশুদ্ধকরণ\n\nএই পদ্ধতিতে অত্যন্ত বিশুদ্ধ টাইটানিয়াম (Ti) বা জিরকোনিয়াম (Zr) পাওয়া যায়।\n\n**ধাপ ১:** অপদ্রব্যযুক্ত ধাতুকে আয়োডিনের সাথে উত্তপ্ত করা হয়, তৈরি হয় উদ্বায়ী **টাইট্যানিয়াম টেট্রা-আয়োডাইড**:\n\n$$Ti + 2I_2 \\xrightarrow{523K} TiI_4$$\n\n**ধাপ ২:** এই বাষ্পকে খুবই উচ্চ তাপমাত্রার (প্রায় ১৭০০ কেলভিন) একটি টাংস্টেন ফিলামেন্টের ওপর দিয়ে পাঠানো হয়। ফিলামেন্টের উত্তাপে যৌগটি ভেঙে যায়:\n\n$$TiI_4 \\xrightarrow{1700K} Ti + 2I_2$$\n\nখাঁটি টাইটানিয়াম ফিলামেন্টের গায়ে জমা হয়, আর আয়োডিন গ্যাস মুক্ত হয়ে আবার প্রথম ধাপে ব্যবহৃত হতে পারে।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately details the formation of titanium tetraiodide at 523 K and its thermal decomposition on a heated tungsten filament at ~1700 K in the Van Arkel method.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "STUDY_SUPPORT",
+      "label": "Comparison table and closing summary of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "## সহজ কথায় মনে রাখার কৌশল\n\n| বিষয় | মন্ড প্রক্রিয়া | ভ্যান আর্কেল পদ্ধতি |\n|---|---|---|\n| ধাতু | নিকেল (Ni) | টাইটানিয়াম/জিরকোনিয়াম |\n| ব্যবহৃত গ্যাস | CO | আয়োডিন (I₂) |\n| গঠিত যৌগ | Ni(CO)₄ | TiI₄ |\n| বিয়োজন তাপমাত্রা | বেশি তাপে | টাংস্টেন ফিলামেন্টে অতি উচ্চ তাপে |\n\n## সারকথা\n\nবাষ্পীয় দশা বিশোধনের মূল কৌশল হলো—\n> **অপদ্রব্যযুক্ত ধাতু → উদ্বায়ী যৌগ (বাষ্প) → বিয়োজন → বিশুদ্ধ ধাতু**\n\nএই পদ্ধতিতে অপদ্রব্য যৌগ তৈরিতে অংশ নেয় না বলে সহজেই আলাদা হয়ে যায়, আর ফলাফল হয় অত্যন্ত উচ্চমানের বিশুদ্ধ ধাতু।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The comparison table and general summary accurately condense the main parameters and the overall operational flow of the methods.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "The section 'কেন এই পদ্ধতি দরকার?' introduces industrial necessity before 'মূল নীতি' details the operational steps and conditions. These could either be treated as two separate CONCEPT units or kept together as one concept.",
+      "proposed_resolution": "They are kept together in u1 because the need for high-purity metal directly motivates and explains the rationale of the vapour phase refining principle."
+    },
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "The comparison table ('সহজ কথায় মনে রাখার কৌশল') and the final summary ('সারকথা') could be split into two separate STUDY_SUPPORT units (one recap table and one workflow recap).",
+      "proposed_resolution": "They are combined into a single STUDY_SUPPORT recap unit (u4) in line with the guideline to treat closing review/recap material as one unit rather than splitting each recap component."
+    }
+  ]
+}

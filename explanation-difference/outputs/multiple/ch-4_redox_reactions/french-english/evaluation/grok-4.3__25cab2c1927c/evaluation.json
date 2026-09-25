@@ -1,0 +1,903 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "ed8cfe6bf330e9bad61fc325396266a95582db0db82e3e58aa5b06ac09a2c3e4",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions (oxydo-réduction)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The response provides a comprehensive and clear explanation of redox reactions in French, covering definitions, half-reactions, oxidizing and reducing agents, oxidation numbers, and concrete examples.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Définition de l'oxydo-réduction"
+      },
+      {
+        "id": "s2",
+        "label": "Demi-réactions d'oxydation et de réduction"
+      },
+      {
+        "id": "s3",
+        "label": "Réaction entre le zinc et le sulfate de cuivre"
+      },
+      {
+        "id": "s4",
+        "label": "Agents oxydants et réducteurs"
+      },
+      {
+        "id": "s5",
+        "label": "Nombres d'oxydation"
+      },
+      {
+        "id": "s6",
+        "label": "Exemples courants de réactions redox"
+      },
+      {
+        "id": "s7",
+        "label": "Applications et importance biologique et technique"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition générale d'une réaction redox",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains what a redox reaction is based on electron transfer and the simultaneous occurrence of oxidation and reduction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Je vais t’expliquer les réactions d’oxydo-réduction (ou réactions redox) de façon simple et claire, comme en cours de chimie au lycée.",
+            "start": 0,
+            "end": 144
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Qu’est-ce qu’une réaction redox ?",
+            "start": 146,
+            "end": 183
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Une réaction redox est une réaction chimique au cours de laquelle il y a un **transfert d’électrons** d’un atome (ou d’une molécule) vers un autre.  ",
+            "start": 184,
+            "end": 333
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le mot « redox » vient de la contraction de **réduction** et **oxydation**. Ces deux phénomènes se produisent toujours en même temps : quand l’un gagne des électrons, l’autre en perd.",
+            "start": 334,
+            "end": 517
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines a redox reaction as an electron transfer between species with coupled oxidation and reduction.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Les deux demi-réactions : oxydation et réduction",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Details the definition of oxidation (loss of electrons, increase in oxidation number) and reduction (gain of electrons, decrease in oxidation number) with illustrative half-reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Les deux demi-réactions",
+            "start": 519,
+            "end": 546
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **L’oxydation** : perte d’électrons.  ",
+            "start": 547,
+            "end": 587
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  L’espèce qui s’oxyde voit son nombre d’oxydation **augmenter**.  ",
+            "start": 588,
+            "end": 655
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  Exemple : Zn → Zn²⁺ + 2e⁻ (le zinc perd 2 électrons).",
+            "start": 656,
+            "end": 711
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **La réduction** : gain d’électrons.  ",
+            "start": 713,
+            "end": 753
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  L’espèce qui se réduit voit son nombre d’oxydation **diminuer**.  ",
+            "start": 754,
+            "end": 822
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  Exemple : Cu²⁺ + 2e⁻ → Cu (l’ion cuivre gagne 2 électrons).",
+            "start": 823,
+            "end": 884
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines oxidation and reduction half-reactions and correctly illustrates them with Zn and Cu2+.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Réaction entre le zinc métallique et le sulfate de cuivre",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Works through the overall balanced chemical equation and electron transfers for the displacement reaction between zinc and copper sulfate solution.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple concret : la réaction entre le zinc et le sulfate de cuivre",
+            "start": 886,
+            "end": 957
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Équation globale :  ",
+            "start": 958,
+            "end": 978
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Zn(s) + CuSO₄(aq) → ZnSO₄(aq) + Cu(s)**",
+            "start": 979,
+            "end": 1020
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Détail des transferts :",
+            "start": 1022,
+            "end": 1045
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Le zinc (Zn) **s’oxyde** : il perd 2 électrons et devient Zn²⁺.",
+            "start": 1046,
+            "end": 1111
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- L’ion Cu²⁺ **se réduit** : il gagne ces 2 électrons et devient du cuivre métallique (Cu).",
+            "start": 1112,
+            "end": 1203
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On voit le cuivre se déposer sur le zinc : la solution bleue (à cause de Cu²⁺) s’éclaircit.",
+            "start": 1205,
+            "end": 1296
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation, electron exchange analysis, and macroscopic observations (copper deposition and discoloration of the blue Cu2+ solution) are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Définition des agents oxydant et réducteur",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines reducing agent and oxidizing agent and applies the definitions to the preceding zinc/copper reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Agent oxydant et agent réducteur",
+            "start": 1298,
+            "end": 1334
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **L’agent réducteur** : c’est l’espèce qui donne des électrons (elle s’oxyde). Ici, c’est le zinc.",
+            "start": 1335,
+            "end": 1435
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **L’agent oxydant** : c’est l’espèce qui accepte des électrons (elle se réduit). Ici, c’est Cu²⁺.",
+            "start": 1436,
+            "end": 1535
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines the reducing agent as the electron donor (oxidized) and the oxidizing agent as the electron acceptor (reduced).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Repérage des réactions redox par les nombres d'oxydation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains how to identify redox reactions by tracking changes in oxidation numbers, providing basic assignment rules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Comment repérer une réaction redox ?",
+            "start": 1537,
+            "end": 1577
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il suffit de calculer les **nombres d’oxydation** (ou degrés d’oxydation) avant et après la réaction :",
+            "start": 1578,
+            "end": 1680
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Si un élément voit son nombre d’oxydation augmenter → il s’est oxydé.",
+            "start": 1681,
+            "end": 1752
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Si un élément voit son nombre d’oxydation diminuer → il s’est réduit.",
+            "start": 1753,
+            "end": 1824
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Règles rapides pour les nombres d’oxydation :",
+            "start": 1826,
+            "end": 1871
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Élément seul → 0 (ex. : Zn = 0, O₂ = 0)",
+            "start": 1872,
+            "end": 1913
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Ion simple → charge de l’ion (ex. : Zn²⁺ = +2, Cu²⁺ = +2)",
+            "start": 1914,
+            "end": 1973
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Oxygène → généralement –2",
+            "start": 1974,
+            "end": 2001
+          },
+          {
+            "id": "p30",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- Hydrogène → généralement +1",
+            "start": 2002,
+            "end": 2031
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The criteria for oxidation/reduction based on oxidation numbers and the stated common oxidation state rules are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Exemple de la rouille du fer",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents the oxidation of iron by dioxygen forming iron(III) oxide as a real-world redox reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p32",
+              "quote": "Rouille du fer"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Autres exemples courants",
+            "start": 2033,
+            "end": 2061
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Rouille du fer** : 4 Fe + 3 O₂ → 2 Fe₂O₃ (le fer s’oxyde, l’oxygène se réduit).",
+            "start": 2062,
+            "end": 2145
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation for iron oxidation to Fe2O3 and identification of oxidized/reduced species are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Exemple de la combustion du magnésium",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates a redox reaction via the combustion of magnesium in oxygen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Combustion du magnésium** : 2 Mg + O₂ → 2 MgO (magnésium oxydé, oxygène réduit).",
+            "start": 2146,
+            "end": 2230
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction 2 Mg + O2 -> 2 MgO and the redox assignment are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Exemple du fonctionnement d'une pile électrochimique",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates redox reactions in an electrochemical cell generating an electric current.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p34",
+              "quote": "Dans une pile"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- **Dans une pile** : les réactions redox produisent un courant électrique (oxydation à l’anode, réduction à la cathode).",
+            "start": 2231,
+            "end": 2352
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately connects oxidation at the anode and reduction at the cathode with electrical current generation.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "CONCEPT",
+        "label": "Importance et applications pratiques des réactions redox",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Surveys the prevalence and importance of redox reactions in everyday and biological phenomena, ending with closing conversational prompts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p36",
+              "quote": "respiration cellulaire, photosynthèse, batteries, corrosion des métaux, purification de l’eau"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Pourquoi c’est important ?",
+            "start": 2354,
+            "end": 2384
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les réactions redox sont partout : respiration cellulaire, photosynthèse, batteries, corrosion des métaux, purification de l’eau, etc.",
+            "start": 2385,
+            "end": 2519
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si tu veux, on peut maintenant :",
+            "start": 2521,
+            "end": 2553
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- s’entraîner à équilibrer une équation redox,",
+            "start": 2554,
+            "end": 2600
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- calculer des nombres d’oxydation sur d’autres exemples,",
+            "start": 2601,
+            "end": 2658
+          },
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "- ou voir la différence entre oxydation lente et rapide.",
+            "start": 2659,
+            "end": 2715
+          },
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Dis-moi ce qui t’intéresse le plus !",
+            "start": 2717,
+            "end": 2753
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All listed biological and technical applications are canonical examples of redox reactions.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\french-english\\grok-4.3__25cab2c1927c.json",
+    "original_sha256": "fd50e143bc73145d2707eddbb2982e03ab1b499b11672d30ebf90d637ba54f56",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 41,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "EXAMPLE": 4
+    },
+    "nested_passages": 41,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "none": 6,
+      "everyday": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

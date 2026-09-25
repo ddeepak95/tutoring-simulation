@@ -1,0 +1,159 @@
+# Stage 1: Bengali / vapour phase refining
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "vapour phase refining",
+  "observed_topic": "Vapour phase refining of metals, including its working principle and the refining of nickel",
+  "topic_match": "on_topic",
+  "reason": "The response explains vapour phase refining, including its supposed principle and an example involving nickel refining, which directly addresses the requested topic.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | General definition and principle of vapour phase refining | {"depth": "explanation"} | contains_error |
+| u2 | EXAMPLE | List of metals refined using vapour phase refining | {"context": "real_world", "treatment": "illustrative"} | contains_error |
+| u3 | EXAMPLE | Refining of nickel via carbonyl formation and decomposition | {"context": "real_world", "treatment": "worked"} | contains_error |
+
+## u1: General definition and principle of vapour phase refining
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The text incorrectly describes simple distillation/sublimation rather than vapour phase refining. Vapour phase refining requires converting the crude metal into a volatile compound with a chemical reagent and then thermally decomposing that compound to recover the pure metal, not merely heating the metal to form metal vapour directly.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "বাষ্পীয় পর্যায় পরিশোধন পদ্ধতি এমন একটি ধাতুর পরিশোধনে ব্যবহৃত হয়, যে ধাতুটি বাষ্পে গরম করলে সহজেই বাষ্পে পরিণত হয়। এই পদ্ধতিতে অপরিশোধিত ধাতুটিকে উত্তপ্ত করে ধাতুটির বাষ্প তৈরি করা হয়। ধাতুটির বাষ্প অপদ্রব্যযুক্ত একটি নলের মধ্যে প্রবাহিত করা হয় এবং নলের ঠান্ডা অংশে ধাতুটি বিশুদ্ধ অবস্থায় জমা হয়।"
+          }
+        ],
+        "description": "The response erroneously describes vapour phase refining as directly heating the crude metal to its vapour and condensing it (distillation). In vapour phase refining, the metal is reacted with a reagent to form a volatile chemical compound, which is subsequently decomposed at a higher temperature to yield pure metal.",
+        "correction": "বাষ্পীয় পর্যায় পরিশোধনে অপরিশোধিত ধাতুকে উপযুক্ত বিকারকের সাথে বিক্রিয়া ঘটিয়ে একটি উদ্বায়ী যৌগে রূপান্তর করা হয় এবং পরে সেই যৌগকে উচ্চ তাপমাত্রায় বিয়োজিত করে বিশুদ্ধ ধাতু পাওয়া যায়।",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+বাষ্পীয় পর্যায় পরিশোধন পদ্ধতি এমন একটি ধাতুর পরিশোধনে ব্যবহৃত হয়, যে ধাতুটি বাষ্পে গরম করলে সহজেই বাষ্পে পরিণত হয়। এই পদ্ধতিতে অপরিশোধিত ধাতুটিকে উত্তপ্ত করে ধাতুটির বাষ্প তৈরি করা হয়। ধাতুটির বাষ্প অপদ্রব্যযুক্ত একটি নলের মধ্যে প্রবাহিত করা হয় এবং নলের ঠান্ডা অংশে ধাতুটি বিশুদ্ধ অবস্থায় জমা হয়। অপদ্রব্যগুলো নলের অন্য অংশে জমা হয়।
+```
+
+
+## u2: List of metals refined using vapour phase refining
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "Germanium is refined via zone refining, not vapour phase refining.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "জার্মেনিয়াম"
+          }
+        ],
+        "description": "Germanium (Ge) is typically refined to semiconductor grade using zone refining (অঞ্চল পরিশোধন), not vapour phase refining.",
+        "correction": "জার্মেনিয়ামের পরিবর্তে নিকেল, টাইটানিয়াম বা জিরকোনিয়াম উল্লেখ করা উচিত; জার্মেনিয়াম অঞ্চল পরিশোধনের (zone refining) মাধ্যমে পরিশোধিত হয়।",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+উদাহরণস্বরূপ, জার্মেনিয়াম, টাইটেনিয়াম, জিরকোনিয়াম, থোরিয়াম প্রভৃতি ধাতুর পরিশোধনে এই পদ্ধতি ব্যবহৃত হয়।
+```
+
+
+## u3: Refining of nickel via carbonyl formation and decomposition
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The reaction of nickel with carbon monoxide to form nickel tetracarbonyl is the Mond process, but the text wrongly attributes it to the Van Arkel method.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "এই পদ্ধতিকে ভ্যান-আরকেল পদ্ধতি বলা হয়।"
+          }
+        ],
+        "description": "Refining nickel with carbon monoxide is known as the Mond process (মন্ড পদ্ধতি). The Van Arkel method is used for metals like titanium and zirconium using iodine.",
+        "correction": "এই পদ্ধতিকে মন্ড পদ্ধতি (Mond process) বলা হয়।",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+নিকেল ধাতুর পরিশোধনেও এই পদ্ধতি ব্যবহৃত হয়। এই পদ্ধতিকে ভ্যান-আরকেল পদ্ধতি বলা হয়। এই পদ্ধতিতে অপরিশোধিত নিকেলকে কার্বন মনোক্সাইডের সাথে বিক্রিয়া করে অস্থিতিশীল নিকেল কার্বনিল যৌগ তৈরি করা হয়। এই যৌগটিকে 450-470 K তাপমাত্রায় গরম করলে বিশুদ্ধ নিকেল পাওয়া যায়।
+
+Ni + 4CO → Ni(CO)₄ (অস্থিতিশীল)
+Ni(CO)₄ → Ni + 4CO (450-470 K)
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u2",
+      "u3"
+    ],
+    "issue": "Whether the brief mention of metals (Germanium, Titanium, Zirconium, Thorium) should form a separate illustrative EXAMPLE unit or be merged with the detailed nickel example.",
+    "proposed_resolution": "Separated u2 from u3 because u2 serves as an illustrative list of elements, whereas u3 develops a full chemical reaction scheme and specific temperatures for nickel."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+
+
+এইভাবে বাষ্পীয় পর্যায় পরিশোধন পদ্ধতিতে ধাতুসমূহকে পরিশোধন করা হয়।
+```

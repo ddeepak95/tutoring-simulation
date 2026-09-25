@@ -1,0 +1,467 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "0e25cdbb4b16bb883c865863bdc1e9e02ecc2e7899035c07b4beadad0a94ad59",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response directly and accurately explains the concept of covalent radius to a high school student, including its definition, an illustrative calculation, its utility, distinctions from other radii, units of measurement, and periodic trends.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of covalent radius"
+      },
+      {
+        "id": "s2",
+        "label": "Dichlorine calculation example"
+      },
+      {
+        "id": "s3",
+        "label": "Applications and predicting bond length"
+      },
+      {
+        "id": "s4",
+        "label": "Distinction from van der Waals and ionic radii"
+      },
+      {
+        "id": "s5",
+        "label": "Units of measurement"
+      },
+      {
+        "id": "s6",
+        "label": "Periodic trends in covalent radius"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines the covalent radius as half the distance between the nuclei of two identical atoms joined by a single covalent bond, explaining why the distance is divided by two.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le rayon covalent est une façon de mesurer la taille d’un atome quand il forme une liaison covalente avec un autre atome.",
+            "start": 0,
+            "end": 121
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Définition simple",
+            "start": 123,
+            "end": 144
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Quand deux atomes identiques se lient par une liaison covalente simple (ils partagent une paire d’électrons), on mesure la distance entre leurs deux noyaux. Le **rayon covalent** est la moitié de cette distance.",
+            "start": 145,
+            "end": 356
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On divise par deux parce que chaque atome apporte « sa part » à la liaison. Si les deux atomes sont exactement les mêmes, chacun occupe la moitié de l’espace entre les noyaux.",
+            "start": 358,
+            "end": 533
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately states that the covalent radius corresponds to half the internuclear distance in a homonuclear singly bonded molecule.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Calculation of chlorine covalent radius in Cl₂",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides a worked calculation of the covalent radius of chlorine using the known internuclear distance of dichlorine (198 pm).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple concret : le dichlore (Cl₂)",
+            "start": 535,
+            "end": 574
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Dans la molécule Cl₂, les deux atomes de chlore sont reliés par une liaison covalente.",
+            "start": 575,
+            "end": 663
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- La distance entre les deux noyaux de chlore est de 198 pm (picomètres).",
+            "start": 664,
+            "end": 737
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Le rayon covalent du chlore = 198 ÷ 2 = **99 pm**.",
+            "start": 738,
+            "end": 790
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C’est comme si chaque atome de chlore « occupait » 99 pm de rayon dans cette liaison.",
+            "start": 792,
+            "end": 877
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The internuclear distance of 198 pm in Cl₂ and the resulting covalent radius of 99 pm are standard, accurate chemistry values.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Utility of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why covalent radii are useful, including comparing atom sizes and estimating bond lengths in heteronuclear molecules (e.g., C-H).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Pourquoi on utilise le rayon covalent ?",
+            "start": 879,
+            "end": 922
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Il permet de comparer la taille des atomes.",
+            "start": 923,
+            "end": 968
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Il aide à prévoir la longueur d’une liaison dans d’autres molécules. Par exemple, si tu connais le rayon covalent du carbone (77 pm) et celui de l’hydrogène (37 pm), tu peux estimer que la liaison C–H fera environ 77 + 37 = 114 pm (valeur réelle très proche).",
+            "start": 969,
+            "end": 1230
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Estimating bond length as the sum of covalent radii is a standard method and the illustrative values (77 pm for C, 37 pm for H, yielding ~114 pm for C-H) accurately match introductory chemistry conventions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CAVEAT",
+        "label": "Distinction from van der Waals and ionic radii",
+        "attributes": {
+          "subtype": "qualification"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Clarifies the scope of the covalent radius, qualifying that it applies only to covalently bonded atoms and cautioning against conflating it with van der Waals or ionic radii.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Remarques importantes",
+            "start": 1232,
+            "end": 1257
+          },
+          {
+            "id": "p14",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- On parle de **rayon covalent** uniquement quand les atomes sont liés par une liaison covalente (partage d’électrons). Ce n’est pas la même chose que le rayon de van der Waals (quand les atomes ne sont pas liés) ni que le rayon ionique (quand l’atome a gagné ou perdu des électrons).",
+            "start": 1258,
+            "end": 1542
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The distinction between covalent radius, van der Waals radius (non-bonded atoms), and ionic radius (ions) is scientifically sound and appropriately scoped.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Unit of measurement",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Specifies that covalent radii are typically expressed in picometers and states the conversion to meters.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Les valeurs sont données en picomètres (pm) : 1 pm = 10⁻¹² m. Ce sont des distances extrêmement petites !",
+            "start": 1543,
+            "end": 1650
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "1 picometer is correctly identified as 10⁻¹² meters.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Periodic trends in covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Explains how covalent radius varies across periods and down groups in the periodic table, and includes the closing interactive prompt.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Petite astuce pour retenir",
+            "start": 1652,
+            "end": 1682
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Plus un atome a beaucoup de couches électroniques (en descendant dans le tableau périodique), plus son rayon covalent est grand. À l’inverse, dans une même période, plus le numéro atomique augmente, plus les électrons sont attirés vers le noyau et plus le rayon covalent diminue.",
+            "start": 1683,
+            "end": 1962
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu veux que je t’explique maintenant comment le rayon covalent varie dans le tableau périodique avec des exemples précis ?",
+            "start": 1964,
+            "end": 2086
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The periodic trends described (increasing down a group due to additional electron shells, decreasing across a period due to increasing nuclear charge) are accurate.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\french-native\\grok-4.3__ac448eec0d70.json",
+    "original_sha256": "a3c86ca2d0819f55b069aeaeb24f5c91030b0908770d5993391ca4f7c31b9fc2",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 18,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 1,
+      "CAVEAT": 1
+    },
+    "nested_passages": 18,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

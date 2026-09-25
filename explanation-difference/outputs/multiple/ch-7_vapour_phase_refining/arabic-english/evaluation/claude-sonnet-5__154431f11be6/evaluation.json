@@ -1,0 +1,750 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "f8a16ac24854f937dd86367edbad8cc79cd13ef7e0ab55ccb4e4e3a14817c317",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "Vapour phase refining in metallurgy (principles, requirements, general process, Mond process, Van Arkel method, advantages, and temperature effects)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The entire response directly explains vapour phase refining in Arabic, covering its fundamental principle, necessary conditions, general steps, specific industrial methods (Mond and Van Arkel), advantages, and underlying thermodynamic reasoning.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Basic principle and requirements of vapour phase refining"
+      },
+      {
+        "id": "s2",
+        "label": "General procedure and steps of vapour phase refining"
+      },
+      {
+        "id": "s3",
+        "label": "Mond process for refining nickel"
+      },
+      {
+        "id": "s4",
+        "label": "Van Arkel method for refining titanium and zirconium"
+      },
+      {
+        "id": "s5",
+        "label": "Advantages and effectiveness of vapour phase refining"
+      },
+      {
+        "id": "s6",
+        "label": "Temperature dependence of the formation and decomposition stages"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Fundamental principle of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the concept and definition of vapour phase refining, explaining the mechanism of converting impure metal to a volatile compound and subsequently decomposing it to recover pure metal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# التنقية بالطور البخاري (التكرير بالطور الغازي)",
+            "start": 0,
+            "end": 48
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "سأشرح لك هذا الموضوع بطريقة مبسطة، كأننا نتحدث في حصة الكيمياء.",
+            "start": 50,
+            "end": 113
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## الفكرة الأساسية",
+            "start": 115,
+            "end": 133
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**التنقية بالطور البخاري** هي طريقة تُستخدم لتنقية المعادن من الشوائب، وتعتمد على مبدأ بسيط:",
+            "start": 135,
+            "end": 227
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **تحويل المعدن غير النقي إلى مركب متطاير (غازي)، ثم تحليل هذا المركب مرة أخرى للحصول على المعدن النقي**",
+            "start": 229,
+            "end": 334
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines the foundational principle of vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Prerequisites and conditions for vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Details the two essential conditions required for a metal to undergo vapour phase refining: forming a volatile compound with an available reagent and having that compound easily decompose back into the pure metal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## الشروط الأساسية لهذه الطريقة",
+            "start": 336,
+            "end": 367
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لكي نستخدم هذه الطريقة، يجب توفر شرطين:",
+            "start": 369,
+            "end": 408
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **يجب أن يتفاعل المعدن مع مادة معينة ليكوّن مركبًا متطايرًا (سهل التبخر)**",
+            "start": 410,
+            "end": 487
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **يجب أن يكون هذا المركب غير مستقر، بحيث يتحلل بسهولة ليعطي المعدن النقي مرة أخرى**",
+            "start": 488,
+            "end": 574
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately lists the two standard chemical requirements for vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "General process flow of vapour phase refining",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents the general schematic process flow diagram describing the sequential steps from impure metal to pure metal via thermal decomposition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## خطوات العملية (بشكل عام)",
+            "start": 576,
+            "end": 603
+          },
+          {
+            "id": "p11",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 605,
+            "end": 608
+          },
+          {
+            "id": "p12",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "diagram",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المعدن غير النقي  →  إضافة مادة مناسبة  →  مركب متطاير (بخار)",
+            "start": 609,
+            "end": 670
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "diagram"
+            ],
+            "review_flags": [],
+            "text": "                                                    ↓",
+            "start": 671,
+            "end": 724
+          },
+          {
+            "id": "p14",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "diagram",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المعدن النقي  ←  التحلل الحراري  ←  تسخين المركب المتطاير",
+            "start": 725,
+            "end": 782
+          },
+          {
+            "id": "p15",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "```",
+            "start": 783,
+            "end": 786
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The flow diagram accurately maps the standard steps of vapour phase refining.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Mond process for refining nickel",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates vapour phase refining using the industrial Mond process for nickel, providing reaction conditions, chemical equations, and highlighting carbon monoxide recycling.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## مثالان مشهوران توضحان الفكرة",
+            "start": 788,
+            "end": 819
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1️⃣ عملية \"مونـد\" (Mond Process) - لتنقية النيكل",
+            "start": 821,
+            "end": 873
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| الخطوة | التفاعل |",
+            "start": 875,
+            "end": 895
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|--------|---------|",
+            "start": 896,
+            "end": 916
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **الخطوة الأولى** | يُمرر غاز أول أكسيد الكربون (CO) على النيكل غير النقي عند درجة حرارة حوالي 330 كلفن |",
+            "start": 917,
+            "end": 1024
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **التفاعل** | Ni + 4CO → Ni(CO)₄ (رباعي كربونيل النيكل - غاز متطاير) |",
+            "start": 1025,
+            "end": 1097
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **الخطوة الثانية** | يُسخّن هذا الغاز إلى درجة حرارة أعلى (حوالي 450-470 كلفن) |",
+            "start": 1098,
+            "end": 1180
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **التفاعل** | Ni(CO)₄ → Ni (نقي) + 4CO |",
+            "start": 1181,
+            "end": 1223
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الملاحظة الذكية هنا:** غاز CO يتحرر مرة أخرى، فيمكن إعادة استخدامه! 🔄",
+            "start": 1225,
+            "end": 1296
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The temperatures (approx 330 K and 450-470 K), chemical equations, and intermediate complex (nickel tetracarbonyl) are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Van Arkel method for refining titanium or zirconium",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Illustrates vapour phase refining using the Van Arkel-de Boer method for ultra-pure titanium, including iodination and subsequent thermal decomposition on a heated tungsten filament.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2️⃣ عملية \"فان أركل\" (Van Arkel Method) - لتنقية التيتانيوم أو الزركونيوم",
+            "start": 1298,
+            "end": 1375
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| الخطوة | التفاعل |",
+            "start": 1377,
+            "end": 1397
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|--------|---------|",
+            "start": 1398,
+            "end": 1418
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **الخطوة الأولى** | يتفاعل المعدن غير النقي مع اليود |",
+            "start": 1419,
+            "end": 1475
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **التفاعل** | Ti + 2I₂ → TiI₄ (رباعي يوديد التيتانيوم - متطاير) |",
+            "start": 1476,
+            "end": 1543
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **الخطوة الثانية** | يُحلَّل المركب حراريًا على سلك من التنجستن ساخن جدًا (حوالي 1400 كلفن) |",
+            "start": 1544,
+            "end": 1639
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **التفاعل** | TiI₄ → Ti (نقي جدًا) + 2I₂ |",
+            "start": 1640,
+            "end": 1684
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Chemical reactions and steps of the Van Arkel process for titanium with iodine are correctly described.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Effectiveness and advantages of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains why vapour phase refining is effective, focusing on the ultra-high purity achieved, the non-reactivity of impurities, and precise thermal control.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## لماذا تعتبر هذه الطريقة فعّالة؟",
+            "start": 1686,
+            "end": 1720
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ تعطي معدنًا **عالي النقاء جدًا**",
+            "start": 1722,
+            "end": 1756
+          },
+          {
+            "id": "p34",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ الشوائب لا تتفاعل لتكوين المركب المتطاير، فتبقى خلفها",
+            "start": 1757,
+            "end": 1812
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ يمكن التحكم في الظروف (الحرارة) بدقة لضمان فصل تام",
+            "start": 1813,
+            "end": 1865
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The stated advantages are scientifically sound and reflect the metallurgical significance of the technique.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Thought question on operational temperature differences",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a guided thought question and answer addressing why the first step operates at moderate/low temperatures while the decomposition step requires higher thermal energy.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1867,
+            "end": 1870
+          },
+          {
+            "id": "p37",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**سؤال للتفكير:** هل يمكنك أن تخمن لماذا نحتاج درجة حرارة **منخفضة** في الخطوة الأولى، ودرجة حرارة **عالية** في الخطوة الثانية؟ 🤔",
+            "start": 1872,
+            "end": 2001
+          },
+          {
+            "id": "p38",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "(الإجابة تكمن في أن تكوين المركب المتطاير يحدث بسهولة في درجات حرارة معتدلة، بينما تحتاج كسر الرابطة في المركب \"لتحرير\" المعدن النقي إلى طاقة حرارية أكبر)",
+            "start": 2003,
+            "end": 2157
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation appropriately conveys the thermodynamic principles behind the lower temperature for complex formation and higher temperature for endothermic thermal decomposition.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\arabic-english\\claude-sonnet-5__154431f11be6.json",
+    "original_sha256": "190f78964d927928be8246d7a718cd5a4edeed3013891560e8fca890f4009074",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 38,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "PROCEDURE": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 38,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 7
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

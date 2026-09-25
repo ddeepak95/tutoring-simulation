@@ -1,0 +1,859 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "d7714a76d8ad70c414948a52d38175493f599e3115eea747ef4bd2eae91b7f69",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "The mole concept, Avogadro's number, molar mass, and basic mole-mass conversion formula",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12"
+      ],
+      "reason": "The response explains the mole concept clearly and accurately for a secondary school student, covering its nature as a counting unit, Avogadro's number, molar mass, and mole calculations.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "The dozen analogy for counting units"
+      },
+      {
+        "id": "s2",
+        "label": "The challenge of submicroscopic particles in chemistry"
+      },
+      {
+        "id": "s3",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s4",
+        "label": "Illustrative examples of one mole of substances"
+      },
+      {
+        "id": "s5",
+        "label": "Molar mass and connecting atomic scale to laboratory mass"
+      },
+      {
+        "id": "s6",
+        "label": "Summary recap and mole calculation formula"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "The dozen as a familiar everyday counting unit",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses the familiar daily-life concept of a dozen (12 items like eggs or pens) as an analogy to explain that a mole is simply a defined counting unit.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "إذا ذهبت إلى البقالة وطلبت \"درزن بيض\"، كم بيضة سيعطيك البائع؟"
+            },
+            {
+              "passage_id": "p7",
+              "quote": "ولو طلبت \"درزن أقلام\"؟ سيعطيك **12 قلماً**."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أهلاً بك يا بطل! يسعدني جداً أن أشرح لك هذا المفهوم. ",
+            "start": 0,
+            "end": 53
+          },
+          {
+            "id": "p2",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "دعنا نتفق أولاً: **\"المول\" ليس كائناً فضائياً ولا معادلة معقدة، المول في الحقيقة مجرد \"وحدة عَدّ\"، تماماً مثل \"الدرزن\"!**",
+            "start": 55,
+            "end": 176
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لكي تفهمه ببساطة، سأحكي لك قصة قصيرة:",
+            "start": 178,
+            "end": 215
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. فكرة \"الدرزن\" في حياتنا اليومية",
+            "start": 217,
+            "end": 255
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذا ذهبت إلى البقالة وطلبت \"درزن بيض\"، كم بيضة سيعطيك البائع؟ ",
+            "start": 256,
+            "end": 318
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بالتأكيد **12 بيضة**.",
+            "start": 319,
+            "end": 340
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ولو طلبت \"درزن أقلام\"؟ سيعطيك **12 قلماً**.",
+            "start": 341,
+            "end": 384
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذن كلمة \"درزن\" هي اسم يعبر عن رقم محدد وهو (12)، نستخدمه لتسهيل التعامل مع الأشياء بدلاً من عدّها بالواحدة.",
+            "start": 385,
+            "end": 493
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The comparison of a counting unit to a dozen is standard, intuitive, and factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Need for a large counting package due to microscopic atomic scale",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why chemists need an enormous counting unit: individual atoms cannot be seen or weighed in laboratory amounts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. المشكلة في الكيمياء: الذرات متناهية الصغر!",
+            "start": 495,
+            "end": 544
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في معمل الكيمياء، نحن نتعامل مع ذرات وجزيئات. الذرة صغيرة جداً لدرجة لا يمكن تخيلها؛ لو أردت أن تصنع تفاعلاً كيميائياً، لا يمكنك أن تقول: \"سآخذ 12 ذرة كربون\"، لأن هذا العدد مجهري ولا يُرى حتى بأقوى المجاهر، ولا يمكن وزنه على أي ميزان!",
+            "start": 545,
+            "end": 779
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نحن بحاجة إلى \"حزمة\" ضخمة جداً من الذرات لكي نستطيع رؤيتها ووزنها والتعامل معها في المختبر.",
+            "start": 781,
+            "end": 872
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes the submicroscopic nature of atoms and molecules and why macroscale batches are required.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definition of the mole and Avogadro's number",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "States the definition of one mole as containing 6.022 x 10^23 entities, designated as Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. الحل: \"المول\" (درزن الكيميائيين)",
+            "start": 874,
+            "end": 913
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هنا اخترع العلماء كلمة **\"المول\" (Mole)**.",
+            "start": 914,
+            "end": 956
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "المول هو ببساطة \"درزن الكيميائيين\"، ولكنه درزن عملاق جداً!",
+            "start": 957,
+            "end": 1015
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "**1 مول من أي شيء = $6.022 \\times 10^{23}$ من هذا الشيء.**",
+            "start": 1017,
+            "end": 1075
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "(هذا الرقم يسمى **عدد أفوجادرو**، تكريماً للعالم الذي ساهم في الوصول إليه).",
+            "start": 1076,
+            "end": 1151
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states Avogadro's number as 6.022 x 10^23 and associates it with the mole.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "One mole of iron atoms",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Provides a concrete chemistry example specifying the number of iron atoms in one mole.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "* 1 مول من ذرات الحديد = $6.022 \\times 10^{23}$ ذرة حديد.",
+            "start": 1153,
+            "end": 1210
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "1 mole of iron atoms contains 6.022 x 10^23 atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "One mole of water molecules",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Provides a concrete chemistry example specifying the number of water molecules in one mole.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "* 1 مول من جزيئات الماء = $6.022 \\times 10^{23}$ جزيء ماء.",
+            "start": 1211,
+            "end": 1269
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "1 mole of water molecules contains 6.022 x 10^23 molecules.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Rice grains illustration of Avogadro's scale",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Uses a hypothetical macroscopic comparison of grains of rice covering the Earth to illustrate the vastness of Avogadro's number.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p19",
+              "quote": "(لو كان لديك 1 مول من حبات الأرز، لغطت كوكب الأرض بالكامل بطبقة ارتفاعها عدة أمتار! لهذا نستخدمه فقط مع الأشياء المجهرية كالجزيئات والذرات)."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* (لو كان لديك 1 مول من حبات الأرز، لغطت كوكب الأرض بالكامل بطبقة ارتفاعها عدة أمتار! لهذا نستخدمه فقط مع الأشياء المجهرية كالجزيئات والذرات).",
+            "start": 1270,
+            "end": 1412
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "A standard pedagogical illustration of the scale of Avogadro's number using grains of rice.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Rationale for Avogadro's number and connection to mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains why Avogadro's number was chosen specifically to bridge atomic mass units to grams on a laboratory scale.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. سحر المول: كيف يربط بين المجهر والميزان؟ (الكتلة المولية)",
+            "start": 1414,
+            "end": 1478
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "قد تسألني الآن: *\"يا أستاذ، لماذا اختار العلماء هذا الرقم الغريب تحديداً ($6.022 \\times 10^{23}$)؟ لماذا لم يختاروا رقماً سهلاً كالمليار مثلاً؟\"*",
+            "start": 1479,
+            "end": 1624
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "سؤال ذكي جداً! والجواب هو: **لأن هذا الرقم يجعل الحياة سهلة على الميزان!**",
+            "start": 1626,
+            "end": 1700
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly motivates Avogadro's constant as the numerical link between amu and grams.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Carbon-12 molar mass correspondence",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Demonstrates the bridge between atomic mass and molar mass using carbon (12 amu to 12 g).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* انظر إلى الجدول الدوري، ستجد أن كتلة ذرة الكربون هي تقريباً (12) وحدة كتل ذرية (وهي كتلة صغيرة جداً لا نقدر على وزنها).",
+            "start": 1702,
+            "end": 1823
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* ولكن، إذا جمعت **(1 مول)** من ذرات الكربون، ستتفاجأ أن وزنها على الميزان في المختبر يساوي **12 غراماً بالضبط!**",
+            "start": 1824,
+            "end": 1937
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately illustrates that 1 atom of carbon has a mass of ~12 amu while 1 mole has a mass of 12 grams.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "EXAMPLE",
+        "label": "Oxygen molar mass correspondence",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Demonstrates the atomic mass to gram relationship using oxygen (16 amu to 16 g).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* ذرة الأكسجين كتلتها 16؟ إذن (1 مول) من الأكسجين يزن **16 غراماً**.",
+            "start": 1938,
+            "end": 2006
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately states that an oxygen atom mass of 16 amu corresponds to 16 grams per mole of oxygen atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "CONCEPT",
+        "label": "Definition of molar mass as the bridge",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines molar mass as the mass of one mole and summarizes its role as the bridge between periodic table values and laboratory masses.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**المول هو \"الجسر السحري\" الذي حوّل الأرقام المكتوبة في الجدول الدوري من مجرد أوزان ذرية خيالية، إلى غرامات حقيقية نزنها في المختبر.** وزن 1 مول يسمى **الكتلة المولية (Molar Mass)**.",
+            "start": 2008,
+            "end": 2190
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines molar mass as the mass of 1 mole of a substance.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "STUDY_SUPPORT",
+        "label": "Quick summary recap of key mole concepts",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Recapitulates the main takeaways: what the mole is, its value, and its utility.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2192,
+            "end": 2195
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ملخص سريع لتتذكره دائماً:",
+            "start": 2197,
+            "end": 2226
+          },
+          {
+            "id": "p29",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **المول** = مجرد رقم للعدّ (مثل الدرزن ولكن للذرات).",
+            "start": 2227,
+            "end": 2282
+          },
+          {
+            "id": "p30",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2. **قيمته** = $6.022 \\times 10^{23}$ (عدد أفوجادرو).",
+            "start": 2283,
+            "end": 2336
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **فائدته** = ينقلنا من عالم الذرات المجهري الذي لا نراه، إلى عالم الغرامات التي نستطيع وزنها في المختبر.",
+            "start": 2337,
+            "end": 2444
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately summarizes the core points of the lesson.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u12",
+        "kind": "CONCEPT",
+        "label": "Basic formula for calculating moles from mass",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents the core mathematical formula connecting moles, mass in grams, and molar mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**القانون الأساسي الذي ستستخدمه في المسائل دائماً:**",
+            "start": 2446,
+            "end": 2498
+          },
+          {
+            "id": "p33",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{عدد المولات} = \\frac{\\text{الكتلة بالجرام}}{\\text{الكتلة المولية (من الجدول الدوري)}}$$",
+            "start": 2499,
+            "end": 2594
+          },
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل الفكرة واضحة الآن، أم تحب أن نأخذ مثالاً حسابياً بسيطاً نطبقه معاً؟",
+            "start": 2596,
+            "end": 2666
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The formula n = mass / molar mass is standard, correct, and fundamental to chemistry calculations.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\arabic-native\\gemini-3.8-flash__c7ddd186e0e9.json",
+    "original_sha256": "ee8b052026418ab50b0cf496d2eee778f5cb1548e43fff4dde17dd124688ac52",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 12,
+    "substantive_content_units": 12,
+    "total_passages": 34,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 5,
+      "EXAMPLE": 5,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 34,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 2,
+      "none": 10
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 12
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

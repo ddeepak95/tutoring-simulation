@@ -1,0 +1,678 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "3672ea607df53ceda5bbbbdd4c845ed34bd9935b211aad8162de4930de4f36c8",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The explanation directly covers redox reactions, defining electron transfer, oxidation and reduction, redox couples, a worked concrete example, the simultaneity principle, and a comprehension check.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of redox reactions and electron transfer"
+      },
+      {
+        "id": "s2",
+        "label": "Definitions and mnemonics for oxidation and reduction"
+      },
+      {
+        "id": "s3",
+        "label": "Oxidant/reductant couples and agent definitions"
+      },
+      {
+        "id": "s4",
+        "label": "Worked example of Zn and Cu²⁺ reaction"
+      },
+      {
+        "id": "s5",
+        "label": "Simultaneity of oxidation and reduction"
+      },
+      {
+        "id": "s6",
+        "label": "Comprehension check question"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Basic definition of a redox reaction",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces redox reactions and defines them fundamentally as reactions involving electron transfer between chemical species.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Les réactions d'oxydoréduction (redox)",
+            "start": 0,
+            "end": 40
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 1. L'idée de base",
+            "start": 42,
+            "end": 62
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Une réaction d'oxydoréduction est une réaction chimique où il y a un **transfert d'électrons** entre deux espèces chimiques.",
+            "start": 64,
+            "end": 188
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines a redox reaction as an electron transfer process between chemical species.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Money exchange analogy for electron transfer",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses a cross-domain comparison with money exchange (paying and receiving) to explain the loss and gain of electrons.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "l'argent qu'on échange : quelqu'un en **perd** (il paie), quelqu'un d'autre en **gagne** (il reçoit)"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imaginez que les électrons sont comme de l'argent qu'on échange : quelqu'un en **perd** (il paie), quelqu'un d'autre en **gagne** (il reçoit).",
+            "start": 190,
+            "end": 332
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The money analogy accurately mirrors the bilateral exchange where one party loses what another party gains.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Definitions of oxidation and reduction",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines oxidation as electron loss and reduction as electron gain.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 2. Le vocabulaire essentiel",
+            "start": 334,
+            "end": 364
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Oxydation** = une espèce **perd** des électrons",
+            "start": 366,
+            "end": 417
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Réduction** = une espèce **gagne** des électrons",
+            "start": 418,
+            "end": 470
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Standard definitions of oxidation and reduction are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "STUDY_SUPPORT",
+        "label": "Mnemonics for oxidation and reduction",
+        "attributes": {
+          "subtype": "mnemonic"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides memory aids ('PERDU-GAGNÉ' and the English acronym 'OIL RIG') to help students remember electron loss versus gain.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*Astuce pour retenir :* pensez à \"PERDU-GAGNÉ\" ou utilisez le moyen mnémotechnique **\"OIL RIG\"** (en anglais) :",
+            "start": 472,
+            "end": 583
+          },
+          {
+            "id": "p9",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **O**xidation **I**s **L**oss (l'oxydation, c'est perdre)",
+            "start": 584,
+            "end": 643
+          },
+          {
+            "id": "p10",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **R**eduction **I**s **G**ain (la réduction, c'est gagner)",
+            "start": 644,
+            "end": 704
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The OIL RIG mnemonic is correctly cited and translated, and the French tip is logically consistent.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Redox couples and definition of oxidant and reductant",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the Ox/Red couple notation and half-equation relationship, introducing the definitions of oxidant (electron acceptor) and reductant (electron donor) using the Cu²⁺/Cu couple.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 3. Les couples oxydant/réducteur",
+            "start": 706,
+            "end": 741
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chaque espèce chimique appartient à un **couple** noté :",
+            "start": 743,
+            "end": 799
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Ox} / \\text{Red}$$",
+            "start": 800,
+            "end": 826
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Exemple : le couple Cu²⁺/Cu",
+            "start": 828,
+            "end": 855
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Cu}^{2+} + 2e^- \\rightleftharpoons \\text{Cu}$$",
+            "start": 857,
+            "end": 911
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Cu²⁺** est l'**oxydant** (il peut capter des électrons)",
+            "start": 913,
+            "end": 972
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Cu** est le **réducteur** (il peut donner des électrons)",
+            "start": 973,
+            "end": 1033
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Ox/Red formal notation, the half-equation Cu²⁺ + 2e⁻ ⇌ Cu, and the definitions of oxidant and reductant are scientifically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked reaction between Zn and Cu²⁺",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Walks through the oxidation half-reaction of Zn, the reduction half-reaction of Cu²⁺, the balanced net equation, and mentions experimental observation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 4. Un exemple concret",
+            "start": 1035,
+            "end": 1059
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Prenons la réaction entre le zinc (Zn) et les ions cuivre (Cu²⁺) :",
+            "start": 1061,
+            "end": 1127
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Étape 1** – Le zinc s'oxyde (il perd des électrons) :",
+            "start": 1129,
+            "end": 1184
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Zn} \\rightarrow \\text{Zn}^{2+} + 2e^-$$",
+            "start": 1185,
+            "end": 1232
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Étape 2** – Les ions cuivre se réduisent (ils gagnent ces électrons) :",
+            "start": 1234,
+            "end": 1306
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Cu}^{2+} + 2e^- \\rightarrow \\text{Cu}$$",
+            "start": 1307,
+            "end": 1354
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Bilan global** (on additionne, les électrons s'annulent) :",
+            "start": 1356,
+            "end": 1416
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Zn} + \\text{Cu}^{2+} \\rightarrow \\text{Zn}^{2+} + \\text{Cu}$$",
+            "start": 1417,
+            "end": 1486
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "👉 On voit du cuivre métallique se déposer sur le zinc : c'est visible expérimentalement !",
+            "start": 1488,
+            "end": 1577
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All half-equations and the overall redox equation are fully balanced and chemically accurate, and metallic copper deposition on zinc corresponds to experimental reality.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Key takeaway on simultaneity of oxidation and reduction",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Summarizes the essential takeaway that oxidation and reduction are coupled and must always take place simultaneously.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 5. Point clé à retenir",
+            "start": 1579,
+            "end": 1604
+          },
+          {
+            "id": "p28",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Il n'y a jamais d'oxydation sans réduction**, et inversement. Les deux se produisent **toujours simultanément** : c'est pour cela qu'on parle de réaction \"d'oxydo-**réduction**\".",
+            "start": 1606,
+            "end": 1786
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately recaps the foundational chemical principle that electron loss cannot happen without an electron acceptor.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Comprehension practice question on Fe²⁺ and Ag⁺",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a practice exercise asking the student to identify the oxidized and reduced species in a given reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1788,
+            "end": 1791
+          },
+          {
+            "id": "p30",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "💡 **Question pour vérifier votre compréhension :** Dans la réaction Fe²⁺ + Ag⁺ → Fe³⁺ + Ag, quelle espèce est oxydée et laquelle est réduite ?",
+            "start": 1793,
+            "end": 1935
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction provided in the question (Fe²⁺ + Ag⁺ → Fe³⁺ + Ag) is a valid, balanced redox reaction suitable for the prompt's comprehension check.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\french-native\\claude-sonnet-5__9b36d38d9082.json",
+    "original_sha256": "688d097fbf3536eefd970048e5c5e388376d4f2404ed6d1f059a38964f88a8b1",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 30,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "STUDY_SUPPORT": 3,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 30,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 7,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

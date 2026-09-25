@@ -1,0 +1,388 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "7cf1cde97f9d968bdb7b896b046e5f342c584130056b9b3464098b25266a66ea",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "isotope",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The entire response directly and accurately explains the concept of isotopes in Bengali, including their definition, examples (hydrogen and carbon isotopes), properties, and applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of isotopes and subatomic composition"
+      },
+      {
+        "id": "s2",
+        "label": "Examples of isotopes (hydrogen and carbon)"
+      },
+      {
+        "id": "s3",
+        "label": "Chemical and physical properties of isotopes"
+      },
+      {
+        "id": "s4",
+        "label": "Applications and uses of isotopes"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of atomic number and isotope",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains how the atomic number is determined by protons and how differences in neutron counts define isotopes of the same element.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "প্রিয় ছাত্র/ছাত্রী,",
+            "start": 0,
+            "end": 20
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আজ আমরা “আইসোটোপ” নামক গুরুত্বপূর্ণ একটি বিষয় নিয়ে আলোচনা করব। সহজ ভাষায় বুঝিয়ে বলছি।",
+            "start": 22,
+            "end": 107
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "প্রত্যেক মৌলের পরমাণুতে একটি নির্দিষ্ট সংখ্যক প্রোটন থাকে। এই সংখ্যাকে বলা হয় **পারমাণবিক সংখ্যা (Z)**। কিন্তু সেই পরমাণুতে নিউট্রনের সংখ্যা ভিন্ন হতে পারে।",
+            "start": 109,
+            "end": 265
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যখন একই মৌলের পরমাণুগুলোর প্রোটনের সংখ্যা একই থাকে, কিন্তু নিউট্রনের সংখ্যা আলাদা হয়, তখন সেগুলোকে **আইসোটোপ** বলে।",
+            "start": 267,
+            "end": 382
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of atomic number (Z) as proton count and isotopes as atoms of the same element with identical proton numbers but differing neutron numbers is completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Hydrogen isotopes example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Walks through the three isotopes of hydrogen (protium, deuterium, tritium), specifying their respective proton and neutron counts and explaining why they are isotopes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**সহজ উদাহরণ দিয়ে বোঝাই:**",
+            "start": 384,
+            "end": 410
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "হাইড্রোজেন মৌলের তিনটি আইসোটোপ আছে:",
+            "start": 412,
+            "end": 447
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **প্রোটিয়াম** — ১ প্রোটন + ০ নিউট্রন",
+            "start": 448,
+            "end": 486
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **ডিউটেরিয়াম** — ১ প্রোটন + ১ নিউট্রন",
+            "start": 487,
+            "end": 526
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **ট্রিটিয়াম** — ১ প্রোটন + ২ নিউট্রন",
+            "start": 527,
+            "end": 565
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এরা সবাই হাইড্রোজেনের আইসোটোপ, কারণ প্রোটনের সংখ্যা একই (১), শুধু নিউট্রনের সংখ্যা ভিন্ন।",
+            "start": 567,
+            "end": 656
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The names and subatomic compositions of protium (1p, 0n), deuterium (1p, 1n), and tritium (1p, 2n) are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Carbon isotopes example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents carbon-12 and carbon-14, specifying proton and neutron counts, and concluding they are isotopes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আরেকটি উদাহরণ: কার্বন-১২ ও কার্বন-১৪। দুটোতেই প্রোটন আছে ৬টি, কিন্তু নিউট্রন যথাক্রমে ৬ ও ৮। তাই এরা কার্বনের আইসোটোপ।",
+            "start": 658,
+            "end": 776
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Carbon-12 (6 protons, 6 neutrons) and carbon-14 (6 protons, 8 neutrons) are correctly identified as isotopes of carbon.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Chemical and physical properties of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why isotopes have similar chemical properties (same electron count) but differing physical properties (different mass/stability).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**গুরুত্বপূর্ণ কথা:**  ",
+            "start": 778,
+            "end": 801
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আইসোটোপগুলোর রাসায়নিক ধর্ম একই রকম (কারণ রাসায়নিক বৈশিষ্ট্য নির্ভর করে ইলেকট্রনের সংখ্যার উপর, যা প্রোটনের সমান)। কিন্তু ভর ভিন্ন হওয়ায় তাদের ভৌত ধর্মে (যেমন: ভর, স্থায়িত্ব) পার্থক্য দেখা যায়।",
+            "start": 802,
+            "end": 994
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reasoning correctly links chemical behavior to electronic structure and physical property differences to atomic mass differences.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Applications of isotopes",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "States various practical applications of isotopes in medicine, nuclear power, and radiocarbon dating.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আইসোটোপের ব্যবহার অনেক — চিকিৎসায়, পারমাণবিক বিদ্যুৎ উৎপাদনে এবং প্রত্নতত্ত্বে (কার্বন-১৪ ডেটিং দিয়ে জিনিসের বয়স বের করা হয়)।",
+            "start": 996,
+            "end": 1121
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কোনো অংশ বুঝতে অসুবিধা হলে বা আরও উদাহরণ চাইলে বলো!",
+            "start": 1123,
+            "end": 1174
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed applications (medicine, nuclear power, and carbon-14 dating for archaeological age determination) are standard and correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\bengali-english\\grok-4.3__27f332e26d9d.json",
+    "original_sha256": "10e2101b6b6517d1cf49cf91a60d1dabb5e34e4a614a0d537dc5aa40bf798f81",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 15,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 2
+    },
+    "nested_passages": 15,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

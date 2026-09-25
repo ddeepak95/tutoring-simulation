@@ -1,0 +1,660 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "3227f2721a1d10f150492b3a1ce7c328c1d5eeb1c4099cb944fcefb8e16ec510",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The entire response covers the definition, foundational concepts, governing laws, applications, and a worked calculation example of stoichiometry in Hindi as requested.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and Definition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Key Concepts Related to Stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Underlying Laws of Stoichiometry"
+      },
+      {
+        "id": "s4",
+        "label": "Applications of Stoichiometry"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Example on Stoichiometric Calculation"
+      },
+      {
+        "id": "s6",
+        "label": "Summary of Stoichiometry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces stoichiometry, its etymological/literal meaning in Hindi, and its role in measuring quantities and ratios of reacting substances.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**रससमीकरणमिति: एक परिचय**",
+            "start": 0,
+            "end": 26
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नमस्ते! आज हम रससमीकरणमिति के बारे में बात करने जा रहे हैं, जो रसायन विज्ञान की एक महत्वपूर्ण शाखा है। रससमीकरणमिति का अर्थ है \"मापने की कला\"। यह रसायनिक प्रतिक्रियाओं में भाग लेने वाले पदार्थों की मात्रा को मापने और उनके अनुपात को निर्धारित करने से संबंधित है।",
+            "start": 28,
+            "end": 289
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition correctly describes stoichiometry as the branch of chemistry dealing with measuring quantities and proportions of reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Key Stoichiometric Concepts",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines foundational concepts needed for stoichiometric calculations: chemical equations, moles, and molar mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**रससमीकरणमिति के मूल तत्व**",
+            "start": 291,
+            "end": 319
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रससमीकरणमिति को समझने के लिए, हमें कुछ मूल तत्वों को जानना होगा:",
+            "start": 321,
+            "end": 385
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **रासायनिक समीकरण**: एक रासायनिक समीकरण एक रासायनिक प्रतिक्रिया को दर्शाता है, जिसमें अभिकारकों और उत्पादों के बीच संबंध दिखाया जाता है।",
+            "start": 387,
+            "end": 526
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **मोल**: मोल एक इकाई है जो किसी पदार्थ की मात्रा को दर्शाती है। एक मोल में 6.022 x 10^23 कण (परमाणु या अणु) होते हैं।",
+            "start": 527,
+            "end": 647
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **मोलर द्रव्यमान**: मोलर द्रव्यमान किसी पदार्थ के एक मोल का द्रव्यमान होता है।",
+            "start": 648,
+            "end": 729
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Definitions for chemical equations, mole (including Avogadro's number), and molar mass are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Principles of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Describes the chemical laws underlying stoichiometry: the law of conservation of mass and the law of definite proportions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**रससमीकरणमिति के सिद्धांत**",
+            "start": 731,
+            "end": 759
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रससमीकरणमिति के कुछ महत्वपूर्ण सिद्धांत हैं:",
+            "start": 761,
+            "end": 805
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **द्रव्यमान संरक्षण का नियम**: इस नियम के अनुसार, किसी रासायनिक प्रतिक्रिया में, अभिकारकों का कुल द्रव्यमान उत्पादों के कुल द्रव्यमान के बराबर होता है।",
+            "start": 807,
+            "end": 961
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **निश्चित अनुपात का नियम**: इस नियम के अनुसार, किसी रासायनिक यौगिक में, तत्वों का अनुपात हमेशा निश्चित होता है।",
+            "start": 962,
+            "end": 1076
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The descriptions of the law of conservation of mass and the law of definite proportions are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Applications of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Lists standard practical uses of stoichiometry in predicting reaction outcomes and computing substance amounts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**रससमीकरणमिति के अनुप्रयोग**",
+            "start": 1078,
+            "end": 1107
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रससमीकरणमिति के कई अनुप्रयोग हैं:",
+            "start": 1109,
+            "end": 1142
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **रासायनिक प्रतिक्रियाओं की भविष्यवाणी**: रससमीकरणमिति का उपयोग करके, हम रासायनिक प्रतिक्रियाओं के परिणाम की भविष्यवाणी कर सकते हैं।",
+            "start": 1144,
+            "end": 1279
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **पदार्थों की मात्रा की गणना**: रससमीकरणमिति का उपयोग करके, हम किसी रासायनिक प्रतिक्रिया में भाग लेने वाले पदार्थों की मात्रा की गणना कर सकते हैं।",
+            "start": 1280,
+            "end": 1429
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the primary functions of stoichiometric analysis in chemical reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked Stoichiometric Problem: Water Synthesis",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a fully worked calculation determining the mass of water formed from given masses of hydrogen and oxygen gases.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**उदाहरण**",
+            "start": 1431,
+            "end": 1441
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मान लें कि हमें निम्नलिखित रासायनिक प्रतिक्रिया दी गई है:",
+            "start": 1443,
+            "end": 1500
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H2 + O2 → 2H2O",
+            "start": 1502,
+            "end": 1517
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस प्रतिक्रिया में, हमें 4 ग्राम हाइड्रोजन गैस (H2) और 32 ग्राम ऑक्सीजन गैस (O2) दी गई है। हमें यह जानना है कि कितना पानी (H2O) बनेगा।",
+            "start": 1519,
+            "end": 1653
+          },
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**समाधान**",
+            "start": 1655,
+            "end": 1665
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. सबसे पहले, हमें H2 और O2 के मोल की गणना करनी होगी।",
+            "start": 1667,
+            "end": 1720
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "H2 के मोल = द्रव्यमान / मोलर द्रव्यमान = 4 ग्राम / 2 ग्राम/मोल = 2 मोल",
+            "start": 1721,
+            "end": 1791
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "O2 के मोल = द्रव्यमान / मोलर द्रव्यमान = 32 ग्राम / 32 ग्राम/मोल = 1 मोल",
+            "start": 1792,
+            "end": 1864
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. अब, हमें रासायनिक समीकरण का उपयोग करके H2O के मोल की गणना करनी होगी।",
+            "start": 1865,
+            "end": 1936
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H2 + O2 → 2H2O",
+            "start": 1937,
+            "end": 1952
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2 मोल H2 1 मोल O2 के साथ प्रतिक्रिया करके 2 मोल H2O बनाते हैं।",
+            "start": 1953,
+            "end": 2015
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसलिए, H2O के मोल = 2 मोल",
+            "start": 2016,
+            "end": 2041
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. अंत में, हमें H2O के द्रव्यमान की गणना करनी होगी।",
+            "start": 2042,
+            "end": 2094
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "H2O का द्रव्यमान = मोल x मोलर द्रव्यमान = 2 मोल x 18 ग्राम/मोल = 36 ग्राम",
+            "start": 2095,
+            "end": 2168
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस प्रकार, हमें पता चलता है कि 36 ग्राम पानी बनेगा।",
+            "start": 2170,
+            "end": 2221
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All steps, conversions (mass to moles, stoichiometric mole ratios, moles to mass), and numerical calculations are completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Concluding Summary",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Summarizes the key takeaways and definition of stoichiometry at the end of the lesson.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**निष्कर्ष**",
+            "start": 2223,
+            "end": 2235
+          },
+          {
+            "id": "p32",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रससमीकरणमिति रसायन विज्ञान की एक महत्वपूर्ण शाखा है जो रासायनिक प्रतिक्रियाओं में भाग लेने वाले पदार्थों की मात्रा को मापने और उनके अनुपात को निर्धारित करने से संबंधित है। इसके अनुप्रयोग रासायनिक प्रतिक्रियाओं की भविष्यवाणी और पदार्थों की मात्रा की गणना में होते हैं।",
+            "start": 2237,
+            "end": 2504
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately summarizes the core scope and purpose of stoichiometry.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\hindi-native\\llama-4-maverick__0051a456a205.json",
+    "original_sha256": "9c24d85f9eadbcebf4e4d49d363639d51ff2b7d04e5772084a7d84d6b0657d0e",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 32,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 32,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

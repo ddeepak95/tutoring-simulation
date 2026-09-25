@@ -120,8 +120,8 @@ def metrics(data):
 
 async def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source',type=Path,default=pipeline.EXPERIMENT/'outputs/multiple/ch-4_redox_reactions/run-002-6e205aae6abd67f6.json')
-    parser.add_argument('--output',type=Path,default=pipeline.EXPERIMENT/'outputs/multiple/evaluation/schema_v10_tamil_redox')
+    parser.add_argument('--source',type=Path,default=pipeline.EXPERIMENT/'outputs/multiple/ch-4_redox_reactions/tamil-native/claude-sonnet-5__3884e8d4c759.json')
+    parser.add_argument('--output',type=Path,default=pipeline.EXPERIMENT/'outputs/multiple/ch-4_redox_reactions/tamil-native/evaluation/claude-sonnet-5__3884e8d4c759')
     parser.add_argument('--subject', required=True, help='Discipline, e.g. Chemistry, Physics or History')
     parser.add_argument('--response-language', default='Tamil', help='Language of the source explanation')
     args=parser.parse_args()
@@ -131,7 +131,7 @@ async def main():
     topic=source['job'].get('topic_name')
     if not topic:
         import csv
-        topic_id=args.source.parent.name.split('_',1)[0]
+        topic_id=next(p.name.split('_',1)[0] for p in args.source.parents if p.name.startswith('ch-'))
         with (pipeline.EXPERIMENT/'content/keywords.csv').open(encoding='utf-8-sig',newline='') as f:
             topic=next(r['en'] for r in csv.DictReader(f) if r['id']==topic_id)
     passages=annotate_demo.segment(source['text'])

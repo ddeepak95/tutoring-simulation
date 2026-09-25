@@ -1,0 +1,230 @@
+{
+  "topic_relevance": {
+    "requested_topic": "mole concept",
+    "observed_topic": "The mole concept in chemistry, including Avogadro's number, molar mass, conversion formulas between mass, moles, and particle count, worked examples, and a summary recap.",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly and comprehensively teaches the mole concept, Avogadro's number, molar mass, and calculation methods with examples.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7",
+      "u8"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of mole, Avogadro's number, and why the mole is needed",
+      "excerpts": [
+        {
+          "text": "মোল (mole) হলো রসায়নে পদার্থের পরিমাণ মাপার একটি একক। যেমন আমরা অনেকগুলো জিনিস গুনতে “ডজন” ব্যবহার করি—১ ডজন = ১২টি জিনিস—তেমনি অতি ক্ষুদ্র পরমাণু, অণু বা আয়নের সংখ্যা বোঝাতে “মোল” ব্যবহার করি।\n\n## ১ মোল মানে কতটি কণা?\n\n**১ মোল = \\(6.022 \\times 10^{23}\\) টি কণা**\n\nএই বিশাল সংখ্যাটিকে বলে **অ্যাভোগাড্রো সংখ্যা**।\n\nকণা বলতে হতে পারে—\n\n- পরমাণু: যেমন ১ মোল Fe = \\(6.022 \\times 10^{23}\\) টি লোহার পরমাণু  \n- অণু: যেমন ১ মোল H₂O = \\(6.022 \\times 10^{23}\\) টি পানির অণু  \n- আয়ন: যেমন ১ মোল Na⁺ = \\(6.022 \\times 10^{23}\\) টি সোডিয়াম আয়ন  \n\n---\n\n## কেন মোল দরকার?\n\nপরমাণু ও অণু এত ছোট যে তাদের একটি বা দুটি করে ওজন করা যায় না। কিন্তু রসায়নবিদরা জানতে চান বিক্রিয়ায় কতগুলো কণা অংশ নিচ্ছে। তাই কণার বিশাল সংখ্যা সহজে প্রকাশ করতে “মোল” ব্যবহার করা হয়।\n\nযেমন:\n\n- ১ ডজন ডিম = ১২টি ডিম  \n- ১ মোল পানির অণু = \\(6.022 \\times 10^{23}\\) টি পানির অণু",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "যেমন আমরা অনেকগুলো জিনিস গুনতে “ডজন” ব্যবহার করি—১ ডজন = ১২টি জিনিস"
+          },
+          {
+            "excerpt_index": 0,
+            "quote": "১ ডজন ডিম = ১২টি ডিম"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines the mole as a unit for amount of substance, states Avogadro's constant accurately, explains its role in counting submicroscopic particles, and uses the everyday dozen comparison.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Definition of molar mass and its numerical equivalence to atomic/molecular mass",
+      "excerpts": [
+        {
+          "text": "## মোলার ভর কী?\n\nকোনো পদার্থের **১ মোলের ভরকে মোলার ভর** বলে। এর একক হলো **গ্রাম প্রতি মোল (g/mol)**।\n\nমজার বিষয় হলো, কোনো মৌলের পারমাণবিক ভর সংখ্যাগতভাবে তার মোলার ভরের সমান।\n\nউদাহরণ:\n\n| পদার্থ | আপেক্ষিক ভর | মোলার ভর |\n|---|---:|---:|\n| H | 1 | 1 g/mol |\n| O | 16 | 16 g/mol |\n| C | 12 | 12 g/mol |\n| H₂O | \\(2×1 + 16 = 18\\) | 18 g/mol |\n| CO₂ | \\(12 + 2×16 = 44\\) | 44 g/mol |\n\nঅর্থাৎ,\n\n- **১ মোল পানি (H₂O) = ১৮ গ্রাম**\n- **১ মোল কার্বন ডাই-অক্সাইড (CO₂) = ৪৪ গ্রাম**\n- **১ মোল অক্সিজেন গ্যাস (O₂) = ৩২ গ্রাম**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition, unit (g/mol), relationship to relative atomic/molecular mass, and illustrative values are all accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "PROCEDURE",
+      "label": "Formula for calculating moles from mass",
+      "excerpts": [
+        {
+          "text": "## মোল বের করার সূত্র\n\n### ১. ভর থেকে মোল\n\n\\[\n\\text{মোলের সংখ্যা} = \\frac{\\text{পদার্থের ভর (g)}}{\\text{মোলার ভর (g/mol)}}\n\\]\n\nঅর্থাৎ,\n\n\\[\nn = \\frac{m}{M}\n\\]\n\nএখানে,  \n- \\(n\\) = মোলের সংখ্যা  \n- \\(m\\) = ভর  \n- \\(M\\) = মোলার ভর",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The formula n = m / M and definitions of its variables are standard and correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Calculating moles of 36 grams of water",
+      "excerpts": [
+        {
+          "text": "### উদাহরণ ১  \n৩৬ গ্রাম পানি কত মোল?\n\nপানির মোলার ভর = ১৮ g/mol\n\n\\[\nn = \\frac{36}{18} = 2 \\text{ mol}\n\\]\n\nঅতএব, **৩৬ গ্রাম পানি = ২ মোল পানি**।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correct calculation showing that 36 g of water equals 2 moles.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "PROCEDURE",
+      "label": "Formula for calculating particle count from moles",
+      "excerpts": [
+        {
+          "text": "## মোল থেকে কণার সংখ্যা\n\n\\[\n\\text{কণার সংখ্যা} = \\text{মোলের সংখ্যা} \\times 6.022 \\times 10^{23}\n\\]",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correct relationship stating particle count equals number of moles times Avogadro's number.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "EXAMPLE",
+      "label": "Calculating number of molecules in 2 moles of water",
+      "excerpts": [
+        {
+          "text": "### উদাহরণ ২  \n২ মোল পানিতে কতটি পানির অণু আছে?\n\n\\[\n2 \\times 6.022 \\times 10^{23}\n= 1.2044 \\times 10^{24}\n\\]\n\nঅতএব, ২ মোল পানিতে আছে  \n\\[\n1.2044 \\times 10^{24}\n\\]\nটি পানির অণু।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The multiplication 2 * 6.022 * 10^23 = 1.2044 * 10^24 is mathematically and conceptually accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "EXAMPLE",
+      "label": "Deducing atom counts in 1 mole of carbon dioxide",
+      "excerpts": [
+        {
+          "text": "## একটি গুরুত্বপূর্ণ উদাহরণ: CO₂\n\n১ মোল CO₂-এ আছে—\n\n- \\(6.022 \\times 10^{23}\\) টি CO₂ অণু  \n- প্রতিটি CO₂ অণুতে ১টি C পরমাণু ও ২টি O পরমাণু থাকে  \n- তাই ১ মোল CO₂-এ:\n  - ১ মোল C পরমাণু\n  - ২ মোল O পরমাণু\n\nঅর্থাৎ অক্সিজেন পরমাণুর সংখ্যা হবে:\n\n\\[\n2 \\times 6.022 \\times 10^{23}\n\\]",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly breaks down a compound into its constituent moles and numbers of atoms.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u8",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of the mole concept and key formulas",
+      "excerpts": [
+        {
+          "text": "## সংক্ষেপে মনে রাখো\n\n1. **১ মোল = \\(6.022 \\times 10^{23}\\) টি কণা**  \n2. **মোলার ভর = ১ মোল পদার্থের ভর**  \n3. ভর থেকে মোল:\n\n\\[\nn = \\frac{m}{M}\n\\]\n\n4. মোল থেকে কণার সংখ্যা:\n\n\\[\nN = n \\times 6.022 \\times 10^{23}\n\\]\n\nমোল ধারণা হলো পরমাণু-অণুর ক্ষুদ্র জগৎ এবং ল্যাবরেটরিতে মাপা যায় এমন গ্রাম এককের মধ্যে একটি সেতু।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately summarizes the core definitions and formulas taught in the explanation.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "The introduction compares a mole to a dozen ('১ ডজন = ১২টি'). This could be seen as an ANALOGY or as part of the introductory CONCEPT unit.",
+      "proposed_resolution": "Kept within unit u1 as an illustrative comparison supporting the conceptual definition of mole as a counting unit, rather than splitting out a distinct ANALOGY unit."
+    },
+    {
+      "unit_ids": [
+        "u3",
+        "u5"
+      ],
+      "issue": "Formula presentation can be classified as CONCEPT (mathematical relationship) or PROCEDURE (calculation rule for converting quantities).",
+      "proposed_resolution": "Classified as PROCEDURE because each is explicitly framed as an operational method/formula for solving quantitative problems ('মোল বের করার সূত্র', 'মোল থেকে কণার সংখ্যা')."
+    }
+  ]
+}

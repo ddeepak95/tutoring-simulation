@@ -1,0 +1,177 @@
+{
+  "topic_relevance": {
+    "requested_topic": "stoichiometry",
+    "observed_topic": "Stoichiometry in chemistry, including balanced equations as recipes, the mole concept, and a general method for stoichiometry calculations",
+    "topic_match": "on_topic",
+    "reason": "The explanation defines stoichiometry, explains the quantitative relationships in balanced chemical equations, introduces the mole concept, outlines the procedure for mass-to-mass and mole calculations, and gives a worked example.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "ANALOGY",
+      "label": "Kitchen sandwich-making analogy for stoichiometric ratios",
+      "excerpts": [
+        {
+          "text": "تخيل أنك تريد عمل ساندويتش جبن، ووصفة الساندويتش الواحد هي:\n> **2 شريحة خبز + 1 شريحة جبن = 1 ساندويتش**\n\n* لو سألتك: إذا كان لديك **6 شرائح خبز** وكمية كافية من الجبن، كم ساندويتش يمكنك أن تصنع؟\n* ستجيب فوراً: **3 ساندويتشات!**\n* ولو سألتك: كم شريحة جبن ستحتاج لهذه الساندويتشات الثلاثة؟\n* ستجيب: **3 شرائح جبن.**\n\nما فعلته بعقلك الآن هو بالضبط **علم الاستوكيومتري**! أنت حسبت كميات المواد التي تحتاجها لإنتاج كمية معينة من الناتج.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "تخيل أنك تريد عمل ساندويتش جبن"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The kitchen recipe analogy accurately maps the concept of fixed reactant-to-product stoichiometric ratios to a familiar scenario.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Definition of stoichiometry and the balanced equation as a recipe",
+      "excerpts": [
+        {
+          "text": "هي دراسة **العلاقات الكمية (الأرقام والكتل)** بين المواد المتفاعلة والمواد الناتجة في التفاعل الكيميائي.\n\nفي الكيمياء، \"الوصفة\" الخاصة بنا هي **المعادلة الكيميائية الموزونة**.\nمثال: تكوين الماء:\n$$2H_2 + O_2 \\rightarrow 2H_2O$$\n\nهذه المعادلة تخبرنا بـ \"الوصفة\":\nكل **2 جزيء** من الهيدروجين يتفاعلون مع **1 جزيء** من الأكسجين لإنتاج **2 جزيء** من الماء.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines stoichiometry and explains how stoichiometric coefficients represent molecular ratios in a balanced equation.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "The mole concept and Avogadro's number",
+      "excerpts": [
+        {
+          "text": "في المطبخ، نتعامل بالجرام أو الحبة. لكن في الكيمياء، لا نستطيع إمساك \"جزيئين\" من الهيدروجين لأنهما أصغر من أن نراهما!\nلذلك، اخترع الكيميائيون وحدة اسمها **\"المول\" (Mole)**.\n\n* فكّر في **المول** مثل كلمة **\"درزن\"** (الدرزن = 12 حبة).\n* **المول** = حزمة تحتوي على عدد كبير جداً وثابت من الذرات ($6.022 \\times 10^{23}$).\n\nفنقرأ المعادلة السابقة بلغة الكيميائيين:\n> **2 مول** من الهيدروجين + **1 مول** من الأكسجين $\\rightarrow$ ينتج **2 مول** من الماء.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "فكّر في **المول** مثل كلمة **\"درزن\"** (الدرزن = 12 حبة)"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The unit contains a minor factual imprecision: defining the mole specifically as containing Avogadro's number of 'atoms' rather than elementary entities (such as molecules, formula units, or ions), especially right before applying it to molecular hydrogen, oxygen, and water.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "**المول** = حزمة تحتوي على عدد كبير جداً وثابت من الذرات ($6.022 \\times 10^{23}$)."
+              }
+            ],
+            "description": "The text restricts the definition of a mole to Avogadro's number of 'atoms' (الذرات). A mole of a molecular substance (like H2 or H2O, which the source immediately references) contains 6.022 x 10^23 molecules, not atoms.",
+            "correction": "المول = كمية المادة التي تحتوي على عدد أفوجادرو ($6.022 \\times 10^{23}$) من الجسيمات أو الوحدات البنائية (سواء كانت ذرات، أو جزيئات، أو أيونات).",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "PROCEDURE",
+      "label": "Three-step roadmap for stoichiometry calculations",
+      "excerpts": [
+        {
+          "text": "في الامتحانات، سيعطيك المعلم عادةً كتلة مادة ما بالجرام، ويطلب منك كتلة مادة أخرى بالجرام. \nتذكر دائماً هذه القاعدة الذهبية: **\"لا يمكنك الانتقال من مادة إلى أخرى إلا عبر جسر المولات!\"**\n\nإليك الخطوات الثلاث السحرية:\n\n1. **حوّل الجرامات إلى مولات:** (للمادة المعطاة)\n   $$\\text{عدد المولات} = \\frac{\\text{الكتلة بالجرام}}{\\text{الكتلة المولية (من الجدول الدوري)}}$$\n2. **استخدم النسبة المولية (كوبري المعادلة):**\n   انظر إلى أرقام المعادلة الموزونة لتعرف كم مول من المادة (ب) ينتج من المادة (أ).\n3. **حوّل مولات المادة الجديدة إلى جرامات:** (المادة المطلوبة)\n   $$\\text{الكتلة بالجرام} = \\text{عدد المولات} \\times \\text{الكتلة المولية}$$",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The three-step strategy (mass to moles, mole ratio, moles to mass) is the standard and correct procedure for solving mass-to-mass stoichiometry problems.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "EXAMPLE",
+      "label": "Mole-to-mole calculation for water synthesis",
+      "excerpts": [
+        {
+          "text": "في التفاعل: $2H_2 + O_2 \\rightarrow 2H_2O$\n**سؤال:** كم مولاً من الماء ($H_2O$) سينتج إذا تفاعل **4 مول** من الهيدروجين ($H_2$) تماماً مع الأكسجين؟\n\n**الحل بالمنطق:**\n* المعادلة تقول: كل **2 مول** هيدروجين يعطون **2 مول** ماء (نسبة 1 إلى 1).\n* إذن: **4 مول** هيدروجين ستعطيك بالتأكيد **4 مول** ماء!",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The worked mole-ratio problem correctly applies the stoichiometric coefficients of 2H2 : 2H2O to determine the product moles.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap linking stoichiometry to the law of conservation of mass",
+      "excerpts": [
+        {
+          "text": "**خلاصة الدرس:**\nالاستوكيومتري ليست إلا تطبيقاً لـ **\"قانون حفظ الكتلة\"**؛ فالذرات لا تختفي ولا تُخلق من العدم، بل يُعاد ترتيبها فقط. كل ما عليك فعله هو:\n1. التأكد أن معادلتك موزونة.\n2. التحويل للمولات.\n3. استخدام نسب المعادلة لحساب المجهول.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately connects stoichiometry to the conservation of mass and summarizes the core calculation steps.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": []
+}

@@ -1,0 +1,931 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "720e6cb3b82cbcbd060da17c9c39342c09d310778cbcfd0ba63f698239fcdb8b",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The entire response directly explains stoichiometry in Bengali, covering its definition and Greek etymology, an intuitive tea recipe analogy, the foundational role of balanced equations and mass conservation, a 4-step calculation procedure, a fully worked numerical example, and key mole relationships at STP.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Etymology of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Tea Recipe Analogy for Stoichiometric Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "Balanced Chemical Equations and Conservation of Mass"
+      },
+      {
+        "id": "s4",
+        "label": "Four-Step Procedure for Stoichiometric Calculations"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Numerical Example"
+      },
+      {
+        "id": "s6",
+        "label": "Key Molar Relationships and STP Volume Recap"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and Etymology of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces stoichiometry, its Greek etymology (stoicheion + metron), and defines it as the calculation of reactant and product amounts in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "হ্যালো! রসায়নের অন্যতম মজার এবং গুরুত্বপূর্ণ একটি বিষয় হলো **স্টয়কিওমেট্রি (Stoichiometry)**, যাকে বাংলায় আমরা **\"রাসায়নিক গণনা\"** বলতে পারি। ",
+            "start": 0,
+            "end": 145
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ভয় পাওয়ার কিছু নেই, এটা আসলে রান্নার রেসিপির মতো সহজ! চলো, খুব সহজভাবে এটা বুঝে নেওয়া যাক।",
+            "start": 147,
+            "end": 239
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 241,
+            "end": 244
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ১. স্টয়কিওমেট্রি আসলে কী?",
+            "start": 246,
+            "end": 276
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "গ্রিক শব্দ *Stoicheion* (মৌল) এবং *Metron* (পরিমাপ) থেকে এই শব্দের উৎপত্তি। ",
+            "start": 277,
+            "end": 353
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সহজ কথায়: **কোনো রাসায়নিক বিক্রিয়ায় কতটুকু বিক্রিয়ক (Reactant) ব্যবহার করলে কতটুকু উৎপাদ (Product) তৈরি হবে—তার হিসাব-নিকাশ করাই হলো স্টয়কিওমেট্রি।**",
+            "start": 355,
+            "end": 510
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The Greek etymology and definition of stoichiometry as quantitative chemical calculations are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Tea Recipe Analogy for Stoichiometric Proportions",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the daily-life analogy of a tea recipe to explain how fixed component proportions scale up linearly.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p9",
+              "quote": "*১ কাপ দুধ + ১ চামচ চিনি + ১ চামচ চা পাতা = ১ কাপ স্পেশাল চা*"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "> **চায়ের উদাহরণ দিয়ে বুঝি:**",
+            "start": 512,
+            "end": 542
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> ধরো, ১ কাপ দুধের চায়ের রেসিপি হলো: ",
+            "start": 543,
+            "end": 580
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> *১ কাপ দুধ + ১ চামচ চিনি + ১ চামচ চা পাতা = ১ কাপ স্পেশাল চা*",
+            "start": 581,
+            "end": 644
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> এখন তোমাকে যদি বলি **৫ কাপ চা** বানাতে হবে, তুমি নিশ্চয়ই বলবে:",
+            "start": 645,
+            "end": 709
+          },
+          {
+            "id": "p11",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> *৫ কাপ দুধ + ৫ চামচ চিনি + ৫ চামচ চা পাতা লাগবে।*",
+            "start": 710,
+            "end": 761
+          },
+          {
+            "id": "p12",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> ",
+            "start": 762,
+            "end": 764
+          },
+          {
+            "id": "p13",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> রসায়নে এই সাধারণ ঐকিক নিয়মের হিসাবটাই হলো স্টয়কিওমেট্রি!",
+            "start": 765,
+            "end": 825
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The tea recipe comparison correctly illustrates the concept of stoichiometric ratios and proportional scaling.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Balanced Chemical Equations and Stoichiometric Relationships",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why balancing equations is essential based on the law of conservation of mass, and details how a balanced equation provides molecular, molar, and mass-level relationships.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 827,
+            "end": 830
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ২. স্টয়কিওমেট্রির মূল ভিত্তি: সমতাকৃত সমীকরণ (Balanced Equation)",
+            "start": 832,
+            "end": 901
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "স্টয়কিওমেট্রি করার প্রথম এবং প্রধান শর্ত হলো—রাসায়নিক সমীকরণটির **সমতাকরণ (Balance)** করা থাকতে হবে। কারণ *ভরের নিত্যতা সূত্র* অনুযায়ী পরমাণু কখনো ধ্বংস বা সৃষ্টি হয় না।",
+            "start": 902,
+            "end": 1073
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "একটি সহজ সমীকরণ দেখা যাক:",
+            "start": 1075,
+            "end": 1100
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1101,
+            "end": 1133
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সমীকরণটি আমাদের কী তথ্য দিচ্ছে?",
+            "start": 1135,
+            "end": 1169
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **অণু হিসেবে:** ২ অণু হাইড্রোজেন ($H_2$) + ১ অণু অক্সিজেন ($O_2$) মিলে তৈরি করে ২ অণু পানি ($H_2O$)।",
+            "start": 1170,
+            "end": 1272
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **মোল হিসেবে (সবচেয়ে গুরুত্বপূর্ণ):** **২ মোল** $H_2$ + **১ মোল** $O_2$ মিলে তৈরি করে **২ মোল** $H_2O$।",
+            "start": 1273,
+            "end": 1379
+          },
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **ভর হিসেবে:**",
+            "start": 1380,
+            "end": 1396
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * ২ মোল $H_2 = 2 \\times 2 = 4\\text{ g}$",
+            "start": 1397,
+            "end": 1438
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * ১ মোল $O_2 = 1 \\times 32 = 32\\text{ g}$",
+            "start": 1439,
+            "end": 1482
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * ২ মোল $H_2O = 2 \\times 18 = 36\\text{ g}$",
+            "start": 1483,
+            "end": 1527
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  *(খেয়াল করে দেখো: বিক্রিয়কের মোট ভর $4+32 = 36\\text{ g}$, এবং উৎপাদের ভরও $36\\text{ g}$!)*",
+            "start": 1528,
+            "end": 1620
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation of the law of conservation of mass, equation balancing, and molecular, molar, and mass interpretations of 2H2 + O2 -> 2H2O is entirely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Four-Step Procedure for Solving Stoichiometry Problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a clear 4-step algorithmic sequence for solving chemical stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1622,
+            "end": 1625
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৩. স্টয়কিওমেট্রির অংক করার ৪টি জাদুকরী ধাপ:",
+            "start": 1627,
+            "end": 1675
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যেকোনো গাণিতিক সমস্যা সমাধান করতে এই ধাপগুলো মনে রাখবে:",
+            "start": 1677,
+            "end": 1732
+          },
+          {
+            "id": "p30",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **ধাপ ১:** সঠিক রাসায়নিক সমীকরণটি লেখো এবং সেটির **সমতাকরণ (Balance)** করো।",
+            "start": 1734,
+            "end": 1813
+          },
+          {
+            "id": "p31",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **ধাপ ২:** প্রশ্নে যে মানটি দেওয়া আছে (যেমন: গ্রামে ভর, বা লিটারে আয়তন), সেটিকে **মোলে (Mole)** রূপান্তর করো।",
+            "start": 1814,
+            "end": 1926
+          },
+          {
+            "id": "p32",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **ধাপ ৩:** সমীকরণের অনুপাত (Mole Ratio) দেখে উৎপাদের মোল সংখ্যা বের করো।",
+            "start": 1927,
+            "end": 2002
+          },
+          {
+            "id": "p33",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **ধাপ ৪:** উৎপাদের মোল সংখ্যাকে প্রশ্নে যা চেয়েছে (গ্রাম বা লিটার বা অণুর সংখ্যা) তাতে রূপান্তর করো।",
+            "start": 2003,
+            "end": 2106
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The 4-step method (write/balance equation -> convert given to moles -> use mole ratio -> convert moles to target unit) is the standard correct pedagogical procedure.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked Problem: Water Formation from Hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a complete worked example calculating the mass of water formed from 8 g of hydrogen reacting with excess oxygen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2108,
+            "end": 2111
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৪. চলো একটা উদাহরণ সমাধান করি!",
+            "start": 2113,
+            "end": 2147
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**প্রশ্ন:** *৮ গ্রাম হাইড্রোজেন গ্যাস ($H_2$) পর্যাপ্ত অক্সিজেনের সাথে বিক্রিয়া করলে কত গ্রাম পানি ($H_2O$) তৈরি হবে?*",
+            "start": 2149,
+            "end": 2267
+          },
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমাধান:**",
+            "start": 2269,
+            "end": 2280
+          },
+          {
+            "id": "p38",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **ধাপ ১ (সমীকরণ):** $2H_2 + O_2 \\rightarrow 2H_2O$",
+            "start": 2282,
+            "end": 2334
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **ধাপ ২ (মোলার ভর বের করা):**",
+            "start": 2335,
+            "end": 2366
+          },
+          {
+            "id": "p40",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * $H_2$-এর মোলার ভর = $2\\text{ g/mol}$",
+            "start": 2367,
+            "end": 2407
+          },
+          {
+            "id": "p41",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * সমীকরণ অনুযায়ী, $2$ মোল $H_2 = 2 \\times 2\\text{ g} = 4\\text{ g}$",
+            "start": 2408,
+            "end": 2476
+          },
+          {
+            "id": "p42",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * এবং $2$ মোল পানি ($H_2O$) = $2 \\times 18\\text{ g} = 36\\text{ g}$",
+            "start": 2477,
+            "end": 2545
+          },
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **ধাপ ৩ (ঐকিক নিয়ম):**",
+            "start": 2547,
+            "end": 2571
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * সমীকরণ মতে, $4\\text{ g } H_2$ থেকে পানি পাওয়া যায় = $36\\text{ g}$",
+            "start": 2572,
+            "end": 2641
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * সুতরাং, $1\\text{ g } H_2$ থেকে পানি পাওয়া যায় = $\\frac{36}{4}\\text{ g}$",
+            "start": 2642,
+            "end": 2717
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  * সুতরাং, $8\\text{ g } H_2$ থেকে পানি পাওয়া যায় = $\\frac{36 \\times 8}{4} = 72\\text{ g}$",
+            "start": 2718,
+            "end": 2807
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**উত্তর:** ৭২ গ্রাম পানি তৈরি হবে! দেখলে, কত সহজ?",
+            "start": 2809,
+            "end": 2858
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations are correct: 4 g of H2 yields 36 g of H2O, hence 8 g of H2 yields 72 g of H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap of Avogadro's Number, Molar Volume, and the Mole Bridge",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Recaps essential conversion constants (Avogadro's number and 22.4 L at STP) and summarizes the concept of the mole as a central bridge.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2860,
+            "end": 2863
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### মনে রাখার মতো কিছু তথ্য (STP-তে):",
+            "start": 2865,
+            "end": 2902
+          },
+          {
+            "id": "p50",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **১ মোল** যেকোনো পরমাণু/অণু = $6.022 \\times 10^{23}$ টি কণা (অ্যাভোগাড্রো সংখ্যা)।",
+            "start": 2903,
+            "end": 2987
+          },
+          {
+            "id": "p51",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* **১ মোল** গ্যাস প্রমাণ তাপমাত্রা ও চাপে (STP) = **২২.৪ লিটার** জায়গা দখল করে।",
+            "start": 2988,
+            "end": 3067
+          },
+          {
+            "id": "p52",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "স্টয়কিওমেট্রি মূলত **মোল (Mole)**-কে সেতু হিসেবে ব্যবহার করে ভর, আয়তন এবং কণার সংখ্যার মধ্যে সম্পর্ক তৈরি করে।",
+            "start": 3069,
+            "end": 3181
+          },
+          {
+            "id": "p53",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তোমার কি এই বিষয়টি বুঝতে কোথাও সমস্যা হচ্ছে? লাগলে বলো, আমরা আরও কিছু প্র্যাকটিস করতে পারি!",
+            "start": 3183,
+            "end": 3274
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Avogadro's constant (6.022 x 10^23) and standard molar volume of gas at STP (22.4 L) are stated accurately.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-english\\gemini-3.8-flash__42f7a83aea6e.json",
+    "original_sha256": "f2dfe7dfb994d7b2dce460fca544d4e6670893d5c2187b55e03349a829d1f66f",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 53,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "ANALOGY": 1,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 53,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 5,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

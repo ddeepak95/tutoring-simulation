@@ -1,0 +1,280 @@
+{
+  "topic_relevance": {
+    "requested_topic": "redox reactions",
+    "observed_topic": "Redox reactions, classical and electronic definitions of oxidation and reduction, everyday and classroom examples, oxidation number method, and oxidizing and reducing agents",
+    "topic_match": "on_topic",
+    "reason": "The source directly explains redox reactions at a high school level, covering definitions of oxidation and reduction, everyday examples, a displacement reaction example, oxidation numbers, and oxidizing/reducing agents.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7",
+      "u8",
+      "u9"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definitions of redox reactions, oxidation, and reduction",
+      "excerpts": [
+        {
+          "text": "रेडॉक्स शब्द दो शब्दों से मिलकर बना है — **रिडक्शन (Reduction)** और **ऑक्सीडेशन (Oxidation)**। यानी ऐसी रासायनिक अभिक्रियाएँ जिनमें ऑक्सीकरण और अपचयन दोनों एक साथ होते हैं। \n\n### ऑक्सीकरण (Oxidation) क्या है?\nजब कोई पदार्थ:\n- इलेक्ट्रॉन खोता है, या\n- ऑक्सीजन प्राप्त करता है, या\n- हाइड्रोजन खोता है\n\nतो उसे **ऑक्सीकरण** कहते हैं।\n\n### अपचयन (Reduction) क्या है?\nजब कोई पदार्थ:\n- इलेक्ट्रॉन प्राप्त करता है, या\n- ऑक्सीजन खोता है, या\n- हाइड्रोजन प्राप्त करता है\n\nतो उसे **अपचयन** कहते हैं।\n\n**महत्वपूर्ण बात:** ऑक्सीकरण और अपचयन कभी अकेले नहीं होते। अगर एक पदार्थ ऑक्सीकृत हो रहा है, तो दूसरा जरूर अपचयित हो रहा होगा। इसलिए इन्हें एक साथ “रेडॉक्स” कहते हैं।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly defines oxidation and reduction in terms of electron transfer, oxygen gain/loss, and hydrogen loss/gain, and explains that both processes necessarily occur simultaneously in redox reactions.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Rusting of iron as an everyday oxidation example",
+      "excerpts": [
+        {
+          "text": "1. **लोहे पर जंग लगना**  \n   4Fe + 3O₂ → 2Fe₂O₃ (जंग)  \n   यहाँ लोहा ऑक्सीजन प्राप्त करके ऑक्सीकृत हो रहा है।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "लोहे पर जंग लगना"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The equation 4Fe + 3O2 -> 2Fe2O3 is an accepted introductory simplification for rust formation, and iron gaining oxygen correctly demonstrates oxidation.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Photosynthesis as a biological redox example",
+      "excerpts": [
+        {
+          "text": "2. **प्रकाश संश्लेषण** (पौधों में)  \n   6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂  \n   पानी से हाइड्रोजन निकलकर ग्लूकोज बनता है (अपचयन) और ऑक्सीजन बाहर निकलती है।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The unit misidentifies the reduction process in photosynthesis. It states that hydrogen leaving water forms glucose and calls this reduction. In reality, carbon dioxide (CO2) is reduced to glucose by gaining hydrogen/electrons, while water is oxidized to molecular oxygen by losing hydrogen/electrons.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "पानी से हाइड्रोजन निकलकर ग्लूकोज बनता है (अपचयन)"
+              }
+            ],
+            "description": "The explanation states that hydrogen leaves water to form glucose and terms this reduction. In photosynthesis, carbon dioxide (CO2) is reduced to form glucose, while water loses hydrogen and is oxidized to oxygen. Loss of hydrogen from water is oxidation, not reduction.",
+            "correction": "कार्बन डाइऑक्साइड (CO₂) हाइड्रोजन प्राप्त करके ग्लूकोज में अपचयित (reduce) होती है, जबकि पानी से हाइड्रोजन निकलकर ऑक्सीजन बनती है (ऑक्सीकरण)।",
+            "severity": "major"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Respiration as an everyday redox example",
+      "excerpts": [
+        {
+          "text": "3. **श्वसन** (हम साँस लेते हैं)  \n   भोजन (ग्लूकोज) ऑक्सीजन से मिलकर ऊर्जा देता है — यह भी रेडॉक्स अभिक्रिया है।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "हम साँस लेते हैं"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Cellular respiration involving the oxidation of glucose in the presence of oxygen is correctly described as a redox process.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "EXAMPLE",
+      "label": "Displacement reaction of zinc and copper sulfate",
+      "excerpts": [
+        {
+          "text": "**Zn + CuSO₄ → ZnSO₄ + Cu**\n\n- जिंक (Zn) इलेक्ट्रॉन खो रहा है → **ऑक्सीकरण** हो रहा है।  \n- कॉपर (Cu²⁺) इलेक्ट्रॉन प्राप्त कर रहा है → **अपचयन** हो रहा है।\n\nइस अभिक्रिया में इलेक्ट्रॉन जिंक से कॉपर की ओर जा रहे हैं।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly shows the electron transfer in Zn + CuSO4 -> ZnSO4 + Cu, identifying Zn losing electrons as oxidation and Cu2+ gaining electrons as reduction.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "CONCEPT",
+      "label": "Identifying redox reactions using oxidation number changes",
+      "excerpts": [
+        {
+          "text": "रेडॉक्स अभिक्रिया में किसी तत्व की ऑक्सीकरण संख्या बदल जाती है।  \nउदाहरण: CuO + H₂ → Cu + H₂O  \n- Cu की ऑक्सीकरण संख्या +2 से 0 हो गई (अपचयन)  \n- H की ऑक्सीकरण संख्या 0 से +1 हो गई (ऑक्सीकरण)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Correctly explains that oxidation numbers change during a redox reaction, accurately identifying Cu (+2 to 0) as reduction and H (0 to +1) as oxidation in CuO + H2 -> Cu + H2O.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "STUDY_SUPPORT",
+      "label": "Recap of oxidation and reduction definitions",
+      "excerpts": [
+        {
+          "text": "- ऑक्सीकरण = इलेक्ट्रॉन का नुकसान  \n- अपचयन = इलेक्ट्रॉन का लाभ",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately summarizes oxidation as electron loss and reduction as electron gain.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u8",
+      "kind": "CONCEPT",
+      "label": "Definitions of oxidizing and reducing agents",
+      "excerpts": [
+        {
+          "text": "- ऑक्सीकारक (Oxidising agent) = वह पदार्थ जो दूसरे को ऑक्सीकृत करे (खुद अपचयित होता है)  \n- अपचायक (Reducing agent) = वह पदार्थ जो दूसरे को अपचयित करे (खुद ऑक्सीकृत होता है)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Accurately defines oxidizing and reducing agents, correctly noting that an oxidizing agent oxidizes another substance while itself getting reduced, and vice versa.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u9",
+      "kind": "STUDY_SUPPORT",
+      "label": "Study strategy for identifying redox reactions",
+      "excerpts": [
+        {
+          "text": "अगर कोई अभिक्रिया समझनी हो तो सबसे पहले देखो — कौन सा तत्व इलेक्ट्रॉन खो रहा है और कौन प्राप्त कर रहा है। इससे आसानी से रेडॉक्स पहचान में आ जाएगी।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "study_strategy"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Valid advice for students to analyze electron loss and gain to identify redox processes.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u6"
+      ],
+      "issue": "Unit u6 combines a general rule about oxidation number changes with a worked reaction (CuO + H2). It could be classified as an EXAMPLE (worked) or PROCEDURE (method to identify redox).",
+      "proposed_resolution": "Classified as CONCEPT with depth explanation because the primary teaching job is explaining the concept that changes in oxidation state characterize redox reactions, with the reaction serving as direct explanatory support."
+    },
+    {
+      "unit_ids": [
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "issue": "Under the heading 'याद रखने वाली बातें', the text lists recap bullets, introduces oxidizing and reducing agents for the first time, and ends with advice on how to approach a reaction. These could conceivably be grouped as a single composite unit under STUDY_SUPPORT.",
+      "proposed_resolution": "Separated into u7 (STUDY_SUPPORT recap), u8 (CONCEPT), and u9 (STUDY_SUPPORT study_strategy). According to the guidelines, content taught for the first time remains a CONCEPT rather than study support despite the 'याद रखने वाली बातें' heading, and the recap and problem-solving strategy perform distinct study-support functions."
+    },
+    {
+      "unit_ids": [
+        "u3"
+      ],
+      "issue": "Photosynthesis is listed under the section header 'दैनिक जीवन से' (from daily life), which could suggest everyday contextualization.",
+      "proposed_resolution": "Marked contextualization as 'none' because the excerpt itself simply mentions '(पौधों में)' and describes cellular photosynthesis without explicitly connecting it to familiar everyday human activities."
+    }
+  ]
+}

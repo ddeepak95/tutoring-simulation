@@ -1,0 +1,163 @@
+{
+  "topic_relevance": {
+    "requested_topic": "vapour phase refining",
+    "observed_topic": "Vapour phase refining in metallurgy, including its principles, the Mond process for nickel, and the Van Arkel method for zirconium/titanium",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly teaches vapour phase refining, detailing its fundamental working principles, required conditions, and standard industrial examples (Mond process and Van Arkel method).",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Principle and essential requirements of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "আচ্ছা, ধরো তোমার কাছে একটা অশুদ্ধ ধাতু আছে, যার মধ্যে অন্য কিছু অপদ্রব্য (impurities) মিশে আছে। এই অশুদ্ধ ধাতুকে খাঁটি করার একটা চমৎকার পদ্ধতি হলো **বাষ্প দশা পরিশোধন**।\n\n## মূলনীতি (Principle)\n\nএই পদ্ধতির মূল নীতি হলো:\n\n> **ধাতুটিকে প্রথমে একটি উদ্বায়ী যৌগে (volatile compound) রূপান্তরিত করা হয়, তারপর সেই যৌগকে পচিয়ে (decompose) বিশুদ্ধ ধাতু পাওয়া হয়।**\n\nএখানে দুটি শর্ত পূরণ হতে হবে:\n1. ধাতুটি সহজেই একটি উদ্বায়ী যৌগে পরিণত হতে পারবে\n2. সেই যৌগ সহজেই বিশ্লিষ্ট (decompose) হয়ে বিশুদ্ধ ধাতু দেবে",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text uses the Bengali term 'পচিয়ে' (meaning biological rotting or putrefaction) to translate chemical thermal decomposition ('decompose'). In chemical science, the appropriate terminology is 'বিয়োজিত করে' or 'বিশ্লিষ্ট করে'.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "পচিয়ে (decompose)"
+              }
+            ],
+            "description": "In chemistry, decomposition refers to chemical dissociation/breakdown (বিয়োজন / বিশ্লিষ্টকরণ), whereas 'পচন' or 'পচিয়ে' refers to organic rotting/putrefaction.",
+            "correction": "'পচিয়ে'-এর পরিবর্তে 'বিয়োজিত করে' বা 'বিশ্লিষ্ট করে' ব্যবহার করা সমীচীন।",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Mond process for nickel refining",
+      "excerpts": [
+        {
+          "text": "### ১. মন্ড প্রক্রিয়া (Mond Process) - নিকেল পরিশোধনের জন্য\n\n**ধাপ ১:** অশুদ্ধ নিকেলকে কার্বন মনোক্সাইড গ্যাসের সাথে প্রায় 330-350 K তাপমাত্রায় উত্তপ্ত করা হয়।\n\n$$Ni + 4CO \\xrightarrow{330-350K} Ni(CO)_4$$\n\nএখানে নিকেল কার্বনিল (Ni(CO)₄) তৈরি হয়, যা একটি উদ্বায়ী যৌগ।\n\n**ধাপ ২:** এই নিকেল কার্বনিলকে আরও উচ্চ তাপমাত্রায় (450-470 K) উত্তপ্ত করা হয়, ফলে এটি বিশ্লিষ্ট হয়ে খাঁটি নিকেল দেয়।\n\n$$Ni(CO)_4 \\xrightarrow{450-470K} Ni + 4CO$$",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The chemical reactions, stoichiometric equations, volatile intermediate formation, and temperature ranges (330-350 K and 450-470 K) for the Mond process are factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Van Arkel method for zirconium/titanium refining",
+      "excerpts": [
+        {
+          "text": "### ২. ভ্যান আর্কেল পদ্ধতি (Van Arkel Method) - জিরকোনিয়াম/টাইটানিয়াম পরিশোধনের জন্য\n\n**ধাপ ১:** অশুদ্ধ ধাতুকে (যেমন জিরকোনিয়াম) আয়োডিনের সাথে উত্তপ্ত করা হয়।\n\n$$Zr + 2I_2 \\rightarrow ZrI_4$$\n\nএখানে জিরকোনিয়াম আয়োডাইড (ZrI₄) তৈরি হয়, যা উদ্বায়ী।\n\n**ধাপ ২:** এই যৌগকে খুব উচ্চ তাপমাত্রায় (প্রায় 1800 K) টাংস্টেন ফিলামেন্টের উপর উত্তপ্ত করা হলে এটি বিশ্লিষ্ট হয়ে খাঁটি জিরকোনিয়াম দেয়।\n\n$$ZrI_4 \\xrightarrow{1800K} Zr + 2I_2$$",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The chemical equations, intermediate iodide formation, and high-temperature thermal decomposition on a tungsten filament at ~1800 K for the Van Arkel method are factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "STUDY_SUPPORT",
+      "label": "Flowchart summary and intuitive conceptual recap of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "## সহজে মনে রাখার কৌশল\n\n```\nঅশুদ্ধ ধাতু + গ্যাস → উদ্বায়ী যৌগ (কম তাপমাত্রায়)\n                ↓\nউদ্বায়ী যৌগ → বিশুদ্ধ ধাতু + গ্যাস (বেশি তাপমাত্রায়)\n```\n\n**সহজ ভাষায়:** এটা অনেকটা এরকম - তুমি প্রথমে ধাতুকে \"গ্যাসে পরিণত\" করছো (impurity থেকে আলাদা করার জন্য), তারপর সেই গ্যাস থেকে আবার \"খাঁটি ধাতু\" ফিরিয়ে আনছো।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The summary accurately captures the two-stage thermal transition scheme (formation of volatile compound at lower temperature followed by decomposition at higher temperature).",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CONCEPT",
+      "label": "Key characteristics and limitations of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "## গুরুত্বপূর্ণ পয়েন্ট\n\n- এই পদ্ধতিতে **অত্যন্ত বিশুদ্ধ (highly pure)** ধাতু পাওয়া যায়\n- মূলত **নিকেল, জিরকোনিয়াম, টাইটানিয়াম** এর মতো ধাতুর জন্য ব্যবহৃত হয়\n- এটি একটি ব্যয়বহুল কিন্তু কার্যকরী পদ্ধতি",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The points regarding very high purity, typical metals refined, and the expensive nature of the process are accurate.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "u4 is introduced with 'সহজে মনে রাখার কৌশল' (technique to remember easily), which could suggest subtype 'mnemonic' or 'study_strategy'. However, the content itself is a structural summary/flowchart summarizing the process steps.",
+      "proposed_resolution": "Assigned subtype 'recap' because the primary teaching function is summarizing the two reaction steps schematically rather than providing an acronym or study methodology."
+    },
+    {
+      "unit_ids": [
+        "u5"
+      ],
+      "issue": "u5 could be classified as CAVEAT (qualification/limitation) because it mentions cost and metal specificity, or as STUDY_SUPPORT (recap).",
+      "proposed_resolution": "Assigned CONCEPT with depth 'statement' because it lists substantive general properties/features of the method."
+    }
+  ]
+}

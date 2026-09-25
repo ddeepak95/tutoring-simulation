@@ -1,0 +1,579 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "f9537b9aa50ad4332647bf60ca0d0e02f2492812a1c63c4904ba839055c73d50",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "isotope",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response directly explains isotopes in French, including their subatomic composition, an analogy, standard notation, real-world examples (carbon), radioactive decay/dating, and a comprehension check.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Définition d'un isotope"
+      },
+      {
+        "id": "s2",
+        "label": "Analogie familiale des isotopes"
+      },
+      {
+        "id": "s3",
+        "label": "Exemples d'isotopes du carbone"
+      },
+      {
+        "id": "s4",
+        "label": "Notation standard des isotopes"
+      },
+      {
+        "id": "s5",
+        "label": "Stabilité et radioactivité des isotopes"
+      },
+      {
+        "id": "s6",
+        "label": "Question de vérification"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition de base d'un isotope",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what an isotope is by breaking down atomic number Z (protons), neutron variance, and the resulting difference in mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# Explication : Les Isotopes (pour un lycéen)",
+            "start": 0,
+            "end": 45
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## En français simple",
+            "start": 47,
+            "end": 68
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Définition de base**",
+            "start": 70,
+            "end": 92
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Un **isotope**, c'est une variante d'un même élément chimique. Deux isotopes ont :",
+            "start": 94,
+            "end": 176
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Le **même nombre de protons** (donc le même numéro atomique Z)",
+            "start": 177,
+            "end": 241
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Un **nombre différent de neutrons**",
+            "start": 242,
+            "end": 279
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Donc une **masse atomique différente**",
+            "start": 280,
+            "end": 320
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly defines isotopes as atoms of the same element with identical numbers of protons and different numbers of neutrons, resulting in different masses.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Analogie des frères et sœurs",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the analogy of siblings sharing family identity (element/protons) but differing in weight (neutrons) to clarify the concept.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p9",
+              "quote": "Imagine des **frères et sœurs** : ils ont les mêmes parents (même \"identité familiale\" = même élément chimique), mais ils n'ont pas exactement le même poids."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Analogie pour mieux comprendre",
+            "start": 322,
+            "end": 355
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine des **frères et sœurs** : ils ont les mêmes parents (même \"identité familiale\" = même élément chimique), mais ils n'ont pas exactement le même poids. Les isotopes, c'est pareil : même \"famille\" chimique (même nombre de protons), mais poids différent (nombre de neutrons différent).",
+            "start": 357,
+            "end": 646
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately captures the relationship between identical element identity and variation in atomic weight/mass.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Isotopes du carbone",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates isotopes using Carbon-12, Carbon-13, and Carbon-14 in a structured table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Exemple concret : le Carbone",
+            "start": 648,
+            "end": 679
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Isotope | Protons | Neutrons | Nombre de masse (A) |",
+            "start": 681,
+            "end": 735
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---------|---------|----------|---------------------|",
+            "start": 736,
+            "end": 790
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbone-12 (¹²C) | 6 | 6 | 12 |",
+            "start": 791,
+            "end": 824
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbone-13 (¹³C) | 6 | 7 | 13 |",
+            "start": 825,
+            "end": 858
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| Carbone-14 (¹⁴C) | 6 | 8 | 14 |",
+            "start": 859,
+            "end": 892
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "👉 Les trois sont du **carbone** (car ils ont tous 6 protons), mais ce sont des isotopes différents.",
+            "start": 894,
+            "end": 993
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The proton counts (6), neutron counts (6, 7, 8), and mass numbers (12, 13, 14) for carbon isotopes are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Notation isotopique standard",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Introduces and breaks down the standard isotopic notation (superscript A, subscript Z, element symbol X).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Notation",
+            "start": 995,
+            "end": 1006
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On écrit un isotope comme ceci :",
+            "start": 1008,
+            "end": 1040
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$^{A}_{Z}X$$",
+            "start": 1042,
+            "end": 1055
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **X** = symbole de l'élément",
+            "start": 1057,
+            "end": 1087
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **Z** = numéro atomique (nombre de protons)",
+            "start": 1088,
+            "end": 1133
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **A** = nombre de masse (protons + neutrons)",
+            "start": 1134,
+            "end": 1180
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The nuclide/isotope notation format and the descriptions of A, Z, and X are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Stabilité et radioactivité des isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains that some isotopes are stable while others are radioactive, connecting carbon-14 decay to archaeological dating.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Point important : stabilité",
+            "start": 1182,
+            "end": 1212
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Certains isotopes sont **stables** (comme le Carbone-12), d'autres sont **radioactifs** (comme le Carbone-14), c'est-à-dire qu'ils se désintègrent avec le temps. C'est d'ailleurs le principe utilisé pour la **datation au carbone 14** en archéologie !",
+            "start": 1214,
+            "end": 1464
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Carbon-12 is indeed a stable isotope and Carbon-14 is a radioisotope used in archaeological radiocarbon dating.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Question d'application",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a practice question asking the student to find mass number A given proton and neutron counts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1466,
+            "end": 1469
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Question pour vérifier ta compréhension** : Si un atome a 8 protons et 10 neutrons, quel est son nombre de masse A ? 😊",
+            "start": 1471,
+            "end": 1591
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The question setup provides sound givens (8 protons, 10 neutrons) corresponding to Oxygen-18.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\french-english\\claude-sonnet-5__825261af1d2b.json",
+    "original_sha256": "1c4144b9d4415671ffebed6ea3725121cceb1f9b4ff3d7ea4618bb41e8d90cd6",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 26,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 26,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 5,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

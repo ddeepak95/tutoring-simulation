@@ -1,0 +1,188 @@
+{
+  "topic_relevance": {
+    "requested_topic": "stoichiometry",
+    "observed_topic": "stoichiometry in chemistry",
+    "topic_match": "on_topic",
+    "reason": "The explanation introduces stoichiometry, covering stoichiometric coefficients, balanced chemical equations, the mole concept, limiting and excess reactants, and a general method to solve stoichiometry problems.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "ANALOGY",
+      "label": "Sandwich-making analogy for stoichiometry and proportions",
+      "excerpts": [
+        {
+          "text": "Si tu sais suivre une recette de cuisine, tu as déjà compris 80 % du travail. **La stœchiométrie, c'est simplement la recette de cuisine de la chimie.**",
+          "occurrence": 0
+        },
+        {
+          "text": "### 1. L'analogie du grilled-cheese (ou du sandwich)\n\nImagine que tu prépares des sandwichs au fromage. La \"recette\", c'est :\n> **2 tranches de pain + 1 tranche de fromage $\\rightarrow$ 1 sandwich**\n\nSi je te donne **10 tranches de pain**, combien de tranches de fromage te faut-il pour ne rien gaspiller ? \nIl t'en faut **5**, et tu obtiendras **5 sandwichs**. \n\nFélicitations, tu viens de faire de la stœchiométrie ! Tu as calculé les proportions nécessaires pour que la réaction se fasse parfaitement.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 1,
+            "quote": "Imagine que tu prépares des sandwichs au fromage."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The analogy accurately maps fixed ingredient proportions in a recipe to stoichiometric ratios.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Stoichiometric coefficients and mass conservation in balanced equations",
+      "excerpts": [
+        {
+          "text": "### 2. Le passage à la chimie : Les coefficients\n\nEn chimie, les ingrédients sont les **réactifs**, et le plat final est le **produit**.\n\nPrenons la fabrication de l'eau :\n$$\\text{2 H}_2 + \\text{O}_2 \\rightarrow \\text{2 H}_2\\text{O}$$\n\nRegarde les grands chiffres devant les molécules (on les appelle les **coefficients stœchiométriques**) :\n* Le **2** devant $\\text{H}_2$\n* Le **1** sous-entendu devant $\\text{O}_2$\n* Le **2** devant $\\text{H}_2\\text{O}$\n\nCela se lit exactement comme la recette du sandwich : \n*\"Il me faut 2 molécules de dihydrogène et 1 molécule de dioxygène pour fabriquer 2 molécules d'eau.\"*\n\n> **Règle d'or de Lavoisier :** *\"Rien ne se perd, rien ne se crée, tout se transforme.\"* Tu dois toujours avoir le même nombre d'atomes à gauche (réactifs) et à droite (produits). Ici, on a 4 hydrogènes et 2 oxygènes des deux côtés. L'équation est dite **équilibrée**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The concepts of reactants, products, stoichiometric coefficients, and the conservation of atoms in balanced chemical equations are described correctly.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "The mole as a macroscopic bridge for stoichiometric equations",
+      "excerpts": [
+        {
+          "text": "### 3. Le problème de la balance : La Mole\n\nDans la vraie vie, au laboratoire, on ne peut pas attraper \"deux molécules\" avec une pince à épiler, c'est beaucoup trop petit. On pèse des grammes avec une balance.\n\nPour faire le pont entre le monde microscopique (les atomes) et notre monde (les grammes), les chimistes utilisent un \"paquet\" géant : **la mole**. \n* C'est comme quand tu achètes des œufs : tu ne les achètes pas à l'unité, tu achètes une *douzaine* (paquet de 12).\n* Une mole, c'est un paquet d'environ $6{,}022 \\times 10^{23}$ molécules (le nombre d'Avogadro).\n\nDonc, dans notre équation :\n$$\\text{2 H}_2 + \\text{O}_2 \\rightarrow \\text{2 H}_2\\text{O}$$\nOn lit maintenant : \n*\"**2 moles** de $\\text{H}_2$ réagissent avec **1 mole** de $\\text{O}_2$ pour donner **2 moles** de $\\text{H}_2\\text{O}$.\"*",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "C'est comme quand tu achètes des œufs : tu ne les achètes pas à l'unité, tu achètes une *douzaine* (paquet de 12)."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The explanation of the mole, Avogadro's number, and reading stoichiometric ratios in moles rather than single molecules is factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Limiting and excess reactants",
+      "excerpts": [
+        {
+          "text": "### 4. Le piège classique : Le réactif limitant\n\nReprenons les sandwichs :\nTu as **10 tranches de pain**, mais seulement **2 tranches de fromage** dans ton frigo. Combien de sandwichs peux-tu faire ?\nSeulement **2**. \n\nIl te restera 6 tranches de pain sur les bras. \n* Le fromage est ce qu'on appelle le **réactif limitant** : c'est lui qui s'épuise en premier et qui dicte l'arrêt de la réaction.\n* Le pain est le **réactif en excès**.\n\nEn chimie, c'est pareil ! Le calcul stœchiométrique te permet de savoir quel ingrédient va manquer en premier.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Tu as **10 tranches de pain**, mais seulement **2 tranches de fromage** dans ton frigo."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definitions and qualitative determination of limiting and excess reactants are accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "PROCEDURE",
+      "label": "Four-step method for solving stoichiometry problems",
+      "excerpts": [
+        {
+          "text": "### 5. La méthode infaillible pour résoudre un exercice\n\nQuand ton professeur te donne un problème de stœchiométrie (par exemple : *\"Combien de grammes d'eau puis-je produire avec 8 grammes d'oxygène ?\"*), suis toujours ces 4 étapes :\n\n1. **Équilibre l'équation chimique** (écris la bonne recette).\n2. **Convertis les grammes en moles** (car la recette parle en moles, pas en grammes ! Formule : $n = \\frac{m}{M}$).\n3. **Utilise les proportions de la recette** (fais un produit en croix / règle de trois grâce aux coefficients).\n4. **Reconvertis les moles en grammes** si la question te demande une masse ($m = n \\times M$).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The 4-step sequence (balance equation -> convert mass to moles -> apply mole ratio -> convert moles to target mass) and formulas are standard and correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of stoichiometry",
+      "excerpts": [
+        {
+          "text": "**En résumé :** \nLa stœchiométrie n'est rien d'autre que l'art de compter les molécules par paquets (les moles) pour respecter les proportions d'une réaction chimique équilibrée.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The recap accurately synthesizes the core points of the explanation.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "Whether the introductory sentence comparing stoichiometry to a kitchen recipe should be an independent concept or grouped with the sandwich analogy in u1.",
+      "proposed_resolution": "Grouped with u1 as excerpt 0 because it introduces the primary domain mapping that Section 1 directly elaborates."
+    },
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "Classification of Section 4: it could be classified as CAVEAT (introduced as 'Le piège classique'), ANALOGY (developed via sandwiches), or CONCEPT (defining limiting/excess reactants).",
+      "proposed_resolution": "Classified as CONCEPT because its primary teaching function is to define and explain the fundamental concepts of limiting and excess reactants rather than warning against a specific erroneous step or solely mapping an external domain."
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "topic_relevance": {
+    "requested_topic": "mole concept",
+    "observed_topic": "The mole concept, Avogadro's number, molar mass, and mole-mass conversion calculations",
+    "topic_match": "on_topic",
+    "reason": "The explanation introduces the mole concept, defines Avogadro's number, explains molar mass, presents the conversion formula between mass and moles, and provides a worked problem.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "ANALOGY",
+      "label": "Analogy of buying rice by kilogram to explain the need for the mole unit",
+      "excerpts": [
+        {
+          "text": "تخيل أنني طلبت منك أن تذهب إلى البقالة وتشتري لي **\"500,000 حبة أرز\"**! \nهل ستجلس في المحل لتعد حبات الأرز حبة حبة؟ مستحيل، صح؟ \nماذا تفعل بدلاً من ذلك؟ تطلب **\"كيلوغراماً\"** من الأرز؛ لأنك تزن كمية كبيرة تحتوي على ملايين الحبات دون أن تعدها.\n\nنفس المشكلة تواجه الكيميائيين: الذرات والجزيئات صغيرة جداً جداً، ومستحيل رؤيتها أو عدّها بالواحدة في المختبر. لذلك، اخترع العلماء وحدة قياس جديدة للتعامل مع هذه الأعداد الضخمة، وسموها: **\"المول\"**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "تذهب إلى البقالة وتشتري لي **\"500,000 حبة أرز\"**"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The analogy accurately illustrates the difficulty of counting individual microscopic entities and the need for a collective measurement unit.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Definition of the mole and Avogadro's number using the dozen comparison",
+      "excerpts": [
+        {
+          "text": "أنت تعرف كلمة **\"دزينة\" أو \"دستة\" (Dozen)**، صح؟\n* إذا قلت لك: \"دستة بيض\" = كم بيضة؟ ستقول لي فوراً: **12**.\n* \"دستة سيارات\" = **12**.\n* \"دستة أقلام\" = **12**.\n\nكلمة **\"مول\"** هي بالضبط مثل كلمة \"دستة\"، لكنها خاصة بالعلماء، ولأن الذرات صغيرة جداً، فدستة الكيميائيين رقمها كبير جداً جداً!\n\n**المول الواحد من أي مادة = $6.022 \\times 10^{23}$ من الجسيمات (ذرات، أو جزيئات).**\n\nهذا الرقم العملاق يسمى **\"عدد أفوجادرو\" (Avogadro's Number)** تكريماً للعالم الذي ساهم في اكتشافه.\n*(تخيل الرقم: 6 وأمامها 23 صفراً! رقم فلكي).*",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "دستة بيض"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The mole is correctly defined as a specific quantity containing Avogadro's number of entities (6.022 x 10^23 particles).",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Concept and definition of molar mass",
+      "excerpts": [
+        {
+          "text": "لنرجع لمثال الدستة:\n* هل وزن \"دستة بيض\" يساوي وزن \"دستة بطيخ\"؟\n* كلاهما 12 حبة، لكن البطيخ أثقل بكثير!\n\nنفس الشيء في الكيمياء:\n* **1 مول من الهيدروجين** فيه $6.022 \\times 10^{23}$ ذرة، ووزنه = **1 جرام** فقط.\n* **1 مول من الكربون** فيه نفس العدد ($6.022 \\times 10^{23}$ ذرة)، لكن وزنه = **12 جرام**.\n\nوزن المول الواحد من أي مادة يسمى **\"الكتلة المولية\" (Molar Mass)**، ووحدته هي **(g/mol - جرام/مول)**.\n**من أين نحصل على هذا الرقم؟** من **الجدول الدوري**! هو نفس \"العدد الكتلي\" المكتوب أسفل كل عنصر.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "هل وزن \"دستة بيض\" يساوي وزن \"دستة بطيخ\"؟"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text conflates the mass number (العدد الكتلي) with the standard atomic weight / atomic mass (الكتلة الذرية / الوزن الذري) displayed in the periodic table.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "هو نفس \"العدد الكتلي\" المكتوب أسفل كل عنصر."
+              }
+            ],
+            "description": "The text identifies the value given below each element in the periodic table as the 'mass number' (العدد الكتلي). The mass number is an integer defined as the sum of protons and neutrons in a specific nucleus, whereas periodic tables display the standard atomic weight or average atomic mass (الكتلة الذرية / الوزن الذري), which corresponds numerically to molar mass in g/mol.",
+            "correction": "هو نفس \"الكتلة الذرية\" (أو الوزن الذري) المكتوبة أسفل كل عنصر.",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Formula relating number of moles, mass, and molar mass",
+      "excerpts": [
+        {
+          "text": "في الامتحانات، هناك مثلث سحري ستستخدمه دائماً للتحويل بين ما تراه بعينك (الجرامات على الميزان) وما يحدث في عالم الذرات (المولات):\n\n$$n = \\frac{m}{M}$$\n\nحيث:\n* **$n$**: عدد المولات (Mole).\n* **$m$**: الكتلة بالجرام (التي تزنها في المختبر).\n* **$M$**: الكتلة المولية (من الجدول الدوري، g/mol).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The equation n = m / M and the definition of each term are chemically and mathematically correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "EXAMPLE",
+      "label": "Worked calculation finding the number of moles in 36 grams of water",
+      "excerpts": [
+        {
+          "text": "**سؤال:** كم عدد مولات الماء ($H_2O$) الموجودة في **36 جرام** من الماء؟\n\n1. **نحسب الكتلة المولية للماء ($M$) من الجدول الدوري:**\n   * الهيدروجين ($H$) = 1، والأكسجين ($O$) = 16.\n   * جزيء الماء فيه ذرتين $H$ وذرة $O$:\n   * $M = (2 \\times 1) + 16 = 18 \\text{ g/mol}$.\n2. **نطبق القانون الذهبي:**\n   * عدد المولات ($n$) = الكتلة ($m$) ÷ الكتلة المولية ($M$)\n   * $n = \\frac{36}{18} = 2 \\text{ mol}$.\n\n**النتيجة:** في 36 جرام ماء، يوجد **2 مول** من جزيئات الماء (أي ضعف عدد أفوجادرو)!",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The calculation of the molar mass of water (18 g/mol) and the resulting number of moles (2 mol) are correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of the mole as a bridge between microscopic and macroscopic worlds",
+      "excerpts": [
+        {
+          "text": "**المول هو مجرد \"جسر\" يربط بين العالم المجهري الصغير جداً الذي لا نراه (الذرات)، والعالم الحقيقي الذي نقيسه على الميزان في المختبر (الجرامات).**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The summary provides an accurate synthesis of the main conceptual role of the mole.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "u1 uses the everyday scenario of buying rice by weight instead of counting individual grains to explain why chemists need the mole. It could be classified as an ANALOGY or as a CONCEPT explaining the rationale behind the unit.",
+      "proposed_resolution": "Classified as ANALOGY because the explanation is framed around and developed through mapping the grocery rice-counting scenario to chemistry."
+    },
+    {
+      "unit_ids": [
+        "u2"
+      ],
+      "issue": "u2 heavily relies on the 'dozen' comparison to introduce the mole. It could be categorized as ANALOGY or CONCEPT.",
+      "proposed_resolution": "Classified as CONCEPT because its primary teaching job is defining the mole and Avogadro's number for the first time in the text, using the dozen comparison as scaffolding."
+    },
+    {
+      "unit_ids": [
+        "u4"
+      ],
+      "issue": "u4 presents the formula n = m / M. It could be categorized as PROCEDURE (a method for calculating moles from mass) or CONCEPT (a mathematical definition/relationship).",
+      "proposed_resolution": "Classified as CONCEPT because it defines the quantitative relationship and explains the variables rather than outlining a general multi-step procedure."
+    }
+  ]
+}

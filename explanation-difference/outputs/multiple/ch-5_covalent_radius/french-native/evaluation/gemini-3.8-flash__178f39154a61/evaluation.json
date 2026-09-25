@@ -1,0 +1,589 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "564f191dc88b6205d054814114df5714ed61807891131cc4b1b4dba880d0d435",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response clearly and accurately explains the concept of covalent radius to a high school student, addressing why isolated atomic radii cannot be directly measured, how covalent radii are defined and calculated from homonuclear bond lengths, an explanatory analogy, periodic trends, and units of measurement.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Absence de frontière nette de l'atome et principe de mesure"
+      },
+      {
+        "id": "s2",
+        "label": "Définition, calcul et unités du rayon covalent"
+      },
+      {
+        "id": "s3",
+        "label": "Évolution périodique du rayon covalent"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "The problem of defining atomic boundaries",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why measuring the size of an isolated atom is impossible due to its fuzzy electron cloud, contrasting it with a hard sphere and setting up the need for bonded measurements.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "bille de billard"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! C’est une excellente question, et rassure-toi, c'est une notion très visuelle une fois qu'on a la bonne image en tête.",
+            "start": 0,
+            "end": 128
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour bien comprendre le **rayon covalent**, faisons un petit détour par un problème fondamental en chimie.",
+            "start": 130,
+            "end": 236
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 238,
+            "end": 241
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. Le problème : Un atome n'a pas de bord net !",
+            "start": 243,
+            "end": 294
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si je te demande de mesurer le rayon d'une bille de billard, c'est facile : elle a un bord dur et bien défini. ",
+            "start": 296,
+            "end": 407
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Mais un atome, ce n'est pas une bille rigide. C'est un noyau minuscule entouré d'un **nuage d'électrons**. Ce nuage est un peu comme du brouillard : plus on s'éloigne du centre, plus il devient flou, sans jamais s'arrêter d'un coup net. On ne peut donc pas poser une règle pour mesurer où s'arrête l'atome.",
+            "start": 408,
+            "end": 714
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Alors, comment font les chimistes ? **Ils mesurent les atomes quand ils sont attachés ensemble !**",
+            "start": 716,
+            "end": 814
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly characterizes the electron cloud as lacking a sharp boundary and motivates measuring internuclear distances in bonded atoms.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition and calculation of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines the covalent radius as half the internuclear distance between two identical bonded atoms sharing electrons.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 816,
+            "end": 819
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. La solution : Le rayon covalent",
+            "start": 821,
+            "end": 859
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Quand deux atomes identiques partagent des électrons pour former une **liaison covalente** (par exemple, deux atomes de chlore dans la molécule $\\text{Cl}_2$, ou deux atomes de carbone), ils se rapprochent tellement que leurs nuages électroniques fusionnent un peu.",
+            "start": 861,
+            "end": 1126
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Les chimistes sont capables de mesurer très précisément la **distance entre les deux noyaux** (appelons-la $D$).",
+            "start": 1128,
+            "end": 1240
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le **rayon covalent ($r_{\\text{cov}}$)**, c'est tout simplement **la moitié de cette distance** :",
+            "start": 1242,
+            "end": 1339
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$r_{\\text{cov}} = \\frac{D}{2}$$",
+            "start": 1341,
+            "end": 1373
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the covalent radius as r_cov = D/2 for a homonuclear single covalent bond is standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "ANALOGY",
+        "label": "Foam ball analogy for covalent overlap",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the image of two compressed foam balls to help visualize why covalent radius corresponds to half the distance between centers of bonded atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p15",
+              "quote": "balles en mousse"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "> **L'analogie de la balle en mousse :**",
+            "start": 1375,
+            "end": 1415
+          },
+          {
+            "id": "p15",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> Imagine deux balles en mousse qu'on presse l'une contre l'autre. Elles s'écrasent un peu au point de contact. Le rayon covalent, c'est la moitié de la distance entre les centres de ces deux balles pressées.",
+            "start": 1416,
+            "end": 1624
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately conveys the idea of overlapping or deformed spheres and why the measured radius reflects this bonded distance.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Periodic trends of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains how and why covalent radii vary across periods (increasing effective nuclear charge) and down groups (increasing principal quantum shell).",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p20",
+              "quote": "comme si on rajoutait une épaisseur à un oignon"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1626,
+            "end": 1629
+          },
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Comment varie-t-il dans le tableau périodique ? (Très utile pour les devoirs !)",
+            "start": 1631,
+            "end": 1717
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le rayon covalent n'est pas le même pour tous les éléments, et il suit une logique formidable sur le tableau périodique :",
+            "start": 1719,
+            "end": 1840
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Quand on descend dans une colonne $\\downarrow$ : le rayon AUGMENTE.**",
+            "start": 1842,
+            "end": 1916
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * *Pourquoi ?* À chaque ligne, on ajoute une nouvelle couche d'électrons (comme si on rajoutait une épaisseur à un oignon). L'atome devient mécaniquement plus gros.",
+            "start": 1917,
+            "end": 2084
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Quand on va de gauche à droite sur une ligne $\\rightarrow$ : le rayon DIMINUE.**",
+            "start": 2085,
+            "end": 2170
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "   * *Pourquoi ? (Attention, c'est contre-intuitif !)* Sur une même ligne, on a le même nombre de couches, mais le noyau gagne de plus en plus de protons (+). Ce noyau plus puissant attire les électrons (-) plus fortement vers lui. Résultat : l'atome \"s'auto-compacte\" et rétrécit !",
+            "start": 2171,
+            "end": 2453
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The periodic trends and their underlying physical justifications (addition of electron shells down a group, higher nuclear charge pulling electrons inward across a period) are scientifically accurate and appropriate for high school chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap of covalent radius definition and units",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Summarizes the essential points of the lesson including definition, interpretation, and measurement units (picometers and angstroms), concluding with an interactive check for understanding.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2455,
+            "end": 2458
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### En résumé :",
+            "start": 2460,
+            "end": 2475
+          },
+          {
+            "id": "p25",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le **rayon covalent**, c'est la moitié de la distance entre les noyaux de deux atomes identiques liés par une liaison covalente simple.",
+            "start": 2477,
+            "end": 2614
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* C'est la façon dont les chimistes définissent la \"taille\" pratique d'un atome engagé dans une molécule.",
+            "start": 2615,
+            "end": 2720
+          },
+          {
+            "id": "p27",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Il s'exprime souvent en **picomètres** ($1 \\text{ pm} = 10^{-12} \\text{ m}$) ou en **angströms** ($1 \\text{ Å} = 10^{-10} \\text{ m}$).",
+            "start": 2721,
+            "end": 2857
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce que cette image te semble claire, ou aimerais-tu qu'on applique ça à un exemple précis (comme la molécule de dihydrogène $\\text{H}_2$) ?",
+            "start": 2859,
+            "end": 3002
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately re-states the definition specifying single covalent bonds and gives correct unit conversion factors for pm (10^-12 m) and Å (10^-10 m).",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\french-native\\gemini-3.8-flash__178f39154a61.json",
+    "original_sha256": "1ca20c0bc0e9d5f725ac34c5ad25012433a8e0d768cefa1d26324a78227de313",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 28,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 28,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "everyday": 3,
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

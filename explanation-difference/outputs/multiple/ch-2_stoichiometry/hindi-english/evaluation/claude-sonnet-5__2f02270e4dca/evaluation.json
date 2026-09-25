@@ -1,0 +1,957 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "21ad06a5863c70002ad713d84cc4df200c911e55860282006d593d34f9aaf86f",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The explanation directly covers stoichiometry, including its definition, underlying principle of conservation of mass, steps for calculation, worked examples, related concepts (limiting reagent, percent yield), and real-world applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and basic concept of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Law of Conservation of Mass"
+      },
+      {
+        "id": "s3",
+        "label": "Stoichiometric calculations and problem-solving"
+      },
+      {
+        "id": "s4",
+        "label": "Key terms: Limiting reagent, excess reagent, and percent yield"
+      },
+      {
+        "id": "s5",
+        "label": "Significance and applications of stoichiometry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the branch of chemistry dealing with quantitative relationships between reactants and products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# स्टोइकियोमेट्री (Stoichiometry) क्या है?",
+            "start": 0,
+            "end": 42
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नमस्ते! आज हम रसायन विज्ञान के एक बहुत महत्वपूर्ण विषय **स्टोइकियोमेट्री** को सरल भाषा में समझेंगे।",
+            "start": 44,
+            "end": 143
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## परिभाषा",
+            "start": 145,
+            "end": 155
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**स्टोइकियोमेट्री** रसायन विज्ञान की वह शाखा है जिसमें हम रासायनिक अभिक्रियाओं (chemical reactions) में **अभिकारकों (reactants)** और **उत्पादों (products)** की **मात्रा** के बीच संबंध का अध्ययन करते हैं।",
+            "start": 157,
+            "end": 360
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "सरल शब्दों में - यह हमें बताता है कि:",
+            "start": 362,
+            "end": 399
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- कितने ग्राम/मोल अभिकारक चाहिए",
+            "start": 400,
+            "end": 431
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- कितने ग्राम/मोल उत्पाद बनेगा",
+            "start": 432,
+            "end": 462
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately states that stoichiometry relates quantities of reactants and products in chemical reactions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Foundation on the Law of Conservation of Mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains that stoichiometry is based on the Law of Conservation of Mass, where total mass before reaction equals total mass after reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## मूल सिद्धांत",
+            "start": 464,
+            "end": 479
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "स्टोइकियोमेट्री **द्रव्यमान संरक्षण के नियम (Law of Conservation of Mass)** पर आधारित है:",
+            "start": 481,
+            "end": 570
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> \"पदार्थ न तो बनाया जा सकता है, न ही नष्ट किया जा सकता है\"",
+            "start": 572,
+            "end": 631
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसका मतलब - अभिक्रिया से पहले जितना द्रव्यमान था, अभिक्रिया के बाद भी उतना ही रहेगा।",
+            "start": 633,
+            "end": 717
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The description accurately presents the Law of Conservation of Mass as the fundamental premise of stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Molar relationship in water formation",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates how balanced equation coefficients relate molar quantities using the reaction of hydrogen and oxygen to form water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## उदाहरण से समझें",
+            "start": 719,
+            "end": 737
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "आइए हाइड्रोजन और ऑक्सीजन से पानी बनने की अभिक्रिया देखें:",
+            "start": 739,
+            "end": 796
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 798,
+            "end": 830
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इस समीकरण से पता चलता है:",
+            "start": 832,
+            "end": 857
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **2 मोल** हाइड्रोजन गैस + **1 मोल** ऑक्सीजन गैस → **2 मोल** पानी",
+            "start": 858,
+            "end": 924
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation 2H2 + O2 -> 2H2O and its mole interpretation (2 mol H2 + 1 mol O2 -> 2 mol H2O) are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Steps to solve stoichiometric problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents a four-step general methodology to carry out stoichiometric calculations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## स्टोइकियोमेट्री के चरण (Steps)",
+            "start": 926,
+            "end": 959
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1️⃣ संतुलित समीकरण लिखें",
+            "start": 961,
+            "end": 989
+          },
+          {
+            "id": "p19",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "सबसे पहले रासायनिक समीकरण को संतुलित करें",
+            "start": 990,
+            "end": 1031
+          },
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2️⃣ मोल में बदलें (Convert to Moles)",
+            "start": 1033,
+            "end": 1073
+          },
+          {
+            "id": "p21",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{मोल} = \\frac{\\text{दिया गया द्रव्यमान (g)}}{\\text{मोलर द्रव्यमान (g/mol)}}$$",
+            "start": 1074,
+            "end": 1158
+          },
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3️⃣ मोल अनुपात का प्रयोग करें",
+            "start": 1160,
+            "end": 1193
+          },
+          {
+            "id": "p23",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "संतुलित समीकरण के गुणांक (coefficients) का उपयोग करके अनुपात निकालें",
+            "start": 1194,
+            "end": 1262
+          },
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4️⃣ वापस द्रव्यमान/आयतन में बदलें",
+            "start": 1264,
+            "end": 1301
+          },
+          {
+            "id": "p25",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "जरूरत के अनुसार अंतिम उत्तर निकालें",
+            "start": 1302,
+            "end": 1337
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps (balance equation, convert mass to moles, use stoichiometric ratio, convert back to target quantity) and the formula for moles are standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked mass calculation for water formation",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a fully worked example calculating the mass of water formed from 4 g of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## व्यावहारिक उदाहरण",
+            "start": 1339,
+            "end": 1359
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**प्रश्न:** 4 ग्राम हाइड्रोजन गैस से कितने ग्राम पानी बनेगा?",
+            "start": 1361,
+            "end": 1421
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**हल:**",
+            "start": 1423,
+            "end": 1430
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "समीकरण: $2H_2 + O_2 \\rightarrow 2H_2O$",
+            "start": 1432,
+            "end": 1470
+          },
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**चरण 1:** H₂ के मोल निकालें",
+            "start": 1472,
+            "end": 1500
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{मोल} = \\frac{4g}{2 g/mol} = 2 \\text{ मोल}$$",
+            "start": 1501,
+            "end": 1552
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**चरण 2:** मोल अनुपात लगाएं",
+            "start": 1554,
+            "end": 1581
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण से: 2 मोल H₂ → 2 मोल H₂O",
+            "start": 1582,
+            "end": 1613
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "तो: 2 मोल H₂ → 2 मोल H₂O",
+            "start": 1614,
+            "end": 1638
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**चरण 3:** पानी का द्रव्यमान निकालें",
+            "start": 1640,
+            "end": 1676
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{द्रव्यमान} = 2 \\text{ मोल} \\times 18 g/mol = 36 \\text{ ग्राम}$$",
+            "start": 1677,
+            "end": 1748
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उत्तर:** 36 ग्राम पानी बनेगा ✅",
+            "start": 1750,
+            "end": 1782
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations are mathematically and chemically accurate: 4 g H2 / (2 g/mol) = 2 mol H2; 2 mol H2 produces 2 mol H2O; 2 mol * 18 g/mol = 36 g H2O.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Key stoichiometric concepts",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines limiting reagent, excess reagent, and percent yield in a summary table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## महत्वपूर्ण अवधारणाएं",
+            "start": 1784,
+            "end": 1807
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| अवधारणा | विवरण |",
+            "start": 1809,
+            "end": 1828
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---------|--------|",
+            "start": 1829,
+            "end": 1849
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **सीमित अभिकारक (Limiting Reagent)** | जो अभिकारक पहले खत्म हो जाए |",
+            "start": 1850,
+            "end": 1920
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **आधिक्य अभिकारक (Excess Reagent)** | जो अभिकारक बच जाए |",
+            "start": 1921,
+            "end": 1980
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| **प्रतिशत उपज (% Yield)** | वास्तविक उपज ÷ सैद्धांतिक उपज × 100 |",
+            "start": 1981,
+            "end": 2048
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definitions for limiting reagent, excess reagent, and percent yield formula are completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Importance and applications of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Lists the industrial, pharmaceutical, and practical reasons why stoichiometry is essential.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p48",
+              "quote": "✅ खाना बनाने की तरह - सही अनुपात से ही अच्छा परिणाम मिलता है!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## क्यों जरूरी है स्टोइकियोमेट्री?",
+            "start": 2050,
+            "end": 2084
+          },
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ उद्योगों में सही मात्रा में कच्चा माल इस्तेमाल करने के लिए",
+            "start": 2086,
+            "end": 2146
+          },
+          {
+            "id": "p46",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ दवाइयां बनाने में सटीक मात्रा जानने के लिए",
+            "start": 2147,
+            "end": 2191
+          },
+          {
+            "id": "p47",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ प्रदूषण नियंत्रण में",
+            "start": 2192,
+            "end": 2214
+          },
+          {
+            "id": "p48",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ खाना बनाने की तरह - सही अनुपात से ही अच्छा परिणाम मिलता है!",
+            "start": 2215,
+            "end": 2276
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed practical applications and cooking comparison accurately illustrate the necessity of stoichiometric proportions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Memory tip for stoichiometry",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Provides a strategy and mental model to remember stoichiometry by likening it to chemical mathematics and ratios.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2278,
+            "end": 2281
+          },
+          {
+            "id": "p50",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**याद रखने की तरकीब:** स्टोइकियोमेट्री को \"रासायनिक गणित\" (Chemical Mathematics) समझें - जैसे गणित में अनुपात-समानुपात होता है, वैसे ही यहां भी अणुओं/परमाणुओं का अनुपात काम आता है!",
+            "start": 2283,
+            "end": 2463
+          },
+          {
+            "id": "p51",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "क्या आप चाहेंगे कि मैं कोई और उदाहरण या सीमित अभिकारक (Limiting Reagent) के बारे में विस्तार से समझाऊं? 😊",
+            "start": 2465,
+            "end": 2570
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Likening stoichiometry to mathematical ratio and proportion applied to atoms and molecules is an accurate and helpful heuristic.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\hindi-english\\claude-sonnet-5__2f02270e4dca.json",
+    "original_sha256": "6847e734808c07f59a3abd829ae125eeeb32241355b6698b9cf969d6f467b3c9",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 51,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 2,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 51,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 7,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

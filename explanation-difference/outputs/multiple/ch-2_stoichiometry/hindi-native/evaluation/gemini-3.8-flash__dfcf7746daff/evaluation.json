@@ -1,0 +1,996 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "b15a445d9063c4c5fcccd01bd951047409d68944d3dd4a86fd95fd87c0acb077",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry in chemistry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The explanation covers the requested topic of stoichiometry in detail, including its definition, the law of conservation of mass, balanced chemical equations, stoichiometric coefficients, mole-mass calculations, problem-solving steps, and real-world applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction and Sandwich Recipe Analogy"
+      },
+      {
+        "id": "s2",
+        "label": "Definition and Etymology of Stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Balanced Chemical Equations and Stoichiometric Coefficients"
+      },
+      {
+        "id": "s4",
+        "label": "Mass Calculations and Conservation in Stoichiometry"
+      },
+      {
+        "id": "s5",
+        "label": "Three-Step Method for Solving Stoichiometry Problems"
+      },
+      {
+        "id": "s6",
+        "label": "Real-World Applications of Stoichiometry"
+      },
+      {
+        "id": "s7",
+        "label": "Summary of Stoichiometry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Sandwich recipe analogy for stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the concept of fixed stoichiometric ratios using the everyday analogy of making a sandwich from bread and cheese.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "मान लीजिए आपको एक **सैंडविच** बनाना है।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "नमस्ते प्यारे छात्र! रसायन विज्ञान की इस खूबसूरत कक्षा में आपका स्वागत है। ",
+            "start": 0,
+            "end": 75
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मुझे पता है कि **\"रससमीकरणमिति\" (Stoichiometry - स्टोइकीओमेट्री)** नाम सुनने में थोड़ा कठिन और डरावना लगता है, लेकिन यकीन मानिए, यह उतना ही आसान है जितना कि रसोई में चाय या मैगी बनाना! ",
+            "start": 77,
+            "end": 262
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "आइए, इसे बिल्कुल आसान भाषा में समझते हैं।",
+            "start": 264,
+            "end": 305
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 307,
+            "end": 310
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. रससमीकरणमिति आखिर है क्या? (एक आसान उदाहरण)",
+            "start": 312,
+            "end": 362
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "मान लीजिए आपको एक **सैंडविच** बनाना है। ",
+            "start": 364,
+            "end": 404
+          },
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "आपकी रेसिपी है:",
+            "start": 405,
+            "end": 420
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**2 ब्रेड + 1 चीज़ स्लाइस = 1 सैंडविच**",
+            "start": 421,
+            "end": 460
+          },
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "अब अगर मैं आपसे पूछूँ:",
+            "start": 462,
+            "end": 484
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* 10 ब्रेड से कितने सैंडविच बनेंगे? आप तुरंत कहेंगे – **5 सैंडविच** (और इसके लिए 5 चीज़ स्लाइस चाहिए होंगे)।",
+            "start": 485,
+            "end": 593
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The sandwich recipe analogy accurately illustrates stoichiometric ratios and proportions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Definition and etymology of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines stoichiometry as the quantitative relationship between reactants and products in a chemical reaction and explains its Greek etymology.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "बस! यही **रससमीकरणमिति (Stoichiometry)** है। ",
+            "start": 595,
+            "end": 640
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **परिभाषा:** रसायन विज्ञान में, किसी रासायनिक अभिक्रिया (Chemical Reaction) में भाग लेने वाले पदार्थों (अभिकारक/Reactants) और बनने वाले पदार्थों (उत्पाद/Products) की मात्रा के हिसाब-किताब को ही **रससमीकरणमिति** कहते हैं। इसे आप **\"केमिस्ट्री की रेसिपी\"** कह सकते हैं।",
+            "start": 641,
+            "end": 910
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(यह शब्द ग्रीक भाषा के दो शब्दों से बना है: 'Stoicheion' यानी तत्व और 'Metron' यानी मापना।)*",
+            "start": 912,
+            "end": 1005
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry and the Greek etymology ('stoicheion' meaning element and 'metron' meaning measure) are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Balanced chemical equations and stoichiometric coefficients",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the law of conservation of mass as the governing rule for balancing chemical equations, and demonstrates how stoichiometric coefficients represent ratios of molecules and moles using water synthesis as an illustrative example.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p24",
+              "quote": "जैसे 1 दर्जन = 12 केले"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1007,
+            "end": 1010
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. इसका सबसे बड़ा नियम: 'संतुलित समीकरण' (Balanced Equation)",
+            "start": 1012,
+            "end": 1076
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "जैसे रसोई में आप कोई चीज़ गायब नहीं कर सकते, वैसे ही प्रकृति में **द्रव्यमान संरक्षण का नियम (Law of Conservation of Mass)** काम करता है—*द्रव्यमान को न तो बनाया जा सकता है, न ही नष्ट किया जा सकता है।*",
+            "start": 1078,
+            "end": 1279
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "इसलिए, स्टोइकीओमेट्री का पहला नियम है: **समीकरण हमेशा संतुलित (Balanced) होना चाहिए।**",
+            "start": 1281,
+            "end": 1367
+          },
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**उदाहरण देखिए:**",
+            "start": 1369,
+            "end": 1386
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "पानी बनने की अभिक्रिया:",
+            "start": 1387,
+            "end": 1410
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1411,
+            "end": 1443
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यहाँ आगे लिखे हुए नंबर ($2, 1, 2$) को **रससमीकरणमितीय गुणांक (Stoichiometric Coefficients)** कहते हैं। यह हमें 'अनुपात' (Ratio) बताते हैं:",
+            "start": 1445,
+            "end": 1583
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* हाइड्रोजन के **2 अणु** + ऑक्सीजन का **1 अणु** मिलकर पानी के **2 अणु** बनाते हैं।",
+            "start": 1584,
+            "end": 1666
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* या बड़े स्तर पर कहें तो: हाइड्रोजन के **2 मोल** + ऑक्सीजन का **1 मोल** मिलकर पानी के **2 मोल** बनाते हैं।",
+            "start": 1667,
+            "end": 1774
+          },
+          {
+            "id": "p24",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(नोट: 'मोल' को आप केमिस्ट्री का 'दर्जन' समझ सकते हैं, जैसे 1 दर्जन = 12 केले, वैसे ही 1 मोल = $6.022 \\times 10^{23}$ कण।)*",
+            "start": 1776,
+            "end": 1899
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly defines stoichiometric coefficients, demonstrates mole and molecule ratios in water synthesis, and accurately states the law of conservation of mass and Avogadro's number.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Mass conservation calculation in water formation",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates mass stoichiometry and proves conservation of mass by calculating molar masses and total masses of reactants and products in the synthesis of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1901,
+            "end": 1904
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. यह ग्राम (द्रव्यमान) में कैसे काम करता है?",
+            "start": 1906,
+            "end": 1955
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "आइए उसी पानी वाले उदाहरण को ग्राम में देखें:",
+            "start": 1957,
+            "end": 2001
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* $H_2$ (हाइड्रोजन) का मोलर द्रव्यमान = 2 ग्राम। तो $2H_2$ = $2 \\times 2 = 4$ ग्राम।",
+            "start": 2002,
+            "end": 2086
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* $O_2$ (ऑक्सीजन) का मोलर द्रव्यमान = 32 ग्राम।",
+            "start": 2087,
+            "end": 2134
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* $H_2O$ (पानी) का मोलर द्रव्यमान = 18 ग्राम। तो $2H_2O$ = $2 \\times 18 = 36$ ग्राम।",
+            "start": 2135,
+            "end": 2219
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "समीकरण के अनुसार:",
+            "start": 2221,
+            "end": 2238
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**4 ग्राम हाइड्रोजन + 32 ग्राम ऑक्सीजन = 36 ग्राम पानी**",
+            "start": 2239,
+            "end": 2295
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "जाँचिए: ",
+            "start": 2297,
+            "end": 2305
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "बाएँ हाथ की तरफ कुल भार = $4 + 32 = 36$ ग्राम।",
+            "start": 2306,
+            "end": 2352
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "दाएँ हाथ की तरफ कुल भार = $36$ ग्राम।",
+            "start": 2353,
+            "end": 2390
+          },
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "हिसाब बिल्कुल पक्का है!",
+            "start": 2391,
+            "end": 2414
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All molar masses (H2 = 2 g/mol, O2 = 32 g/mol, H2O = 18 g/mol) and the mass balance (4 g + 32 g = 36 g) are correctly calculated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "PROCEDURE",
+        "label": "Three-step method for solving stoichiometry problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a reusable three-step sequence for tackling stoichiometry problems in examinations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2416,
+            "end": 2419
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. परीक्षा में प्रश्न कैसे हल करें? (3 आसान कदम)",
+            "start": 2421,
+            "end": 2473
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "जब भी परीक्षा में रससमीकरणमिति का कोई सवाल आए, तो बस ये तीन कदम (Steps) याद रखना:",
+            "start": 2475,
+            "end": 2556
+          },
+          {
+            "id": "p40",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **कदम 1 (समीकरण संतुलित करें):** सबसे पहले रासायनिक समीकरण को बैलेंस करें।",
+            "start": 2558,
+            "end": 2635
+          },
+          {
+            "id": "p41",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **कदम 2 (मोल में बदलें):** जो भी वज़न (ग्राम) दिया गया है, उसे **मोल** में बदल लें। ($\\text{मोल} = \\frac{\\text{दिया गया भार}}{\\text{मोलर द्रव्यमान}}$)",
+            "start": 2636,
+            "end": 2789
+          },
+          {
+            "id": "p42",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **कदम 3 (अनुपात से उत्तर निकालें):** संतुलित समीकरण के अनुपात को देखकर पता लगाएँ कि कितना उत्पाद बनेगा, और फिर ज़रूरत पड़ने पर उसे वापस ग्राम में बदल लें।",
+            "start": 2790,
+            "end": 2947
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps (balancing equation, converting mass to moles, and using stoichiometric ratios) form the correct standard methodology.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Application of stoichiometry in medicine formulation",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates the practical importance of stoichiometry in pharmaceutical manufacturing, citing paracetamol.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p45",
+              "quote": "अगर पैरासिटामोल बनाते समय केमिकल का अनुपात थोड़ा भी गलत हो गया, तो दवा ज़हर बन सकती है।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2949,
+            "end": 2952
+          },
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 5. हम इसे क्यों पढ़ते हैं? (दैनिक जीवन में उपयोग)",
+            "start": 2954,
+            "end": 3007
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **दवाइयां बनाने में:** अगर पैरासिटामोल बनाते समय केमिकल का अनुपात थोड़ा भी गलत हो गया, तो दवा ज़हर बन सकती है।",
+            "start": 3009,
+            "end": 3121
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately illustrates that incorrect reactant ratios in pharmaceutical synthesis can lead to toxic impurities.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Application of stoichiometry in rocket propulsion",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates the practical importance of stoichiometry in calculating the precise ratio of fuel to oxidizer in rocketry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **रॉकेट साइंस में:** रॉकेट में कितना ईंधन और कितनी ऑक्सीजन भरनी है ताकि वह अंतरिक्ष तक पहुँच सके, यह गणना इसी से होती है।",
+            "start": 3122,
+            "end": 3245
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes the role of stoichiometry in determining fuel and oxidizer proportions in rocket engines.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Application of stoichiometry in industrial manufacturing",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates how industrial factories use stoichiometric calculations to prevent raw material wastage.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **फ़ैक्टरी में:** कोई भी कंपनी कच्चा माल बर्बाद नहीं करना चाहती, इसलिए वे सटीक हिसाब लगाते हैं।",
+            "start": 3246,
+            "end": 3343
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately states that factories rely on exact stoichiometry to optimize raw material usage.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of stoichiometry",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a concluding recap defining stoichiometry as the mathematics of chemistry, along with an interactive teacher-student sign-off.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### सारांश (Summary):",
+            "start": 3345,
+            "end": 3366
+          },
+          {
+            "id": "p49",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "रससमीकरणमिति कुछ और नहीं, बस **रसायन विज्ञान का गणित** है, जो हमें बताता है कि कितना कच्चा माल डालने पर कितना उत्पाद मिलेगा।",
+            "start": 3367,
+            "end": 3491
+          },
+          {
+            "id": "p50",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "क्या आपको यह समझ आया, या हम इस पर एक छोटा सा न्यूमेरिकल (सवाल) हल करके देखें?",
+            "start": 3493,
+            "end": 3570
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes the core meaning of stoichiometry.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\hindi-native\\gemini-3.8-flash__dfcf7746daff.json",
+    "original_sha256": "317227292a9ec27df5abc555b85d9b31b5ada04b40311a88ace0a0c534769358",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 50,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 2,
+      "EXAMPLE": 4,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 50,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "everyday": 3,
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

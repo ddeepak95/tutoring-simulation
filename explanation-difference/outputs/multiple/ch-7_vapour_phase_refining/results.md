@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-f1ca274cdf615f77.json](run-001-f1ca274cdf615f77.json)
+**Source:** [run-001-f1ca274cdf615f77.json](english/gpt-5.6-terra__7c971b9d9fb3.json)
 
 **Vapour phase refining** is a method used to purify metals by converting the impure metal into a **volatile compound** (a compound that easily changes into vapour). This vapour is then decomposed to obtain the **pure metal**.
 
@@ -122,7 +122,7 @@ It is mainly used for metals that can form volatile compounds, such as **nickel,
 
 **Status:** completed
 
-**Source:** [run-001-43d2dac7f3bbcf69.json](run-001-43d2dac7f3bbcf69.json)
+**Source:** [run-001-43d2dac7f3bbcf69.json](english/grok-4.3__1d30d2ec01c6.json)
 
 Vapour phase refining is a method used to purify certain metals that can easily form volatile (easily vaporized) compounds. The idea is simple: turn the impure metal into a gas or vapour, separate it from the solid impurities that stay behind, and then break the vapour back down into pure metal.
 
@@ -160,7 +160,7 @@ This method is especially useful when the metal forms a compound that is stable 
 
 **Status:** completed
 
-**Source:** [run-001-811417147a4da0aa.json](run-001-811417147a4da0aa.json)
+**Source:** [run-001-811417147a4da0aa.json](english/gemini-3.8-flash__366a02e5a622.json)
 
 Hello! Welcome to our chemistry session. Today, we are going to look at a very clever technique used in metallurgy called **Vapour Phase Refining**. 
 
@@ -242,7 +242,7 @@ Does this make sense? Would you like to try writing out the steps for Titanium u
 
 **Status:** completed
 
-**Source:** [run-001-bb8b672589214193.json](run-001-bb8b672589214193.json)
+**Source:** [run-001-bb8b672589214193.json](english/claude-sonnet-5__5886caa71614.json)
 
 # Vapour Phase Refining
 
@@ -341,7 +341,7 @@ Would you like me to explain **why** these specific temperatures are chosen, or 
 
 **Status:** completed
 
-**Source:** [run-001-361d6732c55e5094.json](run-001-361d6732c55e5094.json)
+**Source:** [run-001-361d6732c55e5094.json](english/llama-4-maverick__f519e0928a19.json)
 
 Vapour phase refining is a method used to purify metals. I'd be happy to explain it in detail.
 
@@ -400,7 +400,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-002-85fbaf364377eff6.json](run-002-85fbaf364377eff6.json)
+**Source:** [run-002-85fbaf364377eff6.json](tamil-native/gpt-5.6-terra__75c7d0043d3d.json)
 
 **ஆவி நிலை மூலம் தூய்மையாக்கல்** (Distillation) என்பது ஒரு கலவையில் உள்ள திரவங்களைப் பிரித்து, தூய்மையான திரவத்தைப் பெறும் முறையாகும். இது திரவங்களின் **கொதிநிலைகளில் உள்ள வேறுபாட்டை** அடிப்படையாகக் கொண்டது.
 
@@ -444,7 +444,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-002-d0e886eb4a77e394.json](run-002-d0e886eb4a77e394.json)
+**Source:** [run-002-d0e886eb4a77e394.json](tamil-native/grok-4.3__910d123b6d47.json)
 
 **ஆவி நிலைமை தூய்மையாக்கல் (Vapour Phase Refining)**
 
@@ -501,7 +501,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-002-efadfa462681ba35.json](run-002-efadfa462681ba35.json)
+**Source:** [run-002-efadfa462681ba35.json](tamil-native/gemini-3.8-flash__c128eb57dcf1.json)
 
 வணக்கம்! வேதியியல் என்பது நாம் அன்றாடம் பார்க்கும் மாற்றங்களின் அறிவியல். இன்று நாம் உலோகவியலில் (Metallurgy) மிக முக்கியமான மற்றும் சுவாரஸ்யமான ஒரு தலைப்பான **"ஆவி நிலைமை தூய்மையாக்கல்" (Vapour Phase Refining)** பற்றி மிக எளிமையாகப் புரிந்துகொள்ளப் போகிறோம்.
 
@@ -575,7 +575,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-002-e2878c5341f5363a.json](run-002-e2878c5341f5363a.json)
+**Source:** [run-002-e2878c5341f5363a.json](tamil-native/claude-sonnet-5__a06b016d156f.json)
 
 # ஆவி நிலை தூய்மையாக்கல் (Vapor Phase Refining/Distillation)
 
@@ -630,7 +630,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-002-e8d0e92c05a08e8d.json](run-002-e8d0e92c05a08e8d.json)
+**Source:** [run-002-e8d0e92c05a08e8d.json](tamil-native/llama-4-maverick__1b7a57b054f8.json)
 
 கொடுக்கப்பட்டுள்ள வினாவிற்கு விடை அளிக்கும் வகையில் விளக்கம் அளிக்கப்படுகிறது.
 
@@ -656,7 +656,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-003-d6bf9af472f5e517.json](run-003-d6bf9af472f5e517.json)
+**Source:** [run-003-d6bf9af472f5e517.json](tamil-english/gpt-5.6-terra__7d529b81f6fe.json)
 
 **வாயு நிலை சுத்திகரிப்பு (Vapour Phase Refining)** என்பது உலோகங்களை மிகவும் தூய்மையான நிலையில் பெறப் பயன்படுத்தப்படும் ஒரு சுத்திகரிப்பு முறையாகும்.
 
@@ -743,7 +743,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-003-678a3c99362ed2c6.json](run-003-678a3c99362ed2c6.json)
+**Source:** [run-003-678a3c99362ed2c6.json](tamil-english/grok-4.3__5cedf161b6fc.json)
 
 வணக்கம் மாணவரே!  
 
@@ -783,7 +783,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-003-f958ede55b3be8dd.json](run-003-f958ede55b3be8dd.json)
+**Source:** [run-003-f958ede55b3be8dd.json](tamil-english/gemini-3.8-flash__1ab235504f9c.json)
 
 வணக்கம்! வேதியியலில் (Chemistry) உலோகங்களை பிரித்தெடுக்கும் பிரிவில் மிக முக்கியமான மற்றும் சுவாரஸ்யமான தலைப்பு **"ஆவி நிலை முறை" (Vapour Phase Refining)**. 
 
@@ -845,7 +845,7 @@ I hope this explanation helps you understand vapour phase refining! Do you have 
 
 **Status:** completed
 
-**Source:** [run-003-1692f2a934bc4291.json](run-003-1692f2a934bc4291.json)
+**Source:** [run-003-1692f2a934bc4291.json](tamil-english/claude-sonnet-5__db8a0442e273.json)
 
 # ஆவி நிலை சுத்திகரிப்பு (Vapour Phase Refining)
 
@@ -912,7 +912,7 @@ $$ZrI_4 \xrightarrow{1800K} Zr + 2I_2$$
 
 **Status:** completed
 
-**Source:** [run-003-ffbf4c7e39035d48.json](run-003-ffbf4c7e39035d48.json)
+**Source:** [run-003-ffbf4c7e39035d48.json](tamil-english/llama-4-maverick__f001b6467e58.json)
 
 விடை 
 ## Step 1: வாயு நிலை தூய்மைப்படுத்தல் முறையை விளக்குதல்

@@ -1,0 +1,72 @@
+{
+  "topic_relevance": {
+    "requested_topic": "vapour phase refining",
+    "observed_topic": "Simple distillation of saltwater (evaporation and condensation)",
+    "topic_match": "off_topic",
+    "reason": "Vapour phase refining is a metallurgical purification process in which an impure metal is converted into a volatile compound and then thermally decomposed into pure metal (such as the Mond or Van Arkel processes). The explanation instead describes simple distillation of water to separate it from salt.",
+    "content_unit_ids": [
+      "u1",
+      "u2"
+    ],
+    "major_task_failure": true
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of distillation framed as vapour phase purification",
+      "excerpts": [
+        {
+          "text": "நீர்ம நிலையில் இருக்கும் நீர், வெப்பப்படுத்தும் போது ஆவி நிலையை அடைகிறது. இந்த ஆவி நிலையில் உள்ள நீரானது மீண்டும் நீர்ம நிலைக்கு மாறும் நிகழ்வு தான் ஆவி நிலைமை தூய்மையாக்கல் ஆகும்.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "not_assessed_due_to_topic_mismatch",
+        "reason": "The response is off-topic, so unit accuracy is not assessed.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Separation of salt and water by evaporation and condensation",
+      "excerpts": [
+        {
+          "text": "உதாரணமாக, உப்பு நீரை எடுத்துக்கொள்வோம். உப்புநீரில் உப்பு மற்றும் நீர் ஆகிய இரண்டும் உள்ளன. இந்த உப்பு நீரை வெப்பப்படுத்தும் போது நீரானது ஆவியாகி விடும். ஆனால், உப்பு ஆவியாகாது. ஆவியாகி வெளியேறும் நீராவியை ஒரு குளிர்விக்கும் அமைப்பில் செலுத்தி குளிர்விக்கும் போது, மீண்டும் நீர்ம நிலைக்கு மாறுகிறது. இந்த நீரானது உப்பு இல்லாத தூய நீராகும். இவ்வாறு பிரித்தெடுக்கப்படும் நீரானது தூய்மையான நீர் ஆகும். இந்த முறையில் நடைபெறும் தூய்மையாக்கல் ஆவி நிலைமை தூய்மையாக்கல் எனப்படுகிறது.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "not_assessed_due_to_topic_mismatch",
+        "reason": "The response is off-topic, so unit accuracy is not assessed.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1",
+        "u2"
+      ],
+      "issue": "The model literally interpreted the Tamil phrase 'ஆவி நிலைமை தூய்மையாக்கல்' (vapour phase refining) as purification by evaporation and condensation (distillation). One could argue this is an erroneous explanation of vapour phase refining rather than off-topic.",
+      "proposed_resolution": "The substantive teaching content describes simple distillation/desalination and contains no principles or examples of metallurgical vapour phase refining (e.g. volatile intermediate formation or thermal decomposition). Therefore, it is classified as off_topic rather than an erroneous treatment of vapour phase refining."
+    }
+  ]
+}

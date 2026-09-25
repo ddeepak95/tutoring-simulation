@@ -1,0 +1,177 @@
+# Stage 1: Bengali / isotope
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "isotope",
+  "observed_topic": "Definition, properties, and examples of isotopes, along with atomic number and mass number",
+  "topic_match": "on_topic",
+  "reason": "The explanation clearly defines isotopes (সমস্থানিক), explains their relationship to atomic and mass numbers, and provides illustrative examples such as hydrogen and carbon isotopes.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition of isotopes and comparison of chemical and physical properties | {"depth": "explanation"} | contains_error |
+| u2 | EXAMPLE | Isotopes of hydrogen (protium, deuterium, tritium) | {"context": "abstract_or_hypothetical", "treatment": "illustrative"} | accurate |
+| u3 | EXAMPLE | Isotopes of carbon and application in radiocarbon dating | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u4 | CONCEPT | Definitions of mass number and atomic number, and calculation of neutron number | {"depth": "explanation"} | accurate |
+| u5 | STUDY_SUPPORT | Closing recap of the definition of isotope with hydrogen example | {"subtype": "recap"} | accurate |
+
+## u1: Definition of isotopes and comparison of chemical and physical properties
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The text incorrectly claims that isotopes have significant similarity in their physical properties due to having the same number of protons. While chemical properties are essentially identical because of identical electron configurations, physical properties (such as mass, density, and boiling point) differ due to different masses and neutron numbers.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "প্রোটনের সংখ্যা একই থাকায় তাদের রাসায়নিক ও ভৌত ধর্মে অনেক সাদৃশ্য বিদ্যমান।"
+          }
+        ],
+        "description": "Isotopes have nearly identical chemical properties because they have the same number of protons and electrons, but their physical properties differ due to differences in mass/neutron count.",
+        "correction": "প্রোটন সংখ্যা একই থাকায় এদের রাসায়নিক ধর্ম অভিন্ন বা অত্যন্ত সদৃশ হলেও ভর সংখ্যা ভিন্ন হওয়ায় ভৌত ধর্মে পার্থক্য দেখা যায়।",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+সমস্থানিক বা আইসোটোপ হলো একই মৌলিক পদার্থের ভিন্ন ভিন্ন নিউক্লিয়াস-বিশিষ্ট পরমাণু যাদের পারমাণবিক সংখ্যা একই কিন্তু নিউক্লিয়াসে নিউট্রন সংখ্যা ভিন্ন। অর্থাৎ, ভর সংখ্যা ভিন্ন কিন্তু পারমাণবিক সংখ্যা একই। প্রোটনের সংখ্যা একই থাকায় তাদের রাসায়নিক ও ভৌত ধর্মে অনেক সাদৃশ্য বিদ্যমান।
+```
+
+
+## u2: Isotopes of hydrogen (protium, deuterium, tritium)
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The names, symbols, atomic numbers, and mass numbers of the three isotopes of hydrogen are stated correctly.",
+    "errors": []
+  }
+}
+```
+
+```text
+যেমন: হাইড্রোজেনের তিনটি আইসোটোপ বা সমস্থানিক রয়েছে—প্রোটিয়াম বা হাইড্রোজেন-১ (প্রতীক: ১H), ডিউটেরিয়াম বা হাইড্রোজেন-২ (প্রতীক: ২H বা D), ট্রিটিয়াম বা হাইড্রোজেন-৩ (প্রতীক: ৩H বা T)। এদের প্রত্যেকেরই পারমাণবিক সংখ্যা ১ কিন্তু ভর সংখ্যা যথাক্রমে ১, ২ ও ৩।
+```
+
+
+## u3: Isotopes of carbon and application in radiocarbon dating
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Carbon-12 and Carbon-13 are stable isotopes while Carbon-14 is radioactive and used for radiocarbon dating of ancient artifacts.",
+    "errors": []
+  }
+}
+```
+
+```text
+কার্বনের তিনটি সমস্থানিক রয়েছে— ১২C, ১৩C, ১৪C। এদের মধ্যে প্রথম দুটি স্থায়ী কিন্তু তৃতীয়টি অস্থায়ী বা তেজস্ক্রিয়। ১৪C দিয়ে প্রাচীন নিদর্শনের বয়স নির্ধারণ করা হয়।
+```
+
+
+## u4: Definitions of mass number and atomic number, and calculation of neutron number
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Mass number (A), atomic number (Z), and the formula for neutron count (A - Z) are defined and formulated accurately.",
+    "errors": []
+  }
+}
+```
+
+```text
+কোনো মৌলের যেকোনো একটি সমস্থানিকের নিউক্লিয়াসে প্রোটন ও নিউট্রন সংখ্যা একত্রে মোট যত হয় তাকে ভর সংখ্যা বলে। ভর সংখ্যাকে A দ্বারা প্রকাশ করা হয়। নিউক্লিয়াসে উপস্থিত প্রোটনের সংখ্যাকে পারমাণবিক সংখ্যা বলে। একে Z দ্বারা প্রকাশ করা হয়। সুতরাং, নিউক্লিয়াসে নিউট্রনের সংখ্যা = A – Z।
+```
+
+
+## u5: Closing recap of the definition of isotope with hydrogen example
+
+```json
+{
+  "attributes": {
+    "subtype": "recap"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The recap accurately restates the definition of isotopes and the hydrogen isotope example.",
+    "errors": []
+  }
+}
+```
+
+```text
+একটি মৌলের সকল পরমাণুর পারমাণবিক সংখ্যা বা প্রোটন সংখ্যা একই হলেও নিউট্রন সংখ্যা ভিন্ন হতে পারে। পারমাণবিক সংখ্যা একই থাকলেও যেসব পরমাণুর ভর সংখ্যা ভিন্ন হয় তাদেরকে পরস্পরের সমস্থানিক বলে। যেমন— হাইড্রোজেনের তিনটি আইসোটোপ বা সমস্থানিক হলো ১H, ২H ও ৩H। এদের পারমাণবিক সংখ্যা একই (১) কিন্তু ভর সংখ্যা যথাক্রমে ১, ২ ও ৩।
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u5"
+    ],
+    "issue": "Unit u5 repeats the definition of isotope and the hydrogen example given earlier in u1 and u2. It can be viewed either as a STUDY_SUPPORT (recap) summarizing the main idea or as a redundant CONCEPT unit containing an illustrative EXAMPLE.",
+    "proposed_resolution": "Classified as STUDY_SUPPORT with subtype 'recap' because its primary function in the passage is to conclude the explanation by summarizing the core concept."
+  }
+]
+```
+
+## Unassigned text for coverage review

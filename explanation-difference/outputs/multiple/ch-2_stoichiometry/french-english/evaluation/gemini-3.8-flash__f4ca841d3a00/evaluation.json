@@ -1,0 +1,967 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "f0f784fe159f47bad71ea869575b79bbb02c67be3a25bf9aba53e5d577e4a87a",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response explains stoichiometry clearly and accurately in French, using introductory analogies, chemical equations, stoichiometric coefficients, the mole concept, limiting reactants, and a step-by-step problem-solving method.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction et définition générale de la stœchiométrie"
+      },
+      {
+        "id": "s2",
+        "label": "L'analogie du sandwich pour illustrer les proportions"
+      },
+      {
+        "id": "s3",
+        "label": "Coefficients stœchiométriques et équilibrage d'une équation"
+      },
+      {
+        "id": "s4",
+        "label": "La mole comme unité macroscopique de comptage"
+      },
+      {
+        "id": "s5",
+        "label": "Réactif limitant et réactif en excès"
+      },
+      {
+        "id": "s6",
+        "label": "Méthode de résolution d'un problème de stœchiométrie"
+      },
+      {
+        "id": "s7",
+        "label": "Récapitulatif"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition introductive de la stœchiométrie",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the subject, de-dramatizes the term, and defines stoichiometry via the cooking recipe metaphor.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p2",
+              "quote": "Si tu sais suivre une recette de cuisine, tu as déjà compris 80 % du travail. **La stœchiométrie, c'est simplement la recette de cuisine de la chimie.**"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour ! Installe-toi. Ne te laisse pas impressionner par ce mot un peu barbare : **la stœchiométrie** (prononce *sté-kio-mé-tri*). ",
+            "start": 0,
+            "end": 133
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En réalité, c'est un concept très logique. Si tu sais suivre une recette de cuisine, tu as déjà compris 80 % du travail. **La stœchiométrie, c'est simplement la recette de cuisine de la chimie.**",
+            "start": 135,
+            "end": 330
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Voici comment ça marche, étape par étape.",
+            "start": 332,
+            "end": 373
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 375,
+            "end": 378
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately captures the high school conceptual understanding of stoichiometry as the recipe and quantitative proportions of chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "L'analogie du sandwich pour illustrer les proportions stœchiométriques",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents a concrete sandwich-making scenario to illustrate how stoichiometric ratios work in practice.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "Imagine que tu prépares des sandwichs au fromage."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. L'analogie du grilled-cheese (ou du sandwich)",
+            "start": 380,
+            "end": 432
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu prépares des sandwichs au fromage. La \"recette\", c'est :",
+            "start": 434,
+            "end": 505
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **2 tranches de pain + 1 tranche de fromage $\\rightarrow$ 1 sandwich**",
+            "start": 506,
+            "end": 578
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Si je te donne **10 tranches de pain**, combien de tranches de fromage te faut-il pour ne rien gaspiller ? ",
+            "start": 580,
+            "end": 687
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il t'en faut **5**, et tu obtiendras **5 sandwichs**. ",
+            "start": 688,
+            "end": 742
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Félicitations, tu viens de faire de la stœchiométrie ! Tu as calculé les proportions nécessaires pour que la réaction se fasse parfaitement.",
+            "start": 744,
+            "end": 884
+          },
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 886,
+            "end": 889
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The sandwich calculation (10 slices bread + 5 cheese -> 5 sandwiches) is mathematically correct and provides a valid cross-domain analogy for stoichiometric ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Coefficients stœchiométriques et conservation de la matière",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains chemical reactants, products, stoichiometric coefficients, and the law of conservation of atoms using the synthesis of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p13",
+              "quote": "En chimie, les ingrédients sont les **réactifs**, et le plat final est le **produit**."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. Le passage à la chimie : Les coefficients",
+            "start": 891,
+            "end": 939
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En chimie, les ingrédients sont les **réactifs**, et le plat final est le **produit**.",
+            "start": 941,
+            "end": 1027
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Prenons la fabrication de l'eau :",
+            "start": 1029,
+            "end": 1062
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{2 H}_2 + \\text{O}_2 \\rightarrow \\text{2 H}_2\\text{O}$$",
+            "start": 1063,
+            "end": 1125
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Regarde les grands chiffres devant les molécules (on les appelle les **coefficients stœchiométriques**) :",
+            "start": 1127,
+            "end": 1232
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le **2** devant $\\text{H}_2$",
+            "start": 1233,
+            "end": 1263
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le **1** sous-entendu devant $\\text{O}_2$",
+            "start": 1264,
+            "end": 1307
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le **2** devant $\\text{H}_2\\text{O}$",
+            "start": 1308,
+            "end": 1346
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cela se lit exactement comme la recette du sandwich : ",
+            "start": 1348,
+            "end": 1402
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*\"Il me faut 2 molécules de dihydrogène et 1 molécule de dioxygène pour fabriquer 2 molécules d'eau.\"*",
+            "start": 1403,
+            "end": 1505
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **Règle d'or de Lavoisier :** *\"Rien ne se perd, rien ne se crée, tout se transforme.\"* Tu dois toujours avoir le même nombre d'atomes à gauche (réactifs) et à droite (produits). Ici, on a 4 hydrogènes et 2 oxygènes des deux côtés. L'équation est dite **équilibrée**.",
+            "start": 1507,
+            "end": 1776
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1778,
+            "end": 1781
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation 2 H2 + O2 -> 2 H2O is correctly balanced, the stoichiometric coefficients are accurately identified, and Lavoisier's conservation of atoms is properly stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "La mole comme échelle macroscopique",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains why moles are used instead of single molecules, mentions Avogadro's number and the dozen analogy, and demonstrates how equations are read in moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p27",
+              "quote": "C'est comme quand tu achètes des œufs : tu ne les achètes pas à l'unité, tu achètes une *douzaine* (paquet de 12)."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Le problème de la balance : La Mole",
+            "start": 1783,
+            "end": 1825
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Dans la vraie vie, au laboratoire, on ne peut pas attraper \"deux molécules\" avec une pince à épiler, c'est beaucoup trop petit. On pèse des grammes avec une balance.",
+            "start": 1827,
+            "end": 1992
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Pour faire le pont entre le monde microscopique (les atomes) et notre monde (les grammes), les chimistes utilisent un \"paquet\" géant : **la mole**. ",
+            "start": 1994,
+            "end": 2142
+          },
+          {
+            "id": "p27",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* C'est comme quand tu achètes des œufs : tu ne les achètes pas à l'unité, tu achètes une *douzaine* (paquet de 12).",
+            "start": 2143,
+            "end": 2259
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Une mole, c'est un paquet d'environ $6{,}022 \\times 10^{23}$ molécules (le nombre d'Avogadro).",
+            "start": 2260,
+            "end": 2356
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc, dans notre équation :",
+            "start": 2358,
+            "end": 2385
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{2 H}_2 + \\text{O}_2 \\rightarrow \\text{2 H}_2\\text{O}$$",
+            "start": 2386,
+            "end": 2448
+          },
+          {
+            "id": "p31",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "On lit maintenant : ",
+            "start": 2449,
+            "end": 2469
+          },
+          {
+            "id": "p32",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*\"**2 moles** de $\\text{H}_2$ réagissent avec **1 mole** de $\\text{O}_2$ pour donner **2 moles** de $\\text{H}_2\\text{O}$.\"*",
+            "start": 2470,
+            "end": 2593
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2595,
+            "end": 2598
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole, the value of Avogadro's number (~6.022 x 10^23), and the interpretation of stoichiometric coefficients in terms of moles are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Réactif limitant et réactif en excès",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Explains the concepts of limiting and excess reactants using an everyday sandwich scenario before connecting them to chemical reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p36",
+              "quote": "Tu as **10 tranches de pain**, mais seulement **2 tranches de fromage** dans ton frigo. Combien de sandwichs peux-tu faire ?"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. Le piège classique : Le réactif limitant",
+            "start": 2600,
+            "end": 2647
+          },
+          {
+            "id": "p35",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Reprenons les sandwichs :",
+            "start": 2649,
+            "end": 2674
+          },
+          {
+            "id": "p36",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Tu as **10 tranches de pain**, mais seulement **2 tranches de fromage** dans ton frigo. Combien de sandwichs peux-tu faire ?",
+            "start": 2675,
+            "end": 2799
+          },
+          {
+            "id": "p37",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Seulement **2**. ",
+            "start": 2800,
+            "end": 2817
+          },
+          {
+            "id": "p38",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il te restera 6 tranches de pain sur les bras. ",
+            "start": 2819,
+            "end": 2866
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le fromage est ce qu'on appelle le **réactif limitant** : c'est lui qui s'épuise en premier et qui dicte l'arrêt de la réaction.",
+            "start": 2867,
+            "end": 2997
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* Le pain est le **réactif en excès**.",
+            "start": 2998,
+            "end": 3036
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En chimie, c'est pareil ! Le calcul stœchiométrique te permet de savoir quel ingrédient va manquer en premier.",
+            "start": 3038,
+            "end": 3148
+          },
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3150,
+            "end": 3153
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reasoning that 2 slices of cheese limit production to 2 sandwiches (leaving 6 slices of bread in excess) is correct, and the definitions of limiting and excess reactants are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "PROCEDURE",
+        "label": "Méthode en 4 étapes pour résoudre un exercice de stœchiométrie",
+        "attributes": {},
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Presents a reusable four-step procedure to solve mass-to-mass stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 5. La méthode infaillible pour résoudre un exercice",
+            "start": 3155,
+            "end": 3210
+          },
+          {
+            "id": "p44",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Quand ton professeur te donne un problème de stœchiométrie (par exemple : *\"Combien de grammes d'eau puis-je produire avec 8 grammes d'oxygène ?\"*), suis toujours ces 4 étapes :",
+            "start": 3212,
+            "end": 3389
+          },
+          {
+            "id": "p45",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **Équilibre l'équation chimique** (écris la bonne recette).",
+            "start": 3391,
+            "end": 3453
+          },
+          {
+            "id": "p46",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **Convertis les grammes en moles** (car la recette parle en moles, pas en grammes ! Formule : $n = \\frac{m}{M}$).",
+            "start": 3454,
+            "end": 3570
+          },
+          {
+            "id": "p47",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. **Utilise les proportions de la recette** (fais un produit en croix / règle de trois grâce aux coefficients).",
+            "start": 3571,
+            "end": 3683
+          },
+          {
+            "id": "p48",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. **Reconvertis les moles en grammes** si la question te demande une masse ($m = n \\times M$).",
+            "start": 3684,
+            "end": 3779
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3781,
+            "end": 3784
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The 4-step algorithm (balancing, mass-to-mole conversion n=m/M, stoichiometric mole ratio, and mole-to-mass conversion m=n*M) is the standard and correct method.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Synthèse et clôture",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Summarizes the key takeaway of stoichiometry in one sentence and closes with an invitation for further practice.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p50",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**En résumé :** ",
+            "start": 3786,
+            "end": 3802
+          },
+          {
+            "id": "p51",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stœchiométrie n'est rien d'autre que l'art de compter les molécules par paquets (les moles) pour respecter les proportions d'une réaction chimique équilibrée.",
+            "start": 3803,
+            "end": 3964
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Est-ce que cette explication te semble claire ? Veux-tu qu'on essaie de faire un petit exemple de calcul ensemble ?",
+            "start": 3966,
+            "end": 4081
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary accurately distills stoichiometry to counting molecules in moles to respect proportions in balanced reactions.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\french-english\\gemini-3.8-flash__f4ca841d3a00.json",
+    "original_sha256": "7adcfd52c75604755fb12625fd7a42483a053bb1764aa780a9e88117f758529c",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 52,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "ANALOGY": 1,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 52,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "everyday": 5,
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

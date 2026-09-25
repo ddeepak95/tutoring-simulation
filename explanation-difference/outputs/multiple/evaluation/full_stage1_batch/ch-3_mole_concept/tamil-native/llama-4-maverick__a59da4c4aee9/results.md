@@ -1,0 +1,228 @@
+# Stage 1: Tamil / mole concept
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "mole concept",
+  "observed_topic": "The mole concept for elements, compounds, and ions, Avogadro's number, and molar mass relationships",
+  "topic_match": "on_topic",
+  "reason": "The response explains the mole concept across elements, compounds, and ions, introducing Avogadro's number and relating mass in grams to the number of particles.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition of mole for elements and Avogadro's number | {"depth": "explanation"} | accurate |
+| u2 | CONCEPT | Definition of mole for chemical compounds | {"depth": "explanation"} | accurate |
+| u3 | EXAMPLE | Calculation of molecules in one mole of water | {"context": "abstract_or_hypothetical", "treatment": "worked"} | accurate |
+| u4 | CONCEPT | Definition of mole for ions | {"depth": "explanation"} | accurate |
+| u5 | EXAMPLE | Calculation of ions in one mole of sodium ions | {"context": "abstract_or_hypothetical", "treatment": "worked"} | contains_error |
+| u6 | STUDY_SUPPORT | Summary formula for the mole concept | {"subtype": "recap"} | accurate |
+
+## u1: Definition of mole for elements and Avogadro's number
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The definition of a mole of an element based on gram atomic mass and Avogadro's number is factually correct within standard introductory chemistry scope.",
+    "errors": []
+  }
+}
+```
+
+```text
+கார்பனைப் பொறுத்தவரை, மோல் என்பது அதன் அணு நிறையின் கிராம் எடையில் உள்ள அணுக்களின் எண்ணிக்கை. 12 கிராம் கார்பனில் உள்ள அணுக்களின் எண்ணிக்கை ஒரு மோல். ஒரு தனிமத்தின் ஒரு மோல் அதன் அணு நிறையின் கிராம் எடையில் உள்ள அணுக்களின் எண்ணிக்கையைக் குறிக்கிறது. ஒரு தனிமத்தின் ஒரு மோல் அணுக்களின் எண்ணிக்கை எப்போதும் 6.022 × 10^23  அணுக்களாக இருக்கும், இது அவகாட்ரோ எண் என்று அழைக்கப்படுகிறது.
+```
+
+
+## u2: Definition of mole for chemical compounds
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Accurately relates one mole of a compound to its molecular mass in grams and states that it contains 6.022 × 10^23 molecules.",
+    "errors": []
+  }
+}
+```
+
+```text
+ஒரு சேர்மத்தைப் பொறுத்தவரை, ஒரு மோல் என்பது அதன் மூலக்கூறு நிறையின் கிராம் எடையில் உள்ள மூலக்கூறுகளின் எண்ணிக்கையைக் குறிக்கிறது. ஒரு சேர்மத்தின் ஒரு மோல் மூலக்கூறுகளின் எண்ணிக்கை எப்போதும் 6.022 × 10^23 மூலக்கூறுகளாக இருக்கும்.
+```
+
+
+## u3: Calculation of molecules in one mole of water
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly states the relative molecular mass of water as 18 and deduces that 18 g contains 1 mole (6.022 × 10^23 molecules).",
+    "errors": []
+  }
+}
+```
+
+```text
+எடுத்துக்காட்டாக, நீரின் மூலக்கூறு நிறை 18. எனவே, 18 கிராம் எடையுள்ள நீரில் உள்ள மூலக்கூறுகளின் எண்ணிக்கை ஒரு மோல் ஆகும், அதாவது 6.022 × 10^23 மூலக்கூறுகள்.
+```
+
+
+## u4: Definition of mole for ions
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly defines a mole of ions in terms of its gram ionic mass and Avogadro's number.",
+    "errors": []
+  }
+}
+```
+
+```text
+ஒரு மோல் அயனிகள் என்பது அயனி நிறையின் கிராம் எடையில் உள்ள அயனிகளின் எண்ணிக்கையைக் குறிக்கிறது. அதாவது 6.022 × 10^23  அயனிகள்.
+```
+
+
+## u5: Calculation of ions in one mole of sodium ions
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The text states that the mass of a sodium ion (Na+) is 23 grams, incorrectly phrasing the molar mass / gram ionic mass as the mass of an individual ion.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "சோடியம் அயனியின் (Na+) நிறை 23 கிராம்"
+          }
+        ],
+        "description": "The statement claims that the mass of a sodium ion (Na+) is 23 grams. 23 grams is the molar mass (gram ionic mass, the mass of one mole of Na+ ions), whereas an individual sodium ion has a mass of approximately 3.82 × 10^-23 g.",
+        "correction": "சோடியம் அயனியின் அயனி நிறை 23 (அல்லது ஒரு மோல் சோடியம் அயனியின் நிறை 23 கிராம்)",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+எடுத்துக்காட்டாக, சோடியம் அயனியின் (Na+) நிறை 23 கிராம். 23 கிராம் சோடியம் அயனியில் உள்ள அயனிகளின் எண்ணிக்கை 6.022 × 10^23 அயனிகளின் ஒரு மோல் ஆகும்.
+```
+
+
+## u6: Summary formula for the mole concept
+
+```json
+{
+  "attributes": {
+    "subtype": "recap"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The summary formula accurately integrates the relationships for atoms, molecules, and ions into a single review line.",
+    "errors": []
+  }
+}
+```
+
+```text
+ஒரு பொருளின் ஒரு மோல் அதன் அணு நிறை/மூலக்கூறு நிறை/அயனி நிறை கிராம்களில் = 6.022 × 10^23  துகள்கள் (அணுக்கள்/மூலக்கூறுகள்/அயனிகள்).
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u1"
+    ],
+    "issue": "Paragraph 1 introduces the mole concept referencing carbon (12 g) before giving the general definition for elements and naming Avogadro's number. This could alternatively be split into an illustrative EXAMPLE unit for carbon followed by a CONCEPT unit for elements in general.",
+    "proposed_resolution": "Kept together as a single CONCEPT unit because the carbon sentence serves as the opening definition/basis for elements in general rather than being introduced as a separate illustrative problem."
+  },
+  {
+    "unit_ids": [
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "issue": "Paragraphs 2 and 3 could each be kept as single units combining concept and example rather than splitting them into CONCEPT and EXAMPLE units.",
+    "proposed_resolution": "Split into distinct CONCEPT and EXAMPLE units because the examples are explicitly introduced with 'எடுத்துக்காட்டாக' ('for example') and carry out specific quantitative applications."
+  },
+  {
+    "unit_ids": [
+      "u3",
+      "u5"
+    ],
+    "issue": "The treatment attribute for u3 and u5 could be viewed as 'illustrative' rather than 'worked' since the operations are direct single-step substitutions.",
+    "proposed_resolution": "Assigned 'worked' because both examples state an initial given value (molecular/ionic mass) and explicitly deduce the corresponding mole count and particle quantity ('எனவே...')."
+  },
+  {
+    "unit_ids": [
+      "u6"
+    ],
+    "issue": "The concluding equation could be classified as a CONCEPT (statement) rather than STUDY_SUPPORT (recap).",
+    "proposed_resolution": "Classified as STUDY_SUPPORT (recap) because it explicitly functions as a closing summary of the earlier sections."
+  }
+]
+```
+
+## Unassigned text for coverage review

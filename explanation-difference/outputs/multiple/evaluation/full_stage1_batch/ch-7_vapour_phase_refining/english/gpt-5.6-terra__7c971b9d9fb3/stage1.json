@@ -1,0 +1,128 @@
+{
+  "topic_relevance": {
+    "requested_topic": "vapour phase refining",
+    "observed_topic": "vapour phase refining of metals, including its principle, steps, and examples (Mond process and Van Arkel process)",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly covers the definition, principle, general steps, and classic chemical examples of vapour phase refining (Mond process for nickel and Van Arkel process for titanium/zirconium).",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition, principle, and general stages of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "**Vapour phase refining** is a method used to purify metals by converting the impure metal into a **volatile compound** (a compound that easily changes into vapour). This vapour is then decomposed to obtain the **pure metal**.\n\n### Principle\nSome metals form gaseous compounds with certain chemicals at low temperatures. When these gaseous compounds are heated at a higher temperature, they break down and deposit the pure metal.\n\n### Steps involved\n1. **Formation of a volatile compound**  \n   The impure metal reacts with a suitable gas or chemical to form a volatile compound.\n\n2. **Separation from impurities**  \n   The volatile compound turns into vapour and separates from the non-volatile impurities, which are left behind.\n\n3. **Decomposition of vapour**  \n   The vapour is heated or passed over a hot surface. It decomposes and deposits pure metal.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definitions, principle of reversible formation/decomposition at different temperatures, and procedural steps accurately describe the mechanism of vapour phase refining.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Mond process for the purification of nickel",
+      "excerpts": [
+        {
+          "text": "## Example 1: Mond Process for Nickel\n\nNickel is purified using **carbon monoxide**.\n\n### Step 1: Formation of nickel carbonyl\nImpure nickel reacts with carbon monoxide at about **330–350 K**:\n\n\\[\n\\text{Ni} + 4\\text{CO} \\rightarrow \\text{Ni(CO)}_4\n\\]\n\nNickel tetracarbonyl, \\(\\text{Ni(CO)}_4\\), is a volatile gas.\n\n### Step 2: Decomposition\nThe gas is heated to about **450–470 K**:\n\n\\[\n\\text{Ni(CO)}_4 \\rightarrow \\text{Ni} + 4\\text{CO}\n\\]\n\nPure nickel is deposited, while carbon monoxide can be reused.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The temperatures (330–350 K for formation of volatile nickel tetracarbonyl and 450–470 K for decomposition), balanced chemical reactions, and operational description of the Mond process are factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Van Arkel process for the purification of titanium",
+      "excerpts": [
+        {
+          "text": "## Example 2: Van Arkel Process for Titanium and Zirconium\n\nTitanium or zirconium is purified by reacting it with **iodine**.\n\nFor titanium:\n\n\\[\n\\text{Ti} + 2\\text{I}_2 \\rightarrow \\text{TiI}_4\n\\]\n\nTitanium tetraiodide (\\(\\text{TiI}_4\\)) is volatile. Its vapour is passed over a hot tungsten filament, where it decomposes:\n\n\\[\n\\text{TiI}_4 \\rightarrow \\text{Ti} + 2\\text{I}_2\n\\]\n\nPure titanium is deposited on the filament.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The reaction of titanium with iodine to form volatile titanium tetraiodide and its subsequent thermal decomposition on a hot tungsten filament are factually accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of the vapour phase refining process flow",
+      "excerpts": [
+        {
+          "text": "### In short\nVapour phase refining works because:\n\n> **Impure metal → volatile compound → vapour → heating → pure metal**\n\nIt is mainly used for metals that can form volatile compounds, such as **nickel, titanium, and zirconium**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The flow diagram and mentioned metals correctly summarize the essence and common applications of vapour phase refining.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1"
+      ],
+      "issue": "The 'Steps involved' section could potentially be classified as a distinct PROCEDURE unit rather than part of the initial CONCEPT unit.",
+      "proposed_resolution": "Kept together within u1 as a CONCEPT because the steps describe the general conceptual mechanism of vapour phase refining directly continuing from the definition and principle, following the guideline to prefer keeping uncertain splits within one teaching episode together."
+    },
+    {
+      "unit_ids": [
+        "u2",
+        "u3"
+      ],
+      "issue": "Whether the treatment attribute for the chemical examples should be 'worked' or 'illustrative'.",
+      "proposed_resolution": "Assigned 'worked' because both examples trace a multi-step qualitative reaction pathway with specific conditions and balanced chemical equations to achieve the purified metal product, rather than merely mentioning the reactions illustratively."
+    }
+  ]
+}

@@ -1,0 +1,653 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "46fb6b860bdbd71b3d6f12503f7ad0619998d53dc5da27e6906c8eb00dbf9198",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "mole concept",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The response explains the mole concept, Avogadro's number, molar mass, conversion formulas, a worked example, and practice problems.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s2",
+        "label": "Purpose of the mole concept"
+      },
+      {
+        "id": "s3",
+        "label": "Key definitions: mole, molar mass, and molecular weight"
+      },
+      {
+        "id": "s4",
+        "label": "Mole calculation example"
+      },
+      {
+        "id": "s5",
+        "label": "Conversion formulas between moles, mass, and particles"
+      },
+      {
+        "id": "s6",
+        "label": "Practice exercises"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of a mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines the mole as a unit of measurement for counting particles, using an analogy to a dozen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "Just like how a dozen represents 12 items"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The mole concept! A fundamental idea in chemistry that can be a bit tricky to grasp at first, but don't worry, I'm here to help you understand it clearly.",
+            "start": 0,
+            "end": 154
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**What is a mole?**",
+            "start": 156,
+            "end": 175
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "A mole is a unit of measurement in chemistry that represents a specific amount of a substance. Just like how a dozen represents 12 items, a mole represents a certain number of particles (atoms or molecules).",
+            "start": 177,
+            "end": 384
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly defines the mole as a unit representing a specific quantity of particles and appropriately compares it to a dozen.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Avogadro's number",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines Avogadro's number (6.022 x 10^23) and provides a visualization scale comparison using grains of sand covering the Earth.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**The number: Avogadro's Number**",
+            "start": 386,
+            "end": 419
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The number of particles in one mole is known as Avogadro's Number, named after the Italian scientist Amedeo Avogadro. This number is equal to 6.022 x 10^23 particles. That's a huge number! To put it into perspective, if you had 6.022 x 10^23 grains of sand, you could cover the entire surface of the Earth with a layer of sand about 1 cm thick!",
+            "start": 421,
+            "end": 765
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Avogadro's number is accurately stated as 6.022 x 10^23, and the standard illustrative sand-covering-Earth analogy is factually reasonable for fine sand.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Why the mole concept is needed",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why chemists use moles due to the microscopic scale of atoms/molecules and the need to bridge the particle count to measurable amounts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Why do we need the mole concept?**",
+            "start": 767,
+            "end": 803
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "In chemistry, we often deal with very small particles like atoms and molecules. It's impractical to count them individually, so we need a way to express large quantities of these particles. The mole concept helps us to do just that. It allows us to convert between the amount of a substance and the number of particles it contains.",
+            "start": 805,
+            "end": 1136
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes the practical necessity of the mole in bridging microscopic entities to macroscopic quantities.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Key terminology and definitions",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Lists direct definitions of mole, molar mass, and molecular weight.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Key definitions:**",
+            "start": 1138,
+            "end": 1158
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Mole (mol)**: The unit of measurement that represents 6.022 x 10^23 particles (Avogadro's Number).",
+            "start": 1160,
+            "end": 1263
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Molar mass**: The mass of one mole of a substance, expressed in grams per mole (g/mol).",
+            "start": 1264,
+            "end": 1356
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Molecular weight**: The sum of the atomic weights of the atoms in a molecule.",
+            "start": 1357,
+            "end": 1439
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All three definitions (mole, molar mass in g/mol, and molecular weight) are standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked example calculating carbon atoms",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates how to calculate the number of carbon atoms in 2 moles of carbon.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**How to use the mole concept?**",
+            "start": 1441,
+            "end": 1473
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let's consider an example:",
+            "start": 1475,
+            "end": 1501
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Suppose you have 1 mole of carbon atoms (C). The molar mass of carbon is 12 g/mol, which means that 1 mole of carbon atoms weighs 12 grams.",
+            "start": 1503,
+            "end": 1642
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Using Avogadro's Number, we know that 1 mole of carbon contains 6.022 x 10^23 carbon atoms.",
+            "start": 1644,
+            "end": 1735
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Now, let's say you want to find the number of atoms in 2 moles of carbon. You can simply multiply the number of moles by Avogadro's Number:",
+            "start": 1737,
+            "end": 1876
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2 mol x 6.022 x 10^23 atoms/mol = 1.2044 x 10^24 atoms",
+            "start": 1878,
+            "end": 1932
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of carbon (12 g/mol) and the multiplication (2 mol * 6.022 x 10^23 atoms/mol = 1.2044 x 10^24 atoms) are completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "PROCEDURE",
+        "label": "Conversion formulas",
+        "attributes": {},
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides reusable mathematical formulas to convert between moles, mass, and number of particles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Converting between moles, mass, and number of particles**",
+            "start": 1934,
+            "end": 1993
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "You can use the following formulas to convert between moles, mass, and number of particles:",
+            "start": 1995,
+            "end": 2086
+          },
+          {
+            "id": "p20",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1. **Moles to mass**: mass (g) = number of moles x molar mass (g/mol)",
+            "start": 2088,
+            "end": 2157
+          },
+          {
+            "id": "p21",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2. **Mass to moles**: number of moles = mass (g) / molar mass (g/mol)",
+            "start": 2158,
+            "end": 2227
+          },
+          {
+            "id": "p22",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "3. **Moles to number of particles**: number of particles = number of moles x Avogadro's Number",
+            "start": 2228,
+            "end": 2322
+          },
+          {
+            "id": "p23",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "4. **Number of particles to moles**: number of moles = number of particles / Avogadro's Number",
+            "start": 2323,
+            "end": 2417
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All four conversion formulas connecting moles, mass, molar mass, and particle counts are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Practice exercises",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Provides practice exercises for the student to solve using the mole concept.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Practice makes perfect!**",
+            "start": 2419,
+            "end": 2446
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Now that you've understood the basics of the mole concept, it's time to practice some problems. I'll give you a few exercises to try:",
+            "start": 2448,
+            "end": 2581
+          },
+          {
+            "id": "p26",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. Calculate the number of atoms in 3 moles of oxygen (O2).",
+            "start": 2583,
+            "end": 2642
+          },
+          {
+            "id": "p27",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. Find the mass of 2 moles of sodium chloride (NaCl).",
+            "start": 2643,
+            "end": 2697
+          },
+          {
+            "id": "p28",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. How many moles are present in 24 grams of carbon?",
+            "start": 2698,
+            "end": 2750
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Feel free to ask me if you need help with these exercises or have any further questions on the mole concept!",
+            "start": 2752,
+            "end": 2860
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The practice problems are clear, chemically valid, and well-suited for high school practice on mole conversions.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\english\\llama-4-maverick__786f8e76263d.json",
+    "original_sha256": "e974cf380578e5b0ce87f2f93ac5d6099f4581d6d99ea497df53a50a3c70fa51",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 29,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 1,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 29,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 1,
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

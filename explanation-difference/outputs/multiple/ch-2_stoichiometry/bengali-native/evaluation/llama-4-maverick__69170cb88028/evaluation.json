@@ -1,0 +1,368 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "b61a84131b9d15726d4194853bc88305487f19944b7c377e2832de61f08750a7",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
+      "reason": "The response clearly and accurately explains chemical stoichiometry (রাসায়নিক সমীকরণমিতি) in Bengali, covering its basic definition, an everyday recipe analogy, a worked mole calculation example for water synthesis, and related concepts such as limiting reactants, excess reactants, and percent yield.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Cake recipe analogy for stoichiometry"
+      },
+      {
+        "id": "s3",
+        "label": "Worked stoichiometric calculation for water formation"
+      },
+      {
+        "id": "s4",
+        "label": "Key stoichiometry terms: limiting reactant, excess reactant, and percent yield"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the relationship between the mole amounts of reactants and products in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক সমীকরণমিতি বা স্টয়শিওমেট্রি রসায়নের একটি গুরুত্বপূর্ণ বিষয়। রাসায়নিক বিক্রিয়ার আগে বিক্রিয়কগুলোর মোল সংখ্যা এবং বিক্রিয়ার পরে উৎপাদের মোল সংখ্যার মধ্যে যে সম্পর্ক থাকে তাকেই রাসায়নিক সমীকরণমিতি বলা হয়।",
+            "start": 0,
+            "end": 220
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately captures the core meaning of stoichiometry as the quantitative relationship among moles of reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Baking cake analogy for stoichiometric proportions",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the everyday process of following a recipe to bake a cake to explain how fixed ratios of reactants produce fixed amounts of product.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p2",
+              "quote": "ধরো, তুমি একটি কেক বানাতে চাও। কেক বানানোর জন্য তোমার কিছু উপাদান প্রয়োজন, যেমন ময়দা, চিনি, ডিম ইত্যাদি।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক সমীকরণমিতি বোঝার জন্য একটি সহজ উদাহরণ দিয়ে শুরু করা যাক। ধরো, তুমি একটি কেক বানাতে চাও। কেক বানানোর জন্য তোমার কিছু উপাদান প্রয়োজন, যেমন ময়দা, চিনি, ডিম ইত্যাদি। এখন, যদি তুমি কেক বানানোর রেসিপি অনুসরণ করো, তাহলে তুমি দেখবে যে একটি নির্দিষ্ট পরিমাণ ময়দা, চিনি এবং ডিম দিয়ে একটি নির্দিষ্ট সংখ্যক কেক তৈরি করা যায়।",
+            "start": 222,
+            "end": 550
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক বিক্রিয়ার ক্ষেত্রেও একই ব্যাপার ঘটে। বিক্রিয়কগুলো নির্দিষ্ট অনুপাতে মিশে উৎপাদ তৈরি করে। এই অনুপাতগুলো রাসায়নিক সমীকরণ দ্বারা প্রকাশ করা হয়।",
+            "start": 552,
+            "end": 706
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately illustrates how fixed proportions in chemical reactions correspond to fixed ratios of recipe ingredients.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Mole calculation for the formation of water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a full worked example deriving required moles of oxygen from a given amount of hydrogen using the balanced reaction 2H2 + O2 -> 2H2O.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উদাহরণস্বরূপ, হাইড্রোজেন এবং অক্সিজেন গ্যাসের মধ্যে বিক্রিয়ায় পানি তৈরি হয়। এই বিক্রিয়ার রাসায়নিক সমীকরণ হলো:",
+            "start": 708,
+            "end": 822
+          },
+          {
+            "id": "p5",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H₂ + O₂ → 2H₂O",
+            "start": 824,
+            "end": 839
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সমীকরণ থেকে আমরা দেখতে পাচ্ছি যে, 2 মোল হাইড্রোজেন গ্যাস 1 মোল অক্সিজেন গ্যাসের সাথে বিক্রিয়া করে 2 মোল পানি তৈরি করে।",
+            "start": 841,
+            "end": 963
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখন, যদি আমাদের কাছে 4 মোল হাইড্রোজেন গ্যাস থাকে, তাহলে কত মোল অক্সিজেন গ্যাসের প্রয়োজন হবে?",
+            "start": 965,
+            "end": 1058
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উত্তরটি খুঁজে বের করার জন্য, আমরা রাসায়নিক সমীকরণ থেকে হাইড্রোজেন এবং অক্সিজেনের মোল অনুপাত ব্যবহার করতে পারি। সমীকরণ অনুসারে, হাইড্রোজেন এবং অক্সিজেনের মোল অনুপাত হলো 2:1।",
+            "start": 1060,
+            "end": 1233
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সুতরাং, 4 মোল হাইড্রোজেন গ্যাসের জন্য আমাদের প্রয়োজন হবে (4/2) = 2 মোল অক্সিজেন গ্যাস।",
+            "start": 1235,
+            "end": 1322
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এইভাবে, রাসায়নিক সমীকরণমিতি ব্যবহার করে আমরা বিক্রিয়ক এবং উৎপাদের পরিমাণ নির্ধারণ করতে পারি।",
+            "start": 1324,
+            "end": 1418
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation 2H2 + O2 -> 2H2O is properly balanced, and the calculation using the 2:1 mole ratio to determine that 4 moles of H2 need 2 moles of O2 is correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Additional stoichiometric concepts and summary",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines key stoichiometric concepts including limiting reactant, excess reactant, and percent yield, followed by concluding remarks on the significance of stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক সমীকরণমিতির আরও কিছু গুরুত্বপূর্ণ দিক রয়েছে, যেমন:",
+            "start": 1420,
+            "end": 1481
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*   **সীমিত বিক্রিয়ক:** কোনো বিক্রিয়ায় যদি একটি বিক্রিয়ক সম্পূর্ণরূপে ব্যবহৃত হয়ে যায়, তাহলে সেই বিক্রিয়কটিকে সীমিত বিক্রিয়ক বলা হয়। সীমিত বিক্রিয়ক বিক্রিয়ার পরিমাণ নির্ধারণ করে।",
+            "start": 1483,
+            "end": 1672
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*   **অতিরিক্ত বিক্রিয়ক:** যে বিক্রিয়কটি বিক্রিয়ার পরে অবশিষ্ট থাকে, তাকে অতিরিক্ত বিক্রিয়ক বলা হয়।",
+            "start": 1673,
+            "end": 1777
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*   **শতকরা ফলন:** কোনো বিক্রিয়ায় তাত্ত্বিকভাবে যে পরিমাণ উৎপাদ পাওয়া উচিত, তার সাথে প্রকৃতপক্ষে প্রাপ্ত উৎপাদের অনুপাতকে শতকরা ফলন বলা হয়।",
+            "start": 1778,
+            "end": 1921
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক সমীকরণমিতি রসায়নের একটি গুরুত্বপূর্ণ হাতিয়ার। এটি রাসায়নিক বিক্রিয়ার পরিমাণগত দিক সম্পর্কে আমাদের বোঝার সুযোগ করে দেয়। রাসায়নিক সমীকরণমিতি বোঝার মাধ্যমে আমরা বিভিন্ন রাসায়নিক প্রক্রিয়াকে আরও ভালোভাবে নিয়ন্ত্রণ করতে পারি এবং নতুন নতুন রাসায়নিক পদার্থ তৈরি করতে পারি।",
+            "start": 1923,
+            "end": 2208
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The qualitative definitions of limiting reactant, excess reactant, and percent yield are correct for an introductory high school level.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-native\\llama-4-maverick__69170cb88028.json",
+    "original_sha256": "1e7349447e19a8743a15c6e051b77d75653db3af271059b00652170f50b8dc40",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 4,
+    "substantive_content_units": 4,
+    "total_passages": 15,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "ANALOGY": 1,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 15,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 3,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 4
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

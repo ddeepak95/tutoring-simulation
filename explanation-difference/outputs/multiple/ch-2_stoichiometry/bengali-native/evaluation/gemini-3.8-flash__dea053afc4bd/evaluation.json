@@ -1,0 +1,1029 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "d28a7002c47f942fe152dab569f928cb173e323df89487747c61053ee9695996",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The response accurately and directly explains chemical stoichiometry in Bengali for a high school student, covering basic definitions, key prerequisites (balanced equations, mole, molar mass), a worked example, and a general problem-solving procedure.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Intuition of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Key Concepts: Balanced Equation"
+      },
+      {
+        "id": "s3",
+        "label": "Key Concepts: Mole"
+      },
+      {
+        "id": "s4",
+        "label": "Key Concepts: Molar Mass"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Example: Mass-Mass Calculation"
+      },
+      {
+        "id": "s6",
+        "label": "General Procedure for Solving Stoichiometry Problems"
+      },
+      {
+        "id": "s7",
+        "label": "Mnemonic Rhyme for Problem-Solving Steps"
+      },
+      {
+        "id": "s8",
+        "label": "Summary and Encouragement"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Analogy of making an omelet to explain stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses the real-world cooking analogy of an omelet recipe (eggs and salt to omelet) to explain the concept of stoichiometric ratios between reactants and products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p7",
+              "quote": "মনে করো, তুমি ডিমের অমলেট বানাবে।"
+            },
+            {
+              "passage_id": "p8",
+              "quote": "১টি ডিম + ১ চিমটি লবণ = ১টি অমলেট"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "হ্যালো! কেমন আছো? রসায়ন বিষয়টাকে অনেকে একটু ভয় পায়, কিন্তু সত্যি বলতে রসায়ন আসলে রান্নাবান্নার মতোই মজার একটা বিষয়! ",
+            "start": 0,
+            "end": 116
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আজকে আমরা রসায়নের খুবই গুরুত্বপূর্ণ এবং মজার একটা টপিক নিয়ে কথা বলব, যার নাম **“রাসায়নিক সমীকরণমিতি” (Stoichiometry)**। নামটা শুনে বেশ কঠিন আর ভারী মনে হলেও, আসল ব্যাপারটা কিন্তু দারুণ সহজ! ",
+            "start": 118,
+            "end": 309
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "চলো, একদম সহজ করে বিষয়টা বুঝে নেওয়া যাক।",
+            "start": 311,
+            "end": 351
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 353,
+            "end": 356
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ১. সমীকরণমিতি আসলে কী?",
+            "start": 358,
+            "end": 384
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "খুব সহজ কথায়: **রাসায়নিক সমীকরণমিতি হলো রসায়নের ‘রেসিপি’ (Recipe) বা হিসাব-নিকাশ।**",
+            "start": 385,
+            "end": 468
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "মনে করো, তুমি ডিমের অমলেট বানাবে। তোমার রেসিপি হলো:",
+            "start": 470,
+            "end": 521
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **১টি ডিম + ১ চিমটি লবণ = ১টি অমলেট**",
+            "start": 522,
+            "end": 561
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এখন আমি যদি তোমাকে বলি, \"তোমার বন্ধুদের জন্য ৫টি অমলেট বানাতে হবে।\" তুমি কিন্তু সাথে সাথেই হিসাব করে বলে দেবে— \"তাহলে ৫টি ডিম আর ৫ চিমটি লবণ লাগবে!\" ",
+            "start": 563,
+            "end": 712
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই যে তুমি আগে থেকেই হিসাব করে ফেললে যে কতটুকু উৎপাদ (অমলেট) পেতে হলে ঠিক কতটুকু বিক্রিয়ক (ডিম ও লবণ) লাগবে—ঠিক এই হিসাবটাই রসায়নে যখন পরমাণু বা অণুর ক্ষেত্রে করা হয়, তাকে বলে **রাসায়নিক সমীকরণমিতি**।",
+            "start": 714,
+            "end": 914
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy correctly relates the proportional relationship of ingredients in a recipe to reactants and products in stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Role of balanced chemical equations in stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why a balanced equation is necessary for stoichiometric calculations and demonstrates particle/molecular interpretation using the synthesis of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 916,
+            "end": 919
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ২. সমীকরণমিতির ৩টি মূল চাবিকাঠি:",
+            "start": 921,
+            "end": 957
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতির অংক বা হিসাবগুলো পানির মতো সহজ করার জন্য তোমাকে ৩টি জিনিস মাথায় রাখতে হবে:",
+            "start": 959,
+            "end": 1045
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### ক) সমতাকৃত সমীকরণ (Balanced Equation):",
+            "start": 1047,
+            "end": 1090
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এটা হলো রসায়নের মূল রেসিপি। সমীকরণটি ব্যালেন্স বা সমতা করা না থাকলে কিন্তু হিসাব ভুল হবে! ",
+            "start": 1091,
+            "end": 1181
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যেমন: পানি তৈরির বিক্রিয়া—",
+            "start": 1182,
+            "end": 1208
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1209,
+            "end": 1241
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এর মানে হলো: **২ অণু হাইড্রোজেন** গ্যাসের সাথে **১ অণু অক্সিজেন** গ্যাস মিলে **২ অণু পানি** তৈরি করে।",
+            "start": 1242,
+            "end": 1343
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The chemical equation 2H2 + O2 -> 2H2O is properly balanced and the molecular ratio interpretation is scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The mole as a chemical unit of measurement",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the concept of a mole by drawing a parallel to a dozen, and reinterprets the balanced equation in terms of moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p20",
+              "quote": "দোকানে গিয়ে যেমন আমরা ১২টি ডিম না বলে ‘১ ডজন’ বলি"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### খ) মোল (Mole) — রসায়নের ‘ডজন’:",
+            "start": 1345,
+            "end": 1380
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "দোকানে গিয়ে যেমন আমরা ১২টি ডিম না বলে ‘১ ডজন’ বলি, রসায়নে বিজ্ঞানীদের পরমাণু বা অণু মাপার একক হলো **‘মোল’**। ",
+            "start": 1381,
+            "end": 1490
+          },
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "উপরের সমীকরণটাকে আমরা মোলের ভাষায় বলতে পারি:",
+            "start": 1491,
+            "end": 1535
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **২ মোল $H_2$ + ১ মোল $O_2$ = ২ মোল $H_2O$**",
+            "start": 1536,
+            "end": 1582
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole as a counting unit analogous to a dozen and its application to stoichiometric coefficients are correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Molar mass definition and examples",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines molar mass as mass in grams of 1 mole of a substance and gives standard values for H2, O2, and H2O.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "#### গ) মোলার ভর (Molar Mass):",
+            "start": 1584,
+            "end": 1614
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "১ মোল পদার্থের গ্রাম এককে ভর। ",
+            "start": 1615,
+            "end": 1645
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "যেমন: ",
+            "start": 1646,
+            "end": 1652
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* ১ মোল হাইড্রোজেনের ($H_2$) ভর = $2$ গ্রাম।",
+            "start": 1653,
+            "end": 1697
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* ১ মোল অক্সিজেনের ($O_2$) ভর = $32$ গ্রাম।",
+            "start": 1698,
+            "end": 1741
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* ১ মোল পানির ($H_2O$) ভর = $18$ গ্রাম।",
+            "start": 1742,
+            "end": 1781
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and the molar mass values for hydrogen (2 g), oxygen (32 g), and water (18 g) are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked mass-mass calculation of water formation from hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents a fully worked-out stoichiometric calculation determining the mass of water produced from 4 g of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1783,
+            "end": 1786
+          },
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৩. চলো একটা ছোট উদাহরণ দিয়ে বুঝে নিই!",
+            "start": 1788,
+            "end": 1829
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**প্রশ্ন:** ৪ গ্রাম হাইড্রোজেন ($H_2$) গ্যাস পর্যাপ্ত অক্সিজেনের সাথে বিক্রিয়া করলে কত গ্রাম পানি ($H_2O$) তৈরি হবে?",
+            "start": 1831,
+            "end": 1947
+          },
+          {
+            "id": "p32",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমাধানের ধাপগুলো দেখো (খুবই সহজ ঐকিক নিয়ম):**",
+            "start": 1949,
+            "end": 1996
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ১: সমীকরণ লেখা ও সমতা করা**",
+            "start": 1998,
+            "end": 2031
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 2032,
+            "end": 2064
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ২: গ্রাম ভর হিসাব করা**",
+            "start": 2066,
+            "end": 2095
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* হাইড্রোজেনের ভর = $2 \\times (1 \\times 2) = 4$ গ্রাম",
+            "start": 2096,
+            "end": 2149
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* পানির ভর = $2 \\times (1 \\times 2 + 16) = 2 \\times 18 = 36$ গ্রাম",
+            "start": 2150,
+            "end": 2216
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ৩: এবার ঐকিক নিয়মে হিসাব করো**",
+            "start": 2218,
+            "end": 2254
+          },
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ থেকে আমরা দেখতে পাচ্ছি:",
+            "start": 2255,
+            "end": 2285
+          },
+          {
+            "id": "p40",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> ৪ গ্রাম $H_2$ থেকে পানি পাওয়া যায় = **৩৬ গ্রাম**।",
+            "start": 2286,
+            "end": 2337
+          },
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ব্যস! কত সহজে উত্তর বের হয়ে গেল! তোমাকে আলাদা করে কোনো জটিল হিসাবও করতে হলো না।",
+            "start": 2339,
+            "end": 2418
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculation 4 g H2 yielding 36 g H2O based on 2H2 + O2 -> 2H2O is mathematically and chemically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "PROCEDURE",
+        "label": "Four-step general procedure for solving stoichiometry problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Details the standard step-by-step method to solve any stoichiometry problem: balance equation, convert to moles, find mole ratio, and convert to required unit.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2420,
+            "end": 2423
+          },
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ৪. শিক্ষকের স্পেশাল টিপস (যেকোনো অংক সমাধানের গোপন সূত্র):",
+            "start": 2425,
+            "end": 2487
+          },
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "পরীক্ষায় যখনই সমীকরণমিতির কোনো অংক আসবে, মনে মনে এই ৪টি ধাপ মনে রাখবে:",
+            "start": 2489,
+            "end": 2559
+          },
+          {
+            "id": "p45",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **সমীকরণ লিখবে এবং ব্যালেন্স করবে।**",
+            "start": 2561,
+            "end": 2600
+          },
+          {
+            "id": "p46",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. প্রশ্নে যার পরিমাণ দেওয়া আছে, তাকে **‘মোলে’ (Mole)** রূপান্তর করবে।",
+            "start": 2601,
+            "end": 2671
+          },
+          {
+            "id": "p47",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. সমীকরণের অনুপাত দেখে নির্ণেয় পদার্থের **মোল সংখ্যা** বের করবে।",
+            "start": 2672,
+            "end": 2737
+          },
+          {
+            "id": "p48",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. সবশেষে সেই মোলকে প্রশ্নে যা চেয়েছে (গ্রামে নাকি লিটারে) তাতে রূপান্তর করে নেবে।",
+            "start": 2738,
+            "end": 2820
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed sequence of steps is the standard, valid algorithm for chemical stoichiometry calculations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Mnemonic rhyme for stoichiometric steps",
+        "attributes": {
+          "subtype": "mnemonic"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a concise Bengali rhyming summary/mnemonic to help students memorize the stoichiometric calculation procedure.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p49",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **সংক্ষেপে মনে রাখার ছন্দ:**  ",
+            "start": 2822,
+            "end": 2854
+          },
+          {
+            "id": "p50",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> দেওয়া আছে গ্রামে $\\rightarrow$ নাও তাকে মোলে $\\rightarrow$ অনুপাত করো সমীকরণ দেখে $\\rightarrow$ রূপান্তর করো নিজের মতো করে!",
+            "start": 2855,
+            "end": 2980
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The mnemonic accurately reflects the logical order of steps in stoichiometric conversions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap and teacher's closing reassurance",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Summarizes the topic by comparing stoichiometry to elementary unitary method and offers support for further questions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p53",
+              "quote": "শুধু উপাদানগুলো চাল-ডালের বদলে হাইড্রোজেন, অক্সিজেন বা নাইট্রোজেন!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p51",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2982,
+            "end": 2985
+          },
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**শেষ কথা:**",
+            "start": 2987,
+            "end": 2999
+          },
+          {
+            "id": "p53",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "রাসায়নিক সমীকরণমিতি মোটেও কোনো ভয়ের বিষয় নয়, এটা স্রেফ ক্লাস ফাইভের **ঐকিক নিয়ম**; শুধু উপাদানগুলো চাল-ডালের বদলে হাইড্রোজেন, অক্সিজেন বা নাইট্রোজেন! ",
+            "start": 3000,
+            "end": 3151
+          },
+          {
+            "id": "p54",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তোমার কি এই বিষয়ে কোনো জায়গায় বুঝতে সমস্যা হচ্ছে? কোনো নির্দিষ্ট অংক নিয়ে কি কনফিউশন আছে? আমাকে নিঃসংকোচে বলতে পারো, আমি আবার বুঝিয়ে দেব!",
+            "start": 3153,
+            "end": 3290
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Framing stoichiometric calculations as proportion/unitary method with chemical quantities is conceptually sound and pedagogically standard.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-native\\gemini-3.8-flash__dea053afc4bd.json",
+    "original_sha256": "5434a4705db485ac7637efb5f95d820ed5b065d5ae8954eb46d07b6005c7c7ff",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 54,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 3,
+      "EXAMPLE": 1,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 2
+    },
+    "nested_passages": 54,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "everyday": 3,
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

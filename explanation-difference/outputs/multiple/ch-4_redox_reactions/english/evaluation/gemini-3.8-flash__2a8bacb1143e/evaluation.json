@@ -1,0 +1,1092 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "5306315218b9ae6de99715424259b2cfe71a0b07421fe121dd598fbbf4c8eacb",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "redox reactions",
+      "observed_topic": "redox reactions",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The explanation is entirely focused on redox reactions, covering their fundamental definition as coupled electron transfer processes, standard mnemonics, clarification of reduction terminology, a worked chemical example, oxidizing and reducing agents, real-world manifestations, and a quick-check practice question.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of redox reactions and coupled electron transfer"
+      },
+      {
+        "id": "s2",
+        "label": "Redox mnemonics (OIL RIG and LEO GER)"
+      },
+      {
+        "id": "s3",
+        "label": "Reduction terminology and negative electron charge"
+      },
+      {
+        "id": "s4",
+        "label": "Worked example: formation of sodium chloride"
+      },
+      {
+        "id": "s5",
+        "label": "Oxidizing agents and reducing agents"
+      },
+      {
+        "id": "s6",
+        "label": "Real-world examples of redox reactions"
+      },
+      {
+        "id": "s7",
+        "label": "Practice check on oxidation and reduction"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of redox reactions as coupled oxidation and reduction",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces redox reactions as the portmanteau of reduction and oxidation, explaining that electron transfer requires both processes to occur simultaneously.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p2",
+              "quote": "Have you ever wondered why a sliced apple turns brown, how your smartphone battery holds a charge, or why an old bicycle gets rusty?"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Welcome to chemistry class! Today, we are going to tackle one of the most important concepts in science: **Redox Reactions**. ",
+            "start": 0,
+            "end": 126
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Have you ever wondered why a sliced apple turns brown, how your smartphone battery holds a charge, or why an old bicycle gets rusty? ",
+            "start": 128,
+            "end": 261
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The answer to all three is the exact same thing: **a redox reaction**.",
+            "start": 263,
+            "end": 333
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let’s break it down so it makes complete sense.",
+            "start": 335,
+            "end": 382
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 384,
+            "end": 387
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. What Does \"Redox\" Even Mean?",
+            "start": 389,
+            "end": 424
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "The word **Redox** is a portmanteau (a blend of two words):",
+            "start": 426,
+            "end": 485
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   **Red** = **Reduction**",
+            "start": 486,
+            "end": 513
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   **Ox** = **Oxidation**",
+            "start": 514,
+            "end": 540
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Here is the golden rule of redox: **They are a package deal.** You cannot have oxidation without reduction, and you cannot have reduction without oxidation. ",
+            "start": 542,
+            "end": 699
+          },
+          {
+            "id": "p11",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Think of it like a game of catch. One person cannot *catch* a ball unless another person *throws* it. In chemistry, the \"ball\" is an **electron ($e^-$)**.",
+            "start": 701,
+            "end": 855
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 857,
+            "end": 860
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines redox as the pairing of reduction and oxidation and correctly explains that electron transfer requires one species to lose electrons while another gains them.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "STUDY_SUPPORT",
+        "label": "Mnemonics for electron transfer: OIL RIG and LEO GER",
+        "attributes": {
+          "subtype": "mnemonic"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents standard chemistry mnemonics (OIL RIG and LEO GER) to help students recall the definitions of oxidation and reduction in terms of electron movement.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. The Golden Mnemonic: OIL RIG",
+            "start": 862,
+            "end": 897
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "In high school chemistry, the easiest way to remember what is happening to the electrons is a simple phrase:",
+            "start": 899,
+            "end": 1007
+          },
+          {
+            "id": "p15",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **OIL RIG**",
+            "start": 1009,
+            "end": 1022
+          },
+          {
+            "id": "p16",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "> *   **O**xidation **I**s **L**oss (of electrons)",
+            "start": 1023,
+            "end": 1073
+          },
+          {
+            "id": "p17",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "> *   **R**eduction **I**s **G**ain (of electrons)",
+            "start": 1074,
+            "end": 1124
+          },
+          {
+            "id": "p18",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Another popular one you might hear is: **LEO** the lion says **GER** — **L**ose **E**lectrons **O**xidation / **G**ain **E**lectrons **R**eduction).*",
+            "start": 1126,
+            "end": 1277
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1279,
+            "end": 1282
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Both OIL RIG (Oxidation Is Loss, Reduction Is Gain) and LEO GER (Lose Electrons Oxidation, Gain Electrons Reduction) are accurately transcribed and defined.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CAVEAT",
+        "label": "Misconception regarding why electron gain is called reduction",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Clarifies the common student confusion between gaining something and the term 'reduction' by explaining the negative charge of electrons.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. Why is \"Gaining\" called \"Reduction\"? (The Big Confusion)",
+            "start": 1284,
+            "end": 1347
+          },
+          {
+            "id": "p21",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Students often ask: *\"Teacher, if I am gaining something, shouldn't that be called an increase? Why is it called a reduction?\"*",
+            "start": 1349,
+            "end": 1476
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Remember: **Electrons have a negative charge ($-1$).**",
+            "start": 1478,
+            "end": 1532
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "If you gain negative charges, your overall charge goes down (it is *reduced*).",
+            "start": 1533,
+            "end": 1611
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "* If you start at $0$ and gain an electron, your charge is now $-1$. Your charge was **reduced**.",
+            "start": 1612,
+            "end": 1709
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1711,
+            "end": 1714
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately resolves the confusion by stating that electrons carry a negative charge (-1), which reduces the overall oxidation state or electrical charge upon gain.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked example: formation of table salt (NaCl)",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Walks through the reaction of sodium and chlorine step-by-step to show electron transfer and identify which element undergoes oxidation and which undergoes reduction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p27",
+              "quote": "standard table salt"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. Let’s Look at an Example: Making Table Salt",
+            "start": 1716,
+            "end": 1766
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Let’s look at how Sodium ($\\text{Na}$) and Chlorine ($\\text{Cl}$) react to make standard table salt ($\\text{NaCl}$):",
+            "start": 1768,
+            "end": 1884
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{Na} + \\text{Cl} \\rightarrow \\text{Na}^+ + \\text{Cl}^-$$",
+            "start": 1886,
+            "end": 1949
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1.  **Sodium ($\\text{Na}$):** It starts neutral ($0$). It gives away one electron to become $\\text{Na}^+$. ",
+            "start": 1951,
+            "end": 2058
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "    *   It **lost** an electron. ",
+            "start": 2059,
+            "end": 2092
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "    *   According to OIL RIG, Sodium was **oxidized**.",
+            "start": 2093,
+            "end": 2147
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2.  **Chlorine ($\\text{Cl}$):** It starts neutral ($0$). It takes that electron to become $\\text{Cl}^-$.",
+            "start": 2148,
+            "end": 2252
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "    *   It **gained** an electron. ",
+            "start": 2253,
+            "end": 2288
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "    *   According to OIL RIG, Chlorine was **reduced**.",
+            "start": 2289,
+            "end": 2344
+          },
+          {
+            "id": "p35",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2346,
+            "end": 2349
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly tracks electron transfer at an introductory atomic level: neutral sodium loses one electron to become Na+ (oxidation) and chlorine gains one electron to become Cl- (reduction).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Oxidizing agents and reducing agents",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Defines oxidizing agents and reducing agents, explaining their reciprocal relationship to the substance oxidized or reduced.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p36",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 5. The \"Secret Agent\" Trap (Watch Out for This on Tests!)",
+            "start": 2351,
+            "end": 2412
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Teachers love to put this on exams because it trips people up. You will often be asked to identify the **Oxidizing Agent** and the **Reducing Agent**.",
+            "start": 2414,
+            "end": 2564
+          },
+          {
+            "id": "p38",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Think of an \"agent\" like a travel agent: A travel agent doesn’t go on vacation; they *help you* go on vacation.",
+            "start": 2566,
+            "end": 2677
+          },
+          {
+            "id": "p39",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   **The Oxidizing Agent:** Causes the *other* guy to be oxidized. (How? By taking its electrons! Therefore, the oxidizing agent gets **reduced**).",
+            "start": 2678,
+            "end": 2826
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   **The Reducing Agent:** Causes the *other* guy to be reduced. (How? By giving it electrons! Therefore, the reducing agent gets **oxidized**).",
+            "start": 2827,
+            "end": 2972
+          },
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Summary Cheat Sheet:**",
+            "start": 2974,
+            "end": 2998
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   Substance that is **oxidized** = the **reducing agent**",
+            "start": 2999,
+            "end": 3058
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "*   Substance that is **reduced** = the **oxidizing agent**",
+            "start": 3059,
+            "end": 3118
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(It’s always the opposite!)*",
+            "start": 3120,
+            "end": 3149
+          },
+          {
+            "id": "p45",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3151,
+            "end": 3154
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately defines an oxidizing agent as the substance that gains electrons and is reduced, and a reducing agent as the substance that donates electrons and is oxidized.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Real-world example: smartphone batteries",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates how redox chemistry generates an electric current by moving electrons through an external circuit in batteries.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p48",
+              "quote": "Your phone battery works because chemicals inside push electrons through a wire (oxidation on one side, reduction on the other). That flow of electrons powers your screen."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p46",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 6. Why Does This Matter in Real Life?",
+            "start": 3156,
+            "end": 3197
+          },
+          {
+            "id": "p47",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Redox isn't just theory on a whiteboard; it drives our modern world:",
+            "start": 3199,
+            "end": 3267
+          },
+          {
+            "id": "p48",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1.  **Batteries:** Your phone battery works because chemicals inside push electrons through a wire (oxidation on one side, reduction on the other). That flow of electrons powers your screen.",
+            "start": 3269,
+            "end": 3459
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately describes the operation of a battery as an electrochemical redox system with oxidation at the anode and reduction at the cathode generating electron flow.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Real-world example: rusting of iron",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates corrosion as an oxidation reaction where iron loses electrons to environmental oxygen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p49",
+              "quote": "Oxygen in the air steals electrons from iron on your car or bike, oxidizing the iron into crumbly iron oxide (rust)."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p49",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2.  **Rusting:** Oxygen in the air steals electrons from iron on your car or bike, oxidizing the iron into crumbly iron oxide (rust).",
+            "start": 3460,
+            "end": 3593
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately attributes rusting to the oxidation of metallic iron into iron oxide by oxygen.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "EXAMPLE",
+        "label": "Real-world example: cellular respiration",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Illustrates the biological role of redox reactions in metabolic cellular respiration.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p50",
+              "quote": "The food you eat (glucose) is oxidized by the oxygen you breathe in to produce energy for your cells. You are literally powered by redox reactions right now!"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p50",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3.  **Breathing (Respiration):** The food you eat (glucose) is oxidized by the oxygen you breathe in to produce energy for your cells. You are literally powered by redox reactions right now!",
+            "start": 3594,
+            "end": 3784
+          },
+          {
+            "id": "p51",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3786,
+            "end": 3789
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately identifies aerobic cellular respiration as a redox process involving the oxidation of glucose with oxygen.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Quick check: oxidation of magnesium",
+        "attributes": {
+          "subtype": "practice_question"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides a quick check practice question assessing whether losing electrons to form Mg2+ corresponds to oxidation or reduction, followed by the answer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Quick Check:",
+            "start": 3791,
+            "end": 3807
+          },
+          {
+            "id": "p53",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine you have an atom of Magnesium ($\\text{Mg}$) that loses two electrons to become $\\text{Mg}^{2+}$. ",
+            "start": 3808,
+            "end": 3913
+          },
+          {
+            "id": "p54",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*Did it undergo Oxidation or Reduction?*",
+            "start": 3915,
+            "end": 3955
+          },
+          {
+            "id": "p55",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Hint: Remember **OIL RIG**!)* ",
+            "start": 3956,
+            "end": 3988
+          },
+          {
+            "id": "p56",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "practice_question"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*(Answer: It lost electrons, so it was **Oxidized**!)*",
+            "start": 3990,
+            "end": 4044
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly applies the definition of oxidation (loss of electrons) to the conversion of Mg to Mg2+.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-4_redox_reactions\\english\\gemini-3.8-flash__2a8bacb1143e.json",
+    "original_sha256": "8a17b830e0212fb2cdb4672a05eadfca3c357c694eb7971398f0187c2fa4d201",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 56,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "STUDY_SUPPORT": 2,
+      "CAVEAT": 1,
+      "EXAMPLE": 4
+    },
+    "nested_passages": 56,
+    "unique_subtopics": 7,
+    "contextualization": {
+      "everyday": 5,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

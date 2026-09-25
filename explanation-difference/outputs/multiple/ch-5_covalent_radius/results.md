@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-f363e58d0ed8b1ce.json](run-001-f363e58d0ed8b1ce.json)
+**Source:** [run-001-f363e58d0ed8b1ce.json](english/gpt-5.6-terra__d0cce1c61c1a.json)
 
 **Covalent radius** is a measure of the size of an atom when it is joined to another atom by a **covalent bond**.
 
@@ -89,7 +89,7 @@ In short, covalent radius tells us the approximate size of an atom when it forms
 
 **Status:** completed
 
-**Source:** [run-001-74c61ad967da5842.json](run-001-74c61ad967da5842.json)
+**Source:** [run-001-74c61ad967da5842.json](english/grok-4.3__24ff8befd38a.json)
 
 Covalent radius is a way to measure the size of an atom when it forms a covalent bond with another atom.
 
@@ -121,7 +121,7 @@ So, in short: covalent radius = half the distance between two identical atoms th
 
 **Status:** completed
 
-**Source:** [run-001-07fca11817f0cbf8.json](run-001-07fca11817f0cbf8.json)
+**Source:** [run-001-07fca11817f0cbf8.json](english/gemini-3.8-flash__91b32aee2654.json)
 
 Hello! Welcome to chemistry class. Today, we’re going to tackle a concept that sounds fancy, but is actually very logical once you picture it: the **covalent radius**.
 
@@ -191,7 +191,7 @@ Does that make sense? Let me know if you want to practice with an example!
 
 **Status:** completed
 
-**Source:** [run-001-32e17a751371eca0.json](run-001-32e17a751371eca0.json)
+**Source:** [run-001-32e17a751371eca0.json](english/claude-sonnet-5__9ac739c656ae.json)
 
 # Covalent Radius
 
@@ -245,7 +245,7 @@ Would you like me to explain how this compares to other types of atomic radii, l
 
 **Status:** completed
 
-**Source:** [run-001-70ac966231c14e2b.json](run-001-70ac966231c14e2b.json)
+**Source:** [run-001-70ac966231c14e2b.json](english/llama-4-maverick__346f602cb72e.json)
 
 Covalent radius is an important concept in chemistry that helps us understand the size of atoms and how they interact with each other.
 
@@ -294,7 +294,7 @@ Now, I hope you have a good understanding of covalent radius! Do you have any qu
 
 **Status:** completed
 
-**Source:** [run-002-cc1fa93bb27c3f12.json](run-002-cc1fa93bb27c3f12.json)
+**Source:** [run-002-cc1fa93bb27c3f12.json](tamil-native/gpt-5.6-terra__8588d8257b97.json)
 
 **சகப்பிணைப்பு ஆரம் (Covalent Radius)** என்பது ஒரு அணுவின் அளவைச் சுட்டிக்காட்டும் அளவாகும்.
 
@@ -358,7 +358,7 @@ Now, I hope you have a good understanding of covalent radius! Do you have any qu
 
 **Status:** completed
 
-**Source:** [run-002-82d2163d54bf695e.json](run-002-82d2163d54bf695e.json)
+**Source:** [run-002-82d2163d54bf695e.json](tamil-native/grok-4.3__a7e95950621a.json)
 
 மாணவரே, வணக்கம்! நான் உங்களுக்கு சகப்பிணைப்பு ஆரத்தை மிக எளிமையாகவும் தெளிவாகவும் விளக்குகிறேன். உயர்நிலைப் பள்ளி மட்டத்தில் புரிந்துகொள்ளும் வகையில் சொல்கிறேன்.
 
@@ -412,7 +412,7 @@ Now, I hope you have a good understanding of covalent radius! Do you have any qu
 
 **Status:** completed
 
-**Source:** [run-002-8a850ca3ac8b44fa.json](run-002-8a850ca3ac8b44fa.json)
+**Source:** [run-002-8a850ca3ac8b44fa.json](tamil-native/gemini-3.8-flash__c2233591d89e.json)
 
 வணக்கம் மாணவரே! வாருங்கள், வேதியியலில் மிக முக்கியமான மற்றும் எளிமையான ஒரு தலைப்பான **"சகப்பிணைப்பு ஆரம்" (Covalent Radius)** பற்றி இன்று மிகத் தெளிவாகப் புரிந்து கொள்வோம்.
 
@@ -476,7 +476,7 @@ $$r = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-002-45754f15b72ce34d.json](run-002-45754f15b72ce34d.json)
+**Source:** [run-002-45754f15b72ce34d.json](tamil-native/claude-sonnet-5__29708a77b2e4.json)
 
 # சகப்பிணைப்பு ஆரம் (Covalent Bond)
 
@@ -541,7 +541,7 @@ $$r = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-002-7d441e333cc2fddc.json](run-002-7d441e333cc2fddc.json)
+**Source:** [run-002-7d441e333cc2fddc.json](tamil-native/llama-4-maverick__3c35543a1b39.json)
 
 வணக்கம் மாணவரே, இன்று நாம் சகப்பிணைப்பு ஆரம் பற்றி பார்க்கலாம். ஒரே தனிமத்தின் இரு அணுக்களுக்கிடையேயுள்ள் பிணைப்பு நீளத்தில் பாதியை சகப்பிணைப்பு ஆரம் என்பர். சகப்பிணைப்பு ஆரம் என்பது ஒரே தனிமத்தைச் சேர்ந்த இரு அணுக்கள் சகப்பிணைப்பால் பிணைக்கப்பட்டிருக்கும் போது அவ்விரு அணுக்களுக்கிடையே உள்ள தூரத்தின் பாதி ஆகும். ஒரே வகையான இரு அணுக்களுக்கிடையே உள்ள பிணைப்பின் நீளம் = 2 × சகப்பிணைப்பு ஆரம். அதாவது, ஒரு தனிமத்தின் இரு அணுக்களுக்கிடையே சகப்பிணைப்பு உள்ள போது அவ்விரு அணுக்களின் மையக்கருக்களுக்கு இடையே உள்ள தொலைவின் பாதியை சகப்பிணைப்பு ஆரம் என்கிறோம். ஐதரசன் மூலக்கூறில் பிணைப்பு நீளம் 74 பைக்கோ மீட்டர் ஆகும். ஐதரசனின் சகப்பிணைப்பு ஆரம் 37 பைக்கோ மீட்டர் ஆகும். குளோரின் மூலக்கூறில் பிணைப்பு நீளம் 198 பைக்கோ மீட்டர் ஆகும். குளோரினின் சகப்பிணைப்பு ஆரம் 99 பைக்கோ மீட்டர் ஆகும். இவ்வாறு ஒரே தனிமத்தின் அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளத்தைக் கொண்டு அவ்வணுவின் சகப்பிணைப்பு ஆரம் கணக்கிடப்படுகிறது. ஆனால் வெவ்வேறு தனிமங்களின் அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளம் அவற்றின் சகப்பிணைப்பு ஆரங்களின் கூடுதலுக்குச் சமனாகவோ அல்லது அதற்கு அருகிலோ இருக்கும். எடுத்துக்காட்டாக C-Cl பிணைப்பு நீளம் = C சகப்பிணைப்பு ஆரம் + Cl சகப்பிணைப்பு ஆரம் = 77 pm + 99 pm = 176 pm. சகப்பிணைப்பு ஆரம் பிணைப்பு வரிசையை பொறுத்து அமையும். பிணைப்பு வரிசை அதிகரிக்கும் போது சகப்பிணைப்பு ஆரம் குறையும். மாணவரே உங்களுக்கு இப்போது சகப்பிணைப்பு ஆரம் பற்றி தெளிவாக புரிந்திருக்கும் என்று நம்புகிறேன்.
 
@@ -564,7 +564,7 @@ $$r = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-003-68a24b562029b40f.json](run-003-68a24b562029b40f.json)
+**Source:** [run-003-68a24b562029b40f.json](tamil-english/gpt-5.6-terra__c3572b379b71.json)
 
 **கோவேலன்ட் ஆரம் (Covalent Radius)** என்பது ஒரு அணுவின் அளவை குறிப்பிடும் அளவாகும்.
 
@@ -635,7 +635,7 @@ $$r = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-003-86d6a629dc2be449.json](run-003-86d6a629dc2be449.json)
+**Source:** [run-003-86d6a629dc2be449.json](tamil-english/grok-4.3__43a66f17047c.json)
 
 கோவலன்ட் ஆரம் என்றால் என்ன?
 
@@ -669,7 +669,7 @@ $$r = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-003-95d73d5b028fad25.json](run-003-95d73d5b028fad25.json)
+**Source:** [run-003-95d73d5b028fad25.json](tamil-english/gemini-3.8-flash__605cb3b49190.json)
 
 வணக்கம்! வேதியியலில் (Chemistry) மிக முக்கியமான மற்றும் எளிமையான ஒரு தலைப்பான **"சகப்பிணைப்பு ஆரம்" (Covalent Radius)** பற்றி இன்று நாம் தெரிந்து கொள்ளலாம்.
 
@@ -732,7 +732,7 @@ $$\text{சகப்பிணைப்பு ஆரம் } (r) = \frac{d}{2}$$
 
 **Status:** completed
 
-**Source:** [run-003-b778d6d860afcc11.json](run-003-b778d6d860afcc11.json)
+**Source:** [run-003-b778d6d860afcc11.json](tamil-english/claude-sonnet-5__242fa5ea20ef.json)
 
 # கூட்டிணைவு ஆரம் (Covalent Radius) - விளக்கம்
 
@@ -787,7 +787,7 @@ Cl -------- Cl
 
 **Status:** completed
 
-**Source:** [run-003-058c2d30a895621f.json](run-003-058c2d30a895621f.json)
+**Source:** [run-003-058c2d30a895621f.json](tamil-english/llama-4-maverick__9eeb3f140071.json)
 
 வணக்கம். இன்று நாம் பரமாணு அமைப்பு பற்றி படிக்க போகிறோம். அதில் முக்கியமான ஒரு பகுதி என்னவென்றால் "பகிர்வு ஆரம்" (Covalent radius). ஒரு பிணைப்பில் ஈடுபடும் இரு அணுக்களுக்கு இடையிலே உள்ள தொலைவின் பாதி அளவை பகிர்வு ஆரம் என்பர். ஒரே மாதிரியான இரு அணுக்களுக்கிடையே உள்ள பிணைப்பு நீளத்தை பாதியாக பிரித்தால் அதை பகிர்வு ஆரம் எனலாம். எடுத்துக்காட்டாக ஐதரசன் மூலக்கூறில் (H2) இரு ஐதரசன் அணுக்களுக்கு இடையே உள்ள தொலைவு 74 பிகோமீட்டர் என்றால் ஐதரசனின் பகிர்வு ஆரம் 37 பிகோமீட்டராக இருக்கும். அதேபோல் ஆக்சிஜன் மூலக்கூறில் (O2) ஆக்சிஜன் அணுக்களுக்கு இடையே உள்ள தொலைவு 144 பிகோமீட்டர் என்றால், ஆக்சிஜனின் பகிர்வு ஆரம் 74 பிகோமீட்டர். ஆனால் ஐதரசன் குளோரைடு (HCl) போன்ற வேறுபட்ட அணுக்களால் ஆன மூலக்கூறுகளில், பிணைப்பு நீளம் என்பது அந்த இரு அணுக்களின் பகிர்வு ஆரங்களின் கூடுதலுக்கு சமம். அதாவது HCl ல் ஐதரசன் மற்றும் குளோரின் அணுக்களுக்கு இடையே உள்ள பிணைப்பு நீளம் = ஐதரசனின் பகிர்வு ஆரம் + குளோரினின் பகிர்வு ஆரம். இவ்வாறு பகிர்வு ஆரம் கணக்கிடப்படுகிறது. இன்னும் நிறைய விளக்கங்கள் உள்ளன. அவை அனைத்தும் தனித்தனியாக பார்க்கலாம். நன்றி. வணக்கம்.
 

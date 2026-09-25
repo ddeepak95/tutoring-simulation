@@ -1,0 +1,293 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "e903e1e9fef85fec972e4e16a881fc29c1b9bff737941b09d6edfb0d84742c85",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "vapour phase refining",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2"
+      ],
+      "reason": "The response explains the principle and general steps of vapour phase refining and illustrates them with the Mond process for purifying nickel.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "General principles and steps of vapour phase refining"
+      },
+      {
+        "id": "s2",
+        "label": "Mond process for nickel purification"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Principles and steps of vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces vapour phase refining, provides its definition, and details the three core steps of the process.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Bonjour! Aujourd'hui, nous allons discuter de la purification des métaux par raffinage en phase vapeur, également connu sous le nom de raffinage en phase gazeuse. (Today, we're going to discuss the purification of metals by vapour phase refining.)",
+            "start": 0,
+            "end": 247
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le raffinage en phase vapeur est une méthode utilisée pour purifier les métaux qui peuvent être facilement convertis en composés volatils. (Vapour phase refining is a method used to purify metals that can be easily converted into volatile compounds.)",
+            "start": 249,
+            "end": 499
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Voici comment cela fonctionne : (Here's how it works:)",
+            "start": 501,
+            "end": 555
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Conversion en composé volatil** : Tout d'abord, le métal impur est converti en un composé volatil, généralement un chlorure ou un iodure, qui a un point d'ébullition bas. (First, the impure metal is converted into a volatile compound, usually a chloride or iodide, which has a low boiling point.)",
+            "start": 557,
+            "end": 858
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Vaporisation** : Le composé volatil est ensuite vaporisé à une température appropriée. (The volatile compound is then vaporized at a suitable temperature.)",
+            "start": 859,
+            "end": 1019
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Décomposition** : La vapeur du composé est ensuite décomposée à une température plus élevée pour obtenir le métal pur. (The vapour of the compound is then decomposed at a higher temperature to obtain the pure metal.)",
+            "start": 1020,
+            "end": 1241
+          }
+        ],
+        "accuracy": {
+          "verdict": "contains_error",
+          "reason": "The unit inaccurately cites chlorides as typical volatile compounds formed in vapour phase refining.",
+          "errors": [
+            {
+              "passage_ids": [
+                "p4"
+              ],
+              "description": "The passage asserts that the impure metal is usually converted into a chloride or an iodide ('généralement un chlorure ou un iodure'). In vapour phase refining, which depends on direct thermal decomposition of the volatile compound, carbonyls (e.g., Mond process) and iodides (e.g., Van Arkel–de Boer process) are used. Metal chlorides are generally too thermodynamically stable to decompose thermally into elemental metal at accessible temperatures.",
+              "correction": "State that the metal is typically converted into a carbonyl (such as nickel tetracarbonyl) or an iodide (such as zirconium or titanium tetraiodide), rather than a chloride.",
+              "severity": "minor"
+            }
+          ]
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Mond process for nickel purification",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents an industrial application of vapour phase refining using the Mond process for nickel, including balanced chemical reactions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Un exemple classique de raffinage en phase vapeur est la purification du nickel par le procédé Mond. (A classic example of vapour phase refining is the purification of nickel by the Mond process.)",
+            "start": 1243,
+            "end": 1439
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": " Dans ce procédé, le nickel impur est traité avec du monoxyde de carbone (CO) pour former du nickel tétracarbonyle (Ni(CO)4), un composé volatil. (In this process, impure nickel is treated with carbon monoxide (CO) to form nickel tetracarbonyl (Ni(CO)4), a volatile compound.)",
+            "start": 1441,
+            "end": 1717
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": " Ni + 4CO → Ni(CO)4",
+            "start": 1719,
+            "end": 1738
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ensuite, le Ni(CO)4 est vaporisé et décomposé à une température plus élevée pour obtenir le nickel pur. (Then, the Ni(CO)4 is vaporized and decomposed at a higher temperature to obtain pure nickel.)",
+            "start": 1740,
+            "end": 1938
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": " Ni(CO)4 → Ni + 4CO",
+            "start": 1940,
+            "end": 1959
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C'est ainsi que fonctionne le raffinage en phase vapeur ! (That's how vapour phase refining works!)",
+            "start": 1961,
+            "end": 2060
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Maintenant, avez-vous des questions sur ce processus ? (Now, do you have any questions about this process?)",
+            "start": 2062,
+            "end": 2169
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation of the Mond process, including formation and decomposition of volatile nickel tetracarbonyl along with the chemical equations, is factually correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\french-english\\llama-4-maverick__3ab8635a7961.json",
+    "original_sha256": "85d99594861d6a8e352b7d42abf1c6dd60ad992f9efb79918b2dec1af102472b",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 2,
+    "substantive_content_units": 2,
+    "total_passages": 13,
+    "content_unit_kinds": {
+      "CONCEPT": 1,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 13,
+    "unique_subtopics": 2,
+    "contextualization": {
+      "none": 2
+    },
+    "proposed_substantive_verdicts": {
+      "contains_error": 1,
+      "accurate": 1
+    },
+    "proposed_error_records": 1,
+    "proposed_error_severity": {
+      "minor": 1
+    },
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

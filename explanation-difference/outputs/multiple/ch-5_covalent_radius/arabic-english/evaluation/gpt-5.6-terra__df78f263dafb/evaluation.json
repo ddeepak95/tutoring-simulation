@@ -1,0 +1,652 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "fd558c2e57bdcd95ff47e95429b10f3e7bcc768bea12a8c094adc306af1a5517",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The response directly explains covalent radius in Arabic, covering its definition and formula, an illustrative worked example (Cl2), the rationale behind measuring atomic size this way, periodic table trends, the effect of bond multiplicity, and a closing summary.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Calculation Formula of Covalent Radius"
+      },
+      {
+        "id": "s2",
+        "label": "Worked Example with Chlorine Molecule"
+      },
+      {
+        "id": "s3",
+        "label": "Purpose and Rationale of Covalent Radius"
+      },
+      {
+        "id": "s4",
+        "label": "Periodic Table Trends of Covalent Radius"
+      },
+      {
+        "id": "s5",
+        "label": "Effect of Bond Multiplicity on Covalent Radius"
+      },
+      {
+        "id": "s6",
+        "label": "Summary of Covalent Radius"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and formula of covalent radius",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines covalent radius as half the distance between the nuclei of two identical covalently bonded atoms, including the mathematical formula.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**نصف القطر التساهمي** هو مقياس تقريبي لحجم الذرة عندما ترتبط بذرة أخرى بروابط تساهمية.",
+            "start": 0,
+            "end": 87
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### التعريف",
+            "start": 89,
+            "end": 100
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "عندما ترتبط ذرتان متماثلتان برابطة تساهمية، نقيس المسافة بين مركزي نواتيهما، ثم نقسمها على 2.",
+            "start": 101,
+            "end": 194
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 196,
+            "end": 198
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{نصف القطر التساهمي} = \\frac{\\text{المسافة بين نواتي ذرتين متماثلتين مرتبطتين}}{2}",
+            "start": 199,
+            "end": 286
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 287,
+            "end": 289
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and formula correctly represent the homonuclear diatomic definition of covalent radius commonly taught in high school chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Calculating the covalent radius of chlorine",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents a concrete worked calculation of chlorine's covalent radius using the Cl2 internuclear distance (198 pm) and provides the conversion factor for picometers.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال",
+            "start": 291,
+            "end": 299
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في جزيء الكلور \\(Cl_2\\)، ترتبط ذرتا كلور برابطة تساهمية.  ",
+            "start": 300,
+            "end": 358
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إذا كانت المسافة بين نواتيهما تساوي \\(198\\) بيكومتر \\((pm)\\)، فإن:",
+            "start": 359,
+            "end": 425
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 427,
+            "end": 429
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\text{نصف القطر التساهمي للكلور} = \\frac{198}{2} = 99 \\, pm",
+            "start": 430,
+            "end": 489
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 490,
+            "end": 492
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> البيكومتر وحدة صغيرة جدًا:  ",
+            "start": 494,
+            "end": 524
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "> \\[",
+            "start": 525,
+            "end": 529
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "> 1\\, pm = 10^{-12}\\, m",
+            "start": 530,
+            "end": 553
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "> \\]",
+            "start": 554,
+            "end": 558
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The internuclear distance of 198 pm for Cl2, the resulting covalent radius of 99 pm, and the definition of a picometer (10^-12 m) are all factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Rationale for using covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why covalent radius is necessary, pointing out that atoms lack sharp outer boundaries and that this method offers a practical measure of atomic size in molecules.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### لماذا نستخدمه؟",
+            "start": 560,
+            "end": 578
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لا يوجد للذرة “حافة” واضحة مثل الكرة الصلبة، لذلك لا يمكن قياس حجمها مباشرة. نصف القطر التساهمي يعطينا طريقة عملية لتقدير حجم الذرات داخل الجزيئات.",
+            "start": 579,
+            "end": 726
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately clarifies that electron probability clouds have no definite outer edges, necessitating operational definitions like covalent radius.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Periodic trends of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains how covalent radius varies across periods and down groups in the periodic table, providing the underlying atomic structure causes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### كيف يتغير في الجدول الدوري؟",
+            "start": 728,
+            "end": 759
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **عبر الدورة من اليسار إلى اليمين:** يقل نصف القطر التساهمي غالبًا.  ",
+            "start": 761,
+            "end": 832
+          },
+          {
+            "id": "p21",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  لأن عدد البروتونات في النواة يزداد، فتزداد قوة جذب النواة للإلكترونات، فتقترب الإلكترونات من النواة.",
+            "start": 833,
+            "end": 935
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **نزولًا في المجموعة من الأعلى إلى الأسفل:** يزداد نصف القطر التساهمي.  ",
+            "start": 937,
+            "end": 1011
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "  لأن الذرات تحتوي على مستويات طاقة أكثر، فتكون إلكترونات التكافؤ أبعد عن النواة.",
+            "start": 1012,
+            "end": 1093
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The trends (decrease across a period due to increasing effective nuclear charge, increase down a group due to additional principal energy shells) and their explanations are scientifically sound.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CAVEAT",
+        "label": "Variation with bond multiplicity",
+        "attributes": {
+          "subtype": "qualification"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Qualifies that covalent radii depend on bond order, noting that single bonds are longer while double and triple bonds are progressively shorter.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ملاحظة مهمة",
+            "start": 1095,
+            "end": 1110
+          },
+          {
+            "id": "p25",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "قد يختلف نصف القطر التساهمي قليلًا حسب نوع الرابطة:",
+            "start": 1111,
+            "end": 1162
+          },
+          {
+            "id": "p26",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الرابطة الأحادية أطول،",
+            "start": 1163,
+            "end": 1187
+          },
+          {
+            "id": "p27",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الرابطة الثنائية أقصر،",
+            "start": 1188,
+            "end": 1212
+          },
+          {
+            "id": "p28",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الرابطة الثلاثية أقصر أكثر.",
+            "start": 1213,
+            "end": 1242
+          },
+          {
+            "id": "p29",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لذلك تكون الذرات المرتبطة بروابط متعددة أقرب إلى بعضها من الذرات المرتبطة برابطة أحادية.",
+            "start": 1244,
+            "end": 1332
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately states the inverse relationship between bond multiplicity and covalent bond length/radius.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Brief summary",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Concludes the lesson with a concise summary sentence restating the core definition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**باختصار:**  ",
+            "start": 1334,
+            "end": 1348
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نصف القطر التساهمي = نصف المسافة بين نواتي ذرتين متماثلتين مرتبطتين تساهميًا.",
+            "start": 1349,
+            "end": 1426
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap correctly summarizes the definition of covalent radius.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\arabic-english\\gpt-5.6-terra__df78f263dafb.json",
+    "original_sha256": "a0430b5f1708f85d8b17a313181c9c4fdcb02824811386bb93531103b2625050",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 31,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "EXAMPLE": 1,
+      "CAVEAT": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 31,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "none": 6
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,664 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "08c8e1a28932bd4c8e8acde5894a66fc9358e79430f511516e26a9e465a81e87",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "vapour phase refining",
+      "observed_topic": "steam distillation",
+      "topic_match": "off_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9"
+      ],
+      "reason": "The prompt asked for an explanation of vapour phase refining (বাষ্পীয় দশা বিশোধন), which in chemistry refers to the metallurgical refining process where a metal is converted into a volatile compound and subsequently decomposed (such as the Mond process for nickel or the Van Arkel process for zirconium/titanium). Instead, the response completely confuses this with steam distillation (বাষ্প পাতন), explicitly labelling it 'steam distillation' and explaining the isolation of essential oils using steam.",
+      "major_task_failure": true
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "বাষ্প পাতনের ধারণা ও মূলনীতি (Concept and principle of steam distillation)"
+      },
+      {
+        "id": "s2",
+        "label": "বাষ্প পাতনের কার্যপ্রণালী (Procedure of steam distillation)"
+      },
+      {
+        "id": "s3",
+        "label": "বাষ্প পাতনের ব্যবহার (Applications of steam distillation)"
+      },
+      {
+        "id": "s4",
+        "label": "বাষ্প পাতনের সুবিধা ও সারসংক্ষেপ (Advantages and summary of steam distillation)"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of steam distillation erroneously identified as vapour phase refining",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines steam distillation, explaining why direct heating causes thermal degradation of organic compounds and how steam allows separation at a lower temperature.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "গোলাপের তেল, লবঙ্গের তেল, ইউক্যালিপটাসের তেল"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "আচ্ছা, বন্ধু। তোমাকে খুব সহজ ভাষায় বাষ্পীয় দশা বিশোধন (steam distillation) বুঝিয়ে দিচ্ছি।",
+            "start": 0,
+            "end": 89
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### বাষ্পীয় দশা বিশোধন কী?",
+            "start": 91,
+            "end": 117
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এটি এক ধরনের **পাতন** পদ্ধতি। সাধারণ পাতনে আমরা যে পদার্থকে আলাদা করতে চাই, সেটাকে সরাসরি গরম করে ফুটিয়ে বাষ্পে পরিণত করি। কিন্তু অনেক জৈব পদার্থ (যেমন গোলাপের তেল, লবঙ্গের তেল, ইউক্যালিপটাসের তেল) এত উচ্চ তাপমাত্রায় ফোটে যে সরাসরি গরম করলে সেগুলো পুড়ে বা পচে যায়। ",
+            "start": 119,
+            "end": 384
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সমস্যা সমাধানের জন্য আমরা **জলীয় বাষ্প** ব্যবহার করি। বাষ্পের সাহায্যে পদার্থটিকে তার আসল স্ফুটনাঙ্কের চেয়ে অনেক কম তাপমাত্রায় বাষ্পে পরিণত করে আলাদা করা হয়। এজন্যই একে **বাষ্পীয় দশা বিশোধন** বলে।",
+            "start": 386,
+            "end": 585
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Operating principle of steam distillation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains how the combination of partial vapour pressures of immiscible liquids reaches atmospheric pressure below 100°C.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "জল ও তেল"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### এটা কীভাবে কাজ করে? (সহজ নীতি)",
+            "start": 587,
+            "end": 621
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "মনে করো, তোমার কাছে দুটি তরল আছে যারা একে অপরের সাথে মিশে না (যেমন: জল ও তেল)। এদের বাষ্পচাপ যখন বায়ুমণ্ডলীয় চাপের সমান হয়, তখন মিশ্রণটি ফুটতে শুরু করে। ",
+            "start": 623,
+            "end": 776
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- জলের স্ফুটনাঙ্ক ১০০° সেলসিয়াস।",
+            "start": 778,
+            "end": 810
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- অনেক জৈব তেলের স্ফুটনাঙ্ক ২০০°–২৫০° সেলসিয়াস বা তার বেশি।",
+            "start": 811,
+            "end": 870
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কিন্তু যখন আমরা জলীয় বাষ্প পাঠাই, তখন জলের বাষ্পচাপ + তেলের বাষ্পচাপ = বায়ুমণ্ডলীয় চাপ হয় অনেক কম তাপমাত্রায় (সাধারণত ৯৫°–১০০° সেলসিয়াসের মধ্যে)। ফলে তেলটি পচে যাওয়ার আগেই বাষ্পের সাথে উড়ে যায়।",
+            "start": 872,
+            "end": 1065
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "Laboratory procedure for steam distillation",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Provides a sequential five-step experimental procedure for conducting steam distillation in the laboratory.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p11",
+              "quote": "উদ্ভিদের পাতা, ফুল বা বাকল"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### পদ্ধতিটি কীভাবে করা হয়?",
+            "start": 1067,
+            "end": 1094
+          },
+          {
+            "id": "p11",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "১. একটা বড় ফ্লাস্কে উদ্ভিদের পাতা, ফুল বা বাকল (যেখান থেকে তেল বের করতে চাই) রাখা হয়।",
+            "start": 1096,
+            "end": 1181
+          },
+          {
+            "id": "p12",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "২. আলাদা একটা জলের পাত্র গরম করে প্রচুর বাষ্প তৈরি করা হয়।",
+            "start": 1182,
+            "end": 1240
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "৩. এই বাষ্পকে ফ্লাস্কের মধ্যে ঢোকানো হয়। বাষ্প উদ্ভিদের ভেতর দিয়ে যাওয়ার সময় তেলের কণাগুলোকে সাথে করে নিয়ে যায়।",
+            "start": 1241,
+            "end": 1352
+          },
+          {
+            "id": "p14",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "৪. বাষ্প + তেলের মিশ্রণ একটা **কনডেন্সার** (ঠান্ডা করার নল)-এর মধ্যে দিয়ে যায়। ঠান্ডা হওয়ার ফলে এটি আবার তরলে পরিণত হয়।",
+            "start": 1353,
+            "end": 1472
+          },
+          {
+            "id": "p15",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "৫. যেহেতু তেল আর জল একসাথে মিশে না, তাই **আলাদা করার ফানেল** (separating funnel)-এ ঢেলে দুটো স্তর আলাদা করে নেওয়া হয়।",
+            "start": 1473,
+            "end": 1590
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Application: Extracting essential oils from flowers and peels",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the process with the real-world extraction of essential oils from rose, jasmine, and lemon peel.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p17",
+              "quote": "গোলাপ, জুঁই, লেবুর খোসা থেকে **সুগন্ধী তেল** (essential oil) বের করা।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### কোথায় ব্যবহার হয়?",
+            "start": 1592,
+            "end": 1613
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- গোলাপ, জুঁই, লেবুর খোসা থেকে **সুগন্ধী তেল** (essential oil) বের করা।",
+            "start": 1615,
+            "end": 1686
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Application: Separating eugenol from cloves",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates the isolation of eugenol from cloves using steam distillation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p18",
+              "quote": "লবঙ্গ থেকে ইউজেনল আলাদা করা।"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- লবঙ্গ থেকে ইউজেনল আলাদা করা।",
+            "start": 1687,
+            "end": 1717
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Application: Refining organic compounds from coal",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Mentions industrial application to separate organic compounds from coal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- কয়লা থেকে কিছু জৈব যৌগ বিশোধন করা।",
+            "start": 1718,
+            "end": 1754
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Application: Pharmaceutical and fragrance industries",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Mentions general industrial applications in medicine and perfumery.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- কিছু ওষুধ ও সুগন্ধি শিল্পে।",
+            "start": 1755,
+            "end": 1784
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Advantages of steam distillation",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Lists key advantages of steam distillation such as preserving temperature-sensitive compounds, separating water-insoluble substances, and affordability.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### কেন এই পদ্ধতি ভালো?",
+            "start": 1786,
+            "end": 1809
+          },
+          {
+            "id": "p22",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- তাপমাত্রা কম থাকায় পদার্থ পচে যায় না।",
+            "start": 1811,
+            "end": 1850
+          },
+          {
+            "id": "p23",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- পানিতে অদ্রবণীয় পদার্থকেও আলাদা করা যায়।",
+            "start": 1851,
+            "end": 1893
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- তুলনামূলক সস্তা ও সহজ।",
+            "start": 1894,
+            "end": 1918
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary recap and conversational close",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Summarizes the key concept with an analogy and provides a closing prompt offering further explanation.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p25",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সারকথা**: বাষ্পীয় দশা বিশোধন আসলে “বাষ্পের সাহায্যে কম তাপে পাতন” করার একটা চালাক উপায়। যেসব পদার্থ সরাসরি গরম করলে নষ্ট হয়ে যায়, তাদেরকে বাষ্পের “ঘোড়ায় চড়িয়ে” নিচু তাপমাত্রায় বের করে আনা হয়।",
+            "start": 1920,
+            "end": 2113
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "বুঝতে পেরেছ? কোনো অংশ আবার বিস্তারিত বলব?",
+            "start": 2115,
+            "end": 2156
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Not assessed because the overall response is off-topic (explaining steam distillation rather than vapour phase refining).",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-7_vapour_phase_refining\\bengali-native\\grok-4.3__cde139037a76.json",
+    "original_sha256": "f0d561f5dfe05af76f20feda4ebd71077439ae4083560bbccbc9d129b25375bf",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 9,
+    "substantive_content_units": 9,
+    "total_passages": 26,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "PROCEDURE": 1,
+      "EXAMPLE": 4,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 26,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "everyday": 5,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "not_assessed_due_to_topic_mismatch": 9
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "27a6db17e4939cd4d2cf499b9bb575aff450f1afa1868061b1fe5874ad135211",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "covalent radius",
+      "observed_topic": "covalent radius (نصف القطر التساهمي)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3"
+      ],
+      "reason": "The explanation directly addresses the requested topic of covalent radius, covering its definition, an example calculation with chlorine, and periodic trends.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of covalent radius"
+      },
+      {
+        "id": "s2",
+        "label": "Example calculation and application"
+      },
+      {
+        "id": "s3",
+        "label": "Periodic trends of covalent radius"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of covalent radius",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what covalent radius is as half the internuclear distance between two identical covalently bonded atoms.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "نصف القطر التساهمي هو مقياس لحجم الذرة عندما تكون مرتبطة بذرة أخرى برابطة تساهمية. يُعرَّف بأنه نصف المسافة بين نواتي ذرتين متماثلتين مرتبطتين برابطة تساهمية واحدة.  ",
+            "start": 0,
+            "end": 166
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition provided is standard and chemically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Calculation for Cl2 and estimating bond lengths",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Applies the definition to the chlorine molecule (Cl2) with specific numerical values and shows how covalent radii are used to predict bond lengths.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "مثال: في جزيء الكلور Cl₂ تكون المسافة بين النواتين 198 بيكومتر، فيكون نصف القطر التساهمي للكلور 99 بيكومتر. يُستخدم لتقدير طول الرابطة بين ذرتين مختلفتين بجمع نصفي قطرهما التساهميين.  ",
+            "start": 168,
+            "end": 352
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The internuclear distance in a Cl2 molecule is approximately 198 pm, yielding a single-bond covalent radius of 99 pm, and the addition of covalent radii is a standard approximation for heteronuclear bond lengths.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Periodic trends of covalent radius",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains how and why the covalent radius changes across periods and down groups in the periodic table, and absorbs the concluding tag passage.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "يقل نصف القطر التساهمي عبر الدورة في الجدول الدوري بسبب زيادة الشحنة النووية الفعالة، ويزداد نزولاً في المجموعة بسبب إضافة مستويات طاقة.  ",
+            "start": 354,
+            "end": 492
+          },
+          {
+            "id": "p4",
+            "category": "OTHER",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [
+              "unwanted_formatting"
+            ],
+            "text": "\\confidence{80}",
+            "start": 494,
+            "end": 509
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly identifies that covalent radius decreases across a period due to increasing effective nuclear charge and increases down a group due to the addition of principal energy levels.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-5_covalent_radius\\arabic-english\\grok-4.3__7d3130f113fe.json",
+    "original_sha256": "2c7ac44489c5464506a0f67b235e97555d4bb70ae65e319b6751174c8f3fb696",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 3,
+    "substantive_content_units": 3,
+    "total_passages": 4,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 4,
+    "unique_subtopics": 3,
+    "contextualization": {
+      "none": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 3
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

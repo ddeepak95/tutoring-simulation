@@ -1,0 +1,353 @@
+# Stage 1: Bengali / alkaline earth metals
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "alkaline earth metals",
+  "observed_topic": "Definition, naming origin, general properties, and applications of alkaline earth metals",
+  "topic_match": "on_topic",
+  "reason": "The explanation defines alkaline earth metals (Group 2), discusses the origin of their name, summarizes their characteristic periodic properties, and provides specific real-world applications for each member element.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+    "u5",
+    "u6",
+    "u7",
+    "u8",
+    "u9"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition of alkaline earth metals and group membership | {"depth": "statement"} | accurate |
+| u2 | CONCEPT | Etymology and origin of the name alkaline earth metals | {"depth": "explanation"} | contains_error |
+| u3 | CONCEPT | General physical and chemical periodic properties of alkaline earth metals | {"depth": "statement"} | accurate |
+| u4 | EXAMPLE | Applications of magnesium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u5 | EXAMPLE | Applications of calcium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u6 | EXAMPLE | Applications of beryllium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u7 | EXAMPLE | Applications of strontium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u8 | EXAMPLE | Applications of barium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+| u9 | EXAMPLE | Applications of radium | {"context": "real_world", "treatment": "illustrative"} | accurate |
+
+## u1: Definition of alkaline earth metals and group membership
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly defines alkaline earth metals as Group 2 divalent metallic elements and identifies Be, Mg, Ca, Sr, Ba, and Ra.",
+    "errors": []
+  }
+}
+```
+
+```text
+মেন্ডেলিফের পর্যায় সারণীর দ্বিতীয় শ্রেণিতে অবস্থিত দ্বিযোজী ধাতব মৌলিক পদার্থগুলোকে একত্রে ক্ষারীয় মৃত্তিকা ধাতু বলা হয়। এদেরকে দ্বিতীয় শ্রেণির ধাতুও বলা হয়। পর্যায় সারণিতে বেরিলিয়াম (Be), ম্যাগনেসিয়াম (Mg), ক্যালসিয়াম (Ca), স্ট্রনশিয়াম (Sr), বেরিয়াম (Ba) ও রেডিয়াম (Ra) মৌলগুলোকে একত্রে ক্ষারীয় মৃত্তিকা ধাতু বলা হয়।
+```
+
+
+## u2: Etymology and origin of the name alkaline earth metals
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The text states that the oxides of alkaline earth metals are insoluble in water and only exhibit weak alkaline behavior upon heating. In reality, oxides of Ca, Sr, and Ba react exothermically with water to form strongly basic hydroxides without needing to be heated.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "এদের অক্সাইডগুলো পানিতে অদ্রবণীয় এবং উত্তপ্ত করলে ক্ষীণ ক্ষারীয় ক্রিয়া প্রকাশ পায়।"
+          }
+        ],
+        "description": "The claim that alkaline earth metal oxides are insoluble in water and show weak basicity only when heated is factually incorrect. While BeO is insoluble and MgO is only sparingly soluble, CaO, SrO, and BaO react readily with water at room temperature to form soluble/moderately soluble, strongly alkaline hydroxides.",
+        "correction": "Alkaline earth metal oxides were historically called 'earths' because of their heat resistance and earthy appearance, and 'alkaline' because they are basic; oxides of calcium, strontium, and barium react readily with water to produce strongly alkaline solutions.",
+        "severity": "major"
+      }
+    ]
+  }
+}
+```
+
+```text
+এদেরকে ক্ষারীয় মৃত্তিকা ধাতু বলার কারণ হলো এদের অক্সাইড মাটির মতো অদ্রবণীয় এবং ক্ষারীয়। এদের অক্সাইডগুলো পানিতে অদ্রবণীয় এবং উত্তপ্ত করলে ক্ষীণ ক্ষারীয় ক্রিয়া প্রকাশ পায়। এদের অক্সাইডগুলো মাটির মতো দেখতে বলে এদেরকে ক্ষারীয় মৃত্তিকা ধাতু বলা হয়।
+```
+
+
+## u3: General physical and chemical periodic properties of alkaline earth metals
+
+```json
+{
+  "attributes": {
+    "depth": "statement"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "All 10 listed physical and chemical properties correctly represent the group's general periodic characteristics.",
+    "errors": []
+  }
+}
+```
+
+```text
+ক্ষারীয় মৃত্তিকা ধাতুর সাধারণ ধর্মগুলো নিচে দেওয়া হলো:
+
+১. ইলেকট্রন বিন্যাস: ক্ষারীয় মৃত্তিকা ধাতুর পরমাণুর সর্ববহিঃস্থ স্তরে ২টি করে ইলেকট্রন থাকে।
+
+২. ধাতব ধর্ম: এদের সকলেরই ধাতব ধর্ম আছে। এরা প্রত্যেকেই সিলভার ধূসর বর্ণের কঠিন পদার্থ।
+
+৩. যোজনী: ক্ষারীয় মৃত্তিকা ধাতুসমূহের যোজনী ২।
+
+৪. ইলেকট্রন ত্যাগ: ক্ষারীয় মৃত্তিকা ধাতুসমূহ তাদের যোজনী ইলেকট্রন ত্যাগ করে দ্বি-ধনাত্মক আয়নে পরিণত হয়।
+
+৫. বিজারণ ধর্ম: ক্ষারীয় মৃত্তিকা ধাতুগুলো বিজারক হিসেবে কাজ করতে পারে।
+
+৬. গলনাঙ্ক ও স্ফুটনাঙ্ক: এদের গলনাঙ্ক ও স্ফুটনাঙ্ক বেশ উচ্চ।
+
+৭. যৌগের প্রকৃতি: ক্ষারীয় মৃত্তিকা ধাতুসমূহের অক্সাইড ও হাইড্রক্সাইডসমূহ ক্ষারীয়। এদের হ্যালাইডগুলো আয়নিক।
+
+৮. পারমাণবিক ও আয়নিক আকার: ক্ষারীয় মৃত্তিকা ধাতুসমূহের পরমাণু ও আয়নের আকার একই পর্যায়ের ক্ষার ধাতুসমূহের চেয়ে ছোট।
+
+৯. আয়নিকরণ শক্তি: ক্ষারীয় মৃত্তিকা ধাতুসমূহের আয়নিকরণ শক্তি একই পর্যায়ের ক্ষার ধাতুসমূহের চেয়ে বেশি।
+
+১০. তড়িৎ ঋণাত্মকতা: ক্ষারীয় মৃত্তিকা ধাতুসমূহের তড়িৎ ঋণাত্মকতা মান একই পর্যায়ের ক্ষার ধাতুসমূহের চেয়ে বেশি।
+```
+
+
+## u4: Applications of magnesium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly describes standard uses of magnesium in flash photography, flare signaling, and alloys like duralumin and elektron metal.",
+    "errors": []
+  }
+}
+```
+
+```text
+ম্যাগনেসিয়াম (Mg) এর ব্যবহার: ম্যাগনেসিয়াম ধাতু বিভিন্ন শিল্পে এবং চিকিৎসা ক্ষেত্রে বহুল ব্যবহৃত হয়। ম্যাগনেসিয়াম তারের টুকরোকে বাতাসে পোড়ালে উজ্জ্বল আলো ও তাপ উৎপন্ন হয়। এভাবে উৎপন্ন আলো ফটোগ্রাফিতে এবং সিগন্যালিং-এ ব্যবহৃত হয়। এছাড়া ম্যাগনেসিয়াম বিভিন্ন সংকর ধাতু যেমন- ডুরালুমিন, ইলেকট্রন ধাতু ইত্যাদি প্রস্তুতিতে ব্যবহৃত হয়।
+```
+
+
+## u5: Applications of calcium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly states the use of calcium as a reducing agent in extracting refractory metals (U, Th, Zr) and in alloys.",
+    "errors": []
+  }
+}
+```
+
+```text
+ক্যালসিয়াম (Ca) এর ব্যবহার: ক্যালসিয়াম ধাতু মূল্যবান ধাতু যেমন- ইউরেনিয়াম, থোরিয়াম, জিরকোনিয়াম ইত্যাদি ধাতুর অক্সাইড আকরিক থেকে নিষ্কাশনে বিজারক হিসেবে ব্যবহৃত হয়। এছাড়া ক্যালসিয়াম সংকর ধাতু প্রস্তুত করতেও ব্যবহৃত হয়।
+```
+
+
+## u6: Applications of beryllium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Accurately identifies beryllium's role as a neutron reflector/moderator in nuclear reactors and beryllium-copper/nickel alloys in electrical components.",
+    "errors": []
+  }
+}
+```
+
+```text
+বেরিলিয়াম (Be) এর ব্যবহার: বেরিলিয়াম ধাতু নিউক্লিয়ার চুল্লিতে নিউট্রন প্রতিফলক হিসেবে এবং এর সাথে তামা বা নিকেলের সংকর ধাতু বৈদ্যুতিক সুইচ এবং বিভিন্ন যন্ত্রপাতি তৈরিতে ব্যবহৃত হয়।
+```
+
+
+## u7: Applications of strontium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Correctly notes strontium's application as a getter in vacuum tubes and in pyrotechnic signal flares/lamps.",
+    "errors": []
+  }
+}
+```
+
+```text
+স্ট্রনশিয়াম (Sr) এর ব্যবহার: স্ট্রনশিয়াম ধাতু তড়িৎনালীতে শোষক হিসেবে এবং সিগন্যাল ল্যাম্প তৈরিতে ব্যবহৃত হয়।
+```
+
+
+## u8: Applications of barium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Accurately describes barium's use as a vacuum getter and barium compounds in diagnostic X-ray imaging (barium meal).",
+    "errors": []
+  }
+}
+```
+
+```text
+বেরিয়াম (Ba) এর ব্যবহার: বেরিয়াম ধাতু উচ্চ তাপমাত্রায় তড়িৎনালীতে গ্যাস শোষক হিসেবে এবং চিকিৎসা ক্ষেত্রে এক্স-রে পরীক্ষায় ব্যবহৃত হয়।
+```
+
+
+## u9: Applications of radium
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "Accurately mentions radium's historical and medical use in radiotherapy for cancer.",
+    "errors": []
+  }
+}
+```
+
+```text
+রেডিয়াম (Ra) এর ব্যবহার: রেডিয়াম ধাতু ক্যান্সার চিকিৎসায় ব্যবহৃত হয়।
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u4",
+      "u5",
+      "u6",
+      "u7",
+      "u8",
+      "u9"
+    ],
+    "issue": "Whether the separate paragraphs outlining individual element uses should be kept as distinct EXAMPLE units or merged into a single comprehensive EXAMPLE unit of alkaline earth metal applications.",
+    "proposed_resolution": "Separated into individual EXAMPLE units (u4 through u9) because each paragraph introduces and develops distinct real-world applications and technological cases for a specific metal."
+  },
+  {
+    "unit_ids": [
+      "u3"
+    ],
+    "issue": "Whether the numbered list of 10 general periodic properties should be split into individual CONCEPT units per property or kept as one unit.",
+    "proposed_resolution": "Kept as a single CONCEPT unit because the list functions together as a standard periodic profile of the group's general physical and chemical properties."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+আচ্ছা, তাহলে চলো আজকে আমরা ক্ষারীয় মৃত্তিকা ধাতু সম্পর্কে জেনে নেই।
+
+
+```
+
+```text
+
+
+এখন প্রশ্ন করতে পারো, এদেরকে ক্ষারীয় মৃত্তিকা ধাতু বলা হয় কেন?
+
+
+```
+
+```text
+
+
+এখন তোমাদেরকে সংক্ষেপে ক্ষারীয় মৃত্তিকা ধাতুর ধর্ম সম্পর্কে বলি।
+
+
+```
+
+```text
+
+
+এখন তোমাদেরকে ক্ষারীয় মৃত্তিকা ধাতুর ব্যবহার সম্পর্কে বলি।
+
+
+```
+
+```text
+
+
+তোমরা কি বুঝতে পেরেছো?
+```

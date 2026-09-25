@@ -133,3 +133,71 @@ class TopicTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MultilingualTests(unittest.TestCase):
+    def inputs(self):
+        config={'version':2,'defaults':{'topics':['t1'],'models':['openai/test']},'target_languages':['hi','fr'],
+            'baseline':{'id':'baseline','prompt_language':'en','response_language':'en'},
+            'conditions':[{'id':'native','prompt_language':'$target','response_language':'$target'},
+                          {'id':'english','prompt_language':'en','response_language':'$target'}]}
+        words={'t1':{'en':'isotope','hi':'HINDI_TERM','fr':'isotope-fr','subject':'chemistry'}}
+        templates=[{'lang_id':'en','lang_name_eng':'English','prompt':'Explain {topic} in {response_language_name_en}.'},
+                   {'lang_id':'hi','lang_name_eng':'Hindi','prompt':'Hindi instruction: {topic}'},
+                   {'lang_id':'fr','lang_name_eng':'French','prompt':'French instruction: {topic}'}]
+        return config,words,templates
+
+    def test_expansion_and_language_separation(self):
+        config,words,templates=self.inputs();jobs=runner.expand_jobs(config,words,templates)
+        self.assertEqual(len(jobs),5)
+        self.assertEqual(jobs[1]['prompt'],'Hindi instruction: HINDI_TERM')
+        self.assertEqual(jobs[2]['prompt'],'Explain isotope in Hindi.')
+        self.assertEqual(jobs[2]['prompt_language'],'en')
+        self.assertEqual(jobs[2]['response_language'],'hi')
+        self.assertEqual(jobs[2]['topic_language'],'en')
+        self.assertEqual(jobs[2]['language'],'hi')
+        self.assertEqual(len({j['job_id'] for j in jobs}),5)
+        config['target_languages'].reverse()
+        self.assertEqual({j['job_id'] for j in jobs},{j['job_id'] for j in runner.expand_jobs(config,words,templates)})
+
+    def test_invalid_matrix(self):
+        import copy
+        config,words,templates=self.inputs()
+        for mutation in [lambda c:c.update(target_languages=['hi','hi']),lambda c:c['conditions'][0].update(prompt_language='missing'),lambda c:c.update(target_languages=['en']),lambda c:c['conditions'].append(c['conditions'][0])]:
+            c=copy.deepcopy(config);mutation(c)
+            with self.assertRaises(ValueError):runner.expand_jobs(c,words,templates)
+        del words['t1']['hi']
+        with self.assertRaises(ValueError):runner.expand_jobs(config,words,templates)
+
+    def test_actual_matrix(self):
+        config=runner.api.read_json(runner.HERE/'run_set/multiple.json')
+        templates=runner.api.read_json(runner.HERE/'content/prompt-structures.json')
+        jobs=runner.expand_jobs(config,runner.read_keywords(runner.HERE/'content/keywords.csv'),templates)
+        self.assertEqual(len(jobs),385)
+        self.assertEqual(sum(j['condition_id']=='english_baseline' for j in jobs),35)
+        self.assertFalse(any('{topic}' in j['prompt'] or '{response_language_name_en}' in j['prompt'] for j in jobs))
+
+
+class OrganizedOutputTests(unittest.TestCase):
+    def test_shared_root_and_resume(self):
+        import argparse
+        config={'version':2,'defaults':{'topics':['x'],'models':['openai/test']},'target_languages':['hi'],
+            'conditions':[{'id':'native','prompt_language':'$target','response_language':'$target'}]}
+        templates=[{'lang_id':'hi','lang_name_eng':'Hindi','prompt':'Explain {topic}'}]
+        jobs=runner.expand_jobs(config,{'x':{'hi':'term','en':'topic'}},templates)
+        runner.api.resolve_models(jobs,{'models':[]})
+        async def fake(**kwargs): return {'output':[{'type':'message','content':[{'type':'output_text','text':'Saved response'}]}]}
+        execute=runner.api.execute
+        async def local(*args,**kwargs):return await execute(*args,**kwargs,call=fake)
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory); (root/'existing.txt').write_text('keep')
+            args=argparse.Namespace(output=root,run_set=root/'new.json',resume=False,dry_run=False,concurrency=1,timeout=10)
+            with patch.object(runner.api,'execute',local):
+                self.assertEqual(runner.run_organized(args,config,jobs,{'models':[]},{'jobs':jobs}),0)
+                path=runner.organized_path(root,jobs[0]);self.assertTrue(path.exists())
+                self.assertEqual(path.parent.name,'hindi-native')
+                self.assertTrue(path.name.startswith('openai_test__'))
+                before=path.read_bytes();args.resume=True
+                self.assertEqual(runner.run_organized(args,config,jobs,{'models':[]},{'jobs':jobs}),0)
+                self.assertEqual(before,path.read_bytes())
+                self.assertEqual((root/'existing.txt').read_text(),'keep')

@@ -36,9 +36,13 @@ def topic_folder(job):
     return f"{identifier}_{slug}"
 
 
-def expand_jobs(config, keywords=None):
+def expand_jobs(config, keywords=None, prompt_structures=None):
     if not isinstance(config, dict) or not isinstance(config.get("defaults", {}), dict):
         raise ValueError("Run set and defaults must be objects")
+    if config.get("version") == 2:
+        return expand_multilingual(config, keywords, prompt_structures)
+    if config.get("version", 1) != 1:
+        raise ValueError("Unsupported runset version")
     if not isinstance(config.get("runs"), list) or not config["runs"]:
         raise ValueError("Run set needs a nonempty runs list")
     has_topics = any("topics" in {**config.get("defaults", {}), **row}
@@ -102,6 +106,128 @@ def expand_jobs(config, keywords=None):
     return jobs
 
 
+def expand_multilingual(config, keywords, templates):
+    import string
+    allowed={'version','keywords_file','prompt_structures_file','defaults','target_languages','baseline','conditions','output_dir'}
+    if config.keys()-allowed: raise ValueError('Unknown v2 settings: '+str(sorted(config.keys()-allowed)))
+    if not keywords or not isinstance(templates,list): raise ValueError('Version 2 needs keywords and prompt structures')
+    catalog={}
+    for row in templates:
+        if not isinstance(row,dict) or not all(isinstance(row.get(k),str) and row[k].strip() for k in ['lang_id','lang_name_eng','prompt']): raise ValueError('Invalid prompt structure')
+        if row['lang_id'] in catalog: raise ValueError('Duplicate prompt language: '+row['lang_id'])
+        fields=[]
+        for _,field,spec,conversion in string.Formatter().parse(row['prompt']):
+            if field is not None:
+                if spec or conversion: raise ValueError('Template formatting options are not supported')
+                fields.append(field)
+        if 'topic' not in fields or set(fields)-{'topic','response_language_name_en'}: raise ValueError('Invalid template placeholders: '+row['lang_id'])
+        catalog[row['lang_id']]=row
+    defaults=config.get('defaults',{})
+    if defaults.keys()-{'topics','models','reasoning','web_search'}: raise ValueError('Unknown defaults')
+    topics=api.string_list(defaults.get('topics'),'topics')
+    targets=api.string_list(config.get('target_languages'),'target_languages')
+    if len(set(topics))!=len(topics) or len(set(targets))!=len(targets): raise ValueError('Duplicate topics or target languages')
+    if 'en' in targets: raise ValueError('English belongs in baseline, not target_languages')
+    conditions=config.get('conditions')
+    if not isinstance(conditions,list) or not conditions: raise ValueError('conditions must be nonempty')
+    baseline=config.get('baseline')
+    definitions=([baseline] if baseline is not None else [])+conditions
+    identifiers=set()
+    for c in definitions:
+        if not isinstance(c,dict) or set(c)!={'id','prompt_language','response_language'}: raise ValueError('Condition needs id, prompt_language and response_language')
+        if not all(isinstance(c[k],str) and c[k] for k in c): raise ValueError('Condition fields must be nonempty strings')
+        if not re.fullmatch(r'[a-zA-Z0-9_-]+',c['id']) or c['id'] in identifiers: raise ValueError('Invalid or duplicate condition ID')
+        identifiers.add(c['id'])
+    if baseline and (baseline['prompt_language']!='en' or baseline['response_language']!='en'): raise ValueError('Baseline must be English to English')
+    expanded=([(baseline,None)] if baseline else [])+[(c,target) for target in targets for c in conditions]
+    jobs=[];combinations=set()
+    for index,(condition,target) in enumerate(expanded,1):
+        pl=target if condition['prompt_language']=='$target' else condition['prompt_language']
+        rl=target if condition['response_language']=='$target' else condition['response_language']
+        if (pl,rl) in combinations: raise ValueError('Duplicate prompt/response language combination')
+        combinations.add((pl,rl))
+        if pl not in catalog or rl not in catalog: raise ValueError('Missing language template/name: '+str((pl,rl)))
+        template=catalog[pl]['prompt']
+        if pl!=rl and 'response_language_name_en' not in template: raise ValueError('Cross-language template must specify response_language_name_en')
+        for tid in topics:
+            keyword=keywords.get(tid,{})
+            if not keyword.get(pl) or not keyword.get('en'): raise ValueError(f'Missing topic translation: {tid}, {pl}')
+            prompt=template.format(topic=keyword[pl],response_language_name_en=catalog[rl]['lang_name_eng'])
+            settings={k:v for k,v in defaults.items() if k!='topics'}
+            settings.update(lang_id=pl,prompt=prompt)
+            for job in expand_jobs({'runs':[settings]}):
+                job.update(run_index=index,condition_id=condition['id'],prompt_language=pl,topic_language=pl,response_language=rl,
+                    response_language_name=catalog[rl]['lang_name_eng'],language=rl,topic=keyword[pl],topic_id=tid,
+                    topic_name=keyword['en'],subject=keyword.get('subject',''),prompt_type='language_template',
+                    prompt_template=template,prompt_template_sha256=hashlib.sha256(template.encode('utf-8')).hexdigest())
+                job.pop('job_id')
+                identity={k:v for k,v in job.items() if k!='run_index'}
+                digest=hashlib.sha256(json.dumps(identity,sort_keys=True,ensure_ascii=False).encode()).hexdigest()[:16]
+                job['job_id']=f"run-{condition['id']}-{pl}-{rl}-{digest}"
+                jobs.append(job)
+    return jobs
+
+
+LANGUAGE_NAMES={'en':'english','ta':'tamil','hi':'hindi','bn':'bengali','ar':'arabic','fr':'french'}
+
+def language_folder(job):
+    if 'response_language' in job:
+        pl,rl=job['prompt_language'],job['response_language']
+    else:
+        pl,rl={1:('en','en'),2:('ta','ta'),3:('en','ta')}[job['run_index']]
+    name=LANGUAGE_NAMES.get(rl,rl)
+    if pl==rl: return 'english' if rl=='en' else name+'-native'
+    return name+'-'+LANGUAGE_NAMES.get(pl,pl)
+
+def response_filename(job):
+    model=re.sub(r'[^a-zA-Z0-9._-]+','_',job['model'])
+    suffix=hashlib.sha256(job['job_id'].encode()).hexdigest()[:12]
+    return f'{model}__{suffix}.json'
+
+def organized_path(root,job):
+    return root/topic_folder(job)/language_folder(job)/response_filename(job)
+
+def run_organized(args,config,jobs,catalog,manifest):
+    output=(args.output or args.run_set.parent/config.get('output_dir','../outputs/'+args.run_set.stem)).resolve()
+    record_dir=output/'_runsets'/args.run_set.stem
+    manifest={**manifest,'layout':'topic-language-condition-v1','response_files':{j['job_id']:organized_path(output,j).relative_to(output).as_posix() for j in jobs}}
+    mp=record_dir/'manifest.json'
+    if mp.exists() and (not args.resume or api.read_json(mp)!=manifest): raise ValueError('Runset manifest exists; use --resume with unchanged configuration or another output/runset name')
+    destinations=[organized_path(output,j) for j in jobs]
+    if len(set(destinations))!=len(jobs): raise ValueError('Response destination collision')
+    for j,path in zip(jobs,destinations):
+        if path.exists() and (not args.resume or api.read_json(path).get('job')!=j): raise ValueError('Existing response would be overwritten: '+str(path))
+    for path in destinations: path.parent.mkdir(parents=True,exist_ok=True)
+    record_dir.mkdir(parents=True,exist_ok=True);api.write_json(mp,manifest)
+    preview=['# Rendered prompts','',f'{len(jobs)} jobs.',''];seen=set()
+    for j in jobs:
+        key=(j['topic_id'],j['run_index'])
+        if key not in seen:
+            seen.add(key);preview.extend([f"## {j['topic_name']} / {language_folder(j)}",'',j['prompt'],''])
+    (record_dir/'prompt_preview.md').write_text('\n'.join(preview),encoding='utf-8')
+    print(f'Prepared {len(jobs)} jobs. Manifest: {mp}',flush=True)
+    if args.dry_run:return 0
+    from dotenv import load_dotenv
+    load_dotenv(ROOT/'.env')
+    batches={}
+    for j in jobs:batches.setdefault((topic_folder(j),language_folder(j)),[]).append(j)
+    async def execute():
+        failures=0
+        for (topic,language),batch in batches.items():
+            folder=output/topic/language/'_runs'/args.run_set.stem;folder.mkdir(parents=True,exist_ok=True)
+            api.write_json(folder/'manifest.json',{**manifest,'jobs':batch})
+            resolver=lambda job:organized_path(output,job)
+            failures+=await api.execute(batch,folder,catalog,args.concurrency,args.timeout,args.resume,request_builder=request_for,log_calls=True,result_path_builder=resolver)
+            render_markdown(batch,folder,batch[0]['topic_name']+' / '+language,result_path_builder=resolver)
+        return failures
+    failures=asyncio.run(execute())
+    lines=['# '+args.run_set.stem,'']
+    for topic,language in batches:lines.append(f'- [{topic} / {language}](../../{topic}/{language}/_runs/{args.run_set.stem}/results.md)')
+    (record_dir/'results.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
+    print(f'Finished {len(jobs)-failures}/{len(jobs)}; reports: {record_dir}')
+    return int(bool(failures))
+
+
 def request_for(job):
     request = api.request_for(job)
     if job["reasoning"] is None:
@@ -109,7 +235,7 @@ def request_for(job):
     return request
 
 
-def render_markdown(jobs, output, title):
+def render_markdown(jobs, output, title, result_path_builder=None):
     """Consolidate saved responses in manifest order, including failed jobs."""
     lines = [f"# {title}: model responses", "",
              f"{len(jobs)} requests. Response text is preserved from the saved JSON results.", "",
@@ -126,7 +252,7 @@ def render_markdown(jobs, output, title):
                       f"## Prompt {index} ({group[0]['lang_id']})", "", "**Prompt**", ""])
         lines.extend("> " + line for line in group[0]["prompt"].splitlines())
         for job in group:
-            path = output / f"{job['job_id']}.json"
+            path = result_path_builder(job) if result_path_builder else output / f"{job['job_id']}.json"
             result = api.read_json(path) if path.exists() else {"status": "missing"}
             if path.exists() and result.get("job") != job:
                 raise ValueError(f"Result does not match manifest job: {path}")
@@ -134,7 +260,7 @@ def render_markdown(jobs, output, title):
                           f"### {job['model']}", "",
                           f"**Status:** {result['status']}", ""])
             if path.exists():
-                lines.extend([f"**Source:** [{path.name}]({path.name})", ""])
+                lines.extend([f"**Source:** [{path.name}]({__import__('os').path.relpath(path,output).replace(chr(92),chr(47))})", ""])
             if result.get("text"):
                 lines.extend([result["text"], ""])
             else:
@@ -152,7 +278,7 @@ def render_markdown(jobs, output, title):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-set", type=Path, default=HERE / "run_set" / "run1.json")
-    parser.add_argument("--keywords", type=Path, default=HERE / "content" / "keywords.csv")
+    parser.add_argument("--keywords", type=Path, help="Override keyword CSV; v2 paths default to runset-relative configuration")
     parser.add_argument("--output", type=Path, help="Default: outputs/<run-set filename without extension>")
     parser.add_argument("--dry-run", action="store_true", help="Save a manifest without making API calls")
     parser.add_argument("--resume", action="store_true", help="Skip completed jobs in an identical manifest")
@@ -165,14 +291,18 @@ def main(argv=None):
     try:
         config = api.read_json(args.run_set)
         catalog = api.read_json(ROOT / "data" / "models.json")
-        needs_keywords = any("topics" in {**config.get("defaults", {}), **row}
+        needs_keywords = config.get("version")==2 or any("topics" in {**config.get("defaults", {}), **row}
                              for row in config.get("runs", []) if isinstance(row, dict))
-        jobs = expand_jobs(config, read_keywords(args.keywords) if needs_keywords else None)
+        keyword_path=args.keywords or ((args.run_set.parent/config.get('keywords_file','../content/keywords.csv')) if config.get('version')==2 else HERE/'content/keywords.csv')
+        templates=api.read_json(args.run_set.parent/config['prompt_structures_file']) if config.get('version')==2 else None
+        jobs = expand_jobs(config, read_keywords(keyword_path) if needs_keywords else None,templates)
         api.resolve_models(jobs, catalog)
         if args.limit:
             jobs = jobs[:args.limit]
         manifest = dict(run_set=config, jobs=jobs, requests=[request_for(job) for job in jobs],
                         model_catalog_sha256=hashlib.sha256(json.dumps(catalog, sort_keys=True).encode()).hexdigest())
+        if config.get("version")==2:
+            return run_organized(args,config,jobs,catalog,manifest)
         output = args.output or HERE / "outputs" / args.run_set.stem
         manifest_path = output / "manifest.json"
         if output.exists() and any(output.iterdir()):
@@ -198,6 +328,16 @@ def main(argv=None):
         parser.error(str(exc))
     print(f"Prepared {len(jobs)} jobs. Manifest: {manifest_path}", flush=True)
     if args.dry_run:
+        from collections import Counter
+        print(json.dumps(dict(Counter((j.get('condition_id','legacy')+': '+j.get('prompt_language',j['lang_id'])+' -> '+j.get('response_language',j['language'])) for j in jobs)),indent=2))
+        preview=['# Rendered prompt preview','',f'{len(jobs)} jobs; no API calls made.','']
+        seen=set()
+        for job in jobs:
+            key=(job.get('topic_id'),job['run_index'])
+            if key in seen: continue
+            seen.add(key)
+            preview.extend([f"## {job.get('topic_name','Prompt')} / {job.get('condition_id',job['run_index'])} / {job.get('prompt_language',job['lang_id'])} -> {job.get('response_language',job['language'])}",'',job['prompt'],''])
+        (output/'prompt_preview.md').write_text('\n'.join(preview),encoding='utf-8')
         return 0
     from dotenv import load_dotenv
     load_dotenv(ROOT / ".env")

@@ -1,0 +1,128 @@
+{
+  "topic_relevance": {
+    "requested_topic": "isotope",
+    "observed_topic": "Definition of isotopes, comparison of carbon isotopes, and stability versus radioactive decay with carbon-14 dating",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly defines isotopes, illustrates the concept using carbon isotopes, and discusses isotopic stability and radioactive decay.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of isotopes and relationship between subatomic particles and mass",
+      "excerpts": [
+        {
+          "text": "An **isotope** is a version of an element that has the same number of **protons** but a different number of **neutrons**.\n\n- The number of **protons** decides which element it is.\n- The number of **neutrons** can change without changing the element.\n- Therefore, isotopes of the same element have different **masses**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition correctly specifies that isotopes share the same proton number but differ in neutron number, explaining how this affects isotopic mass.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Comparison of carbon-12, carbon-13, and carbon-14 isotopes",
+      "excerpts": [
+        {
+          "text": "### Example: Carbon isotopes\n\nEvery carbon atom has **6 protons**. However, carbon can have different numbers of neutrons:\n\n| Isotope | Protons | Neutrons | Mass number |\n|---|---:|---:|---:|\n| Carbon-12 | 6 | 6 | 12 |\n| Carbon-13 | 6 | 7 | 13 |\n| Carbon-14 | 6 | 8 | 14 |\n\nAll three are carbon because they all contain 6 protons. But they are different isotopes because their numbers of neutrons are different.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The proton counts, neutron counts, mass numbers, and qualitative deductions for carbon-12, carbon-13, and carbon-14 are factually correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Distinction between stable and radioactive isotopes",
+      "excerpts": [
+        {
+          "text": "Some isotopes are **stable**, meaning they do not change over time. Others are **radioactive**, meaning they slowly break down and release radiation.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definitions provided for stable and radioactive isotopes accurately state their basic physical behavior.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "EXAMPLE",
+      "label": "Radiocarbon dating using carbon-14",
+      "excerpts": [
+        {
+          "text": "For example, carbon-14 is radioactive and is used to estimate the age of ancient bones, wood, and fossils.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Carbon-14 is indeed an unstable radioactive isotope used in radiometric dating of organic remains.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u2"
+      ],
+      "issue": "Attribute treatment for u2: whether presenting the table and concluding that all three are carbon isotopes constitutes 'worked' qualitative reasoning or an 'illustrative' example.",
+      "proposed_resolution": "Classified as 'worked' because it supplies specific quantities of protons and neutrons, applies the definition, and reasons to a conclusion identifying why they are the same element yet distinct isotopes."
+    },
+    {
+      "unit_ids": [
+        "u3",
+        "u4"
+      ],
+      "issue": "Unit boundary: whether the mention of carbon-14 dating should be kept within u3 as a supporting illustrative sentence or split into a distinct EXAMPLE unit.",
+      "proposed_resolution": "Separated into u4 as an EXAMPLE unit because it introduces an explicit real-world application of radioactive isotopes."
+    }
+  ]
+}

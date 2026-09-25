@@ -1,0 +1,164 @@
+{
+  "topic_relevance": {
+    "requested_topic": "isotope",
+    "observed_topic": "Definition, structure, examples, and properties of isotopes",
+    "topic_match": "on_topic",
+    "reason": "The explanation directly defines isotopes, describes their subatomic structure (protons and neutrons), provides examples (hydrogen and carbon), discusses their chemical and physical properties, and clarifies a common point of confusion.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and subatomic explanation of isotopes",
+      "excerpts": [
+        {
+          "text": "**النظائر** هي ذرات تنتمي إلى نفس العنصر الكيميائي، ولها نفس **العدد الذري** (عدد البروتونات)، لكنها تختلف في **العدد الكتلي** (بسبب اختلاف عدد النيوترونات في النواة).\n\n---\n\n## الشرح المبسط\n\nتخيل أن الذرة تتكون من:\n- **بروتونات** (شحنة موجبة) — تحدد هوية العنصر\n- **نيوترونات** (متعادلة الشحنة) — تضيف كتلة للذرة\n- **إلكترونات** (شحنة سالبة) — تدور حول النواة\n\nالنظائر تشترك في **نفس عدد البروتونات** (لذلك تبقى نفس العنصر)، لكنها تختلف في **عدد النيوترونات**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition and description of isotopes, subatomic particles, and their relationship to atomic number and mass number are factually accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Isotopes of hydrogen table",
+      "excerpts": [
+        {
+          "text": "| النظير | البروتونات | النيوترونات | العدد الكتلي |\n|--------|:---:|:---:|:---:|\n| **الهيدروجين العادي (Protium)** | 1 | 0 | 1 |\n| **الديوتيريوم (Deuterium)** | 1 | 1 | 2 |\n| **التريتيوم (Tritium)** | 1 | 2 | 3 |\n\nجميعها هيدروجين (لأن عدد البروتونات = 1)، لكنها تختلف في الكتلة.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The composition of protium, deuterium, and tritium is correctly presented.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Isotopes of carbon and their applications",
+      "excerpts": [
+        {
+          "text": "- **الكربون-12** (⁶C¹²): 6 بروتونات + 6 نيوترونات — **الأكثر شيوعًا واستقرارًا**\n- **الكربون-13** (⁶C¹³): 6 بروتونات + 7 نيوترونات — مستقر أيضًا\n- **الكربون-14** (⁶C¹⁴): 6 بروتونات + 8 نيوترونات — **مشع** ويُستخدم في تحديد عمر الأحافير (التأريخ الكربوني)",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The isotopic symbols use non-standard notation by placing the atomic number (6) as a superscript on the left and the mass number as a superscript on the right, rather than placing the atomic number as a subscript and the mass number as a superscript on the left.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "(⁶C¹²)"
+              },
+              {
+                "excerpt_index": 0,
+                "quote": "(⁶C¹³)"
+              },
+              {
+                "excerpt_index": 0,
+                "quote": "(⁶C¹⁴)"
+              }
+            ],
+            "description": "In standard nuclide notation, the atomic number is written as a subscript on the left and the mass number is written as a superscript on the left (e.g., ¹²₆C or C-12), rather than placing the atomic number as a left superscript and the mass number as a right superscript.",
+            "correction": "Use standard nuclide notation: ¹²₆C, ¹³₆C, and ¹⁴₆C (or simply Carbon-12, Carbon-13, Carbon-14 / ¹²C, ¹³C, ¹⁴C).",
+            "severity": "minor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "General chemical and physical properties of isotopes",
+      "excerpts": [
+        {
+          "text": "1. النظائر لها **نفس الخواص الكيميائية** تقريبًا (لأن التفاعلات الكيميائية تعتمد على الإلكترونات)\n2. النظائر تختلف في **الخواص الفيزيائية** مثل الكتلة والكثافة\n3. بعض النظائر **مستقرة** وبعضها **مشع (غير مستقر)** ويتحلل مع الزمن\n4. الكتلة الذرية المذكورة في الجدول الدوري هي **متوسط** كتل النظائر المختلفة للعنصر حسب نسبة وجودها في الطبيعة",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The statements correctly explain why isotopes share chemical properties, differ in physical properties, can be radioactive, and how relative atomic mass is calculated.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CAVEAT",
+      "label": "Clarifying that sharing neutron count does not make atoms isotopes",
+      "excerpts": [
+        {
+          "text": "إذا كان لديك ذرتان لهما نفس عدد النيوترونات لكن عدد بروتونات مختلف، هل تُعتبران نظائر لبعضهما؟\n\n**الإجابة:** لا! فالنظائر تُعرَّف بناءً على **تشابه عدد البروتونات**، وليس النيوترونات.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "misconception"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The unit correctly addresses the misconception regarding atoms with identical neutron numbers but differing proton numbers (which are isotones, not isotopes).",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u5"
+      ],
+      "issue": "The unit is formatted as a question and immediate answer ('سؤال للتفكير / الإجابة'). It could be classified as STUDY_SUPPORT (practice_question) or CAVEAT (misconception).",
+      "proposed_resolution": "Classified as CAVEAT (misconception) because the answer is immediately provided to dispel a common student confusion between sharing protons versus sharing neutrons, rather than leaving a task for the student to practice."
+    }
+  ]
+}

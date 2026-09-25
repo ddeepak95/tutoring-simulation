@@ -1,0 +1,872 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "94b002398e471ca1759de5d72ca022859786c3d1f0da214496bdd2dcb668b701",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "Stoichiometry (রাসায়নিক সমীকরণমিতি) in chemistry, including its definition, balanced equations, mole concept, calculation procedure, worked example, limiting reagent, and real-world significance.",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The response provides a comprehensive introductory explanation of chemical stoichiometry in Bengali, covering definitions, mole ratios, problem-solving steps, a step-by-step worked example, limiting reagents, and practical applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Concept of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Balanced Equations and Mole Ratios"
+      },
+      {
+        "id": "s3",
+        "label": "The Mole Concept and Conversions"
+      },
+      {
+        "id": "s4",
+        "label": "Steps for Stoichiometric Calculations"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Stoichiometry Example"
+      },
+      {
+        "id": "s6",
+        "label": "Limiting Reagents"
+      },
+      {
+        "id": "s7",
+        "label": "Importance and Applications of Stoichiometry"
+      },
+      {
+        "id": "s8",
+        "label": "Summary and Practice Invitation"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of Stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the branch of chemistry dealing with quantitative relationships between reactants and products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# রাসায়নিক সমীকরণমিতি (Stoichiometry)",
+            "start": 0,
+            "end": 38
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সমীকরণমিতি কী?",
+            "start": 40,
+            "end": 57
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতি হলো রসায়নের এমন একটি শাখা যেখানে আমরা রাসায়নিক বিক্রিয়ায় বিক্রিয়ক (reactant) ও উৎপাদের (product) মধ্যে **পরিমাণগত সম্পর্ক** নিয়ে আলোচনা করি। সহজ কথায়, একটি বিক্রিয়ায় কত পরিমাণ পদার্থ লাগবে এবং কত পরিমাণ পদার্থ উৎপন্ন হবে—এটাই আমরা হিসাব করি।",
+            "start": 59,
+            "end": 320
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately describes stoichiometry as quantitative calculations involving reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Balanced Chemical Equations and Mole Ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains that balanced chemical equations serve as the foundation of stoichiometry, interpreting coefficients as mole ratios using the formation of ammonia as an illustrative example.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মূল ভিত্তি: সুষম রাসায়নিক সমীকরণ",
+            "start": 322,
+            "end": 358
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতির ভিত্তি হলো একটি **সুষম (balanced) রাসায়নিক সমীকরণ**। উদাহরণ দেখি:",
+            "start": 360,
+            "end": 438
+          },
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$N_2 + 3H_2 \\rightarrow 2NH_3$$",
+            "start": 440,
+            "end": 472
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সমীকরণটি আমাদের বলছে:",
+            "start": 474,
+            "end": 498
+          },
+          {
+            "id": "p8",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **১ মোল** নাইট্রোজেন গ্যাস",
+            "start": 499,
+            "end": 527
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **৩ মোল** হাইড্রোজেন গ্যাসের সাথে বিক্রিয়া করে",
+            "start": 528,
+            "end": 577
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **২ মোল** অ্যামোনিয়া উৎপন্ন করে",
+            "start": 578,
+            "end": 612
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "এই সংখ্যাগুলো (১, ৩, ২) কে **মোল অনুপাত** বা **স্টোইকিওমেট্রিক কোএফিসিয়েন্ট** বলে।",
+            "start": 614,
+            "end": 697
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation N2 + 3H2 -> 2NH3 is balanced correctly, and the coefficients accurately represent the stoichiometric mole ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The Mole Concept and Mass Conversion Formula",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Reviews essential prerequisite definitions and formulas regarding the mole, Avogadro's constant, and the relation between mass, molar mass, and moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## মোলের ধারণা মনে রাখি",
+            "start": 699,
+            "end": 722
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণমিতি বুঝতে হলে \"মোল\" বুঝতে হবে:",
+            "start": 724,
+            "end": 761
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ১ মোল = $6.022 \\times 10^{23}$ টি কণা (অ্যাভোগেড্রো সংখ্যা)",
+            "start": 762,
+            "end": 823
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- মোল = ভর ÷ মোলার ভর",
+            "start": 824,
+            "end": 845
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n = \\frac{m}{M}$$",
+            "start": 847,
+            "end": 866
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Avogadro's number (6.022 x 10^23) and the formula n = m / M are stated correctly.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "General Steps for Solving Stoichiometry Problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a four-step reusable procedure for solving standard mass-to-mass stoichiometric problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সমীকরণমিতির ধাপসমূহ",
+            "start": 868,
+            "end": 890
+          },
+          {
+            "id": "p18",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "কোনো সমস্যা সমাধানের জন্য এই ধাপগুলো অনুসরণ করি:",
+            "start": 892,
+            "end": 940
+          },
+          {
+            "id": "p19",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ১:** সমীকরণটি সুষম করা",
+            "start": 942,
+            "end": 970
+          },
+          {
+            "id": "p20",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ২:** প্রদত্ত পদার্থের ভরকে মোলে রূপান্তর করা",
+            "start": 971,
+            "end": 1021
+          },
+          {
+            "id": "p21",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ৩:** মোল অনুপাত ব্যবহার করে কাঙ্ক্ষিত পদার্থের মোল বের করা",
+            "start": 1022,
+            "end": 1086
+          },
+          {
+            "id": "p22",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ৪:** মোলকে ভরে রূপান্তর করা",
+            "start": 1087,
+            "end": 1120
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The four-step algorithm (balance equation, mass to moles, apply mole ratio, moles to mass) is the standard and correct approach in introductory chemistry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked Example: Synthesizing Ammonia from Nitrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Demonstrates the step-by-step calculation of the mass of ammonia produced from 28 grams of nitrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## একটি বাস্তব উদাহরণ",
+            "start": 1122,
+            "end": 1143
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমস্যা:** ২৮ গ্রাম নাইট্রোজেন গ্যাসের সাথে পূর্ণ বিক্রিয়ায় কত গ্রাম অ্যামোনিয়া উৎপন্ন হবে?",
+            "start": 1145,
+            "end": 1240
+          },
+          {
+            "id": "p25",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সমাধান:**",
+            "start": 1242,
+            "end": 1253
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ: $N_2 + 3H_2 \\rightarrow 2NH_3$",
+            "start": 1255,
+            "end": 1293
+          },
+          {
+            "id": "p27",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ১ - মোল বের করা:**",
+            "start": 1295,
+            "end": 1319
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$N_2\\text{-এর মোলার ভর} = 28 \\text{ g/mol}$$",
+            "start": 1320,
+            "end": 1365
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n(N_2) = \\frac{28}{28} = 1 \\text{ মোল}$$",
+            "start": 1366,
+            "end": 1408
+          },
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ২ - মোল অনুপাত ব্যবহার:**",
+            "start": 1410,
+            "end": 1441
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "সমীকরণ থেকে, ১ মোল $N_2$ থেকে ২ মোল $NH_3$ উৎপন্ন হয়।",
+            "start": 1442,
+            "end": 1496
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n(NH_3) = 1 \\times 2 = 2 \\text{ মোল}$$",
+            "start": 1497,
+            "end": 1537
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ধাপ ৩ - ভরে রূপান্তর:**",
+            "start": 1539,
+            "end": 1564
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$NH_3\\text{-এর মোলার ভর} = 17 \\text{ g/mol}$$",
+            "start": 1565,
+            "end": 1611
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$m(NH_3) = 2 \\times 17 = 34 \\text{ গ্রাম}$$",
+            "start": 1612,
+            "end": 1656
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**উত্তর:** ৩৪ গ্রাম অ্যামোনিয়া উৎপন্ন হবে।",
+            "start": 1658,
+            "end": 1701
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass of N2 is 28 g/mol, giving 1 mol N2; the 1:2 stoichiometric ratio produces 2 mol NH3; with a molar mass of 17 g/mol for NH3, the mass is correctly computed as 34 g.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Limiting Reagents",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Explains the concept of a limiting reagent as the reactant consumed first, which determines the maximum yield of products.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## সীমাবদ্ধ বিকারক (Limiting Reagent)",
+            "start": 1703,
+            "end": 1740
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "বাস্তব বিক্রিয়ায় সব বিক্রিয়ক ঠিক অনুপাতে থাকে না। যে বিক্রিয়কটি **আগে শেষ হয়ে যায়**, সেটিই বিক্রিয়ার পরিমাণ নির্ধারণ করে। একে **সীমাবদ্ধ বিকারক** বলে।",
+            "start": 1742,
+            "end": 1899
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation accurately identifies the limiting reagent as the substance that runs out first and restricts product formation.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Importance of Stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Lists practical reasons why stoichiometry is vital, including industry, pharmaceuticals, cost reduction, and lab work.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## কেন সমীকরণমিতি গুরুত্বপূর্ণ?",
+            "start": 1901,
+            "end": 1932
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- শিল্পক্ষেত্রে সঠিক পরিমাণে কাঁচামাল ব্যবহার করতে",
+            "start": 1934,
+            "end": 1984
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- ওষুধ তৈরিতে সঠিক অনুপাত মেনে চলতে",
+            "start": 1985,
+            "end": 2020
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- বিক্রিয়ার খরচ ও অপচয় কমাতে",
+            "start": 2021,
+            "end": 2051
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- পরীক্ষাগারে সঠিক ফলাফল পেতে",
+            "start": 2052,
+            "end": 2081
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed applications accurately reflect the standard real-world significance of stoichiometric control.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary and Practice Invitation",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Provides a concluding recap emphasizing the role of balanced equation coefficients, followed by an interactive closing offer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p44",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**সংক্ষেপে মনে রাখো:** সমীকরণমিতি হলো রসায়নের \"গণিত\"—যেখানে সুষম সমীকরণের কোএফিসিয়েন্টগুলোই তোমার হিসাবের চাবিকাঠি!",
+            "start": 2083,
+            "end": 2200
+          },
+          {
+            "id": "p45",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "তুমি কি কোনো নির্দিষ্ট সমস্যা নিয়ে অনুশীলন করতে চাও? 😊",
+            "start": 2202,
+            "end": 2257
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap appropriately summarizes coefficients as the key factor in stoichiometric calculations.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\bengali-native\\claude-sonnet-5__416a8b6035d4.json",
+    "original_sha256": "48871e64eb2ea6bed383481b29fe4f2d9d252d40ac4fb9a70dc013c15c278dfb",
+    "evaluation_language": "Bengali",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 45,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 45,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "none": 8
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

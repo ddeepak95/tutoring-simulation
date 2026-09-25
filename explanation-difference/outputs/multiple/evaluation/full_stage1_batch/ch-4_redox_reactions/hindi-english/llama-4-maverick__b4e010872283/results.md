@@ -1,0 +1,186 @@
+# Stage 1: Hindi / redox reactions
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "redox reactions",
+  "observed_topic": "Redox reactions, oxidation, reduction, and how to identify redox reactions with a worked example",
+  "topic_match": "on_topic",
+  "reason": "The explanation directly covers redox reactions, defining them in terms of oxidation state changes, explaining oxidation and reduction, walking through a worked example of sodium reacting with chlorine, and explaining how to identify redox reactions.",
+  "content_unit_ids": [
+    "u1",
+    "u2",
+    "u3",
+    "u4"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition of redox reactions, oxidation states, and oxidation and reduction processes | {"depth": "explanation"} | accurate |
+| u2 | EXAMPLE | Worked example of redox reaction between sodium and chlorine | {"context": "abstract_or_hypothetical", "treatment": "worked"} | accurate |
+| u3 | PROCEDURE | Method for identifying a redox reaction | {} | accurate |
+| u4 | STUDY_SUPPORT | Recap of redox reactions and their significance | {"subtype": "recap"} | accurate |
+
+## u1: Definition of redox reactions, oxidation states, and oxidation and reduction processes
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The definitions of redox reactions, oxidation states, oxidation (loss of electrons, increase in oxidation state), and reduction (gain of electrons, decrease in oxidation state) are factually correct within high school chemistry.",
+    "errors": []
+  }
+}
+```
+
+```text
+**रेडॉक्स अभिक्रिया क्या है?**
+
+रेडॉक्स अभिक्रिया एक प्रकार की रासायनिक अभिक्रिया है जिसमें एक या अधिक तत्वों के ऑक्सीकरण अवस्था में परिवर्तन होता है। ऑक्सीकरण अवस्था का अर्थ है किसी तत्व का वह अवस्था जिसमें वह अपने इलेक्ट्रॉनों को खो देता है या प्राप्त कर लेता है।
+
+**ऑक्सीकरण और अपचयन**
+
+रेडॉक्स अभिक्रिया में दो मुख्य प्रक्रियाएं होती हैं:
+
+1. **ऑक्सीकरण** (Oxidation): जब कोई तत्व अपने इलेक्ट्रॉनों को खो देता है, तो उसे ऑक्सीकरण कहते हैं। इस प्रक्रिया में, तत्व की ऑक्सीकरण अवस्था बढ़ जाती है।
+2. **अपचयन** (Reduction): जब कोई तत्व इलेक्ट्रॉनों को प्राप्त कर लेता है, तो उसे अपचयन कहते हैं। इस प्रक्रिया में, तत्व की ऑक्सीकरण अवस्था घट जाती है।
+```
+
+
+## u2: Worked example of redox reaction between sodium and chlorine
+
+```json
+{
+  "attributes": {
+    "context": "abstract_or_hypothetical",
+    "treatment": "worked"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The reaction between sodium and chlorine is correctly broken down into oxidation and reduction half-reactions, accurately tracking electron transfer and the changes in oxidation states.",
+    "errors": []
+  }
+}
+```
+
+```text
+**उदाहरण**
+
+एक सरल उदाहरण लेते हैं:
+
+2Na + Cl₂ → 2NaCl
+
+इस अभिक्रिया में, सोडियम (Na) अपने इलेक्ट्रॉन को खो देता है और क्लोरीन (Cl) इलेक्ट्रॉन प्राप्त कर लेता है।
+
+* सोडियम का ऑक्सीकरण होता है: Na → Na⁺ + e⁻ (ऑक्सीकरण अवस्था 0 से +1 हो जाती है)
+* क्लोरीन का अपचयन होता है: Cl₂ + 2e⁻ → 2Cl⁻ (ऑक्सीकरण अवस्था 0 से -1 हो जाती है)
+```
+
+
+## u3: Method for identifying a redox reaction
+
+```json
+{
+  "attributes": {},
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The stated procedure correctly explains how to determine if a reaction is redox by checking for changes in elements' oxidation states and verifying the simultaneous occurrence of oxidation and reduction.",
+    "errors": []
+  }
+}
+```
+
+```text
+**रेडॉक्स अभिक्रिया की पहचान**
+
+रेडॉक्स अभिक्रिया की पहचान करने के लिए, हमें देखना होता है कि अभिक्रिया में कौन से तत्वों की ऑक्सीकरण अवस्था में परिवर्तन हो रहा है। यदि किसी अभिक्रिया में ऑक्सीकरण और अपचयन दोनों प्रक्रियाएं होती हैं, तो वह रेडॉक्स अभिक्रिया है।
+```
+
+
+## u4: Recap of redox reactions and their significance
+
+```json
+{
+  "attributes": {
+    "subtype": "recap"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The conclusion accurately summarizes the core concepts of redox reactions taught earlier in the response.",
+    "errors": []
+  }
+}
+```
+
+```text
+**निष्कर्ष**
+
+रेडॉक्स अभिक्रियाएं रसायन विज्ञान में एक महत्वपूर्ण भूमिका निभाती हैं। इन अभिक्रियाओं में ऑक्सीकरण और अपचयन प्रक्रियाएं होती हैं, जो तत्वों की ऑक्सीकरण अवस्था में परिवर्तन का कारण बनती हैं। रेडॉक्स अभिक्रियाओं को समझने से हमें विभिन्न रासायनिक प्रक्रियाओं को समझने में मदद मिलती है।
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u1"
+    ],
+    "issue": "The introductory conceptual text combines the overarching definition of redox reactions and oxidation states with the definitions of oxidation and reduction. These could alternatively be split into two separate CONCEPT units: one defining redox reactions/oxidation states, and the second defining oxidation and reduction as a paired contrast.",
+    "proposed_resolution": "Kept together as a single CONCEPT unit per the guidance to prefer keeping uncertain splits within one teaching episode together, as both parts jointly establish what a redox reaction is."
+  },
+  {
+    "unit_ids": [
+      "u3"
+    ],
+    "issue": "The section 'रेडॉक्स अभिक्रिया की पहचान' could be classified as PROCEDURE (a reusable task-oriented method for identifying redox reactions) or as CONCEPT (a conceptual criterion/rule for what qualifies as a redox reaction).",
+    "proposed_resolution": "Classified as PROCEDURE because it is explicitly framed as an active sequence of checks to carry out on a reaction ('रेडॉक्स अभिक्रिया की पहचान करने के लिए, हमें देखना होता है...')."
+  },
+  {
+    "unit_ids": [
+      "u4"
+    ],
+    "issue": "The concluding section under 'निष्कर्ष' could be regarded as conversational closing remarks and omitted, or as a substantive recap of earlier points.",
+    "proposed_resolution": "Annotated as STUDY_SUPPORT with subtype 'recap' because it explicitly reviews the central conceptual takeaways (oxidation and reduction causing changes in oxidation states)."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+**रेडॉक्स अभिक्रियाएं** (Redox अभिक्रियाएं)
+
+नमस्ते! आज हम रेडॉक्स अभिक्रियाओं के बारे में पढ़ने जा रहे हैं। यह एक महत्वपूर्ण विषय है जो रसायन विज्ञान में बहुत उपयोगी है।
+
+
+```
+
+```text
+
+
+अब, क्या आपके पास कोई प्रश्न है?
+```

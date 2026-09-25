@@ -1,0 +1,407 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "652d9cd0247daa97d7cda27b115b0de4df98b0303ece09a28ebd3b6835cd8d98",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "endemic species",
+      "topic_match": "off_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The prompt asked to explain isotopes ('ஓரிடத்தான்' in Tamil chemistry terminology), but the response interpreted the term literally as 'endemic species' in ecology and biology, discussing flora and fauna restricted to specific geographical regions.",
+      "major_task_failure": true
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of Endemic Species"
+      },
+      {
+        "id": "s2",
+        "label": "Examples of Endemic Species"
+      },
+      {
+        "id": "s3",
+        "label": "Ecological Importance and Vulnerability"
+      },
+      {
+        "id": "s4",
+        "label": "Distinction Between Endemic and Rare Species"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of endemic species",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces and defines the term 'ஓரிடத்தான்' as endemic species, describing organisms naturally restricted to a single geographical area.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ஓரிடத்தான்** என்பது ஆங்கிலத்தில் **Endemic species** என்று அழைக்கப்படுகிறது.",
+            "start": 0,
+            "end": 78
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ஒரு குறிப்பிட்ட **பகுதியில் மட்டுமே இயற்கையாக வாழும்** தாவரம் அல்லது விலங்கு ஓரிடத்தான் எனப்படும். அது உலகின் வேறு இடங்களில் இயற்கையாகக் காணப்படாது.",
+            "start": 80,
+            "end": 228
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "EXAMPLE",
+        "label": "Nilgiri tahr as an endemic species",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents the Nilgiri tahr of the Western Ghats as an example of an endemic animal.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p4",
+              "quote": "இந்தியாவின் மேற்குத் தொடர்ச்சி மலையில் மட்டுமே இயற்கையாக வாழ்கிறது."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### எளிய உதாரணம்",
+            "start": 230,
+            "end": 246
+          },
+          {
+            "id": "p4",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **நீலகிரி வரையாடு** – இந்தியாவின் மேற்குத் தொடர்ச்சி மலையில் மட்டுமே இயற்கையாக வாழ்கிறது.  ",
+            "start": 247,
+            "end": 340
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Lion-tailed macaque as an endemic species",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents the lion-tailed macaque as a distinct example of an endemic species in the Western Ghats.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "மேற்குத் தொடர்ச்சி மலைக் காடுகளில் மட்டுமே காணப்படுகிறது."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **சிங்கவால் குரங்கு** – மேற்குத் தொடர்ச்சி மலைக் காடுகளில் மட்டுமே காணப்படுகிறது.  ",
+            "start": 341,
+            "end": 426
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Neelakurinji as an endemic plant",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents Neelakurinji as an example of an endemic plant associated with the Western Ghats.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "மேற்குத் தொடர்ச்சி மலைப் பகுதிகளுடன் தொடர்புடைய ஒரு சிறப்பான தாவரம்."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **நீலகுறிஞ்சி மலர்** – மேற்குத் தொடர்ச்சி மலைப் பகுதிகளுடன் தொடர்புடைய ஒரு சிறப்பான தாவரம்.",
+            "start": 427,
+            "end": 520
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "CONCEPT",
+        "label": "Vulnerability and importance of endemic species",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why endemic species are vulnerable to extinction and why habitat conservation is necessary.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ஏன் இவை முக்கியம்?",
+            "start": 522,
+            "end": 544
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ஓரிடத்தான் உயிரினங்கள் ஒரு சிறிய பகுதிக்கே கட்டுப்பட்டிருப்பதால், அந்தப் பகுதியின் காடுகள் அழிந்தால் அல்லது காலநிலை மாறினால் அவை எளிதில் அழிவின் விளிம்புக்குச் செல்லலாம். எனவே அவற்றின் வாழிடங்களைப் பாதுகாப்பது மிகவும் அவசியம்.",
+            "start": 545,
+            "end": 771
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Recap summary of endemic species",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Provides a quick one-line recap formula for remembering what an endemic species is.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### நினைவில் கொள்ளுங்கள்",
+            "start": 773,
+            "end": 797
+          },
+          {
+            "id": "p10",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **“ஒரே இடத்தில் மட்டுமே இயற்கையாக வாழும் உயிரினம் = ஓரிடத்தான்.”**",
+            "start": 798,
+            "end": 866
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CAVEAT",
+        "label": "Distinguishing endemic species from rare species",
+        "attributes": {
+          "subtype": "misconception"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Clarifies the common misconception equating endemic species with rare species.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "misconception"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இது **அரிய உயிரினம்** என்பதற்குச் சமமான சொல் அல்ல. ஒரு உயிரினம் அரியதாக இருக்கலாம்; ஆனால் பல இடங்களில் வாழலாம். ஓரிடத்தான் உயிரினம் மட்டும் ஒரு குறிப்பிட்ட இடத்திலேயே வாழும்.",
+            "start": 868,
+            "end": 1042
+          }
+        ],
+        "accuracy": {
+          "verdict": "not_assessed_due_to_topic_mismatch",
+          "reason": "Topic is off-topic relative to the requested chemistry topic 'isotope'.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\tamil-native\\gpt-5.6-terra__f589a5159205.json",
+    "original_sha256": "19409c9a275c3cd23e91ccdce7d30749fbdd1aef6cd8a63d27db76f8ce09f31d",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 11,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "EXAMPLE": 3,
+      "STUDY_SUPPORT": 1,
+      "CAVEAT": 1
+    },
+    "nested_passages": 11,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 4,
+      "localized": 3
+    },
+    "proposed_substantive_verdicts": {
+      "not_assessed_due_to_topic_mismatch": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

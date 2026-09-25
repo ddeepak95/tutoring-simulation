@@ -1,0 +1,136 @@
+# Stage 1: French / vapour phase refining
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "vapour phase refining",
+  "observed_topic": "Vapour phase refining of metals and the Mond process for nickel",
+  "topic_match": "on_topic",
+  "reason": "The explanation defines vapour phase refining, outlines its general operating principles and steps, and provides the standard Mond process for nickel as an example.",
+  "content_unit_ids": [
+    "u1",
+    "u2"
+  ],
+  "major_task_failure": false
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition, principle, and steps of vapour phase refining | {"depth": "explanation"} | contains_error |
+| u2 | EXAMPLE | Mond process for the purification of nickel | {"context": "real_world", "treatment": "illustrative"} | accurate |
+
+## u1: Definition, principle, and steps of vapour phase refining
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "contains_error",
+    "reason": "The unit misidentifies chlorides as typical compounds used for thermal decomposition vapour phase refining. In vapour phase refining, volatile compounds must undergo thermal decomposition to recover the metal; metal chlorides are thermodynamically too stable to dissociate into pure metal under accessible thermal conditions, which is why volatile carbonyls (Mond process) and iodides (Van Arkel process) are used.",
+    "errors": [
+      {
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "généralement un chlorure ou un iodure"
+          }
+        ],
+        "description": "Vapour phase refining relies on thermal decomposition of volatile compounds to liberate pure metal. The volatile compounds typically used are carbonyls (e.g., in the Mond process for nickel) or iodides (e.g., in the Van Arkel process for titanium and zirconium). Chlorides are generally not decomposed thermally to pure metal without reducing agents.",
+        "correction": "généralement un carbonyle ou un iodure",
+        "severity": "minor"
+      }
+    ]
+  }
+}
+```
+
+```text
+Bonjour! Aujourd'hui, nous allons discuter de la purification des métaux par raffinage en phase vapeur, également connu sous le nom de raffinage en phase gazeuse. (Today, we're going to discuss the purification of metals by vapour phase refining.)
+
+Le raffinage en phase vapeur est une méthode utilisée pour purifier les métaux qui peuvent être facilement convertis en composés volatils. (Vapour phase refining is a method used to purify metals that can be easily converted into volatile compounds.)
+
+Voici comment cela fonctionne : (Here's how it works:)
+
+1. **Conversion en composé volatil** : Tout d'abord, le métal impur est converti en un composé volatil, généralement un chlorure ou un iodure, qui a un point d'ébullition bas. (First, the impure metal is converted into a volatile compound, usually a chloride or iodide, which has a low boiling point.)
+2. **Vaporisation** : Le composé volatil est ensuite vaporisé à une température appropriée. (The volatile compound is then vaporized at a suitable temperature.)
+3. **Décomposition** : La vapeur du composé est ensuite décomposée à une température plus élevée pour obtenir le métal pur. (The vapour of the compound is then decomposed at a higher temperature to obtain the pure metal.)
+```
+
+
+## u2: Mond process for the purification of nickel
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "accurate",
+    "reason": "The description of the Mond process and its corresponding chemical equations for the formation and thermal decomposition of nickel tetracarbonyl are correct.",
+    "errors": []
+  }
+}
+```
+
+```text
+Un exemple classique de raffinage en phase vapeur est la purification du nickel par le procédé Mond. (A classic example of vapour phase refining is the purification of nickel by the Mond process.)
+
+ Dans ce procédé, le nickel impur est traité avec du monoxyde de carbone (CO) pour former du nickel tétracarbonyle (Ni(CO)4), un composé volatil. (In this process, impure nickel is treated with carbon monoxide (CO) to form nickel tetracarbonyl (Ni(CO)4), a volatile compound.)
+
+ Ni + 4CO → Ni(CO)4
+
+Ensuite, le Ni(CO)4 est vaporisé et décomposé à une température plus élevée pour obtenir le nickel pur. (Then, the Ni(CO)4 is vaporized and decomposed at a higher temperature to obtain pure nickel.)
+
+ Ni(CO)4 → Ni + 4CO
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u1"
+    ],
+    "issue": "The introductory sentence 'Bonjour! Aujourd'hui, nous allons discuter...' contains a greeting/announcement as well as the alternative name 'raffinage en phase gazeuse'. It could either be included within u1 or left unassigned as a greeting.",
+    "proposed_resolution": "Included in u1 because it introduces the metallurgical topic and provides the alternative terminology directly leading into the definition."
+  },
+  {
+    "unit_ids": [
+      "u1"
+    ],
+    "issue": "Unit u1 presents a numbered three-step sequence ('Conversion en composé volatil', 'Vaporisation', 'Décomposition'), which could be viewed as a PROCEDURE rather than a CONCEPT.",
+    "proposed_resolution": "Classified as CONCEPT with depth 'explanation' because it explains the underlying chemical and physical principles of how the vapour phase refining process works rather than teaching a general practical or mathematical problem-solving procedure."
+  },
+  {
+    "unit_ids": [
+      "u2"
+    ],
+    "issue": "Unit u2 details the two successive reaction steps and chemical equations of the Mond process, which could be interpreted as 'worked' treatment rather than 'illustrative'.",
+    "proposed_resolution": "Assigned treatment 'illustrative' because the equations and description serve as a qualitative illustration of an industrial case without carrying out a worked derivation or quantitative calculation."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+
+
+C'est ainsi que fonctionne le raffinage en phase vapeur ! (That's how vapour phase refining works!)
+
+Maintenant, avez-vous des questions sur ce processus ? (Now, do you have any questions about this process?)
+```

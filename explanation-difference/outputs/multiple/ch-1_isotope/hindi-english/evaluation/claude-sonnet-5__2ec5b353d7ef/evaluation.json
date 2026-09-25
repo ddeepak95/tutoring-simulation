@@ -1,0 +1,721 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "1cd4f7db3d18d2e134067ad1be452d13d5202e08ab4cbc3e992f21814dac842c",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "isotope",
+      "observed_topic": "isotopes (समस्थानिक)",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ],
+      "reason": "The entire response directly addresses isotopes in Hindi, defining them, providing an everyday sibling analogy, explaining the mass number formula, detailing hydrogen and carbon isotopes as examples, explaining their chemical and physical properties, and giving a mnemonic based on the Hindi term.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Conceptual Understanding of Isotopes"
+      },
+      {
+        "id": "s2",
+        "label": "Mass Number and Subatomic Composition"
+      },
+      {
+        "id": "s3",
+        "label": "Examples of Isotopes (Hydrogen and Carbon)"
+      },
+      {
+        "id": "s4",
+        "label": "Chemical and Physical Properties of Isotopes"
+      },
+      {
+        "id": "s5",
+        "label": "Mnemonic Trick and Etymology"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of isotopes",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what isotopes are in terms of having the same atomic number but different mass numbers.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# समस्थानिक (Isotope) - सरल भाषा में समझाएं",
+            "start": 0,
+            "end": 43
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## परिभाषा",
+            "start": 45,
+            "end": 55
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**समस्थानिक** (Isotope) वे तत्व होते हैं जिनका **परमाणु क्रमांक (Atomic Number) समान** होता है, लेकिन उनका **द्रव्यमान संख्या (Mass Number) अलग-अलग** होती है।",
+            "start": 56,
+            "end": 214
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states the standard definition of isotopes having the same atomic number and different mass numbers.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Family sibling analogy for isotopes",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1",
+          "s2"
+        ],
+        "rationale": "Uses the analogy of siblings sharing parents (same identity/protons) but having different body weights (different neutrons) to make the concept accessible.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p5",
+              "quote": "सोचिए कि एक ही परिवार के भाई-बहन हैं:"
+            },
+            {
+              "passage_id": "p6",
+              "quote": "- उनके **माता-पिता एक ही हैं** (यानी पहचान एक जैसी)"
+            },
+            {
+              "passage_id": "p7",
+              "quote": "- लेकिन उनका **वजन अलग-अलग** हो सकता है"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## आसान भाषा में समझें",
+            "start": 216,
+            "end": 238
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "सोचिए कि एक ही परिवार के भाई-बहन हैं:",
+            "start": 240,
+            "end": 277
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- उनके **माता-पिता एक ही हैं** (यानी पहचान एक जैसी)",
+            "start": 278,
+            "end": 329
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- लेकिन उनका **वजन अलग-अलग** हो सकता है",
+            "start": 330,
+            "end": 369
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ठीक इसी तरह, समस्थानिकों में:",
+            "start": 371,
+            "end": 400
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **प्रोटॉन (Protons) की संख्या समान** होती है",
+            "start": 401,
+            "end": 447
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- लेकिन **न्यूट्रॉन (Neutrons) की संख्या अलग-अलग** होती है",
+            "start": 448,
+            "end": 506
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy accurately corresponds to the subatomic distinction between protons and neutrons.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Mass number formula and variation",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Presents the formula for mass number and explains how varying the neutron count causes the mass number to differ while protons remain unchanged.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p11",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## सूत्र याद रखें",
+            "start": 508,
+            "end": 525
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{द्रव्यमान संख्या (A)} = \\text{प्रोटॉन} + \\text{न्यूट्रॉन}$$",
+            "start": 527,
+            "end": 594
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "चूंकि प्रोटॉन की संख्या (परमाणु क्रमांक) समान रहती है, इसलिए न्यूट्रॉन की संख्या बदलने से द्रव्यमान संख्या बदल जाती है।",
+            "start": 596,
+            "end": 715
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The formula A = Protons + Neutrons and the reasoning for mass number change are fully accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Hydrogen isotopes example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents protium, deuterium, and tritium in a structured table detailing protons, neutrons, and mass numbers.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## उदाहरण: हाइड्रोजन के समस्थानिक",
+            "start": 717,
+            "end": 750
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| नाम | प्रोटॉन | न्यूट्रॉन | द्रव्यमान संख्या |",
+            "start": 752,
+            "end": 800
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|------|---------|-----------|-------------------|",
+            "start": 801,
+            "end": 851
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| प्रोटियम (¹H) | 1 | 0 | 1 |",
+            "start": 852,
+            "end": 881
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ड्यूटीरियम (²H) | 1 | 1 | 2 |",
+            "start": 882,
+            "end": 913
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| ट्राइटियम (³H) | 1 | 2 | 3 |",
+            "start": 914,
+            "end": 944
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "देखिए! तीनों में **प्रोटॉन = 1** है, लेकिन **न्यूट्रॉन अलग-अलग** हैं।",
+            "start": 946,
+            "end": 1015
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The subatomic particle counts and mass numbers for protium, deuterium, and tritium are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Carbon isotopes example",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Illustrates carbon-12 and carbon-14 with their respective proton and neutron counts.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## एक और उदाहरण: कार्बन",
+            "start": 1017,
+            "end": 1040
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- कार्बन-12 (¹²C): 6 प्रोटॉन + 6 न्यूट्रॉन",
+            "start": 1042,
+            "end": 1084
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- कार्बन-14 (¹⁴C): 6 प्रोटॉन + 8 न्यूट्रॉन",
+            "start": 1085,
+            "end": 1127
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The proton and neutron numbers for carbon-12 (6p, 6n) and carbon-14 (6p, 8n) are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Properties of isotopes",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Explains why isotopes have identical chemical properties (same electron structure) but different physical properties and share the same spot in the periodic table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## मुख्य बिंदु (याद रखने के लिए)",
+            "start": 1129,
+            "end": 1161
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ समस्थानिकों के **रासायनिक गुण (Chemical Properties) समान** होते हैं (क्योंकि इलेक्ट्रॉन संख्या समान होती है)",
+            "start": 1163,
+            "end": 1273
+          },
+          {
+            "id": "p26",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ लेकिन उनके **भौतिक गुण (Physical Properties) अलग** हो सकते हैं (जैसे घनत्व, क्वथनांक)",
+            "start": 1275,
+            "end": 1362
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "✅ आवर्त सारणी (Periodic Table) में समस्थानिक **एक ही स्थान** पर रखे जाते हैं",
+            "start": 1364,
+            "end": 1440
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanations regarding chemical properties, physical properties, and periodic table positioning are standard and accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Mnemonic trick using Hindi word breakdown",
+        "attributes": {
+          "subtype": "mnemonic"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Provides a mnemonic strategy by breaking down the Hindi term 'समस्थानिक' into 'सम' (same) and 'स्थानिक' (place) to remember that they occupy the same position in the periodic table.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "localized",
+          "evidence": [
+            {
+              "passage_id": "p29",
+              "quote": "**\"समस्थानिक\"** शब्द को तोड़ें:"
+            },
+            {
+              "passage_id": "p30",
+              "quote": "- **सम** = समान (Same)"
+            },
+            {
+              "passage_id": "p31",
+              "quote": "- **स्थानिक** = स्थान (Place/Position)"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## याद रखने की ट्रिक",
+            "start": 1442,
+            "end": 1462
+          },
+          {
+            "id": "p29",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**\"समस्थानिक\"** शब्द को तोड़ें:",
+            "start": 1463,
+            "end": 1494
+          },
+          {
+            "id": "p30",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **सम** = समान (Same)",
+            "start": 1495,
+            "end": 1517
+          },
+          {
+            "id": "p31",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **स्थानिक** = स्थान (Place/Position)",
+            "start": 1518,
+            "end": 1556
+          },
+          {
+            "id": "p32",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "mnemonic"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "यानी \"एक ही स्थान पर रहने वाले\" - आवर्त सारणी में एक ही जगह!",
+            "start": 1558,
+            "end": 1618
+          },
+          {
+            "id": "p33",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1620,
+            "end": 1623
+          },
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "क्या आप चाहेंगे कि मैं **समभारिक (Isobars)** या **समन्यूट्रॉनिक (Isotones)** के बारे में भी समझाऊं, ताकि आप इनके बीच का अंतर स्पष्ट रूप से समझ सकें?",
+            "start": 1624,
+            "end": 1772
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The morphological breakdown of the Sanskrit/Hindi term 'समस्थानिक' accurately mirrors the Greek etymology of isotope (isos + topos, meaning same place) and correctly reflects its periodic table placement.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-1_isotope\\hindi-english\\claude-sonnet-5__2ec5b353d7ef.json",
+    "original_sha256": "6421e64d789d592fac42bd307bedae97299d07d4b0ebdddd6ac77fd1dc377d1e",
+    "evaluation_language": "Hindi",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 7,
+    "substantive_content_units": 7,
+    "total_passages": 34,
+    "content_unit_kinds": {
+      "CONCEPT": 3,
+      "ANALOGY": 1,
+      "EXAMPLE": 2,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 34,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5,
+      "everyday": 1,
+      "localized": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 7
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "topic_relevance": {
+    "requested_topic": "mole concept",
+    "observed_topic": "The mole concept in chemistry, including Avogadro's number, molar mass, and calculating amount of substance",
+    "topic_match": "on_topic",
+    "reason": "The text directly explains the mole concept, Avogadro's number, molar mass, and the formula relating mass and molar mass to amount of substance.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4",
+      "u5",
+      "u6",
+      "u7"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "ANALOGY",
+      "label": "Analogy of counting by packets using dozens of eggs and reams of paper",
+      "excerpts": [
+        {
+          "text": "Imagine que tu travailles dans une fabrique d’œufs. Si un client te demande des œufs, tu ne vas pas les compter un par un (\"un, deux, trois...\"). Tu vas utiliser un mot magique : **une douzaine**.\n* Une douzaine = 12 œufs.\n* Deux douzaines = 24 œufs.\n\nSi tu achètes des feuilles de papier pour l'imprimante, tu achètes **une rame** (un paquet de 500 feuilles).\n\nEh bien, en chimie, **la mole, c'est exactement la même chose : c'est un \"paquet\".**",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Imagine que tu travailles dans une fabrique d’œufs."
+          },
+          {
+            "excerpt_index": 0,
+            "quote": "Si tu achètes des feuilles de papier pour l'imprimante, tu achètes **une rame** (un paquet de 500 feuilles)."
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The analogy correctly illustrates how macroscopic counting units like a dozen or a ream represent fixed quantities of items.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "CONCEPT",
+      "label": "Rationale for introducing the mole based on the scale of atoms and molecules",
+      "excerpts": [
+        {
+          "text": "Les atomes et les molécules sont **infiniment petits**. \nSi tu bois une seule petite gorgée d'eau, tu avales environ :\n$1000000000000000000000000$ molécules d'eau (un 1 suivi de 24 zéros !).\n\nC'est un nombre tellement gigantesque que c'est impossible et inutile de compter les molécules une par une. Les chimistes ont donc dit : \n> *\"Créons un paquet géant pour compter ces objets minuscules.\"*\n\nCe paquet s'appelle **la mole** (symbole : **mol**).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "Si tu bois une seule petite gorgée d'eau, tu avales environ :\n$1000000000000000000000000$ molécules d'eau"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The explanation correctly identifies that microscopic particles exist in enormous quantities in macroscopic samples (e.g., ~1 mol or ~18 g in a sip of water), justifying the need for a practical unit of amount.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Definition of Avogadro's number and amount of substance",
+      "excerpts": [
+        {
+          "text": "Dans une douzaine, il y a 12 objets. \nDans une mole, il y a toujours :\n\n$$6,022 \\times 10^{23} \\text{ objets}$$\n\nCe nombre s'appelle le **Nombre d'Avogadro** (noté $N_A$). \nC'est un 6 suivi de 23 zéros ! \n\n* **1 mole d'atomes de carbone** = $6,02 \\times 10^{23}$ atomes de carbone.\n* **1 mole de molécules d'eau** = $6,02 \\times 10^{23}$ molécules d'eau.\n* **1 mole d'élèves** = $6,02 \\times 10^{23}$ élèves (la Terre exploserait, c'est beaucoup trop !).\n\nOn appelle le nombre de moles la **quantité de matière**, notée **$n$**.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "1 mole d'élèves"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition of Avogadro's number ($N_A \\approx 6.022 \\times 10^{23}$) and the introduction of the quantity of matter ($n$) are accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Molar mass as the bridge between macroscopic mass and microscopic particle count",
+      "excerpts": [
+        {
+          "text": "C'est là que la mole devient géniale. **Elle fait le pont entre le monde invisible (les atomes) et notre monde (la balance).**\n\nRegarde ton tableau périodique. Tu verras que le Carbone a une masse de **12**.\nLes chimistes ont fait exprès de choisir le nombre d'Avogadro pour que :\n* **1 mole d'atomes de carbone pèse exactement 12 grammes !**\n\nCette masse s'appelle la **Masse Molaire** (notée **$M$**, en grammes par mole : $\\text{g/mol}$).\n\n* Si tu veux 1 mole de Carbone ($6,02 \\times 10^{23}$ atomes), tu prends une balance et tu pèses **12 g**.\n* Pour l'eau ($H_2O$) : la masse molaire est de $18\\text{ g/mol}$. Si tu pèses **18 g** d'eau, tu as exactement 1 mole d'eau dans ton verre !",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The relationship between relative atomic mass from the periodic table, molar mass in g/mol, and macroscopic mass is correctly explained according to standard high school chemistry conventions.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u5",
+      "kind": "CONCEPT",
+      "label": "Relationship between mass, molar mass, and amount of substance",
+      "excerpts": [
+        {
+          "text": "C'est la formule la plus importante de la chimie au lycée :\n\n$$n = \\frac{m}{M}$$\n\n* **$n$** : la quantité de matière (en **moles**, mol) $\\rightarrow$ *le nombre de paquets*\n* **$m$** : la masse de ton échantillon (en **grammes**, g) $\\rightarrow$ *ce que dit la balance*\n* **$M$** : la masse molaire (en **g/mol**) $\\rightarrow$ *le poids d'un seul paquet (trouvé dans le tableau périodique)*",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The formula n = m / M and its units are correctly stated.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u6",
+      "kind": "EXAMPLE",
+      "label": "Calculating the amount of moles in a given mass of iron",
+      "excerpts": [
+        {
+          "text": "Tu as un morceau de fer de **112 g**. La masse molaire du fer est $M = 56\\text{ g/mol}$. Combien as-tu de moles ?\n\n$$n = \\frac{112}{56} = 2\\text{ moles}$$\n\nTu as **2 moles** de fer (soit 2 fois le paquet d'Avogadro d'atomes de fer).",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The calculation n = 112 / 56 = 2 mol is correct.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u7",
+      "kind": "STUDY_SUPPORT",
+      "label": "Summary recap of the mole concept",
+      "excerpts": [
+        {
+          "text": "La mole n'a rien de mystique. C'est simplement **l'unité des chimistes pour compter par gros paquets** ce qui est trop petit pour être compté à l'unité.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "subtype": "recap"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The summary correctly recaps the core definition and purpose of the mole.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": []
+}

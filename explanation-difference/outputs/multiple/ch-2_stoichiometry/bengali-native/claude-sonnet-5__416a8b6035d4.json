@@ -1,0 +1,126 @@
+{
+  "job": {
+    "run_index": 3,
+    "lang_id": "bn",
+    "language": "bn",
+    "prompt_type": "language_template",
+    "topic": "রাসায়নিক সমীকরণমিতি",
+    "prompt": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+    "model": "claude-sonnet-5",
+    "reasoning": null,
+    "web_search": false,
+    "condition_id": "native_prompt",
+    "prompt_language": "bn",
+    "topic_language": "bn",
+    "response_language": "bn",
+    "response_language_name": "Bengali",
+    "topic_id": "ch-2",
+    "topic_name": "stoichiometry",
+    "subject": "chemistry",
+    "prompt_template": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে {topic} সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+    "prompt_template_sha256": "5ae90b6f515d124b142c521808e885154d0288adfe3db4af8c9663daafe21e19",
+    "job_id": "run-native_prompt-bn-bn-3baca4c3d2816fb9",
+    "resolved_model": "vertex_ai/claude-sonnet-5"
+  },
+  "request": {
+    "model": "vertex_ai/claude-sonnet-5",
+    "input": "আপনি একজন চমৎকার শিক্ষক। হাই স্কুলের একজন শিক্ষার্থীকে রাসায়নিক সমীকরণমিতি সম্পর্কে বাংলা ভাষায় বুঝিয়ে বলুন।",
+    "store": false
+  },
+  "started_at": "2026-09-24T23:57:59.362715+00:00",
+  "response": {
+    "id": "resp_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOnZlcnRleF9haTttb2RlbF9pZDpOb25lO3Jlc3BvbnNlX2lkOmNoYXRjbXBsLTBmNjZkNjAwLTk4N2YtNDEyYy04MjdjLWJkMGI3MTZkM2FhNw==",
+    "created_at": 1790294300,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "claude-sonnet-5",
+    "object": "response",
+    "output": [
+      {
+        "type": "reasoning",
+        "id": "rs_7bdb9e97-450a-40d1-ac78-49ba979ca4c6",
+        "status": "completed",
+        "role": "assistant",
+        "content": [],
+        "phase": null,
+        "encrypted_content": "[{\"type\":\"thinking\",\"thinking\":\"\",\"signature\":\"EuoCCnoIEhACGAIqQDTMeCCPzcm2VfD+yxdryU1ZpBzgZhUjLW7Bbm/6Dy4+9meyZ55UEiA/hpDi+yTYE5qr0iPQLxgtzovIRAz9j74yD2NsYXVkZS1zb25uZXQtNTgAQgh0aGlua2luZ1oMNDE0Mjg5ODc4MDg4qAGK8tbVBhIMFpsvP2/DZAijBRJRGgw76Slh4L1d6JuTPtIiMAK1ZDK56rmtQ2/z4Df/T94jNKajRRSJPuWVmgS6xYV0yTmRGSSt0+yzGA2wnXgcIyqdAe79v3yrrDCuTDEaBVy0aZ+lW3QcOMLX6Mo2oUdNQc/vnpoS3sfYAqy6pNggzH0s3exoGIgU305pWtFGDkhAMghz2LRUya8yv26LbjOLN5GwEZT2MInIxKYc2okMAxl2qsfCMGWQY2WVoypEdPRMV4uV+SAtg80rMnoc3jbOXb+Gx3mL1WtK8T8JeG4WaL9OSfsncT8LopL1S084qdkYAQ==\"}]"
+      },
+      {
+        "type": "message",
+        "id": "msg_37686632-93f7-47c2-a1f8-e73f3c9fec65",
+        "status": "completed",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "# রাসায়নিক সমীকরণমিতি (Stoichiometry)\n\n## সমীকরণমিতি কী?\n\nসমীকরণমিতি হলো রসায়নের এমন একটি শাখা যেখানে আমরা রাসায়নিক বিক্রিয়ায় বিক্রিয়ক (reactant) ও উৎপাদের (product) মধ্যে **পরিমাণগত সম্পর্ক** নিয়ে আলোচনা করি। সহজ কথায়, একটি বিক্রিয়ায় কত পরিমাণ পদার্থ লাগবে এবং কত পরিমাণ পদার্থ উৎপন্ন হবে—এটাই আমরা হিসাব করি।\n\n## মূল ভিত্তি: সুষম রাসায়নিক সমীকরণ\n\nসমীকরণমিতির ভিত্তি হলো একটি **সুষম (balanced) রাসায়নিক সমীকরণ**। উদাহরণ দেখি:\n\n$$N_2 + 3H_2 \\rightarrow 2NH_3$$\n\nএই সমীকরণটি আমাদের বলছে:\n- **১ মোল** নাইট্রোজেন গ্যাস\n- **৩ মোল** হাইড্রোজেন গ্যাসের সাথে বিক্রিয়া করে\n- **২ মোল** অ্যামোনিয়া উৎপন্ন করে\n\nএই সংখ্যাগুলো (১, ৩, ২) কে **মোল অনুপাত** বা **স্টোইকিওমেট্রিক কোএফিসিয়েন্ট** বলে।\n\n## মোলের ধারণা মনে রাখি\n\nসমীকরণমিতি বুঝতে হলে \"মোল\" বুঝতে হবে:\n- ১ মোল = $6.022 \\times 10^{23}$ টি কণা (অ্যাভোগেড্রো সংখ্যা)\n- মোল = ভর ÷ মোলার ভর\n\n$$n = \\frac{m}{M}$$\n\n## সমীকরণমিতির ধাপসমূহ\n\nকোনো সমস্যা সমাধানের জন্য এই ধাপগুলো অনুসরণ করি:\n\n**ধাপ ১:** সমীকরণটি সুষম করা\n**ধাপ ২:** প্রদত্ত পদার্থের ভরকে মোলে রূপান্তর করা\n**ধাপ ৩:** মোল অনুপাত ব্যবহার করে কাঙ্ক্ষিত পদার্থের মোল বের করা\n**ধাপ ৪:** মোলকে ভরে রূপান্তর করা\n\n## একটি বাস্তব উদাহরণ\n\n**সমস্যা:** ২৮ গ্রাম নাইট্রোজেন গ্যাসের সাথে পূর্ণ বিক্রিয়ায় কত গ্রাম অ্যামোনিয়া উৎপন্ন হবে?\n\n**সমাধান:**\n\nসমীকরণ: $N_2 + 3H_2 \\rightarrow 2NH_3$\n\n**ধাপ ১ - মোল বের করা:**\n$$N_2\\text{-এর মোলার ভর} = 28 \\text{ g/mol}$$\n$$n(N_2) = \\frac{28}{28} = 1 \\text{ মোল}$$\n\n**ধাপ ২ - মোল অনুপাত ব্যবহার:**\nসমীকরণ থেকে, ১ মোল $N_2$ থেকে ২ মোল $NH_3$ উৎপন্ন হয়।\n$$n(NH_3) = 1 \\times 2 = 2 \\text{ মোল}$$\n\n**ধাপ ৩ - ভরে রূপান্তর:**\n$$NH_3\\text{-এর মোলার ভর} = 17 \\text{ g/mol}$$\n$$m(NH_3) = 2 \\times 17 = 34 \\text{ গ্রাম}$$\n\n**উত্তর:** ৩৪ গ্রাম অ্যামোনিয়া উৎপন্ন হবে।\n\n## সীমাবদ্ধ বিকারক (Limiting Reagent)\n\nবাস্তব বিক্রিয়ায় সব বিক্রিয়ক ঠিক অনুপাতে থাকে না। যে বিক্রিয়কটি **আগে শেষ হয়ে যায়**, সেটিই বিক্রিয়ার পরিমাণ নির্ধারণ করে। একে **সীমাবদ্ধ বিকারক** বলে।\n\n## কেন সমীকরণমিতি গুরুত্বপূর্ণ?\n\n- শিল্পক্ষেত্রে সঠিক পরিমাণে কাঁচামাল ব্যবহার করতে\n- ওষুধ তৈরিতে সঠিক অনুপাত মেনে চলতে\n- বিক্রিয়ার খরচ ও অপচয় কমাতে\n- পরীক্ষাগারে সঠিক ফলাফল পেতে\n\n**সংক্ষেপে মনে রাখো:** সমীকরণমিতি হলো রসায়নের \"গণিত\"—যেখানে সুষম সমীকরণের কোএফিসিয়েন্টগুলোই তোমার হিসাবের চাবিকাঠি!\n\nতুমি কি কোনো নির্দিষ্ট সমস্যা নিয়ে অনুশীলন করতে চাও? 😊",
+            "annotations": []
+          }
+        ],
+        "phase": null
+      }
+    ],
+    "parallel_tool_calls": false,
+    "temperature": 0.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": null,
+    "max_output_tokens": null,
+    "previous_response_id": null,
+    "reasoning": null,
+    "status": "completed",
+    "text": {},
+    "truncation": null,
+    "usage": {
+      "input_tokens": 102,
+      "input_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0,
+        "text_tokens": 102,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1952,
+      "output_tokens_details": {
+        "audio_tokens": null,
+        "reasoning_tokens": 46,
+        "text_tokens": 1906
+      },
+      "total_tokens": 2054,
+      "cost": null
+    },
+    "user": null,
+    "store": null,
+    "provider_specific_fields": {
+      "citations": null,
+      "thinking_blocks": [
+        {
+          "type": "thinking",
+          "thinking": "",
+          "signature": "EuoCCnoIEhACGAIqQDTMeCCPzcm2VfD+yxdryU1ZpBzgZhUjLW7Bbm/6Dy4+9meyZ55UEiA/hpDi+yTYE5qr0iPQLxgtzovIRAz9j74yD2NsYXVkZS1zb25uZXQtNTgAQgh0aGlua2luZ1oMNDE0Mjg5ODc4MDg4qAGK8tbVBhIMFpsvP2/DZAijBRJRGgw76Slh4L1d6JuTPtIiMAK1ZDK56rmtQ2/z4Df/T94jNKajRRSJPuWVmgS6xYV0yTmRGSSt0+yzGA2wnXgcIyqdAe79v3yrrDCuTDEaBVy0aZ+lW3QcOMLX6Mo2oUdNQc/vnpoS3sfYAqy6pNggzH0s3exoGIgU305pWtFGDkhAMghz2LRUya8yv26LbjOLN5GwEZT2MInIxKYc2okMAxl2qsfCMGWQY2WVoypEdPRMV4uV+SAtg80rMnoc3jbOXb+Gx3mL1WtK8T8JeG4WaL9OSfsncT8LopL1S084qdkYAQ=="
+        }
+      ]
+    }
+  },
+  "text": "# রাসায়নিক সমীকরণমিতি (Stoichiometry)\n\n## সমীকরণমিতি কী?\n\nসমীকরণমিতি হলো রসায়নের এমন একটি শাখা যেখানে আমরা রাসায়নিক বিক্রিয়ায় বিক্রিয়ক (reactant) ও উৎপাদের (product) মধ্যে **পরিমাণগত সম্পর্ক** নিয়ে আলোচনা করি। সহজ কথায়, একটি বিক্রিয়ায় কত পরিমাণ পদার্থ লাগবে এবং কত পরিমাণ পদার্থ উৎপন্ন হবে—এটাই আমরা হিসাব করি।\n\n## মূল ভিত্তি: সুষম রাসায়নিক সমীকরণ\n\nসমীকরণমিতির ভিত্তি হলো একটি **সুষম (balanced) রাসায়নিক সমীকরণ**। উদাহরণ দেখি:\n\n$$N_2 + 3H_2 \\rightarrow 2NH_3$$\n\nএই সমীকরণটি আমাদের বলছে:\n- **১ মোল** নাইট্রোজেন গ্যাস\n- **৩ মোল** হাইড্রোজেন গ্যাসের সাথে বিক্রিয়া করে\n- **২ মোল** অ্যামোনিয়া উৎপন্ন করে\n\nএই সংখ্যাগুলো (১, ৩, ২) কে **মোল অনুপাত** বা **স্টোইকিওমেট্রিক কোএফিসিয়েন্ট** বলে।\n\n## মোলের ধারণা মনে রাখি\n\nসমীকরণমিতি বুঝতে হলে \"মোল\" বুঝতে হবে:\n- ১ মোল = $6.022 \\times 10^{23}$ টি কণা (অ্যাভোগেড্রো সংখ্যা)\n- মোল = ভর ÷ মোলার ভর\n\n$$n = \\frac{m}{M}$$\n\n## সমীকরণমিতির ধাপসমূহ\n\nকোনো সমস্যা সমাধানের জন্য এই ধাপগুলো অনুসরণ করি:\n\n**ধাপ ১:** সমীকরণটি সুষম করা\n**ধাপ ২:** প্রদত্ত পদার্থের ভরকে মোলে রূপান্তর করা\n**ধাপ ৩:** মোল অনুপাত ব্যবহার করে কাঙ্ক্ষিত পদার্থের মোল বের করা\n**ধাপ ৪:** মোলকে ভরে রূপান্তর করা\n\n## একটি বাস্তব উদাহরণ\n\n**সমস্যা:** ২৮ গ্রাম নাইট্রোজেন গ্যাসের সাথে পূর্ণ বিক্রিয়ায় কত গ্রাম অ্যামোনিয়া উৎপন্ন হবে?\n\n**সমাধান:**\n\nসমীকরণ: $N_2 + 3H_2 \\rightarrow 2NH_3$\n\n**ধাপ ১ - মোল বের করা:**\n$$N_2\\text{-এর মোলার ভর} = 28 \\text{ g/mol}$$\n$$n(N_2) = \\frac{28}{28} = 1 \\text{ মোল}$$\n\n**ধাপ ২ - মোল অনুপাত ব্যবহার:**\nসমীকরণ থেকে, ১ মোল $N_2$ থেকে ২ মোল $NH_3$ উৎপন্ন হয়।\n$$n(NH_3) = 1 \\times 2 = 2 \\text{ মোল}$$\n\n**ধাপ ৩ - ভরে রূপান্তর:**\n$$NH_3\\text{-এর মোলার ভর} = 17 \\text{ g/mol}$$\n$$m(NH_3) = 2 \\times 17 = 34 \\text{ গ্রাম}$$\n\n**উত্তর:** ৩৪ গ্রাম অ্যামোনিয়া উৎপন্ন হবে।\n\n## সীমাবদ্ধ বিকারক (Limiting Reagent)\n\nবাস্তব বিক্রিয়ায় সব বিক্রিয়ক ঠিক অনুপাতে থাকে না। যে বিক্রিয়কটি **আগে শেষ হয়ে যায়**, সেটিই বিক্রিয়ার পরিমাণ নির্ধারণ করে। একে **সীমাবদ্ধ বিকারক** বলে।\n\n## কেন সমীকরণমিতি গুরুত্বপূর্ণ?\n\n- শিল্পক্ষেত্রে সঠিক পরিমাণে কাঁচামাল ব্যবহার করতে\n- ওষুধ তৈরিতে সঠিক অনুপাত মেনে চলতে\n- বিক্রিয়ার খরচ ও অপচয় কমাতে\n- পরীক্ষাগারে সঠিক ফলাফল পেতে\n\n**সংক্ষেপে মনে রাখো:** সমীকরণমিতি হলো রসায়নের \"গণিত\"—যেখানে সুষম সমীকরণের কোএফিসিয়েন্টগুলোই তোমার হিসাবের চাবিকাঠি!\n\nতুমি কি কোনো নির্দিষ্ট সমস্যা নিয়ে অনুশীলন করতে চাও? 😊",
+  "usage": {
+    "input_tokens": 102,
+    "input_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0,
+      "text_tokens": 102,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1952,
+    "output_tokens_details": {
+      "audio_tokens": null,
+      "reasoning_tokens": 46,
+      "text_tokens": 1906
+    },
+    "total_tokens": 2054,
+    "cost": null
+  },
+  "status": "completed",
+  "finished_at": "2026-09-24T23:58:20.894699+00:00"
+}

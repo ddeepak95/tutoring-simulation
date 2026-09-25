@@ -1,0 +1,949 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "1892586dfb98e2dc08ea8e544419ea68068318c2f9ac977991e439ab67effadd",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "Stoichiometry in chemistry: concept, mole bridge, and calculations",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6"
+      ],
+      "reason": "The explanation directly addresses stoichiometry in Arabic, explaining the core concept through an everyday recipe analogy, defining it quantitatively with chemical equations, introducing the mole bridge, outlining the standard mass calculation procedure, working through a mole-to-mole calculation, and summarizing the concept through the law of conservation of mass.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Kitchen recipe analogy for stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Chemical definition and balanced equations as recipes"
+      },
+      {
+        "id": "s3",
+        "label": "The mole concept and macroscopic reaction interpretation"
+      },
+      {
+        "id": "s4",
+        "label": "Roadmap and procedure for stoichiometric calculations"
+      },
+      {
+        "id": "s5",
+        "label": "Worked mole-to-mole stoichiometric example"
+      },
+      {
+        "id": "s6",
+        "label": "Summary and connection to the conservation of mass"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "ANALOGY",
+        "label": "Kitchen sandwich recipe analogy for stoichiometry",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces stoichiometry via an analogy to preparing sandwiches from bread and cheese slices to build intuitive understanding of reactant-product quantitative proportions.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p7",
+              "quote": "تخيل أنك تريد عمل ساندويتش جبن، ووصفة الساندويتش الواحد هي:"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "أهلاً بك يا بطل! يسعدني جداً أن أشرح لك هذا المفهوم. ",
+            "start": 0,
+            "end": 53
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "كثير من الطلاب يخافون من كلمة **\"استوكيومتري\" (Stoichiometry)** أو ما نسميه بالعربية **\"الحسابات الكيميائية\"**، لأن الاسم يبدو معقداً وغريباً، لكن في الحقيقة، فكرتها أسهل مما تتخيل!",
+            "start": 55,
+            "end": 236
+          },
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ببساطة شديدة: **الاستوكيومتري هي \"كتاب الطبخ\" الخاص بالكيميائي.**",
+            "start": 238,
+            "end": 303
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "دعنا نأخذ جولة سريعة وممتعة لفهمها خطوة بخطوة:",
+            "start": 305,
+            "end": 351
+          },
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 353,
+            "end": 356
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. تشبيه المطبخ (سر الفكرة) 🍳",
+            "start": 358,
+            "end": 391
+          },
+          {
+            "id": "p7",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "تخيل أنك تريد عمل ساندويتش جبن، ووصفة الساندويتش الواحد هي:",
+            "start": 392,
+            "end": 451
+          },
+          {
+            "id": "p8",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **2 شريحة خبز + 1 شريحة جبن = 1 ساندويتش**",
+            "start": 452,
+            "end": 496
+          },
+          {
+            "id": "p9",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* لو سألتك: إذا كان لديك **6 شرائح خبز** وكمية كافية من الجبن، كم ساندويتش يمكنك أن تصنع؟",
+            "start": 498,
+            "end": 587
+          },
+          {
+            "id": "p10",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* ستجيب فوراً: **3 ساندويتشات!**",
+            "start": 588,
+            "end": 620
+          },
+          {
+            "id": "p11",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* ولو سألتك: كم شريحة جبن ستحتاج لهذه الساندويتشات الثلاثة؟",
+            "start": 621,
+            "end": 680
+          },
+          {
+            "id": "p12",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* ستجيب: **3 شرائح جبن.**",
+            "start": 681,
+            "end": 706
+          },
+          {
+            "id": "p13",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ما فعلته بعقلك الآن هو بالضبط **علم الاستوكيومتري**! أنت حسبت كميات المواد التي تحتاجها لإنتاج كمية معينة من الناتج.",
+            "start": 708,
+            "end": 824
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The sandwich analogy accurately mirrors stoichiometry: proportional reactant consumption yielding a predictable product amount.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Chemical definition of stoichiometry and balanced equations",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines stoichiometry formally as the study of quantitative relations in chemical reactions and explains how balanced chemical equations serve as microscopic recipes.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 826,
+            "end": 829
+          },
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. في الكيمياء: ما هي الاستوكيومتري؟",
+            "start": 831,
+            "end": 871
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هي دراسة **العلاقات الكمية (الأرقام والكتل)** بين المواد المتفاعلة والمواد الناتجة في التفاعل الكيميائي.",
+            "start": 872,
+            "end": 976
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في الكيمياء، \"الوصفة\" الخاصة بنا هي **المعادلة الكيميائية الموزونة**.",
+            "start": 978,
+            "end": 1047
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "مثال: تكوين الماء:",
+            "start": 1048,
+            "end": 1066
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1067,
+            "end": 1099
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذه المعادلة تخبرنا بـ \"الوصفة\":",
+            "start": 1101,
+            "end": 1133
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "كل **2 جزيء** من الهيدروجين يتفاعلون مع **1 جزيء** من الأكسجين لإنتاج **2 جزيء** من الماء.",
+            "start": 1134,
+            "end": 1224
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry and the molecular interpretation of the balanced equation for water formation are factually correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The mole concept as a macroscopic counting unit",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains why macroscopic units are needed due to the tiny size of atoms and molecules, defines the mole using Avogadro's number and a dozen comparison, and reinterprets chemical equations in moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p26",
+              "quote": "* فكّر في **المول** مثل كلمة **\"درزن\"** (الدرزن = 12 حبة)."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1226,
+            "end": 1229
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 3. المشكلة: الذرات صغيرة جداً! (مفهوم \"المول\")",
+            "start": 1231,
+            "end": 1281
+          },
+          {
+            "id": "p24",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في المطبخ، نتعامل بالجرام أو الحبة. لكن في الكيمياء، لا نستطيع إمساك \"جزيئين\" من الهيدروجين لأنهما أصغر من أن نراهما!",
+            "start": 1282,
+            "end": 1399
+          },
+          {
+            "id": "p25",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لذلك، اخترع الكيميائيون وحدة اسمها **\"المول\" (Mole)**.",
+            "start": 1400,
+            "end": 1454
+          },
+          {
+            "id": "p26",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* فكّر في **المول** مثل كلمة **\"درزن\"** (الدرزن = 12 حبة).",
+            "start": 1456,
+            "end": 1514
+          },
+          {
+            "id": "p27",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* **المول** = حزمة تحتوي على عدد كبير جداً وثابت من الذرات ($6.022 \\times 10^{23}$).",
+            "start": 1515,
+            "end": 1599
+          },
+          {
+            "id": "p28",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "فنقرأ المعادلة السابقة بلغة الكيميائيين:",
+            "start": 1601,
+            "end": 1641
+          },
+          {
+            "id": "p29",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "> **2 مول** من الهيدروجين + **1 مول** من الأكسجين $\\rightarrow$ ينتج **2 مول** من الماء.",
+            "start": 1642,
+            "end": 1730
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation of the mole, Avogadro's number, and reading equation coefficients as mole ratios is scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Three-step roadmap for stoichiometry mass calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents a reusable three-step procedure (grams to moles, mole ratio conversion, and moles to grams) for solving standard stoichiometry mass-mass problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p30",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1732,
+            "end": 1735
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 4. خريطة الطريق لحل أي مسألة استوكيومتري 🗺️",
+            "start": 1737,
+            "end": 1784
+          },
+          {
+            "id": "p32",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "في الامتحانات، سيعطيك المعلم عادةً كتلة مادة ما بالجرام، ويطلب منك كتلة مادة أخرى بالجرام. ",
+            "start": 1785,
+            "end": 1876
+          },
+          {
+            "id": "p33",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "تذكر دائماً هذه القاعدة الذهبية: **\"لا يمكنك الانتقال من مادة إلى أخرى إلا عبر جسر المولات!\"**",
+            "start": 1877,
+            "end": 1971
+          },
+          {
+            "id": "p34",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "إليك الخطوات الثلاث السحرية:",
+            "start": 1973,
+            "end": 2001
+          },
+          {
+            "id": "p35",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **حوّل الجرامات إلى مولات:** (للمادة المعطاة)",
+            "start": 2003,
+            "end": 2051
+          },
+          {
+            "id": "p36",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$\\text{عدد المولات} = \\frac{\\text{الكتلة بالجرام}}{\\text{الكتلة المولية (من الجدول الدوري)}}$$",
+            "start": 2052,
+            "end": 2150
+          },
+          {
+            "id": "p37",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **استخدم النسبة المولية (كوبري المعادلة):**",
+            "start": 2151,
+            "end": 2197
+          },
+          {
+            "id": "p38",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "   انظر إلى أرقام المعادلة الموزونة لتعرف كم مول من المادة (ب) ينتج من المادة (أ).",
+            "start": 2198,
+            "end": 2280
+          },
+          {
+            "id": "p39",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **حوّل مولات المادة الجديدة إلى جرامات:** (المادة المطلوبة)",
+            "start": 2281,
+            "end": 2343
+          },
+          {
+            "id": "p40",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "   $$\\text{الكتلة بالجرام} = \\text{عدد المولات} \\times \\text{الكتلة المولية}$$",
+            "start": 2344,
+            "end": 2422
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The three-step strategy and the conversion formulas between mass, molar mass, and moles are completely correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked mole-to-mole calculation for water production",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Walks through a concrete calculation question with explicit givens, reasoning using stoichiometric mole ratios, and a final quantitative answer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p41",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2424,
+            "end": 2427
+          },
+          {
+            "id": "p42",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال سريع بالأرقام:",
+            "start": 2429,
+            "end": 2452
+          },
+          {
+            "id": "p43",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose",
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "في التفاعل: $2H_2 + O_2 \\rightarrow 2H_2O$",
+            "start": 2453,
+            "end": 2495
+          },
+          {
+            "id": "p44",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**سؤال:** كم مولاً من الماء ($H_2O$) سينتج إذا تفاعل **4 مول** من الهيدروجين ($H_2$) تماماً مع الأكسجين؟",
+            "start": 2496,
+            "end": 2600
+          },
+          {
+            "id": "p45",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الحل بالمنطق:**",
+            "start": 2602,
+            "end": 2619
+          },
+          {
+            "id": "p46",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* المعادلة تقول: كل **2 مول** هيدروجين يعطون **2 مول** ماء (نسبة 1 إلى 1).",
+            "start": 2620,
+            "end": 2694
+          },
+          {
+            "id": "p47",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "* إذن: **4 مول** هيدروجين ستعطيك بالتأكيد **4 مول** ماء!",
+            "start": 2695,
+            "end": 2751
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Applying the 2:2 (1:1) stoichiometric ratio between H2 and H2O correctly yields 4 moles of water from 4 moles of hydrogen.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of stoichiometry and connection to conservation of mass",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Summarizes key lesson takeaways, roots stoichiometry fundamentally in the law of conservation of mass, and offers ongoing study support.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2753,
+            "end": 2756
+          },
+          {
+            "id": "p49",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**خلاصة الدرس:**",
+            "start": 2758,
+            "end": 2774
+          },
+          {
+            "id": "p50",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الاستوكيومتري ليست إلا تطبيقاً لـ **\"قانون حفظ الكتلة\"**؛ فالذرات لا تختفي ولا تُخلق من العدم، بل يُعاد ترتيبها فقط. كل ما عليك فعله هو:",
+            "start": 2775,
+            "end": 2911
+          },
+          {
+            "id": "p51",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. التأكد أن معادلتك موزونة.",
+            "start": 2912,
+            "end": 2940
+          },
+          {
+            "id": "p52",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. التحويل للمولات.",
+            "start": 2941,
+            "end": 2960
+          },
+          {
+            "id": "p53",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. استخدام نسب المعادلة لحساب المجهول.",
+            "start": 2961,
+            "end": 2999
+          },
+          {
+            "id": "p54",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل الفكرة واضحة بالنسبة لك الآن؟ وإذا كان لديك مسألة معينة في واجبك المدرسي تشعر أنها صعبة، اكتبها لي ولنحلها معاً خطوة بخطوة!",
+            "start": 3001,
+            "end": 3127
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly establishes that stoichiometry is governed by the law of conservation of mass and accurately summarizes the general problem-solving checklist.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\arabic-english\\gemini-3.8-flash__68a52868f408.json",
+    "original_sha256": "8c97aba1ef2f4194db2e2e2e71de83978e0a24b781330cf9699fc12d0a2ac120",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 6,
+    "substantive_content_units": 6,
+    "total_passages": 54,
+    "content_unit_kinds": {
+      "ANALOGY": 1,
+      "CONCEPT": 2,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 54,
+    "unique_subtopics": 6,
+    "contextualization": {
+      "everyday": 2,
+      "none": 4
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 6
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

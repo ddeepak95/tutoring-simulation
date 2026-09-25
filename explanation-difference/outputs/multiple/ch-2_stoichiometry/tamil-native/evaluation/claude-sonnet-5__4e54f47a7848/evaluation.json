@@ -1,0 +1,773 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "895441fe98a640bd34ee4d601b97f2476c66249274d73f78e9997d29a4271b71",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The entire response explains stoichiometry in Tamil, covering its definition, underlying principle (conservation of mass), mole ratio interpretation in balanced equations, calculation procedure, a worked numerical example, and practical significance.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and principles of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Mole ratios in chemical equations"
+      },
+      {
+        "id": "s3",
+        "label": "Stoichiometric calculations and procedure"
+      },
+      {
+        "id": "s4",
+        "label": "Significance and practice"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the method of calculating quantities of reactants and products involved in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# வேதி வினைக் கூறுகளின் விகிதம் (Stoichiometry)",
+            "start": 0,
+            "end": 47
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## அறிமுகம்",
+            "start": 49,
+            "end": 60
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "வேதிவினையில் ஈடுபடும் **வினைபடு பொருட்கள்** (Reactants) மற்றும் உருவாகும் **விளைபொருட்களின்** (Products) அளவு தொடர்பான கணக்கீட்டு முறையே **வேதி வினைக் கூறுகளின் விகிதம்** எனப்படும்.",
+            "start": 62,
+            "end": 243
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition accurately captures stoichiometry as quantitative calculations involving reactants and products.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Underlying principle: Law of conservation of mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains how the law of conservation of mass dictates that total mass before and after a reaction is conserved, requiring chemical equations to be balanced.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## அடிப்படைக் கோட்பாடு",
+            "start": 245,
+            "end": 267
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "வேதிவினையில் **பொருள் அழிவதும் இல்லை, புதிதாக உருவாவதும் இல்லை** (Law of Conservation of Mass). எனவே:",
+            "start": 269,
+            "end": 370
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- வினைக்கு முன் இருக்கும் மொத்த நிறை = வினைக்குப் பின் இருக்கும் மொத்த நிறை",
+            "start": 372,
+            "end": 447
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- இதனால், ஒரு சமன்படுத்தப்பட்ட வேதிச் சமன்பாட்டில் அணுக்களின் எண்ணிக்கை இரு பக்கமும் சமமாக இருக்க வேண்டும்.",
+            "start": 448,
+            "end": 555
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The explanation correctly links the law of conservation of mass to mass conservation and the requirement for balancing chemical equations.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "EXAMPLE",
+        "label": "Mole ratios in water formation reaction",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Illustrates mole ratios using the balanced chemical reaction of hydrogen and oxygen forming water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## எடுத்துக்காட்டு",
+            "start": 557,
+            "end": 575
+          },
+          {
+            "id": "p9",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**ஹைட்ரஜன் மற்றும் ஆக்ஸிஜன் இணைந்து நீர் உருவாகும் வினை:**",
+            "start": 577,
+            "end": 635
+          },
+          {
+            "id": "p10",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 637,
+            "end": 669
+          },
+          {
+            "id": "p11",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இங்கு:",
+            "start": 671,
+            "end": 677
+          },
+          {
+            "id": "p12",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| பொருள் | மோல் விகிதம் |",
+            "start": 678,
+            "end": 703
+          },
+          {
+            "id": "p13",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|--------|-------------|",
+            "start": 704,
+            "end": 728
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| H₂ | 2 |",
+            "start": 729,
+            "end": 739
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| O₂ | 1 |",
+            "start": 740,
+            "end": 750
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| H₂O | 2 |",
+            "start": 751,
+            "end": 762
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**இதன் பொருள்:** 2 மோல் ஹைட்ரஜன், 1 மோல் ஆக்ஸிஜனுடன் வினைபுரிந்து, 2 மோல் நீர் உருவாக்குகிறது.",
+            "start": 764,
+            "end": 858
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation 2H2 + O2 -> 2H2O and corresponding mole ratios (2:1:2) are scientifically accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Mole calculation formula",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Presents the standard mathematical relation between mass, molar mass, and moles.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## முக்கியமான படிகள்",
+            "start": 860,
+            "end": 880
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. மோல் கருத்து (Mole Concept)",
+            "start": 882,
+            "end": 916
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$\\text{மோல் எண்ணிக்கை} = \\frac{\\text{கொடுக்கப்பட்ட நிறை (g)}}{\\text{மோலார் நிறை (g/mol)}}$$",
+            "start": 917,
+            "end": 1009
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The formula correctly gives number of moles as given mass (g) divided by molar mass (g/mol).",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "PROCEDURE",
+        "label": "Steps for stoichiometric calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Outlines the general four-step procedure used to solve stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p21",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. கணக்கீட்டு முறை",
+            "start": 1011,
+            "end": 1033
+          },
+          {
+            "id": "p22",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. வேதிச் சமன்பாட்டை சமன்படுத்துக",
+            "start": 1034,
+            "end": 1067
+          },
+          {
+            "id": "p23",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. கொடுக்கப்பட்ட பொருளின் மோல் எண்ணிக்கையைக் கணக்கிடுக",
+            "start": 1068,
+            "end": 1122
+          },
+          {
+            "id": "p24",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. மோல் விகிதத்தைப் பயன்படுத்தி தேவையான பொருளின் மோல் எண்ணிக்கையைக் காண்க",
+            "start": 1123,
+            "end": 1196
+          },
+          {
+            "id": "p25",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. அதை நிறையாக மாற்றுக",
+            "start": 1197,
+            "end": 1219
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The sequence of steps (balance equation, find moles of given substance, determine moles of desired substance using mole ratio, convert to mass) is standard and correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "EXAMPLE",
+        "label": "Worked stoichiometric calculation for water synthesis",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Provides a step-by-step worked numerical calculation to find the mass of oxygen required to react with 4g of hydrogen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## எடுத்துக்காட்டு கணக்கு",
+            "start": 1221,
+            "end": 1246
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**கேள்வி:** 4g ஹைட்ரஜன் முழுவதுமாக வினைபுரிய எத்தனை கிராம் ஆக்ஸிஜன் தேவை?",
+            "start": 1248,
+            "end": 1321
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**தீர்வு:**",
+            "start": 1323,
+            "end": 1334
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- H₂ மோலார் நிறை = 2 g/mol",
+            "start": 1335,
+            "end": 1361
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- H₂ மோல் எண்ணிக்கை = 4/2 = 2 மோல்",
+            "start": 1362,
+            "end": 1396
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- சமன்பாட்டின்படி: 2 மோல் H₂ க்கு 1 மோல் O₂ தேவை",
+            "start": 1397,
+            "end": 1445
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- O₂ மோலார் நிறை = 32 g/mol",
+            "start": 1446,
+            "end": 1473
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- தேவையான O₂ நிறை = 1 × 32 = **32 கிராம்**",
+            "start": 1474,
+            "end": 1516
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations and values are correct: 4 g / 2 g/mol = 2 mol H2; 2 mol H2 requires 1 mol O2; 1 mol * 32 g/mol = 32 g O2.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "CONCEPT",
+        "label": "Significance and uses of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Lists the practical applications and importance of stoichiometry in predicting reaction quantities, industrial production, and laboratory work.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## முடிவுரை",
+            "start": 1518,
+            "end": 1529
+          },
+          {
+            "id": "p35",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "வேதி வினைக் கூறுகளின் விகிதம் என்பது:",
+            "start": 1531,
+            "end": 1568
+          },
+          {
+            "id": "p36",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- வினையின் **அளவை கணிக்க** உதவுகிறது",
+            "start": 1569,
+            "end": 1605
+          },
+          {
+            "id": "p37",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **தொழிற்சாலைகளில்** எந்த அளவு மூலப்பொருள் தேவை என அறிய உதவுகிறது",
+            "start": 1606,
+            "end": 1672
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **ஆய்வகங்களில்** துல்லியமான கணக்கீடுகளுக்கு பயன்படுகிறது",
+            "start": 1673,
+            "end": 1731
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed applications in reaction estimation, chemical industry, and laboratory calculations are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "STUDY_SUPPORT",
+        "label": "Advice on practicing stoichiometry problems",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Encourages the student to solve more practice problems to gain a strong understanding of stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "இந்த கருத்தை நன்கு புரிந்துகொள்ள, அதிக பயிற்சி கணக்குகள் செய்வது அவசியம்!",
+            "start": 1733,
+            "end": 1806
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Sound pedagogical study advice.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\tamil-native\\claude-sonnet-5__4e54f47a7848.json",
+    "original_sha256": "0e66b311611c22067d11caae17266dd5c200ac51d5bf046591834dce4b8839b5",
+    "evaluation_language": "Tamil",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 39,
+    "content_unit_kinds": {
+      "CONCEPT": 4,
+      "EXAMPLE": 2,
+      "PROCEDURE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 39,
+    "unique_subtopics": 4,
+    "contextualization": {
+      "none": 8
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

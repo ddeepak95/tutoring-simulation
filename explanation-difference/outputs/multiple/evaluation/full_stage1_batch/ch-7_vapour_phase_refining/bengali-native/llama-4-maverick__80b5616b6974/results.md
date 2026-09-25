@@ -1,0 +1,138 @@
+# Stage 1: Bengali / vapour phase refining
+
+Gemini-3.8-flash; model proposals, not independently verified. Stage 2 was not run.
+
+## Topic relevance
+
+{
+  "requested_topic": "vapour phase refining",
+  "observed_topic": "Steam distillation",
+  "topic_match": "off_topic",
+  "reason": "The requested topic is vapour phase refining, a chemical metallurgical refining technique (such as the Mond process or Van Arkel process) used to purify metals by converting them into volatile compounds and subsequently decomposing them. The explanation instead describes steam distillation of organic compounds, explicitly equating 'বাষ্পীয় দশা বিশোধন' to steam distillation ('স্টিম ডিস্টিলেশন'). Because it teaches an entirely different chemical separation method, the response is off-topic.",
+  "content_unit_ids": [],
+  "major_task_failure": true
+}
+
+| Unit | Kind | Label | Attributes | Accuracy |
+|---|---|---|---|---|
+| u1 | CONCEPT | Definition, working principle, and operational steps of steam distillation | {"depth": "explanation"} | not_assessed_due_to_topic_mismatch |
+| u2 | CAVEAT | Limitation of steam distillation to immiscible liquids | {"subtype": "limitation"} | not_assessed_due_to_topic_mismatch |
+| u3 | EXAMPLE | Application of steam distillation in aniline purification | {"context": "real_world", "treatment": "illustrative"} | not_assessed_due_to_topic_mismatch |
+
+## u1: Definition, working principle, and operational steps of steam distillation
+
+```json
+{
+  "attributes": {
+    "depth": "explanation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "not_assessed_due_to_topic_mismatch",
+    "reason": "This unit was not assessed for factual accuracy because the overall response is off-topic.",
+    "errors": []
+  }
+}
+```
+
+```text
+বাষ্পীয় দশা বিশোধন বা স্টিম ডিস্টিলেশন একটি বিশেষ প্রক্রিয়া যেখানে জলীয় বাষ্প ব্যবহার করে কোনো তরল বা কঠিন পদার্থকে তার স্ফুটনাঙ্কের নিচের তাপমাত্রায় পাতিত করা হয়।
+
+এই পদ্ধতিতে যে পদার্থকে বিশোধন করা হবে তাকে পানি বা জলের সাথে মিশানো হয় না এমন কোনো দ্রাবকে দ্রবীভূত করা হয়। এরপর এই দ্রবণকে একটি বিশেষ ধরনের পাতন ফ্লাস্কে নিয়ে উচ্চ তাপমাত্রায় জলীয় বাষ্প প্রবেশ করিয়ে দ্রবণের বাষ্পকে পাতিত করা হয়।
+
+এই পদ্ধতির সুবিধা হলো, সাধারণ পাতন পদ্ধতিতে যে সমান্য জৈব যৌগগুলো তাদের স্ফুটনাঙ্কে পৌঁছানোর আগেই বিযোজিত হয়ে যায়, তাদেরকে সহজেই বিশোধন করা যায়।
+
+তোমরা জানো যে, তরল পদার্থের তলদেশে চাপ কম হলে স্ফুটন ঘটে এবং স্ফুটনাঙ্ক কমে যায়। বাষ্পীয় দশা বিশোধনে জলীয় বাষ্প প্রবেশ করানোর ফলে মিশ্রণটির মোট বাষ্পচাপ বেড়ে যায় এবং বায়ুমণ্ডলীয় চাপের সমান হয়। ফলে মিশ্রণটির স্ফুটনাঙ্ক কমে যায় এবং সেটি তার স্ফুটনাঙ্কের চেয়ে কম তাপমাত্রায় পাতিত হয়।
+
+এই পদ্ধতিতে পাতিত বাষ্পকে ঠাণ্ডা করে জলীয় অংশ এবং জৈব যৌগকে আলাদা করা হয়। এভাবে জৈব যৌগকে বিশোধন করা হয়।
+```
+
+
+## u2: Limitation of steam distillation to immiscible liquids
+
+```json
+{
+  "attributes": {
+    "subtype": "limitation"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "not_assessed_due_to_topic_mismatch",
+    "reason": "This unit was not assessed for factual accuracy because the overall response is off-topic.",
+    "errors": []
+  }
+}
+```
+
+```text
+এই পদ্ধতির একটি সীমাবদ্ধতা হলো, এ পদ্ধতিতে শুধু অমিশ্রণীয় তরল যৌগকে পৃথক করা যায়।
+```
+
+
+## u3: Application of steam distillation in aniline purification
+
+```json
+{
+  "attributes": {
+    "context": "real_world",
+    "treatment": "illustrative"
+  },
+  "contextualization": {
+    "value": "none",
+    "evidence": []
+  },
+  "accuracy": {
+    "verdict": "not_assessed_due_to_topic_mismatch",
+    "reason": "This unit was not assessed for factual accuracy because the overall response is off-topic.",
+    "errors": []
+  }
+}
+```
+
+```text
+অ্যানিলিন উৎপাদনে বাষ্পীয় দশা বিশোধন পদ্ধতি ব্যবহার করা হয়। এ পদ্ধতিতে অ্যানিলিনকে পানির সাথে অমিশ্রণীয় দ্রাবকে দ্রবীভূত করে জলীয় বাষ্পের সাথে পাতিত করা হয়। এতে অ্যানিলিনের স্ফুটনাঙ্ক কমে যায় এবং এটি পাতিত হয়ে পানির সাথে জমা হয়। পানিতে অ্যানিলিন অদ্রবণীয় হওয়ায় এদের আলাদা করা সহজ হয়।
+```
+
+## Ambiguities
+
+```json
+[
+  {
+    "unit_ids": [
+      "u1"
+    ],
+    "issue": "Paragraphs 1 through 5 explain the definition, operational steps, advantage, and physical mechanism (vapour pressure) of steam distillation. These paragraphs could alternatively be split into a general definition/procedure unit and a separate concept unit focusing on the underlying vapour pressure mechanism (paragraph 4).",
+    "proposed_resolution": "The paragraphs are kept together in a single CONCEPT unit (u1) because they collectively deliver one cohesive explanation of what steam distillation is, how it works mechanically, and why it reduces the effective boiling point."
+  },
+  {
+    "unit_ids": [
+      "u1",
+      "u2"
+    ],
+    "issue": "Paragraph 6 consists of a single sentence stating that the process can only separate immiscible liquids. It could be seen as an additional qualifying property of steam distillation merged into u1, or as a distinct CAVEAT unit.",
+    "proposed_resolution": "It is classified as a distinct CAVEAT unit with subtype 'limitation' because the text explicitly introduces and develops it as a standalone limitation ('এই পদ্ধতির একটি সীমাবদ্ধতা হলো')."
+  }
+]
+```
+
+## Unassigned text for coverage review
+
+```text
+
+
+তোমাদের বুঝতে সুবিধা হবে যদি একটি উদাহরণ দিয়ে বিষয়টি ব্যাখ্যা করি।
+
+
+```
+
+```text
+
+
+তোমাদের বুঝতে সুবিধা হয়েছে কিনা জানাবা কিন্তু!
+```

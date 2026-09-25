@@ -1,0 +1,25 @@
+
+Traceback (most recent call last):
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_stage1.py", line 85, in <module>
+    if __name__=='__main__':asyncio.run(main())
+                            ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ddeep\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_stage1.py", line 67, in main
+    d=json.loads(re.sub(r'^```(?:json)?\s*|\s*```$','',answer));resolved=validate(d,text,payload['topic_name_en']);break
+                                                                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_stage1.py", line 9, in validate
+    resolved=resolve(d,text);ids={u['id'] for u in d['content_units']};t=d['topic_relevance']
+  File "D:\Projects\PhD\tutoring-check\explanation-difference\evaluation\boundary_pilot\run_demo.py", line 21, in resolve
+    assert occ<len(starts),'Exact excerpt not found: '+quote[:100]
+           ^^^^^^^^^^^^^^^
+AssertionError: Exact excerpt not found: ## \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09c2\u09a4\u09cd\u09b0
+
+$$\text{\u09ae\u09cb\u09b2 \u09b8\u0982\u0996\u09cd\u09af\u09be (n)} = \frac{\text{\u09aa\u09cd\u09b0\u09a6\u09a4\u09cd\u09a4 \u09ad\u09b0 (\u0997\u09cd\u09b0\u09be\u09ae)}}{\text{\u09ae\u09cb\u09b2\u09be\u09b0 \u09ad\u09b0 (g/

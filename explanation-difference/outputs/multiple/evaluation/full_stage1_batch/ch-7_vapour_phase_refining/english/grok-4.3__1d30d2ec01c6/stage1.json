@@ -1,0 +1,128 @@
+{
+  "topic_relevance": {
+    "requested_topic": "vapour phase refining",
+    "observed_topic": "Principles, operational stages, criteria, and examples (Mond and Van Arkel processes) of vapour phase refining",
+    "topic_match": "on_topic",
+    "reason": "The text explains vapour phase refining accurately and thoroughly, covering its general principle, operational steps, industrial examples (Mond process for nickel and Van Arkel process for titanium/zirconium), and necessary criteria.",
+    "content_unit_ids": [
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "major_task_failure": false
+  },
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition and general mechanism of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "Vapour phase refining is a method used to purify certain metals that can easily form volatile (easily vaporized) compounds. The idea is simple: turn the impure metal into a gas or vapour, separate it from the solid impurities that stay behind, and then break the vapour back down into pure metal.\n\nHere's how it works in clear steps:\n\n1. **Form the volatile compound**  \n   The impure metal is heated with a suitable gas or element (like carbon monoxide or iodine). Only the desired metal reacts to form a compound that turns into vapour at a relatively low temperature. Most impurities do not form such vapours and remain as solid residue.\n\n2. **Vaporisation and separation**  \n   The volatile compound is heated gently so it becomes a gas. This gas is moved away (often through a pipe or chamber), leaving the non-volatile impurities behind. Because the compound is now in vapour form, it can be purified very effectively.\n\n3. **Decomposition to recover pure metal**  \n   The purified vapour is then heated to a higher temperature or passed over a hot surface (like a heated filament). This causes the compound to break down, depositing the pure metal as a solid while releasing the original gas or element, which can often be reused.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The definition and three-step operating principle (formation of volatile compound, separation from non-volatile impurities, and thermal decomposition to recover pure metal) are chemically sound and accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u2",
+      "kind": "EXAMPLE",
+      "label": "Mond process for nickel refining",
+      "excerpts": [
+        {
+          "text": "- **Mond’s process for nickel**  \n  Impure nickel is heated with carbon monoxide gas at about 50 °C to form nickel carbonyl vapour:  \n  Ni (impure) + 4CO → Ni(CO)₄ (vapour)  \n  The vapour is then heated to about 200 °C, where it decomposes:  \n  Ni(CO)₄ → Ni (pure) + 4CO  \n  The pure nickel deposits as a solid, and carbon monoxide is recycled.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The temperatures (~50 °C for carbonyl formation, ~200 °C for thermal decomposition) and the balanced chemical equations accurately describe the Mond process.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u3",
+      "kind": "EXAMPLE",
+      "label": "Van Arkel process for titanium or zirconium refining",
+      "excerpts": [
+        {
+          "text": "- **Van Arkel process for titanium or zirconium**  \n  The impure metal is heated with iodine to form a volatile iodide vapour. This vapour is passed over a hot tungsten filament (around 1400–1800 °C). The iodide breaks down, leaving a rod of very pure metal on the filament while iodine vapour is released and can be reused.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "real_world",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The operational description of the Van Arkel process, including reaction with iodine to form volatile iodide and thermal decomposition on an electrically heated tungsten filament at 1400–1800 °C, is factually accurate.",
+        "errors": []
+      }
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Key requirements, purity outcome, and applicability of vapour phase refining",
+      "excerpts": [
+        {
+          "text": "This method is especially useful when the metal forms a compound that is stable enough to vaporise but can be easily decomposed at higher temperatures. It gives metals of very high purity (often 99.9 % or more) and is used mainly for nickel, titanium, zirconium, and a few other reactive metals.",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The stated criteria (compound must be volatile yet easily decomposed at higher temperatures) and the high purity outcome are standard and correct.",
+        "errors": []
+      }
+    }
+  ],
+  "ambiguities": [
+    {
+      "unit_ids": [
+        "u1",
+        "u4"
+      ],
+      "issue": "Whether the concluding paragraph (u4) should be separated as its own CONCEPT unit teaching the specific criteria and purity outcomes of vapour phase refining, or grouped into u1 as a discontinuous second excerpt continuing the general concept of the method.",
+      "proposed_resolution": "Separated as u4 because it shifts focus to the thermodynamic requirements/conditions and purity yields of the technique after the worked examples are completed."
+    },
+    {
+      "unit_ids": [
+        "u3"
+      ],
+      "issue": "Whether the treatment attribute of u3 should be 'worked' or 'illustrative'. Unlike u2, u3 does not provide explicit chemical equations, but it follows the sequential operations, reaction conditions (iodine, 1400–1800 °C tungsten filament), and outcomes qualitatively.",
+      "proposed_resolution": "Assigned 'worked' because the narrative traces through specific procedural operations to a concrete qualitative result (pure metal deposited on a filament and iodine recycled)."
+    }
+  ]
+}

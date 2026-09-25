@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-001-bfad9c0f98a5.json](run-001-001-bfad9c0f98a5.json)
+**Source:** [run-001-001-bfad9c0f98a5.json](english/gpt-5.6-terra__6fd2100a2252.json)
 
 ## Mole Concept — Simple Explanation
 
@@ -335,7 +335,7 @@ A mole connects the tiny world of atoms and molecules to measurable quantities l
 
 **Status:** completed
 
-**Source:** [run-001-002-02324cd4a644.json](run-001-002-02324cd4a644.json)
+**Source:** [run-001-002-02324cd4a644.json](english/grok-4.3__6d2fe2e80d95.json)
 
 **The Mole Concept – Explained Simply**
 
@@ -423,7 +423,7 @@ Would you like me to explain how to use moles in chemical equations (stoichiomet
 
 **Status:** completed
 
-**Source:** [run-001-003-44e9577041b0.json](run-001-003-44e9577041b0.json)
+**Source:** [run-001-003-44e9577041b0.json](english/gemini-3.8-flash__b643fd1d9d7d.json)
 
 Welcome to chemistry! Don’t worry if the **mole concept** sounds intimidating—almost every chemistry student struggles with it at first. 
 
@@ -528,7 +528,7 @@ How does that feel? Would you like to try a practice problem together to test it
 
 **Status:** completed
 
-**Source:** [run-001-004-1671f807028b.json](run-001-004-1671f807028b.json)
+**Source:** [run-001-004-1671f807028b.json](english/claude-sonnet-5__57081cfc99e2.json)
 
 # The Mole Concept
 
@@ -631,7 +631,7 @@ $$= 2 \times 6.022 \times 10^{23} = 1.2044 \times 10^{24} \text{ atoms}$$
 
 **Status:** completed
 
-**Source:** [run-001-005-a0c390bda440.json](run-001-005-a0c390bda440.json)
+**Source:** [run-001-005-a0c390bda440.json](english/llama-4-maverick__786f8e76263d.json)
 
 The mole concept! A fundamental idea in chemistry that can be a bit tricky to grasp at first, but don't worry, I'm here to help you understand it clearly.
 
@@ -703,7 +703,7 @@ Feel free to ask me if you need help with these exercises or have any further qu
 
 **Status:** completed
 
-**Source:** [run-002-001-bee6bb6ef255.json](run-002-001-bee6bb6ef255.json)
+**Source:** [run-002-001-bee6bb6ef255.json](tamil-native/gpt-5.6-terra__68a70a4a65d1.json)
 
 வேதியியலில் **“மோல்” (mole)** என்பது மிகச் சிறிய துகள்களை—அணுக்கள், மூலக்கூறுகள், அயன்கள் போன்றவற்றை—எண்ணுவதற்கான ஒரு அலகாகும்.
 
@@ -918,7 +918,7 @@ n = \frac{36}{18} = 2
 
 **Status:** completed
 
-**Source:** [run-002-002-b4720c172353.json](run-002-002-b4720c172353.json)
+**Source:** [run-002-002-b4720c172353.json](tamil-native/grok-4.3__4ad8f6f2b547.json)
 
 நீங்கள் ஒரு சிறந்த ஆசிரியர் என்று நினைத்து, உயர்நிலைப் பள்ளி மாணவருக்கு எளிமையாக, புரியும் விதத்தில் **மோல்** கோட்பாட்டை விளக்குகிறேன்.
 
@@ -998,7 +998,7 @@ n = \frac{36}{18} = 2
 
 **Status:** completed
 
-**Source:** [run-002-003-a77895c09229.json](run-002-003-a77895c09229.json)
+**Source:** [run-002-003-a77895c09229.json](tamil-native/gemini-3.8-flash__ae77dde5cd13.json)
 
 வணக்கம்! வாருங்கள், வேதியியலின் மிக முக்கியமான மற்றும் சுவாரஸ்யமான பாடமான **"மோல் தத்துவம்" (Mole Concept)** பற்றி மிக எளிமையாகப் புரிந்து கொள்வோம்.
 
@@ -1091,7 +1091,7 @@ n = \frac{36}{18} = 2
 
 **Status:** completed
 
-**Source:** [run-002-004-9060bf1ad204.json](run-002-004-9060bf1ad204.json)
+**Source:** [run-002-004-9060bf1ad204.json](tamil-native/claude-sonnet-5__628ecd25b740.json)
 
 # மோல் கோட்பாடு (Mole Concept)
 
@@ -1165,7 +1165,7 @@ STP (நிலையான வெப்பநிலை மற்றும் அ
 
 **Status:** completed
 
-**Source:** [run-002-005-ea5a62a22df8.json](run-002-005-ea5a62a22df8.json)
+**Source:** [run-002-005-ea5a62a22df8.json](tamil-native/llama-4-maverick__a59da4c4aee9.json)
 
 கார்பனைப் பொறுத்தவரை, மோல் என்பது அதன் அணு நிறையின் கிராம் எடையில் உள்ள அணுக்களின் எண்ணிக்கை. 12 கிராம் கார்பனில் உள்ள அணுக்களின் எண்ணிக்கை ஒரு மோல். ஒரு தனிமத்தின் ஒரு மோல் அதன் அணு நிறையின் கிராம் எடையில் உள்ள அணுக்களின் எண்ணிக்கையைக் குறிக்கிறது. ஒரு தனிமத்தின் ஒரு மோல் அணுக்களின் எண்ணிக்கை எப்போதும் 6.022 × 10^23  அணுக்களாக இருக்கும், இது அவகாட்ரோ எண் என்று அழைக்கப்படுகிறது. 
 
@@ -1194,7 +1194,7 @@ STP (நிலையான வெப்பநிலை மற்றும் அ
 
 **Status:** completed
 
-**Source:** [run-003-001-a3af3a3a3477.json](run-003-001-a3af3a3a3477.json)
+**Source:** [run-003-001-a3af3a3a3477.json](tamil-english/gpt-5.6-terra__6ad8ac8da58c.json)
 
 ## மோல் (Mole) கருத்து – எளிய விளக்கம்
 
@@ -1464,7 +1464,7 @@ n = \frac{V}{22.4}
 
 **Status:** completed
 
-**Source:** [run-003-002-924bd122bd32.json](run-003-002-924bd122bd32.json)
+**Source:** [run-003-002-924bd122bd32.json](tamil-english/grok-4.3__0041b70a0be2.json)
 
 மாணவர்களே, வணக்கம்! இன்று நாம் வேதியியலில் மிக முக்கியமான பாடமான **மோல் கருத்து** (Mole Concept) பற்றி எளிமையாகப் புரிந்துகொள்வோம்.
 
@@ -1516,7 +1516,7 @@ n = 9 ÷ 18 = **0.5 மோல்** (அரை மோல்)
 
 **Status:** completed
 
-**Source:** [run-003-003-4fa00ddeda1a.json](run-003-003-4fa00ddeda1a.json)
+**Source:** [run-003-003-4fa00ddeda1a.json](tamil-english/gemini-3.8-flash__d064842c650a.json)
 
 வணக்கம்! வேதியியலில் (Chemistry) மிக முக்கியமான, ஆனால் பல மாணவர்கள் குழப்பிக்கொள்ளும் ஒரு தலைப்பு **"மோல் கருத்துரு" (Mole Concept)**. 
 
@@ -1605,7 +1605,7 @@ $$\text{மோல்களின் எண்ணிக்கை (n)} = \frac{36}
 
 **Status:** completed
 
-**Source:** [run-003-004-cbee6fc9b855.json](run-003-004-cbee6fc9b855.json)
+**Source:** [run-003-004-cbee6fc9b855.json](tamil-english/claude-sonnet-5__f241d3c0fb37.json)
 
 # மோல் கருத்து (Mole Concept) - எளிய விளக்கம்
 
@@ -1707,7 +1707,7 @@ $$1 \text{ மோல் வாயு} = 22.4 \text{ லிட்டர்}$$
 
 **Status:** completed
 
-**Source:** [run-003-005-3f40934b7a5f.json](run-003-005-3f40934b7a5f.json)
+**Source:** [run-003-005-3f40934b7a5f.json](tamil-english/llama-4-maverick__52e291c81dac.json)
 
 வணக்கம் மாணவரே! இன்று நாம் வேதியியலின் அடிப்படைக் கருத்துகளில் ஒன்றான "மோல் கருத்தை" பற்றி விரிவாகப் பார்க்கலாம்.
 

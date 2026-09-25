@@ -1,0 +1,785 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "46819b9402e7c975546732bac931db6cae244f486a518e0a06edd3ff174e0b00",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response directly explains stoichiometry (الحسابات الكيميائية), covering its definition, basic mole concepts and conversion formulas, systematic steps for solving stoichiometry problems, a fully worked example, and useful study tips.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Mole concept and conversion formulas"
+      },
+      {
+        "id": "s3",
+        "label": "Steps for solving stoichiometry problems"
+      },
+      {
+        "id": "s4",
+        "label": "Worked example of mass-to-mass stoichiometry"
+      },
+      {
+        "id": "s5",
+        "label": "Tips and best practices for stoichiometry"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines what stoichiometry is and highlights the reliance on balanced chemical equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "# الحسابات الكيميائية (Stoichiometry)",
+            "start": 0,
+            "end": 37
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 🔬 ما هي الحسابات الكيميائية؟",
+            "start": 39,
+            "end": 70
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هي الحسابات التي تُستخدم لمعرفة كميات المواد المتفاعلة والناتجة في التفاعل الكيميائي، بالاعتماد على **المعادلة الكيميائية الموزونة**.",
+            "start": 72,
+            "end": 205
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 207,
+            "end": 210
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition correctly describes stoichiometry as calculations used to determine reactant and product amounts based on a balanced chemical equation.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Foundational mole concepts and conversion relationships",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains foundational concepts including the mole, Avogadro's number, molar mass, and conversion formulas connecting mass, moles, particle count, and STP gas volume.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 📌 المفاهيم الأساسية المطلوبة",
+            "start": 212,
+            "end": 243
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 1. المول (Mole)",
+            "start": 245,
+            "end": 264
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- المول هو وحدة لقياس كمية المادة",
+            "start": 265,
+            "end": 298
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- **1 مول = 6.022 × 10²³ جسيم** (عدد أفوجادرو)",
+            "start": 299,
+            "end": 345
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الكتلة المولية = كتلة المول الواحد بالجرام (تُقاس بوحدة g/mol)",
+            "start": 346,
+            "end": 410
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### 2. العلاقات المهمة",
+            "start": 412,
+            "end": 434
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| من | إلى | العلاقة |",
+            "start": 436,
+            "end": 458
+          },
+          {
+            "id": "p12",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "|---|---|---|",
+            "start": 459,
+            "end": 472
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| الكتلة | المول | عدد المولات = الكتلة ÷ الكتلة المولية |",
+            "start": 473,
+            "end": 531
+          },
+          {
+            "id": "p14",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| المول | عدد الجسيمات | عدد الجسيمات = عدد المولات × 6.022×10²³ |",
+            "start": 532,
+            "end": 598
+          },
+          {
+            "id": "p15",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "table"
+            ],
+            "review_flags": [],
+            "text": "| المول | حجم الغاز (STP) | الحجم = عدد المولات × 22.4 لتر |",
+            "start": 599,
+            "end": 659
+          },
+          {
+            "id": "p16",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 661,
+            "end": 664
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The unit accurately defines the mole, Avogadro's constant (6.022 × 10²³), molar mass, and standard conversion relationships including 22.4 L/mol for ideal gases at STP.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "Steps for solving stoichiometry problems",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Outlines a reusable 4-step algorithm for tackling standard stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p17",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 🧮 خطوات حل مسائل الحسابات الكيميائية",
+            "start": 666,
+            "end": 705
+          },
+          {
+            "id": "p18",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخطوة 1: اكتب المعادلة الكيميائية الموزونة ✅",
+            "start": 707,
+            "end": 756
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هذا **أهم خطوة** لأن الأرقام (المعاملات) تخبرنا بنسب التفاعل.",
+            "start": 757,
+            "end": 818
+          },
+          {
+            "id": "p20",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخطوة 2: حوّل الكمية المعطاة إلى مولات",
+            "start": 820,
+            "end": 863
+          },
+          {
+            "id": "p21",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخطوة 3: استخدم النسبة المولية من المعادلة الموزونة",
+            "start": 865,
+            "end": 921
+          },
+          {
+            "id": "p22",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخطوة 4: حوّل الناتج من مولات إلى الوحدة المطلوبة",
+            "start": 923,
+            "end": 977
+          },
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 979,
+            "end": 982
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps (balance equation -> convert given quantity to moles -> apply stoichiometric mole ratio -> convert moles to target unit) represent the standard pedagogical workflow for stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked mass-to-mass stoichiometry calculation (H2 and O2 reacting to form H2O)",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Provides a fully worked example calculating the mass of oxygen required to react with 4 grams of hydrogen gas.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## 💡 مثال تطبيقي",
+            "start": 984,
+            "end": 1000
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**السؤال:** كم جرام من الأكسجين (O₂) نحتاج للتفاعل الكامل مع 4 جرام من الهيدروجين (H₂) لإنتاج الماء؟",
+            "start": 1002,
+            "end": 1102
+          },
+          {
+            "id": "p26",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**المعادلة الموزونة:**",
+            "start": 1104,
+            "end": 1126
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$2H_2 + O_2 \\rightarrow 2H_2O$$",
+            "start": 1127,
+            "end": 1159
+          },
+          {
+            "id": "p28",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الحل:**",
+            "start": 1161,
+            "end": 1170
+          },
+          {
+            "id": "p29",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الخطوة 1:** حساب عدد مولات H₂",
+            "start": 1172,
+            "end": 1203
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n(H_2) = \\frac{الكتلة}{الكتلة المولية} = \\frac{4}{2} = 2 \\text{ مول}$$",
+            "start": 1204,
+            "end": 1276
+          },
+          {
+            "id": "p31",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الخطوة 2:** استخدام النسبة المولية من المعادلة",
+            "start": 1278,
+            "end": 1326
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- النسبة بين H₂ و O₂ هي 2:1",
+            "start": 1327,
+            "end": 1354
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$n(O_2) = n(H_2) \\times \\frac{1}{2} = 2 \\times \\frac{1}{2} = 1 \\text{ مول}$$",
+            "start": 1355,
+            "end": 1432
+          },
+          {
+            "id": "p34",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**الخطوة 3:** حساب كتلة O₂",
+            "start": 1434,
+            "end": 1460
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- الكتلة المولية لـ O₂ = 32 g/mol",
+            "start": 1461,
+            "end": 1494
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "$$الكتلة = n \\times الكتلة المولية = 1 \\times 32 = 32 \\text{ جرام}$$",
+            "start": 1495,
+            "end": 1563
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### ✅ الإجابة: نحتاج 32 جرام من الأكسجين",
+            "start": 1565,
+            "end": 1605
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1607,
+            "end": 1610
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations and steps are correct: n(H2) = 4 / 2 = 2 mol; n(O2) = 2 × (1/2) = 1 mol; mass(O2) = 1 × 32 = 32 g.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Study advice for solving stoichiometry problems",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Presents practical tips and reminders for high school students when tackling stoichiometry, followed by a closing conversational offer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## ⚠️ نصائح مهمة",
+            "start": 1612,
+            "end": 1628
+          },
+          {
+            "id": "p40",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. **لا تنسَ وزن المعادلة** قبل البدء بأي حسابات",
+            "start": 1630,
+            "end": 1678
+          },
+          {
+            "id": "p41",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. **انتبه للوحدات** دائمًا (جرام، مول، لتر)",
+            "start": 1679,
+            "end": 1723
+          },
+          {
+            "id": "p42",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. تدرّب على حساب **الكتلة المولية** لأي مركب بجمع الكتل الذرية",
+            "start": 1724,
+            "end": 1787
+          },
+          {
+            "id": "p43",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1789,
+            "end": 1792
+          },
+          {
+            "id": "p44",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "هل تريد أن أشرح لك موضوع **المتفاعل المحدد (Limiting Reactant)** أو أعطيك تمارين للتدريب؟ 😊",
+            "start": 1794,
+            "end": 1885
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The tips (checking balanced equations, keeping track of units, practicing molar mass calculations) are sound and accurate pedagogical advice.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\arabic-native\\claude-sonnet-5__b6bfd983527c.json",
+    "original_sha256": "2594bfc3dd31f856495ff50ad26be1562d4d1d29586f1d9a82167ac9f87d3de5",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 44,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 44,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

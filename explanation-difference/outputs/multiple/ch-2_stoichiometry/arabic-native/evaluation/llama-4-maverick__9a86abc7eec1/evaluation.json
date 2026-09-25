@@ -1,0 +1,517 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "558605cf6a9b4ea7c3b603d1cb809c5fef78464be42e67affc763a5e06c74c4e",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The response directly and accurately explains stoichiometry for a high school level, covering its definition, key concepts (mole, molar mass, mole ratio), procedural steps, a worked example, and a concluding recap.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Introduction to stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Core stoichiometric concepts"
+      },
+      {
+        "id": "s3",
+        "label": "Steps for performing stoichiometric calculations"
+      },
+      {
+        "id": "s4",
+        "label": "Worked example: combustion of methane"
+      },
+      {
+        "id": "s5",
+        "label": "Recap and general advice"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and foundations of stoichiometry",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces stoichiometry as the quantitative study of reactants and products based on the law of conservation of mass and molar relationships.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "بالطبع، يسعدني أن أشرح الحسابات الكيميائية بطريقة مبسطة ومفهومة لطالب في المرحلة الثانوية.",
+            "start": 0,
+            "end": 90
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مقدمة",
+            "start": 92,
+            "end": 101
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الحسابات الكيميائية هي جزء أساسي من الكيمياء، وتستخدم لتحديد كميات المواد المتفاعلة والمنتجات في التفاعلات الكيميائية. تعتمد هذه الحسابات على قوانين ومفاهيم كيميائية أساسية، مثل قانون حفظ الكتلة والعلاقات المولية.",
+            "start": 102,
+            "end": 315
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and foundational principles of stoichiometry (conservation of mass and mole relationships) are described correctly.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Fundamental concepts: mole, molar mass, and mole ratio",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Defines the core conceptual tools needed for stoichiometry: the mole with Avogadro's number, molar mass and how to calculate it, and the mole ratio from balanced equations.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### المفاهيم الأساسية",
+            "start": 317,
+            "end": 338
+          },
+          {
+            "id": "p5",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **المول**: هو وحدة قياس كمية المادة، ويمثل كمية المادة التي تحتوي على عدد أفوجادرو (6.022 × 10^23) من الجسيمات (ذرات، جزيئات، أيونات).",
+            "start": 339,
+            "end": 476
+          },
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **الكتلة المولية**: هي كتلة مول واحد من المادة، وتقاس بوحدة الغرام/مول. يمكن حسابها بجمع الكتل الذرية لجميع الذرات في الجزيء.",
+            "start": 477,
+            "end": 605
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **النسبة المولية**: هي النسبة بين عدد مولات المواد المتفاعلة والمنتجات في معادلة كيميائية متوازنة.",
+            "start": 606,
+            "end": 707
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definitions of mole (including Avogadro's number), molar mass, and mole ratio are accurate and standard.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "PROCEDURE",
+        "label": "Standard methodology for stoichiometric calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Outlines a six-step reusable procedure for solving stoichiometry problems, from writing a balanced equation to verifying units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p8",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### خطوات إجراء الحسابات الكيميائية",
+            "start": 709,
+            "end": 744
+          },
+          {
+            "id": "p9",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **كتابة المعادلة الكيميائية**: أولاً، يجب كتابة المعادلة الكيميائية للتفاعل. يجب أن تكون المعادلة متوازنة، أي أن عدد ذرات كل عنصر يجب أن يكون متساويًا على جانبي المعادلة.",
+            "start": 745,
+            "end": 918
+          },
+          {
+            "id": "p10",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **تحديد المعلومات المعطاة**: حدد الكميات المعطاة في المسألة، مثل كتلة أو عدد مولات المواد المتفاعلة أو المنتجات.",
+            "start": 919,
+            "end": 1034
+          },
+          {
+            "id": "p11",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **تحويل الوحدات**: إذا لزم الأمر، قم بتحويل الوحدات إلى المول أو الغرام باستخدام الكتلة المولية.",
+            "start": 1035,
+            "end": 1134
+          },
+          {
+            "id": "p12",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. **استخدام النسب المولية**: استخدم المعادلة الكيميائية المتوازنة لتحديد النسب المولية بين المواد المتفاعلة والمنتجات.",
+            "start": 1135,
+            "end": 1254
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "5. **الحساب**: قم بإجراء الحسابات اللازمة باستخدام النسب المولية والكميات المعطاة.",
+            "start": 1255,
+            "end": 1337
+          },
+          {
+            "id": "p14",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "6. **التحقق من الإجابة**: تأكد من أن الإجابة منطقية ووحداتها مناسبة.",
+            "start": 1338,
+            "end": 1406
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedure presents the correct canonical sequence of steps for stoichiometric problem solving.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "EXAMPLE",
+        "label": "Worked calculation: mass of carbon dioxide from methane combustion",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Demonstrates a complete worked problem: balancing the combustion equation, finding mole ratios, calculating molar mass, and determining product mass.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### مثال عملي",
+            "start": 1408,
+            "end": 1421
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "لنفترض أننا نريد حساب كتلة ثاني أكسيد الكربون (CO2) الناتجة عن احتراق 2 مول من الميثان (CH4) وفقًا للتفاعل:",
+            "start": 1422,
+            "end": 1529
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[ \\text{CH}_4 + 2\\text{O}_2 \\rightarrow \\text{CO}_2 + 2\\text{H}_2\\text{O} \\]",
+            "start": 1530,
+            "end": 1607
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **المعادلة متوازنة**: المعادلة أعلاه متوازنة.",
+            "start": 1609,
+            "end": 1657
+          },
+          {
+            "id": "p19",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **المعلومات المعطاة**: 2 مول من CH4.",
+            "start": 1658,
+            "end": 1697
+          },
+          {
+            "id": "p20",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **النسبة المولية**: من المعادلة، نرى أن 1 مول من CH4 ينتج 1 مول من CO2. لذا، 2 مول من CH4 ستنتج 2 مول من CO2.",
+            "start": 1698,
+            "end": 1810
+          },
+          {
+            "id": "p21",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "4. **الكتلة المولية ل CO2**: الكتلة المولية ل CO2 = 12 (لـ C) + 2*16 (لـ O2) = 44 غرام/مول.",
+            "start": 1811,
+            "end": 1902
+          },
+          {
+            "id": "p22",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "5. **الحساب**: كتلة CO2 = 2 مول * 44 غرام/مول = 88 غرام.",
+            "start": 1903,
+            "end": 1959
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The reaction equation is balanced, the molar mass calculation for CO2 (44 g/mol) is correct, and the resulting mass calculation (88 g) is accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of stoichiometry concepts and problem-solving tips",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Concludes by summarizing the core concepts and emphasizing balanced equations and proper units.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p23",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### الخاتمة",
+            "start": 1961,
+            "end": 1972
+          },
+          {
+            "id": "p24",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "الحسابات الكيميائية تعتمد على فهم المفاهيم الأساسية مثل المول والكتلة المولية والنسب المولية. من خلال اتباع الخطوات المنهجية والمنطقية، يمكن حل المسائل الكيميائية بسهولة ودقة. تذكر دائمًا أن تكتب المعادلات الكيميائية بشكل متوازن وتستخدم الوحدات الصحيحة في حساباتك.",
+            "start": 1973,
+            "end": 2237
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The summary provides accurate advice and correctly reinforces the foundational ideas.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\arabic-native\\llama-4-maverick__9a86abc7eec1.json",
+    "original_sha256": "dfd128658b177bf4bc4d3789b6b14358166113ece35bad16b9c4c11ad4f9e287",
+    "evaluation_language": "Arabic",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 24,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 24,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

@@ -1,0 +1,468 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "faf1e9143f278bedf753a8d482ea44c855d408945a75626638f7c8eccda8fb13",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "Introduction à la stœchiométrie en chimie",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5"
+      ],
+      "reason": "The text directly explains stoichiometry, its importance, underlying principles (conservation of mass, chemical equations), the procedure to apply it, and provides an illustrative chemical reaction example.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Définition de la stœchiométrie"
+      },
+      {
+        "id": "s2",
+        "label": "Analogie de la recette de cuisine"
+      },
+      {
+        "id": "s3",
+        "label": "Principes de base de la stœchiométrie"
+      },
+      {
+        "id": "s4",
+        "label": "Méthode d'application de la stœchiométrie"
+      },
+      {
+        "id": "s5",
+        "label": "Exemple de réaction de formation de l'eau"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Définition de la stœchiométrie",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines stoichiometry as the branch of chemistry concerned with measuring reactant and product amounts in a chemical reaction.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Bienvenue dans le monde de la chimie !**",
+            "start": 0,
+            "end": 42
+          },
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Aujourd'hui, nous allons explorer un concept fondamental en chimie : la stoechiométrie. Ne t'inquiète pas si cela te semble compliqué au début, je suis là pour t'expliquer cela de manière claire et simple.",
+            "start": 44,
+            "end": 249
+          },
+          {
+            "id": "p3",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Qu'est-ce que la stoechiométrie ?**",
+            "start": 251,
+            "end": 288
+          },
+          {
+            "id": "p4",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stoechiométrie est la partie de la chimie qui s'occupe de mesurer les quantités de réactifs et de produits dans une réaction chimique. En d'autres termes, il s'agit de comprendre comment les substances chimiques réagissent entre elles et quelles sont les quantités impliquées.",
+            "start": 290,
+            "end": 569
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of stoichiometry is clear and scientifically standard.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Analogie de la cuisine pour illustrer l'importance des proportions",
+        "attributes": {},
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Uses the real-world domain of following a cooking recipe to illustrate why precise proportions of reactants are essential.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p6",
+              "quote": "Imagine que tu es un cuisinier et que tu veux préparer un gâteau. Tu as besoin de connaître les quantités exactes d'ingrédients pour obtenir un résultat parfait."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p5",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Pourquoi est-ce important ?**",
+            "start": 571,
+            "end": 602
+          },
+          {
+            "id": "p6",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Imagine que tu es un cuisinier et que tu veux préparer un gâteau. Tu as besoin de connaître les quantités exactes d'ingrédients pour obtenir un résultat parfait. De même, en chimie, il est crucial de connaître les quantités de réactifs et de produits pour prédire les résultats d'une réaction.",
+            "start": 604,
+            "end": 897
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The cooking analogy accurately maps the necessity of specific ingredient proportions to chemical reactant amounts.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Principes de base : conservation de la masse et équations chimiques",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Explains the law of conservation of mass and the definition and role of chemical equations in stoichiometry.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p7",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Les principes de base de la stoechiométrie**",
+            "start": 899,
+            "end": 945
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **La loi de conservation de la masse** : lors d'une réaction chimique, la masse totale des réactifs est égale à la masse totale des produits. Cela signifie que la matière ne peut pas être créée ou détruite, seulement transformée.",
+            "start": 947,
+            "end": 1179
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Les équations chimiques** : une équation chimique est une représentation symbolique d'une réaction chimique. Elle indique les réactifs, les produits et les quantités impliquées.",
+            "start": 1180,
+            "end": 1362
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The law of conservation of mass and the description of chemical equations are accurately stated.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Étapes pour appliquer la stœchiométrie",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Outlines the sequential steps to apply stoichiometry: write the equation, balance it, and determine quantities via coefficients.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Comment appliquer la stoechiométrie ?**",
+            "start": 1364,
+            "end": 1405
+          },
+          {
+            "id": "p11",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "1. **Écrire l'équation chimique** : commence par écrire l'équation chimique de la réaction que tu veux étudier.",
+            "start": 1407,
+            "end": 1518
+          },
+          {
+            "id": "p12",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "2. **Équilibrer l'équation** : assure-toi que l'équation est équilibrée, c'est-à-dire que le nombre d'atomes de chaque élément est le même des deux côtés de l'équation.",
+            "start": 1519,
+            "end": 1687
+          },
+          {
+            "id": "p13",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "3. **Déterminer les quantités** : utilise les coefficients de l'équation équilibrée pour déterminer les quantités de réactifs et de produits impliquées.",
+            "start": 1688,
+            "end": 1840
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The procedural steps correctly represent the general method used in stoichiometry.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Exemple de synthèse de l'eau",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "illustrative"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Illustrates how stoichiometric coefficients indicate relative molecular ratios using the formation of water, concluding with a general wrap-up.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Un exemple simple**",
+            "start": 1842,
+            "end": 1863
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Supposons que nous voulions préparer de l'eau (H2O) en faisant réagir de l'hydrogène (H2) avec de l'oxygène (O2). L'équation chimique est :",
+            "start": 1865,
+            "end": 2004
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H2 + O2 → 2H2O",
+            "start": 2006,
+            "end": 2021
+          },
+          {
+            "id": "p17",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*   2 molécules d'hydrogène réagissent avec 1 molécule d'oxygène pour former 2 molécules d'eau.",
+            "start": 2023,
+            "end": 2118
+          },
+          {
+            "id": "p18",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "*   Les coefficients (2, 1 et 2) indiquent les quantités relatives de chaque substance impliquée.",
+            "start": 2119,
+            "end": 2216
+          },
+          {
+            "id": "p19",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "**Conclusion**",
+            "start": 2218,
+            "end": 2232
+          },
+          {
+            "id": "p20",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La stoechiométrie est un outil puissant pour comprendre les réactions chimiques et prédire les résultats. En appliquant les principes de base et en utilisant les équations chimiques, tu pourras déterminer les quantités de réactifs et de produits impliquées dans une réaction. N'hésite pas à me poser des questions si tu as besoin de clarifications ou si tu veux explorer d'autres exemples !",
+            "start": 2234,
+            "end": 2624
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The chemical equation 2H2 + O2 -> 2H2O is properly balanced and the molecular ratios derived from the stoichiometric coefficients are correct.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\french-native\\llama-4-maverick__657131a3a9b9.json",
+    "original_sha256": "a7dfcb64c8adfb97d79710c4051f990f283e11d97c9b440c723aff017ef707ca",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 5,
+    "substantive_content_units": 5,
+    "total_passages": 20,
+    "content_unit_kinds": {
+      "CONCEPT": 2,
+      "ANALOGY": 1,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1
+    },
+    "nested_passages": 20,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 4,
+      "everyday": 1
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 5
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

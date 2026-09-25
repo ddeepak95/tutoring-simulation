@@ -43,7 +43,7 @@ Source: [manifest.json](manifest.json)
 
 **Status:** completed
 
-**Source:** [run-001-001-6908cb327e8a.json](run-001-001-6908cb327e8a.json)
+**Source:** [run-001-001-6908cb327e8a.json](english/gpt-5.6-terra__151e5ec4ca87.json)
 
 An **isotope** is a version of an element that has the same number of **protons** but a different number of **neutrons**.
 
@@ -74,7 +74,7 @@ Some isotopes are **stable**, meaning they do not change over time. Others are *
 
 **Status:** completed
 
-**Source:** [run-001-002-833a5715c193.json](run-001-002-833a5715c193.json)
+**Source:** [run-001-002-833a5715c193.json](english/grok-4.3__67b792c26e6d.json)
 
 **Isotopes** are like different versions of the same element.
 
@@ -118,7 +118,7 @@ Would you like me to show you how to calculate the number of neutrons in an isot
 
 **Status:** completed
 
-**Source:** [run-001-003-d6d6cafcb2ac.json](run-001-003-d6d6cafcb2ac.json)
+**Source:** [run-001-003-d6d6cafcb2ac.json](english/gemini-3.8-flash__daa4bcdecdd6.json)
 
 Hey there! Welcome to class. Don't worry if chemistry sometimes feels like a completely different language—today, we’re going to break down **isotopes**, and I promise it’s much simpler than it sounds. 
 
@@ -193,7 +193,7 @@ How does that feel? Does that make sense, or would you like to try a practice pr
 
 **Status:** completed
 
-**Source:** [run-001-004-0ada98e92494.json](run-001-004-0ada98e92494.json)
+**Source:** [run-001-004-0ada98e92494.json](english/claude-sonnet-5__5002c65cc4a9.json)
 
 # Isotopes
 
@@ -260,7 +260,7 @@ Carbon-14 is famously used in **carbon dating** — scientists measure how much 
 
 **Status:** completed
 
-**Source:** [run-001-005-6f56fea9d434.json](run-001-005-6f56fea9d434.json)
+**Source:** [run-001-005-6f56fea9d434.json](english/llama-4-maverick__cf3c2221af71.json)
 
 Isotopes! A fundamental concept in chemistry that can be a bit tricky to grasp at first, but don't worry, I'm here to help you understand it clearly.
 
@@ -328,7 +328,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-002-001-33b5ee5ed1a4.json](run-002-001-33b5ee5ed1a4.json)
+**Source:** [run-002-001-33b5ee5ed1a4.json](tamil-native/gpt-5.6-terra__f589a5159205.json)
 
 **ஓரிடத்தான்** என்பது ஆங்கிலத்தில் **Endemic species** என்று அழைக்கப்படுகிறது.
 
@@ -356,7 +356,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-002-002-4b496d7869cc.json](run-002-002-4b496d7869cc.json)
+**Source:** [run-002-002-4b496d7869cc.json](tamil-native/grok-4.3__c07c3319e472.json)
 
 சரி, உயர்நிலைப் பள்ளி மாணவரே! நான் உனக்கு **ஓரிடத்தான்** என்ற சொல்லை மிக எளிமையாகவும், சுவாரஸியமாகவும் விளக்குகிறேன்.
 
@@ -401,7 +401,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-002-003-f6439913b2c1.json](run-002-003-f6439913b2c1.json)
+**Source:** [run-002-003-f6439913b2c1.json](tamil-native/gemini-3.8-flash__8740e93966a5.json)
 
 வணக்கம்! வாருங்கள், இன்று வேதியியலில் மிக முக்கியமானதும் சுவாரசியமானதுமான **"ஓரிடத்தான்" (Isotope - ஐசோடோப்)** பற்றி மிக எளிமையாகப் புரிந்து கொள்வோம்.
 
@@ -484,7 +484,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-002-004-66fb522af174.json](run-002-004-66fb522af174.json)
+**Source:** [run-002-004-66fb522af174.json](tamil-native/claude-sonnet-5__7ed76b1875f8.json)
 
 # ஓரிடத்தான் - தமிழ் எழுத்தியல் கருத்து
 
@@ -539,7 +539,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-002-005-e57775f9bc3f.json](run-002-005-e57775f9bc3f.json)
+**Source:** [run-002-005-e57775f9bc3f.json](tamil-native/llama-4-maverick__031a4c706f38.json)
 
 ஓரிடத்தான் என்றால் என்ன என்பதைப் பார்ப்போம்.
 
@@ -585,7 +585,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-003-001-ac3b2af7c62a.json](run-003-001-ac3b2af7c62a.json)
+**Source:** [run-003-001-ac3b2af7c62a.json](tamil-english/gpt-5.6-terra__e828bdcb8870.json)
 
 **ஐசோடோப்புகள் (Isotopes)** என்பது ஒரே தனிமத்தைச் சேர்ந்த, ஆனால் **நியூட்ரான்களின் எண்ணிக்கையில் வேறுபடும் அணுக்கள்** ஆகும்.
 
@@ -697,7 +697,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-003-002-a0a89211ab2b.json](run-003-002-a0a89211ab2b.json)
+**Source:** [run-003-002-a0a89211ab2b.json](tamil-english/grok-4.3__135007903eb8.json)
 
 ஐசோடோப்புகள் என்றால் என்ன?
 
@@ -735,7 +735,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-003-003-e9c199347fd8.json](run-003-003-e9c199347fd8.json)
+**Source:** [run-003-003-e9c199347fd8.json](tamil-english/gemini-3.8-flash__86e368beb3d7.json)
 
 வணக்கம்! வேதியியலில் (Chemistry) மிக முக்கியமான, அதே சமயம் மிகவும் சுவாரசியமான ஒரு தலைப்புதான் **"ஐசோடோப்புகள்" (Isotopes)**. இதை மிக எளிமையாகப் புரிந்து கொள்ளலாம்.
 
@@ -815,7 +815,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-003-004-fdbe6dbf2911.json](run-003-004-fdbe6dbf2911.json)
+**Source:** [run-003-004-fdbe6dbf2911.json](tamil-english/claude-sonnet-5__ee463dce8da9.json)
 
 # ஐசோடோப்புகள் (Isotopes) - விளக்கம்
 
@@ -894,7 +894,7 @@ Now, I hope you have a good understanding of isotopes! Do you have any questions
 
 **Status:** completed
 
-**Source:** [run-003-005-405efe7dd2b8.json](run-003-005-405efe7dd2b8.json)
+**Source:** [run-003-005-405efe7dd2b8.json](tamil-english/llama-4-maverick__3cec6dc0e943.json)
 
 வணக்கம். இன்று நாம் ஐசோடோப்புகளைப் பற்றி படிக்க போகிறோம். ஐசோடோப்புகள் என்றால் என்ன? ஒரே தனிமத்தின் வெவ்வேறு அணுக்கள், ஒரே அணு எண் கொண்டவையாக இருந்தாலும் வெவ்வேறு நிறை எண்களைக் கொண்டிருப்பது ஐசோடோப்புகள் எனப்படும். அதாவது ஒரே தனிமத்தின் அணுக்கள் அவற்றின் அணுக்கருவில் சம எண்ணிக்கையிலான புரோட்டான்களையும் வெவ்வேறு எண்ணிக்கையிலான நியூட்ரான்களையும் கொண்டிருக்கும். எடுத்துக்காட்டாக ஹைட்ரஜன் தனிமத்தின் ஐசோடோப்புகளான ப்ரோட்டியம், டியூட்டரியம் மற்றும் டிரிடியம் ஆகியவற்றின் அணு எண் 1 ஆகும். ஆனால் அவற்றின் நிறை எண்கள் முறையே 1, 2, 3 ஆகும். ஐசோடோப்புகளுக்கான சில எடுத்துக்காட்டுகள் கீழே கொடுக்கப்பட்டுள்ளன.
 

@@ -1,0 +1,111 @@
+{
+  "job": {
+    "run_index": 7,
+    "lang_id": "fr",
+    "language": "fr",
+    "prompt_type": "language_template",
+    "topic": "Stoechiométrie",
+    "prompt": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+    "model": "claude-sonnet-5",
+    "reasoning": null,
+    "web_search": false,
+    "condition_id": "native_prompt",
+    "prompt_language": "fr",
+    "topic_language": "fr",
+    "response_language": "fr",
+    "response_language_name": "French",
+    "topic_id": "ch-2",
+    "topic_name": "stoichiometry",
+    "subject": "chemistry",
+    "prompt_template": "Vous êtes un excellent professeur. Expliquez {topic} à un élève de lycée en français.",
+    "prompt_template_sha256": "4a25508059476f23071a558f2c5de7dbae54546d12c724105f13d75c8078cc40",
+    "job_id": "run-native_prompt-fr-fr-6548dbe67f73f038",
+    "resolved_model": "vertex_ai/claude-sonnet-5"
+  },
+  "request": {
+    "model": "vertex_ai/claude-sonnet-5",
+    "input": "Vous êtes un excellent professeur. Expliquez Stoechiométrie à un élève de lycée en français.",
+    "store": false
+  },
+  "started_at": "2026-09-24T23:53:25.970485+00:00",
+  "response": {
+    "id": "resp_bGl0ZWxsbTpjdXN0b21fbGxtX3Byb3ZpZGVyOnZlcnRleF9haTttb2RlbF9pZDpOb25lO3Jlc3BvbnNlX2lkOmNoYXRjbXBsLTMxM2MyYWQ2LWEwOTItNGU1NC04OTYyLWFlY2JiNDlmZTViYw==",
+    "created_at": 1790294018,
+    "error": null,
+    "incomplete_details": null,
+    "instructions": null,
+    "metadata": {},
+    "model": "claude-sonnet-5",
+    "object": "response",
+    "output": [
+      {
+        "type": "message",
+        "id": "msg_ec9a913e-6cb3-4cca-8384-d61fe4ae890b",
+        "status": "completed",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "# La Stœchiométrie : les proportions dans les réactions chimiques\n\n## Une image pour commencer\n\nImagine que tu fais des sandwichs. Pour **1 sandwich**, il te faut :\n- 2 tranches de pain\n- 1 tranche de jambon\n\nSi tu as 10 tranches de jambon mais seulement 6 tranches de pain, combien de sandwichs peux-tu faire ? Seulement **3**, car le pain te limite !\n\n**La stœchiométrie, c'est exactement ça, mais avec des molécules.**\n\n## Définition\n\nLa stœchiométrie étudie les **proportions** dans lesquelles les réactifs se combinent et les produits se forment lors d'une réaction chimique.\n\n## Le point de départ : l'équation équilibrée\n\nPrenons un exemple simple, la formation de l'eau :\n\n$$2H_2 + O_2 \\rightarrow 2H_2O$$\n\nLes nombres devant chaque formule (les **coefficients stœchiométriques**) nous disent :\n- 2 molécules de dihydrogène réagissent avec\n- 1 molécule de dioxygène pour donner\n- 2 molécules d'eau\n\n**Ces nombres sont sacrés** : ils indiquent le rapport exact des quantités.\n\n## Pourquoi utiliser la mole ?\n\nOn ne compte pas les molécules une par une (il y en a des milliards !), on utilise la **mole** comme \"paquet\" de particules (comme une \"douzaine\" pour les œufs).\n\nDonc l'équation se lit aussi :\n> 2 moles de H₂ réagissent avec 1 mole de O₂ pour donner 2 moles de H₂O\n\n## La méthode pour résoudre un exercice\n\n**Étape 1** : Équilibrer l'équation chimique (si ce n'est pas fait)\n\n**Étape 2** : Convertir les données en moles (grâce à la masse molaire M)\n$$n = \\frac{m}{M}$$\n\n**Étape 3** : Utiliser les rapports stœchiométriques pour trouver l'inconnue\n\n**Étape 4** : Reconvertir en grammes si besoin\n\n## Exemple concret\n\n*Combien de grammes d'eau obtient-on avec 4 g de H₂ (excès de O₂) ?*\n\n**1)** Masse molaire de H₂ = 2 g/mol\n$$n(H_2) = \\frac{4}{2} = 2 \\text{ mol}$$\n\n**2)** Rapport stœchiométrique : 2 mol H₂ → 2 mol H₂O (rapport 1:1 ici)\n$$n(H_2O) = 2 \\text{ mol}$$\n\n**3)** Masse molaire de H₂O = 18 g/mol\n$$m(H_2O) = 2 \\times 18 = 36 \\text{ g}$$\n\n## Le concept clé : le réactif limitant\n\nComme dans l'exemple des sandwichs, souvent **un réactif s'épuise avant l'autre**. On l'appelle le **réactif limitant**, et c'est lui qui détermine la quantité maximale de produit qu'on peut obtenir.\n\n## À retenir 🎯\n\n| Concept | Explication |\n|---------|-------------|\n| Coefficients stœchiométriques | Les rapports entre les substances |\n| Mole | L'unité pour compter les particules |\n| Réactif limitant | Celui qui s'épuise en premier |\n\n**As-tu des questions sur un point en particulier, ou veux-tu qu'on s'entraîne avec un exercice ?**",
+            "annotations": []
+          }
+        ],
+        "phase": null
+      }
+    ],
+    "parallel_tool_calls": false,
+    "temperature": 0.0,
+    "tool_choice": "auto",
+    "tools": [],
+    "top_p": null,
+    "max_output_tokens": null,
+    "previous_response_id": null,
+    "reasoning": null,
+    "status": "completed",
+    "text": {},
+    "truncation": null,
+    "usage": {
+      "input_tokens": 44,
+      "input_tokens_details": {
+        "audio_tokens": null,
+        "cached_tokens": 0,
+        "text_tokens": 44,
+        "cache_write_tokens": 0
+      },
+      "output_tokens": 1196,
+      "output_tokens_details": {
+        "audio_tokens": null,
+        "reasoning_tokens": 0,
+        "text_tokens": 1196
+      },
+      "total_tokens": 1240,
+      "cost": null
+    },
+    "user": null,
+    "store": null,
+    "provider_specific_fields": {
+      "citations": null,
+      "thinking_blocks": null
+    }
+  },
+  "text": "# La Stœchiométrie : les proportions dans les réactions chimiques\n\n## Une image pour commencer\n\nImagine que tu fais des sandwichs. Pour **1 sandwich**, il te faut :\n- 2 tranches de pain\n- 1 tranche de jambon\n\nSi tu as 10 tranches de jambon mais seulement 6 tranches de pain, combien de sandwichs peux-tu faire ? Seulement **3**, car le pain te limite !\n\n**La stœchiométrie, c'est exactement ça, mais avec des molécules.**\n\n## Définition\n\nLa stœchiométrie étudie les **proportions** dans lesquelles les réactifs se combinent et les produits se forment lors d'une réaction chimique.\n\n## Le point de départ : l'équation équilibrée\n\nPrenons un exemple simple, la formation de l'eau :\n\n$$2H_2 + O_2 \\rightarrow 2H_2O$$\n\nLes nombres devant chaque formule (les **coefficients stœchiométriques**) nous disent :\n- 2 molécules de dihydrogène réagissent avec\n- 1 molécule de dioxygène pour donner\n- 2 molécules d'eau\n\n**Ces nombres sont sacrés** : ils indiquent le rapport exact des quantités.\n\n## Pourquoi utiliser la mole ?\n\nOn ne compte pas les molécules une par une (il y en a des milliards !), on utilise la **mole** comme \"paquet\" de particules (comme une \"douzaine\" pour les œufs).\n\nDonc l'équation se lit aussi :\n> 2 moles de H₂ réagissent avec 1 mole de O₂ pour donner 2 moles de H₂O\n\n## La méthode pour résoudre un exercice\n\n**Étape 1** : Équilibrer l'équation chimique (si ce n'est pas fait)\n\n**Étape 2** : Convertir les données en moles (grâce à la masse molaire M)\n$$n = \\frac{m}{M}$$\n\n**Étape 3** : Utiliser les rapports stœchiométriques pour trouver l'inconnue\n\n**Étape 4** : Reconvertir en grammes si besoin\n\n## Exemple concret\n\n*Combien de grammes d'eau obtient-on avec 4 g de H₂ (excès de O₂) ?*\n\n**1)** Masse molaire de H₂ = 2 g/mol\n$$n(H_2) = \\frac{4}{2} = 2 \\text{ mol}$$\n\n**2)** Rapport stœchiométrique : 2 mol H₂ → 2 mol H₂O (rapport 1:1 ici)\n$$n(H_2O) = 2 \\text{ mol}$$\n\n**3)** Masse molaire de H₂O = 18 g/mol\n$$m(H_2O) = 2 \\times 18 = 36 \\text{ g}$$\n\n## Le concept clé : le réactif limitant\n\nComme dans l'exemple des sandwichs, souvent **un réactif s'épuise avant l'autre**. On l'appelle le **réactif limitant**, et c'est lui qui détermine la quantité maximale de produit qu'on peut obtenir.\n\n## À retenir 🎯\n\n| Concept | Explication |\n|---------|-------------|\n| Coefficients stœchiométriques | Les rapports entre les substances |\n| Mole | L'unité pour compter les particules |\n| Réactif limitant | Celui qui s'épuise en premier |\n\n**As-tu des questions sur un point en particulier, ou veux-tu qu'on s'entraîne avec un exercice ?**",
+  "usage": {
+    "input_tokens": 44,
+    "input_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0,
+      "text_tokens": 44,
+      "cache_write_tokens": 0
+    },
+    "output_tokens": 1196,
+    "output_tokens_details": {
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "text_tokens": 1196
+    },
+    "total_tokens": 1240,
+    "cost": null
+  },
+  "status": "completed",
+  "finished_at": "2026-09-24T23:53:38.516757+00:00"
+}

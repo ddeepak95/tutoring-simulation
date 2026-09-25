@@ -1,0 +1,295 @@
+{
+  "content_units": [
+    {
+      "id": "u1",
+      "kind": "CONCEPT",
+      "label": "Definition of mole and Avogadro's number",
+      "excerpts": [
+        {
+          "text": "মোল হলো পদার্থবিজ্ঞান ও রসায়নে ব্যবহৃত একটি গুরুত্বপূর্ণ পরিমাপের একক। পদার্থের পরিমাণ বা তোলার একক হচ্ছে মোল। পদার্থবিজ্ঞান এবং রসায়নে মোলের ধারণা খুবই গুরুত্বপূর্ণ।\n\nমোলের মাত্রা বা একক হচ্ছে \"n\"। যেকোনো পদার্থের এক মোল পরিমাণ পদার্থে ঐ নির্দিষ্ট পদার্থের (যেমনঃ পরমাণু, অনু, আয়ন, ইলেকট্রন) ৬.০২২ × ১০২৩ টি কণা থাকে। এ সংখ্যাকে বলা হয় অ্যাভোগাড্রো সংখ্যা।\n\nসোজা কথায়, যেকোনো পদার্থের ১ মোল = ৬.০২২ × ১০২৩টি কণা।\n\nএখন প্রশ্ন আসতে পারে, এত বড় সংখ্যা দিয়ে কী দরকার? এর উত্তর হলো, পরমাণু, অনু বা আয়ন খুবই ক্ষুদ্র। তাই এদেরকে গণনা করা বেশ কঠিন। সেই সমস্যা সমাধান করতেই মোলের ধারণা।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text incorrectly states that 'n' is the unit or dimension of mole (it is the variable symbol for amount of substance; the SI unit is mol and dimension is N), and writes 10^23 as 1023 (১০২৩) without exponentiation.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "মোলের মাত্রা বা একক হচ্ছে \"n\"।"
+              }
+            ],
+            "description": "The symbol 'n' represents the physical quantity 'amount of substance' (or number of moles), not its unit or dimension. The SI base unit of amount of substance is mole (symbol: mol), and the dimension is N.",
+            "correction": "পদার্থের পরিমাণের প্রতীক হলো n এবং মোলের একক হলো মোল (mol)।",
+            "severity": "major"
+          },
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "৬.০২২ × ১০২৩ টি কণা থাকে"
+              },
+              {
+                "excerpt_index": 0,
+                "quote": "৬.০২২ × ১০২৩টি কণা"
+              }
+            ],
+            "description": "Avogadro's constant is approximately 6.022 × 10^23, but the power of ten is written as plain digits 1023 (১০২৩) without superscript formatting.",
+            "correction": "৬.০২২ × ১০^২৩ টি কণা",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 0,
+          "end": 586,
+          "text": "মোল হলো পদার্থবিজ্ঞান ও রসায়নে ব্যবহৃত একটি গুরুত্বপূর্ণ পরিমাপের একক। পদার্থের পরিমাণ বা তোলার একক হচ্ছে মোল। পদার্থবিজ্ঞান এবং রসায়নে মোলের ধারণা খুবই গুরুত্বপূর্ণ।\n\nমোলের মাত্রা বা একক হচ্ছে \"n\"। যেকোনো পদার্থের এক মোল পরিমাণ পদার্থে ঐ নির্দিষ্ট পদার্থের (যেমনঃ পরমাণু, অনু, আয়ন, ইলেকট্রন) ৬.০২২ × ১০২৩ টি কণা থাকে। এ সংখ্যাকে বলা হয় অ্যাভোগাড্রো সংখ্যা।\n\nসোজা কথায়, যেকোনো পদার্থের ১ মোল = ৬.০২২ × ১০২৩টি কণা।\n\nএখন প্রশ্ন আসতে পারে, এত বড় সংখ্যা দিয়ে কী দরকার? এর উত্তর হলো, পরমাণু, অনু বা আয়ন খুবই ক্ষুদ্র। তাই এদেরকে গণনা করা বেশ কঠিন। সেই সমস্যা সমাধান করতেই মোলের ধারণা।"
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "kind": "ANALOGY",
+      "label": "Dozen marble counting analogy for the mole",
+      "excerpts": [
+        {
+          "text": "যেমন ধরো, তোমার কাছে কিছু মার্বেল আছে। এখন তুমি মার্বেলগুলো গুনতে বসলে। ধরো, তুমি ১০০টি মার্বেল গুনলে। এখন তুমি চাইলে এই ১০০টি মার্বেলকে এক ডজন মার্বেলের সাথে তুলনা করতে পারো। অর্থাৎ, ১০০টি মার্বেল = ১০০/১২ = ৮.৩৩ ডজন মার্বেল।\n\nএখন তুমি যদি ১ মোল মার্বেল নিয়ে কাজ করো, তাহলে মার্বেলের সংখ্যা হবে ৬.০২২ × ১০২৩। এত মার্বেল গুনে বের করা প্রায় অসম্ভব। কিন্তু তুমি চাইলে এটাকে মোলের সাথে তুলনা করতে পারো।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {},
+      "contextualization": {
+        "value": "everyday",
+        "evidence": [
+          {
+            "excerpt_index": 0,
+            "quote": "যেমন ধরো, তোমার কাছে কিছু মার্বেল আছে। এখন তুমি মার্বেলগুলো গুনতে বসলে। ধরো, তুমি ১০০টি মার্বেল গুনলে। এখন তুমি চাইলে এই ১০০টি মার্বেলকে এক ডজন মার্বেলের সাথে তুলনা করতে পারো।"
+          }
+        ]
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "Avogadro's number is written as 6.022 × 1023 instead of 6.022 × 10^23.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "মার্বেলের সংখ্যা হবে ৬.০২২ × ১০২৩।"
+              }
+            ],
+            "description": "The exponent notation is missing superscript formatting, displaying as 1023 instead of 10^23.",
+            "correction": "৬.০২২ × ১০^২৩",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 588,
+          "end": 989,
+          "text": "যেমন ধরো, তোমার কাছে কিছু মার্বেল আছে। এখন তুমি মার্বেলগুলো গুনতে বসলে। ধরো, তুমি ১০০টি মার্বেল গুনলে। এখন তুমি চাইলে এই ১০০টি মার্বেলকে এক ডজন মার্বেলের সাথে তুলনা করতে পারো। অর্থাৎ, ১০০টি মার্বেল = ১০০/১২ = ৮.৩৩ ডজন মার্বেল।\n\nএখন তুমি যদি ১ মোল মার্বেল নিয়ে কাজ করো, তাহলে মার্বেলের সংখ্যা হবে ৬.০২২ × ১০২৩। এত মার্বেল গুনে বের করা প্রায় অসম্ভব। কিন্তু তুমি চাইলে এটাকে মোলের সাথে তুলনা করতে পারো।"
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "kind": "CONCEPT",
+      "label": "Formula relating moles to mass and molar mass",
+      "excerpts": [
+        {
+          "text": "মোল সংখ্যা = (পদার্থের ভর/পদার্থের মোলার ভর)\n\nঅর্থাৎ, n = (m/M)\n\nএখানে, n = মোল সংখ্যা, m = পদার্থের ভর, M = পদার্থের মোলার ভর।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The formula n = m/M and the definitions of each variable are stated correctly.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1063,
+          "end": 1190,
+          "text": "মোল সংখ্যা = (পদার্থের ভর/পদার্থের মোলার ভর)\n\nঅর্থাৎ, n = (m/M)\n\nএখানে, n = মোল সংখ্যা, m = পদার্থের ভর, M = পদার্থের মোলার ভর।"
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "kind": "CONCEPT",
+      "label": "Definition of molar mass",
+      "excerpts": [
+        {
+          "text": "মোলার ভর কী?\n\nমোলার ভর হলো কোনো পদার্থের (যেমনঃ পরমাণু, অনু, আয়ন ইত্যাদি) এক মোলের ভর। একে M দিয়ে প্রকাশ করা হয়। একক হলো গ্রাম/মোল (g/mol)।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "statement"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "Molar mass is correctly defined as the mass of one mole of a substance, represented by M with the unit g/mol.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1192,
+          "end": 1334,
+          "text": "মোলার ভর কী?\n\nমোলার ভর হলো কোনো পদার্থের (যেমনঃ পরমাণু, অনু, আয়ন ইত্যাদি) এক মোলের ভর। একে M দিয়ে প্রকাশ করা হয়। একক হলো গ্রাম/মোল (g/mol)।"
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "kind": "EXAMPLE",
+      "label": "Molar mass of atomic oxygen and water",
+      "excerpts": [
+        {
+          "text": "যেমনঃ অক্সিজেনের মোলার ভর ১৬ গ্রাম/মোল। অর্থাৎ, ১ মোল অক্সিজেন পরমাণুর ভর ১৬ গ্রাম।\n\nআবার, পানির (H2O) মোলার ভর ১৮ গ্রাম/মোল। অর্থাৎ, ১ মোল পানির ভর ১৮ গ্রাম।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "illustrative"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "accurate",
+        "reason": "The molar mass values for oxygen atoms and water molecules and their corresponding mass per mole are correct.",
+        "errors": []
+      },
+      "spans": [
+        {
+          "start": 1336,
+          "end": 1494,
+          "text": "যেমনঃ অক্সিজেনের মোলার ভর ১৬ গ্রাম/মোল। অর্থাৎ, ১ মোল অক্সিজেন পরমাণুর ভর ১৬ গ্রাম।\n\nআবার, পানির (H2O) মোলার ভর ১৮ গ্রাম/মোল। অর্থাৎ, ১ মোল পানির ভর ১৮ গ্রাম।"
+        }
+      ]
+    },
+    {
+      "id": "u6",
+      "kind": "CONCEPT",
+      "label": "Relationship between atomic/molecular mass and gram-expressed mass",
+      "excerpts": [
+        {
+          "text": "তোমরা হয়তো ইতিমধ্যে জেনে গেছো যে, মোলার ভর = পারমাণবিক ভর বা আণবিক ভর।\n\nপারমাণবিক ভর বা আণবিক ভর কী?\n\nপরমাণুর ক্ষেত্রে এক মোল পরমাণুর গ্রামে প্রকাশিত ভরকে পারমাণবিক ভর বলে। অনুর ক্ষেত্রে এক মোল অনুর গ্রামে প্রকাশিত ভরকে আণবিক ভর বলে।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "depth": "explanation"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The text conflates atomic/molecular mass with gram-atomic/gram-molecular mass (molar mass). The mass of one mole in grams is gram-atomic/gram-molecular mass (or molar mass), whereas atomic and molecular mass are measured in unified atomic mass units (u) or are dimensionless relative masses.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "পরমাণুর ক্ষেত্রে এক মোল পরমাণুর গ্রামে প্রকাশিত ভরকে পারমাণবিক ভর বলে। অনুর ক্ষেত্রে এক মোল অনুর গ্রামে প্রকাশিত ভরকে আণবিক ভর বলে।"
+              }
+            ],
+            "description": "Defining atomic mass and molecular mass as the mass of one mole in grams confuses them with gram-atomic/gram-molecular mass (or molar mass). Atomic mass and molecular mass represent the mass of a single atom/molecule (in atomic mass units, u) or relative atomic/molecular mass.",
+            "correction": "পরমাণুর ক্ষেত্রে এক মোল পরমাণুর গ্রামে প্রকাশিত ভরকে গ্রাম-পারমাণবিক ভর (বা মোলার ভর) এবং অণুর ক্ষেত্রে এক মোল অণুর গ্রামে প্রকাশিত ভরকে গ্রাম-আণবিক ভর (বা মোলার ভর) বলে।",
+            "severity": "major"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 1496,
+          "end": 1729,
+          "text": "তোমরা হয়তো ইতিমধ্যে জেনে গেছো যে, মোলার ভর = পারমাণবিক ভর বা আণবিক ভর।\n\nপারমাণবিক ভর বা আণবিক ভর কী?\n\nপরমাণুর ক্ষেত্রে এক মোল পরমাণুর গ্রামে প্রকাশিত ভরকে পারমাণবিক ভর বলে। অনুর ক্ষেত্রে এক মোল অনুর গ্রামে প্রকাশিত ভরকে আণবিক ভর বলে।"
+        }
+      ]
+    },
+    {
+      "id": "u7",
+      "kind": "EXAMPLE",
+      "label": "Calculation of molecular mass of oxygen gas",
+      "excerpts": [
+        {
+          "text": "যেমনঃ অক্সিজেনের (O2) আণবিক ভর = ২ × ১৬ = ৩২ গ্রাম/মোল।",
+          "occurrence": 0
+        }
+      ],
+      "attributes": {
+        "context": "abstract_or_hypothetical",
+        "treatment": "worked"
+      },
+      "contextualization": {
+        "value": "none",
+        "evidence": []
+      },
+      "accuracy": {
+        "verdict": "contains_error",
+        "reason": "The unit g/mol (গ্রাম/মোল) is assigned to molecular mass, whereas molecular mass is either expressed in atomic mass units (u) or dimensionless.",
+        "errors": [
+          {
+            "evidence": [
+              {
+                "excerpt_index": 0,
+                "quote": "যেমনঃ অক্সিজেনের (O2) আণবিক ভর = ২ × ১৬ = ৩২ গ্রাম/মোল।"
+              }
+            ],
+            "description": "The unit g/mol belongs to molar mass, not molecular mass.",
+            "correction": "অক্সিজেনের (O2) মোলার ভর = ২ × ১৬ = ৩২ গ্রাম/মোল (অথবা আণবিক ভর = ৩২ u বা এককবিহীন ৩২)।",
+            "severity": "minor"
+          }
+        ]
+      },
+      "spans": [
+        {
+          "start": 1731,
+          "end": 1786,
+          "text": "যেমনঃ অক্সিজেনের (O2) আণবিক ভর = ২ × ১৬ = ৩২ গ্রাম/মোল।"
+        }
+      ]
+    }
+  ],
+  "unassigned_spans": [
+    {
+      "start": 989,
+      "end": 1063,
+      "text": "\n\nএখন আসি, মোল কিভাবে বের করতে হয় সেটা নিয়ে।\n\nযেকোনো পদার্থের ক্ষেত্রে,\n\n"
+    },
+    {
+      "start": 1786,
+      "end": 1838,
+      "text": "\n\nআশা করি, তুমি মোল সম্পর্কে পরিষ্কার ধারণা পেয়েছো।"
+    }
+  ],
+  "note": "Gaps require semantic review; exact alignment does not prove correct boundaries."
+}

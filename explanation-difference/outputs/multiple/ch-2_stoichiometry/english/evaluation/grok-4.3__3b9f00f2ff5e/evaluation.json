@@ -1,0 +1,893 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "32aa4bb410da5df856274b719a8c7aee0c50476ae2cea5ffe5a28953aacc8c8d",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "stoichiometry",
+      "observed_topic": "stoichiometry",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8"
+      ],
+      "reason": "The explanation comprehensively covers stoichiometry for high school chemistry, including the definition, balanced equations, the mole concept, step-by-step problem-solving procedure, a worked calculation, limiting reactants, study tips, and real-world applications.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition and Analogy of Stoichiometry"
+      },
+      {
+        "id": "s2",
+        "label": "Conservation of Mass and Balanced Equations"
+      },
+      {
+        "id": "s3",
+        "label": "The Mole and Molar Mass"
+      },
+      {
+        "id": "s4",
+        "label": "Stoichiometry Procedure"
+      },
+      {
+        "id": "s5",
+        "label": "Worked Stoichiometry Problem"
+      },
+      {
+        "id": "s6",
+        "label": "Limiting Reactants"
+      },
+      {
+        "id": "s7",
+        "label": "Study Strategies"
+      },
+      {
+        "id": "s8",
+        "label": "Real-World Applications"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition of stoichiometry and baking recipe analogy",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Introduces the concept of stoichiometry as the quantitative relationship between reactants and products in a chemical reaction using a baking recipe analogy.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p1",
+              "quote": "recipe in baking: if the recipe says \"2 cups flour + 1 cup sugar makes 12 cookies,\" you can scale it up or down to figure out how many cookies you'll get from 4 cups of flour."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry is basically the \"math of chemistry.\" It helps you figure out exactly how much stuff (reactants) you need to make a certain amount of product in a chemical reaction—or how much product you can make from what you have. Think of it like a recipe in baking: if the recipe says \"2 cups flour + 1 cup sugar makes 12 cookies,\" you can scale it up or down to figure out how many cookies you'll get from 4 cups of flour.",
+            "start": 0,
+            "end": 426
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition and recipe analogy accurately capture the essence of stoichiometry for an introductory audience.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "CONCEPT",
+        "label": "Conservation of mass, balanced equations, and mole ratios",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Explains why chemical reactions require balanced equations due to the law of conservation of mass, and illustrates how coefficients provide mole ratios using the formation of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p2",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Why We Need It",
+            "start": 428,
+            "end": 446
+          },
+          {
+            "id": "p3",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chemical reactions follow the law of conservation of mass—atoms are never created or destroyed, just rearranged. So we use **balanced chemical equations** to show the exact ratios of molecules involved.",
+            "start": 447,
+            "end": 649
+          },
+          {
+            "id": "p4",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Example (unbalanced):",
+            "start": 651,
+            "end": 672
+          },
+          {
+            "id": "p5",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "H₂ + O₂ → H₂O",
+            "start": 673,
+            "end": 686
+          },
+          {
+            "id": "p6",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Balanced:",
+            "start": 688,
+            "end": 697
+          },
+          {
+            "id": "p7",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2H₂ + O₂ → 2H₂O",
+            "start": 698,
+            "end": 713
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "This tells us that **2 molecules of hydrogen** react with **1 molecule of oxygen** to make **2 molecules of water**. The numbers in front (called coefficients) give us the mole ratios.",
+            "start": 715,
+            "end": 899
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly links the law of conservation of mass to balancing equations and explains how stoichiometric coefficients represent mole and molecule ratios.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "The mole concept, Avogadro's number, and molar mass",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Defines the mole as a counting unit in chemistry, introduces Avogadro's number, explains molar mass, and demonstrates how to determine the molar mass of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p10",
+              "quote": "just like a \"dozen\" = 12"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p9",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### The Mole: Chemistry's Counting Unit",
+            "start": 901,
+            "end": 940
+          },
+          {
+            "id": "p10",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Atoms and molecules are tiny, so we don't count them one by one. Instead, we use the **mole** (just like a \"dozen\" = 12).",
+            "start": 941,
+            "end": 1062
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole = 6.022 × 10²³ particles (Avogadro's number)",
+            "start": 1064,
+            "end": 1117
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- We convert between **grams** (what we can measure) and **moles** using molar mass (found on the periodic table).",
+            "start": 1118,
+            "end": 1232
+          },
+          {
+            "id": "p13",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "For water (H₂O):",
+            "start": 1234,
+            "end": 1250
+          },
+          {
+            "id": "p14",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- H = 1.008 g/mol × 2 = 2.016 g",
+            "start": 1251,
+            "end": 1282
+          },
+          {
+            "id": "p15",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- O = 16.00 g/mol",
+            "start": 1283,
+            "end": 1300
+          },
+          {
+            "id": "p16",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Total molar mass = 18.016 g/mol",
+            "start": 1301,
+            "end": 1334
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "So 1 mole of water weighs about 18 grams.",
+            "start": 1336,
+            "end": 1377
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition of the mole, the value of Avogadro's number, and the calculation of the molar mass of water are correct within standard high school precision and pedagogical conventions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "PROCEDURE",
+        "label": "Step-by-step procedure for stoichiometric calculations",
+        "attributes": {},
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Presents the general four-step algorithmic method used to solve mass-to-mass stoichiometry problems.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p18",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### How Stoichiometry Works (Step by Step)",
+            "start": 1379,
+            "end": 1421
+          },
+          {
+            "id": "p19",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "You always follow these steps:",
+            "start": 1422,
+            "end": 1452
+          },
+          {
+            "id": "p20",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "1. Write and balance the equation.",
+            "start": 1454,
+            "end": 1488
+          },
+          {
+            "id": "p21",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "2. Convert given amounts (usually in grams) to moles.",
+            "start": 1489,
+            "end": 1542
+          },
+          {
+            "id": "p22",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "3. Use the mole ratio from the balanced equation to find moles of what you're looking for.",
+            "start": 1543,
+            "end": 1633
+          },
+          {
+            "id": "p23",
+            "category": "PROCEDURE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "4. Convert back to grams if needed.",
+            "start": 1634,
+            "end": 1669
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The four steps correctly capture the standard sequence: balancing the reaction, converting mass to moles, applying the mole ratio, and converting moles to mass.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Worked example: Calculating mass of water formed from 8 grams of hydrogen",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Walks through a complete calculation applying the four-step stoichiometry process to determine the mass of water formed from 8 grams of hydrogen reacting with excess oxygen.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "**Real example**: How many grams of water can you make from 8 grams of hydrogen gas (H₂) reacting with plenty of oxygen?",
+            "start": 1671,
+            "end": 1791
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation",
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Balanced equation: 2H₂ + O₂ → 2H₂O",
+            "start": 1793,
+            "end": 1827
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Step 1: Convert 8 g H₂ to moles.  ",
+            "start": 1829,
+            "end": 1865
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  Molar mass of H₂ = 2 g/mol  ",
+            "start": 1866,
+            "end": 1896
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  8 g ÷ 2 g/mol = 4 moles of H₂",
+            "start": 1897,
+            "end": 1928
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Step 2: Use the mole ratio.  ",
+            "start": 1930,
+            "end": 1961
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  From the equation: 2 moles H₂ make 2 moles H₂O  ",
+            "start": 1962,
+            "end": 2012
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  So the ratio is 2:2 (or 1:1)  ",
+            "start": 2013,
+            "end": 2045
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  4 moles H₂ will make 4 moles H₂O",
+            "start": 2046,
+            "end": 2080
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Step 3: Convert moles of H₂O to grams.  ",
+            "start": 2082,
+            "end": 2124
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  Molar mass of H₂O = 18 g/mol  ",
+            "start": 2125,
+            "end": 2157
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "  4 moles × 18 g/mol = 72 grams of water",
+            "start": 2158,
+            "end": 2198
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "You can make 72 grams of water from 8 grams of hydrogen.",
+            "start": 2200,
+            "end": 2256
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "All calculations, conversions, mole ratios, and the final result (72 g H₂O) are mathematically and chemically correct using standard rounded molar masses.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Limiting reactant concept and illustrative scenario",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s6"
+        ],
+        "rationale": "Defines what a limiting reactant is and provides an illustrative hypothetical reaction with specific mole amounts to show how product amount is limited and excess remains.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p37",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Limiting Reactant (The One That Runs Out First)",
+            "start": 2258,
+            "end": 2309
+          },
+          {
+            "id": "p38",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Sometimes you don't have \"plenty\" of everything. The reactant that gets used up first limits how much product you can make.",
+            "start": 2310,
+            "end": 2433
+          },
+          {
+            "id": "p39",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Example: If you have 4 moles of H₂ but only 1 mole of O₂, oxygen is the limiting reactant (because the equation needs 2 H₂ per 1 O₂, so you can only use 2 moles of H₂). You'll only make 2 moles of water, and you'll have leftover hydrogen.",
+            "start": 2435,
+            "end": 2673
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The definition is accurate and the illustrative problem (4 moles H₂ and 1 mole O₂ producing 2 moles H₂O with oxygen limiting) is chemically sound and correctly solved.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "STUDY_SUPPORT",
+        "label": "Study tips and strategies for mastering stoichiometry",
+        "attributes": {
+          "subtype": "study_strategy"
+        },
+        "subtopic_ids": [
+          "s7"
+        ],
+        "rationale": "Provides practical learning tips, dimensional analysis reminders, and encouragement for high school students.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p40",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Quick Tips for Students",
+            "start": 2675,
+            "end": 2702
+          },
+          {
+            "id": "p41",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Always balance the equation first—everything else depends on it.",
+            "start": 2703,
+            "end": 2769
+          },
+          {
+            "id": "p42",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Keep track of units (grams → moles → moles → grams).",
+            "start": 2770,
+            "end": 2824
+          },
+          {
+            "id": "p43",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Practice with simple reactions like combustion or making water/ammonia.",
+            "start": 2825,
+            "end": 2898
+          },
+          {
+            "id": "p44",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "study_strategy"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- It feels like a lot at first, but once you do 3–4 problems, the pattern becomes automatic.",
+            "start": 2899,
+            "end": 2991
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The tips reflect standard, effective chemistry problem-solving strategies.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Real-world applications of stoichiometry",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s8"
+        ],
+        "rationale": "Surveys real-world and industrial applications of stoichiometry and concludes with a conversational closing offer.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p45",
+              "quote": "making medicine, calculating fuel in rockets, figuring out how much fertilizer plants need, or even baking on a huge industrial scale."
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Stoichiometry is used everywhere in real life: making medicine, calculating fuel in rockets, figuring out how much fertilizer plants need, or even baking on a huge industrial scale. Master this and a huge part of chemistry suddenly makes sense! ",
+            "start": 2993,
+            "end": 3238
+          },
+          {
+            "id": "p46",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "social"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Want me to walk through another example (like making ammonia or burning propane)? Just give me a reaction and amounts.",
+            "start": 3240,
+            "end": 3358
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The listed practical domains accurately represent major real-world uses of stoichiometric calculations.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-2_stoichiometry\\english\\grok-4.3__3b9f00f2ff5e.json",
+    "original_sha256": "4343d24c38a8955c7f388830feba7d69a5114b9fda78662ae21812da5f22b004",
+    "evaluation_language": "English",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 8,
+    "substantive_content_units": 8,
+    "total_passages": 46,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "PROCEDURE": 1,
+      "EXAMPLE": 1,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 46,
+    "unique_subtopics": 8,
+    "contextualization": {
+      "everyday": 3,
+      "none": 5
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 8
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}

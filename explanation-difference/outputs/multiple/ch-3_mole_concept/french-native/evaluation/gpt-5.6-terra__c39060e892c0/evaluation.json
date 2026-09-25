@@ -1,0 +1,2046 @@
+{
+  "schema_version": "0.10-pilot",
+  "fingerprint": "cb7e70386d77364a172251fc68a600d53c1df67e51027ed3fe727899aade9d73",
+  "evaluation": {
+    "topic_relevance": {
+      "requested_topic": "mole concept",
+      "observed_topic": "The mole concept, Avogadro's number, amount of substance, and molar mass",
+      "topic_match": "on_topic",
+      "content_unit_ids": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7",
+        "u8",
+        "u9",
+        "u10",
+        "u11"
+      ],
+      "reason": "The entire response directly and accurately explains the concept of the mole, Avogadro's number, chemical entities, and molar mass relationships.",
+      "major_task_failure": false
+    },
+    "subtopics": [
+      {
+        "id": "s1",
+        "label": "Definition of the mole and Avogadro's number"
+      },
+      {
+        "id": "s2",
+        "label": "Chemical entities counted by the mole"
+      },
+      {
+        "id": "s3",
+        "label": "Amount of substance and relation to number of entities"
+      },
+      {
+        "id": "s4",
+        "label": "Molar mass and mass-mole relationships"
+      },
+      {
+        "id": "s5",
+        "label": "Summary of key concepts and formulas"
+      }
+    ],
+    "content_units": [
+      {
+        "id": "u1",
+        "kind": "CONCEPT",
+        "label": "Definition and purpose of the mole",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Explains why chemists use the mole as a special unit to count particles that are too small to be counted individually.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p1",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Le concept de mole",
+            "start": 0,
+            "end": 21
+          },
+          {
+            "id": "p2",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En chimie, les atomes, molécules et ions sont beaucoup trop petits pour être comptés un par un. On utilise donc une unité spéciale pour les compter : **la mole**.",
+            "start": 23,
+            "end": 185
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately introduces the mole as a unit for counting microscopic particles.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u2",
+        "kind": "ANALOGY",
+        "label": "Analogy between a mole and a dozen",
+        "attributes": {},
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Uses the familiar concept of a dozen (package of 12 items) to help the student understand counting by packages with the mole.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p3",
+              "quote": "douzaine"
+            },
+            {
+              "passage_id": "p4",
+              "quote": "1 douzaine = 12 objets"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p3",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "C’est un peu comme une **douzaine** :",
+            "start": 187,
+            "end": 224
+          },
+          {
+            "id": "p4",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 douzaine = 12 objets  ",
+            "start": 226,
+            "end": 252
+          },
+          {
+            "id": "p5",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole = \\(6{,}022 \\times 10^{23}\\) objets",
+            "start": 253,
+            "end": 297
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The analogy correctly relates the dozen as a unit of 12 to the mole as a counting unit of 6.022 x 10^23.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u3",
+        "kind": "CONCEPT",
+        "label": "Avogadro's constant and illustrative quantities",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s1"
+        ],
+        "rationale": "Defines Avogadro's constant (N_A) with its value and unit, and states the number of entities contained in one mole of different substances.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p6",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ce nombre énorme s’appelle le **nombre d’Avogadro** :",
+            "start": 299,
+            "end": 352
+          },
+          {
+            "id": "p7",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 354,
+            "end": 356
+          },
+          {
+            "id": "p8",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N_A = 6{,}022 \\times 10^{23}\\ \\text{mol}^{-1}",
+            "start": 357,
+            "end": 402
+          },
+          {
+            "id": "p9",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 403,
+            "end": 405
+          },
+          {
+            "id": "p10",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ainsi :",
+            "start": 407,
+            "end": 414
+          },
+          {
+            "id": "p11",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole d’atomes de fer contient \\(6{,}022 \\times 10^{23}\\) atomes de fer ;",
+            "start": 416,
+            "end": 492
+          },
+          {
+            "id": "p12",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole de molécules d’eau contient \\(6{,}022 \\times 10^{23}\\) molécules d’eau ;",
+            "start": 493,
+            "end": 574
+          },
+          {
+            "id": "p13",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mole d’ions sodium contient \\(6{,}022 \\times 10^{23}\\) ions sodium.",
+            "start": 575,
+            "end": 646
+          },
+          {
+            "id": "p14",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 648,
+            "end": 651
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Correctly states Avogadro's constant as 6.022 x 10^23 mol^-1 and correctly applies it to atoms, molecules, and ions.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u4",
+        "kind": "CONCEPT",
+        "label": "Types of elementary chemical entities",
+        "attributes": {
+          "depth": "statement"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Lists the various chemical entities that can be counted using moles and qualifies that the entity being counted must always be specified.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p15",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Que compte une mole ?",
+            "start": 653,
+            "end": 677
+          },
+          {
+            "id": "p16",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La mole peut compter différentes sortes d’entités chimiques :",
+            "start": 679,
+            "end": 740
+          },
+          {
+            "id": "p17",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- des **atomes** : \\(1\\ \\text{mol}\\) de carbone ;",
+            "start": 742,
+            "end": 791
+          },
+          {
+            "id": "p18",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- des **molécules** : \\(1\\ \\text{mol}\\) de dioxygène \\(O_2\\) ;",
+            "start": 792,
+            "end": 854
+          },
+          {
+            "id": "p19",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- des **ions** : \\(1\\ \\text{mol}\\) d’ions chlorure \\(Cl^-\\) ;",
+            "start": 855,
+            "end": 916
+          },
+          {
+            "id": "p20",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- des électrons, des formules chimiques, etc.",
+            "start": 917,
+            "end": 962
+          },
+          {
+            "id": "p21",
+            "category": "CAVEAT",
+            "attributes": {
+              "subtype": "qualification"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il faut toujours préciser ce que l’on compte.",
+            "start": 964,
+            "end": 1009
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Accurately lists elementary entities (atoms, molecules, ions, electrons) and correctly notes the necessity of specifying what is being counted.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u5",
+        "kind": "EXAMPLE",
+        "label": "Moles of molecules versus moles of constituent atoms in water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s2"
+        ],
+        "rationale": "Demonstrates through worked deduction that 1 mol of H2O contains 2 mol of H atoms and 1 mol of O atoms based on molecular composition.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p22",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Par exemple :",
+            "start": 1011,
+            "end": 1024
+          },
+          {
+            "id": "p23",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1026,
+            "end": 1028
+          },
+          {
+            "id": "p24",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1\\ \\text{mol de } H_2O",
+            "start": 1029,
+            "end": 1051
+          },
+          {
+            "id": "p25",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1052,
+            "end": 1054
+          },
+          {
+            "id": "p26",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "correspond à \\(6{,}022 \\times 10^{23}\\) molécules d’eau.",
+            "start": 1056,
+            "end": 1112
+          },
+          {
+            "id": "p27",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Or chaque molécule d’eau contient :",
+            "start": 1114,
+            "end": 1149
+          },
+          {
+            "id": "p28",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 2 atomes d’hydrogène ;",
+            "start": 1151,
+            "end": 1175
+          },
+          {
+            "id": "p29",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 atome d’oxygène.",
+            "start": 1176,
+            "end": 1196
+          },
+          {
+            "id": "p30",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc, dans 1 mole d’eau, il y a :",
+            "start": 1198,
+            "end": 1231
+          },
+          {
+            "id": "p31",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1233,
+            "end": 1235
+          },
+          {
+            "id": "p32",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "2\\ \\text{mol d’atomes d’hydrogène}",
+            "start": 1236,
+            "end": 1270
+          },
+          {
+            "id": "p33",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1271,
+            "end": 1273
+          },
+          {
+            "id": "p34",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "et",
+            "start": 1275,
+            "end": 1277
+          },
+          {
+            "id": "p35",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1279,
+            "end": 1281
+          },
+          {
+            "id": "p36",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1\\ \\text{mol d’atomes d’oxygène}",
+            "start": 1282,
+            "end": 1314
+          },
+          {
+            "id": "p37",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1315,
+            "end": 1317
+          },
+          {
+            "id": "p38",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1319,
+            "end": 1322
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The stoichiometric reasoning is entirely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u6",
+        "kind": "CONCEPT",
+        "label": "Formula relating amount of substance to number of entities",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Introduces the symbol n for amount of substance in moles and explains the equation N = n * N_A relating it to the count of entities N.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p39",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## La quantité de matière",
+            "start": 1324,
+            "end": 1349
+          },
+          {
+            "id": "p40",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La quantité de matière se note généralement \\(n\\) et s’exprime en **moles** :",
+            "start": 1351,
+            "end": 1428
+          },
+          {
+            "id": "p41",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1430,
+            "end": 1432
+          },
+          {
+            "id": "p42",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "n \\text{ en mol}",
+            "start": 1433,
+            "end": 1449
+          },
+          {
+            "id": "p43",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1450,
+            "end": 1452
+          },
+          {
+            "id": "p44",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le nombre d’entités chimiques se note \\(N\\). La relation est :",
+            "start": 1454,
+            "end": 1516
+          },
+          {
+            "id": "p45",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1518,
+            "end": 1520
+          },
+          {
+            "id": "p46",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N = n \\times N_A",
+            "start": 1521,
+            "end": 1537
+          },
+          {
+            "id": "p47",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1538,
+            "end": 1540
+          },
+          {
+            "id": "p48",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "avec :",
+            "start": 1542,
+            "end": 1548
+          },
+          {
+            "id": "p49",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(N\\) : nombre d’atomes, molécules ou ions ;",
+            "start": 1550,
+            "end": 1596
+          },
+          {
+            "id": "p50",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(n\\) : quantité de matière en mol ;",
+            "start": 1597,
+            "end": 1635
+          },
+          {
+            "id": "p51",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(N_A\\) : nombre d’Avogadro.",
+            "start": 1636,
+            "end": 1666
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The equation N = n * N_A and the definitions of all variables and units are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u7",
+        "kind": "EXAMPLE",
+        "label": "Calculating the number of molecules in 2.0 moles of water",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s3"
+        ],
+        "rationale": "Applies the relation N = n * N_A to compute the number of molecules present in 2.0 mol of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p52",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "### Exemple",
+            "start": 1668,
+            "end": 1679
+          },
+          {
+            "id": "p53",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Combien y a-t-il de molécules dans \\(2{,}0\\) mol d’eau ?",
+            "start": 1681,
+            "end": 1737
+          },
+          {
+            "id": "p54",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1739,
+            "end": 1741
+          },
+          {
+            "id": "p55",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N = n \\times N_A",
+            "start": 1742,
+            "end": 1758
+          },
+          {
+            "id": "p56",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1759,
+            "end": 1761
+          },
+          {
+            "id": "p57",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1763,
+            "end": 1765
+          },
+          {
+            "id": "p58",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N = 2{,}0 \\times 6{,}022 \\times 10^{23}",
+            "start": 1766,
+            "end": 1805
+          },
+          {
+            "id": "p59",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1806,
+            "end": 1808
+          },
+          {
+            "id": "p60",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 1810,
+            "end": 1812
+          },
+          {
+            "id": "p61",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N \\approx 1{,}20 \\times 10^{24}",
+            "start": 1813,
+            "end": 1844
+          },
+          {
+            "id": "p62",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 1845,
+            "end": 1847
+          },
+          {
+            "id": "p63",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Il y a donc environ \\(1{,}20 \\times 10^{24}\\) molécules d’eau.",
+            "start": 1849,
+            "end": 1911
+          },
+          {
+            "id": "p64",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 1913,
+            "end": 1916
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The calculation 2.0 * 6.022 x 10^23 ≈ 1.20 x 10^24 is mathematically and scientifically correct.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u8",
+        "kind": "CONCEPT",
+        "label": "Molar mass and the relationship between mass and moles",
+        "attributes": {
+          "depth": "explanation"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Defines molar mass M in g/mol and presents the formulas connecting mass, amount of substance, and molar mass: m = n * M and n = m / M.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p65",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Le lien entre la mole et la masse",
+            "start": 1918,
+            "end": 1954
+          },
+          {
+            "id": "p66",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Chaque substance possède une **masse molaire**, notée \\(M\\), exprimée en grammes par mole :",
+            "start": 1956,
+            "end": 2047
+          },
+          {
+            "id": "p67",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2049,
+            "end": 2051
+          },
+          {
+            "id": "p68",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M \\text{ en g·mol}^{-1}",
+            "start": 2052,
+            "end": 2075
+          },
+          {
+            "id": "p69",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2076,
+            "end": 2078
+          },
+          {
+            "id": "p70",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La masse molaire indique la masse d’une mole de substance.",
+            "start": 2080,
+            "end": 2138
+          },
+          {
+            "id": "p71",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La relation importante est :",
+            "start": 2140,
+            "end": 2168
+          },
+          {
+            "id": "p72",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2170,
+            "end": 2172
+          },
+          {
+            "id": "p73",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "m = n \\times M",
+            "start": 2173,
+            "end": 2187
+          },
+          {
+            "id": "p74",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2188,
+            "end": 2190
+          },
+          {
+            "id": "p75",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "ou, pour calculer le nombre de moles :",
+            "start": 2192,
+            "end": 2230
+          },
+          {
+            "id": "p76",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2232,
+            "end": 2234
+          },
+          {
+            "id": "p77",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "n = \\frac{m}{M}",
+            "start": 2235,
+            "end": 2250
+          },
+          {
+            "id": "p78",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "explanation"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2251,
+            "end": 2253
+          },
+          {
+            "id": "p79",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "avec :",
+            "start": 2255,
+            "end": 2261
+          },
+          {
+            "id": "p80",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(m\\) : masse en grammes ;",
+            "start": 2263,
+            "end": 2291
+          },
+          {
+            "id": "p81",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(n\\) : quantité de matière en mol ;",
+            "start": 2292,
+            "end": 2330
+          },
+          {
+            "id": "p82",
+            "category": "CONCEPT",
+            "attributes": {
+              "depth": "statement"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- \\(M\\) : masse molaire en g·mol\\(^{-1}\\).",
+            "start": 2331,
+            "end": 2373
+          },
+          {
+            "id": "p83",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2375,
+            "end": 2378
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Molar mass and its fundamental equations (m = n * M and n = m / M) are correctly stated with their SI/practical units.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u9",
+        "kind": "EXAMPLE",
+        "label": "Calculating the molar mass and mass of a mole of water",
+        "attributes": {
+          "context": "real_world",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Walks through calculating the molar mass of H2O from atomic masses and relates it to an everyday glass containing 18 g of water.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p96",
+              "quote": "dans un verre contenant 18 g d’eau"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p84",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Exemple avec l’eau",
+            "start": 2380,
+            "end": 2401
+          },
+          {
+            "id": "p85",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "La formule de l’eau est \\(H_2O\\).",
+            "start": 2403,
+            "end": 2436
+          },
+          {
+            "id": "p86",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Masse molaire de H : environ \\(1{,}0\\ \\text{g·mol}^{-1}\\)",
+            "start": 2438,
+            "end": 2497
+          },
+          {
+            "id": "p87",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Masse molaire de O : environ \\(16{,}0\\ \\text{g·mol}^{-1}\\)",
+            "start": 2498,
+            "end": 2558
+          },
+          {
+            "id": "p88",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc :",
+            "start": 2560,
+            "end": 2566
+          },
+          {
+            "id": "p89",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2568,
+            "end": 2570
+          },
+          {
+            "id": "p90",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(H_2O) = 2 \\times 1{,}0 + 16{,}0 = 18{,}0\\ \\text{g·mol}^{-1}",
+            "start": 2571,
+            "end": 2632
+          },
+          {
+            "id": "p91",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2633,
+            "end": 2635
+          },
+          {
+            "id": "p92",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Cela signifie que :",
+            "start": 2637,
+            "end": 2656
+          },
+          {
+            "id": "p93",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2658,
+            "end": 2660
+          },
+          {
+            "id": "p94",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "1\\ \\text{mol d’eau} = 18{,}0\\ \\text{g d’eau}",
+            "start": 2661,
+            "end": 2705
+          },
+          {
+            "id": "p95",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2706,
+            "end": 2708
+          },
+          {
+            "id": "p96",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Ainsi, dans un verre contenant 18 g d’eau, il y a environ une mole d’eau, c’est-à-dire plus de \\(6 \\times 10^{23}\\) molécules !",
+            "start": 2710,
+            "end": 2837
+          },
+          {
+            "id": "p97",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 2839,
+            "end": 2842
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The molar mass calculation M(H2O) = 18.0 g/mol and the physical interpretation are completely accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u10",
+        "kind": "EXAMPLE",
+        "label": "Calculating the molar mass and mass for carbon dioxide",
+        "attributes": {
+          "context": "abstract_or_hypothetical",
+          "treatment": "worked"
+        },
+        "subtopic_ids": [
+          "s4"
+        ],
+        "rationale": "Computes the molar mass of CO2 (44.0 g/mol) and calculates the mass corresponding to 0.5 mol of CO2.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "none",
+          "evidence": []
+        },
+        "passages": [
+          {
+            "id": "p98",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## Exemple avec le dioxyde de carbone",
+            "start": 2844,
+            "end": 2881
+          },
+          {
+            "id": "p99",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Le dioxyde de carbone a pour formule \\(CO_2\\).",
+            "start": 2883,
+            "end": 2929
+          },
+          {
+            "id": "p100",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 2931,
+            "end": 2933
+          },
+          {
+            "id": "p101",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "M(CO_2) = 12{,}0 + 2 \\times 16{,}0 = 44{,}0\\ \\text{g·mol}^{-1}",
+            "start": 2934,
+            "end": 2996
+          },
+          {
+            "id": "p102",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 2997,
+            "end": 2999
+          },
+          {
+            "id": "p103",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "Donc :",
+            "start": 3001,
+            "end": 3007
+          },
+          {
+            "id": "p104",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 1 mol de \\(CO_2\\) a une masse de 44 g ;",
+            "start": 3009,
+            "end": 3050
+          },
+          {
+            "id": "p105",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- 0,5 mol de \\(CO_2\\) a une masse de :",
+            "start": 3051,
+            "end": 3089
+          },
+          {
+            "id": "p106",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3091,
+            "end": 3093
+          },
+          {
+            "id": "p107",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "m = n \\times M = 0{,}5 \\times 44 = 22\\ \\text{g}",
+            "start": 3094,
+            "end": 3141
+          },
+          {
+            "id": "p108",
+            "category": "EXAMPLE",
+            "attributes": {},
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3142,
+            "end": 3144
+          },
+          {
+            "id": "p109",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "separator"
+            ],
+            "review_flags": [],
+            "text": "---",
+            "start": 3146,
+            "end": 3149
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "Calculations of M(CO2) = 44.0 g/mol and m = 0.5 * 44 = 22 g are accurate.",
+          "errors": []
+        }
+      },
+      {
+        "id": "u11",
+        "kind": "STUDY_SUPPORT",
+        "label": "Summary of key takeaways and final analogy",
+        "attributes": {
+          "subtype": "recap"
+        },
+        "subtopic_ids": [
+          "s5"
+        ],
+        "rationale": "Summarizes the essential definitions, values, and formulas of the chapter, concluding with the dozen-eggs analogy.",
+        "review_flags": [],
+        "contextualization": {
+          "value": "everyday",
+          "evidence": [
+            {
+              "passage_id": "p127",
+              "quote": "œufs ou des objets du quotidien"
+            }
+          ]
+        },
+        "passages": [
+          {
+            "id": "p110",
+            "category": "ORGANIZATION",
+            "attributes": {
+              "subtype": "structural"
+            },
+            "formats": [
+              "heading"
+            ],
+            "review_flags": [],
+            "text": "## À retenir",
+            "start": 3151,
+            "end": 3163
+          },
+          {
+            "id": "p111",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- La **mole** est une unité qui permet de compter des particules microscopiques.",
+            "start": 3165,
+            "end": 3245
+          },
+          {
+            "id": "p112",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Une mole contient toujours :",
+            "start": 3246,
+            "end": 3276
+          },
+          {
+            "id": "p113",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3278,
+            "end": 3280
+          },
+          {
+            "id": "p114",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "6{,}022 \\times 10^{23}",
+            "start": 3281,
+            "end": 3303
+          },
+          {
+            "id": "p115",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3304,
+            "end": 3306
+          },
+          {
+            "id": "p116",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "entités chimiques.",
+            "start": 3308,
+            "end": 3326
+          },
+          {
+            "id": "p117",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "list"
+            ],
+            "review_flags": [],
+            "text": "- Relations essentielles :",
+            "start": 3327,
+            "end": 3353
+          },
+          {
+            "id": "p118",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3355,
+            "end": 3357
+          },
+          {
+            "id": "p119",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "N = n \\times N_A",
+            "start": 3358,
+            "end": 3374
+          },
+          {
+            "id": "p120",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3375,
+            "end": 3377
+          },
+          {
+            "id": "p121",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3379,
+            "end": 3381
+          },
+          {
+            "id": "p122",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "m = n \\times M",
+            "start": 3382,
+            "end": 3396
+          },
+          {
+            "id": "p123",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3397,
+            "end": 3399
+          },
+          {
+            "id": "p124",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\[",
+            "start": 3401,
+            "end": 3403
+          },
+          {
+            "id": "p125",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "n = \\frac{m}{M}",
+            "start": 3404,
+            "end": 3419
+          },
+          {
+            "id": "p126",
+            "category": "STUDY_SUPPORT",
+            "attributes": {
+              "subtype": "recap"
+            },
+            "formats": [
+              "equation"
+            ],
+            "review_flags": [],
+            "text": "\\]",
+            "start": 3420,
+            "end": 3422
+          },
+          {
+            "id": "p127",
+            "category": "ANALOGY",
+            "attributes": {},
+            "formats": [
+              "prose"
+            ],
+            "review_flags": [],
+            "text": "En résumé : la mole est au monde des atomes et des molécules ce que la douzaine est au monde des œufs ou des objets du quotidien.",
+            "start": 3424,
+            "end": 3553
+          }
+        ],
+        "accuracy": {
+          "verdict": "accurate",
+          "reason": "The recap accurately synthesizes all core concepts, constants, and formulas.",
+          "errors": []
+        }
+      }
+    ]
+  },
+  "review_status": "proposed",
+  "provenance": {
+    "original_path": "D:\\Projects\\PhD\\tutoring-check\\explanation-difference\\outputs\\multiple\\ch-3_mole_concept\\french-native\\gpt-5.6-terra__c39060e892c0.json",
+    "original_sha256": "816fbc493d11489d7389875bd345aff20e87d36dbe857bf887691a74a27eff6a",
+    "evaluation_language": "French",
+    "subject": "Chemistry",
+    "translation_used": false
+  },
+  "metrics": {
+    "total_content_units": 11,
+    "substantive_content_units": 11,
+    "total_passages": 127,
+    "content_unit_kinds": {
+      "CONCEPT": 5,
+      "ANALOGY": 1,
+      "EXAMPLE": 4,
+      "STUDY_SUPPORT": 1
+    },
+    "nested_passages": 127,
+    "unique_subtopics": 5,
+    "contextualization": {
+      "none": 8,
+      "everyday": 3
+    },
+    "proposed_substantive_verdicts": {
+      "accurate": 11
+    },
+    "proposed_error_records": 0,
+    "proposed_error_severity": {},
+    "note": "LLM proposals, not verified accuracy. Organization excluded from substantive counts. Errors counted per unit, not globally deduplicated."
+  }
+}
