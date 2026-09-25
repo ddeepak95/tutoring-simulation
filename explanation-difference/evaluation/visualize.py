@@ -60,6 +60,17 @@ def render_document(data, source):
     return ''.join(result)
 
 
+def generation_prompt(source):
+    if not source:
+        return ""
+    path=Path(source)
+    if not path.is_file():
+        return ""
+    original=json.loads(path.read_text(encoding="utf-8"))
+    prompt=original.get("request",{}).get("input")
+    return prompt if isinstance(prompt,str) else original.get("job",{}).get("prompt","")
+
+
 def build(source, output):
     data=json.loads(source.read_text(encoding="utf-8"))
     units=data["evaluation"]["content_units"]
@@ -70,6 +81,7 @@ def build(source, output):
     for p in spans:
         assert p["start"]>=last and source_text[p["start"]:p["end"]]==p["text"], "Invalid source span"
         last=p["end"]
+    data["viewer_generation_prompt"]=generation_prompt(data.get("provenance",{}).get("original_path"))
     data["viewer_source_text"]=source_text
     data["viewer_rendered_html"]=render_document(data,source_text)
     template=Path(__file__).with_name("annotation_viewer.html").read_text(encoding="utf-8")

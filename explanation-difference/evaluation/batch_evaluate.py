@@ -27,6 +27,7 @@ def viewer(rows):
         if not row['success']:continue
         folder=Path(row['output']); record=json.loads((folder/'evaluation.json').read_text(encoding='utf-8'))
         text=(folder/'source.md').read_text(encoding='utf-8')
+        record['viewer_generation_prompt']=visualize.generation_prompt(row['source'])
         record['viewer_source_text']=text
         record['viewer_rendered_html']=visualize.render_document(record,text)
         records.append(dict(meta=row,record=record))
