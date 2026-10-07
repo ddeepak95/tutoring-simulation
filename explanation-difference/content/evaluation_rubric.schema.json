@@ -1,0 +1,686 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Educational Explanation and Conversation Evaluation",
+  "description": "Output schema for the streamlined rubric, version 1.1-draft: response instructional characteristics, technical accuracy, and separate conversation ratings. Source matching and cross-record consistency require semantic validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rubric_version": {
+      "const": "1.1-draft"
+    },
+    "conversation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "topic_native_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "topic_english_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "native_language": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "learner_level": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "learning_objective": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reference_concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reference_source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "topic_native_name",
+        "topic_english_name",
+        "native_language",
+        "learner_level",
+        "learning_objective",
+        "reference_concepts",
+        "reference_source"
+      ]
+    },
+    "tutor_turn_inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "turn_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "contains_explanation": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "turn_id",
+          "contains_explanation",
+          "reason"
+        ]
+      }
+    },
+    "explanation_evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "turn_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "concepts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/concept"
+            }
+          },
+          "features": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "examples": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/feature"
+                }
+              },
+              "analogies_or_models": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "enum": [
+                        "analogy",
+                        "model",
+                        "representation"
+                      ]
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/evidence"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "description",
+                    "evidence"
+                  ]
+                }
+              },
+              "cultural_references": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "regions": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "minItems": 1
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/evidence"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "required": [
+                    "description",
+                    "regions",
+                    "evidence"
+                  ]
+                }
+              },
+              "real_world_connections": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/feature"
+                }
+              },
+              "questions_or_hints": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "kinds": {
+                      "type": "array",
+                      "items": {
+                        "enum": [
+                          "question",
+                          "hint"
+                        ]
+                      },
+                      "minItems": 1,
+                      "uniqueItems": true
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "evidence": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/evidence"
+                      },
+                      "minItems": 1
+                    }
+                  },
+                  "required": [
+                    "kinds",
+                    "description",
+                    "evidence"
+                  ]
+                }
+              },
+              "summary": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "present": {
+                    "type": "boolean"
+                  },
+                  "evidence": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/evidence"
+                    }
+                  }
+                },
+                "required": [
+                  "present",
+                  "evidence"
+                ]
+              }
+            },
+            "required": [
+              "examples",
+              "analogies_or_models",
+              "cultural_references",
+              "real_world_connections",
+              "questions_or_hints",
+              "summary"
+            ]
+          },
+          "instructional_characteristics": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "reviews_needed_prerequisites": {
+                "$ref": "#/$defs/feature_judgment"
+              },
+              "connects_new_material_to_prior_knowledge": {
+                "$ref": "#/$defs/feature_judgment"
+              },
+              "consolidates_main_ideas": {
+                "$ref": "#/$defs/feature_judgment"
+              },
+              "checks_understanding": {
+                "$ref": "#/$defs/feature_judgment"
+              },
+              "offers_relevant_follow_up": {
+                "$ref": "#/$defs/feature_judgment"
+              },
+              "maintains_focus": {
+                "$ref": "#/$defs/response_quality_judgment"
+              },
+              "connects_ideas_coherently": {
+                "$ref": "#/$defs/response_quality_judgment"
+              },
+              "explains_relevance": {
+                "$ref": "#/$defs/feature_judgment"
+              }
+            },
+            "required": [
+              "reviews_needed_prerequisites",
+              "connects_new_material_to_prior_knowledge",
+              "consolidates_main_ideas",
+              "checks_understanding",
+              "offers_relevant_follow_up",
+              "maintains_focus",
+              "connects_ideas_coherently",
+              "explains_relevance"
+            ]
+          },
+          "technical_accuracy": {
+            "$ref": "#/$defs/technical_accuracy"
+          }
+        },
+        "required": [
+          "turn_id",
+          "concepts",
+          "features",
+          "instructional_characteristics",
+          "technical_accuracy"
+        ]
+      }
+    },
+    "conversation_evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "responsiveness": {
+          "$ref": "#/$defs/rating"
+        },
+        "guidance_and_adaptation": {
+          "$ref": "#/$defs/rating"
+        },
+        "checking_and_using_understanding": {
+          "$ref": "#/$defs/rating"
+        },
+        "continuity_and_progress": {
+          "$ref": "#/$defs/rating"
+        }
+      },
+      "required": [
+        "responsiveness",
+        "guidance_and_adaptation",
+        "checking_and_using_understanding",
+        "continuity_and_progress"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "rubric_version",
+    "conversation_id",
+    "metadata",
+    "tutor_turn_inventory",
+    "explanation_evaluations",
+    "conversation_evaluation",
+    "limitations"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "turn_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "concept_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "turn_id",
+        "quote",
+        "occurrence",
+        "concept_ids"
+      ]
+    },
+    "feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "description",
+        "evidence"
+      ]
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concept_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label_source": {
+          "enum": [
+            "explicit_title",
+            "evaluator_generated"
+          ]
+        },
+        "title_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/evidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "concept_id",
+        "label",
+        "label_source",
+        "title_span",
+        "content_spans"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "label_source": {
+                "const": "explicit_title"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "title_span": {
+                "$ref": "#/$defs/evidence"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "label_source": {
+                "const": "evaluator_generated"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "title_span": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "rating": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "scored",
+            "not_applicable",
+            "insufficient_evidence"
+          ]
+        },
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 3
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "score",
+        "rationale",
+        "evidence"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "scored"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "score": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "score": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "feature_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "present",
+            "absent",
+            "not_applicable"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "rationale",
+        "evidence"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "present"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "response_quality_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "meets",
+            "partially_meets",
+            "does_not_meet"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "status",
+        "rationale",
+        "evidence"
+      ]
+    },
+    "technical_accuracy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "no_identified_error",
+            "minor_error",
+            "major_error",
+            "cannot_determine"
+          ]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        },
+        "corrections": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "rationale",
+        "evidence",
+        "corrections"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "minor_error",
+                  "major_error"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -21,7 +21,7 @@ Collect multilingual explanations through the ChatGPT browser interface or an AP
 
 ## Setup and checks
 
-The existing `.venv` is retained. For a fresh setup, run `uv sync`. A new lockfile must be resolved: regeneration during cleanup was blocked by a package-registry TLS handshake failure, so the obsolete simulator lockfile was backed up and removed. The existing environment passes the project tests. Configure only the services you use in `.env`; `.env.example` contains placeholders. Vertex models use Google Application Default Credentials where configured. Browser collection requires Chrome and the setup described in the browser guide.
+The local `.venv` was recreated with Python 3.14.7 and the project dependencies installed using `.venv\Scripts\python.exe -m pip install -e .`. The old, broken environment is preserved in an ignored `.venv-broken-*` directory. For a fresh setup, run `python -m venv .venv` followed by `.venv\Scripts\python.exe -m pip install -e .`, or use `uv sync` if uv is installed. Configure only the services you use in `.env`; `.env.example` contains placeholders. Vertex models use Google Application Default Credentials where configured. Browser collection requires Chrome and the setup described in the browser guide.
 
 Run from the repository root:
 
