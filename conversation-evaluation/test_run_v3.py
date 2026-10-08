@@ -409,6 +409,7 @@ class V3Tests(unittest.TestCase):
             self.assertIn("74 pm", data["messages"][0]["text"])
             self.assertNotIn(TAMIL_TOPIC, json.dumps(data["messages"], ensure_ascii=False))
             value = self.result()
+            value["conversation_id"] = data["conversation_id"]
             value["learning_topic"] = data["learning_topic"]
         return dict(text=json.dumps(value), usage={})
 
@@ -462,6 +463,8 @@ class V3Tests(unittest.TestCase):
         self.assertEqual(path.parent, self.source.parent)
         self.assertEqual(value["metadata"]["native_language"], "English")
         self.assertEqual(value["learning_topic"], "Covalent radius")
+        self.assertNotEqual(value["conversation_id"], pipeline.normalize(self.source)["conversation_id"])
+        self.assertEqual(value["source_conversation_id"], pipeline.normalize(self.source)["conversation_id"])
         record = pipeline.read_json(output / "run_status.json")[0]
         evaluation = pipeline.read_json(Path(record["folder"]) / "evaluation.json")
         self.assertEqual(evaluation["learning_topic"], "Covalent radius")

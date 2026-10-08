@@ -243,6 +243,18 @@ prompt as `evaluator.md` and includes its content in the resume fingerprint.
 
 ## Human annotation
 
+The [instructional feature annotation UI](human-annotation/ui/README.md) provides
+a conversation workspace with editing pop-ups. Highlight tutor passages to record the six
+instructional features from the current coding guidebook, link supporting turns,
+and export annotations with exact evidence and locally derived counts.
+
+```powershell
+.venv/Scripts/python.exe conversation-evaluation/human-annotation/ui/serve.py
+```
+
+Open http://127.0.0.1:8765. Original English, original Tamil, and reviewed English
+translation examples are included; other transcripts and saved projects can be imported.
+
 Use the [human coding guide](human-annotation/coder-guide-v2.md) and copy the
 [annotation form](human-annotation/annotation-form-v2.md) for each conversation.
 The guide follows v2 and covers response annotation, feature counting, quality

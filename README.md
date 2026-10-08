@@ -7,6 +7,7 @@ Collect multilingual explanations through the ChatGPT browser interface or an AP
 - [Collection and code guide](explanation/README.md)
 - [Browser collection](explanation/BROWSER.md) and [browser queues](explanation/BROWSER_QUEUES.md)
 - [Analysis commands](explanation/analysis/README.md)
+- [Human annotation portal: Supabase setup and Vercel deployment](annotation-portal/README.md)
 - [Consolidated study overview](explanation/consolidated-study/reports/overview.md)
 
 ## Repository layout
@@ -14,6 +15,7 @@ Collect multilingual explanations through the ChatGPT browser interface or an AP
 | Path | Purpose |
 | --- | --- |
 | `explanation/` | Collection tools, analysis code, tests, configurations, original outputs and consolidated study |
+| `annotation-portal/` | Hosted human annotation UI, username login, independent cloud annotations, and admin assignments/progress |
 | `data/models.json` | Model catalog used by the API runner and its tests |
 | `src/tutoring_check/vertex_auth.py` | Shared Google ADC support for configured Vertex models |
 | `pyproject.toml` | Explanation collection and analysis dependencies |

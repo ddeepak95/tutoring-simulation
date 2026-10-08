@@ -14,6 +14,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
+identity_spec = importlib.util.spec_from_file_location("conversation_identity", ROOT / "conversation_identity.py")
+identity = importlib.util.module_from_spec(identity_spec)
+identity_spec.loader.exec_module(identity)
 SPEC = importlib.util.spec_from_file_location("conversation_api", ROOT / "explanation/run.py")
 api = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(api)
@@ -334,9 +337,10 @@ async def check_relevance(conversation, reply, folder, timeout, call=None):
 
 
 def save_transcript(folder, record):
+    record.setdefault("conversation_id", identity.original_uid(folder / "conversation.json"))
     api.write_json(folder / "conversation.json", record)
     c = record["configuration"]
-    lines = [f"# {c['topic_name']} ({c['language']})", "", f"Status: {record['status']}", ""]
+    lines = [f"# {c['topic_name']} ({c['language']})", "", f"Conversation ID: {record['conversation_id']}", "", f"Status: {record['status']}", ""]
     if "relevance_check" in record:
         check = record["relevance_check"]
         lines.extend(["First-response relevance: " + check.get("reason", check.get("error", "")), ""])

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Instructional Feature Annotation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon" aria-hidden="true">a.</span><div><strong>Annotation studio</strong><span>Conversation research</span></div></div>
+    <div class="top-actions"><span id="save-status" class="save-status" role="status">Ready</span><button id="import-button" class="button secondary">Import file</button><button id="export-button" class="button primary">Export JSON <span aria-hidden="true">↗</span></button></div>
+  </header>
+  <main>
+    <div class="workspace-heading"><div><div class="eyebrow">HUMAN ANNOTATION · INSTRUCTIONAL FEATURES</div><h1>Read. Highlight. Annotate.</h1><p>Capture the teaching features you observe, one passage at a time.</p></div><label class="annotator-label">Annotator <input id="annotator" placeholder="Your name or ID" autocomplete="off"></label></div>
+    <div class="workspace">
+      <section class="conversation-panel" aria-labelledby="conversation-heading">
+        <div class="panel-header"><div><h2 id="conversation-heading">Conversation</h2><p id="conversation-meta"></p></div><div class="document-stats"><span class="pill" id="turn-count"></span><span class="pill"><span id="annotation-total">0</span> highlights</span></div></div>
+        <div class="source-bar"><label for="conversation-select">Transcript</label><select id="conversation-select"></select><button id="guide-button" class="button text-button" aria-expanded="false">Coding guide</button></div>
+        <div id="guide-panel" class="guide-panel" hidden><label for="guide-select">Feature</label><select id="guide-select"></select><div id="guide-content"></div></div>
+        <div id="feature-summary" class="feature-summary" aria-label="Feature counts"></div>
+        <div class="reading-hint"><span aria-hidden="true">✧</span> Select tutor text to annotate. Click a saved highlight to edit. Changes save automatically.</div>
+        <div id="conversation" class="conversation" tabindex="0" aria-label="Conversation transcript"></div>
+        <div class="conversation-footer"><span class="status-dot"></span> Saved in this browser. Export JSON to keep or share your work. Original text is preserved.</div>
+      </section>
+    </div>
+  </main>
+  <input id="file-input" type="file" accept=".json,.txt,.md" hidden>
+  <div id="selection-menu" class="selection-menu" hidden aria-label="Choose instructional feature"><strong id="selection-title">Annotate as</strong><div id="selection-options"></div><div id="attribute-panel" hidden><div id="popup-feature-control" hidden><label class="popup-field-label" for="popup-feature-select">Instructional feature</label><select id="popup-feature-select"></select></div><div id="attribute-options"></div><div id="popup-evidence"></div><p id="popup-save-status" class="popup-save-hint" role="status">Changes save automatically.</p><div id="popup-edit-actions" class="popup-edit-actions" hidden><button id="delete-highlight" type="button">Delete highlight</button></div></div><div id="popup-choices" hidden></div><button id="extend-button" hidden>Add passage to an existing entry</button><button id="dismiss-selection" class="dismiss-selection" aria-label="Dismiss selection">×</button></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="data.js"></script>
+  <script src="core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -19,7 +19,7 @@ ROOT = HERE.parent
 spec = importlib.util.spec_from_file_location("conversation_evaluation_shared", ROOT / "conversation-evaluation/run.py")
 shared = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(shared)
-VERSION = "1"
+VERSION = "2"
 LABELS = {
     "concepts_and_subtopics_covered": "Concepts and Subtopics Covered",
     "examples": "Examples", "analogies": "Analogies", "representations": "Representations",
@@ -327,7 +327,7 @@ def publish_translation(record, translation, stage_task, settings, reviewed=Fals
     source = record["path"]
     name = source.stem + ".comparative.english" + ("" if reviewed else ".draft")
     path = source.with_name(name + ".json")
-    conversation = shared.translated_conversation(record["conversation"], stage_task, translation)
+    conversation = shared.translated_conversation(record["conversation"], stage_task, translation, variant=path.name)
     provenance = dict(source_path=str(source), source_hash=record["source_hash"], reviewed=reviewed,
         model=settings["model"], fingerprint=shared.digest(dict(task=stage_task, settings=settings)),
         segments=translation["segments"], changes=translation.get("changes", []))

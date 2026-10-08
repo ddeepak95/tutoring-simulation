@@ -6,6 +6,7 @@ import copy
 from collections import Counter
 import csv
 import hashlib
+import importlib.util
 import json
 import os
 import re
@@ -16,13 +17,16 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
+identity_spec = importlib.util.spec_from_file_location("conversation_identity", ROOT / "conversation_identity.py")
+identity = importlib.util.module_from_spec(identity_spec)
+identity_spec.loader.exec_module(identity)
 LEGACY_RUBRIC = ROOT / "explanation-difference/content/evaluation_rubric.md"
 LEGACY_SCHEMA = ROOT / "explanation-difference/content/evaluation_rubric.schema.json"
 PROMPT = HERE / "prompts/evaluator-v3.md"
 RUBRIC = HERE / "human-annotation/coding-guidebook.md"
 SCHEMA = HERE / "schemas/evaluator-v3.schema.json"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
-PIPELINE_VERSION = "5"
+PIPELINE_VERSION = "6"
 TRANSLATION_PROMPT = HERE / "prompts/translator.md"
 METADATA_KEYS = (
     "topic_native_name", "topic_english_name", "native_language",
@@ -228,14 +232,14 @@ def load_translation(path, fingerprint, task, original):
         return None
     translated_segments = provenance.get("segments", [])
     validate_translation({"segments": translated_segments}, task)
-    expected = translated_conversation(original, task, {"segments": translated_segments})
+    expected = translated_conversation(original, task, {"segments": translated_segments}, variant=path.name)
     payload = {key: child for key, child in value.items() if key != "translation"}
     if payload != expected:
         raise ValueError(f"Translated file has been modified: {path}; preserve it and use a separate source or remove this generated cache explicitly")
     return value
 
 
-def translated_conversation(conversation, task, value):
+def translated_conversation(conversation, task, value, variant="conversation.english.json"):
     result = copy.deepcopy(conversation)
     result.pop("translation", None)
     for path, segment in zip(task["paths"], value["segments"]):
@@ -249,13 +253,15 @@ def translated_conversation(conversation, task, value):
     original_language = conversation["metadata"]["native_language"] or "an unspecified source language"
     result["limitations"] = list(dict.fromkeys(result["limitations"] + [
         f"Evaluation uses an English translation from {original_language}; wording and tone judgments depend on translation fidelity. Evidence quotations refer to the English translation and retain original turn IDs."]))
+    result["source_conversation_id"] = conversation["conversation_id"]
+    result["conversation_id"] = identity.translation_uid(conversation["conversation_id"], variant, result)
     return result
 
 
 def save_translation(source, path, conversation, task, value, settings):
     if path.exists() and read_json(path).get("translation", {}).get("source_path") != str(source.resolve()):
         raise ValueError(f"Refusing to overwrite an unrelated translated file: {path}")
-    result = translated_conversation(conversation, task, value)
+    result = translated_conversation(conversation, task, value, variant=path.name)
     result["translation"] = dict(source_path=str(source.resolve()),
         original_language=conversation["metadata"]["native_language"], target_language="English",
         model=settings["model"], fingerprint=translation_fingerprint(conversation, task, settings),
