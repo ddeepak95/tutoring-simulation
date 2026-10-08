@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+const portal = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const root = path.resolve(portal, '..');
+const ui = path.join(root, 'conversation-evaluation/human-annotation/ui');
+const guide = fs.readFileSync(path.join(ui, '../coding-guidebook.md'));
+const schemaBytes = fs.readFileSync(path.join(root, 'conversation-evaluation/schemas/evaluator-v3.schema.json'));
+const schema = JSON.parse(schemaBytes);
+const sandbox = { window: {} };
+vm.runInNewContext(fs.readFileSync(path.join(ui, 'data.js'), 'utf8'), sandbox);
+const rows = new Map(guide.toString('utf8').split(/\r?\n/).filter(line => line.startsWith('| ')).map(line => line.trim().slice(1, -1).split('|').map(cell => cell.trim())).filter(cells => cells.length === 5).map(cells => [cells[0], cells]));
+const labels = { topic: 'Concept or subtopic', example: 'Specific example', comparison: 'Comparison', representation: 'Representation', reference: 'Cultural reference', question: 'Exact question wording', concept_illustrated: 'Concept illustrated', concept_explained: 'Concept explained', concept_checked: 'Concept checked', detail_level: 'Detail level', question_type: 'Question classification', representation_type: 'Representation type' };
+const rubric = sandbox.window.ANNOTATION_DATA.rubric.map(feature => {
+  const row = rows.get(feature.name);
+  if (!row) throw new Error('Missing rubric row: ' + feature.name);
+  const attributes = schema.properties.instructional_features.properties[feature.key].items.properties;
+  return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: Object.entries(attributes).filter(([key]) => key !== 'turn_locations').map(([key, definition]) => ({ key, label: labels[key], ...(definition.enum ? { options: definition.enum } : {}) })) };
+});
+const snapshot = { rubric_source: 'conversation-evaluation/human-annotation/coding-guidebook.md', rubric_sha256: crypto.createHash('sha256').update(guide).update(schemaBytes).digest('hex'), rubric };
+const out = path.join(portal, 'src/generated'); fs.mkdirSync(out, { recursive: true });
+fs.writeFileSync(path.join(out, 'rubric.json'), JSON.stringify(snapshot, null, 2) + '\n');
+let core = fs.readFileSync(path.join(ui, 'core.js'), 'utf8');
+core = core.replace(/\(function \(root\) \{/, '').replace(/  root.AnnotationCore = api;[\s\S]*$/, 'export default api;\n');
+fs.writeFileSync(path.join(out, 'core.js'), '// Generated from the existing annotation core; run npm run sync:rubric.\n' + core);
+console.log('Synced six rubric features and shared evidence validation. No research transcripts are bundled.');

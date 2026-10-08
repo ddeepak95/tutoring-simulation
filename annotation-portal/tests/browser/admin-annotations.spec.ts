@@ -1,0 +1,71 @@
+import { expect, test } from '@playwright/test';
+import { backend, ids, login, select } from './mock';
+
+test('admin annotates independently, resumes, submits and reopens own work', async ({ page }) => {
+  const state = await backend(page);
+  const originalWork = structuredClone(state.assignments), originalTranscript = structuredClone(state.documents[0].transcript);
+  await login(page, 'admin');
+  const topic = page.locator(`[data-conversation-id="${ids.doc}"] .conversation-topic-link`);
+  await topic.click();
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
+  const own = state.assignments.find(row => row.annotator_id === ids.admin)!;
+  expect(own).toBeDefined();
+  await select(page, 't1', 'Wet clothes drying illustrates evaporation.');
+  await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Explained', exact: true }).click();
+  await expect.poll(() => own.annotations[0]?.entry.detail_level).toBe('Explained');
+  await page.reload(); await expect(page.locator('mark')).toHaveCount(1);
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click();
+  await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button').click();
+  await page.getByRole('link', { name: 'View and annotate', exact: true }).click();
+  await expect(page).toHaveURL(new RegExp(`/assignments/${own.id}$`));
+  expect(state.assignments.filter(row => row.annotator_id === ids.admin)).toHaveLength(1);
+  await expect(page.locator('mark')).toHaveCount(1);
+  page.once('dialog', dialog => void dialog.accept());
+  await page.getByRole('button', { name: 'Complete Annotation', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0); expect(own.status).toBe('submitted');
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click();
+  const ownRow = page.locator('.progress').getByRole('row').filter({ hasText: 'admin' });
+  await ownRow.getByRole('button', { name: 'Reopen', exact: true }).click();
+  await expect(ownRow).toContainText('In progress');
+  await topic.click(); await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click();
+  await page.locator('.progress').getByRole('row').filter({ hasText: 'alice' }).getByRole('link', { name: 'View', exact: true }).click();
+  await expect(page.locator('mark')).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
+  expect(state.assignments.filter(row => row.annotator_id !== ids.admin)).toEqual(originalWork);
+  expect(state.documents[0].transcript).toEqual(originalTranscript);
+});
+
+test('admin header navigation flushes pending saves and stays in the editor on failure', async ({ page }) => {
+  const state = await backend(page); await login(page, 'admin');
+  await page.locator('.conversation-topic-link').click();
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
+  const own = state.assignments.find(row => row.annotator_id === ids.admin)!;
+  await select(page, 't1', 'Wet clothes drying');
+  await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Brief', exact: true }).click();
+  await page.getByRole('link', { name: 'Settings', exact: true }).click();
+  await expect(page).toHaveURL(/\/settings$/); expect(own.annotations[0].entry.detail_level).toBe('Brief');
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click(); await page.locator('.conversation-topic-link').click();
+  await page.locator('mark').click();
+  state.failSaves = true;
+  await page.getByRole('button', { name: 'Elaborated', exact: true }).click();
+  await page.getByRole('button', { name: 'Close annotation popup' }).click();
+  await page.getByRole('link', { name: 'Settings', exact: true }).click();
+  await expect(page).toHaveURL(new RegExp(`/assignments/${own.id}$`));
+  await expect(page.locator('.save-status')).toContainText('Cloud save failed');
+  expect(own.annotations[0].entry.detail_level).toBe('Brief');
+  expect(await page.evaluate(key => Boolean(localStorage.getItem(key)), `annotation-portal:draft:${ids.admin}:${own.id}`)).toBe(true);
+  state.failSaves = false;
+  await page.getByRole('link', { name: 'Settings', exact: true }).click();
+  await expect(page).toHaveURL(/\/settings$/); expect(own.annotations[0].entry.detail_level).toBe('Elaborated');
+});
+
+test('annotators cannot use the admin conversation route', async ({ page }) => {
+  const state = await backend(page); await login(page, 'alice');
+  await page.goto(`/conversations/${ids.doc}`);
+  await expect(page.getByRole('heading', { name: 'Your assignments' })).toBeVisible();
+  expect(state.assignments).toHaveLength(2);
+  expect(state.assignments.some(row => row.annotator_id === ids.admin)).toBe(false);
+});
