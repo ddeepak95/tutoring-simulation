@@ -8,7 +8,11 @@ export interface Evidence { turn_id: string; quote: string; start: number; end: 
 export interface Annotation { id: string; feature: string; entry: Record<string, string | string[] | null>; evidence: Evidence[]; }
 export interface Field { key: string; label: string; options?: string[]; }
 export interface Feature { key: string; name: string; short_label: string; color: string; highlight: string; description: string; guidance: string; entry_attributes: string; fields: Field[]; }
-export interface RubricSnapshot { rubric_source: string; rubric_sha256: string; rubric: Feature[]; }
+export interface RatingDimension { key: string; label: string; description: string; options: string[]; scale_items: Partial<Record<string, string>>; guidance: string; }
+export interface TurnRating { values: Record<string, string>; notes: string; }
+export type TurnRatings = Record<string, TurnRating>;
+export interface AnnotationWork { annotations: Annotation[]; turn_ratings: TurnRatings; }
+export interface RubricSnapshot { rubric_source: string; rubric_sha256: string; rubric: Feature[]; rating_dimensions?: RatingDimension[]; rating_scope?: string; }
 export interface DocumentRow { id: string; label: string; language: string; transcript: Conversation; created_at: string; source_path?: string | null; }
-export interface Assignment { id: string; conversation_id: string; annotator_id: string; rubric_hash: string; status: Status; revision: number; annotations: Annotation[]; updated_at: string; submitted_at: string | null; conversations?: DocumentRow; profiles?: Profile; }
+export interface Assignment { id: string; conversation_id: string; annotator_id: string; rubric_hash: string; status: Status; revision: number; annotations: Annotation[]; turn_ratings?: TurnRatings; updated_at: string; submitted_at: string | null; conversations?: DocumentRow; profiles?: Profile; }
 export interface ExportData { format_version: string; annotations: Annotation[]; incomplete_annotations: { id: string; feature: string; missing_attributes: string[] }[]; feature_counts: Record<string, number>; [key: string]: unknown; }

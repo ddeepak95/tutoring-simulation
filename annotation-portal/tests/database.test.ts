@@ -2,19 +2,22 @@ import { beforeAll, afterAll, describe, expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
 import { C, bundledRubric } from '../src/lib';
+import { completeRatings } from './ratings-fixture';
 const admin = '00000000-0000-4000-8000-000000000001', alice = '00000000-0000-4000-8000-000000000002', bob = '00000000-0000-4000-8000-000000000003';
 const documentId = '00000000-0000-4000-8000-000000000010', assignmentA = '00000000-0000-4000-8000-000000000011', assignmentB = '00000000-0000-4000-8000-000000000012';
 const transcript = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text: 'தமிழ் 😀 Water becomes vapour. Why? Why?' }, { turn_id: 's1', speaker: 'student', text: 'Because it gets warm.' }] });
 let db: PGlite;
 async function asUser(id: string) { await db.exec(`reset role; set role authenticated; select set_config('request.jwt.claim.sub', '${id}', false);`); }
-async function save(id: string, revision: number, annotations: unknown[], submit = false) { return db.query<{ result: { revision: number; status: string } }>('select public.save_assignment($1::uuid, $2::integer, $3::jsonb, $4::boolean) as result', [id, revision, JSON.stringify(annotations), submit]); }
+async function save(id: string, revision: number, annotations: unknown[], submit = false) { return db.query<{ result: { revision: number; status: string } }>('select public.save_assignment($1::uuid, $2::integer, $3::jsonb, $4::boolean, $5::jsonb) as result', [id, revision, JSON.stringify(annotations), submit, JSON.stringify(submit ? completeRatings(transcript, bundledRubric) : {})]); }
 beforeAll(async () => {
   db = new PGlite();
   await db.exec(`create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create schema storage; create table auth.users(id uuid primary key, email text); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$; grant usage on schema public, auth, storage to anon, authenticated, service_role; grant execute on function auth.uid() to authenticated; create table storage.buckets(id text primary key, name text, public boolean, file_size_limit bigint); create table storage.objects(id uuid primary key default gen_random_uuid(), bucket_id text, name text); alter table storage.objects enable row level security; grant select, insert, delete on storage.objects to authenticated;`);
   await db.exec(fs.readFileSync('supabase/migrations/202610080001_portal.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610090001_turn_ratings_issues.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610090002_remove_issue_correction_status.sql', 'utf8'));
   await db.query('insert into auth.users(id,email) values ($1,$2),($3,$4),($5,$6)', [admin, 'admin@users.annotation.invalid', alice, 'alice@users.annotation.invalid', bob, 'bob@users.annotation.invalid']);
   await db.exec(`update public.profiles set role='admin' where id='${admin}';`);
-  await db.query('insert into public.rubric_versions(hash,snapshot) values ($1,$2::jsonb)', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
+  await db.query('insert into public.rubric_versions(hash,snapshot) values ($1,$2::jsonb) on conflict(hash) do nothing', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
   await db.query('insert into public.conversations(id,label,transcript,created_by,source_path) values ($1,$2,$3::jsonb,$4,$5)', [documentId, 'Test', JSON.stringify(transcript), admin, 'immutable/test.json']);
   await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4),($5,$2,$6,$4)', [assignmentA, documentId, alice, bundledRubric.rubric_sha256, assignmentB, bob]);
 
@@ -102,5 +105,37 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     expect((await db.query('select * from public.annotation_revisions where assignment_id<>$1 order by assignment_id, revision', [ownId])).rows).toEqual(originalHistory);
     expect((await db.query('select * from public.annotation_revisions where assignment_id=$1', [ownId])).rows).toHaveLength(4);
     expect((await db.query<{ transcript: unknown }>('select transcript from public.conversations where id=$1', [documentId])).rows[0].transcript).toEqual(transcript);
+  });
+  it('enforces complete tutor-only ratings in both RPC versions and audits atomic rating saves', async () => {
+    await asUser(admin);
+    const ratedTranscript = C.normalizeConversation({ messages: [...transcript.messages, { turn_id: 't2', speaker: 'tutor', text: 'A second explanation.' }] });
+    const { rows: docs } = await db.query<{ id: string }>('insert into public.conversations(label,transcript) values($1,$2::jsonb) returning id', ['Rating checks', JSON.stringify(ratedTranscript)]);
+    const ratings = completeRatings(ratedTranscript, bundledRubric);
+    await expect(db.query('insert into public.assignments(conversation_id,annotator_id,rubric_hash,turn_ratings) values($1,$2,$3,$4::jsonb)', [docs[0].id, alice, bundledRubric.rubric_sha256, JSON.stringify(ratings)])).rejects.toThrow(/row-level/);
+    const { rows } = await db.query<{ id: string }>('insert into public.assignments(conversation_id,annotator_id,rubric_hash) values($1,$2,$3) returning id', [docs[0].id, alice, bundledRubric.rubric_sha256]);
+    const id = rows[0].id;
+    const write = (ratings: unknown, submit = false, revision = 0) => db.query('select public.save_assignment($1, $2::integer, $3::jsonb, $4::boolean, $5::jsonb)', [id, revision, '[]', submit, JSON.stringify(ratings)]);
+    await asUser(alice);
+    await expect(write({}, true)).rejects.toThrow(/Rate every tutor turn/);
+    await expect(db.query('select public.save_assignment($1,0,$2::jsonb,true)', [id, '[]'])).rejects.toThrow(/Rate every tutor turn/);
+    await expect(write({ s1: ratings.t1 })).rejects.toThrow(/tutor turns/);
+    await expect(write({ missing: ratings.t1 })).rejects.toThrow(/tutor turns/);
+    await expect(write({ t1: { values: { relevance: '4' }, notes: '' } })).rejects.toThrow(/Invalid turn rating value/);
+    await expect(write({ t1: { values: {}, notes: 1 } })).rejects.toThrow(/attributes/);
+    const partial = { t1: { values: { relevance: '3' }, notes: '' } };
+    await write(partial);
+    expect((await db.query<{ turn_ratings: unknown }>('select turn_ratings from public.annotation_revisions where assignment_id=$1 and revision=1', [id])).rows[0].turn_ratings).toEqual(partial);
+    await expect(write(ratings, false, 0)).rejects.toThrow(/Revision conflict/);
+    ratings.t1.values.appropriateness_for_the_learners_level = 'Insufficient evidence';
+    await expect(write(ratings, true, 1)).rejects.toThrow(/limitation/);
+    ratings.t1.notes = 'The learner level was not supplied or demonstrated.';
+    await asUser(bob); await expect(write(ratings, false, 1)).rejects.toThrow(/denied/);
+    await asUser(admin); await expect(write(ratings, false, 1)).rejects.toThrow(/denied/);
+    await asUser(alice); await write(ratings, true, 1); await expect(write(ratings, false, 2)).rejects.toThrow(/read only/);
+    await asUser(admin); await db.query('select public.reopen_assignment($1,2)', [id]);
+    expect((await db.query<{ turn_ratings: unknown }>('select turn_ratings from public.annotation_revisions where assignment_id=$1 and revision=3', [id])).rows[0].turn_ratings).toEqual(ratings);
+    await asUser(alice);
+    await db.query('select public.save_assignment($1,3,$2::jsonb,false)', [id, '[]']);
+    expect((await db.query<{ turn_ratings: unknown }>('select turn_ratings from public.assignments where id=$1', [id])).rows[0].turn_ratings).toEqual(ratings);
   });
 });

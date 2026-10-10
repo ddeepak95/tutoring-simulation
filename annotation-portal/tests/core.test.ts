@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { C, bundledRubric, loginIdentifier, validateSubmission } from '../src/lib';
+import { completeRatings } from './ratings-fixture';
 const conversation = C.normalizeConversation({ messages: [
   { turn_id: 't1', speaker: 'tutor', text: 'தமிழ் 😀 What is evaporation? What is evaporation?\nClothes dry as liquid water becomes vapour.' },
   { turn_id: 's1', speaker: 'student', text: 'How?' },
@@ -25,8 +26,10 @@ describe('annotation evidence and submission', () => {
     expect(C.validateAnnotations(conversation, [a], bundledRubric.rubric, { allowIncomplete: true })).toHaveLength(1);
     expect(() => validateSubmission(conversation, [a], bundledRubric, 'ann')).toThrow(/Complete/);
     a.entry.detail_level = 'Brief';
-    expect(validateSubmission(conversation, [a], bundledRubric, 'ann').feature_counts.examples).toBe(1);
-    expect(validateSubmission(conversation, [], bundledRubric, 'ann').annotations).toEqual([]);
+    expect(() => validateSubmission(conversation, [a], bundledRubric, 'ann')).toThrow(/Rate every tutor turn/);
+    const ratings = completeRatings(conversation, bundledRubric);
+    expect(validateSubmission(conversation, [a], bundledRubric, 'ann', ratings).feature_counts.examples).toBe(1);
+    expect(validateSubmission(conversation, [], bundledRubric, 'ann', ratings).annotations).toEqual([]);
   });
   it('keeps overlap and the simplified fields', () => {
     const ev = C.makeEvidence(conversation, 't1', 0, 5);

@@ -14,7 +14,7 @@ export async function backend(page: Page) {
   const people = profiles.map(profile => ({ ...profile }));
   const passwords = new Map(people.map(profile => [profile.username, 'test-password-123']));
   const documents = [{ id: ids.doc, label: sample.label, language: 'Tamil', transcript: structuredClone(sample), created_at: new Date().toISOString() }];
-  const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, status: 'not_started', revision: 0, annotations: [], updated_at: new Date().toISOString(), submitted_at: null }));
+  const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }));
   const state = { documents, assignments, people, passwords, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
   await page.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url());
@@ -71,7 +71,7 @@ export async function backend(page: Page) {
       if (!row || row.annotator_id !== userId) return send({ message: 'Access denied' }, 403);
       if (row.revision !== body.p_revision) return send({ message: 'Revision conflict. Export your draft and reload the latest saved version before editing.', code: '40001' }, 409);
       if (row.status === 'submitted') return send({ message: 'Read only' }, 409);
-      row.annotations = body.p_annotations; row.revision++; row.status = body.p_submit ? 'submitted' : 'in_progress'; row.submitted_at = body.p_submit ? new Date().toISOString() : null; row.updated_at = new Date().toISOString(); state.saves++;
+      row.annotations = body.p_annotations; row.turn_ratings = body.p_turn_ratings ?? row.turn_ratings ?? {}; row.revision++; row.status = body.p_submit ? 'submitted' : 'in_progress'; row.submitted_at = body.p_submit ? new Date().toISOString() : null; row.updated_at = new Date().toISOString(); state.saves++;
       return send(row);
     }
     if (url.pathname === '/rest/v1/rpc/reopen_assignment') { if (profile.role !== 'admin') return send({ message: 'Admin required' }, 403); const row = assignments.find(a => a.id === body.p_assignment_id); row.status = 'in_progress'; row.revision++; row.submitted_at = null; return send(null); }
@@ -80,7 +80,7 @@ export async function backend(page: Page) {
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
     if (url.pathname === '/rest/v1/rubric_versions') rows = [{ hash: rubric.rubric_sha256, snapshot: rubric }];
     if (url.pathname === '/rest/v1/assignments') {
-      if (request.method() === 'POST') { const newRows = Array.isArray(body) ? body : [body]; assignments.push(...newRows.map((a: any) => ({ id: crypto.randomUUID(), ...a, status: 'not_started', revision: 0, annotations: [], updated_at: new Date().toISOString(), submitted_at: null }))); return send(null, 201); }
+      if (request.method() === 'POST') { const newRows = Array.isArray(body) ? body : [body]; assignments.push(...newRows.map((a: any) => ({ id: crypto.randomUUID(), ...a, status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }))); return send(null, 201); }
       rows = assignments.filter(a => profile.role === 'admin' || a.annotator_id === userId).map(a => ({ ...a, conversations: documents.find(d => d.id === a.conversation_id), profiles: people.find(p => p.id === a.annotator_id) }));
     }
     for (const [key, value] of url.searchParams) { if (value.startsWith('eq.')) rows = rows.filter(row => String(row[key]) === value.slice(3)); }
@@ -110,4 +110,12 @@ export async function select(page: Page, turnId: string, quote: string) {
     while (walker.nextNode()) { const child = walker.currentNode, end = offset + child.textContent!.length; if (!first && start >= offset && start < end) { first = child; firstOffset = start - offset; } if (start + value.length > offset && start + value.length <= end) { last = child; lastOffset = start + value.length - offset; break; } offset = end; }
     const range = document.createRange(); range.setStart(first!, firstOffset); range.setEnd(last!, lastOffset); const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range); node.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
   }, quote);
+}
+export async function rateAllTutorTurns(page: Page) {
+  const panel = page.getByRole('complementary', { name: 'Tutor turn ratings' });
+  const turns = await panel.getByLabel('Tutor turn', { exact: true }).locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
+  for (const turnId of turns) {
+    await panel.getByLabel('Tutor turn', { exact: true }).selectOption(turnId);
+    for (const dimension of rubric.rating_dimensions) await panel.getByRole('button', { name: `${dimension.label}: ${dimension.options[0]}`, exact: true }).click();
+  }
 }

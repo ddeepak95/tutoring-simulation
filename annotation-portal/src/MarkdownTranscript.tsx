@@ -6,6 +6,7 @@ import type { Annotation, Feature } from './types';
 interface Props {
   text: string; turnId: string; annotations: Annotation[]; rubric: Feature[]; readonly: boolean;
   onHighlight: (ids: string[], rect: DOMRect) => void;
+  onHighlightLeave?: () => void;
 }
 function safeUrl(value: string, image = false): string | undefined {
   try {
@@ -13,9 +14,10 @@ function safeUrl(value: string, image = false): string | undefined {
     if (['https:', 'http:', ...(image ? [] : ['mailto:'])].includes(url.protocol)) return value;
   } catch { /* Render unsafe destinations as ordinary text. */ }
 }
-export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight }: Props) {
+export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave }: Props) {
   const tree = useMemo(() => parseMarkdown(text), [text]);
   const definitions = new Map<string, Definition>();
+  const labeledPassages = new Set<string>();
   for (const node of tree.children) {
     if (node.type === 'definition') definitions.set(node.identifier.toUpperCase(), node);
   }
@@ -33,10 +35,23 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
       if (!active.length) segments.push(<span key={i} {...data}>{value.slice(i, end)}</span>);
       else {
         const feature = rubric.find(f => f.key === active[0].feature)!;
-        segments.push(<mark key={i} {...data} style={{ backgroundColor: feature.highlight, borderBottomColor: feature.color }}
-          tabIndex={readonly ? undefined : 0} role={readonly ? undefined : 'button'}
-          aria-label={`Edit ${active.map(a => rubric.find(f => f.key === a.feature)!.name).join(' / ')}`}
-          data-annotation-ids={key} onClick={event => { event.preventDefault(); onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
+        const labels = new Set<string>();
+        if (readonly) for (const annotation of active) {
+          annotation.evidence.forEach((evidence, index) => {
+            const passage = `${annotation.id}:${index}`;
+            if (evidence.turn_id === turnId && evidence.start < map[end - 1][1] && evidence.end > map[i][0] && !labeledPassages.has(passage)) {
+              labels.add(rubric.find(f => f.key === annotation.feature)!.short_label);
+              labeledPassages.add(passage);
+            }
+          });
+        }
+        segments.push(<mark key={i} {...data} data-feature-label={labels.size ? [...labels].join(' / ') : undefined} style={{ backgroundColor: feature.highlight, borderBottomColor: feature.color, '--highlight-label-color': feature.color } as React.CSSProperties}
+          tabIndex={0} role="button"
+          aria-label={`${readonly ? 'View' : 'Edit'} ${active.map(a => rubric.find(f => f.key === a.feature)!.name).join(' / ')}`}
+          data-annotation-ids={key} onClick={event => { event.preventDefault(); if (!readonly) onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
+          onMouseEnter={event => { if (readonly) onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
+          onMouseLeave={() => { if (readonly) onHighlightLeave?.(); }}
+          onPointerUp={event => { if (readonly && event.pointerType === 'touch') onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
           onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.getSelection()?.removeAllRanges(); onHighlight(ids, event.currentTarget.getBoundingClientRect()); } }}>
           {value.slice(i, end)}
         </mark>);

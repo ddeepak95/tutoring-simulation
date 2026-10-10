@@ -56,7 +56,7 @@ export function Admin() {
     if (!version) { const { error } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (error && error.code !== '23505') throw new Error(message(error)); }
     // Fetch current assignments so an older dashboard view cannot recreate existing work.
     const current = await fetchAssignments();
-    const existing = new Set(current.filter(row => row.rubric_hash === bundledRubric.rubric_sha256).map(row => `${row.conversation_id}:${row.annotator_id}`));
+    const existing = new Set(current.map(row => `${row.conversation_id}:${row.annotator_id}`));
     const payload = documentIds.flatMap(conversation_id => userIds.filter(annotator_id => !existing.has(`${conversation_id}:${annotator_id}`)).map(annotator_id => ({ conversation_id, annotator_id, rubric_hash: bundledRubric.rubric_sha256 })));
     if (payload.length) {
       const { error } = await supabase!.from('assignments').insert(payload);
@@ -76,7 +76,7 @@ export function Admin() {
     try {
       const fresh = await fetchAssignments(); const { data, error } = await supabase!.from('rubric_versions').select('hash, snapshot'); if (error) throw error;
       const versions = new Map(data.map(row => [row.hash, row.snapshot as RubricSnapshot]));
-      download('study-annotations.json', { format_version: 'annotation-portal-study/1.0', exported_at: new Date().toISOString(), assignments: fresh.map(row => ({ assignment_id: row.id, annotator_id: row.annotator_id, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, source_conversation_id: row.conversations!.transcript.source_conversation_id || null, repository_source: row.conversations!.transcript.repository_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
+      download('study-annotations.json', { format_version: 'annotation-portal-study/1.0', exported_at: new Date().toISOString(), assignments: fresh.map(row => ({ assignment_id: row.id, annotator_id: row.annotator_id, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, turn_ratings: row.turn_ratings || {}, rating_dimensions: versions.get(row.rubric_hash)?.rating_dimensions || [], rating_scope: versions.get(row.rubric_hash)?.rating_scope || null, source_conversation_id: row.conversations!.transcript.source_conversation_id || null, repository_source: row.conversations!.transcript.repository_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
     } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
   function originalLanguage(doc: DocumentRow) {

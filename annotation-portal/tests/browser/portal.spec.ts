@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { backend, ids, login, select, repositoryFixture, sample } from './mock';
+import { backend, ids, login, rateAllTutorTurns, select, repositoryFixture, sample } from './mock';
 
 test('synced repository conversations appear directly in the dashboard without an import step', async ({ page }) => {
   const state = await backend(page); const repository = repositoryFixture();
@@ -69,6 +69,7 @@ test('username login, persistent highlights, separate annotators and admin monit
   await page.locator('mark').click(); await page.screenshot({ path: '.runtime/editor-preview.png', fullPage: true }); await page.getByRole('button', { name: 'Close annotation popup' }).click();
   await select(page, 't1', 'Have you understood?'); await page.getByRole('button', { name: 'Questions', exact: true }).click(); await page.getByRole('button', { name: 'Instructional', exact: true }).click();
   await expect.poll(() => state.assignments[0].annotations.length).toBe(2);
+  await rateAllTutorTurns(page);
   page.once('dialog', dialog => void dialog.accept()); await page.getByRole('button', { name: 'Complete Annotation', exact: true }).click(); await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0); await expect.poll(() => state.assignments[0].status).toBe('submitted');
   await page.getByRole('button', { name: 'Sign out' }).click(); await login(page, 'bob'); await page.locator('.assignment-card').click(); await expect(page.locator('mark')).toHaveCount(0);
   await page.getByRole('button', { name: 'Sign out' }).click(); await login(page, 'admin'); await expect(page.getByRole('heading', { name: 'Conversations', exact: true })).toBeVisible();

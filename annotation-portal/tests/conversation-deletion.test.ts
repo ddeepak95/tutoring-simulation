@@ -2,6 +2,7 @@ import { beforeAll, afterAll, describe, expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
 import { C, bundledRubric } from '../src/lib';
+import { completeRatings } from './ratings-fixture';
 
 const admin = '00000000-0000-4000-8000-000000000001', alice = '00000000-0000-4000-8000-000000000002';
 const doomed = '00000000-0000-4000-8000-000000000010', other = '00000000-0000-4000-8000-000000000020';
@@ -15,11 +16,12 @@ beforeAll(async () => {
   db = new PGlite();
   await db.exec(`create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create schema storage; create table auth.users(id uuid primary key, email text); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$; grant usage on schema public, auth, storage to anon, authenticated, service_role; grant execute on function auth.uid() to authenticated; create table storage.buckets(id text primary key, name text, public boolean, file_size_limit bigint); create table storage.objects(id uuid primary key default gen_random_uuid(), bucket_id text, name text); alter table storage.objects enable row level security; grant select, insert, delete on storage.objects to authenticated;`);
   await db.exec(fs.readFileSync('supabase/migrations/202610080001_portal.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610090001_turn_ratings_issues.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610080002_conversation_ids.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610080003_conversation_deletion.sql', 'utf8'));
   await db.query('insert into auth.users(id,email) values($1,$2),($3,$4)', [admin, 'admin@users.annotation.invalid', alice, 'alice@users.annotation.invalid']);
   await db.exec(`update public.profiles set role='admin' where id='${admin}'`);
-  await db.query('insert into public.rubric_versions(hash,snapshot) values($1,$2)', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
+  await db.query('insert into public.rubric_versions(hash,snapshot) values($1,$2) on conflict(hash) do nothing', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
   for (const [id, assignmentId] of [[doomed, assignment], [other, otherAssignment]]) {
     await db.query('insert into public.conversations(id,label,transcript,created_by,source_path) values($1,$2,$3,$4,$5)', [id, 'Test', JSON.stringify({ ...transcript, conversation_id: id }), admin, `repository/${id}.json`]);
     await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4)', [assignmentId, id, alice, bundledRubric.rubric_sha256]);
@@ -38,7 +40,7 @@ describe.sequential('admin conversation deletion', () => {
     await asUser(admin); const first = await preview(); expect(first.assignment_count).toBe(1); expect(first.annotation_count).toBe(0); expect(first.revision_count).toBe(0);
     await expect(remove(null)).rejects.toThrow(/changed/);
     const annotation = C.createAnnotation('examples', C.makeEvidence(transcript, 't1', 0, 16), bundledRubric.rubric, 'example'); annotation.entry.detail_level = 'Brief';
-    await asUser(alice); await db.query('select public.save_assignment($1,0,$2,true)', [assignment, JSON.stringify([annotation])]);
+    await asUser(alice); await db.query('select public.save_assignment($1,0,$2,true,$3::jsonb)', [assignment, JSON.stringify([annotation]), JSON.stringify(completeRatings(transcript, bundledRubric))]);
     await asUser(admin); await expect(remove(first.snapshot)).rejects.toThrow(/changed/);
     const second = await preview(); expect(second.assignment_count).toBe(1); expect(second.annotation_count).toBe(1); expect(second.revision_count).toBe(1);
     await db.exec('reset role;');

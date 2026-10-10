@@ -10,6 +10,7 @@
     representations: ["representation_type"],
     cultural_references: ["detail_level"],
     questions: ["question_type"],
+    issues: ["issue", "explanation"],
   };
   const OPTIONAL_CONCEPT_FIELDS = {
     examples: "concept_illustrated", analogies: "concept_explained",
@@ -110,10 +111,12 @@
         if (evidence.quote !== expected.quote || evidence.occurrence !== expected.occurrence) throw new Error("An evidence quotation or occurrence no longer matches the transcript.");
       }
       const allowed = new Set([...feature.fields.map(f => f.key), "turn_locations"]);
+      if (annotation.feature === "issues") allowed.add("correction_status");
       for (const key of Object.keys(annotation.entry)) {
         if (!allowed.has(key)) throw new Error(`Unexpected entry attribute: ${key}.`);
       }
       for (const field of feature.fields) {
+        if (annotation.feature === "issues" && field.key === "correction_status") continue;
         const value = annotation.entry[field.key];
         // Human forms rely on selected passages rather than requiring a concept label.
         // Previously recorded concept metadata remains valid and is preserved.
@@ -165,7 +168,10 @@
       feature_counts[feature.key] = entries.length;
       highlight_counts[feature.key] = matching.length;
     }
+    const issues = instructional_features.issues || [];
+    delete instructional_features.issues;
     return {
+      issues,
       format_version: FORMAT_VERSION,
       exported_at: new Date().toISOString(),
       annotator: annotator || null,

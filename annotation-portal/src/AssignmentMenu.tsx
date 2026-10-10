@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import { bundledRubric } from './lib';
 import type { Assignment, DocumentRow, Profile } from './types';
 
 interface Props {
@@ -25,7 +24,7 @@ export function AssignmentMenu({ documents, users, assignments, anchor, onAssign
   const position = above ? { bottom: Math.max(12, window.innerHeight - rect.top + 8) } : { top: Math.min(rect.bottom + 8, window.innerHeight - 100) };
   const maxHeight = Math.max(100, above ? rect.top - 20 : spaceBelow);
   const ids = new Set(documents.map(doc => doc.id));
-  const current = assignments.filter(row => ids.has(row.conversation_id) && row.rubric_hash === bundledRubric.rubric_sha256);
+  const current = assignments.filter(row => ids.has(row.conversation_id));
   function assignedCount(userId: string) { return new Set(current.filter(row => row.annotator_id === userId).map(row => row.conversation_id)).size; }
 
   useEffect(() => {
@@ -69,7 +68,7 @@ export function AssignmentMenu({ documents, users, assignments, anchor, onAssign
   return createPortal(<form ref={menu} className="assignment-menu" role="dialog" aria-label="Assign annotators" style={{ left, width, maxHeight, ...position }} onSubmit={submit}>
     <button className="dismiss" type="button" disabled={busy} onClick={onClose} aria-label="Close assignment menu">×</button>
     <h3>Assign annotators</h3><p>{documents.length === 1 ? documents[0].transcript.learning_topic || documents[0].label : `${documents.length} selected conversations`}</p>
-    {documents.length === 1 && <Link className="view-annotate-link" to={`/conversations/${documents[0].id}`}>View and annotate</Link>}
+    {documents.length === 1 && <><Link className="view-annotate-link" to={`/conversations/${documents[0].id}/view`}>View annotations</Link><Link className="view-annotate-link" to={`/conversations/${documents[0].id}`}>View and annotate</Link></>}
     {users.length ? <fieldset><legend>Select annotators</legend>{users.map(user => {
       const count = assignedCount(user.id); const allAssigned = count === documents.length;
       return <label className="checkbox" key={user.id}><input type="checkbox" disabled={busy || allAssigned} checked={allAssigned || selected.includes(user.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, user.id] : previous.filter(id => id !== user.id))} /><span>{user.username}{count > 0 && <small>{allAssigned ? 'Already assigned' : `Assigned to ${count} of ${documents.length}`}</small>}</span></label>;

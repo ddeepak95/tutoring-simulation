@@ -1,6 +1,6 @@
 {
   "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
-  "rubric_sha256": "e2a71d6da2aa8102045dfd3e1932f5a5afed09e6b3b6e6545904252c0489473d",
+  "rubric_sha256": "a113c05ff215cf89aafba03823aaf1549a62fd359fa2b4d2bf1c6a2c7a36d5e5",
   "rubric": [
     {
       "name": "Concepts and Subtopics Covered",
@@ -172,6 +172,193 @@
           "label": "Concept checked"
         }
       ]
+    },
+    {
+      "key": "issues",
+      "name": "Issues",
+      "short_label": "Issues",
+      "color": "#ad514b",
+      "highlight": "#fbe7e4",
+      "description": "Which distinct factual, conceptual, procedural, or reasoning issues occur in the tutor’s contributions?",
+      "entry_attributes": "`issue`; `explanation`; exact selected evidence; `turn_locations`",
+      "guidance": "**What to record:** List each distinct confirmed factual, conceptual, procedural, or reasoning issue in the tutor’s contributions. Do not assign severity labels.<br><br>**Entry attributes:** Record `issue` (a short description of the issue), `evidence` (the tutor’s exact incorrect wording or step), `explanation` (why it is incorrect and what the correct claim or step should be), `turn_locations` (the turns containing the issue and any correction).<br><br>**Distinct entries:** List repetitions of the same underlying issue once and record all occurrences. List independently incorrect claims or steps separately. Retain corrected issues in the list; supporting passages can include a later correction.<br><br>**Worked example:** The tutor says, “Evaporation only occurs at boiling temperature.” Record `issue`: **Evaporation incorrectly restricted to boiling temperature**; `evidence`: **Evaporation only occurs at boiling temperature.**; `explanation`: **Evaporation can occur below boiling temperature; it takes place at the liquid’s surface.**; `turn_locations`: the actual supporting turns.<br><br>Flag uncertain or interpretation-dependent cases for verification rather than listing them as confirmed issues.",
+      "fields": [
+        {
+          "key": "issue",
+          "label": "Issue description"
+        },
+        {
+          "key": "explanation",
+          "label": "Why it is an issue and the correct claim or step"
+        }
+      ]
     }
-  ]
+  ],
+  "rating_dimensions": [
+    {
+      "key": "concept_summarization",
+      "label": "Concept Summarization",
+      "description": "Does the tutor recap the key points of each newly explained concept?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "Not applicable"
+      ],
+      "scale_items": {
+        "1": "Never",
+        "2": "Summarizes some, but not all, newly explained concepts",
+        "3": "Recaps the key points after every new concept explanation.",
+        "Not applicable": "No new concept is explained in this turn."
+      },
+      "guidance": "Identify each newly explained concept and check whether the tutor provides a brief recap of its key points after the explanation. A summary condenses ideas already explained; introducing new information or repeating an isolated sentence does not qualify.<br><br>**3:** Summarizes every newly explained concept. **2:** Summarizes some, but not all, newly explained concepts. **1:** Does not summarize any newly explained concept.<br><br>Do not require a summary after every turn. A combined recap can cover multiple concepts if it clearly summarizes the key points of each.<br><br>**Worked example:** After explaining evaporation and its influencing factors, the tutor says, “To recap, evaporation happens at a liquid’s surface, and higher temperature, greater exposed surface area, and moving air increase its rate.” This qualifies because it condenses the preceding explanation into its main points.<br><br>**Transition without a summary:** “Now let’s move on to boiling” does not qualify: it marks a transition without recapping the explanation.<br><br>**Not applicable:** If no new concept is explained, record Not applicable rather than assigning 1."
+    },
+    {
+      "key": "coherence",
+      "label": "Coherence",
+      "description": "Do the tutor’s explanations and examples build on one another in a logical sequence across turns?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Explanations and examples are largely disconnected, with little logical progression across turns.",
+        "2": "Some explanations and examples connect to preceding content, but others contain abrupt transitions or unexplained gaps.",
+        "3": "Explanations and examples consistently connect to preceding content, forming a logical sequence across turns."
+      },
+      "guidance": "Assess whether the tutor’s explanations and examples form a logical progression across turns. Look for connections that show how new content builds on preceding ideas. These may be explicit or clear from the explanation; words such as “because” or “therefore” alone do not establish coherence.<br><br>**3:** Connections are consistently clear, with no substantive unexplained gaps. **2:** Some connections are clear, but other transitions leave the learner to infer a missing link. **1:** Explanations are largely disconnected, with little logical progression.<br><br>A change of topic is not automatically incoherent if the tutor explains the connection. Assess logical connections separately from factual correctness and relevance to the learning objective.<br><br>**Worked example:** The tutor first explains evaporation as particles escaping a liquid’s surface. In a later turn, it says, “Higher temperature gives more particles enough energy to escape, so evaporation becomes faster.” This clearly connects a new explanation to the preceding concept.<br><br>**Unexplained gap:** If the tutor instead moves from evaporation to “Temperature affects density” without explaining the relationship or transition, that is evidence of a gap. One gap supports **2**, rather than automatically making the whole conversation **1**."
+    },
+    {
+      "key": "information_load_appropriateness",
+      "label": "Information Load Appropriateness",
+      "description": "Across the conversation, does the tutor provide sufficient explanation and introduce information in manageable portions, considering the learner’s questions and any expressed needs?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Frequently omits essential details or presents information without breaking it into manageable portions. Substantial unnecessary detail or repetition occurs, or expressed needs for more or less information repeatedly go unaddressed.",
+        "2": "Generally provides sufficient, manageable explanations, but some parts omit essential details, introduce several ideas without breaking them down, or include unnecessary detail or repetition. Responds inconsistently to expressed needs for more or less information.",
+        "3": "Provides the essential details needed to follow the explanations, introduces new information in manageable portions, and avoids unnecessary detail or repetition. Adjusts the amount of information when the learner expresses a need."
+      },
+      "guidance": "Assess the amount and organization of information across the conversation. Judge whether explanations provide the details needed to follow the concept without unnecessary detail, repetition, or too many new ideas introduced at once.<br><br>**3:** Essential details are provided, new information is broken into manageable parts, and the tutor adjusts when the learner requests more detail or simplification. **2:** Explanations are generally sufficient and manageable, but some parts omit needed details, introduce several ideas without breaking them down, or contain unnecessary detail or repetition. **1:** These problems recur or substantially affect the central explanation, or requests for more or less information repeatedly go unaddressed.<br><br>Use the learner’s questions and expressed needs as evidence. Do not infer overload from length alone or assume confusion means excessive information. Assess adjustment only when an opportunity arises.<br><br>**Worked example:** The learner asks why clothes dry faster in moving air. The tutor explains that moving air removes water vapour near the clothes, allowing evaporation to continue faster, and adds detail when requested. This supports an appropriate information load.<br><br>**Insufficient detail:** An answer such as “Because of evaporation,” without explaining airflow’s role, does not provide the details needed to answer the learner’s question.<br><br>**Too much information at once:** A lengthy explanation introducing vapour pressure, humidity, diffusion, and thermodynamics without developing their connections may provide too much information at once. Assess how the ideas are presented, rather than length alone.<br><br>**Distinguishing 2 from 1:** Assign **2** for occasional, localized problems within otherwise manageable explanations. Assign **1** when problems recur or substantially affect the central explanation. A single problem may justify **1** if it leaves the main reasoning of the central explanation difficult to follow."
+    },
+    {
+      "key": "relevance",
+      "label": "Relevance",
+      "description": "Do the tutor’s explanations, examples, and responses to follow-up questions support the core learning objective or address learner questions related to it?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Content frequently shifts to topics that do not support the core learning objective, leaving the intended topic or related learner questions insufficiently addressed.",
+        "2": "Content generally supports the core learning objective, but some explanations, examples, or follow-up responses introduce tangents without a clear contribution to it.",
+        "3": "Explanations, examples, and follow-up responses consistently support the core learning objective. Additional topics serve a clear purpose, such as explaining a prerequisite or answering a related learner question."
+      },
+      "guidance": "Identify the core learning objective from the task or initial learner request. Assess whether the tutor’s explanations, examples, and follow-up responses contribute to that objective.<br><br>Additional topics can be relevant when they explain a prerequisite, clarify the concept, or answer a related learner question. Introducing another topic does not automatically constitute a tangent.<br><br>**3:** Content consistently contributes to the learning objective. **2:** Content generally contributes, but some passages introduce tangents without a clear purpose. **1:** Content frequently shifts away from the objective, leaving the intended topic or related learner questions insufficiently addressed.<br><br>Judge what the content contributes, rather than how smoothly it connects to preceding content. Assess real-world usefulness separately.<br><br>**Worked example:** The learner asks how temperature affects evaporation. The tutor explains particle energy before connecting it to the rate of evaporation. The particle explanation is relevant because it supports the requested explanation.<br><br>**Tangent:** If the tutor instead describes temperature scales and their history without using that information to explain evaporation, that passage is a tangent. A localized tangent within an otherwise relevant conversation supports **2**; repeated shifts that leave the learning objective insufficiently addressed support **1**."
+    },
+    {
+      "key": "real_world_connection_and_usefulness",
+      "label": "Real-World Connection and Usefulness",
+      "description": "Does the tutor explicitly explain how the learning topic relates to real-world situations or serves a useful purpose?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Provides no real-world connection or useful purpose, or only makes a vague claim such as “This is important.”",
+        "2": "Mentions a real-world situation or practical use, but leaves its connection to the topic partly unexplained.",
+        "3": "Clearly explains how the topic helps interpret a concrete real-world situation or supports a practical use."
+      },
+      "guidance": "Look for an explicit connection between the learning topic and an everyday situation or practical purpose.<br><br>**3:** Explains how the concept helps understand the situation or accomplish a practical goal. **2:** Names a related situation or use but leaves the connection partly unexplained. **1:** Provides no connection or useful purpose, or only claims that the topic is important.<br><br>Personalization is not required. A familiar object alone does not establish a meaningful connection.<br><br>**Worked example — 3:** “Spreading wet clothes out exposes more surface area, increasing evaporation and helping them dry faster.” This connects the concept to a practical action and explains why it works.<br><br>**Worked example — 2:** “Evaporation happens when clothes dry,” without further explanation, names a real-world situation but leaves the connection partly unexplained."
+    },
+    {
+      "key": "appropriateness_for_the_learners_level",
+      "label": "Appropriateness for the Learner’s Level",
+      "description": "Do the tutor’s vocabulary, conceptual complexity, mathematical detail, and assumed prior knowledge match the learner’s stated level and demonstrated understanding?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "Insufficient evidence"
+      ],
+      "scale_items": {
+        "1": "Frequently uses language, concepts, or mathematical detail that is too advanced or too basic for the learner, with little adjustment to clear indications of their understanding.",
+        "2": "Generally matches the learner’s level, but some explanations use unexplained terminology or notation, assume unsupported knowledge, omit needed mathematical steps, or are unnecessarily basic. Adjustments are inconsistent.",
+        "3": "Consistently uses language, conceptual complexity, and mathematical detail suited to the learner. Explains unfamiliar terms, notation, and prerequisite steps when needed, and adjusts to demonstrated understanding.",
+        "Insufficient evidence": "There is insufficient evidence of the learner’s level. Record the limitation in the turn notes."
+      },
+      "guidance": "Use the stated learner level, supplied profile, and understanding demonstrated through the learner’s contributions. Assess whether vocabulary, conceptual complexity, mathematical detail, and assumed prior knowledge fit that evidence.<br><br>**3:** Explanations consistently fit the learner’s level. Unfamiliar terms, notation, and prerequisite steps are explained when needed. **2:** Explanations generally fit, but some passages assume unsupported knowledge, omit necessary steps, or are unnecessarily basic. **1:** Explanations frequently mismatch the learner’s level, with little adjustment to clear evidence of their understanding.<br><br>Assess mathematical detail only where relevant. Do not infer ability from age alone, and assess adjustment only when an opportunity arises. If learner-level evidence is insufficient, record that limitation.<br><br>**Worked example:** The learner says, “I haven’t learned about particles yet.” The tutor introduces particles in plain language before using them to explain evaporation. This supports alignment with the learner’s level.<br><br>**Mismatch:** Using unexplained terms such as “molecular kinetic-energy distribution” despite that statement provides evidence of a mismatch. An occasional mismatch supports **2**; repeated mismatches support **1**.<br><br>Judge the difficulty and assumed knowledge here; assess the amount of information under Information Load Appropriateness."
+    },
+    {
+      "key": "opportunities_to_demonstrate_understanding",
+      "label": "Opportunities to Demonstrate Understanding",
+      "description": "Does the tutor provide an opportunity for the learner to practise or demonstrate understanding of the core learning concept, during the conversation or through a follow-up task?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Provides no opportunity to demonstrate understanding or practise the core learning concept.",
+        "2": "Provides only a recall question, a general self-report check, or a vague suggestion for related practice.",
+        "3": "Provides a concrete question or task requiring the learner to explain or apply the core learning concept, during the conversation or as follow-up practice."
+      },
+      "guidance": "Identify the core learning concept from the task or initial learner request. Assess opportunities to practise or demonstrate that concept, rather than requiring a check after every supporting concept. Either a prompt during the conversation or a follow-up practice task can qualify.<br><br>**3:** A concrete question or task requires explanation or application of the core learning concept. **2:** Opportunities are limited to recall, general self-report checks, or vague suggestions for related practice. **1:** No opportunity is provided to demonstrate understanding or practise the core learning concept.<br><br>A score of **3** indicates that an opportunity was provided, not that the learner demonstrated understanding or completed the task. Assess the tutor’s prompt even if the learner does not respond. Multiple questions or tasks are not required."
+    },
+    {
+      "key": "conversational_naturalness",
+      "label": "Conversational Naturalness",
+      "description": "Does the tutor use familiar conversational phrases and address the learner personally, making the exchange feel like a dialogue rather than simply delivering explanations?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Primarily delivers impersonal explanations, with little conversational phrasing or personal acknowledgement of the learner’s contributions.",
+        "2": "Uses some conversational phrases and personal wording, but these are often generic or repetitive, and parts of the exchange feel like standalone explanations.",
+        "3": "Consistently uses familiar conversational phrases and personal wording tied to the learner’s contributions, making explanations feel part of a dialogue."
+      },
+      "guidance": "Assess whether the tutor’s wording feels like dialogue with this learner, using familiar conversational phrases and personal references that fit the exchange.<br><br>**3:** Conversational phrasing and personal wording consistently fit the learner’s contributions. **2:** Some wording feels conversational and personal, but other parts use generic, repetitive phrases or read like standalone explanations. **1:** Responses predominantly deliver impersonal explanations with little conversational phrasing or personal acknowledgement.<br><br>**Worked example:** The learner says, “I’ve noticed clothes dry faster near our fan.” The tutor replies, “That’s a useful observation—let’s use your fan example to explore what moving air does.” This provides evidence of conversational, personal wording.<br><br>Repeatedly starting unrelated responses with “Great question!” provides weaker evidence because the phrase does not reflect the particular contribution.<br><br>Judge the pattern across the conversation; one natural phrase alone does not establish **3**."
+    },
+    {
+      "key": "responsiveness",
+      "label": "Responsiveness",
+      "description": "Does the tutor address the learner’s questions, requests, and expressed confusion, and adapt explanations to demonstrated prior knowledge, misconceptions, or stated interests when relevant?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Frequently ignores or misinterprets learner contributions, or continues generic explanations despite clear indications that adaptation is needed.",
+        "2": "Addresses some learner contributions, but responses are sometimes incomplete or generic, or miss clear opportunities to adapt the explanation.",
+        "3": "Consistently addresses the learner’s contributions and makes relevant adaptations—for example, building on demonstrated knowledge, correcting a misconception, or using an expressed interest to shape an example."
+      },
+      "guidance": "Compare the tutor’s responses with the learner’s questions, requests, expressed confusion, and other relevant contributions. Look for direct answers and adaptations based on demonstrated knowledge, misconceptions, or stated interests.<br><br>**3:** Consistently addresses the points raised and adapts explanations when relevant opportunities arise. **2:** Addresses some contributions, but others receive incomplete or generic responses, or clear opportunities for adaptation are missed. **1:** Frequently ignores or misinterprets contributions, or continues generic explanations despite clear indications that adaptation is needed.<br><br>Assess adaptation only when supported by the learner’s contributions or supplied profile. When no adaptation opportunity arises, assess how directly the tutor addresses the learner’s contributions.<br><br>**Worked example:** The learner says, “I thought evaporation happens only when water boils.” The tutor replies, “Evaporation can happen below boiling temperature. It occurs at the surface, while boiling occurs throughout the liquid.” This directly addresses the misconception and adapts the explanation.<br><br>**Missed contribution:** A reply such as “Evaporation is important in the water cycle,” without addressing the misconception, provides evidence of poor responsiveness.<br><br>Judge the pattern across the conversation; one missed contribution does not automatically establish **1**."
+    },
+    {
+      "key": "positivity_of_tone",
+      "label": "Positivity of Tone",
+      "description": "How much warmth, encouragement, or empathy does the tutor express toward the learner through its wording and responses?",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "scale_items": {
+        "1": "Low positivity: Shows little or no warmth, encouragement, or empathy; the tone is neutral or negative.",
+        "2": "Moderate positivity: Uses some warm, encouraging, or empathetic wording, but the tone is predominantly matter-of-fact.",
+        "3": "High positivity: Consistently conveys warmth, encouragement, or empathy through wording suited to the learner’s contributions."
+      },
+      "guidance": "Assess the warmth, encouragement, and empathy expressed in the tutor’s wording across the conversation.<br><br>**3:** Consistently conveys positive tone suited to the learner’s contributions. **2:** Uses some warm, encouraging, or empathetic wording, but the tone is predominantly matter-of-fact. **1:** Shows little or no positive tone; responses are neutral or negative.<br><br>Judge the overall pattern rather than an isolated phrase. Record dismissive or discouraging wording when present.<br><br>**Worked example — High positivity:** “You’ve identified the key factor. This distinction can be tricky—let’s work through it together.”<br><br>**Worked example — Moderate positivity:** Mostly factual explanations, with occasional encouragement such as “That’s a useful observation.”<br><br>**Worked example — Low positivity:** Consistently matter-of-fact explanations without warmth or encouragement, or wording such as “You should already know this.”<br><br>A neutral tone can receive **1** without being disrespectful; this item measures positivity, not overall teaching quality."
+    }
+  ],
+  "rating_scope": "Rate each tutor turn in the context available up to that turn. Conversation-level guidebook criteria are applied to the selected turn; these are not conversation-wide scores."
 }
