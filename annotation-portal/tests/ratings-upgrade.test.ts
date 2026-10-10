@@ -61,6 +61,18 @@ it('upgrades active work without losing highlights or history, preserves submiss
     await expect(validateRatings()).resolves.toBeDefined();
     ratings.t1.values.instructional_sequence = 'Not determinable';
     await expect(validateRatings()).resolves.toBeDefined();
+    delete ratings.t1.values.coherence;
+    delete ratings.t1.values.responsiveness;
+    await expect(validateRatings()).rejects.toThrow(/Coherence|Responsiveness/);
+    await db.exec(fs.readFileSync('supabase/migrations/202610100001_rating_questions.sql', 'utf8'));
+    await expect(validateRatings()).resolves.toBeDefined();
+    ratings.t1.values.concept_summarization = 'Not applicable';
+    await expect(validateRatings()).resolves.toBeDefined();
+    await db.exec(fs.readFileSync('supabase/migrations/202610100002_summary_options.sql', 'utf8'));
+    await expect(validateRatings()).rejects.toThrow(/Concept Summarization/);
+    await expect(db.query('select public.validate_turn_ratings($1::jsonb,$2::jsonb,$3::jsonb,false)', [JSON.stringify(conversation), JSON.stringify(ratings), JSON.stringify(pinned)])).resolves.toBeDefined();
+    ratings.t1.values.concept_summarization = '1';
+    await expect(validateRatings()).resolves.toBeDefined();
     await asUser(alice);
     const saved = (await db.query<any>('select public.save_assignment($1,2,$2::jsonb,true,$3::jsonb) as saved', [draftId, '[]', JSON.stringify(ratings)])).rows[0].saved;
     expect(saved.status).toBe('submitted');

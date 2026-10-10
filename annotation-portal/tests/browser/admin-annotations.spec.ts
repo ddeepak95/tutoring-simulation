@@ -4,7 +4,7 @@ import C from '../../src/generated/core.js';
 import fs from 'node:fs';
 const rubric = JSON.parse(fs.readFileSync('src/generated/rubric.json', 'utf8'));
 
-test('admin switches annotators within a conversation and inspects readonly details', async ({ page }) => {
+test('admin switches annotators, edits active work, and keeps submissions locked until reopened', async ({ page }) => {
   const state = await backend(page);
   const conversation = C.normalizeConversation(state.documents[0].transcript);
   for (const [i, quote] of ['Wet clothes drying', 'Water changes from liquid into vapour.'].entries()) {
@@ -28,13 +28,17 @@ test('admin switches annotators within a conversation and inspects readonly deta
   await expect(page).toHaveURL(new RegExp(`/assignments/${ids.b}$`));
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(page.locator('mark')).toHaveText('Water changes from liquid into vapour.');
-  await expect(page.locator('.save-status')).toContainText('bob · Read only');
-  await page.getByRole('button', { name: 'View Examples', exact: true }).focus(); await page.keyboard.press('Enter');
-  await expect(page.getByRole('dialog', { name: 'View Examples' })).toContainText('Elaborated');
-  await select(page, 't1', 'What is evaporation?');
-  await expect(page.getByRole('button', { name: 'Questions', exact: true })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
-  expect(state.assignments).toEqual(original); expect(state.saves).toBe(0);
+  await expect(page.locator('.save-status')).toContainText("Editing bob's annotations");
+  await page.getByRole('button', { name: 'Edit Examples', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Edit Examples' })).toContainText('Elaborated');
+  await page.getByRole('button', { name: 'Brief', exact: true }).click();
+  await page.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true }).click();
+  await expect.poll(() => state.assignments[1].turn_ratings.t1?.values.relevance).toBe('3');
+  expect(state.assignments[1].annotations[0].entry.detail_level).toBe('Brief');
+  expect(state.assignments[1].annotator_id).toBe(ids.bob);
+  expect(state.assignments[0]).toEqual(original[0]);
+  original[1] = structuredClone(state.assignments[1]);
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
   await switcher.selectOption('own');
   await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
   const own = state.assignments.find(row => row.annotator_id === ids.admin)!;
@@ -47,6 +51,29 @@ test('admin switches annotators within a conversation and inspects readonly deta
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(switcher).toBeVisible(); await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   expect(state.assignments.filter(row => row.annotator_id !== ids.admin)).toEqual(original);
+});
+
+test('admin enters editing from review, reopens submitted work, and saves under the original annotator', async ({ page }) => {
+  const state = await backend(page);
+  state.assignments[0].status = 'submitted'; state.assignments[0].submitted_at = new Date().toISOString();
+  const bobWork = structuredClone(state.assignments[1]);
+  await login(page, 'admin'); await page.goto(`/assignments/${ids.a}/view`);
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Reopen and edit', exact: true }).click();
+  await expect(page).toHaveURL(new RegExp(`/assignments/${ids.a}$`));
+  await expect(page.locator('.save-status')).toContainText("Editing alice's annotations");
+  await select(page, 't1', 'Wet clothes drying'); await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Explained', exact: true }).click();
+  await rateAllTutorTurns(page);
+  page.once('dialog', dialog => void dialog.accept()); await page.getByRole('button', { name: 'Complete Annotation', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Reopen and edit', exact: true })).toBeVisible();
+  expect(state.assignments[0].status).toBe('submitted'); expect(state.assignments[0].annotator_id).toBe(ids.alice);
+  expect(state.assignments[0].annotations[0].entry.detail_level).toBe('Explained');
+  expect(state.assignments[1]).toEqual(bobWork); expect(state.assignments).toHaveLength(2);
+  await page.goto(`/assignments/${ids.b}/view`);
+  await page.getByRole('link', { name: 'Edit annotations', exact: true }).click();
+  await expect(page).toHaveURL(new RegExp(`/assignments/${ids.b}$`));
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
 });
 
 test('failed admin saves prevent annotator switching until retry succeeds', async ({ page }) => {
@@ -113,7 +140,8 @@ test('admin annotates independently, resumes, submits and reopens own work', asy
   await page.getByRole('link', { name: 'Conversations', exact: true }).click();
   await page.locator('.progress').getByRole('row').filter({ hasText: 'alice' }).getByRole('link', { name: 'View', exact: true }).click();
   await expect(page.locator('mark')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toBeVisible();
+  await expect(page.locator('.save-status')).toContainText("Editing alice's annotations");
   expect(state.assignments.filter(row => row.annotator_id !== ids.admin)).toEqual(originalWork);
   expect(state.documents[0].transcript).toEqual(originalTranscript);
 });

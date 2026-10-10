@@ -2,28 +2,39 @@ import { expect, test } from '@playwright/test';
 import { backend, ids, login, rateAllTutorTurns, select } from './mock';
 
 test('every tutor turn must be fully rated; ratings autosave, survive reload, and appear read only in review', async ({ page }) => {
-  const state = await backend(page); await login(page, 'alice'); await page.locator('.assignment-card').click();
+  const state = await backend(page);
+  state.assignments[0].turn_ratings = { t1: { values: { concept_summarization: 'Not applicable' }, notes: '' } };
+  await login(page, 'alice'); await page.locator('.assignment-card').click();
   const panel = page.getByRole('complementary', { name: 'Tutor turn ratings' });
   await expect(panel.getByRole('heading', { name: 'Instructional Sequence', exact: true })).toHaveCount(0);
-  await expect(panel.locator('.rating-dimension')).toHaveCount(10);
+  await expect(panel.locator('.rating-dimension')).toHaveCount(8);
+  await expect(panel.getByRole('button', { name: /No new concept is explained/ })).toHaveCount(0);
+  await expect(panel.getByRole('group', { name: 'Concept Summarization', exact: true }).getByRole('button')).toHaveCount(3);
+  await expect(panel.getByText('Previously saved: no new concept explained. Choose an answer above before submitting.', { exact: true })).toBeVisible();
+  await expect(panel.getByRole('heading', { name: 'Coherence', exact: true })).toHaveCount(0);
+  await expect(panel.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true })).toHaveText('All information is relevant.');
+  await expect(panel.getByRole('button', { name: /: [123]$/ })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Rate tutor turn t1', exact: true })).toHaveText('Rating pending');
   await expect(page.getByRole('button', { name: /tutor turn s1/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'Complete Annotation', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Rate every tutor turn'); expect(state.assignments[0].status).toBe('not_started');
-  await panel.getByRole('button', { name: 'Relevance: 3', exact: true }).click();
+  await panel.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true }).click();
   await expect.poll(() => state.assignments[0].turn_ratings.t1?.values.relevance).toBe('3');
-  await page.reload(); await expect(panel.getByRole('button', { name: 'Relevance: 3', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await page.reload(); await expect(panel.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true })).toHaveAttribute('aria-pressed', 'true');
   await rateAllTutorTurns(page);
+  await expect(panel.locator('.rating-dimension')).toHaveCount(10);
+  expect(state.assignments[0].turn_ratings.t1.values.coherence).toBeUndefined();
+  expect(state.assignments[0].turn_ratings.t1.values.responsiveness).toBeUndefined();
   await expect(page.getByRole('button', { name: 'Rate tutor turn t1', exact: true })).toHaveText('Rated');
   await expect(page.getByRole('button', { name: 'Rate tutor turn t2', exact: true })).toHaveText('Rated');
   await expect(panel).toContainText('2 of 2 tutor turns rated');
   page.once('dialog', dialog => void dialog.accept()); await page.getByRole('button', { name: 'Complete Annotation', exact: true }).click();
   await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
   expect(state.assignments[0].annotations).toHaveLength(0); expect(state.assignments[0].status).toBe('submitted');
-  await expect(panel.getByRole('button', { name: 'Relevance: 1', exact: true })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Relevance: Most information is irrelevant.', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Sign out', exact: true }).click(); await login(page, 'admin');
   await page.goto(`/assignments/${ids.a}/view`); await expect(panel).toContainText('2 of 2 tutor turns rated');
-  await expect(panel.getByRole('button', { name: 'Relevance: 1', exact: true })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Relevance: Most information is irrelevant.', exact: true })).toBeDisabled();
   expect(state.assignments[1].turn_ratings).toEqual({});
 });
 
@@ -57,7 +68,7 @@ test('issues require explanation without correction status, and support linked c
 test('failed rating saves recover locally and mobile turn buttons reach the rating panel', async ({ page }) => {
   const state = await backend(page); await login(page, 'alice'); await page.locator('.assignment-card').click();
   state.failSaves = true;
-  await page.getByRole('button', { name: 'Relevance: 3', exact: true }).click();
+  await page.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true }).click();
   await expect(page.locator('.save-status')).toContainText('Cloud save failed');
   expect(state.assignments[0].turn_ratings).toEqual({});
   await page.reload(); await expect(page.getByText('A local recovery draft is available.', { exact: true })).toBeVisible();

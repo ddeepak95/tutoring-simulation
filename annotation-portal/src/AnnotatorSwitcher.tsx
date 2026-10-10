@@ -15,7 +15,7 @@ export function AnnotatorSwitcher({ assignment, profile, busy, onSwitch, viewOnl
     setLoading(true); setError(''); setViews([]);
     void (async () => {
       try {
-        const { data, error } = await supabase!.from('assignments').select('id, annotator_id, status, rubric_hash, profiles!assignments_annotator_id_fkey(id, username, role)').eq('conversation_id', assignment.conversation_id).returns<AnnotationView[]>();
+        const { data, error } = await supabase!.from('assignments').select('id, annotator_id, status, rubric_hash, profiles!assignments_annotator_id_fkey(id, username, role)').eq('conversation_id', assignment.conversation_id).eq('is_active',true).returns<AnnotationView[]>();
         if (error) throw error;
         if (alive) setViews((data as AnnotationView[]).sort((a, b) => (a.profiles?.username || a.annotator_id).localeCompare(b.profiles?.username || b.annotator_id)));
       } catch { if (alive) setError('Could not load annotators.'); }

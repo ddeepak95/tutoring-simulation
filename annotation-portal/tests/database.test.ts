@@ -15,11 +15,13 @@ beforeAll(async () => {
   await db.exec(fs.readFileSync('supabase/migrations/202610080001_portal.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610090001_turn_ratings_issues.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610090002_remove_issue_correction_status.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610100001_rating_questions.sql', 'utf8'));
   await db.query('insert into auth.users(id,email) values ($1,$2),($3,$4),($5,$6)', [admin, 'admin@users.annotation.invalid', alice, 'alice@users.annotation.invalid', bob, 'bob@users.annotation.invalid']);
   await db.exec(`update public.profiles set role='admin' where id='${admin}';`);
   await db.query('insert into public.rubric_versions(hash,snapshot) values ($1,$2::jsonb) on conflict(hash) do nothing', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
   await db.query('insert into public.conversations(id,label,transcript,created_by,source_path) values ($1,$2,$3::jsonb,$4,$5)', [documentId, 'Test', JSON.stringify(transcript), admin, 'immutable/test.json']);
   await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4),($5,$2,$6,$4)', [assignmentA, documentId, alice, bundledRubric.rubric_sha256, assignmentB, bob]);
+
 
 });
 afterAll(async () => { await db?.close(); });
@@ -137,5 +139,38 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     await asUser(alice);
     await db.query('select public.save_assignment($1,3,$2::jsonb,false)', [id, '[]']);
     expect((await db.query<{ turn_ratings: unknown }>('select turn_ratings from public.assignments where id=$1', [id])).rows[0].turn_ratings).toEqual(ratings);
+  });
+  it('allows audited admin edits of another annotator while preserving ownership, validation and revision locks', async () => {
+    await db.exec('reset role');
+    await db.exec(fs.readFileSync('supabase/migrations/202610100003_admin_edit_annotations.sql', 'utf8'));
+    const doc = '00000000-0000-4000-8000-000000000050', id = '00000000-0000-4000-8000-000000000051';
+    await db.query('insert into public.conversations(id,label,transcript,created_by) values($1,$2,$3::jsonb,$4)', [doc, 'Admin editing', JSON.stringify(transcript), admin]);
+    await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4)', [id, doc, alice, bundledRubric.rubric_sha256]);
+    const start = transcript.messages[0].text.indexOf('Water');
+    const annotation = C.createAnnotation('examples', C.makeEvidence(transcript, 't1', start, start + 5), bundledRubric.rubric, 'admin-example'); annotation.entry.detail_level = 'Brief';
+    const ratings = { t1: { values: { relevance: '3' }, notes: '' } };
+    const write = (revision: number, submit = false, payload: unknown = ratings) => db.query<any>('select public.save_assignment($1,$2,$3::jsonb,$4,$5::jsonb) as result', [id, revision, JSON.stringify([annotation]), submit, JSON.stringify(payload)]);
+    await asUser(bob); await expect(write(0)).rejects.toThrow(/denied/);
+    await asUser(admin); await write(0);
+    let row = (await db.query<any>('select * from public.assignments where id=$1', [id])).rows[0];
+    expect(row.annotator_id).toBe(alice); expect(row.annotations).toEqual([annotation]); expect(row.turn_ratings).toEqual(ratings);
+    let history = (await db.query<any>('select * from public.annotation_revisions where assignment_id=$1 order by revision', [id])).rows;
+    expect(history[0].actor_id).toBe(admin); expect(history[0].operation).toBe('admin_edit');
+    await expect(db.exec("update public.assignments set annotations='[]'::jsonb")).rejects.toThrow(/permission denied/);
+    await expect(write(0)).rejects.toThrow(/Revision conflict/);
+    await expect(write(1, true)).rejects.toThrow(/Rate every tutor turn/);
+    annotation.evidence[0].quote = 'wrong'; await expect(write(1)).rejects.toThrow(/exactly match/); annotation.evidence[0].quote = 'Water';
+    await db.query('select public.save_assignment($1,1,$2::jsonb,false)', [id, JSON.stringify([annotation])]);
+    row = (await db.query<any>('select * from public.assignments where id=$1', [id])).rows[0]; expect(row.turn_ratings).toEqual(ratings);
+    await asUser(alice); await expect(write(0)).rejects.toThrow(/Revision conflict/); await write(2);
+    await asUser(admin); await write(3, true, completeRatings(transcript, bundledRubric));
+    history = (await db.query<any>('select * from public.annotation_revisions where assignment_id=$1 order by revision', [id])).rows;
+    expect(history.map((item: any) => item.actor_id)).toEqual([admin, admin, alice, admin]);
+    expect(history.at(-1).operation).toBe('admin_submit');
+    await expect(write(4)).rejects.toThrow(/read only/);
+    await db.query('select public.reopen_assignment($1,4)', [id]); await write(5);
+    expect((await db.query<any>('select annotator_id from public.assignments where id=$1', [id])).rows[0].annotator_id).toBe(alice);
+    await db.exec('reset role; set role anon'); await expect(write(6)).rejects.toThrow(/permission denied/);
+    await db.exec('reset role');
   });
 });

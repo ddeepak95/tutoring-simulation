@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { bundledRubric, C, download, fetchAssignments, supabase } from './lib';
+import { bundledRubric, C, download, fetchAssignments, fetchAllRows, supabase } from './lib';
 import type { Assignment, DocumentRow, Profile, RubricSnapshot } from './types';
 import { AssignmentMenu } from './AssignmentMenu';
 import { DeleteConversation } from './DeleteConversation';
 import { identifyUploadedConversation } from './conversation-identity';
+import { ratingQuestionMetadata } from './turn-ratings';
+import { compareWithBaseline } from './baseline-comparison';
+import type { LLMBaseline } from './types';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
@@ -49,34 +52,34 @@ export function Admin() {
     } catch (err) { setError(`${uploaded ? `${uploaded} uploaded before the error. ` : ''}${message(err)}`); }
     finally { if (fileRef.current) fileRef.current.value = ''; setBusy(false); await refresh(); }
   }
-  async function assign(documentIds: string[], userIds: string[]) {
+  async function assign(documentIds: string[], userIds: string[], baselineIds: Record<string,string>) {
     if (!documentIds.length || !userIds.length) return;
     setError(''); setNotice('');
     const { data: version, error: readError } = await supabase!.from('rubric_versions').select('hash').eq('hash', bundledRubric.rubric_sha256).maybeSingle(); if (readError) throw new Error(message(readError));
     if (!version) { const { error } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (error && error.code !== '23505') throw new Error(message(error)); }
-    // Fetch current assignments so an older dashboard view cannot recreate existing work.
-    const current = await fetchAssignments();
-    const existing = new Set(current.map(row => `${row.conversation_id}:${row.annotator_id}`));
-    const payload = documentIds.flatMap(conversation_id => userIds.filter(annotator_id => !existing.has(`${conversation_id}:${annotator_id}`)).map(annotator_id => ({ conversation_id, annotator_id, rubric_hash: bundledRubric.rubric_sha256 })));
-    if (payload.length) {
-      const { error } = await supabase!.from('assignments').insert(payload);
-      if (error) {
-        await refresh();
-        throw new Error(error.code === '23505' ? 'Assignments changed while you were selecting. Existing work is safe; try assigning again.' : message(error));
-      }
-    }
-    setNotice(payload.length ? `Created ${payload.length} independent assignment${payload.length === 1 ? '' : 's'}.` : 'These annotators already have this conversation.'); setSelected([]); await refresh();
+    const {data,error}=await supabase!.rpc('create_annotation_assignments',{p_conversation_ids:documentIds,p_annotator_ids:userIds,p_rubric_hash:bundledRubric.rubric_sha256,p_baseline_ids:baselineIds});
+    if(error) {await refresh();throw new Error(message(error));}
+    setNotice(data.restored ? `Resumed ${data.restored} saved assignment${data.restored===1?'':'s'}. Created ${data.created} new assignments.` : data.created ? `Created ${data.created} independent assignment${data.created===1?'':'s'}.` : 'These annotators already have this conversation.'); setSelected([]); await refresh();
   }
   async function reopen(row: Assignment) {
     setError(''); setBusy(true);
     try { const { error } = await supabase!.rpc('reopen_assignment', { p_assignment_id: row.id, p_revision: row.revision }); if (error) throw error; await refresh(); } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
+  async function unassign(assignments: Assignment[]) {
+    setError('');setNotice('');
+    const {data,error}=await supabase!.rpc('unassign_annotation_assignments',{p_assignments:assignments.map(row=>({id:row.id,revision:row.revision}))});
+    await refresh();
+    if(error) throw new Error(message(error));
+    setNotice(`Unassigned ${data.unassigned} conversation${data.unassigned===1?'':'s'}. Saved annotation work is retained.`);
+  }
   async function exportAll() {
     setBusy(true); setError('');
     try {
-      const fresh = await fetchAssignments(); const { data, error } = await supabase!.from('rubric_versions').select('hash, snapshot'); if (error) throw error;
+      const fresh = await fetchAllRows<Assignment>('assignments','*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)'); const data = await fetchAllRows<{hash:string;snapshot:RubricSnapshot}>('rubric_versions','hash, snapshot',['hash']);
       const versions = new Map(data.map(row => [row.hash, row.snapshot as RubricSnapshot]));
-      download('study-annotations.json', { format_version: 'annotation-portal-study/1.0', exported_at: new Date().toISOString(), assignments: fresh.map(row => ({ assignment_id: row.id, annotator_id: row.annotator_id, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, turn_ratings: row.turn_ratings || {}, rating_dimensions: versions.get(row.rubric_hash)?.rating_dimensions || [], rating_scope: versions.get(row.rubric_hash)?.rating_scope || null, source_conversation_id: row.conversations!.transcript.source_conversation_id || null, repository_source: row.conversations!.transcript.repository_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
+      const [baselines,revisionRows]=await Promise.all([fetchAllRows<LLMBaseline>('llm_baselines'),fetchAllRows('annotation_revisions','*',['assignment_id','revision'])]);
+      const baselinesById=new Map(baselines.map(baseline=>[baseline.id,baseline]));
+      download('study-annotations.json', { format_version: 'annotation-portal-study/2.0', exported_at: new Date().toISOString(), llm_baselines:baselines, revision_history:revisionRows, assignments: fresh.map(row => ({ assignment_id: row.id, annotator_id: row.annotator_id, annotation_source:row.annotation_source || 'blank', baseline_id:row.baseline_id || null, baseline_comparison:row.baseline_id && baselinesById.has(row.baseline_id)?compareWithBaseline(baselinesById.get(row.baseline_id)!.annotations,row.annotations):null, is_active:row.is_active!==false, unassigned_at:row.unassigned_at || null, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, turn_ratings: row.turn_ratings || {}, ...ratingQuestionMetadata(versions.get(row.rubric_hash)!), source_conversation_id: row.conversations!.transcript.source_conversation_id || null, repository_source: row.conversations!.transcript.repository_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
     } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
   function originalLanguage(doc: DocumentRow) {
@@ -110,7 +113,7 @@ export function Admin() {
       })}</tbody></table></div>
       {loading ? <p className="empty" role="status">Loading conversations…</p> : !documents.length && <p className="empty">No conversations yet. Upload transcript files to get started.</p>}
     </section>
-    {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
+    {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
     {deleteDocument && <DeleteConversation document={deleteDocument} onClose={() => setDeleteDocument(null)} onDeleted={async id => { setSelected(previous => previous.filter(value => value !== id)); setDocuments(previous => previous.filter(doc => doc.id !== id)); setRows(previous => previous.filter(row => row.conversation_id !== id)); setNotice('Conversation and associated annotation work deleted.'); await refresh(); }} />}
     <div className="stat-grid">{(['all', 'not_started', 'in_progress', 'submitted'] as const).map(status => <button className={`card stat-card ${filter === status ? 'selected' : ''}`} key={status} onClick={() => setFilter(status)}><strong>{status === 'all' ? rows.length : rows.filter(row => row.status === status).length}</strong><span>{status === 'all' ? 'Total assignments' : statusText(status)}</span></button>)}</div>
     <section className="card progress"><div className="progress-heading"><h2>Annotation progress</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Annotator</th><th>Status</th><th>Highlights</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.annotations.length}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}</td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>

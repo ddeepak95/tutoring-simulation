@@ -4,6 +4,7 @@ import type { DocumentRow } from './types';
 
 interface Preview {
   conversation_id: string; label: string; assignment_count: number; annotation_count: number; revision_count: number; snapshot: string;
+  baseline_count?: number; generation_count?: number;
 }
 function validPreview(value: unknown, id: string): value is Preview {
   const preview = value as Preview;
@@ -49,7 +50,7 @@ export function DeleteConversation({ document, onClose, onDeleted }: { document:
     <span className="eyebrow">DELETE CONVERSATION</span><h2 id="delete-title">Delete conversation?</h2>
     <p className="delete-topic"><strong>{document.transcript.learning_topic || document.label}</strong><small>{document.transcript.conversation_id || document.id}</small></p>
     <p>This permanently removes the conversation from the portal, together with its assignments, annotations, and saved revision history.</p>
-    {loading ? <p role="status">Checking current annotation work…</p> : preview && <dl className="deletion-counts"><div><dt>Assignments</dt><dd>{preview.assignment_count}</dd></div><div><dt>Current annotations</dt><dd>{preview.annotation_count}</dd></div><div><dt>Saved revisions</dt><dd>{preview.revision_count}</dd></div></dl>}
+    {loading ? <p role="status">Checking current annotation work…</p> : preview && <dl className="deletion-counts"><div><dt>Assignments</dt><dd>{preview.assignment_count}</dd></div><div><dt>Current annotations</dt><dd>{preview.annotation_count}</dd></div><div><dt>Saved revisions</dt><dd>{preview.revision_count}</dd></div>{Boolean(preview.baseline_count) && <div><dt>LLM baselines</dt><dd>{preview.baseline_count}</dd></div>}{Boolean(preview.generation_count) && <div><dt>Generation records</dt><dd>{preview.generation_count}</dd></div>}</dl>}
     <small>Source files are retained separately. Other conversations, including translations, remain available.</small>
     {error && <p className="error" role="alert">{error}</p>}
     {!preview && !loading && <button className="secondary" disabled={busy} onClick={() => { setError(''); void load(); }}>Refresh deletion details</button>}

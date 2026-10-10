@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
+import C from '../../src/generated/core.js';
 const rubric = JSON.parse(fs.readFileSync('src/generated/rubric.json', 'utf8'));
 export const ids = { admin: '00000000-0000-4000-8000-000000000001', alice: '00000000-0000-4000-8000-000000000002', bob: '00000000-0000-4000-8000-000000000003', doc: '00000000-0000-4000-8000-000000000010', a: '00000000-0000-4000-8000-000000000011', b: '00000000-0000-4000-8000-000000000012' };
 export const profiles = [{ id: ids.admin, username: 'admin', role: 'admin' }, { id: ids.alice, username: 'alice', role: 'annotator' }, { id: ids.bob, username: 'bob', role: 'annotator' }];
@@ -15,9 +16,21 @@ export async function backend(page: Page) {
   const passwords = new Map(people.map(profile => [profile.username, 'test-password-123']));
   const documents = [{ id: ids.doc, label: sample.label, language: 'Tamil', transcript: structuredClone(sample), created_at: new Date().toISOString() }];
   const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }));
-  const state = { documents, assignments, people, passwords, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
+  const state = { documents, assignments, people, passwords, baselines:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
   await page.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url());
+    if((url.hostname==='127.0.0.1'||url.hostname==='localhost')&&url.pathname==='/api/llm-annotations') {
+      const send=(data:unknown,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(data)});
+      let caller='';try{caller=JSON.parse(Buffer.from((request.headers().authorization||'').split('.')[1],'base64url').toString()).sub;}catch{}
+      if(people.find(person=>person.id===caller)?.role!=='admin')return send({error:'Only administrators can generate LLM annotations.'},403);
+      if(state.failLLMGeneration)return send({error:'The model output failed exact-highlight validation. No baseline or assignments were created.'},502);
+      const body=request.postDataJSON();const document=documents.find(document=>document.id===body.conversation_id);if(!document)return send({error:'Conversation not found.'},404);
+      const conversation=C.normalizeConversation(document.transcript);const quote='Wet clothes drying';const start=conversation.messages[0].text.indexOf(quote);
+      const annotation=C.createAnnotation('examples',C.makeEvidence(conversation,'t1',start,start+quote.length),rubric.rubric,`llm-${body.request_id}-1`);annotation.entry.detail_level='Brief';
+      const baseline={id:body.request_id,conversation_id:document.id,rubric_hash:rubric.rubric_sha256,annotations:[annotation],model:'configured/model',prompt_version:'instructional-highlights/1',prompt:'mock prompt',prompt_sha256:'a'.repeat(64),transcript_sha256:'b'.repeat(64),generation_config:{},created_by:caller,created_at:new Date().toISOString()};
+      state.baselines.unshift(baseline);state.generationRuns.unshift({id:baseline.id,conversation_id:baseline.conversation_id,status:'completed',error_code:null,created_at:baseline.created_at,finished_at:baseline.created_at});state.llmGenerations++;
+      return send({baseline},201);
+    }
     if ((url.hostname === '127.0.0.1' || url.hostname === 'localhost') && url.pathname === '/api/annotators') {
       const send = (data: unknown, status = 200) => route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(data) });
       let caller = ''; try { caller = JSON.parse(Buffer.from((request.headers().authorization || '').split('.')[1], 'base64url').toString()).sub; } catch {}
@@ -52,6 +65,33 @@ export async function backend(page: Page) {
       const source = state.repositoryFiles[sourcePath]; return source ? route.fulfill({ status: 200, contentType: 'application/json', body: source }) : send({ error: 'Not found', statusCode: '404' }, 404);
     }
     if (url.pathname.startsWith('/storage/v1/object/transcripts/')) return send({ Key: url.pathname });
+    if(url.pathname==='/rest/v1/rpc/open_admin_annotation_assignment') {
+      if(profile.role!=='admin')return send({message:'Admin required'},403);
+      let row=assignments.find(row=>row.conversation_id===body.p_conversation_id&&row.annotator_id===userId);
+      const baseline=state.baselines.find(baseline=>baseline.conversation_id===body.p_conversation_id);
+      if(!row){row={id:crypto.randomUUID(),conversation_id:body.p_conversation_id,annotator_id:userId,rubric_hash:body.p_rubric_hash,status:'not_started',revision:0,annotations:[],turn_ratings:{},updated_at:new Date().toISOString(),submitted_at:null};assignments.push(row);}
+      if(baseline&&!row.baseline_id&&row.revision===0&&row.status==='not_started'&&row.annotations.length===0&&Object.keys(row.turn_ratings||{}).length===0){row.baseline_id=baseline.id;row.annotation_source='llm';row.rubric_hash=baseline.rubric_hash;row.annotations=structuredClone(baseline.annotations);}
+      return send(row.id);
+    }
+    if(url.pathname==='/rest/v1/rpc/unassign_annotation_assignments') {
+      if(profile.role!=='admin')return send({message:'Admin required'},403);
+      const requested=body.p_assignments.map((item:any)=>({item,row:assignments.find(row=>row.id===item.id)}));
+      if(requested.some(({item,row}:any)=>!row||row.revision!==item.revision))return send({message:'Annotation work changed. Review the refreshed assignment before unassigning.',code:'40001'},409);
+      for(const {row} of requested){row.is_active=false;row.unassigned_at=new Date().toISOString();row.revision++;}
+      return send({unassigned:requested.length});
+    }
+    if(url.pathname==='/rest/v1/rpc/create_annotation_assignments') {
+      if(profile.role!=='admin')return send({message:'Admin required'},403);
+      let created=0,skipped=0,restored=0;const assignmentIds=[];
+      for(const conversation_id of body.p_conversation_ids)for(const annotator_id of body.p_annotator_ids){
+        const existing=assignments.find(row=>row.conversation_id===conversation_id&&row.annotator_id===annotator_id);
+        if(existing){if(existing.is_active===false){existing.is_active=true;existing.unassigned_at=null;existing.revision++;restored++;}else skipped++;continue;}
+        const baseline=state.baselines.find(baseline=>baseline.id===body.p_baseline_ids?.[conversation_id]);
+        if(body.p_baseline_ids?.[conversation_id]&&(!baseline||baseline.conversation_id!==conversation_id))return send({message:'Invalid baseline'},400);
+        const row={id:crypto.randomUUID(),conversation_id,annotator_id,rubric_hash:baseline?.rubric_hash||body.p_rubric_hash,status:'not_started',revision:0,annotations:structuredClone(baseline?.annotations||[]),turn_ratings:{},baseline_id:baseline?.id||null,annotation_source:baseline?'llm':'blank',updated_at:new Date().toISOString(),submitted_at:null};assignments.push(row);assignmentIds.push(row.id);created++;
+      }
+      return send({created,skipped,restored,assignment_ids:assignmentIds});
+    }
     if (['/rest/v1/rpc/preview_conversation_deletion', '/rest/v1/rpc/delete_conversation'].includes(url.pathname)) {
       if (profile.role !== 'admin') return send({ message: 'Admin access required', code: '42501' }, 403);
       const document = documents.find(document => document.id === body.p_conversation_id);
@@ -68,22 +108,26 @@ export async function backend(page: Page) {
     if (url.pathname === '/rest/v1/rpc/save_assignment') {
       if (state.failNextSave || state.failSaves) { state.failNextSave = false; return send({ message: 'Network unavailable. Retry saving.', code: 'offline' }, 500); }
       const row = assignments.find(a => a.id === body.p_assignment_id);
-      if (!row || row.annotator_id !== userId) return send({ message: 'Access denied' }, 403);
+      if(row?.is_active===false)return send({message:'This assignment has been unassigned.'},403);
+      if (!row || (row.annotator_id !== userId && profile.role !== 'admin')) return send({ message: 'Access denied' }, 403);
       if (row.revision !== body.p_revision) return send({ message: 'Revision conflict. Export your draft and reload the latest saved version before editing.', code: '40001' }, 409);
       if (row.status === 'submitted') return send({ message: 'Read only' }, 409);
       row.annotations = body.p_annotations; row.turn_ratings = body.p_turn_ratings ?? row.turn_ratings ?? {}; row.revision++; row.status = body.p_submit ? 'submitted' : 'in_progress'; row.submitted_at = body.p_submit ? new Date().toISOString() : null; row.updated_at = new Date().toISOString(); state.saves++;
       return send(row);
     }
-    if (url.pathname === '/rest/v1/rpc/reopen_assignment') { if (profile.role !== 'admin') return send({ message: 'Admin required' }, 403); const row = assignments.find(a => a.id === body.p_assignment_id); row.status = 'in_progress'; row.revision++; row.submitted_at = null; return send(null); }
+    if (url.pathname === '/rest/v1/rpc/reopen_assignment') { if (profile.role !== 'admin') return send({ message: 'Admin required' }, 403); const row = assignments.find(a => a.id === body.p_assignment_id); if (!row || row.revision !== body.p_revision || row.status !== 'submitted') return send({ message: 'Assignment has changed or is not submitted', code: '40001' }, 409); row.status = 'in_progress'; row.revision++; row.submitted_at = null; return send(null); }
     let rows: any[] = [];
     if (url.pathname === '/rest/v1/profiles') rows = people.filter(p => profile.role === 'admin' || p.id === userId);
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
     if (url.pathname === '/rest/v1/rubric_versions') rows = [{ hash: rubric.rubric_sha256, snapshot: rubric }];
+    if(url.pathname==='/rest/v1/llm_baselines')rows=state.baselines.filter(baseline=>profile.role==='admin'||assignments.some(row=>row.baseline_id===baseline.id&&row.annotator_id===userId));
+    if(url.pathname==='/rest/v1/llm_generation_runs')rows=profile.role==='admin'?state.generationRuns:[];
+    if(url.pathname==='/rest/v1/annotation_revisions')rows=[];
     if (url.pathname === '/rest/v1/assignments') {
       if (request.method() === 'POST') { const newRows = Array.isArray(body) ? body : [body]; assignments.push(...newRows.map((a: any) => ({ id: crypto.randomUUID(), ...a, status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }))); return send(null, 201); }
-      rows = assignments.filter(a => profile.role === 'admin' || a.annotator_id === userId).map(a => ({ ...a, conversations: documents.find(d => d.id === a.conversation_id), profiles: people.find(p => p.id === a.annotator_id) }));
+      rows = assignments.filter(a => profile.role === 'admin' || (a.annotator_id === userId && a.is_active!==false)).map(a => ({ ...a, is_active:a.is_active!==false, conversations: documents.find(d => d.id === a.conversation_id), profiles: people.find(p => p.id === a.annotator_id) }));
     }
-    for (const [key, value] of url.searchParams) { if (value.startsWith('eq.')) rows = rows.filter(row => String(row[key]) === value.slice(3)); }
+    for (const [key, value] of url.searchParams) { if (value.startsWith('eq.')) rows = rows.filter(row => String(row[key]) === value.slice(3));if(value.startsWith('in.(')){const values=value.slice(4,-1).split(',');rows=rows.filter(row=>values.includes(String(row[key])));} }
     if (request.headers().accept?.includes('application/vnd.pgrst.object+json')) return rows[0] ? send(rows[0]) : send({ message: 'Not found' }, 406);
     return send(rows);
   });
@@ -116,6 +160,6 @@ export async function rateAllTutorTurns(page: Page) {
   const turns = await panel.getByLabel('Tutor turn', { exact: true }).locator('option').evaluateAll(options => options.map(option => (option as HTMLOptionElement).value));
   for (const turnId of turns) {
     await panel.getByLabel('Tutor turn', { exact: true }).selectOption(turnId);
-    for (const dimension of rubric.rating_dimensions) await panel.getByRole('button', { name: `${dimension.label}: ${dimension.options[0]}`, exact: true }).click();
+    for (const group of await panel.locator('.rating-options').all()) await group.getByRole('button').first().click();
   }
 }

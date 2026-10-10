@@ -5,6 +5,29 @@ import { completeRatings } from './ratings-fixture';
 import { activeRatingDimensions } from '../src/turn-ratings';
 const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text: 'One.' }, { turn_id: 's1', speaker: 'student', text: 'Why?' }, { turn_id: 't2', speaker: 'tutor', text: 'Two.' }] });
 
+it('preserves retired no-new-concept ratings in drafts but requires a replacement for submission', () => {
+  const ratings = completeRatings(conversation, bundledRubric);
+  const dimension = activeRatingDimensions(bundledRubric).find(item => item.key === 'concept_summarization')!;
+  expect(dimension.options).toEqual(['3', '2', '1']);
+  ratings.t1.values.concept_summarization = 'Not applicable';
+  expect(() => validateTurnRatings(conversation, ratings, bundledRubric)).not.toThrow();
+  expect(ratingComplete(ratings.t1, bundledRubric, conversation, 't1')).toBe(false);
+  expect(() => validateTurnRatings(conversation, ratings, bundledRubric, true)).toThrow(/t1/);
+  ratings.t1.values.concept_summarization = '1';
+  expect(() => validateTurnRatings(conversation, ratings, bundledRubric, true)).not.toThrow();
+});
+
+it('uses eight questions for the first tutor turn and ten for subsequent tutor turns', () => {
+  const ratings = completeRatings(conversation, bundledRubric);
+  delete ratings.t1.values.coherence; delete ratings.t1.values.responsiveness;
+  expect(activeRatingDimensions(bundledRubric, conversation, 't1')).toHaveLength(8);
+  expect(activeRatingDimensions(bundledRubric, conversation, 't2')).toHaveLength(10);
+  expect(() => validateTurnRatings(conversation, ratings, bundledRubric, true)).not.toThrow();
+  delete ratings.t2.values.responsiveness;
+  expect(() => validateTurnRatings(conversation, ratings, bundledRubric, true)).toThrow(/t2/);
+  expect(activeRatingDimensions(bundledRubric).find(dimension => dimension.key === 'relevance')?.scale_items['3']).toBe('All information is relevant.');
+});
+
 it('omits instructional sequence for new and historical rubrics without discarding saved ratings', () => {
   const legacy = { ...bundledRubric, rating_dimensions: [...bundledRubric.rating_dimensions!, { key: 'instructional_sequence', label: 'Instructional Sequence', description: '', options: ['Not determinable'], scale_items: {}, guidance: '' }] };
   expect(activeRatingDimensions(legacy)).toHaveLength(10);

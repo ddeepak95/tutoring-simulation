@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import C from './generated/core.js';
 import snapshot from './generated/rubric.json';
 import type { Annotation, Assignment, Conversation, ExportData, RubricSnapshot, TurnRatings } from './types';
-import { validateTurnRatings } from './turn-ratings';
+import { activeRatingDimensions, validateTurnRatings } from './turn-ratings';
 export const bundledRubric = snapshot as RubricSnapshot;
 export { C };
 export const usernamePattern = /^[a-z0-9][a-z0-9._-]{2,31}$/;
@@ -21,9 +21,20 @@ export function validateSubmission(conversation: Conversation, annotations: Anno
   const result = C.buildExport(conversation, annotations, rubric.rubric, username);
   if (result.incomplete_annotations.length) throw new Error('Complete the details for every highlight before submitting.');
   validateTurnRatings(conversation, turnRatings, rubric, true);
-  return { ...result, turn_ratings: turnRatings, rating_dimensions: rubric.rating_dimensions || [], rating_scope: rubric.rating_scope || null };
+  return { ...result, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
 }
 export async function fetchAssignments(): Promise<Assignment[]> {
-  const { data, error } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').order('updated_at', { ascending: false });
+  const { data, error } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').eq('is_active',true).order('updated_at', { ascending: false });
   if (error) throw error; return data as Assignment[];
+}
+export async function fetchAllRows<T>(table: string, columns = '*', orderColumns = ['id']): Promise<T[]> {
+  const rows: T[] = [];
+  for (let offset = 0;; offset += 500) {
+    let query=supabase!.from(table).select(columns);
+    for(const column of orderColumns) query=query.order(column);
+    const {data,error}=await query.range(offset,offset+499);
+    if(error) throw error;
+    rows.push(...data as T[]);
+    if(data.length<500) return rows;
+  }
 }

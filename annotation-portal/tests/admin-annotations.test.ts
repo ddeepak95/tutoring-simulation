@@ -17,7 +17,8 @@ function backend(reads: unknown[], insertError: unknown = null) {
     };
     return query;
   });
-  return { client: { from } as unknown as SupabaseClient, from, filters, writes };
+  const rpc=vi.fn(async(name:string,value:unknown)=>{writes.push([name,value]);return {error:(insertError as {code?:string})?.code==='23505'?null:insertError};});
+  return { client: { from,rpc } as unknown as SupabaseClient, from, rpc, filters, writes };
 }
 describe('admin annotation records', () => {
   it('rejects non-admins before making requests', async () => {
@@ -38,7 +39,7 @@ describe('admin annotation records', () => {
     expect(await openAdminAnnotations('doc', admin, state.client)).toBe('new-own-work');
     expect(state.writes).toEqual([
       ['rubric_versions', { hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }],
-      ['assignments', { conversation_id: 'doc', annotator_id: admin.id, rubric_hash: bundledRubric.rubric_sha256 }]
+      ['open_admin_annotation_assignment', { p_conversation_id: 'doc', p_rubric_hash: bundledRubric.rubric_sha256 }]
     ]);
   });
   it('recovers a concurrent insert by re-reading the same owner record', async () => {
