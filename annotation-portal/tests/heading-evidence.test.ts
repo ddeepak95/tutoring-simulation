@@ -1,0 +1,17 @@
+import {expect,it} from 'vitest';
+import {headingRanges,tutorHeadingInventory} from '../server/heading-evidence';
+
+it('recognizes Markdown and standalone bold headings without accepting code or body emphasis',()=>{
+ const text='# Main\nBody **emphasis** here.\n\nUnit\n----\n\n**Subunit:**\n\n```md\n# Fake heading\n```\n\n**Bold\nbody paragraph**\n';
+ expect(headingRanges(text).map(range=>text.slice(range.start,range.end))).toEqual(['# Main','Unit\n----','**Subunit:**']);
+});
+
+it('detects bold titles without a blank line, inside lists, and with punctuation outside the bold text',()=>{
+ const text='**How it works:**\nBody text.\n\n**Example**:\nAn example.\n\n1. **Measurement**\n   Explanation.\n\n__தலைப்பு__\nவிளக்கம்.\n\nBody **emphasis** here.\n\n**Bold\nbody paragraph**';
+ expect(headingRanges(text).map(range=>text.slice(range.start,range.end))).toEqual(['**How it works:**','**Example**:','**Measurement**','__தலைப்பு__']);
+});
+
+it('inventories tutor headings with exact occurrence numbers and excludes student and code headings',()=>{
+ const conversation={messages:[{speaker:'tutor',turn_id:'t1',text:'Mention **Example:** here.\n\n**Example:**\nBody.\n\n**Example:**\nMore body.\n\n```md\n**Fake:**\n```'},{speaker:'student',turn_id:'s1',text:'**Student title**'}]};
+ expect(tutorHeadingInventory(conversation)).toEqual([{turn_id:'t1',quote:'**Example:**',occurrence:2},{turn_id:'t1',quote:'**Example:**',occurrence:3}]);
+});

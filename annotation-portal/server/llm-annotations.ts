@@ -50,16 +50,21 @@ export function createLLMAnnotationHandler({ getEnvironment = () => process.env,
       const registered = await caller.from('rubric_versions').select('hash').eq('hash', rubric.rubric_sha256).maybeSingle();
       if (registered.error) throw new RequestError(503, 'Could not load the annotation rubric.');
       if (!registered.data) { const insert = await caller.from('rubric_versions').insert({ hash: rubric.rubric_sha256, snapshot: rubric }); if (insert.error && insert.error.code !== '23505') throw new RequestError(503, 'Could not register the annotation rubric.'); }
-      const claim = await caller.rpc('claim_llm_generation', { p_conversation_id: body.conversation_id, p_request_id: body.request_id });
+      let claim = await caller.rpc('claim_llm_generation', { p_conversation_id: body.conversation_id, p_request_id: body.request_id });
       if (claim.error || !claim.data) throw new RequestError(409, 'Could not start generation. Refresh versions; a generation may already be running.');
       if (!claim.data.claimed) {
         if (claim.data.status === 'completed') { const baseline = await caller.from('llm_baselines').select('*').eq('id', body.request_id).single(); if (baseline.error) throw new RequestError(503, 'Could not load the saved baseline.'); send(200, { baseline: baseline.data }); return; }
-        if (claim.data.status === 'failed') throw new RequestError(409, 'This generation failed. Start a new generation to try again.');
+        if(claim.data.status==='failed'||claim.data.status==='generating'&&Date.parse(claim.data.created_at)<Date.now()-600000){
+          claim=await caller.rpc('resume_llm_generation',{p_conversation_id:body.conversation_id,p_request_id:body.request_id});
+          if(claim.error||!claim.data?.claimed)throw new RequestError(409,'Could not resume this checkpoint. A generation may already be running, or this run has no checkpoint.');
+        }
+        else {
         send(202, { request_id: body.request_id, status: 'generating' }); return;
+        }
       }
       claimedId = body.request_id;
       const conversation = document.data.transcript as Conversation;
-      const generated = await generateInstructionalBaseline({ conversation, rubric, requestId: claimedId, config, apiKey: env.OPENROUTER_API_KEY, fetcher });
+      const generated = await generateInstructionalBaseline({ conversation, rubric, requestId: claimedId, config:{...config,repair_attempts:3}, checkpoint:claim.data.checkpoint?.fingerprint?claim.data.checkpoint:undefined,onCheckpoint:async checkpoint=>{const saved=await caller!.rpc('save_llm_generation_checkpoint',{p_request_id:claimedId,p_checkpoint:checkpoint});if(saved.error)throw new RequestError(502,'Could not save generation checkpoint. Resume this run to try again.','save_failed');}, apiKey: env.OPENROUTER_API_KEY, fetcher });
       const saved = await caller.rpc('complete_llm_generation', { p_request_id: claimedId, p_rubric_hash: rubric.rubric_sha256, p_annotations: generated.annotations, p_model: generated.model, p_prompt_version: promptVersion, p_prompt: generated.prompt, p_generation_config: generated.generation_config });
       if (saved.error || !saved.data) throw new RequestError(502, 'Could not confirm baseline storage. Refresh versions before trying again.', 'save_failed');
       send(201, { baseline: saved.data });

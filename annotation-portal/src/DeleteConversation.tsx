@@ -49,7 +49,7 @@ export function DeleteConversation({ document, onClose, onDeleted }: { document:
   return <dialog ref={dialog} className="delete-dialog" aria-labelledby="delete-title" onCancel={event => { if (pending.current) event.preventDefault(); else onClose(); }}>
     <span className="eyebrow">DELETE CONVERSATION</span><h2 id="delete-title">Delete conversation?</h2>
     <p className="delete-topic"><strong>{document.transcript.learning_topic || document.label}</strong><small>{document.transcript.conversation_id || document.id}</small></p>
-    <p>This permanently removes the conversation from the portal, together with its assignments, annotations, and saved revision history.</p>
+    <p>This permanently removes the conversation from the portal, together with its assignments, annotations, and saved revision history. Comparison assignments involving this conversation and their saved answers are also removed.</p>
     {loading ? <p role="status">Checking current annotation work…</p> : preview && <dl className="deletion-counts"><div><dt>Assignments</dt><dd>{preview.assignment_count}</dd></div><div><dt>Current annotations</dt><dd>{preview.annotation_count}</dd></div><div><dt>Saved revisions</dt><dd>{preview.revision_count}</dd></div>{Boolean(preview.baseline_count) && <div><dt>LLM baselines</dt><dd>{preview.baseline_count}</dd></div>}{Boolean(preview.generation_count) && <div><dt>Generation records</dt><dd>{preview.generation_count}</dd></div>}</dl>}
     <small>Source files are retained separately. Other conversations, including translations, remain available.</small>
     {error && <p className="error" role="alert">{error}</p>}

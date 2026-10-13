@@ -4,7 +4,7 @@ export interface Profile { id: string; username: string; role: Role; }
 export interface Turn { turn_id: string; speaker: 'tutor' | 'student'; text: string; }
 export interface RepositorySource { run_id: string; relative_path: string; original_conversation_id: string | null; file_sha256: string; version: string; language: string; topic_id: string; }
 export interface Conversation { conversation_id: string | null; learning_topic: string | null; label: string; messages: Turn[]; repository_source?: RepositorySource; source_conversation_id?: string | null; original_language?: string | null; topic_english_name?: string | null; }
-export interface Evidence { turn_id: string; quote: string; start: number; end: number; occurrence: number; }
+export interface Evidence { turn_id: string; quote: string; start: number; end: number; occurrence: number; example_status?: 'Fresh' | 'Duplicate'; }
 export interface Annotation { id: string; feature: string; entry: Record<string, string | string[] | null>; evidence: Evidence[]; }
 export interface Field { key: string; label: string; options?: string[]; }
 export interface Feature { key: string; name: string; short_label: string; color: string; highlight: string; description: string; guidance: string; entry_attributes: string; fields: Field[]; }
@@ -16,5 +16,5 @@ export interface RubricSnapshot { rubric_source: string; rubric_sha256: string; 
 export interface DocumentRow { id: string; label: string; language: string; transcript: Conversation; created_at: string; source_path?: string | null; }
 export interface Assignment { is_active?: boolean; unassigned_at?: string | null; id: string; conversation_id: string; annotator_id: string; rubric_hash: string; status: Status; revision: number; annotations: Annotation[]; turn_ratings?: TurnRatings; baseline_id?: string | null; annotation_source?: 'blank' | 'llm'; updated_at: string; submitted_at: string | null; conversations?: DocumentRow; profiles?: Profile; }
 export interface LLMBaseline { id: string; conversation_id: string; rubric_hash: string; annotations: Annotation[]; model: string; prompt_version: string; prompt: string; prompt_sha256: string; transcript_sha256: string; generation_config: Record<string, unknown>; created_by: string; created_at: string; }
-export interface LLMGenerationRun { id: string; conversation_id: string; status: 'generating' | 'completed' | 'failed'; error_code: string | null; created_at: string; finished_at: string | null; }
+export interface LLMGenerationRun { id: string; conversation_id: string; status: 'generating' | 'completed' | 'failed'; error_code: string | null; created_at: string; finished_at: string | null; checkpoint_fingerprint?:string|null; }
 export interface ExportData { format_version: string; annotations: Annotation[]; incomplete_annotations: { id: string; feature: string; missing_attributes: string[] }[]; feature_counts: Record<string, number>; [key: string]: unknown; }

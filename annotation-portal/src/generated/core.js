@@ -107,6 +107,7 @@
       if (!feature) throw new Error("Unknown instructional feature.");
       if (!annotation.entry || typeof annotation.entry !== "object" || !Array.isArray(annotation.evidence) || !annotation.evidence.length) throw new Error("Every annotation needs attributes and supporting evidence.");
       for (const evidence of annotation.evidence) {
+        if (evidence.example_status !== undefined && (annotation.feature !== "examples" || !["Fresh", "Duplicate"].includes(evidence.example_status))) throw new Error("Example status must be Fresh or Duplicate and belongs only to examples.");
         const expected = makeEvidence(conversation, evidence.turn_id, evidence.start, evidence.end);
         if (evidence.quote !== expected.quote || evidence.occurrence !== expected.occurrence) throw new Error("An evidence quotation or occurrence no longer matches the transcript.");
       }

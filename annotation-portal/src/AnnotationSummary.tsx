@@ -1,17 +1,21 @@
 import { C } from './lib';
 import type { Annotation, RubricSnapshot } from './types';
+import { groupCoverage, conceptDisplayFeature } from './coverage-hierarchy';
 
 export function AnnotationSummary({ annotations, rubric }: { annotations: Annotation[]; rubric: RubricSnapshot }) {
   return <section className="annotation-summary" aria-label="Annotation summary">
     <div className="annotation-summary-heading"><strong>Annotation summary</strong><small>{annotations.length} total</small></div>
-    <div className="annotation-category-grid">{rubric.rubric.map(feature => {
+    <div className="annotation-category-grid">{rubric.rubric.map(conceptDisplayFeature).map(feature => {
       const entries = annotations.filter(annotation => annotation.feature === feature.key);
       const passages = entries.reduce((total, annotation) => total + annotation.evidence.length, 0);
       const turns = new Set(entries.flatMap(annotation => annotation.evidence.map(evidence => evidence.turn_id))).size;
       const incomplete = entries.filter(annotation => C.missingAttributes(annotation, rubric.rubric).length > 0).length;
+      const hierarchy = groupCoverage(entries);
       return <details className="annotation-category" key={feature.key}>
         <summary><span className="category-dot" style={{ background: feature.color }} /><span>{feature.short_label}</span><strong className="category-count">{entries.length}</strong></summary>
         <div className="category-breakdown">
+          {hierarchy.length > 0 && <div className="attribute-breakdown"><h3>Content hierarchy</h3>{hierarchy.map(group => <details key={group.main}><summary>{group.main} ({group.units.length} units)</summary>{group.annotation && <p>Main concept detail: {String(group.annotation.entry.detail_level)}</p>}{group.units.map(unit=><details key={unit.name}><summary>{unit.name}{unit.annotation && ` (${String(unit.annotation.entry.detail_level)})`}</summary>{unit.subunits.length>0&&<dl>{unit.subunits.map(({name,annotation})=><div key={annotation.id}><dt>{name}</dt><dd>{String(annotation.entry.detail_level)}</dd></div>)}</dl>}</details>)}</details>)}</div>}
+          {feature.key==='examples'&&<div className="attribute-breakdown"><h3>Example highlights</h3><dl>{(['Fresh','Duplicate','Not classified'] as const).map(status=><div key={status}><dt>{status}</dt><dd>{entries.reduce((n,a)=>n+a.evidence.filter(e=>(e.example_status||'Not classified')===status).length,0)}</dd></div>)}</dl></div>}
           {C.formFields(feature).map(field => {
             const counts = new Map<string, number>((field.options || []).map(value => [value, 0]));
             let missing = 0;
@@ -26,7 +30,7 @@ export function AnnotationSummary({ annotations, rubric }: { annotations: Annota
               {!counts.size && !missing && <div><dt>Recorded values</dt><dd>0</dd></div>}
             </dl></div>;
           })}
-          <dl className="category-extra"><div><dt>Supporting passages</dt><dd>{passages}</dd></div><div><dt>Tutor turns</dt><dd>{turns}</dd></div><div><dt>Incomplete annotations</dt><dd>{incomplete}</dd></div></dl>
+          <dl className="category-extra">{hierarchy.length > 0 && <><div><dt>Main concepts</dt><dd>{hierarchy.length}</dd></div><div><dt>Explanatory units</dt><dd>{hierarchy.reduce((sum,group)=>sum+group.units.length,0)}</dd></div><div><dt>Explanatory subunits</dt><dd>{hierarchy.reduce((sum,group)=>sum+group.units.reduce((total,unit)=>total+unit.subunits.length,0),0)}</dd></div></>}<div><dt>Supporting passages</dt><dd>{passages}</dd></div><div><dt>Tutor turns</dt><dd>{turns}</dd></div><div><dt>Incomplete annotations</dt><dd>{incomplete}</dd></div></dl>
         </div>
       </details>;
     })}</div>

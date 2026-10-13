@@ -3,9 +3,9 @@ window.ANNOTATION_DATA = {
   "rubric_sha256": "e2a71d6da2aa8102045dfd3e1932f5a5afed09e6b3b6e6545904252c0489473d",
   "rubric": [
     {
-      "name": "Concepts and Subtopics Covered",
+      "name": "Concepts",
       "key": "concepts_and_subtopics_covered",
-      "short_label": "Concepts & subtopics",
+      "short_label": "Concepts",
       "color": "#658151",
       "highlight": "#eaf2df",
       "description": "Which concepts and subtopics does the tutor substantively explain in the conversation?",

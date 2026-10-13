@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import type { Nodes } from 'mdast';
 import { mappedText, parseMarkdown } from '../src/markdown-source';
 import { MarkdownTranscript } from '../src/MarkdownTranscript';
+import {C,bundledRubric} from '../src/lib';
 
 function leaves(source: string) {
   const result: ReturnType<typeof mappedText>[] = [];
@@ -13,6 +14,16 @@ function leaves(source: string) {
   walk(parseMarkdown(source)); return result;
 }
 describe('Markdown evidence mapping', () => {
+  it('labels fresh and duplicate passages independently while retaining one example entry',()=>{
+    const text='Hydrogen example.\n\nHydrogen example.';
+    const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text}]});
+    const first={...C.makeEvidence(conversation,'t1',0,17),example_status:'Fresh' as const};
+    const second={...C.makeEvidence(conversation,'t1',19,36),example_status:'Duplicate' as const};
+    const annotation=C.createAnnotation('examples',first,bundledRubric.rubric,'example');C.addEvidence(annotation,second);
+    const html=renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[annotation]} rubric={bundledRubric.rubric} readonly onHighlight={()=>{}}/>);
+    expect(html).toContain('data-feature-label="Examples · Fresh"');expect(html).toContain('data-feature-label="Examples · Duplicate"');
+    expect(annotation.evidence).toHaveLength(2);
+  });
   it('maps decoded entities, escapes, Unicode and repeated wording to their exact source spans', () => {
     const source = 'தமிழ் 😀 **Heat** &amp; \\*heat\\* &#x1F600; **Heat**';
     const rendered = leaves(source);

@@ -18,7 +18,9 @@
     "migrate:deletion": "node scripts/migrate-deletion.mjs",
     "migrate:ratings": "node scripts/migrate-ratings.mjs",
     "llm:baselines": "node scripts/llm-baselines.mjs",
-    "sync:prompt": "node scripts/sync-llm-prompt.mjs"
+    "sync:prompt": "node scripts/sync-llm-prompt.mjs",
+    "sync:comparisons": "node scripts/sync-comparison-questions.mjs",
+    "prebuild": "npm run sync:comparisons"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

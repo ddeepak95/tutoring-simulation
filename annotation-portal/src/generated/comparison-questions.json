@@ -1,0 +1,222 @@
+[
+  {
+    "key": "principle_focus",
+    "label": "Focus on the Core Principle",
+    "description": "Which of the two responses better explains the underlying concept or principle, rather than only presenting facts or steps?",
+    "guidance": "Prefer an explanation of the relationships that make the phenomenon or procedure understandable. A worked solution should explain why its steps apply. Do not reward a principle's name without development, or demand a long explanation when the learner already understands it.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core idea 6 and Factor 8; S2: Feature 14 and discussion on PDF page 9."
+  },
+  {
+    "key": "learning_goal_structure",
+    "label": "Structure for the Learning Goal",
+    "description": "Which of the two responses organizes the explanation and examples in a way that better supports the learning goal?",
+    "guidance": "Consider whether the goal is understanding a concept or learning a procedure. Both principle-first and example-first sequences can be useful. Judge how the sequence supports this learner's goal; do not declare either order universally superior. A motivating opening example need not determine the structure of the whole explanation.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core idea 4 and Factor 1; S2: Feature 1."
+  },
+  {
+    "key": "concept_summarization",
+    "label": "Concept Summarization",
+    "description": "Which of the two responses better summarizes the essential ideas when a recap would help the learner?",
+    "guidance": "Prefer a concise, accurate recap that connects the key ideas. Consider whether a summary is needed at this point. Repeating every detail or providing frequent unnecessary summaries may increase the burden; an appropriate omission can be equally good or better.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Table 1, PDF page 22, and discussion of minimal explanations; S2: Features 2 and 9."
+  },
+  {
+    "key": "learner_fit",
+    "label": "Fit for the Learner",
+    "description": "Which of the two responses better matches the learner's current understanding through its content, language, and use of mathematics?",
+    "guidance": "Use the supplied profile and preceding learner contributions. Compare needed prerequisites, accessible wording, explained technical terms, and understandable formulas or calculations where relevant. Prefer enough support without repeating what the learner already understands. Simpler language or fewer formulas is not inherently better. When these aspects differ, weigh their importance to understanding this topic and explain the tradeoff in notes.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "Combines learner level, language level, and mathematization. S1: Core ideas 1 and 2, Factor 2; S2: Features 3, 7, and 8."
+  },
+  {
+    "key": "explanatory_aids_usefulness",
+    "label": "Usefulness of Explanatory Aids",
+    "description": "Which of the two responses uses examples, analogies, models, or representations more effectively to clarify the concept?",
+    "guidance": "Judge how useful the selected aids are, not how many types appear. Prefer clear connections to the principle and to familiar knowledge. Consider the accuracy and limits of analogies or models, and whether tables, diagrams, equations, or described demonstrations are interpreted. Judge only available content; an unseen image is not evidence of a useful visual. Plain explanation may be sufficient. If neither uses an aid, consider whether one was needed before choosing Tie. If different aids have mixed strengths, weigh their contribution to understanding and note the tradeoff.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "Combines examples, analogies/models, and representations. S1: Core idea 2; S2: Features 4, 5, and 6. Accuracy, mapping limits, and available-content checks are operational safeguards."
+  },
+  {
+    "key": "focus_and_information_load",
+    "label": "Focus and Amount of Information",
+    "description": "Which of the two responses stays focused on the essential ideas while providing the right amount of information for the learner?",
+    "guidance": "Prefer enough reasoning and detail to understand the core idea without irrelevant material, unexplained side topics, redundancy, or excessive explanatory aids. Shorter is not automatically better: missing prerequisites can make a brief explanation less useful. Useful examples and context should support the learning goal. Consider signposts or prompts that identify the essential ideas. Judge the text's likely burden, not an unmeasured cognitive-load score. If relevance and amount favor different responses, weigh the effect on understanding and note the tradeoff.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "Combines focus/relevance and information load. S1: Core ideas 3 and 5, Factors 3 and 6; S2: Features 9 and 11, with discussion on PDF page 8."
+  },
+  {
+    "key": "real_world_connection_and_usefulness",
+    "label": "Relevance to the Learner",
+    "description": "Which of the two responses better shows why the concept is useful or worth understanding for this learner?",
+    "guidance": "Look for an explained connection to a relevant situation, practical use, learner goal, or difficulty. A generic claim that the topic is important is weaker than showing its relevance. Real-world applications are one possible route, not a required feature of every turn; do not invent the learner's interests.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core idea 3 and Factor 7; S2: Feature 11. Real-world usefulness is an adaptation of perceived relevance, not a separate validated paper criterion."
+  },
+  {
+    "key": "conversational_naturalness",
+    "label": "Direct Address and Learner Engagement",
+    "description": "Which of the two responses better involves the learner by speaking directly to them and inviting them to think about the explanation?",
+    "guidance": "Prefer meaningful invitations to attend, think, or connect ideas. Personal address should serve the learning activity. Second-person pronouns alone do not establish quality, and informal wording or praise does not compensate for weak explanation. This narrower item preserves the current key while focusing on the papers' direct-address criterion.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S2: Feature 12; S1: discussion of prompts and learner interaction."
+  },
+  {
+    "key": "opportunities_to_demonstrate_understanding",
+    "label": "Opportunities to Demonstrate Understanding",
+    "description": "Which of the two responses provides a better opportunity for the learner to explain, predict, or apply the core idea themselves?",
+    "guidance": "Prefer a suitable question or task requiring use of the explained principle, such as explaining a prediction or applying it to another case. A generic understanding check supplies little diagnostic evidence. Do not reward a task whose answer is immediately supplied before the learner can attempt it. Consider whether a task is appropriate at this point in the exchange; do not require one after every short response.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core idea 7, explanation process, Factors 5 and 6; S2: Feature 13."
+  },
+  {
+    "key": "coherence",
+    "label": "Coherence Across Turns",
+    "description": "Which of the two responses connects its explanation more clearly to the ideas and examples established in earlier turns?",
+    "guidance": "Look for consistent terminology and explicit logical or causal connections, especially between examples and principles. Prefer meaningful continuity rather than repeated wording. Also consider internal coherence, but use this item only when earlier tutor material exists.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": true,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core idea 5 and Factor 3; S2: Feature 10. Restriction to later turns matches the current portal item."
+  },
+  {
+    "key": "responsiveness",
+    "label": "Responsiveness and Adaptation",
+    "description": "Which of the two responses better addresses the learner's latest contribution and adjusts the explanation when needed?",
+    "guidance": "Compare how each tutor answers questions, diagnoses difficulties, and uses learner evidence to refine its explanation. When a misconception appears, prefer identifying the specific difficulty and explaining the relevant distinction rather than repeating the original response. When no change of approach is needed, judge the directness and usefulness of the response. Do not penalize a tutor for a learner message that occurs after its final opportunity to reply.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": true,
+    "question_set": "kulgemeyer-comparative-combined-v2",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "S1: Core ideas 1, 3, and 7; explanation process; Factors 4 and 7. S2 discusses the limits of fixed video adaptation on PDF pages 7–8."
+  }
+]

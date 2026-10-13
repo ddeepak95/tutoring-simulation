@@ -12,7 +12,7 @@ SCHEMA = ROOT / "conversation-evaluation/schemas/evaluator-v3.schema.json"
 TRANSCRIPTS = ROOT / "comparative-evaluation/outputs/chat-transcripts"
 
 ITEMS = [
-    ("Concepts and Subtopics Covered", "concepts_and_subtopics_covered", "Concepts & subtopics", "#658151", "#eaf2df"),
+    ("Concepts", "concepts_and_subtopics_covered", "Concepts", "#658151", "#eaf2df"),
     ("Examples", "examples", "Examples", "#ac8040", "#fcf0d7"),
     ("Analogies", "analogies", "Analogies", "#8772af", "#f0eafa"),
     ("Representations", "representations", "Representations", "#4f89a3", "#e4f1f8"),

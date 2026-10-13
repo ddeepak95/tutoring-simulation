@@ -27,7 +27,7 @@ describe.sequential('immutable LLM baselines and human copies',()=>{
   expect((await claim(baseId)).claimed).toBe(true);expect((await claim(baseId)).claimed).toBe(false);
   await expect(claim(nextId)).rejects.toThrow(/already running/);
   const wrong=structuredClone(annotations);wrong[0].evidence[0].quote='wrong';await expect(complete(baseId,wrong)).rejects.toThrow(/exactly match/);
-  await expect(complete(baseId,[{...annotations[0],feature:'issues'}])).rejects.toThrow(/only instructional/);
+  await expect(complete(baseId,[{...annotations[0],feature:'unknown'}])).rejects.toThrow(/only instructional/);
   const baseline=await complete(baseId);expect(baseline.annotations).toEqual(annotations);expect(baseline.prompt).toBe('Exact prompt');expect(baseline.transcript_sha256).toMatch(/^[a-f0-9]{64}$/);
   expect((await complete(baseId,[])).annotations).toEqual(annotations);
   await expect(db.exec("update llm_baselines set annotations='[]'")).rejects.toThrow(/permission denied/);
@@ -97,6 +97,21 @@ describe.sequential('immutable LLM baselines and human copies',()=>{
   }
   await user(charlie);await expect(open()).rejects.toThrow(/Admin/);
  });
+ it('accepts issues in generation and service import and seeds independently editable copies with blank ratings',async()=>{
+  await user(admin);const issueDoc='00000000-0000-4000-8000-000000000080',generatedId='00000000-0000-4000-8000-000000000081',importedId='00000000-0000-4000-8000-000000000082';
+  await db.query('insert into conversations(id,label,transcript,created_by) values($1,$2,$3::jsonb,$4)',[issueDoc,'Issues test',JSON.stringify({...conversation,conversation_id:issueDoc}),admin]);
+  const issue=C.createAnnotation('issues',annotations[0].evidence[0],bundledRubric.rubric,'llm-issue');issue.entry.issue='Terminology issue: unfamiliar term';issue.entry.explanation='Use the established equivalent in the supplied language.';
+  const payload=[...annotations,issue];await claim(generatedId,issueDoc);expect((await complete(generatedId,payload)).annotations).toEqual(payload);
+  const incomplete=structuredClone(payload);incomplete[2].entry.explanation='';
+  await db.exec('reset role;set role service_role');
+  const imported=async(value:unknown)=>(await db.query<any>('select public.import_llm_baseline($1,$2,$3,$4::jsonb,$5,$6,$7,$8::jsonb,$9) as value',[issueDoc,importedId,bundledRubric.rubric_sha256,JSON.stringify(value),'configured/model','test/issues','Issues prompt','{}',admin])).rows[0].value;
+  await expect(imported(incomplete)).rejects.toThrow();expect((await imported(payload)).annotations).toEqual(payload);
+  await user(admin);await assign([alice],importedId,issueDoc);
+  await user(alice);const row=(await db.query<any>('select * from assignments where conversation_id=$1',[issueDoc])).rows[0];expect(row.annotations).toEqual(payload);expect(row.turn_ratings).toEqual({});
+  const edited=structuredClone(payload);edited[2].entry.explanation='Human revised explanation';await db.query('select public.save_assignment($1,0,$2::jsonb,false,$3::jsonb)',[row.id,JSON.stringify(edited),'{}']);
+  expect((await db.query<any>('select annotations from llm_baselines where id=$1',[importedId])).rows[0].annotations).toEqual(payload);
+  await user(admin);await db.query('select public.delete_conversation($1,$2)',[issueDoc,(await db.query<any>('select public.preview_conversation_deletion($1) as value',[issueDoc])).rows[0].value.snapshot]);
+ });
  it('unassigns with revision checks, revokes access and saving, and restores the same saved work on reassignment',async()=>{
   await user(admin);const baseline='00000000-0000-4000-8000-000000000030';await assign([alice,bob],baseline,otherDoc);
   const rows=(await db.query<any>('select * from assignments where conversation_id=$1 and annotator_id=any($2::uuid[])',[otherDoc,[alice,bob]])).rows;
@@ -120,5 +135,30 @@ describe.sequential('immutable LLM baselines and human copies',()=>{
   const submitted=(await db.query<any>('select * from assignments where id=$1',[b.id])).rows[0];expect(submitted.status).toBe('submitted');expect(submitted.turn_ratings).toEqual(completeRatings(conversation,bundledRubric));
   expect((await assign([alice,bob],baseline,otherDoc)).skipped).toBe(2);
   await user(alice);expect((await db.query('select * from assignments')).rows).toHaveLength(1);expect((await db.query('select * from llm_baselines')).rows).toHaveLength(1);
+ });
+ it('preserves Fresh and Duplicate evidence metadata in immutable baselines and seeded human copies',async()=>{
+  const payload=structuredClone(annotations);payload[0].evidence[0].example_status='Fresh';
+  const source=conversation.messages[0].text;const start=source.lastIndexOf('Water evaporates.');
+  C.addEvidence(payload[0],{...C.makeEvidence(conversation,'t1',start,start+'Water evaporates.'.length),example_status:'Duplicate'});
+  const id='00000000-0000-4000-8000-000000000040';
+  await db.exec('reset role;set role service_role;');
+  const saved=(await db.query<any>('select public.import_llm_baseline($1,$2,$3,$4::jsonb,$5,$6,$7,$8::jsonb,$9) as value',[otherDoc,id,bundledRubric.rubric_sha256,JSON.stringify(payload),'configured/model','test/2','Status prompt','{}',admin])).rows[0].value;
+  expect(saved.annotations[0].evidence.map((e:any)=>e.example_status)).toEqual(['Fresh','Duplicate']);
+  await user(admin);await assign([charlie],id,otherDoc);
+  const copy=(await db.query<any>('select * from assignments where annotator_id=$1 and conversation_id=$2',[charlie,otherDoc])).rows[0];
+  expect(copy.annotations).toEqual(payload);expect(copy.turn_ratings).toEqual({});
+ });
+ it('persists owned checkpoints, resumes failed runs, and rejects budget resets and non-admin access',async()=>{
+  const id='00000000-0000-4000-8000-000000000050';await user(admin);await claim(id,otherDoc);
+  const checkpoint={fingerprint:'a'.repeat(64),attempts:3,repairs_used:2,repair_log:[],draft:{annotations:[]}};
+  const save=(value:unknown)=>db.query('select public.save_llm_generation_checkpoint($1,$2::jsonb)',[id,JSON.stringify(value)]);
+  await save(checkpoint);await expect(save({...checkpoint,repairs_used:0})).rejects.toThrow(/cannot be reset/);
+  await expect(save({...checkpoint,fingerprint:'b'.repeat(64)})).rejects.toThrow(/cannot be reset/);
+  await user(alice);await expect(save(checkpoint)).rejects.toThrow(/Admin/);await expect(db.query('select public.resume_llm_generation($1,$2)',[otherDoc,id])).rejects.toThrow(/Admin/);
+  await user(admin);await db.query('select public.fail_llm_generation($1,$2)',[id,'provider_error']);
+  const resumed=(await db.query<any>('select public.resume_llm_generation($1,$2) as value',[otherDoc,id])).rows[0].value;
+  expect(resumed.claimed).toBe(true);expect(resumed.checkpoint).toEqual(checkpoint);expect(resumed.started_at).toBeTruthy();
+  const concurrent=(await db.query<any>('select public.resume_llm_generation($1,$2) as value',[otherDoc,id])).rows[0].value;expect(concurrent.claimed).toBe(false);
+  await expect(db.query('select public.resume_llm_generation($1,$2)',[doc,id])).rejects.toThrow(/owned/);
  });
 });

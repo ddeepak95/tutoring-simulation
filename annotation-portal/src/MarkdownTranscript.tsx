@@ -1,3 +1,4 @@
+import { conceptLevel, conceptDisplayFeature } from './coverage-hierarchy';
 import { createElement, Fragment, useMemo, type ReactNode } from 'react';
 import type { Nodes, Definition } from 'mdast';
 import { mappedText, parseMarkdown } from './markdown-source';
@@ -15,6 +16,7 @@ function safeUrl(value: string, image = false): string | undefined {
   } catch { /* Render unsafe destinations as ordinary text. */ }
 }
 export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave }: Props) {
+  rubric = rubric.map(conceptDisplayFeature);
   const tree = useMemo(() => parseMarkdown(text), [text]);
   const definitions = new Map<string, Definition>();
   const labeledPassages = new Set<string>();
@@ -40,7 +42,7 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
           annotation.evidence.forEach((evidence, index) => {
             const passage = `${annotation.id}:${index}`;
             if (evidence.turn_id === turnId && evidence.start < map[end - 1][1] && evidence.end > map[i][0] && !labeledPassages.has(passage)) {
-              labels.add(rubric.find(f => f.key === annotation.feature)!.short_label);
+              labels.add(`${rubric.find(f => f.key === annotation.feature)!.short_label}${conceptLevel(annotation)?` ? ${conceptLevel(annotation)}`:''}${annotation.feature==='examples'&&evidence.example_status?` · ${evidence.example_status}`:''}`);
               labeledPassages.add(passage);
             }
           });
