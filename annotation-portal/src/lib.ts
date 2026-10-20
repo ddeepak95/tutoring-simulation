@@ -19,7 +19,6 @@ export function download(name: string, value: unknown) {
 }
 export function validateSubmission(conversation: Conversation, annotations: Annotation[], rubric: RubricSnapshot, username: string, turnRatings: TurnRatings = {}): ExportData {
   const result = C.buildExport(conversation, annotations, rubric.rubric, username);
-  if (result.incomplete_annotations.length) throw new Error('Complete the details for every highlight before submitting.');
   validateTurnRatings(conversation, turnRatings, rubric, true);
   return { ...result, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
 }

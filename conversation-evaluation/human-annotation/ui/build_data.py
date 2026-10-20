@@ -25,6 +25,7 @@ LABELS = {
     "concept_illustrated": "Concept illustrated", "concept_explained": "Concept explained",
     "concept_checked": "Concept checked", "detail_level": "Detail level",
     "question_type": "Question classification", "representation_type": "Representation type",
+    "image_languages": "Languages in image or representation",
 }
 
 
@@ -49,6 +50,8 @@ def build() -> dict:
             field = {"key": attribute, "label": LABELS[attribute]}
             if "enum" in definition:
                 field["options"] = definition["enum"]
+            if definition.get("type") == "array":
+                field["multiple"] = True
             fields.append(field)
         rubric.append({
             "name": name, "key": key, "short_label": short_label, "color": color, "highlight": highlight,

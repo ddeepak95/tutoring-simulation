@@ -2,9 +2,10 @@ import type { Conversation, Profile, RatingDimension, Status, Turn } from './typ
 
 export type ComparisonChoice = 'a' | 'b' | 'tie';
 export interface ComparisonAnswer { values: Record<string, ComparisonChoice>; notes: string; }
+export interface ComparisonQuestion extends RatingDimension { scope?: string; }
 export interface ComparisonAssignment {
   id: string; conversation_a_id: string; conversation_b_id: string; annotator_id: string;
-  questions: RatingDimension[]; answers: ComparisonAnswer[]; status: Status; revision: number;
+  questions: ComparisonQuestion[]; answers: ComparisonAnswer[]; overall_answer?: ComparisonAnswer | null; status: Status; revision: number;
   updated_at: string; submitted_at: string | null; profiles?: Profile;
 }
 export interface ComparisonRound { tutor: Turn; students: Turn[]; }
@@ -31,8 +32,11 @@ export function comparisonRounds(conversation: Conversation): ComparisonRound[] 
   }
   return rounds;
 }
-export function comparisonQuestions(questions: RatingDimension[], index: number) {
-  return questions.filter(question => question.key !== 'instructional_sequence' && (index > 0 || !question.subsequent_only)).map(question => {
+export function overallComparisonQuestions(questions: ComparisonQuestion[]) {
+  return questions.filter(question => question.scope === 'overall');
+}
+export function comparisonQuestions(questions: ComparisonQuestion[], index: number) {
+  return questions.filter(question => question.scope !== 'overall' && question.key !== 'instructional_sequence' && (index > 0 || !question.subsequent_only)).sort((a, b) => Number(b.key === 'follow_up_responsiveness') - Number(a.key === 'follow_up_responsiveness')).map(question => {
     // New and previously pinned comparative wording is authoritative. Only adapt
     // legacy snapshots that still contain the original single-tutor questions.
     if (question.description.startsWith('Which of the two responses')) return question;
@@ -40,7 +44,7 @@ export function comparisonQuestions(questions: RatingDimension[], index: number)
     return prompt ? { ...question, description: prompt, guidance: prompt } : question;
   });
 }
-export function comparisonComplete(answer: ComparisonAnswer, questions: RatingDimension[], index: number) {
+export function comparisonComplete(answer: ComparisonAnswer, questions: ComparisonQuestion[], index: number) {
   const active = comparisonQuestions(questions, index);
   return active.length > 0 && active.every(question => ['a', 'b', 'tie'].includes(answer.values[question.key]));
 }

@@ -13,7 +13,7 @@ async function claim(id:string,document=doc){return (await db.query<any>('select
 async function complete(id:string,payload:unknown=annotations){return (await db.query<any>('select public.complete_llm_generation($1,$2,$3::jsonb,$4,$5,$6,$7::jsonb) as value',[id,bundledRubric.rubric_sha256,JSON.stringify(payload),'configured/model','test/1','Exact prompt','{"max_tokens":100}'])).rows[0].value;}
 async function assign(ids:string[],baseline=baseId,document=doc){return (await db.query<any>('select public.create_annotation_assignments($1::uuid[],$2::uuid[],$3,$4::jsonb) as value',[[document],ids,bundledRubric.rubric_sha256,JSON.stringify(baseline?{[document]:baseline}:{})])).rows[0].value;}
 beforeAll(async()=>{
- db=new PGlite();await db.exec(`create role anon;create role authenticated;create role service_role bypassrls;create schema auth;create schema storage;create table auth.users(id uuid primary key,email text);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema public,auth,storage to authenticated,anon,service_role;grant execute on function auth.uid() to authenticated;create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint);create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text,name text);alter table storage.objects enable row level security;`);
+ db=new PGlite();await db.exec(`create role anon;create role authenticated;create role service_role bypassrls;create schema auth;create schema storage;create table auth.users(id uuid primary key,email text);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;create function storage.foldername(text) returns text[] language sql immutable as $$select string_to_array(regexp_replace($1,'/[^/]*$',''),'/')$$;grant usage on schema public,auth,storage to authenticated,anon,service_role;grant execute on function auth.uid() to authenticated;create table storage.buckets(id text primary key,name text,public boolean,file_size_limit bigint,allowed_mime_types text[]);create table storage.objects(id uuid primary key default gen_random_uuid(),bucket_id text,name text);alter table storage.objects enable row level security;grant select,insert,update,delete on storage.objects to authenticated;`);
  for(const migration of fs.readdirSync('supabase/migrations').filter(file=>file.endsWith('.sql')).sort())await db.exec(fs.readFileSync(`supabase/migrations/${migration}`,'utf8'));
  for(const [id,name] of [[admin,'admin'],[alice,'alice'],[bob,'bob'],[charlie,'charlie']])await db.query('insert into auth.users(id,email) values($1,$2)',[id,`${name}@users.annotation.invalid`]);
  await db.query("update profiles set role='admin' where id=$1",[admin]);await db.query('insert into rubric_versions(hash,snapshot) values($1,$2::jsonb)',[bundledRubric.rubric_sha256,JSON.stringify(bundledRubric)]);
@@ -23,6 +23,11 @@ beforeAll(async()=>{
 });
 afterAll(async()=>{await db?.close();});
 describe.sequential('immutable LLM baselines and human copies',()=>{
+ it('allows authenticated uploads only under the uploader folder in the public image bucket',async()=>{
+  await db.exec('reset role');const bucket=await db.query<any>("select public,file_size_limit,allowed_mime_types from storage.buckets where id='capture-images'");expect(bucket.rows[0]).toMatchObject({public:true,file_size_limit:10485760});
+  await user(alice);await db.query('insert into storage.objects(bucket_id,name) values($1,$2)',['capture-images',`captures/${alice}/ok.png`]);
+  await expect(db.query('insert into storage.objects(bucket_id,name) values($1,$2)',['capture-images',`captures/${bob}/blocked.png`])).rejects.toThrow(/row-level security/);await user(admin);
+ });
  it('claims generation once, validates exact evidence and instructional-only content, and preserves completed versions',async()=>{
   expect((await claim(baseId)).claimed).toBe(true);expect((await claim(baseId)).claimed).toBe(false);
   await expect(claim(nextId)).rejects.toThrow(/already running/);

@@ -3,14 +3,16 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import type {Root,RootContent} from 'mdast';
 import type {Conversation} from '../src/types';
-import {headingRanges} from './heading-evidence.ts';
+import {headingRanges,isCaptureMetadataHeading} from './heading-evidence.ts';
+import {htmlStructuralRanges} from './html-structure.ts';
 
 export interface SourcePassage {source_id:string;kind:'heading'|'table_header'|'passage';turn_id:string;quote:string;occurrence:number;start:number;end:number}
-export function sourcePassages(conversation:Conversation):SourcePassage[]{
+export function sourcePassages(conversation:Conversation,htmlByTurn:Record<string,string>={}):SourcePassage[]{
  return conversation.messages.filter(t=>t.speaker==='tutor').flatMap(turn=>{
   const ranges=new Map<string,{start:number;end:number;kind:SourcePassage['kind']}>();
   const add=(start:number|undefined,end:number|undefined,kind:SourcePassage['kind'])=>{if(start!==undefined&&end!==undefined&&end>start&&!ranges.has(`${start}:${end}`))ranges.set(`${start}:${end}`,{start,end,kind});};
-  headingRanges(turn.text).forEach(h=>add(h.start,h.end,'heading'));
+  headingRanges(turn.text,htmlByTurn[turn.turn_id]||'').forEach(h=>add(h.start,h.end,'heading'));
+  htmlStructuralRanges(htmlByTurn[turn.turn_id]||'',turn.text).forEach(r=>{if(r.kind!=='heading'||!isCaptureMetadataHeading(turn.text.slice(r.start,r.end)))add(r.start,r.end,r.kind);});
   const root=unified().use(remarkParse).use(remarkGfm).parse(turn.text) as Root;
   function visit(node:Root|RootContent){
    if(node.type==='table')node.children.forEach((row,i)=>add(row.position?.start.offset,row.position?.end.offset,i===0?'table_header':'passage'));
@@ -28,4 +30,4 @@ export function sourcePassages(conversation:Conversation):SourcePassage[]{
   });
  });
 }
-export function modelSourcePassages(conversation:Conversation){return sourcePassages(conversation).map(({start:_start,end:_end,...passage})=>passage);}
+export function modelSourcePassages(conversation:Conversation,htmlByTurn:Record<string,string>={}){return sourcePassages(conversation,htmlByTurn).map(({start:_start,end:_end,...passage})=>passage);}

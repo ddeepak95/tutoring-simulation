@@ -7,7 +7,7 @@ test('formatted transcript selections save exact Markdown evidence and remain ed
   const state = await backend(page);
   state.documents[0].transcript.messages[0].text = markdown;
   state.documents[0].transcript.messages[1].text = '**Student text**';
-  await login(page, 'alice'); await page.locator('.assignment-card').click();
+  await login(page, 'alice'); await page.locator('a[href^="/assignments/"]').first().click();
   const turn = page.locator('[data-turn-id="t1"]');
   await expect(turn.getByRole('heading', { level: 3, name: 'Evaporation' })).toBeVisible();
   await expect(turn.locator('ol li')).toHaveCount(2); await expect(turn.locator('blockquote')).toContainText('Water & vapour');
@@ -44,7 +44,7 @@ test('formatted transcript selections save exact Markdown evidence and remain ed
 
 test('existing source highlights render across formatting and multi-block selections retain source boundaries', async ({ page }) => {
   const state = await backend(page); state.documents[0].transcript.messages[0].text = markdown;
-  await login(page, 'alice'); await page.locator('.assignment-card').click();
+  await login(page, 'alice'); await page.locator('a[href^="/assignments/"]').first().click();
   await select(page, 't1', 'HeatAdd energy');
   await page.getByRole('button', { name: 'Examples', exact: true }).click(); await page.getByRole('button', { name: 'Explained', exact: true }).click();
   await expect.poll(() => state.assignments[0].annotations[0]?.entry.detail_level).toBe('Explained');

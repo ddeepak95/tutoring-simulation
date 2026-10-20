@@ -1,0 +1,14 @@
+{
+  "name": "chatgpt-conversation-extension",
+  "version": "1.7.19",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "package": "node scripts/build.mjs && python scripts/package.py",
+    "agent": "node scripts/agent-server.mjs",
+    "test:agent": "node --test tests/agent-server.test.mjs",
+    "agent:questions": "node scripts/question-agent.mjs",
+    "test:questions": "node --test tests/question-agent.test.mjs"
+  }
+}

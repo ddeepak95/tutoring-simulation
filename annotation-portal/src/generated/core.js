@@ -7,7 +7,7 @@
     concepts_and_subtopics_covered: ["topic", "detail_level"],
     examples: ["detail_level"],
     analogies: ["detail_level"],
-    representations: ["representation_type"],
+    representations: ["representation_type", "image_languages"],
     cultural_references: ["detail_level"],
     questions: ["question_type"],
     issues: ["issue", "explanation"],
@@ -83,14 +83,14 @@
     return feature.fields.filter(field => {
       if (OPTIONAL_CONCEPT_FIELDS[annotation.feature] === field.key) return false;
       const value = annotation.entry[field.key];
-      return typeof value !== "string" || !value.trim();
+      return field.multiple ? !Array.isArray(value) || !value.length : typeof value !== "string" || !value.trim();
     }).map(field => field.key);
   }
 
   function createAnnotation(featureKey, evidence, rubric, id) {
     const feature = rubric.find(f => f.key === featureKey);
     if (!feature) throw new Error("Unknown instructional feature.");
-    const entry = Object.fromEntries(feature.fields.filter(field => OPTIONAL_CONCEPT_FIELDS[featureKey] !== field.key).map(field => [field.key, ""]));
+    const entry = Object.fromEntries(feature.fields.filter(field => OPTIONAL_CONCEPT_FIELDS[featureKey] !== field.key).map(field => [field.key, field.multiple ? [] : ""]));
     // Use the selected wording as an editable starting point, without guessing enums.
     entry[feature.fields[0].key] = evidence.quote;
     entry.turn_locations = [evidence.turn_id];
@@ -126,6 +126,12 @@
             throw new Error("Instructional questions must have concept_checked set to null.");
           }
           if (value === undefined || value === "" || value === null) continue;
+        }
+        if (field.multiple) {
+          if (allowIncomplete && Array.isArray(value) && !value.length) continue;
+          if (!Array.isArray(value) || !value.length || value.some(item => typeof item !== "string" || !item.trim()) || new Set(value).size !== value.length) throw new Error(`${field.label} is required.`);
+          if (field.key === "image_languages" && value.some(item => !/^(?:[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*|und|zxx)$/.test(item))) throw new Error(`${field.label} must use BCP 47 language tags.`);
+          continue;
         }
         if (allowIncomplete && value === "") continue;
         if (typeof value !== "string" || !value.trim()) throw new Error(`${field.label} is required.`);

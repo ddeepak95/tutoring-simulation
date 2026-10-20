@@ -1,6 +1,6 @@
 {
   "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
-  "rubric_sha256": "0040605a2abe26b1b822605345c25ee1c512c948a9a1eba02c79a70214030182",
+  "rubric_sha256": "4f5f5d4845d7d76558684432361efc59b8f30965fbe392270f2297890ac68a49",
   "rubric": [
     {
       "name": "Concepts",
@@ -92,8 +92,8 @@
       "color": "#4f89a3",
       "highlight": "#e4f1f8",
       "description": "Which distinct diagrams, graphs, tables, equations, or other visual or symbolic forms does the tutor use to explain or illustrate a learning concept?",
-      "entry_attributes": "`representation`; `representation_type` (Diagram / Graph / Table / Equation / Other visual or symbolic form); `concept_illustrated`; `turn_locations`",
-      "guidance": "**What to record:** List each distinct visual or symbolic representation the tutor provides to explain or illustrate a learning concept. Record representations actually present in the conversation, including text-based diagrams or displayed equations. Do not record a representation that is merely suggested or mentioned without being provided.<br><br>**Entry attributes:** Record `representation` (a short description of what is provided), `representation_type` (Diagram / Graph / Table / Equation / Other visual or symbolic form), `concept_illustrated` (the concept it helps explain), and `turn_locations` (where it appears). For Other, specify the form.<br><br>**Distinct entries:** List repeated use of the same representation once and include all supporting turn locations. Record distinct representations separately, even when they illustrate the same concept.<br><br>**Worked example:** The tutor provides a temperature–time graph showing a heating curve and explains the flat section during a phase change. Record `representation`: **Temperature–time graph showing a heating curve**; `representation_type`: **Graph**; `concept_illustrated`: **Heating and phase changes**; `turn_locations`: the actual turns where the graph appears.<br><br>**Mention without a representation:** If the tutor only says, “You could draw a graph of temperature against time,” but provides no graph, do not list a representation.",
+      "entry_attributes": "`representation`; `representation_type` (Diagram / Graph / Table / Equation / Other visual or symbolic form); `concept_illustrated`; `image_languages` (list of BCP 47 language tags); `turn_locations`",
+      "guidance": "**What to record:** List each distinct visual or symbolic representation the tutor provides to explain or illustrate a learning concept. Record representations actually present in the conversation, including images, text-based diagrams, tables, or displayed equations. Do not record a representation that is merely suggested or mentioned without being provided.<br><br>**Entry attributes:** Record `representation` (a short description of what is provided), `representation_type` (Diagram / Graph / Table / Equation / Other visual or symbolic form), `concept_illustrated` (the concept it helps explain), `image_languages` (a list of languages visibly written inside the representation, using BCP 47 tags such as `en`, `ta`, or `hi`), and `turn_locations` (where it appears). Record every visible written language: for example, use `[\"ta\", \"en\"]` for Tamil and English. Use `[\"zxx\"]` for no written language and `[\"und\"]` when text is present but its language cannot be reliably identified. For Other, specify the form.<br><br>**Distinct entries:** List repeated use of the same representation once and include all supporting turn locations. Record distinct representations separately, even when they illustrate the same concept.<br><br>**Worked example:** The tutor provides a temperature–time graph showing a heating curve and explains the flat section during a phase change. Record `representation`: **Temperature–time graph showing a heating curve**; `representation_type`: **Graph**; `concept_illustrated`: **Heating and phase changes**; `image_languages`: **[\"en\"]**; `turn_locations`: the actual turns where the graph appears.<br><br>**Mention without a representation:** If the tutor only says, “You could draw a graph of temperature against time,” but provides no graph, do not list a representation.",
       "fields": [
         {
           "key": "representation",
@@ -113,6 +113,11 @@
         {
           "key": "concept_illustrated",
           "label": "Concept illustrated"
+        },
+        {
+          "key": "image_languages",
+          "label": "Languages in image or representation",
+          "multiple": true
         }
       ]
     },

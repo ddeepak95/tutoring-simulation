@@ -30,7 +30,19 @@ async function comparisonBackend(page: Page) {
     if (url.pathname === '/rest/v1/rpc/save_comparison_round') {
       if (comparisonState.failSave) return send({ message: 'Network unavailable. Try saving again.' }, 503);
       const body = route.request().postDataJSON(); const row = assignments[0];
-      row.answers.push(body.p_answer); row.revision++; row.status = row.answers.length === 2 ? 'submitted' : 'in_progress';
+      row.answers.push(body.p_answer); row.revision++; row.status = 'in_progress';
+      return send(row);
+    }
+    if (url.pathname === '/rest/v1/rpc/save_comparison_overall') {
+      if (comparisonState.failSave) return send({ message: 'Network unavailable. Try saving again.' }, 503);
+      const body = route.request().postDataJSON(); const row = assignments[0];
+      row.overall_answer = body.p_answer; row.revision++; row.status = 'submitted';
+      return send(row);
+    }
+    if (url.pathname === '/rest/v1/rpc/reset_comparison_assignment') {
+      if (comparisonState.failSave) return send({ message: 'Reset unavailable. Try again.' }, 503);
+      const body = route.request().postDataJSON(); const row = assignments[0];
+      row.questions = body.p_questions; row.answers = []; row.overall_answer = null; row.status = 'not_started'; row.submitted_at = null; row.revision++;
       return send(row);
     }
     return route.fallback();
@@ -55,7 +67,8 @@ test('dashboard lists annotation and comparison assignments in separate sections
   await expect(page.getByRole('heading', { name: 'Your assignments', exact: true })).toHaveCount(0);
   await expect(page.getByText('Pick a conversation to continue annotating.', { exact: true })).toHaveCount(0);
   await comparison.click();
-  await expect(page.getByText('Question 1 of 9', { exact: false })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Reset responses', exact: true })).toHaveCount(0);
+  await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
   await page.getByRole('link', { name: /Dashboard$/ }).click();
   await expect(page).toHaveURL(/\/#compare$/);
   await expect(compare.getByRole('heading', { name: 'Compare', exact: true })).toBeFocused();
@@ -73,9 +86,8 @@ test('admin selects conversations and assigns a comparison', async ({ page }) =>
   await page.getByRole('button', { name: 'Assign comparison', exact: true }).click();
   await expect(page.getByText('Comparison assigned.', { exact: false })).toBeVisible();
   expect(state.assignments[0].annotator_id).toBe(ids.alice);
-  expect(state.assignments[0].questions).toHaveLength(11);
-  expect(state.assignments[0].questions.find(q => q.key === 'conversational_naturalness')?.description).toBe('Which of the two responses better involves the learner by speaking directly to them and inviting them to think about the explanation?');
-  expect(state.assignments[0].questions.every(question => question.description.startsWith('Which of the two responses'))).toBe(true);
+  expect(state.assignments[0].questions).toHaveLength(8);
+  expect(state.assignments[0].questions.filter(question => question.scope === 'overall')).toHaveLength(2);
   await page.locator('.comparisons-page').getByRole('link', { name: /Open$/ }).click();
   await expect(page.getByRole('button', { name: 'Choose conversation A', exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Tie / equally good', exact: true })).toBeDisabled();
@@ -88,7 +100,7 @@ test('questions advance through card choices, recover drafts, and unlock turns o
   await expect(page.locator('.comparison-round')).toHaveCount(1);
   await expect(page.getByText('Student response', { exact: true })).toHaveCount(0);
   await expect(page.locator('.comparison-question')).toHaveCount(1);
-  await expect(page.getByText('Question 1 of 9', { exact: false })).toBeVisible();
+  await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
   await expect(page.getByText('Which of the two responses better explains the underlying concept or principle, rather than only presenting facts or steps?', { exact: true }).first()).toBeVisible();
   await expect(page.getByText('Does the tutor recap the key points of each newly explained concept?', { exact: true })).toHaveCount(0);
   const save = page.getByRole('button', { name: 'Save comparison', exact: false }); await expect(save).toHaveCount(0);
@@ -103,17 +115,17 @@ test('questions advance through card choices, recover drafts, and unlock turns o
   expect(await transcriptB.evaluate(node => node.scrollTop)).toBeGreaterThan(0);
   await cardA.focus(); await page.keyboard.press('Enter');
   await expect(page.locator('.comparison-transcript').first().locator('.comparison-selection-feedback')).toBeVisible();
-  await expect(page.getByText('Question 2 of 9', { exact: false })).toBeVisible();
+  await expect(page.getByText('Question 2 of 5', { exact: false })).toBeVisible();
   await expect(page.locator('.comparison-selection-feedback')).toHaveCount(0);
   await expect(page.locator('.comparison-question')).toHaveCSS('animation-name', 'comparison-question-update');
-  await page.reload(); await expect(page.getByText('Question 2 of 9', { exact: false })).toBeVisible();
+  await page.reload(); await expect(page.getByText('Question 2 of 5', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: 'Previous question', exact: true }).click();
   await expect(cardA).toHaveAttribute('aria-pressed', 'true');
   await cardA.click();
-  await cardB.click(); await expect(page.getByText('Question 3 of 9', { exact: false })).toBeVisible();
-  for (let question = 3; question <= 9; question++) {
-    await expect(page.getByText(`Question ${question} of 9`, { exact: false })).toBeVisible();
-    await page.getByRole('button', { name: question === 6 ? 'Choose conversation B' : 'Tie / equally good', exact: true }).click();
+  await cardB.click(); await expect(page.getByText('Question 3 of 5', { exact: false })).toBeVisible();
+  for (let question = 3; question <= 5; question++) {
+    await expect(page.getByText(`Question ${question} of 5`, { exact: false })).toBeVisible();
+    await page.getByRole('button', { name: question === 4 ? 'Choose conversation B' : 'Tie / equally good', exact: true }).click();
   }
   await expect(page.getByRole('heading', { name: 'All questions answered', exact: true })).toBeVisible();
   const review = page.getByRole('heading', { name: 'Review your choices', exact: true });
@@ -122,7 +134,7 @@ test('questions advance through card choices, recover drafts, and unlock turns o
   await expect(save).toBeEnabled();
   const changeLoad = page.getByRole('button', { name: 'Change answer for Focus and Amount of Information', exact: true });
   await changeLoad.click(); await expect(cardB).toHaveAttribute('aria-pressed', 'true');
-  for (let question = 6; question <= 9; question++) await page.getByRole('button', { name: 'Tie / equally good', exact: true }).click();
+  for (let question = 4; question <= 5; question++) await page.getByRole('button', { name: 'Tie / equally good', exact: true }).click();
   state.comparisonState.failSave = true; await save.click(); await expect(page.getByRole('alert')).toContainText('Network unavailable');
   await expect(page.locator('.comparison-round')).toHaveCount(1);
   state.comparisonState.failSave = false; await save.click();
@@ -130,17 +142,65 @@ test('questions advance through card choices, recover drafts, and unlock turns o
   await expect(page.getByText('Student response', { exact: true })).toHaveCount(2);
   await expect(page.getByText('Alternative student reply.', { exact: true })).toBeVisible();
   const turn2 = page.locator('.comparison-round').nth(1); await expect(turn2.locator('.comparison-question')).toHaveCount(1);
-  await expect(turn2.getByText('Question 1 of 11', { exact: false })).toBeVisible();
+  await expect(turn2.getByText('Question 1 of 6', { exact: false })).toBeVisible();
   await page.reload(); await expect(page.locator('.comparison-round')).toHaveCount(2);
-  for (let question = 1; question <= 11; question++) {
-    await expect(turn2.getByText(`Question ${question} of 11`, { exact: false })).toBeVisible();
-    if (question === 10) await expect(turn2.getByRole('heading', { name: 'Which of the two responses connects its explanation more clearly to the ideas and examples established in earlier turns?', exact: true })).toBeVisible();
+  for (let question = 1; question <= 6; question++) {
+    await expect(turn2.getByText(`Question ${question} of 6`, { exact: false })).toBeVisible();
+    if (question === 1) await expect(turn2.getByRole('heading', { name: "Which of the two responses better addresses the student's follow-up?", exact: true })).toBeVisible();
     await turn2.getByRole('button', { name: 'Choose conversation B', exact: true }).click();
   }
-  await save.click(); await expect(page.getByText('Comparison complete.', { exact: false })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Overall conversation', exact: true })).toHaveCount(0);
+  await save.click();
+  const overall = page.getByRole('form', { name: 'Overall conversation', exact: true });
+  await expect(overall.getByRole('heading', { name: 'Overall conversation', exact: true })).toBeFocused();
+  expect(state.assignments[0].status).toBe('in_progress');
+  const finish = overall.getByRole('button', { name: 'Save overall comparison and finish', exact: true });
+  await expect(finish).toBeDisabled();
+  await overall.getByRole('group', { name: 'Which of the two conversations felt more natural and conversational?' }).getByRole('radio', { name: 'A is better', exact: true }).check();
+  await expect(finish).toBeDisabled();
+  await page.reload();
+  await expect(overall.getByRole('group', { name: 'Which of the two conversations felt more natural and conversational?' }).getByRole('radio', { name: 'A is better', exact: true })).toBeChecked();
+  await overall.getByRole('group', { name: 'Which of the two conversations overall addressed the learning goal better?' }).getByRole('radio', { name: 'Tie / equally good', exact: true }).check();
+  state.comparisonState.failSave = true; await finish.click();
+  await expect(page.getByRole('alert')).toContainText('Network unavailable');
+  expect(state.assignments[0].status).toBe('in_progress');
+  state.comparisonState.failSave = false; await finish.click();
+  await expect(page.getByText('Comparison complete.', { exact: false })).toBeVisible();
+  expect(state.assignments[0].overall_answer?.values).toEqual({ overall_conversational_naturalness: 'a', overall_learning_goal: 'tie' });
+  await expect(overall.getByRole('radio').first()).toBeDisabled();
   expect(state.assignments[0].answers).toHaveLength(2); await expect(save).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   const mobileCards = page.locator('.comparison-round').last().locator('.comparison-transcript');
   expect((await mobileCards.nth(0).boundingBox())!.height).toBe((await mobileCards.nth(1).boundingBox())!.height);
+});
+
+
+test('admin confirms a reset, preserves work on cancel or failure, and restarts with current questions', async ({ page }) => {
+  const state = await comparisonBackend(page); state.seed();
+  const row = state.assignments[0];
+  row.questions = JSON.parse(fs.readFileSync('src/generated/rating-questions.json', 'utf8'));
+  row.answers = [{ values: { concept_summarization: 'a' }, notes: 'Original first response' }, { values: { concept_summarization: 'b' }, notes: 'Original second response' }];
+  row.status = 'submitted'; row.revision = 2;
+  await login(page, 'admin');
+  await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
+  await page.locator('.comparisons-page').getByRole('link', { name: /Open$/ }).click();
+  await page.getByRole('button', { name: 'Reset responses', exact: true }).click();
+  const dialog = page.getByRole('dialog', { name: 'Reset comparison responses?' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Cancel', exact: true })).toBeFocused();
+  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(dialog).toHaveCount(0); expect(row.answers).toHaveLength(2);
+  await page.getByRole('button', { name: 'Reset responses', exact: true }).click();
+  state.comparisonState.failSave = true;
+  await dialog.getByRole('button', { name: 'Reset responses', exact: true }).click();
+  await expect(dialog.getByRole('alert')).toContainText('Reset unavailable');
+  expect(row.answers).toHaveLength(2); expect(row.revision).toBe(2);
+  state.comparisonState.failSave = false;
+  await dialog.getByRole('button', { name: 'Reset responses', exact: true }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(page.locator('.comparison-round')).toHaveCount(1);
+  await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
+  expect(row.status).toBe('not_started'); expect(row.answers).toEqual([]); expect(row.questions).toHaveLength(8); expect(row.revision).toBe(3);
+  await page.reload(); await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { comparisonComplete, comparisonQuestions, comparisonRounds } from '../src/comparison';
+import { comparisonComplete, comparisonQuestions, comparisonRounds, overallComparisonQuestions } from '../src/comparison';
 import questions from '../src/generated/comparison-questions.json';
 import legacyQuestions from '../src/generated/rating-questions.json';
 import type { Conversation } from '../src/types';
@@ -14,8 +14,10 @@ const conversation: Conversation = { conversation_id: null, learning_topic: null
 describe('comparison rounds', () => {
   it('keeps paper-based question wording and guidance instead of legacy overrides', () => {
     const active = comparisonQuestions(questions, 1);
-    expect(active).toEqual(questions);
-    expect(active.find(q => q.key === 'conversational_naturalness')?.description).toBe('Which of the two responses better involves the learner by speaking directly to them and inviting them to think about the explanation?');
+    expect(active.map(q => q.key)).toEqual(['follow_up_responsiveness', ...questions.filter(q => q.scope === 'turn' && !q.subsequent_only).map(q => q.key)]);
+    expect(overallComparisonQuestions(questions)).toHaveLength(2);
+    expect(active.every(q => q.scope !== 'overall')).toBe(true);
+    expect(active[0].description).toBe("Which of the two responses better addresses the student's follow-up?");
     expect(active.some(q => q.key === 'positivity_of_tone')).toBe(false);
   });
   it('preserves historical question sets and their completion requirements', () => {
@@ -36,10 +38,10 @@ describe('comparison rounds', () => {
     expect(rounds[1].students.map(turn => turn.turn_id)).toEqual(['s1', 's2']);
   });
   it('requires every applicable question and accepts ties', () => {
-    expect(comparisonQuestions(questions, 0).some(q => q.key === 'coherence')).toBe(false);
-    expect(comparisonQuestions(questions, 1).some(q => q.key === 'coherence')).toBe(true);
-    expect(comparisonQuestions(questions, 0)).toHaveLength(9);
-    expect(comparisonQuestions(questions, 1)).toHaveLength(11);
+    expect(comparisonQuestions(questions, 0).some(q => q.key === 'follow_up_responsiveness')).toBe(false);
+    expect(comparisonQuestions(questions, 1).some(q => q.key === 'follow_up_responsiveness')).toBe(true);
+    expect(comparisonQuestions(questions, 0)).toHaveLength(5);
+    expect(comparisonQuestions(questions, 1)).toHaveLength(6);
     const answer = { values: Object.fromEntries(comparisonQuestions(questions, 0).map(q => [q.key, 'tie' as const])), notes: '' };
     expect(comparisonComplete(answer, questions, 0)).toBe(true);
     expect(comparisonComplete(answer, questions, 1)).toBe(false);

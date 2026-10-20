@@ -3,10 +3,12 @@ export type Status = 'not_started' | 'in_progress' | 'submitted';
 export interface Profile { id: string; username: string; role: Role; }
 export interface Turn { turn_id: string; speaker: 'tutor' | 'student'; text: string; }
 export interface RepositorySource { run_id: string; relative_path: string; original_conversation_id: string | null; file_sha256: string; version: string; language: string; topic_id: string; }
-export interface Conversation { conversation_id: string | null; learning_topic: string | null; label: string; messages: Turn[]; repository_source?: RepositorySource; source_conversation_id?: string | null; original_language?: string | null; topic_english_name?: string | null; }
+export interface ChatGPTSource { source_conversation_id: string; source_url: string; captured_at: string; imported_at: string; imported_by: string; extractor_version: string; snapshot_sha256: string; capture_report: { complete?: boolean; top_reached?: boolean; bottom_reached?: boolean; consistent_passes?: boolean; message_count: number; limitations: string[]; exact_html?: string }; }
+export interface ArchiveSource { archive_id: string; source_conversation_id: string; source_url: string; captured_at: string; imported_by: string; extractor_version: string; snapshot_sha256: string; prepared_by: string; prepared_at: string; preparation_sha256: string; capture_report: Record<string, unknown>; }
+export interface Conversation { conversation_id: string | null; learning_topic: string | null; label: string; messages: Turn[]; archive_source?: ArchiveSource; repository_source?: RepositorySource; chatgpt_source?: ChatGPTSource; source_conversation_id?: string | null; original_language?: string | null; topic_english_name?: string | null; }
 export interface Evidence { turn_id: string; quote: string; start: number; end: number; occurrence: number; example_status?: 'Fresh' | 'Duplicate'; }
 export interface Annotation { id: string; feature: string; entry: Record<string, string | string[] | null>; evidence: Evidence[]; }
-export interface Field { key: string; label: string; options?: string[]; }
+export interface Field { key: string; label: string; options?: string[]; multiple?: boolean; }
 export interface Feature { key: string; name: string; short_label: string; color: string; highlight: string; description: string; guidance: string; entry_attributes: string; fields: Field[]; }
 export interface RatingDimension { key: string; label: string; description: string; options: string[]; scale_items: Partial<Record<string, string>>; guidance: string; subsequent_only?: boolean; }
 export interface TurnRating { values: Record<string, string>; notes: string; }

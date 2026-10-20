@@ -6,6 +6,7 @@ import {instructionalPromptText,instructionalReviewPrompt,instructionalRepairPro
 import {createHash} from 'node:crypto';
 import { generateInstructionalBaseline } from '../server/llm-provider';
 import { compareWithBaseline } from '../src/baseline-comparison';
+import {modelSourcePassages} from '../server/source-passages';
 const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'😀 **Water evaporates.** Water evaporates. Why? Why?'},{turn_id:'s1',speaker:'student',text:'Water evaporates.'}]});
 const output={annotations:[{feature:'examples',entry:{example:'Evaporation',concept_illustrated:null,detail_level:'Brief'},evidence:[{turn_id:'t1',quote:'Water evaporates.',occurrence:2,example_status:'Fresh' as const}]}]};
 const repairPatch={replacements:[{index:0,annotation:output.annotations[0]}],additions:[]};
@@ -19,14 +20,24 @@ it('uses both prompts and version from the single Markdown source and records it
  expect(instructionalRepairPrompt).toBe(source.split('## Validation repair prompt')[1].trim());
  expect(instructionalPromptSha256).toBe(createHash('sha256').update(source).digest('hex'));
  expect(source).toContain(`prompt_version: ${promptVersion}`);
- const prompt=instructionalPrompt();expect(prompt).toContain('one-based occurrence numbers');expect(prompt).toContain('## JSON output instructions');
- for(const feature of bundledRubric.rubric)expect(prompt).toContain(`feature = ${feature.key}`);
+ const prompt=instructionalPrompt();expect(prompt).toContain('segment_id');expect(prompt).toContain('data-evidence-ids');expect(prompt.length).toBeLessThan(12000);
+ for(const feature of bundledRubric.rubric)expect(prompt).toContain(feature.key);
  for(const section of ['### Pedagogical Characteristics','#### Instructional Sequence','### Conversation Quality','### Errors'])expect(prompt).not.toContain(section);
 });
 it('resolves raw quotations to exact UTF-16 spans and retains occurrence identity',()=>{
  const annotation=resolveLLMAnnotations(output,conversation,bundledRubric,'request')[0];
  expect(annotation.evidence[0].start).toBe(conversation.messages[0].text.lastIndexOf('Water evaporates.'));expect(annotation.evidence[0].occurrence).toBe(2);expect(annotation.entry.turn_locations).toEqual(['t1']);expect(annotation.id).toBe('llm-request-1');
  expect(()=>C.validateAnnotations(conversation,[annotation],bundledRubric.rubric)).not.toThrow();
+});
+it('maps HTML headings and table header rows back onto exact canonical transcript spans',()=>{
+ const value=C.normalizeConversation({conversation_id:'html-conversation',messages:[{turn_id:'html-1',speaker:'tutor',text:'Evaporation\nAB\nrow\n'}]});
+ const html={ 'html-1':'<h2>Evaporation</h2><table><thead><tr><th>A</th><th>B</th></tr></thead><tbody><tr><td>row</td></tr></tbody></table>' };
+ expect(modelSourcePassages(value,html).filter(source=>source.kind!=='passage').map(source=>[source.kind,source.quote])).toEqual([['heading','Evaporation'],['table_header','AB']]);
+ const concept={annotations:[{feature:'concepts_and_subtopics_covered',entry:{topic:'Evaporation',detail_level:'Brief'},evidence:[{turn_id:'html-1',quote:'Evaporation',occurrence:1}]}]};
+ expect(resolveLLMAnnotations(concept,value,bundledRubric,'html',html)[0].evidence[0]).toMatchObject({start:0,end:11});
+ const response={annotations:[{feature:'concepts_and_subtopics_covered',entry:{topic:'Evaporation',detail_level:'Brief'},evidence:[{segment_id:'html-1:s0001',quote:'Evaporation'}]}]};
+ const sent={conversation:value,rubric:bundledRubric,requestId:'html-request',apiKey:'unused',config:{model:'configured/model',timeout:1,repair_attempts:0,reasoning:null},fetcher:vi.fn().mockResolvedValue(new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(response)}}]})))};
+ return generateInstructionalBaseline({...sent,captureHtml:html}).then(result=>{const request=JSON.parse(sent.fetcher.mock.calls[0][1].body);const input=request.messages[1].content;expect(input).toContain('<h2 data-evidence-ids="html-1:s0001">Evaporation</h2>');expect(input).toContain('<th>A</th><th>B</th>');expect(input).not.toContain('tutor_source_passages');expect(input).not.toContain('canonical_text');expect(result.annotations[0].evidence[0]).toMatchObject({turn_id:'html-1',quote:'Evaporation',start:0,end:11});});
 });
 it('preserves per-highlight freshness, supports legacy evidence, and rejects invalid statuses',()=>{
  const value=structuredClone(output);value.annotations[0].evidence.push({...value.annotations[0].evidence[0],occurrence:1,example_status:'Duplicate'});
@@ -36,6 +47,8 @@ it('preserves per-highlight freshness, supports legacy evidence, and rejects inv
  const historical:any=structuredClone(output);delete historical.annotations[0].evidence[0].example_status;expect(resolveLLMAnnotations(historical,conversation,bundledRubric,'old')).toHaveLength(1);
  const exampleVariant=annotationSchema(bundledRubric).properties.annotations.items.anyOf.find(v=>v.properties.feature.enum[0]==='examples')!;
  expect(exampleVariant.properties.evidence.items.required).toContain('example_status');
+ const generatedEvidence=annotationSchema(bundledRubric,true).properties.annotations.items.anyOf.find(v=>v.properties.feature.enum[0]==='examples')!.properties.evidence.items;
+ expect(generatedEvidence.required).toEqual(['segment_id','quote','example_status']);expect(generatedEvidence).not.toHaveProperty('anyOf');
  const wrongFeature=structuredClone(resolved);wrongFeature[0].feature='analogies';expect(()=>C.validateAnnotations(conversation,wrongFeature,bundledRubric.rubric,{allowIncomplete:true})).toThrow(/only to examples/);
 });
 it('rejects fabricated/student evidence, unknown categories, ratings, enum errors and mismatched question quotes',()=>{
@@ -49,11 +62,11 @@ it('repairs invalid exact evidence once without switching models and returns ful
  const result=await generateInstructionalBaseline({conversation,rubric:bundledRubric,requestId:'request',apiKey:'private-key',config:{model:'configured/model',max_tokens:1000,timeout:10,repair_attempts:1,reasoning:null},fetcher});
  expect(fetcher).toHaveBeenCalledTimes(2);expect(result.generation_config.attempts).toBe(2);expect(result.model).toBe('configured/model');expect(result.generation_config.provider_request_id).toBe('provider-id');
  for(const call of fetcher.mock.calls){const request=JSON.parse(call[1].body);expect(request.model).toBe('configured/model');expect(request.provider.require_parameters).toBe(true);expect(request.response_format.type).toBe('json_schema');expect(request.messages[0].content).toBe(instructionalPromptText);}
- const repaired=JSON.parse(fetcher.mock.calls[1][1].body).messages.at(-2).content;
- for(const call of fetcher.mock.calls){const input=JSON.parse(JSON.parse(call[1].body).messages[1].content);expect(input).not.toHaveProperty('label');expect(input.messages).toEqual(conversation.messages);expect(input.learning_topic).toBe(conversation.learning_topic);}
+ const repairRequest=JSON.parse(fetcher.mock.calls[1][1].body);const repaired=repairRequest.messages.at(-2).content;const repairData=JSON.parse(repairRequest.messages.at(-1).content);
+ for(const call of fetcher.mock.calls){const input=JSON.parse(call[1].body).messages[1].content;expect(input).toContain('<conversation>');expect(input).toContain('speaker="tutor"');expect(input).not.toContain('tutor_source_passages');expect(input).not.toContain('tutor_heading_inventory');expect(input).not.toContain('visual_inventory');}
  expect(conversation).toHaveProperty('label');
  let validationError='';try{resolveLLMAnnotations(invalid,conversation,bundledRubric,'request');}catch(error){validationError=(error as Error).message;}
- expect(repaired).toContain(validationError);expect(repaired).toContain('fabricated');expect(result.generation_config.repair_log).toHaveLength(1);
+ expect(repaired).toContain('compact validation details');expect(repairData.invalid_entries[0].error).toBe(validationError);expect(JSON.stringify(repairData)).toContain('fabricated');expect(result.generation_config.repair_log).toHaveLength(1);
  expect(result.prompt).toBe(instructionalPromptText);expect(result.generation_config.repair_prompt).toBe(repaired);
  expect(result.generation_config.instructional_prompt_source).toBe(instructionalPromptSource);expect(result.generation_config.instructional_prompt_sha256).toBe(instructionalPromptSha256);
 });
@@ -62,7 +75,7 @@ it('reviews a validated draft with the original instructions and high reasoning 
  const fetcher=vi.fn().mockResolvedValue(new Response(JSON.stringify({model:'configured/model',choices:[{finish_reason:'stop',message:{content:JSON.stringify(output)}}]})));
  const result=await generateInstructionalBaseline({conversation,rubric:bundledRubric,requestId:'second',previousAnnotations:previous,apiKey:'private-key',config:{model:'configured/model',max_tokens:null,timeout:10,repair_attempts:0,reasoning:{effort:'high',exclude:true}},fetcher});
  const request=JSON.parse(fetcher.mock.calls[0][1].body);expect(request.reasoning.effort).toBe('high');expect(request).not.toHaveProperty('max_tokens');expect(request.messages[0].content).toBe(`${instructionalPromptText}\n\n${instructionalReviewPrompt}`);
- expect(JSON.parse(request.messages[1].content)).not.toHaveProperty('label');expect(JSON.parse(request.messages[2].content)).toEqual(output);expect(previous).toEqual(unchanged);
+ expect(request.messages[1].content).toContain('<conversation>');expect(request.messages[1].content).not.toContain('label');expect(JSON.parse(request.messages[2].content)).toEqual(output);expect(previous).toEqual(unchanged);
  expect(result.generation_config.pass).toBe('review');expect(result.annotations[0].id).toBe('llm-second-1');
  const invalid=structuredClone(previous);invalid[0].evidence[0].quote='fabricated';await expect(generateInstructionalBaseline({conversation,rubric:bundledRubric,requestId:'bad',previousAnnotations:invalid,apiKey:'private-key',config:{model:'configured/model',max_tokens:1000,timeout:10,repair_attempts:0,reasoning:null},fetcher})).rejects.toThrow(/exactly match/);expect(fetcher).toHaveBeenCalledTimes(1);
 });
@@ -96,8 +109,8 @@ it.each([false,true])('repairs omitted bold heading occurrences during generatio
  const response=(value:unknown)=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(value)}}]}));
  const fetcher=vi.fn().mockResolvedValueOnce(response(incomplete)).mockResolvedValueOnce(response(patch));
  const result=await generateInstructionalBaseline({conversation:headed,rubric:bundledRubric,requestId:'headings',...(review?{previousAnnotations:resolveLLMAnnotations(incomplete,headed,bundledRubric,'draft')}:{ }),apiKey:'private-key',config:{model:'configured/model',timeout:10,repair_attempts:1,reasoning:null},fetcher});
- const request=JSON.parse(fetcher.mock.calls[0][1].body);expect(JSON.parse(request.messages[1].content).tutor_heading_inventory).toEqual([{turn_id:'t1',quote:'# Measurement',occurrence:1},{turn_id:'t1',quote:'**Example:**',occurrence:1},{turn_id:'t1',quote:'**Example:**',occurrence:2}]);
- expect(JSON.parse(fetcher.mock.calls[1][1].body).messages.at(-2).content).toContain('Missing content-hierarchy highlight');
+ const request=JSON.parse(fetcher.mock.calls[0][1].body);expect(request.messages[1].content).toContain('<h1 data-evidence-ids="t1:s0001">Measurement</h1>');expect(request.messages[1].content).toContain('<strong>Example:</strong>');
+ expect(JSON.stringify(JSON.parse(fetcher.mock.calls[1][1].body).messages.at(-1).content)).toContain('Missing content-hierarchy highlight');
  expect(result.annotations[1].evidence).toHaveLength(2);expect(result.generation_config.pass).toBe(review?'review':'extraction');
  const failed=vi.fn().mockResolvedValue(response(incomplete));
  await expect(generateInstructionalBaseline({conversation:headed,rubric:bundledRubric,requestId:'reject',apiKey:'private-key',config:{model:'configured/model',timeout:10,repair_attempts:0,reasoning:null},fetcher:failed})).rejects.toThrow(/failed exact-highlight validation/);
@@ -123,7 +136,7 @@ it('accepts exact issue highlights and rejects incomplete issue attributes',()=>
 });
 it('does not retry provider errors or accept truncated model output',async()=>{
  const request={conversation,rubric:bundledRubric,requestId:'request',apiKey:'private-key',config:{model:'configured/model',max_tokens:1000,timeout:10,repair_attempts:1,reasoning:null}};
- const fetcher=vi.fn().mockResolvedValue(new Response('private provider details',{status:403}));await expect(generateInstructionalBaseline({...request,fetcher})).rejects.toThrow(/configured model/);expect(fetcher).toHaveBeenCalledTimes(1);
+ const fetcher=vi.fn().mockResolvedValue(new Response('private provider details',{status:403}));const saveResponse=vi.fn();await expect(generateInstructionalBaseline({...request,fetcher,onProviderResponse:saveResponse})).rejects.toThrow(/configured model/);expect(fetcher).toHaveBeenCalledTimes(1);expect(saveResponse).toHaveBeenCalledWith({http_status:403,raw_body:'private provider details'},1);
  const truncated=vi.fn().mockResolvedValue(new Response(JSON.stringify({choices:[{finish_reason:'length',message:{content:JSON.stringify(output)}}]})));await expect(generateInstructionalBaseline({...request,fetcher:truncated})).rejects.toThrow(/complete/);
 });
 it('compares independent human additions, removals, attribute edits and passage edits without mutating the baseline',()=>{

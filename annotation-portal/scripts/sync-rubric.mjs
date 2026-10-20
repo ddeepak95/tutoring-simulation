@@ -14,12 +14,12 @@ const schema = JSON.parse(schemaBytes);
 const sandbox = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ui, 'data.js'), 'utf8'), sandbox);
 const rows = new Map(guide.toString('utf8').split(/\r?\n/).filter(line => line.startsWith('| ')).map(line => line.trim().slice(1, -1).split('|').map(cell => cell.trim())).filter(cells => cells.length === 5).map(cells => [cells[0], cells]));
-const labels = { topic: 'Concept hierarchy path', example: 'Specific example', comparison: 'Comparison', representation: 'Representation', reference: 'Cultural reference', question: 'Exact question wording', concept_illustrated: 'Concept illustrated', concept_explained: 'Concept explained', concept_checked: 'Concept checked', detail_level: 'Detail level', question_type: 'Question classification', representation_type: 'Representation type' };
+const labels = { topic: 'Concept hierarchy path', example: 'Specific example', comparison: 'Comparison', representation: 'Representation', reference: 'Cultural reference', question: 'Exact question wording', concept_illustrated: 'Concept illustrated', concept_explained: 'Concept explained', concept_checked: 'Concept checked', detail_level: 'Detail level', question_type: 'Question classification', representation_type: 'Representation type', image_languages: 'Languages in image or representation' };
 const rubric = sandbox.window.ANNOTATION_DATA.rubric.map(feature => {
   const row = rows.get(feature.name);
   if (!row) throw new Error('Missing rubric row: ' + feature.name);
   const attributes = schema.properties.instructional_features.properties[feature.key].items.properties;
-  return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: Object.entries(attributes).filter(([key]) => key !== 'turn_locations').map(([key, definition]) => ({ key, label: labels[key], ...(definition.enum ? { options: definition.enum } : {}) })) };
+  return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: Object.entries(attributes).filter(([key]) => key !== 'turn_locations').map(([key, definition]) => ({ key, label: labels[key], ...(definition.enum ? { options: definition.enum } : {}), ...(definition.type === 'array' ? { multiple: true } : {}) })) };
 });
 const issueRow = rows.get('Error');
 if (!issueRow) throw new Error('Missing issues guidebook row.');

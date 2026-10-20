@@ -10,21 +10,22 @@ const questions = text.split(/\r?\n/).filter(line => line.startsWith('| `')).map
   if (cells.length !== 6) throw new Error('Invalid comparative question row.');
   const [rawKey, label, description, guidance, timing, source_basis] = cells;
   const key = rawKey.replaceAll('`', '');
-  if (!/^[a-z][a-z0-9_]*$/.test(key) || !label || !description.startsWith('Which of the two responses') || !guidance || !['All turns', 'Subsequent turns'].includes(timing)) {
+  if (!/^[a-z][a-z0-9_]*$/.test(key) || !label || !/^Which of the two (responses|conversations)/.test(description) || !guidance || !['All turns', 'Follow-up turns', 'Overall conversation'].includes(timing)) {
     throw new Error(`Invalid comparative question: ${key}`);
   }
   return {
     key, label, description, guidance,
     options: ['a', 'b', 'tie'],
     scale_items: { a: 'A is better', b: 'B is better', tie: 'Tie / equally good' },
-    subsequent_only: timing === 'Subsequent turns',
-    question_set: 'kulgemeyer-comparative-combined-v2', source, source_basis,
+    subsequent_only: timing === 'Follow-up turns',
+    scope: timing === 'Overall conversation' ? 'overall' : 'turn',
+    question_set: 'instructional-comparison-v3', source, source_basis,
   };
 });
-if (questions.length !== 11 || questions.filter(question => !question.subsequent_only).length !== 9 || new Set(questions.map(question => question.key)).size !== questions.length) {
-  throw new Error('Expected 11 distinct comparative questions, including 9 initial-turn questions.');
+if (questions.length !== 8 || questions.filter(question => question.scope === 'turn' && !question.subsequent_only).length !== 5 || questions.filter(question => question.scope === 'overall').length !== 2 || new Set(questions.map(question => question.key)).size !== questions.length) {
+  throw new Error('Expected five first-turn, one follow-up, and two overall questions.');
 }
 const output = path.join(portal, 'src/generated/comparison-questions.json');
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, JSON.stringify(questions, null, 2) + '\n');
-console.log('Synced 11 comparative questions (9 initial-turn, 11 subsequent-turn).');
+console.log('Synced comparison questions: 5 first-turn, 6 follow-up, 2 overall.');

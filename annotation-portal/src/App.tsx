@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { BrowserRouter, Link, NavLink, Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import type { Session } from '@supabase/supabase-js';
-import { C, configured, download, fetchAssignments, loginIdentifier, supabase, validateSubmission } from './lib';
+import { bundledRubric, C, configured, download, fetchAssignments, loginIdentifier, supabase, validateSubmission } from './lib';
 import type { Annotation, AnnotationWork, Assignment, LLMBaseline, Profile, RubricSnapshot, TurnRatings } from './types';
 import { SaveQueue, type SaveState } from './save-queue';
 import { Editor } from './Editor';
@@ -14,6 +14,8 @@ import { ratingQuestionMetadata, validateTurnRatings } from './turn-ratings';
 import { LLMBaselines } from './LLMBaselines';
 import { BaselineComparison } from './BaselineComparison';
 import { Comparisons, ComparisonEditor } from './Comparisons';
+import { CapturedTranscript, useCaptureAssets } from './CapturedTranscript';
+import { MarkdownTranscript } from './MarkdownTranscript';
 
 interface Context { profile: Profile; beforeExit: React.MutableRefObject<null | (() => Promise<void>)>; }
 const PortalContext = createContext<Context | null>(null);
@@ -41,36 +43,37 @@ function WorkspaceLink({ to, children, className, end, beforeExit, onError }: { 
   }}>{children}</NavLink>;
 }
 
-function AdminConversation() {
-  const { id } = useParams(); const { profile } = usePortal(); const navigate = useNavigate();
-  const [error, setError] = useState('');
-  useEffect(() => {
-    let alive = true;
-    if (id) void openAdminAnnotations(id, profile).then(assignmentId => { if (alive) navigate(`/assignments/${assignmentId}`, { replace: true }); }).catch(error => { if (alive) setError(message(error)); });
-    return () => { alive = false; };
-  }, [id, profile, navigate]);
-  return <main className="center">{error ? <><p className="error" role="alert">{error}</p><Link to="/">Back to conversations</Link></> : <p role="status">Opening your annotations…</p>}</main>;
+function ConversationOnly({ conversation }: { conversation: import('./types').Conversation }) {
+  const captured = useCaptureAssets(conversation);
+  const rubric = bundledRubric.rubric;
+  const noAnnotations: Annotation[] = [];
+  const noHighlight = () => {};
+  return <main className="editor-page"><div className="editor-bar"><Link className="secondary" to="/">← Conversations</Link></div><section className="document"><div className="document-header"><h2>{conversation.learning_topic || conversation.label}</h2></div>{captured.error && <p className="notice" role="status">{captured.error}</p>}{captured.exactHtml ? <div className="exact-capture"><iframe title="Exact original conversation" sandbox="allow-same-origin" srcDoc={captured.exactHtml} /></div> : <div className="transcript">{conversation.messages.map(turn => <article className={`turn ${turn.speaker === 'tutor' ? 'tutor' : 'student'}`} key={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'tutor' ? 'T' : 'S'}</span><strong>{turn.speaker === 'tutor' ? 'Tutor' : 'Student'}</strong><span>{turn.turn_id}</span></div><div className="turn-body">{captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={noAnnotations} rubric={rubric} readonly onHighlight={noHighlight} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={noAnnotations} rubric={rubric} readonly onHighlight={noHighlight} />}</div></article>)}</div>}</section></main>;
 }
 
 function AdminAnnotationReview() {
   const { id } = useParams(); const { profile } = usePortal(); const navigate = useNavigate();
-  const [error, setError] = useState(''); const [empty, setEmpty] = useState(false);
+  const [error, setError] = useState(''); const [conversation, setConversation] = useState<import('./types').Conversation | null>(null);
   useEffect(() => {
     let alive = true;
-    setError(''); setEmpty(false);
+    setError(''); setConversation(null);
     void (async () => {
       try {
-        const { data, error } = await supabase!.from('assignments').select('id, annotator_id, profiles!assignments_annotator_id_fkey(username)').eq('conversation_id', id).eq('is_active',true).returns<{ id: string; annotator_id: string; profiles: { username: string } | null }[]>();
+        const [{ data, error }, { data: document, error: documentError }] = await Promise.all([
+          supabase!.from('assignments').select('id, annotator_id, annotations, turn_ratings, profiles!assignments_annotator_id_fkey(username)').eq('conversation_id', id).eq('is_active',true).returns<{ id: string; annotator_id: string; annotations: Annotation[]; turn_ratings: TurnRatings; profiles: { username: string } | null }[]>(),
+          supabase!.from('conversations').select('transcript').eq('id', id).single()
+        ]);
         if (error) throw error;
+        if (documentError) throw documentError;
         if (!alive) return;
-        const rows = (data || []).sort((a, b) => Number(a.annotator_id === profile.id) - Number(b.annotator_id === profile.id) || (a.profiles?.username || '').localeCompare(b.profiles?.username || ''));
+        const rows = (data || []).filter(row => row.annotations.length > 0 || Object.keys(row.turn_ratings || {}).length > 0).sort((a, b) => Number(a.annotator_id === profile.id) - Number(b.annotator_id === profile.id) || (a.profiles?.username || '').localeCompare(b.profiles?.username || ''));
         if (rows.length) navigate(`/assignments/${rows[0].id}/view`, { replace: true });
-        else setEmpty(true);
+        else setConversation(document.transcript);
       } catch (err) { if (alive) setError(message(err)); }
     })();
     return () => { alive = false; };
   }, [id, profile.id, navigate]);
-  return <main className="center">{error || empty ? <><p className={error ? 'error' : 'notice'} role={error ? 'alert' : 'status'}>{error || 'No annotator assignments are available for this conversation yet.'}</p><Link to="/">Back to conversations</Link></> : <p role="status">Loading annotations…</p>}</main>;
+  return error ? <main className="center"><p className="error" role="alert">{error}</p><Link to="/">Back to conversations</Link></main> : conversation ? <ConversationOnly conversation={conversation} /> : <main className="center"><p role="status">Loading conversation…</p></main>;
 }
 
 export default function App() {
@@ -95,7 +98,7 @@ export default function App() {
     catch (err) { setError(message(err)); }
   }
   return <BrowserRouter><header className="topbar"><WorkspaceLink className="brand" to="/" end beforeExit={beforeExit} onError={setError}><span className="brand-icon">a.</span><span><strong>AI Explanation Evaluation</strong></span></WorkspaceLink>{profile && <div className="top-actions"><WorkspaceLink to="/comparisons" beforeExit={beforeExit} onError={setError}>Comparisons</WorkspaceLink>{profile.role === 'admin' && <nav aria-label="Administration"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Conversations</WorkspaceLink><WorkspaceLink to="/settings" beforeExit={beforeExit} onError={setError}>Settings</WorkspaceLink></nav>}<span>{profile.username}<small>{profile.role === 'admin' ? 'Administrator' : 'Annotator'}</small></span><button className="secondary" onClick={() => void signOut()}>Sign out</button></div>}</header>
-    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/comparisons" element={<Comparisons profile={profile} />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminConversation /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
+    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/comparisons" element={<Comparisons profile={profile} />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
   </BrowserRouter>;
 }
 function Assignments() {

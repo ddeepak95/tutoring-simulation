@@ -2,9 +2,12 @@ import {unified} from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import type {Root,RootContent} from 'mdast';
+import {htmlHeadingRanges} from './html-structure.ts';
+
+export function isCaptureMetadataHeading(value:string){return /^Agent-explored interactive state state_\d+ \(capture action, not a learner response\)$/u.test(value.trim());}
 
 // Parse Markdown so heading-like text inside code fences is never accepted.
-export function headingRanges(text:string) {
+export function headingRanges(text:string,html='') {
  const root=unified().use(remarkParse).use(remarkGfm).parse(text) as Root;
  const ranges:{start:number;end:number}[]=[];
  function visit(node:Root|RootContent){
@@ -26,11 +29,11 @@ export function headingRanges(text:string) {
   }
   if('children' in node)for(const child of node.children)visit(child as RootContent);
  }
- visit(root);return ranges;
+ visit(root);for(const range of htmlHeadingRanges(html,text))if(!ranges.some(current=>current.start===range.start&&current.end===range.end))ranges.push(range);return ranges.filter(range=>!isCaptureMetadataHeading(text.slice(range.start,range.end))).sort((a,b)=>a.start-b.start||a.end-b.end);
 }
 
-export function tutorHeadingInventory(conversation:{messages:{speaker:string;turn_id:string;text:string}[]}){
- return conversation.messages.filter(turn=>turn.speaker==='tutor').flatMap(turn=>headingRanges(turn.text).map(range=>{
+export function tutorHeadingInventory(conversation:{messages:{speaker:string;turn_id:string;text:string}[]},htmlByTurn:Record<string,string>={}){
+ return conversation.messages.filter(turn=>turn.speaker==='tutor').flatMap(turn=>headingRanges(turn.text,htmlByTurn[turn.turn_id]||'').map(range=>{
   const quote=turn.text.slice(range.start,range.end);let occurrence=0;let at=-1;
   do{at=turn.text.indexOf(quote,at+1);occurrence++;}while(at<range.start);
   return {turn_id:turn.turn_id,quote,occurrence};

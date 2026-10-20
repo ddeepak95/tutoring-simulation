@@ -24,7 +24,7 @@ it('rejects model/rating injection, malformed JSON and oversized requests',async
 it('persists only validated highlights with model/prompt/config provenance and no human ratings',async()=>{
  const mock=await setup();expect((await mock.send()).status).toBe(201);
  const args=mock.rpc.mock.calls.find(([name])=>name==='complete_llm_generation')?.[1] as any;
- expect(args.p_annotations).toEqual([]);expect(args.p_model).toBe('configured/model');expect(args.p_prompt_version).toBe('instructional-highlights/20');expect(args.p_prompt).toContain('feature = issues');expect(args.p_turn_ratings).toBeUndefined();expect(args.p_generation_config.attempts).toBe(1);
+ expect(args.p_annotations).toEqual([]);expect(args.p_model).toBe('configured/model');expect(args.p_prompt_version).toBe('instructional-highlights/21');expect(args.p_prompt).toContain('Issues');expect(args.p_turn_ratings).toBeUndefined();expect(args.p_generation_config.attempts).toBe(1);
 });
 it('does not repeat paid calls for an already claimed or completed generation',async()=>{
  const running=await setup({claimed:false});expect((await running.send()).status).toBe(202);expect(running.fetcher).not.toHaveBeenCalled();const complete=await setup({claimed:false,status:'completed'});expect((await complete.send()).status).toBe(200);expect(complete.fetcher).not.toHaveBeenCalled();
