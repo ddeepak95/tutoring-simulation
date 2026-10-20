@@ -3,7 +3,7 @@ import {createHash} from 'node:crypto';
 import { annotationSchema, instructionalPrompt, resolveLLMAnnotations } from './llm-annotation-core.ts';
 import {instructionalPromptSource,instructionalPromptSha256,instructionalRepairPrompt,instructionalReviewPrompt} from './generated/instructional-prompt.ts';
 import type { Annotation, Conversation, RubricSnapshot } from '../src/types.ts';
-import {modelConversationHtml,resolveSegmentEvidence} from './model-conversation-html.ts';
+import {expandRepeatedQuestionOccurrences,modelConversationHtml,resolveSegmentEvidence} from './model-conversation-html.ts';
 import {inspectAnnotations,applyRepair,repairSchema,type RepairIssue} from './annotation-repair.ts';
 export class GenerationError extends Error {
   code: string;
@@ -20,6 +20,7 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
  if(draft)resolveLLMAnnotations(draft,conversation,rubric,'review-input',captureHtml);
  const prompt=draft?`${instructionalPrompt()}\n\n${instructionalReviewPrompt}`:instructionalPrompt();
  const modelInput=modelConversationHtml(conversation,captureHtml,visuals);
+ if(draft)draft.annotations=expandRepeatedQuestionOccurrences(draft,modelInput.segments,conversation).annotations;
  const visualsWithCaptions=(visuals||[]).map(visual=>({...visual,caption:modelInput.visualCaptions[visual.id]||'Image'}));
  const visualInventory=visualsWithCaptions.map(visual=>({id:visual.id,turn_id:visual.turn_id,mime_type:visual.mime_type,caption:visual.caption,sha256:createHash('sha256').update(visual.data||visual.uri||'').digest('hex')}));
  const screenshotInventory=(contextScreenshots||[]).map((visual,index)=>({id:visual.id||`screenshot-${index+1}`,mime_type:visual.mime_type,sha256:createHash('sha256').update(visual.data||visual.uri||'').digest('hex')}));
@@ -28,6 +29,7 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
  if(checkpoint&&checkpoint.fingerprint!==fingerprint)throw new GenerationError('Checkpoint does not match this transcript, prompt, rubric, model, or review draft.','checkpoint_mismatch');
  const state:GenerationCheckpoint=checkpoint?structuredClone(checkpoint):{fingerprint,attempts:0,repairs_used:0,repair_log:[]};
  if(initialContent!==undefined&&!checkpoint){try{state.draft=JSON.parse(initialContent);}catch{state.draft=initialContent;}state.attempts=1;state.provider_request_id=initialResponseId;}
+ if(state.draft)state.draft=expandRepeatedQuestionOccurrences(state.draft,modelInput.segments,conversation);
  const budget=Math.min(3,Math.max(initialContent===undefined?0:1,Math.max(0,config.repair_attempts)));
  const base=[{role:'system',content:prompt},{role:'user',content:modelInput.html}];
  if(draft)base.push({role:'user',content:JSON.stringify(draft)});
@@ -44,6 +46,7 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
    try{state.draft=applyRepair(state.draft as {annotations:unknown[]},output,pending.issues,conversation,rubric,captureHtml);record.applied=true;}catch(error){record.error=(error as Error).message;}
    state.repair_log.push(record);
   }else{state.draft=output;if(pending.issues.length)state.repair_log.push({attempt:state.repairs_used,mode:'full',issues:pending.issues,response:output,provider_request_id:payload.id});}
+  state.draft=expandRepeatedQuestionOccurrences(state.draft,modelInput.segments,conversation);
   delete state.pending_response;await persist();
  };
  for(;;){

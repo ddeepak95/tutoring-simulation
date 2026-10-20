@@ -22,6 +22,13 @@ function canonicalRange(canonical:string,value:string,cursor:number):{start:numb
  const from=positions.findIndex(position=>position>=cursor);let found=key.indexOf(needle,Math.max(0,from));
  if(found<0)return null;return {start:positions[found],end:positions[found+needle.length-1]+1};
 }
+function canonicalRanges(canonical:string,value:string){
+ const needle=compactKey(value);if(!needle)return [] as {start:number;end:number}[];
+ let key='';const positions:number[]=[];for(let i=0;i<canonical.length;i++)if(!/[\s\u200b\ufeff]/u.test(canonical[i])){key+=canonical[i];positions.push(i);}
+ const ranges:{start:number;end:number}[]=[];let found=key.indexOf(needle);
+ while(found>=0){ranges.push({start:positions[found],end:positions[found+needle.length-1]+1});found=key.indexOf(needle,found+1);}
+ return ranges;
+}
 function sentenceRanges(text:string,start:number,end:number){
  const value=text.slice(start,end);const result:{start:number;end:number}[]=[];
  try{for(const item of new Intl.Segmenter(undefined,{granularity:'sentence'}).segment(value)){const left=item.index+item.segment.search(/\S/u);const right=item.index+item.segment.trimEnd().length;if(right>left&&/[\p{L}\p{N}]/u.test(item.segment))result.push({start:start+left,end:start+right});}}catch{}
@@ -53,8 +60,9 @@ function compactSourceHtml(source:string,turnId:string,canonical:string,segments
   }
   range||=canonicalRange(canonical,nodeText(node),cursor);if(!range)continue;
   cursor=range.end;
-  const sentenceSpans=sentenceRanges(canonical,range.start,range.end);const ids:string[]=[];const captureMetadata=isCaptureMetadataHeading(canonical.slice(range.start,range.end));const isHeading=!captureMetadata&&(/^h[1-6]$/.test(tag)||headings.some(candidate=>candidate.start===range!.start&&candidate.end===range!.end));if(captureMetadata)captureMetadataNodes.add(node);if(isHeading&&!/^h[1-6]$/.test(tag))standaloneHeadingNodes.add(node);
-  for(const span of sentenceSpans){const id=`${turnId}:s${String(++nextId.value).padStart(4,'0')}`;ids.push(id);segments.push({segment_id:id,turn_id:turnId,start:span.start,end:span.end,block_start:range.start,block_end:range.end,quote:canonical.slice(span.start,span.end),source_text:nodeText(node),kind:isHeading?'heading':captureMetadata?'paragraph':semanticKind(tag),source_path:nodePaths.get(node)||null});}
+  const sourceText=nodeText(node);const questionRanges=sourceText.trim().endsWith('?')?canonicalRanges(canonical,sourceText).filter(candidate=>candidate.start!==range!.start):[];
+  const blockRanges=[range,...questionRanges];const ids:string[]=[];const captureMetadata=isCaptureMetadataHeading(canonical.slice(range.start,range.end));const isHeading=!captureMetadata&&(/^h[1-6]$/.test(tag)||headings.some(candidate=>candidate.start===range!.start&&candidate.end===range!.end));if(captureMetadata)captureMetadataNodes.add(node);if(isHeading&&!/^h[1-6]$/.test(tag))standaloneHeadingNodes.add(node);
+  for(const blockRange of blockRanges)for(const span of sentenceRanges(canonical,blockRange.start,blockRange.end)){const id=`${turnId}:s${String(++nextId.value).padStart(4,'0')}`;ids.push(id);segments.push({segment_id:id,turn_id:turnId,start:span.start,end:span.end,block_start:blockRange.start,block_end:blockRange.end,quote:canonical.slice(span.start,span.end),source_text:sourceText,kind:isHeading?'heading':captureMetadata?'paragraph':semanticKind(tag),source_path:nodePaths.get(node)||null});}
   if(ids.length)segmentAttrs.set(node,ids.join(' '));
  }
  const attrsFor=(node:Node)=>{
@@ -115,6 +123,24 @@ export function modelConversationHtml(conversation:Conversation,captureHtml:Reco
   return `<turn id="${esc(turn.turn_id)}" speaker="${esc(turn.speaker)}">${body}${refs}</turn>`;
  }).join('');
  return {html:`<conversation>${turns}</conversation>`,segments,visualCaptions};
+}
+export function expandRepeatedQuestionOccurrences(value:any,segments:EvidenceSegment[],conversation:Conversation){
+ if(!value||typeof value!=='object'||!Array.isArray(value.annotations))return value;
+ const annotations:any[]=[];const expandedKeys=new Set<string>();
+ for(const annotation of value.annotations){
+  const evidence=annotation?.feature==='questions'&&Array.isArray(annotation.evidence)&&annotation.evidence.length===1?annotation.evidence[0]:null;
+  const turn=evidence&&conversation.messages.find(item=>item.turn_id===evidence.turn_id&&item.speaker==='tutor');
+  if(!turn||typeof evidence.quote!=='string'||!evidence.quote||annotation.entry?.question!==evidence.quote||!Number.isInteger(evidence.occurrence)){annotations.push(annotation);continue;}
+  const positions:number[]=[];let at=-1;while((at=turn.text.indexOf(evidence.quote,at+1))>=0)positions.push(at);
+  const blockStarts=positions.map(position=>Math.max(-1,...segments.filter(segment=>segment.turn_id===turn.turn_id&&segment.kind!=='heading'&&position>=segment.block_start&&position+evidence.quote.length<=segment.block_end).map(segment=>segment.block_start)));
+  if(positions.length<2||blockStarts.some(start=>start<0)||new Set(blockStarts).size!==positions.length){annotations.push(annotation);continue;}
+  const group=JSON.stringify([annotation.entry?.question,annotation.entry?.question_type,evidence.turn_id,evidence.quote]);
+  positions.forEach((position,index)=>{
+   const occurrence=index+1,key=`${group}:${occurrence}`;if(expandedKeys.has(key))return;expandedKeys.add(key);
+   const copy=structuredClone(annotation);copy.evidence=[{...evidence,occurrence}];annotations.push(copy);
+  });
+ }
+ return {...value,annotations};
 }
 export function resolveSegmentEvidence(output:any,segments:EvidenceSegment[],conversation:Conversation){
  const byId=new Map(segments.map(segment=>[segment.segment_id,segment]));

@@ -1,5 +1,5 @@
 import {expect,it} from 'vitest';
-import {modelConversationHtml,resolveSegmentEvidence} from '../server/model-conversation-html';
+import {expandRepeatedQuestionOccurrences,modelConversationHtml,resolveSegmentEvidence} from '../server/model-conversation-html';
 import {headingRanges} from '../server/heading-evidence';
 
 it('serializes the conversation once as compact semantic HTML and strips noisy capture attributes',()=>{
@@ -45,6 +45,24 @@ it('resolves a returned segment ID and exact quote to canonical transcript offse
  expect(result.html).toContain(`data-evidence-ids="${result.segments[0].segment_id} ${result.segments[1].segment_id}"`);
  const output=resolveSegmentEvidence({annotations:[{feature:'questions',entry:{question:'Sentence two?',question_type:'Instructional',concept_checked:null},evidence:[{segment_id:result.segments[1].segment_id,quote:'Sentence two.'}]}]},result.segments,conversation);
  expect(output.annotations[0].evidence[0]).toEqual({turn_id:'t1',quote:'Sentence two.',occurrence:1});
+});
+
+it('expands one eligible repeated quiz question to each distinct source block occurrence',()=>{
+ const quote='Which lobe is especially important for visual processing?';
+ const conversation={conversation_id:'c1',learning_topic:'topic',label:'label',messages:[{turn_id:'t1',speaker:'tutor' as const,text:`${quote}\nOptions\n${quote}\nFeedback`}]};
+ const segments=[{segment_id:'t1:s0000',turn_id:'t1',start:0,end:conversation.messages[0].text.length,block_start:0,block_end:conversation.messages[0].text.length,quote:conversation.messages[0].text,source_text:conversation.messages[0].text,kind:'paragraph',source_path:null},{segment_id:'t1:s0001',turn_id:'t1',start:0,end:quote.length,block_start:0,block_end:quote.length+8,quote,source_text:quote,kind:'paragraph',source_path:null},{segment_id:'t1:s0002',turn_id:'t1',start:quote.length+9,end:quote.length*2+9,block_start:quote.length+9,block_end:conversation.messages[0].text.length,quote,source_text:quote,kind:'paragraph',source_path:null}];
+ const annotation={feature:'questions',entry:{question:quote,question_type:'Knowledge-checking',concept_checked:'Visual processing'},evidence:[{turn_id:'t1',quote,occurrence:2}]};
+ const result=expandRepeatedQuestionOccurrences({annotations:[annotation,{...annotation,entry:{...annotation.entry,concept_checked:'Visual function'}}]},segments,conversation);
+ expect(result.annotations.map((item:any)=>item.evidence[0].occurrence)).toEqual([1,2]);
+});
+
+it('maps every canonical occurrence when the captured question block appears only once',()=>{
+ const quote='Which lobe is especially important for visual processing?';
+ const conversation={conversation_id:'c1',learning_topic:'topic',label:'label',messages:[{turn_id:'t1',speaker:'tutor' as const,text:`${quote}\nOptions\n${quote}`}]};
+ const model=modelConversationHtml(conversation,{t1:`<p>${quote}</p>`});
+ expect(model.segments.filter(segment=>segment.quote===quote).map(segment=>segment.block_start)).toHaveLength(2);
+ const result=expandRepeatedQuestionOccurrences({annotations:[{feature:'questions',entry:{question:quote,question_type:'Knowledge-checking',concept_checked:'Visual processing'},evidence:[{turn_id:'t1',quote,occurrence:2}]}]},model.segments,conversation);
+ expect(result.annotations.map((item:any)=>item.evidence[0].occurrence)).toEqual([1,2]);
 });
 
 it('aligns an HTML heading ID with the structural heading occurrence when its wording repeats',()=>{
