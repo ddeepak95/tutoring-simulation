@@ -26,14 +26,16 @@ export function groupCoverage(annotations: Annotation[]) {
   return [...groups.values()];
 }
 
-// Derive the level from the stored parent path so legacy annotations stay valid.
+// Prefer the explicit choice; derive it from old paths for historical annotations.
 export function conceptLevel(annotation: Annotation) {
   if (annotation.feature !== 'concepts_and_subtopics_covered') return null;
+  if (['Main concept', 'Explanatory unit', 'Explanatory subunit'].includes(String(annotation.entry.concept_level))) return annotation.entry.concept_level;
+  if (Object.hasOwn(annotation.entry, 'concept_level')) return null;
   const topic = parseCoverageTopic(annotation.entry.topic);
   return topic ? (['Main concept', 'Explanatory unit', 'Explanatory subunit'] as const)[topic.depth - 1] : null;
 }
 export function conceptDisplayFeature(feature: Feature): Feature {
   return feature.key === 'concepts_and_subtopics_covered'
-    ? {...feature, name: 'Concepts', short_label: 'Concepts', fields: feature.fields.map(field => field.key === 'topic' ? {...field, label: 'Concept hierarchy path'} : field)}
+    ? {...feature, name: 'Concepts', short_label: 'Concepts', fields: feature.fields.map(field => field.key === 'topic' ? {...field, label: 'Concept'} : field)}
     : feature;
 }

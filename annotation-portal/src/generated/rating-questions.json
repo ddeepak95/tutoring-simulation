@@ -1,172 +1,104 @@
 [
   {
-    "key": "concept_summarization",
-    "label": "Concept Summarization",
-    "description": "Does the tutor recap the key points of each newly explained concept?",
+    "key": "explaining_the_core_principle",
+    "label": "Explaining the Core Principle",
+    "description": "How well does the response explain the underlying concept or principle, rather than only presenting facts or steps?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "Does not summarize any concepts.",
-      "2": "Summarizes all or some concepts vaguely.",
-      "3": "Summarizes every newly explained concept clearly."
+      "1": "Gives facts or steps without explaining the underlying principle, or explains it inaccurately.",
+      "2": "Identifies the principle, but the explanation or connection is incomplete or unclear.",
+      "3": "Clearly explains how or why the concept works and connects facts or steps to the underlying principle."
     },
-    "guidance": "Does the tutor recap the key points of each newly explained concept?",
+    "guidance": "How well does the response explain the underlying concept or principle, rather than only presenting facts or steps?",
     "subsequent_only": false
   },
   {
-    "key": "information_load_appropriateness",
-    "label": "Information Load Appropriateness",
-    "description": "Is the amount of information provided appropriate?",
+    "key": "use_of_instructional_features",
+    "label": "Use of Instructional Features",
+    "description": "How well does the response utilize instructional features such as examples, analogies, diagrams, and memory aids to teach the concept?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "Provides far more than necessary.",
-      "2": "Provides slightly more than necessary.",
-      "3": "Provides the right amount of information."
+      "1": "Features confuse or mislead the learner, or the concept remains difficult to understand because helpful features are absent.",
+      "2": "Features partly support learning but are underdeveloped, disconnected, or leave some gaps in understanding.",
+      "3": "Uses appropriate instructional features accurately to clarify the concept; when no feature is needed, the explanation teaches the concept clearly without one."
     },
-    "guidance": "Is the amount of information provided appropriate?",
+    "guidance": "How well does the response utilize instructional features such as examples, analogies, diagrams, and memory aids to teach the concept?",
     "subsequent_only": false
   },
   {
-    "key": "relevance",
-    "label": "Relevance",
-    "description": "Is the information relevant to the core learning topic, with appropriate connections made when tangential?",
+    "key": "focus_and_amount_of_information",
+    "label": "Focus and Amount of Information",
+    "description": "How well does the response stay focused and provide an appropriate amount of information?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "Most information is irrelevant.",
-      "2": "Some information is irrelevant.",
-      "3": "All information is relevant."
+      "1": "Has substantial gaps, or is so irrelevant, repetitive, or overloaded that it impedes understanding.",
+      "2": "Generally focused, but includes some unnecessary or repetitive material, or leaves out useful detail.",
+      "3": "Covers the essential ideas with enough detail and little unnecessary repetition or digression."
     },
-    "guidance": "Is the information relevant to the core learning topic, with appropriate connections made when tangential?",
+    "guidance": "How well does the response stay focused and provide an appropriate amount of information?",
     "subsequent_only": false
   },
   {
-    "key": "real_world_connection_and_usefulness",
-    "label": "Real-World Connection and Usefulness",
-    "description": "Does the tutor explain how the learning topic relates to real-world situations or serves a practical purpose?",
+    "key": "opportunity_to_demonstrate_understanding",
+    "label": "Opportunity to Demonstrate Understanding",
+    "description": "How well does the response give the learner an opportunity to demonstrate understanding?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "Provides no meaningful connection or practical use.",
-      "2": "Mentions a real-world connection or use without fully explaining it.",
-      "3": "Clearly explains a real-world connection or practical use."
+      "1": "Provides no meaningful opportunity, or the prompt does not help demonstrate understanding.",
+      "2": "Provides only a generic check, recall prompt, or vague practice suggestion.",
+      "3": "Provides a relevant, concrete question or task that asks the learner to explain, predict, or apply the concept."
     },
-    "guidance": "Does the tutor explain how the learning topic relates to real-world situations or serves a practical purpose?",
+    "guidance": "How well does the response give the learner an opportunity to demonstrate understanding?",
     "subsequent_only": false
   },
   {
-    "key": "appropriateness_for_the_learners_level",
-    "label": "Appropriateness for the Learner’s Level",
-    "description": "Is the information appropriate for a high-school student?",
+    "key": "guidance_for_next_steps",
+    "label": "Guidance for Next Steps",
+    "description": "How well does the response guide the learner toward useful next steps?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "All information is too advanced.",
-      "2": "Some information is too advanced.",
-      "3": "All information is appropriate for the learner’s level."
+      "1": "Provides no useful next step, or points the learner toward something irrelevant or confusing.",
+      "2": "Suggests a next step, but it is vague, only partly relevant, or does not give a clear direction.",
+      "3": "Suggests a relevant next concept, practice activity, resource, or action and gives a clear direction for what to do next."
     },
-    "guidance": "Is the information appropriate for a high-school student?",
+    "guidance": "How well does the response guide the learner toward useful next steps?",
     "subsequent_only": false
   },
   {
-    "key": "opportunities_to_demonstrate_understanding",
-    "label": "Opportunities to Demonstrate Understanding",
-    "description": "Does the tutor provide opportunities for the learner to practise or demonstrate understanding of the core concept?",
+    "key": "follow_up_responsiveness",
+    "label": "Follow-up Responsiveness",
+    "description": "How well does the response address the student's follow-up?",
     "options": [
       "3",
       "2",
       "1"
     ],
     "scale_items": {
-      "1": "Does not check understanding.",
-      "2": "Only asks whether the learner has understood.",
-      "3": "Provides a concrete question or follow-up learning task."
+      "1": "Misses or misinterprets the main follow-up, or does not address it.",
+      "2": "Addresses the follow-up partly or generically, or misses part of it or a relevant opportunity to adapt.",
+      "3": "Directly and helpfully addresses the student's question, request, or confusion, and adapts to relevant learner information."
     },
-    "guidance": "Does the tutor provide opportunities for the learner to practise or demonstrate understanding of the core concept?",
-    "subsequent_only": false
-  },
-  {
-    "key": "conversational_naturalness",
-    "label": "Conversational Naturalness",
-    "description": "Does the tutor use familiar conversational phrases and address the learner personally, making the exchange feel like a dialogue?",
-    "options": [
-      "3",
-      "2",
-      "1"
-    ],
-    "scale_items": {
-      "1": "Sounds like a textbook explanation.",
-      "2": "Uses some conversational phrases but mostly delivers explanations.",
-      "3": "Feels natural, like talking to a human being."
-    },
-    "guidance": "Does the tutor use familiar conversational phrases and address the learner personally, making the exchange feel like a dialogue?",
-    "subsequent_only": false
-  },
-  {
-    "key": "positivity_of_tone",
-    "label": "Positivity of Tone",
-    "description": "How much warmth, encouragement, or empathy does the tutor express toward the learner?",
-    "options": [
-      "3",
-      "2",
-      "1"
-    ],
-    "scale_items": {
-      "1": "Shows little or no warmth or encouragement.",
-      "2": "Shows some warmth or encouragement but is mostly matter-of-fact.",
-      "3": "Consistently conveys a positive and supportive tone."
-    },
-    "guidance": "How much warmth, encouragement, or empathy does the tutor express toward the learner?",
-    "subsequent_only": false
-  },
-  {
-    "key": "coherence",
-    "label": "Coherence",
-    "description": "Do the tutor’s explanations and examples build logically on previous turns?",
-    "options": [
-      "3",
-      "2",
-      "1"
-    ],
-    "scale_items": {
-      "1": "Makes little or no connection to previous turns.",
-      "2": "Makes some connections, but with room for improvement.",
-      "3": "Makes strong connections across turns."
-    },
-    "guidance": "Do the tutor’s explanations and examples build logically on previous turns?",
-    "subsequent_only": true
-  },
-  {
-    "key": "responsiveness",
-    "label": "Responsiveness",
-    "description": "Does the tutor address the learner’s questions, requests, and confusion, and adapt to their knowledge, misconceptions, or interests?",
-    "options": [
-      "3",
-      "2",
-      "1"
-    ],
-    "scale_items": {
-      "1": "Ignores the learner’s needs.",
-      "2": "Acknowledges the learner’s needs but adapts little.",
-      "3": "Responds well and adapts to the learner’s needs."
-    },
-    "guidance": "Does the tutor address the learner’s questions, requests, and confusion, and adapt to their knowledge, misconceptions, or interests?",
+    "guidance": "How well does the response address the student's follow-up?",
     "subsequent_only": true
   }
 ]

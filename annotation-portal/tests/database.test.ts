@@ -14,8 +14,11 @@ beforeAll(async () => {
   await db.exec(`create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create schema storage; create table auth.users(id uuid primary key, email text); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid $$; grant usage on schema public, auth, storage to anon, authenticated, service_role; grant execute on function auth.uid() to authenticated; create table storage.buckets(id text primary key, name text, public boolean, file_size_limit bigint); create table storage.objects(id uuid primary key default gen_random_uuid(), bucket_id text, name text); alter table storage.objects enable row level security; grant select, insert, delete on storage.objects to authenticated;`);
   await db.exec(fs.readFileSync('supabase/migrations/202610080001_portal.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610090001_turn_ratings_issues.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610210004_memory_aid_rubric.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610090002_remove_issue_correction_status.sql', 'utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610100001_rating_questions.sql', 'utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610100005_evidence_performance.sql', 'utf8').split('create or replace function public.validate_annotations')[0] + 'commit;');
+  await db.exec(fs.readFileSync('supabase/migrations/202610210011_highlight_item_counts.sql', 'utf8').split('-- Keep active Label work')[0] + 'commit;');
   await db.query('insert into auth.users(id,email) values ($1,$2),($3,$4),($5,$6)', [admin, 'admin@users.annotation.invalid', alice, 'alice@users.annotation.invalid', bob, 'bob@users.annotation.invalid']);
   await db.exec(`update public.profiles set role='admin' where id='${admin}';`);
   await db.query('insert into public.rubric_versions(hash,snapshot) values ($1,$2::jsonb) on conflict(hash) do nothing', [bundledRubric.rubric_sha256, JSON.stringify(bundledRubric)]);
@@ -41,13 +44,17 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     await asUser(alice); const start = transcript.messages[0].text.indexOf('Water');
     const annotation = C.createAnnotation('examples', C.makeEvidence(transcript, 't1', start, start + 20), bundledRubric.rubric, 'first');
     expect((await save(assignmentA, 0, [annotation])).rows[0].result.revision).toBe(1);
-    await expect(save(assignmentA, 1, [annotation], true)).rejects.toThrow(/Required/);
+    const incompleteQuestion = C.createAnnotation('questions', C.makeEvidence(transcript, 't1', transcript.messages[0].text.lastIndexOf('Why?'), transcript.messages[0].text.lastIndexOf('Why?') + 4), bundledRubric.rubric, 'incomplete-question');
+    await expect(save(assignmentA, 1, [annotation, incompleteQuestion], true)).rejects.toThrow(/Required/);
     const bad = structuredClone(annotation); bad.evidence[0].quote = 'Not present'; await expect(save(assignmentA, 1, [bad])).rejects.toThrow(/exactly/);
     const wrongOccurrence = structuredClone(annotation); wrongOccurrence.evidence[0].occurrence = 2; await expect(save(assignmentA, 1, [wrongOccurrence])).rejects.toThrow(/occurrence/);
     const malformed = structuredClone(annotation) as any; malformed.evidence[0].start = String(start); await expect(save(assignmentA, 1, [malformed])).rejects.toThrow(/Invalid tutor evidence/);
     const badOffset = structuredClone(annotation); badOffset.evidence[0].start = 7; await expect(save(assignmentA, 1, [badOffset])).rejects.toThrow(/Unicode/);
-    annotation.entry.detail_level = 'Explained';
-    expect((await save(assignmentA, 1, [annotation], true)).rows[0].result.status).toBe('submitted');
+    const representation = C.createAnnotation('representations', C.makeEvidence(transcript, 't1', start, start + 20), bundledRubric.rubric, 'representation');
+    representation.entry.representation_type = 'Flowchart';
+    representation.entry.diagram_count = 3;
+    const issue = C.createAnnotation('issues', C.makeEvidence(transcript, 't1', start, start + 20), bundledRubric.rubric, 'issue');
+    expect((await save(assignmentA, 1, [annotation, representation, issue], true)).rows[0].result.status).toBe('submitted');
     await expect(save(assignmentA, 2, [])).rejects.toThrow(/read only/);
     await asUser(bob); expect((await db.query<{ annotations: unknown[] }>('select annotations from public.assignments')).rows[0].annotations).toEqual([]);
   });
@@ -60,7 +67,8 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
   });
   it('validates each question occurrence, enum values and learner evidence', async () => {
     await asUser(bob); const text = transcript.messages[0].text; const start = text.lastIndexOf('Why?');
-    const question = C.createAnnotation('questions', C.makeEvidence(transcript, 't1', start, start + 4), bundledRubric.rubric, 'q'); question.entry.question_type = 'Instructional'; question.entry.concept_checked = null;
+    const question = C.createAnnotation('questions', C.makeEvidence(transcript, 't1', start, start + 4), bundledRubric.rubric, 'q'); question.entry.question_type = 'Instructional'; question.entry.concept_checked = null; question.entry.question_count = 1;
+    const badCount = structuredClone(question); badCount.entry.question_count = 0; await expect(save(assignmentB, 0, [badCount])).rejects.toThrow(/count/);
     const bad = structuredClone(question); bad.entry.question_type = 'Rhetorical'; await expect(save(assignmentB, 0, [bad])).rejects.toThrow(/enum/);
     const multiple = structuredClone(question); multiple.evidence.push(multiple.evidence[0]); await expect(save(assignmentB, 0, [multiple])).rejects.toThrow(/separately/);
     const learner = structuredClone(question); learner.evidence[0].turn_id = 's1'; await expect(save(assignmentB, 0, [learner])).rejects.toThrow(/tutor/);
@@ -122,15 +130,13 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     await expect(db.query('select public.save_assignment($1,0,$2::jsonb,true)', [id, '[]'])).rejects.toThrow(/Rate every tutor turn/);
     await expect(write({ s1: ratings.t1 })).rejects.toThrow(/tutor turns/);
     await expect(write({ missing: ratings.t1 })).rejects.toThrow(/tutor turns/);
-    await expect(write({ t1: { values: { relevance: '4' }, notes: '' } })).rejects.toThrow(/Invalid turn rating value/);
+    await expect(write({ t1: { values: { understanding_the_core_principle: '4' }, notes: '' } })).rejects.toThrow(/Invalid turn rating value/);
     await expect(write({ t1: { values: {}, notes: 1 } })).rejects.toThrow(/attributes/);
-    const partial = { t1: { values: { relevance: '3' }, notes: '' } };
+    const partial = { t1: { values: { understanding_the_core_principle: '3' }, notes: '' } };
     await write(partial);
     expect((await db.query<{ turn_ratings: unknown }>('select turn_ratings from public.annotation_revisions where assignment_id=$1 and revision=1', [id])).rows[0].turn_ratings).toEqual(partial);
     await expect(write(ratings, false, 0)).rejects.toThrow(/Revision conflict/);
-    ratings.t1.values.appropriateness_for_the_learners_level = 'Insufficient evidence';
-    await expect(write(ratings, true, 1)).rejects.toThrow(/limitation/);
-    ratings.t1.notes = 'The learner level was not supplied or demonstrated.';
+    ratings.t1.notes = 'Optional rater note.';
     await asUser(bob); await expect(write(ratings, false, 1)).rejects.toThrow(/denied/);
     await asUser(admin); await expect(write(ratings, false, 1)).rejects.toThrow(/denied/);
     await asUser(alice); await write(ratings, true, 1); await expect(write(ratings, false, 2)).rejects.toThrow(/read only/);
@@ -148,7 +154,7 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4)', [id, doc, alice, bundledRubric.rubric_sha256]);
     const start = transcript.messages[0].text.indexOf('Water');
     const annotation = C.createAnnotation('examples', C.makeEvidence(transcript, 't1', start, start + 5), bundledRubric.rubric, 'admin-example'); annotation.entry.detail_level = 'Brief';
-    const ratings = { t1: { values: { relevance: '3' }, notes: '' } };
+    const ratings = { t1: { values: { understanding_the_core_principle: '3' }, notes: '' } };
     const write = (revision: number, submit = false, payload: unknown = ratings) => db.query<any>('select public.save_assignment($1,$2,$3::jsonb,$4,$5::jsonb) as result', [id, revision, JSON.stringify([annotation]), submit, JSON.stringify(payload)]);
     await asUser(bob); await expect(write(0)).rejects.toThrow(/denied/);
     await asUser(admin); await write(0);
@@ -172,5 +178,16 @@ describe.sequential('Supabase migration, permissions and exact evidence', () => 
     expect((await db.query<any>('select annotator_id from public.assignments where id=$1', [id])).rows[0].annotator_id).toBe(alice);
     await db.exec('reset role; set role anon'); await expect(write(6)).rejects.toThrow(/permission denied/);
     await db.exec('reset role');
+  });
+  it('saves a Memory Aid annotation against the eight-feature rubric', async () => {
+    await db.exec('reset role');
+    const doc = '00000000-0000-4000-8000-000000000060', id = '00000000-0000-4000-8000-000000000061';
+    await db.query('insert into public.conversations(id,label,transcript,created_by) values($1,$2,$3::jsonb,$4)', [doc, 'Memory Aid', JSON.stringify(transcript), admin]);
+    await db.query('insert into public.assignments(id,conversation_id,annotator_id,rubric_hash) values($1,$2,$3,$4)', [id, doc, alice, bundledRubric.rubric_sha256]);
+    const start = transcript.messages[0].text.indexOf('Water');
+    const aid = C.createAnnotation('memory_aids', C.makeEvidence(transcript, 't1', start, start + 5), bundledRubric.rubric, 'memory-aid');
+    await asUser(alice);
+    await db.query('select public.save_assignment($1,0,$2::jsonb,false,$3::jsonb)', [id, JSON.stringify([aid]), '{}']);
+    expect((await db.query<any>('select annotations from public.assignments where id=$1', [id])).rows[0].annotations).toEqual([aid]);
   });
 });

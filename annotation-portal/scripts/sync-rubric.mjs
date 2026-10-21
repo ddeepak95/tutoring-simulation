@@ -14,18 +14,27 @@ const schema = JSON.parse(schemaBytes);
 const sandbox = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(ui, 'data.js'), 'utf8'), sandbox);
 const rows = new Map(guide.toString('utf8').split(/\r?\n/).filter(line => line.startsWith('| ')).map(line => line.trim().slice(1, -1).split('|').map(cell => cell.trim())).filter(cells => cells.length === 5).map(cells => [cells[0], cells]));
-const labels = { topic: 'Concept hierarchy path', example: 'Specific example', comparison: 'Comparison', representation: 'Representation', reference: 'Cultural reference', question: 'Exact question wording', concept_illustrated: 'Concept illustrated', concept_explained: 'Concept explained', concept_checked: 'Concept checked', detail_level: 'Detail level', question_type: 'Question classification', representation_type: 'Representation type', image_languages: 'Languages in image or representation' };
+const labels = { topic: 'Concept hierarchy path', example: 'Specific example', comparison: 'Comparison', representation: 'Representation', reference: 'Cultural reference', question: 'Exact question wording', concept_illustrated: 'Concept illustrated', concept_explained: 'Concept explained', concept_checked: 'Concept checked', detail_level: 'Detail level', question_type: 'Question classification', representation_type: 'Representation type', image_languages: 'Languages in image or representation', diagram_count: 'Number of diagrams', question_count: 'Number of questions' };
+const portalOptional = { concepts_and_subtopics_covered: ['detail_level'], examples: ['concept_illustrated', 'detail_level'], analogies: ['concept_explained', 'detail_level'], representations: ['concept_illustrated', 'image_languages', 'diagram_count'], cultural_references: ['concept_illustrated', 'detail_level'], questions: ['concept_checked', 'question_count'] };
 const rubric = sandbox.window.ANNOTATION_DATA.rubric.map(feature => {
   const row = rows.get(feature.name);
   if (!row) throw new Error('Missing rubric row: ' + feature.name);
   const attributes = schema.properties.instructional_features.properties[feature.key].items.properties;
-  return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: Object.entries(attributes).filter(([key]) => key !== 'turn_locations').map(([key, definition]) => ({ key, label: labels[key], ...(definition.enum ? { options: definition.enum } : {}), ...(definition.type === 'array' ? { multiple: true } : {}) })) };
+  return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: Object.entries(attributes).filter(([key]) => key !== 'turn_locations').map(([key, definition]) => ({ key, label: labels[key], ...(definition.enum ? { options: definition.enum } : {}), ...(definition.type === 'array' ? { multiple: true } : {}), ...(definition.type === 'integer' ? { numeric: true } : {}), ...(portalOptional[feature.key]?.includes(key) ? { optional: true } : {}) })) };
 });
+const concepts = rubric.find(feature => feature.key === 'concepts_and_subtopics_covered');
+if (!concepts) throw new Error('Missing Concepts rubric category.');
+concepts.entry_attributes = '`topic` (selected heading); optional `concept_level` (Main concept / Explanatory unit / Explanatory subunit); `detail_level` (Brief / Explained / Elaborated); `turn_locations`';
+concepts.fields.splice(1, 0, { key: 'concept_level', label: 'Concept level (optional)', options: ['Main concept', 'Explanatory unit', 'Explanatory subunit'], optional: true });
+const memoryAidRow = rows.get('Memory Aid');
+if (!memoryAidRow) throw new Error('Missing Memory Aid guidebook row.');
+rubric.push({ key: 'memory_aids', name: 'Memory Aid', short_label: 'Memory aid', color: '#397b71', highlight: '#e2f3ee', description: memoryAidRow[1], entry_attributes: memoryAidRow[3], guidance: memoryAidRow[4], fields: [{ key: 'memory_aid', label: 'Memory aid' }] });
 const issueRow = rows.get('Error');
 if (!issueRow) throw new Error('Missing issues guidebook row.');
 const issueGuidance = issueRow[4].replaceAll('errors', 'issues').replaceAll('error', 'issue').replaceAll('Errors', 'Issues').replaceAll('Error', 'Issue').replace('`correction_status` (whether the tutor subsequently corrects it), and ', '').replace('; `correction_status`: whether a later correction appears', '').replace('Retain corrected issues in the list and note the correction.', 'Retain corrected issues in the list; supporting passages can include a later correction.');
-rubric.push({ key: 'issues', name: 'Issues', short_label: 'Issues', color: '#ad514b', highlight: '#fbe7e4', description: issueRow[1].replaceAll('errors', 'issues'), entry_attributes: '`issue`; `explanation`; exact selected evidence; `turn_locations`', guidance: issueGuidance, fields: [{ key: 'issue', label: 'Issue description' }, { key: 'explanation', label: 'Why it is an issue and the correct claim or step' }] });
+rubric.push({ key: 'issues', name: 'Issues', short_label: 'Issues', color: '#ad514b', highlight: '#fbe7e4', description: issueRow[1].replaceAll('errors', 'issues'), entry_attributes: '`issue`; optional `explanation`; exact selected evidence; `turn_locations`', guidance: issueGuidance, fields: [{ key: 'issue', label: 'Issue description' }, { key: 'explanation', label: 'Why it is an issue and the correct claim or step', optional: true }] });
 const questionText = ratingQuestions.toString('utf8');
+const ratingKeyOverrides = { 'Explaining the Core Principle': 'understanding_the_core_principle' };
 const rating_dimensions = [...questionText.matchAll(/^### (.+)\r?\n([\s\S]*?)(?=^#|$(?![\s\S]))/gm)].map(match => {
   const label = match[1].trim();
   const key = label.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
@@ -36,8 +45,8 @@ const rating_dimensions = [...questionText.matchAll(/^### (.+)\r?\n([\s\S]*?)(?=
   if (!description || options.some(value => !scale_items[value])) throw new Error('Invalid rating question: ' + label);
   return { key, label, description, options, scale_items, guidance: description, subsequent_only: match.index > questionText.indexOf('# Subsequent Turns') };
 });
-if (rating_dimensions.length !== 10 || rating_dimensions.filter(dimension => !dimension.subsequent_only).length !== 8) throw new Error('Expected eight first-turn questions and two subsequent-turn questions.');
-const snapshot = { rubric_source: 'conversation-evaluation/human-annotation/coding-guidebook.md', rubric_sha256: crypto.createHash('sha256').update(guide).update(schemaBytes).update(ratingQuestions).update('portal-turn-rating-questions-v5').digest('hex'), rubric, rating_dimensions, rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has eight criteria; subsequent tutor turns also require Coherence and Responsiveness.' };
+if (rating_dimensions.length !== 6 || rating_dimensions.filter(dimension => !dimension.subsequent_only).length !== 5) throw new Error('Expected five first-turn questions and one subsequent-turn question.');
+const snapshot = { rubric_source: 'conversation-evaluation/human-annotation/coding-guidebook.md', rubric_sha256: crypto.createHash('sha256').update(guide).update(schemaBytes).update(ratingQuestions).update('portal-turn-rating-questions-v6-memory-aids-v1-concept-level-v1-optional-annotation-details-v1-per-highlight-counts-v1').digest('hex'), rubric, rating_dimensions, rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has five criteria; subsequent tutor turns also require Follow-up Responsiveness.' };
 const out = path.join(portal, 'src/generated'); fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'rubric.json'), JSON.stringify(snapshot, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'rating-questions.json'), JSON.stringify(rating_dimensions, null, 2) + '\n');
@@ -49,7 +58,11 @@ fs.writeFileSync(path.join(serverOut, 'evaluation-config.json'), JSON.stringify(
 fs.writeFileSync(path.join(out, 'llm-config.json'), JSON.stringify({ model: evaluationConfig.model }, null, 2) + '\n');
 let core = fs.readFileSync(path.join(ui, 'core.js'), 'utf8');
 core = core.replace(/\(function \(root\) \{/, '').replace(/  root.AnnotationCore = api;[\s\S]*$/, 'export default api;\n');
-core = core.replace('    questions: ["question_type"],', '    questions: ["question_type"],\n    issues: ["issue", "explanation"],');
+core = core.replace('    concepts_and_subtopics_covered: ["topic", "detail_level"],', '    concepts_and_subtopics_covered: ["concept_level", "detail_level"],');
+core = core.replace('  const OPTIONAL_CONCEPT_FIELDS = {', '  const OPTIONAL_CONCEPT_FIELDS = {\n    concepts_and_subtopics_covered: "concept_level",');
+core = core.replace('    entry.turn_locations = [evidence.turn_id];', '    if (featureKey === "concepts_and_subtopics_covered" && feature.fields.some(field => field.key === "concept_level")) entry.concept_level = null;\n    entry.turn_locations = [evidence.turn_id];');
+core = core.replace('    questions: ["question_type"],', '    questions: ["question_type", "question_count"],\n    memory_aids: ["memory_aid"],\n    issues: ["issue", "explanation"],');
+core = core.replace('    representations: ["representation_type", "image_languages"],', '    representations: ["representation_type", "image_languages", "diagram_count"],');
 // Retain historical values, but never require or display the retired issue field.
 core = core.replace('      for (const key of Object.keys(annotation.entry)) {', '      if (annotation.feature === "issues") allowed.add("correction_status");\n      for (const key of Object.keys(annotation.entry)) {');
 core = core.replace('      for (const field of feature.fields) {', '      for (const field of feature.fields) {\n        if (annotation.feature === "issues" && field.key === "correction_status") continue;');

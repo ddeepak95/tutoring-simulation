@@ -135,7 +135,7 @@ try{
  async function push(artifact){
   const document=documents.find(doc=>doc.id===artifact.conversation_id);if(!document)throw new Error('The baseline conversation is not in the configured portal.');
   if(!isDeepStrictEqual(artifact.conversation,document.transcript))throw new Error('The local baseline does not contain this exact saved transcript.');
-  if(artifact.format_version!=='llm-baseline-local/1.0'||artifact.rubric_snapshot?.rubric_sha256!==artifact.rubric_hash||!Array.isArray(artifact.annotations)||artifact.annotations.some(annotation=>!['concepts_and_subtopics_covered','examples','analogies','representations','cultural_references','questions','issues'].includes(annotation.feature)))throw new Error('Invalid local baseline format.');
+  if(artifact.format_version!=='llm-baseline-local/1.0'||artifact.rubric_snapshot?.rubric_sha256!==artifact.rubric_hash||!Array.isArray(artifact.annotations)||artifact.annotations.some(annotation=>!['concepts_and_subtopics_covered','examples','analogies','representations','cultural_references','questions','memory_aids','issues'].includes(annotation.feature)))throw new Error('Invalid local baseline format.');
   C.validateAnnotations(document.transcript,artifact.annotations,artifact.rubric_snapshot.rubric);
   const {data:version,error:readError}=await client.from('rubric_versions').select('snapshot').eq('hash',artifact.rubric_hash).maybeSingle();if(readError)throw new Error('Could not read the baseline rubric.');
   if(version && !isDeepStrictEqual(version.snapshot.rubric,artifact.rubric_snapshot.rubric))throw new Error('The saved rubric definition differs from the local baseline.');

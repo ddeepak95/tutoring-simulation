@@ -13,7 +13,7 @@ it('upgrades active work without losing highlights or history, preserves submiss
     await db.query('insert into auth.users(id,email) values($1,$2),($3,$4),($5,$6)', [admin, 'admin@users.annotation.invalid', alice, 'alice@users.annotation.invalid', bob, 'bob@users.annotation.invalid']);
     await db.query("update public.profiles set role='admin' where id=$1", [admin]);
     const legacyHash = 'e2a71d6da2aa8102045dfd3e1932f5a5afed09e6b3b6e6545904252c0489473d';
-    const legacy = { rubric_source: bundledRubric.rubric_source, rubric_sha256: legacyHash, rubric: bundledRubric.rubric.filter(feature => feature.key !== 'issues') };
+    const legacy = { rubric_source: bundledRubric.rubric_source, rubric_sha256: legacyHash, rubric: bundledRubric.rubric.filter(feature => feature.key !== 'issues' && feature.key !== 'memory_aids') };
     await db.query('insert into public.rubric_versions(hash,snapshot) values($1,$2::jsonb)', [legacyHash, JSON.stringify(legacy)]);
     const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text: 'A learning example.' }] });
     await db.query('insert into public.conversations(id,label,transcript,created_by) values($1,$2,$3::jsonb,$4)', [doc, 'Migration preservation', JSON.stringify(conversation), admin]);
@@ -54,7 +54,8 @@ it('upgrades active work without losing highlights or history, preserves submiss
     issue.entry.explanation = '';
     await expect(validate()).rejects.toThrow(/explanation/);
     expect((await db.query<any>('select snapshot from rubric_versions where hash=$1', [active.rubric_hash])).rows[0].snapshot).toEqual(pinned);
-    const ratings = completeRatings(conversation, bundledRubric);
+    const ratings = completeRatings(conversation, pinned);
+    delete ratings.t1.values.instructional_sequence;
     const validateRatings = () => db.query('select public.validate_turn_ratings($1::jsonb,$2::jsonb,$3::jsonb,true)', [JSON.stringify(conversation), JSON.stringify(ratings), JSON.stringify(pinned)]);
     await expect(validateRatings()).rejects.toThrow(/Instructional Sequence/);
     await db.exec(fs.readFileSync('supabase/migrations/202610090003_remove_instructional_sequence.sql', 'utf8'));

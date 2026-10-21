@@ -53,7 +53,6 @@
             },
             "required": [
               "topic",
-              "detail_level",
               "turn_locations"
             ]
           }
@@ -92,7 +91,6 @@
             "required": [
               "example",
               "concept_illustrated",
-              "detail_level",
               "turn_locations"
             ]
           }
@@ -131,7 +129,6 @@
             "required": [
               "comparison",
               "concept_explained",
-              "detail_level",
               "turn_locations"
             ]
           }
@@ -149,6 +146,7 @@
               "representation_type": {
                 "enum": [
                   "Diagram",
+                  "Flowchart",
                   "Graph",
                   "Table",
                   "Equation",
@@ -170,6 +168,11 @@
                 "minItems": 1,
                 "uniqueItems": true
               },
+              "diagram_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
               "turn_locations": {
                 "type": "array",
                 "items": {
@@ -182,7 +185,6 @@
               "representation",
               "representation_type",
               "concept_illustrated",
-              "image_languages",
               "turn_locations"
             ]
           }
@@ -221,7 +223,6 @@
             "required": [
               "reference",
               "concept_illustrated",
-              "detail_level",
               "turn_locations"
             ]
           }
@@ -246,6 +247,11 @@
               "concept_checked": {
                 "type": ["string", "null"],
                 "minLength": 1
+              },
+              "question_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
               },
               "turn_locations": {
                 "type": "array",

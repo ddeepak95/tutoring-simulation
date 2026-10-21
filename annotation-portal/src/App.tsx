@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, type FormEvent,
 import { BrowserRouter, Link, NavLink, Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import type { Session } from '@supabase/supabase-js';
 import { bundledRubric, C, configured, download, fetchAssignments, loginIdentifier, supabase, validateSubmission } from './lib';
-import type { Annotation, AnnotationWork, Assignment, LLMBaseline, Profile, RubricSnapshot, TurnRatings } from './types';
+import type { Annotation, AnnotationWork, Assignment, AssignmentType, LLMBaseline, Profile, RubricSnapshot, TurnRatings } from './types';
 import { SaveQueue, type SaveState } from './save-queue';
 import { Editor } from './Editor';
 import { Admin } from './Admin';
@@ -16,6 +16,8 @@ import { BaselineComparison } from './BaselineComparison';
 import { Comparisons, ComparisonEditor } from './Comparisons';
 import { CapturedTranscript, useCaptureAssets } from './CapturedTranscript';
 import { MarkdownTranscript } from './MarkdownTranscript';
+import { AdminTaskReview } from './AdminTaskReview';
+import { ConfirmDialog } from './ConfirmDialog';
 
 interface Context { profile: Profile; beforeExit: React.MutableRefObject<null | (() => Promise<void>)>; }
 const PortalContext = createContext<Context | null>(null);
@@ -97,22 +99,28 @@ export default function App() {
     try { await beforeExit.current?.(); const { error } = await supabase!.auth.signOut(); if (error) throw error; }
     catch (err) { setError(message(err)); }
   }
-  return <BrowserRouter><header className="topbar"><WorkspaceLink className="brand" to="/" end beforeExit={beforeExit} onError={setError}><span className="brand-icon">a.</span><span><strong>AI Explanation Evaluation</strong></span></WorkspaceLink>{profile && <div className="top-actions"><WorkspaceLink to="/comparisons" beforeExit={beforeExit} onError={setError}>Comparisons</WorkspaceLink>{profile.role === 'admin' && <nav aria-label="Administration"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Conversations</WorkspaceLink><WorkspaceLink to="/settings" beforeExit={beforeExit} onError={setError}>Settings</WorkspaceLink></nav>}<span>{profile.username}<small>{profile.role === 'admin' ? 'Administrator' : 'Annotator'}</small></span><button className="secondary" onClick={() => void signOut()}>Sign out</button></div>}</header>
-    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/comparisons" element={<Comparisons profile={profile} />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
+  return <BrowserRouter><header className="topbar"><WorkspaceLink className="brand" to="/" end beforeExit={beforeExit} onError={setError}><span className="brand-icon">a.</span><span><strong>AI Explanation Evaluation</strong></span></WorkspaceLink>{profile && <div className="top-actions">{profile.role === 'admin' ? <nav aria-label="Administration"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Conversations</WorkspaceLink><WorkspaceLink to="/comparisons" beforeExit={beforeExit} onError={setError}>Comparisons</WorkspaceLink><WorkspaceLink to="/settings" beforeExit={beforeExit} onError={setError}>Settings</WorkspaceLink></nav> : <nav aria-label="Annotator navigation"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Dashboard</WorkspaceLink></nav>}<span>{profile.username}<small>{profile.role === 'admin' ? 'Administrator' : 'Annotator'}</small></span><button className="secondary" onClick={() => void signOut()}>Sign out</button></div>}</header>
+    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/label" element={<Navigate to="/" replace />} /><Route path="/rate" element={<Navigate to="/" replace />} /><Route path="/comparisons" element={profile.role === 'admin' ? <Comparisons profile={profile} /> : <Navigate to="/#compare" replace />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/labeling" element={profile.role === 'admin' ? <AdminTaskReview taskType="label" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/rating" element={profile.role === 'admin' ? <AdminTaskReview taskType="rate" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={<Navigate to="/conversations/:id/labeling" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
   </BrowserRouter>;
 }
+function AssignmentList({ rows, taskType }: { rows: Assignment[]; taskType: AssignmentType }) {
+  const taskRows = rows.filter(row => row.task_type === taskType);
+  return !taskRows.length ? <div className="card empty"><h2>No {taskType} assignments yet</h2><p>Your administrator will assign {taskType} tasks here.</p></div> : <ul className="assignment-list">{taskRows.map(row => <li key={row.id}><Link className="assignment-row" to={`/assignments/${row.id}`}><div className="assignment-row-content"><h2>{row.conversations?.transcript.learning_topic || row.conversations?.label}</h2><p>{row.conversations?.transcript.topic_english_name || row.conversations?.label}</p></div><span className={`status ${row.status}`}>{statusText(row.status)}</span><span className="primary assignment-open">Open</span></Link></li>)}</ul>;
+}
+
 function Assignments() {
   const { profile } = usePortal();
   const [rows, setRows] = useState<Assignment[]>([]); const [error, setError] = useState(''); const [loading, setLoading] = useState(true);
   async function refresh() { setError(''); try { setRows(await fetchAssignments()); } catch (err) { setError(message(err)); } finally { setLoading(false); } }
   useEffect(() => { void refresh(); }, []);
-  return <main className="dashboard"><section aria-labelledby="annotate-heading"><div className="page-heading"><h1 id="annotate-heading">Annotate</h1></div>{error && <p className="error" role="alert">{error}</p>}{loading ? <p role="status">Loading assignments…</p> : !rows.length ? <div className="card empty"><h2>No assignments yet</h2><p>Your administrator will assign conversations here.</p></div> : <ul className="assignment-list">{rows.map(row => <li key={row.id}><Link className="assignment-row" to={`/assignments/${row.id}`}><div className="assignment-row-content"><h2>{row.conversations?.transcript.learning_topic || row.conversations?.label}</h2><p>{row.conversations?.transcript.topic_english_name || row.conversations?.label}</p></div><span className={`status ${row.status}`}>{statusText(row.status)}</span><span className="primary assignment-open">Open</span></Link></li>)}</ul>}</section><Comparisons profile={profile} embedded /></main>;
+  return <main className="dashboard"><div className="page-heading"><h1>Annotator dashboard</h1></div>{error && <p className="error" role="alert">{error}</p>}{loading ? <p role="status">Loading assignments…</p> : <><section aria-labelledby="label-heading"><h2 id="label-heading">Label instructional features</h2><AssignmentList rows={rows} taskType="label" /></section><section className="dashboard-task-section" aria-labelledby="rate-heading"><h2 id="rate-heading">Rate tutor turns</h2><AssignmentList rows={rows} taskType="rate" /></section></>}<Comparisons profile={profile} embedded /></main>;
 }
 
 function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
   const { id } = useParams(); const navigate = useNavigate(); const { profile, beforeExit } = usePortal();
   const [assignment, setAssignment] = useState<Assignment | null>(null); const [rubric, setRubric] = useState<RubricSnapshot | null>(null); const [annotations, setAnnotations] = useState<Annotation[]>([]);
   const [state, setState] = useState<SaveState>('saved'); const [error, setError] = useState(''); const [busy, setBusy] = useState(false);
+  const [confirmCompletion, setConfirmCompletion] = useState(false);
   const [turnRatings, setTurnRatings] = useState<TurnRatings>({});
   const [baseline, setBaseline] = useState<LLMBaseline | null>(null);
   const [reload, setReload] = useState(0);
@@ -138,7 +146,23 @@ function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
         if(!alive) return;
         setAssignment(row); setRubric(snapshot); setAnnotations(row.annotations); setTurnRatings(row.turn_ratings || {});
         if (viewOnly) return;
-        try { const cached = JSON.parse(localStorage.getItem(draftKey) || 'null'); if (cached) { cached.turn_ratings ||= {}; C.validateAnnotations(row.conversations!.transcript, cached.annotations, snapshot.rubric, { allowIncomplete: true }); validateTurnRatings(row.conversations!.transcript, cached.turn_ratings, snapshot); if (JSON.stringify(cached.annotations) !== JSON.stringify(row.annotations) || JSON.stringify(cached.turn_ratings) !== JSON.stringify(row.turn_ratings || {})) setDraft(cached); else localStorage.removeItem(draftKey); } } catch { setError('A local recovery draft could not be read. Cloud data has been kept.'); }
+        try {
+          let cached = JSON.parse(localStorage.getItem(draftKey) || 'null');
+          const siblingType: AssignmentType = row.task_type === 'label' ? 'rate' : 'label';
+          if ((row.task_type === 'label' && Object.keys(cached?.turn_ratings || {}).length) || (row.task_type === 'rate' && !Object.keys(cached?.turn_ratings || {}).length)) {
+            const { data: sibling } = await supabase!.from('assignments').select('id, revision, rubric_hash').eq('conversation_id', row.conversation_id).eq('annotator_id', row.annotator_id).eq('task_type', siblingType).eq('is_active', true).maybeSingle();
+            if (sibling) {
+              const siblingDraft = JSON.parse(localStorage.getItem(`annotation-portal:draft:${profile.id}:${sibling.id}`) || 'null');
+              if (row.task_type === 'label' && Object.keys(cached?.turn_ratings || {}).length) {
+                localStorage.setItem(`annotation-portal:draft:${profile.id}:${sibling.id}`, JSON.stringify({ annotations: [], turn_ratings: cached.turn_ratings, revision: sibling.revision, rubric_hash: sibling.rubric_hash }));
+              } else if (row.task_type === 'rate' && siblingDraft?.turn_ratings && Object.keys(siblingDraft.turn_ratings).length) {
+                cached = { annotations: [], turn_ratings: siblingDraft.turn_ratings, revision: row.revision, rubric_hash: row.rubric_hash };
+                localStorage.setItem(draftKey, JSON.stringify(cached));
+              }
+            }
+          }
+          if (cached) { cached.turn_ratings ||= {}; if(row.task_type==='label') cached.turn_ratings={}; else cached.annotations=[]; C.validateAnnotations(row.conversations!.transcript, cached.annotations, snapshot.rubric, { allowIncomplete: true }); validateTurnRatings(row.conversations!.transcript, cached.turn_ratings, snapshot); if (JSON.stringify(cached.annotations) !== JSON.stringify(row.annotations) || JSON.stringify(cached.turn_ratings) !== JSON.stringify(row.turn_ratings || {})) setDraft(cached); else localStorage.removeItem(draftKey); }
+        } catch { setError('A local recovery draft could not be read. Cloud data has been kept.'); }
         queue.current = new SaveQueue<AnnotationWork>(row.revision, async (next, revision) => {
           const { data, error } = await supabase!.rpc('save_assignment', { p_assignment_id: row.id, p_revision: revision, p_annotations: next.annotations, p_turn_ratings: next.turn_ratings, p_submit: false }); if (error) throw new Error(error.message);
           if (alive) setAssignment(previous => previous && ({ ...previous, ...data })); return data.revision;
@@ -163,18 +187,21 @@ function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
     setBusy(true); setError('');
     try {
       await queue.current?.flush();
-      const nextId = !viewOnly && target === 'own' ? await openAdminAnnotations(assignment.conversation_id, profile) : target;
+      const nextId = !viewOnly && target === 'own' ? await openAdminAnnotations(assignment.conversation_id, profile, undefined, assignment.task_type) : target;
       if (nextId !== assignment.id) navigate(`/assignments/${nextId}${viewOnly ? '/view' : ''}`);
     } catch (err) { setError(message(err)); }
     finally { setBusy(false); }
   }
+  function requestCompletion() {
+    if (!assignment || !rubric || readonly || busy || draft) return;
+    try { validateSubmission(assignment.conversations!.transcript, annotations, rubric, profile.username, turnRatings, assignment.task_type); } catch (err) { setError(message(err)); return; }
+    setError(''); setConfirmCompletion(true);
+  }
   async function submit() {
-    if (!assignment || !rubric || readonly) return;
-    try { validateSubmission(assignment.conversations!.transcript, annotations, rubric, profile.username, turnRatings); } catch (err) { setError(message(err)); return; }
-    if (!window.confirm('Complete this annotation? Your annotations will become read only until an administrator reopens them.')) return;
+    if (!assignment || !rubric || readonly || busy || draft) throw new Error('This task is no longer available to complete. Refresh the page and try again.');
     setBusy(true); setError('');
-    try { await queue.current!.flush(); const { data, error } = await supabase!.rpc('save_assignment', { p_assignment_id: assignment.id, p_revision: queue.current!.revision, p_annotations: annotations, p_turn_ratings: turnRatings, p_submit: true }); if (error) throw error; queue.current!.revision = data.revision; setAssignment(previous => ({ ...previous!, ...data })); }
-    catch (err) { setError(message(err)); } finally { setBusy(false); }
+    try { validateSubmission(assignment.conversations!.transcript, annotations, rubric, profile.username, turnRatings, assignment.task_type); await queue.current!.flush(); const { data, error } = await supabase!.rpc('save_assignment', { p_assignment_id: assignment.id, p_revision: queue.current!.revision, p_annotations: annotations, p_turn_ratings: turnRatings, p_submit: true }); if (error) throw error; queue.current!.revision = data.revision; setAssignment(previous => ({ ...previous!, ...data })); }
+    finally { setBusy(false); }
   }
   async function reopenForEditing() {
     if (!assignment || profile.role !== 'admin' || busy) return;
@@ -189,12 +216,12 @@ function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
   }
   if (!assignment || !rubric) return <main className="center">{error ? <><p className="error" role="alert">{error}</p><Link to="/">Back to workspace</Link></> : <p role="status">Loading conversation…</p>}</main>;
   return <main className="editor-page"><div className="editor-bar"><button className="secondary" disabled={busy} onClick={() => void exit()}>← {profile.role === 'admin' ? 'Dashboard' : 'Assignments'}</button>{profile.role === 'admin' && <AnnotatorSwitcher assignment={assignment} profile={profile} busy={busy} viewOnly={viewOnly} onSwitch={target => void switchAnnotator(target)} />}{profile.role === 'admin' && assignment.is_active!==false && assignment.status === 'submitted' && <button className="secondary" disabled={busy} onClick={() => void reopenForEditing()}>Reopen and edit</button>}{profile.role === 'admin' && assignment.is_active!==false && viewOnly && assignment.status !== 'submitted' && <Link className="secondary" to={`/assignments/${assignment.id}`}>Edit annotations</Link>}<div className="save-status" role="status">{readonly ? statusText(assignment.status) : ({ saved: 'Saved to cloud', saving: 'Saving…', pending: 'Unsaved changes', error: 'Cloud save failed' })[state]}{profile.role === 'admin' && <small>{readonly ? `${assignment.profiles?.username} · Read only` : `Editing ${assignment.profiles?.username}'s annotations`}</small>}</div></div>
-    {profile.role === 'admin' && viewOnly && <AnnotationSummary key={assignment.id} annotations={annotations} rubric={rubric} />}
-    {baseline && <p className="notice">LLM-assisted annotation · Started from baseline {baseline.id.slice(0,8)}. Highlights are your independent copy; ratings are completed from scratch.</p>}
+    {profile.role === 'admin' && viewOnly && assignment.task_type === 'label' && <AnnotationSummary key={assignment.id} annotations={annotations} rubric={rubric} />}
     {baseline && profile.role==='admin' && viewOnly && <BaselineComparison baseline={baseline} annotations={annotations} rubric={rubric}/>}
     {error && <div className="error" role="alert">{error}{state === 'error' && <button className="secondary" onClick={() => { setError(''); void queue.current!.flush().catch(err => setError(message(err))); }}>Retry saving</button>}</div>}
     {draft && <div className="notice"><strong>A local recovery draft is available.</strong><p>{draft.revision !== assignment.revision ? 'The cloud version has changed. Export your draft before reloading; it will not overwrite the newer version.' : 'Restore your unsaved work or keep the cloud version.'}</p><button className="secondary" onClick={() => download('recovery-draft.json', { ...C.buildExport(assignment.conversations!.transcript, draft.annotations, rubric.rubric, profile.username), rubric_sha256: rubric.rubric_sha256, turn_ratings: draft.turn_ratings, ...ratingQuestionMetadata(rubric) })}>Export recovery draft</button>{!readonly && draft.revision === assignment.revision && draft.rubric_hash === assignment.rubric_hash && <button className="primary" onClick={() => { setAnnotations(draft.annotations); setTurnRatings(draft.turn_ratings); queue.current?.enqueue({ annotations: draft.annotations, turn_ratings: draft.turn_ratings }); setDraft(null); }}>Restore draft</button>}<button className="secondary" onClick={() => { localStorage.removeItem(draftKey); setDraft(null); }}>Keep cloud version</button></div>}
-    <Editor key={assignment.id} conversation={assignment.conversations!.transcript} annotations={annotations} rubric={rubric} onChange={change} turnRatings={turnRatings} onRatingsChange={changeRatings} readonly={Boolean(readonly || draft || busy)} completionAction={!readonly ? <button className="primary" disabled={busy || Boolean(draft)} onClick={() => void submit()}>{busy ? 'Please wait…' : 'Complete Annotation'}</button> : undefined} />
+    <Editor key={assignment.id} conversation={assignment.conversations!.transcript} annotations={annotations} rubric={rubric} onChange={change} turnRatings={turnRatings} onRatingsChange={changeRatings} taskType={assignment.task_type} readonly={Boolean(readonly || draft || busy)} onFinish={assignment.task_type === 'rate' && !readonly ? requestCompletion : undefined} completionAction={!readonly ? <button className="primary" disabled={busy || Boolean(draft)} onClick={requestCompletion}>{busy ? 'Please wait…' : `Complete ${assignment.task_type === 'label' ? 'Label' : 'Rate'} task`}</button> : undefined} />
+    {confirmCompletion && <ConfirmDialog title={`Complete ${assignment.task_type === 'label' ? 'Label' : 'Rate'} task?`} confirmLabel={`Complete ${assignment.task_type === 'label' ? 'Label' : 'Rate'} task`} pendingLabel="Completing…" onCancel={() => setConfirmCompletion(false)} onConfirm={submit}><p>This task will become read only until an administrator reopens it.</p></ConfirmDialog>}
   </main>;
 }
 

@@ -16,8 +16,9 @@ export interface GenerationCheckpoint {
 export async function generateInstructionalBaseline({ conversation, rubric, requestId, config, apiKey, visuals, contextScreenshots, captureHtml, previousAnnotations, initialContent, initialResponseId, checkpoint, onCheckpoint, onProviderRequest, onProviderResponse, fetcher=fetch }: {
  conversation:Conversation;rubric:RubricSnapshot;requestId:string;config:{model:string;max_tokens?:number|null;timeout:number;repair_attempts:number;reasoning:unknown;stream?:boolean;provider?:'google'|'openrouter'};apiKey:string;visuals?:GeminiVisual[];contextScreenshots?:GeminiVisual[];captureHtml?:Record<string,string>;previousAnnotations?:Annotation[];initialContent?:string;initialResponseId?:string;checkpoint?:GenerationCheckpoint;onCheckpoint?:(state:GenerationCheckpoint)=>void|Promise<void>;onProviderRequest?:(request:unknown,attempt:number)=>void|Promise<void>;onProviderResponse?:(payload:unknown,attempt:number)=>void|Promise<void>;fetcher?:typeof fetch;
 }) {
+ const modelRubric=rubric;
  const draft=previousAnnotations===undefined?null:{annotations:previousAnnotations.map(({feature,entry,evidence})=>({feature,entry:Object.fromEntries(Object.entries(entry).filter(([key])=>key!=='turn_locations')),evidence:evidence.map(({turn_id,quote,occurrence,example_status})=>({turn_id,quote,occurrence,...(example_status?{example_status}:{})}))}))};
- if(draft)resolveLLMAnnotations(draft,conversation,rubric,'review-input',captureHtml);
+ if(draft)resolveLLMAnnotations(draft,conversation,modelRubric,'review-input',captureHtml);
  const prompt=draft?`${instructionalPrompt()}\n\n${instructionalReviewPrompt}`:instructionalPrompt();
  const modelInput=modelConversationHtml(conversation,captureHtml,visuals);
  if(draft)draft.annotations=expandRepeatedQuestionOccurrences(draft,modelInput.segments,conversation).annotations;
@@ -43,7 +44,7 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
   let output:unknown;try{output=JSON.parse(content);output=resolveSegmentEvidence(output,modelInput.segments,conversation);}catch{output=content;}
   if(pending.targeted){
    const record:{attempt:number;issues:unknown;response:unknown;provider_request_id:unknown;applied:boolean;prompt?:string;error?:string}={attempt:state.repairs_used,issues:pending.issues,response:output,provider_request_id:payload.id,prompt:state.repair_prompt,applied:false};
-   try{state.draft=applyRepair(state.draft as {annotations:unknown[]},output,pending.issues,conversation,rubric,captureHtml);record.applied=true;}catch(error){record.error=(error as Error).message;}
+   try{state.draft=applyRepair(state.draft as {annotations:unknown[]},output,pending.issues,conversation,modelRubric,captureHtml);record.applied=true;}catch(error){record.error=(error as Error).message;}
    state.repair_log.push(record);
   }else{state.draft=output;if(pending.issues.length)state.repair_log.push({attempt:state.repairs_used,mode:'full',issues:pending.issues,response:output,provider_request_id:payload.id});}
   state.draft=expandRepeatedQuestionOccurrences(state.draft,modelInput.segments,conversation);
@@ -51,9 +52,9 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
  };
  for(;;){
   if(state.pending_response)await consumeResponse();
-  const inspection=state.draft===undefined?null:inspectAnnotations(state.draft,conversation,rubric,requestId,captureHtml);
+  const inspection=state.draft===undefined?null:inspectAnnotations(state.draft,conversation,modelRubric,requestId,captureHtml);
   if(inspection&&!inspection.issues.length){
-   const annotations=resolveLLMAnnotations(state.draft,conversation,rubric,requestId,captureHtml);state.validation_errors=[];state.pending_request=false;await persist();
+   const annotations=resolveLLMAnnotations(state.draft,conversation,modelRubric,requestId,captureHtml);state.validation_errors=[];state.pending_request=false;await persist();
    return {annotations,prompt,model:state.model||config.model,generation_config:{...config,provider:config.provider||'openrouter',resumed_checkpoint:Boolean(checkpoint),pass:draft?'review':'extraction',repair_prompt:repairPrompt,instructional_prompt_source:instructionalPromptSource,instructional_prompt_sha256:instructionalPromptSha256,model_segments_sha256:createHash('sha256').update(JSON.stringify(modelInput.segments)).digest('hex'),configured_model:config.model,provider_request_id:state.provider_request_id||null,resumed_from_provider_response:initialResponseId||null,attempts:state.attempts,repairs_used:state.repairs_used,repair_log:state.repair_log,visual_inventory:visualInventory,screenshot_inventory:screenshotInventory,usage:state.usage||null}};
   }
   if(inspection){state.validation_errors=inspection.issues;await persist();if(state.repairs_used>=budget)throw new GenerationError(`The model output failed exact-highlight validation after ${state.repairs_used} repair attempts. No invalid baseline was saved.`,'invalid_output');}
@@ -66,8 +67,8 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
    state.repairs_used++;
   }
   state.attempts++;state.pending_request=true;await persist();
-  const schema=targeted?repairSchema(rubric):annotationSchema(rubric,true);
-  const requestOptions=(visualSet=visualsWithCaptions)=>{const direct=config.provider==='google'?googleRequest(messages,schema,config,apiKey,visualSet,contextScreenshots):null;return {direct,url:direct?.url||'https://openrouter.ai/api/v1/chat/completions',body:direct?.body||JSON.stringify({model:config.model,...(config.max_tokens==null?{}:{max_tokens:config.max_tokens}),temperature:0,messages,...(config.stream?{stream:true,stream_options:{include_usage:true}}:{}),provider:{require_parameters:true,allow_fallbacks:false},...(config.reasoning?{reasoning:config.reasoning}:{}),response_format:{type:'json_schema',json_schema:{name:targeted?'instructional_repairs':'instructional_highlights',strict:true,schema:targeted?repairSchema(rubric):annotationSchema(rubric,true)}}})};};
+  const schema=targeted?repairSchema(modelRubric):annotationSchema(modelRubric,true);
+  const requestOptions=(visualSet=visualsWithCaptions)=>{const direct=config.provider==='google'?googleRequest(messages,schema,config,apiKey,visualSet,contextScreenshots):null;return {direct,url:direct?.url||'https://openrouter.ai/api/v1/chat/completions',body:direct?.body||JSON.stringify({model:config.model,...(config.max_tokens==null?{}:{max_tokens:config.max_tokens}),temperature:0,messages,...(config.stream?{stream:true,stream_options:{include_usage:true}}:{}),provider:{require_parameters:true,allow_fallbacks:false},...(config.reasoning?{reasoning:config.reasoning}:{}),response_format:{type:'json_schema',json_schema:{name:targeted?'instructional_repairs':'instructional_highlights',strict:true,schema}}})};};
   const requestOptionsForImages=requestOptions();let {direct:google,url:requestUrl,body:requestBody}=requestOptionsForImages;let requestLogAttempt=state.attempts;
   const logRequest=async()=>onProviderRequest?.({url:requestUrl,headers:google?{'Content-Type':'application/json','x-goog-api-key':'[redacted]'}:{'Content-Type':'application/json',Authorization:'Bearer [redacted]'},body:JSON.parse(requestBody)},requestLogAttempt);
   await logRequest();

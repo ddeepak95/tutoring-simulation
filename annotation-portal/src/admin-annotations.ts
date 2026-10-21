@@ -1,11 +1,11 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { bundledRubric, supabase } from './lib';
-import type { Profile } from './types';
+import type { AssignmentType, Profile } from './types';
 
-export async function openAdminAnnotations(conversationId: string, profile: Profile, client: SupabaseClient = supabase!): Promise<string> {
+export async function openAdminAnnotations(conversationId: string, profile: Profile, client: SupabaseClient = supabase!, taskType: AssignmentType = 'label'): Promise<string> {
   if (profile.role !== 'admin') throw new Error('Admin access required.');
   async function existing() {
-    const { data, error } = await client.from('assignments').select('id, baseline_id, status, revision, annotations, turn_ratings').eq('conversation_id', conversationId).eq('annotator_id', profile.id).order('updated_at', { ascending: false }).limit(1).maybeSingle();
+    const { data, error } = await client.from('assignments').select('id, baseline_id, status, revision, annotations, turn_ratings, task_type').eq('conversation_id', conversationId).eq('annotator_id', profile.id).eq('task_type',taskType).order('updated_at', { ascending: false }).limit(1).maybeSingle();
     if (error) throw new Error('Could not load your annotations. Please try again.');
     return data;
   }
@@ -27,7 +27,9 @@ export async function openAdminAnnotations(conversationId: string, profile: Prof
     const { error } = await client.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric });
     if (error && error.code !== '23505') throw new Error('Could not register the coding rubric.');
   }
-  const { error } = await client.rpc('open_admin_annotation_assignment',{p_conversation_id:conversationId,p_rubric_hash:bundledRubric.rubric_sha256});
+  const { error } = taskType === 'label'
+    ? await client.rpc('open_admin_annotation_assignment',{p_conversation_id:conversationId,p_rubric_hash:bundledRubric.rubric_sha256})
+    : await client.rpc('create_task_assignments',{p_conversation_ids:[conversationId],p_annotator_ids:[profile.id],p_task_types:[taskType],p_rubric_hash:bundledRubric.rubric_sha256,p_baseline_ids:{}});
   if (error) throw new Error('Could not open this conversation for annotation. Refresh the dashboard and try again.');
   const row = await existing(); const id=row?.id;
   if (!id) throw new Error('Could not confirm your annotation record. Please try again.');

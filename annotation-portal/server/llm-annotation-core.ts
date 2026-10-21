@@ -1,18 +1,16 @@
 import C from '../src/generated/core.js';
 import {instructionalPromptText} from './generated/instructional-prompt.ts';
 import type { Annotation, Conversation, Feature, RubricSnapshot } from '../src/types';
-import { parseCoverageTopic } from '../src/coverage-hierarchy.ts';
 import {headingRanges} from './heading-evidence.ts';
 import {sourcePassages} from './source-passages.ts';
 
 export {instructionalPromptVersion as promptVersion} from './generated/instructional-prompt.ts';
-const optional = new Set(['concept_illustrated', 'concept_explained', 'concept_checked']);
 export function annotationSchema(rubric: RubricSnapshot, useSegmentIds=false) {
   const variants = rubric.rubric.map(feature => ({
     type: 'object', additionalProperties: false, required: ['feature', 'entry', 'evidence'],
     properties: {
       feature: { type: 'string', enum: [feature.key] },
-      entry: { type: 'object', additionalProperties: false, required: feature.fields.map(field => field.key), properties: Object.fromEntries(feature.fields.map(field => [field.key, field.multiple ? { type: 'array', minItems: 1, uniqueItems: true, items: { type: 'string', pattern: '^(?:[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*|und|zxx)$' } } : field.options ? { type: 'string', enum: field.options } : { type: optional.has(field.key) ? ['string', 'null'] : 'string' }])) },
+      entry: { type: 'object', additionalProperties: false, required: feature.fields.map(field => field.key), properties: Object.fromEntries(feature.fields.map(field => [field.key, field.numeric ? { type: field.optional ? ['integer', 'null'] : 'integer', minimum: 1, maximum: 1000 } : field.multiple ? { type: field.optional ? ['array', 'null'] : 'array', minItems: 1, uniqueItems: true, items: { type: 'string', pattern: '^(?:[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*|und|zxx)$' } } : field.options ? { type: field.optional ? ['string', 'null'] : 'string', enum: field.optional ? [...field.options, null] : field.options } : { type: field.optional ? ['string', 'null'] : 'string' }])) },
       evidence: { type: 'array', minItems: 1, items: { type: 'object', additionalProperties: false, required: ['turn_id', 'quote', 'occurrence', ...(feature.key==='examples'?['example_status']:[])], properties: { turn_id: { type: 'string' }, quote: { type: 'string', minLength: 1 }, occurrence: { type: 'integer', minimum: 1 }, ...(feature.key==='examples'?{example_status:{type:'string',enum:['Fresh','Duplicate']}}:{}) } } }
     }
   }));
@@ -38,8 +36,11 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
   const annotations: Annotation[] = output.annotations.map((item, index) => {
     if (!exactKeys(item, ['feature', 'entry', 'evidence']) || typeof item.feature !== 'string' || !features.has(item.feature)) throw new Error('Unknown instructional category or attributes.');
     const feature = features.get(item.feature)!;
-    if (!exactKeys(item.entry, feature.fields.map(field => field.key)) || !Array.isArray(item.evidence) || !item.evidence.length) throw new Error('Missing entry attributes or evidence.');
-    if (item.feature === 'concepts_and_subtopics_covered' && !parseCoverageTopic(item.entry.topic)) throw new Error('Coverage path must have one to three non-empty levels: Main topic :: Explanatory unit :: Explanatory subunit.');
+    const entryKeys = feature.fields.map(field => field.key);
+    const requiredEntryKeys = feature.fields.filter(field => !field.optional).map(field => field.key);
+    const entry = item.entry;
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry) || !Object.keys(entry).every(key => entryKeys.includes(key)) || !requiredEntryKeys.every(key => Object.hasOwn(entry, key)) || !Array.isArray(item.evidence) || !item.evidence.length) throw new Error('Missing entry attributes or evidence.');
+    if (item.feature === 'concepts_and_subtopics_covered' && (typeof (entry as Record<string, unknown>).topic !== 'string' || !(entry as Record<string, string>).topic.trim())) throw new Error('Concept topic must name the highlighted heading.');
     const evidence = item.evidence.map(raw => {
       if(raw&&typeof raw==='object'&&Object.hasOwn(raw,'source_id')){
         const keys=['source_id',...(item.feature==='examples'&&Object.hasOwn(raw,'example_status')?['example_status']:[])];
@@ -70,7 +71,7 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
       return {...C.makeEvidence(conversation, turn.turn_id, start, start + raw.quote.length),...(raw.example_status?{example_status:raw.example_status as 'Fresh'|'Duplicate'}:{})};
     });
     const annotation = C.createAnnotation(feature.key, evidence[0], rubric.rubric, `llm-${requestId}-${index + 1}`);
-    annotation.entry = { ...item.entry, turn_locations: [...new Set(evidence.map(e => e.turn_id))] } as Annotation['entry'];
+    annotation.entry = { ...(entry as Record<string, string | string[] | number | null>), turn_locations: [...new Set(evidence.map(e => e.turn_id))] } as Annotation['entry'];
     annotation.evidence = evidence;
     if (new Set(evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`)).size !== evidence.length) throw new Error('Duplicate supporting passage.');
     return annotation;

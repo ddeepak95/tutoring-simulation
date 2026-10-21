@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const maxArchiveBytes = 8 * 1024 * 1024;
@@ -70,6 +70,14 @@ export async function prepareConversation(output, userId, supabaseUrl) {
     readFile(path.join(directory, `${basename}.capture.json`), 'utf8').then(JSON.parse),
     readFile(path.join(directory, `${basename}.images.json`), 'utf8').then(JSON.parse),
   ]);
+  let topicId = metadata.topic_id || null;
+  if (!topicId) {
+    try {
+      const topics = JSON.parse(await readFile(path.join(import.meta.dirname, 'topics.json'), 'utf8'));
+      const match = topics.find((entry) => Object.entries(entry).some(([key, value]) => key !== 'topic-id' && value && typeof value === 'object' && (value.title === metadata.topic || value.title === metadata.title)));
+      topicId = match?.['topic-id'] || null;
+    } catch { }
+  }
   if (manifest.bucket !== 'capture-images' || !Array.isArray(manifest.images)) throw new Error('Invalid image manifest');
   if (!/^https:\/\/chatgpt\.com\/(?:g\/[a-zA-Z0-9_/-]+\/)?c\/[a-f0-9-]{36}$/.test(metadata.source?.url || '')) {
     throw new Error('Capture must have a saved ChatGPT /c/ conversation URL');
@@ -114,6 +122,10 @@ export async function prepareConversation(output, userId, supabaseUrl) {
     title: metadata.title,
     topic: metadata.topic,
     language: metadata.language,
+    topic_id: topicId,
+    topic_name: metadata.topic,
+    provider: metadata.provider || metadata.chatbot_name || 'ChatGPT',
+    access_type: metadata.access_type || 'chatbot',
   };
   if (!capture.title || !capture.topic || !capture.language || !turns.some((turn) => turn.speaker === 'tutor') || turns.some((turn) => !turn.text?.trim() || !turn.html?.trim())) throw new Error('Capture metadata or turns are incomplete');
   if (Buffer.byteLength(JSON.stringify({ p_capture: capture })) > maxArchiveBytes) throw new Error('Conversation exceeds the 8 MB database limit');
@@ -162,5 +174,13 @@ export async function uploadConversation(output, accessToken) {
     method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_capture: capture }),
   });
   if (!/^[a-f0-9-]{36}$/i.test(receipt.conversation_id || '')) throw new Error('Supabase did not confirm the conversation import');
-  return { ...receipt, uploadedImages: images.length };
+  const result = { ...receipt, uploadedImages: images.length };
+  const uploadRecord = {
+    conversation_id: receipt.conversation_id,
+    uploaded_at: new Date().toISOString(),
+    snapshot_sha256: receipt.snapshot_sha256,
+    uploaded_images: images.length,
+  };
+  await writeFile(path.join(path.dirname(output), `${path.parse(output).name}.upload.json`), `${JSON.stringify(uploadRecord, null, 2)}\n`, 'utf8');
+  return result;
 }

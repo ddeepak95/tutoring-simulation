@@ -17,10 +17,18 @@ export function download(name: string, value: unknown) {
   const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
   const a = document.createElement('a'); a.href = url; a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
-export function validateSubmission(conversation: Conversation, annotations: Annotation[], rubric: RubricSnapshot, username: string, turnRatings: TurnRatings = {}): ExportData {
+export function validateSubmission(conversation: Conversation, annotations: Annotation[], rubric: RubricSnapshot, username: string, turnRatings: TurnRatings = {}, taskType: 'label' | 'rate' | 'both' = 'both'): ExportData {
+  if (taskType === 'rate') {
+    validateTurnRatings(conversation, turnRatings, rubric, true);
+    return { format_version: 'annotation-portal/2.0', annotations: [], incomplete_annotations: [], feature_counts: {}, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
+  }
   const result = C.buildExport(conversation, annotations, rubric.rubric, username);
-  validateTurnRatings(conversation, turnRatings, rubric, true);
-  return { ...result, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
+  if (result.incomplete_annotations.length) throw new Error(`Complete required fields for every highlight before submitting: ${result.incomplete_annotations.map(item => item.id).join(', ')}.`);
+  if (taskType === 'both') {
+    validateTurnRatings(conversation, turnRatings, rubric, true);
+    return { ...result, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
+  }
+  return { ...result, turn_ratings: {}, rating_dimensions: [], rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
 }
 export async function fetchAssignments(): Promise<Assignment[]> {
   const { data, error } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').eq('is_active',true).order('updated_at', { ascending: false });

@@ -25,7 +25,7 @@ export function useCaptureAssets(conversation: Conversation) {
     })();
     return () => { active = false; };
   }, [id]);
-  return id && state.id === id ? state : { id, assets: {} as Record<string, string>, error: '' };
+  return id && state.id === id ? { ...state, loading: false } : { id, assets: {} as Record<string, string>, error: '', loading: Boolean(id) };
 }
 export async function captureAssetsForExport() {
   return fetchAllRows<{ conversation_id: string; turn_id: string; html: string; source_ids: string[] }>('conversation_capture_assets', '*', ['conversation_id', 'turn_id']);

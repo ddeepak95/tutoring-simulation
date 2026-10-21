@@ -4,15 +4,17 @@
   "use strict";
   const FORMAT_VERSION = "instructional-feature-annotation/1.0";
   const FORM_FIELDS = {
-    concepts_and_subtopics_covered: ["topic", "detail_level"],
+    concepts_and_subtopics_covered: ["concept_level", "detail_level"],
     examples: ["detail_level"],
     analogies: ["detail_level"],
-    representations: ["representation_type", "image_languages"],
+    representations: ["representation_type", "image_languages", "diagram_count"],
     cultural_references: ["detail_level"],
-    questions: ["question_type"],
+    questions: ["question_type", "question_count"],
+    memory_aids: ["memory_aid"],
     issues: ["issue", "explanation"],
   };
   const OPTIONAL_CONCEPT_FIELDS = {
+    concepts_and_subtopics_covered: "concept_level",
     examples: "concept_illustrated", analogies: "concept_explained",
     representations: "concept_illustrated", cultural_references: "concept_illustrated",
     questions: "concept_checked",
@@ -81,18 +83,19 @@
     const feature = rubric.find(f => f.key === annotation.feature);
     if (!feature) throw new Error("Unknown instructional feature.");
     return feature.fields.filter(field => {
-      if (OPTIONAL_CONCEPT_FIELDS[annotation.feature] === field.key) return false;
+      if (field.optional || OPTIONAL_CONCEPT_FIELDS[annotation.feature] === field.key) return false;
       const value = annotation.entry[field.key];
-      return field.multiple ? !Array.isArray(value) || !value.length : typeof value !== "string" || !value.trim();
+      return field.multiple ? !Array.isArray(value) || !value.length : field.numeric ? !Number.isInteger(value) : typeof value !== "string" || !value.trim();
     }).map(field => field.key);
   }
 
   function createAnnotation(featureKey, evidence, rubric, id) {
     const feature = rubric.find(f => f.key === featureKey);
     if (!feature) throw new Error("Unknown instructional feature.");
-    const entry = Object.fromEntries(feature.fields.filter(field => OPTIONAL_CONCEPT_FIELDS[featureKey] !== field.key).map(field => [field.key, field.multiple ? [] : ""]));
+    const entry = Object.fromEntries(feature.fields.filter(field => !field.optional && OPTIONAL_CONCEPT_FIELDS[featureKey] !== field.key).map(field => [field.key, field.multiple ? [] : ""]));
     // Use the selected wording as an editable starting point, without guessing enums.
     entry[feature.fields[0].key] = evidence.quote;
+    if (featureKey === "concepts_and_subtopics_covered" && feature.fields.some(field => field.key === "concept_level")) entry.concept_level = null;
     entry.turn_locations = [evidence.turn_id];
     return { id, feature: featureKey, entry, evidence: [structuredClone(evidence)] };
   }
@@ -121,11 +124,16 @@
         const value = annotation.entry[field.key];
         // Human forms rely on selected passages rather than requiring a concept label.
         // Previously recorded concept metadata remains valid and is preserved.
-        if (OPTIONAL_CONCEPT_FIELDS[annotation.feature] === field.key) {
+        if (field.optional || OPTIONAL_CONCEPT_FIELDS[annotation.feature] === field.key) {
           if (field.key === "concept_checked" && annotation.entry.question_type === "Instructional" && value !== undefined && value !== "" && value !== null) {
             throw new Error("Instructional questions must have concept_checked set to null.");
           }
-          if (value === undefined || value === "" || value === null) continue;
+          if (value === undefined || value === "" || value === null || (field.multiple && Array.isArray(value) && !value.length)) continue;
+        }
+        if (field.numeric) {
+          if (!Number.isInteger(value) || value < 1 || value > 1000) throw new Error(`${field.label} must be a whole number from 1 to 1000.`);
+          if (field.key === "diagram_count" && !["Diagram", "Flowchart"].includes(annotation.entry.representation_type)) throw new Error("Diagram count applies only to diagrams and flowcharts.");
+          continue;
         }
         if (field.multiple) {
           if (allowIncomplete && Array.isArray(value) && !value.length) continue;
@@ -167,8 +175,9 @@
       const matching = annotations.filter(a => a.feature === feature.key);
       const entries = matching.filter(a => !incompleteIds.has(a.id)).map(a => {
         const entry = structuredClone(a.entry);
-        const optional = OPTIONAL_CONCEPT_FIELDS[feature.key];
-        if (optional && entry[optional] === "") delete entry[optional];
+        for (const field of feature.fields) {
+          if ((field.optional || OPTIONAL_CONCEPT_FIELDS[feature.key] === field.key) && (entry[field.key] === "" || (field.multiple && Array.isArray(entry[field.key]) && !entry[field.key].length))) delete entry[field.key];
+        }
         return entry;
       });
       instructional_features[feature.key] = entries;

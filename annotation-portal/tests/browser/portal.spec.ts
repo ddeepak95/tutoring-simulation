@@ -80,18 +80,16 @@ test('username login, persistent highlights, separate annotators and admin monit
 });
 test('all pop-up fields, overlapping highlights, deletion and responsive layout', async ({ page }) => {
   const state = await backend(page); await login(page, 'alice'); await page.locator('.assignment-card').click();
-  const guide = page.getByRole('complementary', { name: 'Coding guide' });
-  await expect(guide).toHaveCount(0);
-  await page.getByRole('button', { name: 'Coding guide', exact: true }).click();
+  const guide = page.getByRole('complementary', { name: 'Labeling guide' });
   await expect(guide).toBeVisible();
-  await guide.getByLabel('Feature', { exact: true }).selectOption('examples');
+  await guide.getByRole('button', { name: /^Examples/ }).click();
   await expect(guide.getByRole('heading', { name: 'Examples', exact: true })).toBeVisible();
   const panel = await guide.boundingBox(), document = await page.locator('.document').boundingBox();
   expect(panel!.x).toBeGreaterThanOrEqual(document!.x + document!.width);
   await page.screenshot({ path: '.runtime/coding-guide-preview.png', fullPage: true });
-  await guide.getByRole('button', { name: 'Close coding guide' }).click();
+  await guide.getByRole('button', { name: 'Close labeling guide' }).click();
   await expect(guide).toHaveCount(0);
-  await page.getByRole('button', { name: 'Coding guide', exact: true }).click();
+  await page.getByRole('button', { name: 'Labeling guide', exact: true }).click();
   await expect(guide).toBeVisible();
   for (const [quote, feature, value] of [
     ['Water changes from liquid into vapour.', 'Concepts and Subtopics Covered', 'Explained'],
@@ -107,9 +105,8 @@ test('all pop-up fields, overlapping highlights, deletion and responsive layout'
   await select(page, 't2', 'Pongal cooking'); await page.getByRole('button', { name: 'Examples', exact: true }).click(); await page.getByRole('button', { name: 'Elaborated', exact: true }).click();
   await page.locator('mark').filter({ hasText: 'Pongal cooking' }).click(); await expect(page.getByText('Choose a highlight to edit')).toBeVisible(); await page.getByRole('button', { name: 'Examples', exact: false }).last().click(); await page.getByRole('button', { name: 'Delete highlight', exact: true }).click(); await expect(page.getByText('Highlight deleted.')).toBeVisible(); await page.getByRole('button', { name: 'Undo', exact: true }).click();
   await page.setViewportSize({ width: 390, height: 844 }); await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await expect(guide).toHaveCount(0);
-  await page.getByRole('button', { name: 'Coding guide', exact: true }).click(); await expect(guide).toBeVisible();
-  await guide.getByRole('button', { name: 'Close coding guide' }).click();
+  await expect(guide).toBeVisible();
+  await guide.getByRole('button', { name: 'Close labeling guide' }).click();
   await expect(page.locator('.annotation-panel')).toHaveCount(0);
 });
 test('failed saves remain recoverable, retry succeeds, and stale drafts never overwrite cloud data', async ({ page }) => {

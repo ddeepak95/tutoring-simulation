@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from './lib';
 import type { Assignment, Profile } from './types';
 
-type AnnotationView = Pick<Assignment, 'id' | 'annotator_id' | 'status' | 'rubric_hash' | 'profiles'>;
+type AnnotationView = Pick<Assignment, 'id' | 'annotator_id' | 'status' | 'rubric_hash' | 'profiles' | 'task_type'>;
 const statusText = { not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' };
 
 export function AnnotatorSwitcher({ assignment, profile, busy, onSwitch, viewOnly = false }: { assignment: Assignment; profile: Profile; busy: boolean; onSwitch: (id: string) => void; viewOnly?: boolean }) {
@@ -15,7 +15,7 @@ export function AnnotatorSwitcher({ assignment, profile, busy, onSwitch, viewOnl
     setLoading(true); setError(''); setViews([]);
     void (async () => {
       try {
-        const { data, error } = await supabase!.from('assignments').select('id, annotator_id, status, rubric_hash, profiles!assignments_annotator_id_fkey(id, username, role)').eq('conversation_id', assignment.conversation_id).eq('is_active',true).returns<AnnotationView[]>();
+        const { data, error } = await supabase!.from('assignments').select('id, annotator_id, status, rubric_hash, task_type, profiles!assignments_annotator_id_fkey(id, username, role)').eq('conversation_id', assignment.conversation_id).eq('task_type',assignment.task_type).eq('is_active',true).returns<AnnotationView[]>();
         if (error) throw error;
         if (alive) setViews((data as AnnotationView[]).sort((a, b) => (a.profiles?.username || a.annotator_id).localeCompare(b.profiles?.username || b.annotator_id)));
       } catch { if (alive) setError('Could not load annotators.'); }
@@ -25,7 +25,7 @@ export function AnnotatorSwitcher({ assignment, profile, busy, onSwitch, viewOnl
   }, [assignment.conversation_id, assignment.id, attempt]);
   const others = views.filter(view => viewOnly || view.annotator_id !== profile.id);
   return <div className="annotator-switcher">
-    <label htmlFor="annotation-view">Annotations by</label>
+    <label htmlFor="annotation-view">{assignment.task_type === 'label' ? 'Label work by' : 'Ratings by'}</label>
     <select id="annotation-view" value={!viewOnly && assignment.annotator_id === profile.id ? 'own' : assignment.id} disabled={busy || loading || Boolean(error)} onChange={event => onSwitch(event.target.value)}>
       {!viewOnly && <option value="own">{profile.username} (you)</option>}
       {!others.some(view => view.id === assignment.id) && (viewOnly || assignment.annotator_id !== profile.id) && <option value={assignment.id}>{assignment.profiles?.username || assignment.annotator_id}</option>}

@@ -2,7 +2,7 @@ import type { Conversation, RatingDimension, RubricSnapshot, TurnRating, TurnRat
 import questions from './generated/rating-questions.json';
 
 export function ratingQuestionMetadata(rubric: RubricSnapshot) {
-  return { rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has eight criteria; subsequent tutor turns also require Coherence and Responsiveness.' };
+  return { rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has five criteria; subsequent tutor turns also require Follow-up Responsiveness.' };
 }
 
 export function activeRatingDimensions(rubric: RubricSnapshot, conversation?: Conversation, turnId?: string): RatingDimension[] {

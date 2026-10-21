@@ -51,17 +51,18 @@ async function comparisonBackend(page: Page) {
   return { assignments, comparisonState, docB, seed };
 }
 
-test('dashboard lists annotation and comparison assignments in separate sections', async ({ page }) => {
+test('dashboard lists label, rate, and comparison assignments in separate sections', async ({ page }) => {
   const state = await comparisonBackend(page); state.seed();
   await login(page, 'alice');
-  const annotate = page.getByRole('region', { name: 'Annotate', exact: true });
+  const label = page.getByRole('region', { name: 'Label instructional features' });
+  const rate = page.getByRole('region', { name: 'Rate tutor turns' });
   const compare = page.getByRole('region', { name: 'Compare', exact: true });
-  await expect(annotate.getByRole('heading', { name: 'Annotate', exact: true })).toBeVisible();
-  await expect(annotate.locator('a[href^="/assignments/"]').first()).toBeVisible();
+  await expect(label.locator('a[href^="/assignments/"]').first()).toBeVisible();
+  await expect(rate.getByText('No rate assignments yet')).toBeVisible();
   await expect(compare.getByRole('heading', { name: 'Compare', exact: true })).toBeVisible();
   const comparison = compare.getByRole('link', { name: /Open$/ });
   await expect(comparison).toBeVisible();
-  await expect(annotate.locator('a[href^="/comparisons/"]')).toHaveCount(0);
+  await expect(label.locator('a[href^="/comparisons/"]')).toHaveCount(0);
   await expect(compare.locator('a[href^="/assignments/"]')).toHaveCount(0);
   await expect(page.getByText('YOUR WORKSPACE', { exact: true })).toHaveCount(0);
   await expect(page.getByRole('heading', { name: 'Your assignments', exact: true })).toHaveCount(0);
@@ -69,7 +70,7 @@ test('dashboard lists annotation and comparison assignments in separate sections
   await comparison.click();
   await expect(page.getByRole('button', { name: 'Reset responses', exact: true })).toHaveCount(0);
   await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
-  await page.getByRole('link', { name: /Dashboard$/ }).click();
+  await page.getByRole('link', { name: '← Dashboard' }).click();
   await expect(page).toHaveURL(/\/#compare$/);
   await expect(compare.getByRole('heading', { name: 'Compare', exact: true })).toBeFocused();
   await expect(compare.getByRole('link', { name: /Open$/ })).toBeVisible();
@@ -95,7 +96,7 @@ test('admin selects conversations and assigns a comparison', async ({ page }) =>
 
 test('questions advance through card choices, recover drafts, and unlock turns only after saving', async ({ page }) => {
   const state = await comparisonBackend(page); state.seed(); await login(page, 'alice');
-  await page.getByRole('link', { name: 'Comparisons', exact: true }).click(); await page.locator('.comparisons-page').getByRole('link', { name: /Open$/ }).click();
+  await page.getByRole('region', { name: 'Compare' }).getByRole('link', { name: /Open$/ }).click();
   await expect(page.locator('.comparison-round')).toHaveCount(1);
   await expect(page.locator('.comparison-round')).toHaveCount(1);
   await expect(page.getByText('Student response', { exact: true })).toHaveCount(0);

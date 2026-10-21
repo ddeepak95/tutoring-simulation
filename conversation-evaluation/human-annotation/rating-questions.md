@@ -1,65 +1,41 @@
 # First Turn
 
-### Concept Summarization
+### Explaining the Core Principle
 
-Does the tutor recap the key points of each newly explained concept?
+How well does the response explain the underlying concept or principle, rather than only presenting facts or steps?
 
-3: Summarizes every newly explained concept clearly. 2: Summarizes all or some concepts vaguely. 1: Does not summarize any concepts.
+3: Clearly explains how or why the concept works and connects facts or steps to the underlying principle. 2: Identifies the principle, but the explanation or connection is incomplete or unclear. 1: Gives facts or steps without explaining the underlying principle, or explains it inaccurately.
 
-### Information Load Appropriateness
+### Use of Instructional Features
 
-Is the amount of information provided appropriate?
+How well does the response utilize instructional features such as examples, analogies, diagrams, and memory aids to teach the concept?
 
-3: Provides the right amount of information. 2: Provides slightly more than necessary. 1: Provides far more than necessary.
+3: Uses appropriate instructional features accurately to clarify the concept; when no feature is needed, the explanation teaches the concept clearly without one. 2: Features partly support learning but are underdeveloped, disconnected, or leave some gaps in understanding. 1: Features confuse or mislead the learner, or the concept remains difficult to understand because helpful features are absent.
 
-### Relevance
+### Focus and Amount of Information
 
-Is the information relevant to the core learning topic, with appropriate connections made when tangential?
+How well does the response stay focused and provide an appropriate amount of information?
 
-3: All information is relevant. 2: Some information is irrelevant. 1: Most information is irrelevant.
+3: Covers the essential ideas with enough detail and little unnecessary repetition or digression. 2: Generally focused, but includes some unnecessary or repetitive material, or leaves out useful detail. 1: Has substantial gaps, or is so irrelevant, repetitive, or overloaded that it impedes understanding.
 
-### Real-World Connection and Usefulness
+### Opportunity to Demonstrate Understanding
 
-Does the tutor explain how the learning topic relates to real-world situations or serves a practical purpose?
+How well does the response give the learner an opportunity to demonstrate understanding?
 
-3: Clearly explains a real-world connection or practical use. 2: Mentions a real-world connection or use without fully explaining it. 1: Provides no meaningful connection or practical use.
+3: Provides a relevant, concrete question or task that asks the learner to explain, predict, or apply the concept. 2: Provides only a generic check, recall prompt, or vague practice suggestion. 1: Provides no meaningful opportunity, or the prompt does not help demonstrate understanding.
 
-### Appropriateness for the Learner’s Level
+### Guidance for Next Steps
 
-Is the information appropriate for a high-school student?
+How well does the response guide the learner toward useful next steps?
 
-3: All information is appropriate for the learner’s level. 2: Some information is too advanced. 1: All information is too advanced.
-
-### Opportunities to Demonstrate Understanding
-
-Does the tutor provide opportunities for the learner to practise or demonstrate understanding of the core concept?
-
-3: Provides a concrete question or follow-up learning task. 2: Only asks whether the learner has understood. 1: Does not check understanding.
-
-### Conversational Naturalness
-
-Does the tutor use familiar conversational phrases and address the learner personally, making the exchange feel like a dialogue?
-
-3: Feels natural, like talking to a human being. 2: Uses some conversational phrases but mostly delivers explanations. 1: Sounds like a textbook explanation.
-
-### Positivity of Tone
-
-How much warmth, encouragement, or empathy does the tutor express toward the learner?
-
-3: Consistently conveys a positive and supportive tone. 2: Shows some warmth or encouragement but is mostly matter-of-fact. 1: Shows little or no warmth or encouragement.
+3: Suggests a relevant next concept, practice activity, resource, or action and gives a clear direction for what to do next. 2: Suggests a next step, but it is vague, only partly relevant, or does not give a clear direction. 1: Provides no useful next step, or points the learner toward something irrelevant or confusing.
 
 # Subsequent Turns
 
 Include all first-turn criteria, plus the following:
 
-### Coherence
+### Follow-up Responsiveness
 
-Do the tutor’s explanations and examples build logically on previous turns?
+How well does the response address the student's follow-up?
 
-3: Makes strong connections across turns. 2: Makes some connections, but with room for improvement. 1: Makes little or no connection to previous turns.
-
-### Responsiveness
-
-Does the tutor address the learner’s questions, requests, and confusion, and adapt to their knowledge, misconceptions, or interests?
-
-3: Responds well and adapts to the learner’s needs. 2: Acknowledges the learner’s needs but adapts little. 1: Ignores the learner’s needs.
+3: Directly and helpfully addresses the student's question, request, or confusion, and adapts to relevant learner information. 2: Addresses the follow-up partly or generically, or misses part of it or a relevant opportunity to adapt. 1: Misses or misinterprets the main follow-up, or does not address it.

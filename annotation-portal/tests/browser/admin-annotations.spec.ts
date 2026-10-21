@@ -32,8 +32,8 @@ test('admin switches annotators, edits active work, and keeps submissions locked
   await page.getByRole('button', { name: 'Edit Examples', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Edit Examples' })).toContainText('Elaborated');
   await page.getByRole('button', { name: 'Brief', exact: true }).click();
-  await page.getByRole('button', { name: 'Relevance: All information is relevant.', exact: true }).click();
-  await expect.poll(() => state.assignments[1].turn_ratings.t1?.values.relevance).toBe('3');
+  await page.getByRole('button', { name: 'Explaining the Core Principle: Clearly explains how or why the concept works and connects facts or steps to the underlying principle.', exact: true }).click();
+  await expect.poll(() => state.assignments[1].turn_ratings.t1?.values.understanding_the_core_principle).toBe('3');
   expect(state.assignments[1].annotations[0].entry.detail_level).toBe('Brief');
   expect(state.assignments[1].annotator_id).toBe(ids.bob);
   expect(state.assignments[0]).toEqual(original[0]);

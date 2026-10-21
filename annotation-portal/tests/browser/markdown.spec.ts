@@ -53,3 +53,23 @@ test('existing source highlights render across formatting and multi-block select
   await page.reload(); await expect(page.locator('ol li mark')).toHaveCount(2);
   expect(markdown.slice(evidence.start, evidence.end)).toBe(evidence.quote);
 });
+
+test('feature pills filter Markdown highlights without changing saved annotations', async ({ page }) => {
+  const state = await backend(page);
+  await login(page, 'alice');
+  await page.locator('a[href^="/assignments/"]').first().click();
+  await select(page, 't1', 'Wet clothes drying');
+  await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Close annotation popup' }).click();
+  await select(page, 't2', 'Think of the process like people leaving a crowded room');
+  await page.getByRole('button', { name: 'Analogies', exact: true }).click();
+  await page.getByRole('button', { name: 'Close annotation popup' }).click();
+  await expect(page.locator('.transcript mark')).toHaveCount(2);
+  const filters = page.getByRole('list', { name: 'Feature counts' });
+  await filters.getByRole('button', { name: 'Filter Examples highlights' }).click();
+  await expect(page.locator('.transcript mark')).toHaveCount(1);
+  await expect(page.locator('.transcript mark')).toContainText('Wet clothes drying');
+  await page.getByRole('button', { name: 'Show all highlights' }).click();
+  await expect(page.locator('.transcript mark')).toHaveCount(2);
+  await expect.poll(() => state.assignments[0].annotations.length).toBe(2);
+});

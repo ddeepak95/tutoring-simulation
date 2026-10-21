@@ -6,6 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { auditInteractions, captureInteractions } from './capture-interactions.mjs';
 import { init as initAgentCapture, readSession as readAgentCapture, questionNavigation } from './agent-capture.mjs';
+import { addStaticQuizFallback } from './static-quiz-fallback.mjs';
 import { portalPublicConfig, uploadConversation } from './upload-supabase.mjs';
 
 const host = 'http://127.0.0.1:9222';
@@ -518,6 +519,7 @@ async function saveConversation(page, output, details = {}) {
       graph.id = 'capture-agent-graph';
       graph.textContent = JSON.stringify(agentStates.messages.map((message, index) => ({ transitions: [...message.transitions, ...navigation[index]] }))).replace(/</g, '\\\\u003c');
       body.append(graph);
+      (${addStaticQuizFallback.toString()})(clone, agentStates.messages, navigation);
     }
     if (!agentStates) {
     const questionPattern = /^Question\\s+(\\d+)\\s+(?:of|\\/)\\s*(\\d+)$/i;
@@ -750,6 +752,9 @@ async function saveConversation(page, output, details = {}) {
     title: details.title || firstQuestion?.slice(0, 250),
     topic: details.topic || firstQuestion?.slice(0, 1000),
     language: details.language || 'English',
+    topic_id: details.topicId || null,
+    provider: details.provider || 'ChatGPT',
+    access_type: details.accessType || 'chatbot',
     turns,
     limitations: ['Only messages loaded in the live ChatGPT page were captured; earlier history was not verified.', ...(report.agentStopReason ? [`Agent exploration stopped at the ${report.agentStopReason.replace('_', ' ')}; the recorded states were saved.`] : []), ...(!agentStates && report.unsupported.length ? [`${report.unsupported.length} interactive controls were not verified offline.`] : []), ...(report.ambiguities.length ? [`${report.ambiguities.length} controls had different outcomes from the same visible state; offline replay uses the first recorded outcome.`] : []), ...report.questions.filter((question) => !question.complete || !question.restored).map((question) => `Question panel in assistant message ${question.message}: ${question.captured.length}/${question.total} questions captured; restored=${question.restored}.`)],
     interactions: agentStates ? { agentCapture: { states: report.captured.agentStates, transitions: report.captured.agentTransitions, stopReason: report.agentStopReason } } : { questions: report.questions },
@@ -920,7 +925,7 @@ async function runTopic(topic, language, takeScreenshots, allowQuizAnswers, agen
       await writeState({ targetId: target.id, url: response.url, output, topicId: topic['topic-id'], language, completedPrompts: index + 1 });
     }
     const agentStates = agentCapture ? await runAgentCapture(output, await page.evaluate('location.href')) : null;
-    const saved = await saveConversation(page, output, { title: name, topic: name, language, allowQuizAnswers, agentStates });
+    const saved = await saveConversation(page, output, { title: name, topic: name, topicId: topic['topic-id'], provider: 'ChatGPT', accessType: 'chatbot', language, allowQuizAnswers, agentStates });
     console.log(`Saved ${saved.output}`);
     return { output, screenshots: takeScreenshots ? await captureLiveScreenshots(page, output) : null };
   } finally {

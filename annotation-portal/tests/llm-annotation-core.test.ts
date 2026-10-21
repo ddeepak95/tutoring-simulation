@@ -21,7 +21,7 @@ it('uses both prompts and version from the single Markdown source and records it
  expect(instructionalPromptSha256).toBe(createHash('sha256').update(source).digest('hex'));
  expect(source).toContain(`prompt_version: ${promptVersion}`);
  const prompt=instructionalPrompt();expect(prompt).toContain('segment_id');expect(prompt).toContain('data-evidence-ids');expect(prompt.length).toBeLessThan(12000);
- for(const feature of bundledRubric.rubric)expect(prompt).toContain(feature.key);
+  for(const feature of bundledRubric.rubric)expect(prompt).toContain(feature.key);
  for(const section of ['### Pedagogical Characteristics','#### Instructional Sequence','### Conversation Quality','### Errors'])expect(prompt).not.toContain(section);
 });
 it('resolves raw quotations to exact UTF-16 spans and retains occurrence identity',()=>{
@@ -49,6 +49,8 @@ it('preserves per-highlight freshness, supports legacy evidence, and rejects inv
  expect(exampleVariant.properties.evidence.items.required).toContain('example_status');
  const generatedEvidence=annotationSchema(bundledRubric,true).properties.annotations.items.anyOf.find(v=>v.properties.feature.enum[0]==='examples')!.properties.evidence.items;
  expect(generatedEvidence.required).toEqual(['segment_id','quote','example_status']);expect(generatedEvidence).not.toHaveProperty('anyOf');
+ const conceptVariant=annotationSchema(bundledRubric,true).properties.annotations.items.anyOf.find(v=>v.properties.feature.enum[0]==='concepts_and_subtopics_covered')!;
+ expect(conceptVariant.properties.entry.properties.concept_level.enum).toEqual(['Main concept','Explanatory unit','Explanatory subunit',null]);
  const wrongFeature=structuredClone(resolved);wrongFeature[0].feature='analogies';expect(()=>C.validateAnnotations(conversation,wrongFeature,bundledRubric.rubric,{allowIncomplete:true})).toThrow(/only to examples/);
 });
 it('rejects fabricated/student evidence, unknown categories, ratings, enum errors and mismatched question quotes',()=>{
@@ -61,7 +63,7 @@ it('repairs invalid exact evidence once without switching models and returns ful
  const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(invalid)}}]}))).mockResolvedValueOnce(new Response(JSON.stringify({id:'provider-id',model:'configured/model',usage:{total_tokens:100},choices:[{finish_reason:'stop',message:{content:JSON.stringify(repairPatch)}}]})));
  const result=await generateInstructionalBaseline({conversation,rubric:bundledRubric,requestId:'request',apiKey:'private-key',config:{model:'configured/model',max_tokens:1000,timeout:10,repair_attempts:1,reasoning:null},fetcher});
  expect(fetcher).toHaveBeenCalledTimes(2);expect(result.generation_config.attempts).toBe(2);expect(result.model).toBe('configured/model');expect(result.generation_config.provider_request_id).toBe('provider-id');
- for(const call of fetcher.mock.calls){const request=JSON.parse(call[1].body);expect(request.model).toBe('configured/model');expect(request.provider.require_parameters).toBe(true);expect(request.response_format.type).toBe('json_schema');expect(request.messages[0].content).toBe(instructionalPromptText);}
+ for(const call of fetcher.mock.calls){const request=JSON.parse(call[1].body);expect(request.model).toBe('configured/model');expect(request.provider.require_parameters).toBe(true);expect(request.response_format.type).toBe('json_schema');expect(JSON.stringify(request.response_format.json_schema.schema)).toContain('memory_aids');expect(request.messages[0].content).toBe(instructionalPromptText);}
  const repairRequest=JSON.parse(fetcher.mock.calls[1][1].body);const repaired=repairRequest.messages.at(-2).content;const repairData=JSON.parse(repairRequest.messages.at(-1).content);
  for(const call of fetcher.mock.calls){const input=JSON.parse(call[1].body).messages[1].content;expect(input).toContain('<conversation>');expect(input).toContain('speaker="tutor"');expect(input).not.toContain('tutor_source_passages');expect(input).not.toContain('tutor_heading_inventory');expect(input).not.toContain('visual_inventory');}
  expect(conversation).toHaveProperty('label');
@@ -118,20 +120,21 @@ it.each([false,true])('repairs omitted bold heading occurrences during generatio
  const recovery=await generateInstructionalBaseline({conversation:headed,rubric:bundledRubric,requestId:'resume',initialContent:JSON.stringify(incomplete),apiKey:'private-key',config:{model:'configured/model',timeout:10,repair_attempts:0,reasoning:null},fetcher:resumed});
  expect(recovery.annotations[1].evidence).toHaveLength(2);expect(resumed).toHaveBeenCalledTimes(1);
 });
-it('validates one to three hierarchy levels with heading-only evidence and leaves other categories unrestricted',()=>{
+it('accepts plain concept names and optional levels while requiring heading-only evidence',()=>{
  const headed=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'# Evaporation\nWater evaporates.'}]});
  const coverage={annotations:[{feature:'concepts_and_subtopics_covered',entry:{topic:'Evaporation :: Meaning :: Definition',detail_level:'Brief'},evidence:[{turn_id:'t1',quote:'# Evaporation',occurrence:1}]}]};
  const resolved=resolveLLMAnnotations(coverage,headed,bundledRubric,'hierarchy');expect(resolved[0].entry.topic).toBe('Evaporation :: Meaning :: Definition');
  for(const topic of ['Evaporation','Evaporation :: Meaning']){const value=structuredClone(coverage);value.annotations[0].entry.topic=topic;expect(resolveLLMAnnotations(value,headed,bundledRubric,'node')).toHaveLength(1);}
- const deep=structuredClone(coverage);deep.annotations[0].entry.topic='A :: B :: C :: D';expect(()=>resolveLLMAnnotations(deep,headed,bundledRubric,'deep')).toThrow(/one to three/);
+ const leveled=structuredClone(coverage);leveled.annotations[0].entry.topic='Evaporation';leveled.annotations[0].entry.concept_level='Main concept';expect(resolveLLMAnnotations(leveled,headed,bundledRubric,'leveled')[0].entry.concept_level).toBe('Main concept');
+ const invalid=structuredClone(leveled);invalid.annotations[0].entry.concept_level='Other';expect(()=>resolveLLMAnnotations(invalid,headed,bundledRubric,'invalid-level')).toThrow(/invalid value/);
  const body=structuredClone(coverage);body.annotations[0].evidence[0].quote='Water evaporates.';expect(()=>resolveLLMAnnotations(body,headed,bundledRubric,'body')).toThrow(/heading/);
  const example=structuredClone(output);example.annotations[0].evidence[0].occurrence=1;expect(resolveLLMAnnotations(example,headed,bundledRubric,'example')).toHaveLength(1);
  const historical=structuredClone(resolved);historical[0].entry.topic='Evaporation';historical[0].evidence=[C.makeEvidence(headed,'t1',13,30)];historical[0].entry.turn_locations=['t1'];expect(()=>C.validateAnnotations(headed,historical,bundledRubric.rubric)).not.toThrow();
 });
-it('accepts exact issue highlights and rejects incomplete issue attributes',()=>{
+it('accepts exact issue highlights with an optional explanation',()=>{
  const issue={annotations:[{feature:'issues',entry:{issue:'Conceptual error: evaporation description',explanation:'Explain the specific mistake and correct physical process.'},evidence:[{turn_id:'t1',quote:'Water evaporates.',occurrence:1}]}]};
  const resolved=resolveLLMAnnotations(issue,conversation,bundledRubric,'issue');expect(resolved[0].feature).toBe('issues');expect(resolved[0].entry.turn_locations).toEqual(['t1']);
- const incomplete=structuredClone(issue);incomplete.annotations[0].entry.explanation='';expect(()=>resolveLLMAnnotations(incomplete,conversation,bundledRubric,'issue')).toThrow();
+ const incomplete=structuredClone(issue);incomplete.annotations[0].entry.explanation='';expect(()=>resolveLLMAnnotations(incomplete,conversation,bundledRubric,'issue')).not.toThrow();
  const extra=structuredClone(issue);Object.assign(extra.annotations[0].entry,{correction_status:'uncorrected'});expect(()=>resolveLLMAnnotations(extra,conversation,bundledRubric,'issue')).toThrow();
 });
 it('does not retry provider errors or accept truncated model output',async()=>{

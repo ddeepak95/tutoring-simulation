@@ -1,3 +1,9 @@
+for (const root of document.querySelectorAll('[data-capture-agent-static]')) {
+  const template = [...document.querySelectorAll('template[data-capture-agent-message]')]
+    .find(item => item.dataset.captureAgentMessage === root.dataset.captureAgentMessage
+      && item.dataset.captureAgentState === root.dataset.captureAgentState);
+  if (template) root.replaceWith(template.content.firstElementChild.cloneNode(true));
+}
 const conversation = document.querySelector('.capture-conversation');
 const agentGraph = document.querySelector('#capture-agent-graph')
   ? JSON.parse(document.querySelector('#capture-agent-graph').textContent)
