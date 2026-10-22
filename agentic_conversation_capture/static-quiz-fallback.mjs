@@ -5,6 +5,7 @@ export function addStaticQuizFallback(doc, messages, navigation = []) {
     messages = doc.messages;
     doc = document;
   }
+  const elementDocument = doc.ownerDocument || doc;
   const counter = /^(?:Question|கேள்வி)\s*(\d+)\s*(?:of|\/)\s*(\d+)$/i;
   const findPanel = root => {
     for (const node of root.querySelectorAll('p,span,h2,h3,h4')) {
@@ -21,7 +22,7 @@ export function addStaticQuizFallback(doc, messages, navigation = []) {
     const liveRoot = doc.querySelector(`[data-capture-agent-message="${messageIndex}"]`);
     if (!liveRoot || liveRoot.hasAttribute('data-capture-agent-static')) return;
     const pages = message.states.map(state => {
-      const template = doc.createElement('template');
+      const template = elementDocument.createElement('template');
       template.innerHTML = state.html;
       const root = template.content.firstElementChild;
       const found = root && findPanel(root);
@@ -37,11 +38,11 @@ export function addStaticQuizFallback(doc, messages, navigation = []) {
     if (!livePanel) return;
     const byState = new Map(related.map(page => [page.id, page]));
     const byNumber = new Map(related.map(page => [page.number, page]));
-    const wrapper = doc.createElement('div');
+    const wrapper = elementDocument.createElement('div');
     wrapper.className = 'capture-static-quiz';
     const styleRules = [];
     for (const page of related) {
-      const input = doc.createElement('input');
+      const input = elementDocument.createElement('input');
       input.type = 'radio';
       input.name = `capture-question-${messageIndex}`;
       input.id = `capture-question-${messageIndex}-select-${page.number}`;
@@ -68,7 +69,7 @@ export function addStaticQuizFallback(doc, messages, navigation = []) {
         else if (/^(?:Restart|Start again|மீண்டும் தொடங்கு)/i.test(label)) target ||= initial;
         else continue;
         if (!target) continue;
-        const link = doc.createElement('label');
+        const link = elementDocument.createElement('label');
         link.htmlFor = `capture-question-${messageIndex}-select-${target.number}`;
         link.className = button.className;
         link.innerHTML = button.innerHTML;
@@ -86,10 +87,10 @@ export function addStaticQuizFallback(doc, messages, navigation = []) {
     added++;
   });
   if (added) {
-    const style = doc.createElement('style');
+    const style = elementDocument.createElement('style');
     style.dataset.captureStaticQuizStyle = 'true';
     style.textContent = '.capture-static-quiz>[data-capture-quiz-page]{display:none!important}.capture-static-quiz>input[data-capture-quiz-state]{position:absolute;width:1px;height:1px;opacity:0}.capture-static-quiz label[data-capture-quiz-link]{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;min-height:36px;padding:7px 16px;border:1px solid #d9d9d9;border-radius:24px;color:inherit}.capture-static-quiz label[data-capture-quiz-direction="next"]{background:#111;color:#fff;border-color:#111}' + [...doc.querySelectorAll('[data-capture-quiz-style-rules]')].map(root => root.dataset.captureQuizStyleRules).join('');
-    doc.head.append(style);
+    (doc.querySelector('head') || elementDocument.head).append(style);
   }
   return added;
 }

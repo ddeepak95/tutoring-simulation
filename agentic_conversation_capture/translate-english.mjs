@@ -92,14 +92,22 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
     const nonoverlapping = [...sourceSegments].filter(segment => segment.kind !== 'visual' && segment.end > segment.start)
       .sort((a, b) => a.start - b.start || b.end - a.end).filter((segment, index, sorted) => !sorted.slice(0, index).some(previous => previous.start <= segment.start && previous.end > segment.start));
     const units = [];
+    const addUncovered = (start, end) => {
+      const gap = turn.text.slice(start, end);
+      for (const line of gap.matchAll(/[^\n]*(?:\n|$)/g)) {
+        if (!line[0]) continue;
+        units.push({ source_start: start + line.index, source_end: start + line.index + line[0].length,
+          text: line[0], uncovered: true });
+      }
+    };
     let cursor = 0;
     for (const segment of nonoverlapping) {
       if (segment.start < cursor) continue;
-      if (segment.start > cursor) units.push({ source_start: cursor, source_end: segment.start, text: turn.text.slice(cursor, segment.start) });
+      if (segment.start > cursor) addUncovered(cursor, segment.start);
       units.push({ source_start: segment.start, source_end: segment.end, text: turn.text.slice(segment.start, segment.end) });
       cursor = segment.end;
     }
-    if (cursor < turn.text.length) units.push({ source_start: cursor, source_end: turn.text.length, text: turn.text.slice(cursor) });
+    if (cursor < turn.text.length) addUncovered(cursor, turn.text.length);
     if (!units.length) units.push({ source_start: 0, source_end: turn.text.length, text: turn.text });
     const pieces = units.map(unit => {
       const match = unit.text.match(/^(\s*)([\s\S]*?)(\s*)$/u);
@@ -127,6 +135,17 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
       alignment.push({ segment_id: segment.segment_id, turn_id: turn.turn_id, start: covered[0].start,
         end: covered.at(-1).end, source_start: segment.start, source_end: segment.end,
         kind: tableHeaders.some(range => segment.start >= range.start && segment.end <= range.end) ? 'table_header' : segment.kind });
+    }
+    let extraIndex = Math.max(0, ...sourceSegments.map(segment => Number(segment.segment_id.match(/:s(\d+)$/)?.[1] || 0)));
+    for (const unit of units.filter(unit => unit.uncovered)) {
+      const original = unit.text.match(/^([^=\n]+?=\s*)([^\n]+?)(\s*)$/u);
+      const translated = english.slice(unit.start, unit.end).match(/^([^=\n]+?=\s*)([^\n]+?)(\s*)$/u);
+      if (!original || !translated || !/[^\x00-\x7f]/u.test(original[2]) || !translated[2].trim()) continue;
+      const sourceStart = unit.source_start + original[1].length;
+      const start = unit.start + translated[1].length;
+      alignment.push({ segment_id: `${turn.turn_id}:s${String(++extraIndex).padStart(4, '0')}`,
+        turn_id: turn.turn_id, start, end: start + translated[2].length,
+        source_start: sourceStart, source_end: sourceStart + original[2].length, kind: 'paragraph' });
     }
     turns.push({ turn_id: turn.turn_id, speaker: turn.speaker, text: english });
   }

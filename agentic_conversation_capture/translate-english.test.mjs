@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { readFile } from 'node:fs/promises';
 import { translateCaptureToEnglish } from './translate-english.mjs';
 
 test('translates only title, topic, and ordered turn text', async () => {
@@ -46,4 +47,24 @@ test('records parent evidence IDs alongside translated passage offsets', async (
     { segment_id: 't1:s0002', start: 6, end: 17, source_start: 7, source_end: 17, kind: 'paragraph' },
   ]);
   assert.deepEqual(requests, ['Movimiento', '["Título","Una frase."]']);
+});
+
+test('anchors translated definitions beside math without changing the math label', async () => {
+  const original = JSON.parse(await readFile(new URL('./outputs/covalent-redius/ta/20261020T143758Z/covalent-redius-ta.capture.json', import.meta.url), 'utf8'));
+  const capture = { title: original.title, topic: original.topic, turns: [original.turns[1]] };
+  const source = capture.turns[0].text;
+  const fetcher = async (_url, options) => {
+    const input = JSON.parse(options.body).contents[0].parts[0].text;
+    const text = input.startsWith('[')
+      ? JSON.stringify(JSON.parse(input).map(piece => piece.replaceAll('இங்கு:', 'Where:').replaceAll('சகப்பிணைப்பு ஆரம்', 'covalent radius').replaceAll('இரண்டு அணுக்கருக்களுக்கு இடையிலான தூரம்', 'distance between the two nuclei')))
+      : 'Covalent Radius';
+    return { ok: true, json: async () => ({ candidates: [{ finishReason: 'STOP', content: { parts: [{ text }] } }] }) };
+  };
+  const result = await translateCaptureToEnglish(capture, { fetcher, apiKey: 'test-key', withAnchors: true });
+  const definitions = result.alignment.filter(item => ['covalent radius', 'distance between the two nuclei'].includes(result.turns[0].text.slice(item.start, item.end)));
+  assert.equal(definitions.length, 2);
+  assert.deepEqual(definitions.map(item => [source.slice(item.source_start, item.source_end), result.turns[0].text.slice(item.start, item.end)]), [
+    ['சகப்பிணைப்பு ஆரம்', 'covalent radius'],
+    ['இரண்டு அணுக்கருக்களுக்கு இடையிலான தூரம்', 'distance between the two nuclei'],
+  ]);
 });

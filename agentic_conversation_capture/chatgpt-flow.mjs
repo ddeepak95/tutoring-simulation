@@ -302,10 +302,11 @@ async function waitForStableAnswer(page, before = { users: -1, assistants: 0 }) 
 }
 
 async function sendPrompt(page, prompt) {
-  await waitFor(page, `!!(document.querySelector('#prompt-textarea') || document.querySelector('[contenteditable="true"]') || document.querySelector('textarea[aria-label="Chat with ChatGPT"]'))`, 30000);
+  const editorSelector = '#prompt-textarea,[contenteditable="true"],textarea[aria-label="Chat with ChatGPT"]';
+  await waitFor(page, `[...document.querySelectorAll(${JSON.stringify(editorSelector)})].some(editor => editor.getClientRects().length > 0)`, 30000);
   const before = await page.evaluate(`({users:document.querySelectorAll('[data-message-role="user"], [data-content-search-unit-key$=":user"]').length, assistants:document.querySelectorAll('[data-message-role="assistant"], [data-content-search-unit-key$=":assistant"]').length})`);
   const focused = await page.evaluate(`(() => {
-    const editor = document.querySelector('#prompt-textarea') || document.querySelector('[contenteditable="true"]') || document.querySelector('textarea[aria-label="Chat with ChatGPT"]');
+    const editor = [...document.querySelectorAll(${JSON.stringify(editorSelector)})].find(candidate => candidate.getClientRects().length > 0);
     if (!editor) return false;
     editor.focus();
     return document.activeElement === editor;
@@ -318,7 +319,7 @@ async function sendPrompt(page, prompt) {
   const submitted = () => waitFor(page, `document.querySelectorAll('[data-message-role="user"], [data-content-search-unit-key$=":user"]').length > ${before.users}`, 12000).catch(() => false);
   if (!await submitted()) {
     const retried = await page.evaluate(`(() => {
-      const editor = document.querySelector('#prompt-textarea') || document.querySelector('[contenteditable="true"]') || document.querySelector('textarea[aria-label="Chat with ChatGPT"]');
+      const editor = [...document.querySelectorAll(${JSON.stringify(editorSelector)})].find(candidate => candidate.getClientRects().length > 0);
       const button = document.querySelector(${JSON.stringify(sendButton)});
       if (document.querySelectorAll('[data-message-role="user"], [data-content-search-unit-key$=":user"]').length > ${before.users}) return true;
       if (!editor?.innerText.includes(${JSON.stringify(prompt)}) || !button || button.disabled) return false;
@@ -1051,7 +1052,9 @@ async function main() {
         : await runAgentCapture(output, sourceAudit.conversationUrl);
       if (agentStates.url !== sourceAudit.conversationUrl) throw new Error('Agent session URL does not match the source capture');
       const sourceMetadata = JSON.parse(await readFile(path.join(path.dirname(source), `${path.parse(source).name}.capture.json`), 'utf8'));
-      console.log(JSON.stringify(await saveConversation(page, output, { title: sourceMetadata.title, topic: sourceMetadata.topic, language: sourceMetadata.language, agentStates }), null, 2));
+      const state = await readState();
+      const topicId = sourceMetadata.topic_id || (path.resolve(state.output || '') === source ? state.topicId : undefined);
+      console.log(JSON.stringify(await saveConversation(page, output, { title: sourceMetadata.title, topic: sourceMetadata.topic, topicId, language: sourceMetadata.language, agentStates }), null, 2));
     } finally { page.close(); }
     return;
   }
@@ -1096,7 +1099,7 @@ async function main() {
         ? (await readTopics()).find((topic) => topic['topic-id'] === state.topicId)
         : null;
       const savedName = savedTopic ? topicName(savedTopic, state.language) : null;
-      const saved = await saveConversation(page, output, { ...(savedName ? { title: savedName, topic: savedName, language: state.language } : {}), allowQuizAnswers: argumentsAfterAction.includes('--allow-quiz-answers'), agentStates });
+      const saved = await saveConversation(page, output, { ...(savedName ? { title: savedName, topic: savedName, topicId: state.topicId, language: state.language } : {}), allowQuizAnswers: argumentsAfterAction.includes('--allow-quiz-answers'), agentStates });
       await writeState({ ...state, targetId: target.id, url: await page.evaluate('location.href'), output });
       const screenshots = argumentsAfterAction.includes('--screenshots') ? await captureLiveScreenshots(page, output) : null;
       const uploaded = argumentsAfterAction.includes('--upload') ? await uploadConversation(output) : null;
@@ -1111,7 +1114,7 @@ async function main() {
       ? (await readTopics()).find((topic) => topic['topic-id'] === state.topicId)
       : null;
     const savedName = savedTopic ? topicName(savedTopic, state.language) : null;
-    const saved = await saveConversation(page, output, { ...(savedName ? { title: savedName, topic: savedName, language: state.language } : {}), allowQuizAnswers: argumentsAfterAction.includes('--allow-quiz-answers'), agentStates });
+    const saved = await saveConversation(page, output, { ...(savedName ? { title: savedName, topic: savedName, topicId: state.topicId, language: state.language } : {}), allowQuizAnswers: argumentsAfterAction.includes('--allow-quiz-answers'), agentStates });
     await writeState({ ...state, targetId: target.id, url: response.url, output });
     const screenshots = argumentsAfterAction.includes('--screenshots') ? await captureLiveScreenshots(page, output) : null;
     const uploaded = argumentsAfterAction.includes('--upload') ? await uploadConversation(output) : null;
