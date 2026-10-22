@@ -16,7 +16,8 @@ describe('comparison rounds', () => {
     const active = comparisonQuestions(questions, 1);
     expect(questions.filter(q => q.scope === 'turn').map(q => [q.key, q.label, q.subsequent_only])).toEqual(legacyQuestions.map(q => [q.key, q.label, q.subsequent_only]));
     expect(active.map(q => q.key)).toEqual(['follow_up_responsiveness', ...questions.filter(q => q.scope === 'turn' && !q.subsequent_only).map(q => q.key)]);
-    expect(overallComparisonQuestions(questions)).toHaveLength(2);
+    expect(overallComparisonQuestions(questions)).toHaveLength(1);
+    expect(overallComparisonQuestions([...questions, { ...questions.at(-1)!, key: 'overall_conversational_naturalness' }])).toHaveLength(1);
     expect(active.every(q => q.scope !== 'overall')).toBe(true);
     expect(active[0].description).toBe("Which of the two responses better addresses the student's follow-up?");
     expect(active.some(q => q.key === 'positivity_of_tone')).toBe(false);

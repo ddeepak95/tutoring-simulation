@@ -5,12 +5,13 @@ import type { DocumentRow, LLMBaseline, LLMGenerationRun, RubricSnapshot } from 
 import modelConfig from './generated/llm-config.json';
 import { Editor } from './Editor';
 import { AnnotationSummary } from './AnnotationSummary';
+import { Toast, useToast } from './Toast';
 
 export function LLMBaselines() {
   const { id } = useParams();
   const [document, setDocument] = useState<DocumentRow | null>(null); const [baselines, setBaselines] = useState<LLMBaseline[]>([]);
   const [runs, setRuns] = useState<LLMGenerationRun[]>([]); const [selected, setSelected] = useState(''); const [rubric, setRubric] = useState<RubricSnapshot | null>(null);
-  const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [notice, setNotice] = useState(''); const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [notice, setNotice] = useToast(); const [loading, setLoading] = useState(true);
   const alive = useRef(false); const generating = useRef(false);
   async function refresh() {
     try {
@@ -58,7 +59,7 @@ export function LLMBaselines() {
       {runs[0]?.status==='failed' && <p role="status">The latest generation failed ({runs[0].error_code}). Previous baselines and assignments are preserved.</p>}
       {runs[0]?.status==='failed'&&runs[0].checkpoint_fingerprint&&<button className="secondary" disabled={busy||Boolean(activeRun)} onClick={()=>void generate(runs[0].id)}>Resume saved generation</button>}
     </section>
-    {error && <p className="error" role="alert">{error}</p>}{notice && <p className="notice" role="status">{notice}</p>}
+    {error && <p className="error" role="alert">{error}</p>}<Toast notice={notice} onDismiss={() => setNotice('')} duration={busy ? 0 : 6000} />
     {baseline?.generation_config.origin==='admin_baseline_revision'&&<p className="notice">This version includes manual revisions to an LLM baseline. The original baseline is preserved.</p>}
     {!loading && !baseline && !busy && <p>No saved baseline yet. Generate one, then select it when assigning annotators from the conversation menu.</p>}
     {baseline && rubric && document && <><AnnotationSummary annotations={baseline.annotations} rubric={rubric}/><Editor key={baseline.id} conversation={document.transcript} rubric={{...rubric,rating_dimensions:[]}} annotations={baseline.annotations} onChange={()=>{}} readonly/></>}

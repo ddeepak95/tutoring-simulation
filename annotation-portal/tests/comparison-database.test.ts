@@ -80,7 +80,7 @@ describe.sequential('final overall comparison ratings', () => {
       expect(result.status).toBe('in_progress'); expect(result.submitted_at).toBeNull();
     }
   });
-  it('requires both valid overall choices, checks revisions, and submits with audited answers', async () => {
+  it('requires the remaining overall choice, checks revisions, and submits with audited answers', async () => {
     await expect(overall(1)).rejects.toThrow(/Revision conflict/);
     await expect(overall(2, {})).rejects.toThrow(/every overall/);
     await expect(overall(2, { ...overallValues(), overall_learning_goal: 'invalid' })).rejects.toThrow(/every overall/);

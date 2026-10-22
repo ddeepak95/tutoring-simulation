@@ -20,11 +20,11 @@ const questions = text.split(/\r?\n/).filter(line => line.startsWith('| `')).map
     scale_items: { a: 'A is better', b: 'B is better', tie: 'Tie / equally good' },
     subsequent_only: timing === 'Follow-up turns',
     scope: timing === 'Overall conversation' ? 'overall' : 'turn',
-    question_set: 'instructional-comparison-v4', source, source_basis,
+    question_set: 'instructional-comparison-v5', source, source_basis,
   };
 });
-if (questions.length !== 8 || questions.filter(question => question.scope === 'turn' && !question.subsequent_only).length !== 5 || questions.filter(question => question.scope === 'overall').length !== 2 || new Set(questions.map(question => question.key)).size !== questions.length) {
-  throw new Error('Expected five first-turn, one follow-up, and two overall questions.');
+if (questions.length !== 7 || questions.filter(question => question.scope === 'turn' && !question.subsequent_only).length !== 5 || questions.filter(question => question.scope === 'overall').length !== 1 || new Set(questions.map(question => question.key)).size !== questions.length) {
+  throw new Error('Expected five first-turn, one follow-up, and one overall question.');
 }
 const turnQuestions = questions.filter(question => question.scope === 'turn');
 if (turnQuestions.length !== ratingQuestions.length || turnQuestions.some((question, index) => question.key !== ratingQuestions[index].key || question.label !== ratingQuestions[index].label || question.subsequent_only !== ratingQuestions[index].subsequent_only)) {
@@ -33,4 +33,4 @@ if (turnQuestions.length !== ratingQuestions.length || turnQuestions.some((quest
 const output = path.join(portal, 'src/generated/comparison-questions.json');
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, JSON.stringify(questions, null, 2) + '\n');
-console.log('Synced comparison questions: 5 first-turn, 6 follow-up, 2 overall.');
+console.log('Synced comparison questions: 5 first-turn, 6 follow-up, 1 overall.');

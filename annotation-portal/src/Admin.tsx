@@ -12,13 +12,14 @@ import { ratingQuestionMetadata } from './turn-ratings';
 import { languageId, languageName } from './languages';
 import { compareWithBaseline } from './baseline-comparison';
 import type { LLMBaseline } from './types';
+import { Toast, useToast } from './Toast';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
 
 export function Admin() {
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
-  const [error, setError] = useState(''); const [notice, setNotice] = useState(''); const [busy, setBusy] = useState(false); const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(''); const [notice, setNotice] = useToast(); const [busy, setBusy] = useState(false); const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string[]>([]); const [language, setLanguage] = useState('en');
   const [uploadOpen, setUploadOpen] = useState(false);
   const [deleteDocument, setDeleteDocument] = useState<DocumentRow | null>(null);
@@ -121,7 +122,7 @@ export function Admin() {
   const menuDocuments = menu ? documents.filter(doc => menu.ids.includes(doc.id)) : [];
   return <main className="dashboard admin-dashboard">
     <div className="page-heading"><div><span className="eyebrow">ADMINISTRATION</span><h1>Conversations</h1><p>Manage transcripts and assign annotation work.</p></div><div className="actions"><button className="secondary" disabled={busy} onClick={() => { setError(''); void refresh(); }}>Refresh</button><button className="primary" onClick={() => setUploadOpen(true)}>Upload</button></div></div>
-    {error && !uploadOpen && <p className="error" role="alert">{error}</p>}{notice && !uploadOpen && <p className="notice" role="status">{notice}</p>}
+    {error && !uploadOpen && <p className="error" role="alert">{error}</p>}{!uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}
     
     <section className="card conversation-card" aria-label="Conversations">
       <div className="conversation-toolbar"><span>{documents.length} conversation{documents.length === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div>
@@ -153,7 +154,7 @@ export function Admin() {
     <section className="card progress"><div className="progress-heading"><h2>Annotation progress</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? `${row.annotations.length} highlights` : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>
     <dialog ref={uploadDialog} className="upload-dialog" aria-labelledby="upload-title" onCancel={event => { if (busy) event.preventDefault(); else setUploadOpen(false); }} onClose={() => setUploadOpen(false)}>
       <div className="upload-heading"><div><h2 id="upload-title">Upload conversations</h2><p>Add transcript files directly to the conversation table.</p></div><button className="secondary" aria-label="Close upload" disabled={busy} onClick={() => setUploadOpen(false)}>Close</button></div>
-      {uploadOpen && error && <p className="error" role="alert">{error}</p>}{uploadOpen && notice && <p className="notice" role="status">{notice}</p>}
+      {uploadOpen && error && <p className="error" role="alert">{error}</p>}{uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}
       <section className="card"><h3>Upload files</h3><p>JSON conversations or text files with Tutor: and Student: turns.</p><label>Transcript language code<input value={language} onChange={event => setLanguage(event.target.value)} required /></label><input ref={fileRef} type="file" accept=".json,.txt,.md" multiple disabled={busy} aria-label="Choose transcript files" onChange={event => void upload(event.target.files)} /><small>Use en or ta. Used when a file has no language metadata. Original files are stored privately.</small></section>
     </dialog>
   </main>;

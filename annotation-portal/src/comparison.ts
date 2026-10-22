@@ -1,12 +1,18 @@
 import type { Conversation, Profile, RatingDimension, Status, Turn } from './types';
 
 export type ComparisonChoice = 'a' | 'b' | 'tie';
+export type ComparisonMode = 'turn_wise' | 'whole_conversation';
+export const comparisonModeLabel = (mode: ComparisonMode) => mode === 'whole_conversation' ? 'Whole conversation' : 'Turn wise';
 export interface ComparisonAnswer { values: Record<string, ComparisonChoice>; notes: string; }
 export interface ComparisonQuestion extends RatingDimension { scope?: string; }
 export interface ComparisonAssignment {
-  id: string; conversation_a_id: string; conversation_b_id: string; annotator_id: string;
+  id: string; pair_id?: string; mode?: ComparisonMode; conversation_a_id: string; conversation_b_id: string; annotator_id: string;
   questions: ComparisonQuestion[]; answers: ComparisonAnswer[]; overall_answer?: ComparisonAnswer | null; status: Status; revision: number;
   updated_at: string; submitted_at: string | null; profiles?: Profile;
+}
+export interface ComparisonPair {
+  id: string; mode?: ComparisonMode; conversation_a_id: string; conversation_b_id: string;
+  questions: ComparisonQuestion[]; created_at: string;
 }
 export interface ComparisonRound { tutor: Turn; students: Turn[]; }
 
@@ -33,7 +39,22 @@ export function comparisonRounds(conversation: Conversation): ComparisonRound[] 
   return rounds;
 }
 export function overallComparisonQuestions(questions: ComparisonQuestion[]) {
-  return questions.filter(question => question.scope === 'overall');
+  return questions.filter(question => question.scope === 'overall' && question.key !== 'overall_conversational_naturalness');
+}
+
+export function wholeComparisonQuestions(questions: ComparisonQuestion[]) {
+  return questions.filter(question => question.key !== 'instructional_sequence' && question.key !== 'overall_conversational_naturalness').map(question => {
+    if (question.key === 'focus_and_amount_of_information') return { ...question, description: 'Which conversation explains the topic clearly without leaving important gaps or adding unnecessary detail?' };
+    if (question.key === 'opportunity_to_demonstrate_understanding') return { ...question, description: 'Which of the two conversations gives the learner more opportunities to demonstrate understanding?' };
+    if (question.key === 'follow_up_responsiveness') return { ...question, description: "Which conversation better responds to the learner's follow-up questions?" };
+    if (question.scope === 'overall') return question;
+    return { ...question, description: question.description.replace('Which of the two responses', 'Which of the two conversations') };
+  });
+}
+
+export function wholeComparisonComplete(answer: ComparisonAnswer, questions: ComparisonQuestion[]) {
+  const active = wholeComparisonQuestions(questions);
+  return active.length > 0 && active.every(question => ['a', 'b', 'tie'].includes(answer.values[question.key]));
 }
 export function comparisonQuestions(questions: ComparisonQuestion[], index: number) {
   return questions.filter(question => question.scope !== 'overall' && question.key !== 'instructional_sequence' && (index > 0 || !question.subsequent_only)).sort((a, b) => Number(b.key === 'follow_up_responsiveness') - Number(a.key === 'follow_up_responsiveness')).map(question => {

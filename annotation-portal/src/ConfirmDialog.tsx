@@ -5,6 +5,7 @@ interface Props {
   children: ReactNode;
   confirmLabel: string;
   pendingLabel?: string;
+  danger?: boolean;
   onCancel: () => void;
   onConfirm: () => Promise<void> | void;
 }
@@ -15,7 +16,7 @@ function errorMessage(cause: unknown) {
   return 'Could not complete this action. Try again.';
 }
 
-export function ConfirmDialog({ title, children, confirmLabel, pendingLabel = 'Please wait…', onCancel, onConfirm }: Props) {
+export function ConfirmDialog({ title, children, confirmLabel, pendingLabel = 'Please wait…', danger = false, onCancel, onConfirm }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const pending = useRef(false);
   const titleId = useId();
@@ -38,6 +39,6 @@ export function ConfirmDialog({ title, children, confirmLabel, pendingLabel = 'P
     <h2 id={titleId}>{title}</h2>
     <div className="confirmation-dialog-content">{children}</div>
     {error && <p className="error" role="alert">{error}</p>}
-    <div className="actions"><button type="button" className="secondary" disabled={busy} onClick={onCancel} autoFocus>Cancel</button><button type="button" className="primary" disabled={busy} onClick={() => void confirm()}>{busy ? pendingLabel : confirmLabel}</button></div>
+    <div className="actions"><button type="button" className="secondary" disabled={busy} onClick={onCancel} autoFocus>Cancel</button><button type="button" className={danger ? 'delete-confirm' : 'primary'} disabled={busy} onClick={() => void confirm()}>{busy ? pendingLabel : confirmLabel}</button></div>
   </dialog>;
 }

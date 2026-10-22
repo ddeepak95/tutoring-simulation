@@ -4,7 +4,7 @@
 
 Choose **A is better**, **B is better**, or **Tie / equally good** for each question independently. Evaluate each tutor response using its own preceding learner context. Use the original language to assess wording; translations may support interpretation. Compare instructional usefulness, not length or the number of examples. Do not infer actual learning solely from the explanation.
 
-The first tutor turn uses five questions. Follow-up turns first ask about the student's follow-up, then repeat all five first-turn questions. After all tutor turns have been rated and saved, ask the two overall-conversation questions. Save these separately from turn ratings; the comparison is complete only when both overall questions have been saved.
+The first tutor turn uses five questions. Follow-up turns first ask about the student's follow-up, then repeat all five first-turn questions. After all tutor turns have been rated and saved, ask the overall-conversation question. Save it separately from turn ratings; the comparison is complete when the overall answer has been saved.
 
 ## First turn
 
@@ -22,14 +22,13 @@ Then ask all five first-turn questions in the same order.
 
 ## Overall conversation
 
-1. Which of the two conversations felt more natural and conversational?
-2. Which of the two conversations overall addressed the learning goal better?
+1. Which of the two conversations overall addressed the learning goal better?
 
-These questions appear only after every turn comparison has been saved. Consider the complete conversations, including how each tutor uses learner contributions across turns.
+This question appears only after every turn comparison has been saved. Consider the complete conversations, including how each tutor uses learner contributions across turns.
 
 ## Portal question definitions
 
-This table is the source for `annotation-portal/scripts/sync-comparison-questions.mjs`. The turn-question keys, labels, and order match `conversation-evaluation/human-annotation/rating-questions.md`; the wording asks annotators to compare A and B. Timing determines display order: **Follow-up turns** precedes **All turns** on later turns; **Overall conversation** is a separate final stage. All questions use A/B/tie choices. The question set is version `instructional-comparison-v4`.
+This table is the source for `annotation-portal/scripts/sync-comparison-questions.mjs`. The turn-question keys, labels, and order match `conversation-evaluation/human-annotation/rating-questions.md`; the wording asks annotators to compare A and B. Timing determines display order: **Follow-up turns** precedes **All turns** on later turns; **Overall conversation** is a separate final stage. All questions use A/B/tie choices. The question set is version `instructional-comparison-v5`.
 
 | Key | Label | Comparative question (`description`) | Judging guidance | Timing | Source basis |
 | --- | --- | --- | --- | --- | --- |
@@ -39,7 +38,6 @@ This table is the source for `annotation-portal/scripts/sync-comparison-question
 | `opportunity_to_demonstrate_understanding` | Opportunity to Demonstrate Understanding | Which of the two responses gives the learner a better opportunity to demonstrate understanding? | Compare relevant, concrete questions or tasks that ask the learner to explain, predict, or apply the concept. A generic understanding check gives less evidence. | All turns | Current rating question: Opportunity to Demonstrate Understanding. |
 | `guidance_for_next_steps` | Guidance for Next Steps | Which of the two responses better guides the learner toward useful next steps? | Compare how relevant and clear each suggested next concept, practice activity, resource, or action is. Vague or confusing directions are less useful. | All turns | Current rating question: Guidance for Next Steps. |
 | `follow_up_responsiveness` | Follow-up Responsiveness | Which of the two responses better addresses the student's follow-up? | Compare how directly and helpfully each tutor responds to its own student's questions, requests, or confusion and adapts to relevant learner information. Do not assume the two student replies are identical. | Follow-up turns | Current rating question: Follow-up Responsiveness. |
-| `overall_conversational_naturalness` | Overall Conversational Naturalness | Which of the two conversations felt more natural and conversational? | Consider the full exchange, including flow, wording, and how tutor contributions connect with student contributions. Judge from original wording, not translation polish. | Overall conversation | Study-specific whole-conversation judgment; related to direct address in S2 Feature 12, broader than that paper criterion. |
 | `overall_learning_goal` | Overall Learning Goal | Which of the two conversations overall addressed the learning goal better? | Consider how well the full conversation develops the intended topic and addresses learner needs. Do not equate this preference judgment with measured learning gains. | Overall conversation | Study-specific synthesis informed by S1's explanatory process and S2's goal-sensitive framework. |
 
 ## Source basis and versioning
@@ -49,4 +47,4 @@ These are study-specific questions informed by the two papers, not a validated s
 - **S1:** Kulgemeyer, *Towards a framework for effective instructional explanations in science teaching*, DOI: 10.1080/03057267.2018.1598054. The local filename says 2018; the PDF records online publication on 15 April 2019. PDF pages 7-9 describe the core ideas and explanatory process.
 - **S2:** Kulgemeyer (2020), *A Framework of Effective Science Explanation Videos Informed by Criteria for Instructional Explanations*, *Research in Science Education*, 50, 2441-2462, DOI: 10.1007/s11165-018-9787-7. Table 2 on PDF page 10 lists the framework's features.
 
-New and not-yet-started comparisons use this set. Comparisons with saved turn answers retain their stored questions and completion rules until an administrator resets them. Annotate ratings remain separate. Scientific correctness remains a separate error check, while incorrect explanations or aids can affect the corresponding comparative judgments.
+New and active comparisons use this set. Retired questions remain in completed comparison records and revision history for audit purposes, but are hidden from the annotation view. Annotate ratings remain separate. Scientific correctness remains a separate error check, while incorrect explanations or aids can affect the corresponding comparative judgments.

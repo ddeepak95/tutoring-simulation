@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { download, fetchAllRows, supabase } from './lib';
 import { PrepareArchive } from './PrepareArchive';
 import { languageName } from './languages';
+import { Toast, useToast } from './Toast';
 
 type Archive = { id: string; title: string; topic: string; language: string; captured_at: string; source_url: string };
 
@@ -12,7 +13,7 @@ export function HtmlArchives({ onPrepared = async () => {} }: { onPrepared?: () 
   const [preview, setPreview] = useState<{ title: string; html: string } | null>(null);
   const [deleting, setDeleting] = useState<Archive | null>(null);
   const [deleteError, setDeleteError] = useState('');
-  const [notice, setNotice] = useState('');
+  const [notice, setNotice] = useToast();
   const deletionPending = useRef(false);
   const deleteDialog = useRef<HTMLDialogElement>(null);
   useEffect(() => { if (deleting) deleteDialog.current?.showModal(); else deleteDialog.current?.close(); }, [deleting]);
@@ -65,7 +66,7 @@ export function HtmlArchives({ onPrepared = async () => {} }: { onPrepared?: () 
   return <section id="html-archives" className="card" aria-label="HTML archives">
     <h2>HTML archives</h2>
     <p>Review saved captures and prepare conversation turns for annotation, rating, or comparison. Captured layouts and images remain linked to the prepared conversation.</p>
-    {notice && <p role="status">{notice}</p>}
+    <Toast notice={notice} onDismiss={() => setNotice('')} />
     {error && <p className="error" role="alert">{error}</p>}
     {archives.length ? <div className="table-wrap"><table className="conversation-table"><thead><tr><th>Title / topic</th><th>Language</th><th>Captured</th><th>Actions</th></tr></thead><tbody>{archives.map(archive => <tr key={archive.id}>
       <td><strong>{archive.title}</strong><p>{archive.topic}</p></td><td>{languageName(archive.language)}</td><td>{new Date(archive.captured_at).toLocaleString()}</td>
