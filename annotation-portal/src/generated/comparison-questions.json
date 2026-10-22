@@ -1,9 +1,9 @@
 [
   {
-    "key": "principle_focus",
-    "label": "Understanding the Core Principle",
+    "key": "explaining_the_core_principle",
+    "label": "Explaining the Core Principle",
     "description": "Which of the two responses better explains the underlying concept or principle, rather than only presenting facts or steps?",
-    "guidance": "Compare whether the response explains why or how the concept works and connects facts or steps to the underlying principle.",
+    "guidance": "Compare how clearly and accurately each response explains why or how the concept works and connects facts or steps to the principle.",
     "options": [
       "a",
       "b",
@@ -16,15 +16,15 @@
     },
     "subsequent_only": false,
     "scope": "turn",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: Core idea 6 and Factor 8; S2: Feature 14."
+    "source_basis": "Current rating question: Explaining the Core Principle."
   },
   {
-    "key": "learner_fit",
-    "label": "Fit for a High-School Student",
-    "description": "Which of the two responses better matches a high-school student's understanding level through its content, language, and use of formulas and mathematical notation?",
-    "guidance": "Consider suitable content depth, accessible wording, explained technical terms, and understandable formulas and notation where relevant. Do not reward unnecessary formulas or oversimplification.",
+    "key": "use_of_instructional_features",
+    "label": "Use of Instructional Features",
+    "description": "Which of the two responses uses instructional features such as examples, analogies, diagrams, and memory aids more effectively to teach the concept?",
+    "guidance": "Compare the accuracy and teaching value of features actually shown. A clear explanation without a feature may be equally good when no feature is needed.",
     "options": [
       "a",
       "b",
@@ -37,36 +37,15 @@
     },
     "subsequent_only": false,
     "scope": "turn",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: Core ideas 1 and 2; S2: Features 3, 7, and 8. High-school level is the study's chosen target."
+    "source_basis": "Current rating question: Use of Instructional Features."
   },
   {
-    "key": "explanatory_aids_usefulness",
-    "label": "Usefulness of Explanatory Aids",
-    "description": "Which of the two responses uses examples, analogies, models, or representations more effectively to clarify the concept?",
-    "guidance": "Judge the clarity, accuracy, and instructional value of the aids used, not their number. Plain explanation may be sufficient. Judge only representations actually available in the transcript.",
-    "options": [
-      "a",
-      "b",
-      "tie"
-    ],
-    "scale_items": {
-      "a": "A is better",
-      "b": "B is better",
-      "tie": "Tie / equally good"
-    },
-    "subsequent_only": false,
-    "scope": "turn",
-    "question_set": "instructional-comparison-v3",
-    "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: Core idea 2; S2: Features 4, 5, and 6."
-  },
-  {
-    "key": "focus_and_information_load",
+    "key": "focus_and_amount_of_information",
     "label": "Focus and Amount of Information",
-    "description": "Which of the two responses stays focused on the essential ideas while providing the right amount of information for the learner without information overload?",
-    "guidance": "Prefer enough reasoning and detail to understand the concept without digressions, needless repetition, or excessive information. Shorter is not automatically better.",
+    "description": "Which of the two responses stays focused and provides a more appropriate amount of information?",
+    "guidance": "Prefer essential ideas with enough detail to understand them, without major gaps, digressions, repetition, or overload. Shorter is not automatically better.",
     "options": [
       "a",
       "b",
@@ -79,15 +58,15 @@
     },
     "subsequent_only": false,
     "scope": "turn",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: Core idea 5 and Factor 3; S2: Feature 9."
+    "source_basis": "Current rating question: Focus and Amount of Information."
   },
   {
-    "key": "opportunities_to_demonstrate_understanding",
-    "label": "Demonstrating Understanding",
-    "description": "Which of the two responses provides a better opportunity for the learner to demonstrate their understanding of the concepts learned?",
-    "guidance": "Compare questions or tasks that invite the learner to explain, predict, or apply the concept. A generic understanding check gives less evidence than a concrete task. Consider whether a task is appropriate at this point.",
+    "key": "opportunity_to_demonstrate_understanding",
+    "label": "Opportunity to Demonstrate Understanding",
+    "description": "Which of the two responses gives the learner a better opportunity to demonstrate understanding?",
+    "guidance": "Compare relevant, concrete questions or tasks that ask the learner to explain, predict, or apply the concept. A generic understanding check gives less evidence.",
     "options": [
       "a",
       "b",
@@ -100,15 +79,36 @@
     },
     "subsequent_only": false,
     "scope": "turn",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: Core idea 7, Factors 5 and 6; S2: Feature 13."
+    "source_basis": "Current rating question: Opportunity to Demonstrate Understanding."
+  },
+  {
+    "key": "guidance_for_next_steps",
+    "label": "Guidance for Next Steps",
+    "description": "Which of the two responses better guides the learner toward useful next steps?",
+    "guidance": "Compare how relevant and clear each suggested next concept, practice activity, resource, or action is. Vague or confusing directions are less useful.",
+    "options": [
+      "a",
+      "b",
+      "tie"
+    ],
+    "scale_items": {
+      "a": "A is better",
+      "b": "B is better",
+      "tie": "Tie / equally good"
+    },
+    "subsequent_only": false,
+    "scope": "turn",
+    "question_set": "instructional-comparison-v4",
+    "source": "comparative-evaluation/prompts/comparative-questions.md",
+    "source_basis": "Current rating question: Guidance for Next Steps."
   },
   {
     "key": "follow_up_responsiveness",
-    "label": "Addressing the Student's Follow-Up",
+    "label": "Follow-up Responsiveness",
     "description": "Which of the two responses better addresses the student's follow-up?",
-    "guidance": "Compare how directly and helpfully each tutor responds to its own student's questions, requests, confusion, or demonstrated understanding. Consider adaptation when needed; do not assume the two student replies are identical.",
+    "guidance": "Compare how directly and helpfully each tutor responds to its own student's questions, requests, or confusion and adapts to relevant learner information. Do not assume the two student replies are identical.",
     "options": [
       "a",
       "b",
@@ -121,9 +121,9 @@
     },
     "subsequent_only": true,
     "scope": "turn",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
-    "source_basis": "S1: explanation-diagnosis-adaptation process, Core ideas 1 and 7."
+    "source_basis": "Current rating question: Follow-up Responsiveness."
   },
   {
     "key": "overall_conversational_naturalness",
@@ -142,7 +142,7 @@
     },
     "subsequent_only": false,
     "scope": "overall",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
     "source_basis": "Study-specific whole-conversation judgment; related to direct address in S2 Feature 12, broader than that paper criterion."
   },
@@ -163,7 +163,7 @@
     },
     "subsequent_only": false,
     "scope": "overall",
-    "question_set": "instructional-comparison-v3",
+    "question_set": "instructional-comparison-v4",
     "source": "comparative-evaluation/prompts/comparative-questions.md",
     "source_basis": "Study-specific synthesis informed by S1's explanatory process and S2's goal-sensitive framework."
   }

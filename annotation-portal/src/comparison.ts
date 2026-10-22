@@ -28,7 +28,7 @@ export function comparisonRounds(conversation: Conversation): ComparisonRound[] 
   let students: Turn[] = [];
   for (const turn of conversation.messages) {
     if (turn.speaker === 'student') students.push(turn);
-    else { rounds.push({ tutor: turn, students: rounds.length ? students : [] }); students = []; }
+    else { rounds.push({ tutor: turn, students }); students = []; }
   }
   return rounds;
 }

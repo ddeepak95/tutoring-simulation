@@ -131,6 +131,7 @@ export async function backend(page: Page) {
     let rows: any[] = [];
     if (url.pathname === '/rest/v1/profiles') rows = people.filter(p => profile.role === 'admin' || p.id === userId);
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
+    if (url.pathname === '/rest/v1/conversation_details') rows = documents;
     if (url.pathname === '/rest/v1/conversation_capture_assets') rows=state.captureAssets;
     if (url.pathname === '/rest/v1/conversation_capture_documents') rows=state.captureDocuments;
     if (url.pathname === '/rest/v1/rubric_versions') rows = [{ hash: rubric.rubric_sha256, snapshot: rubric }];

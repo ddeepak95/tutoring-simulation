@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { translateCaptureToEnglish, translationSourceHash } from './translate-english.mjs';
 
 const maxArchiveBytes = 8 * 1024 * 1024;
 const maxImageBytes = 10 * 1024 * 1024;
@@ -70,14 +71,13 @@ export async function prepareConversation(output, userId, supabaseUrl) {
     readFile(path.join(directory, `${basename}.capture.json`), 'utf8').then(JSON.parse),
     readFile(path.join(directory, `${basename}.images.json`), 'utf8').then(JSON.parse),
   ]);
-  let topicId = metadata.topic_id || null;
-  if (!topicId) {
-    try {
-      const topics = JSON.parse(await readFile(path.join(import.meta.dirname, 'topics.json'), 'utf8'));
-      const match = topics.find((entry) => Object.entries(entry).some(([key, value]) => key !== 'topic-id' && value && typeof value === 'object' && (value.title === metadata.topic || value.title === metadata.title)));
-      topicId = match?.['topic-id'] || null;
-    } catch { }
-  }
+  const topics = JSON.parse(await readFile(path.join(import.meta.dirname, 'topics.json'), 'utf8'));
+  const languages = JSON.parse(await readFile(path.join(import.meta.dirname, 'languages.json'), 'utf8'));
+  const language = Object.entries(languages).find(([key, value]) => key === String(metadata.language).toLowerCase() || value.name.toLowerCase() === String(metadata.language).toLowerCase())?.[0];
+  if (!language) throw new Error(`Unsupported language key: ${metadata.language}`);
+  const oldTopicId = metadata.topic_id === 'covalent-redius' ? 'covalent-radius' : metadata.topic_id;
+  const topicEntry = topics.find((entry) => entry['topic-id'] === oldTopicId) || topics.find((entry) => Object.entries(entry).some(([key, value]) => languages[key] && value?.title && (value.title === metadata.topic || value.title === metadata.title)));
+  const topicId = topicEntry?.['topic-id'] || oldTopicId || null;
   if (manifest.bucket !== 'capture-images' || !Array.isArray(manifest.images)) throw new Error('Invalid image manifest');
   if (!/^https:\/\/chatgpt\.com\/(?:g\/[a-zA-Z0-9_/-]+\/)?c\/[a-f0-9-]{36}$/.test(metadata.source?.url || '')) {
     throw new Error('Capture must have a saved ChatGPT /c/ conversation URL');
@@ -121,9 +121,9 @@ export async function prepareConversation(output, userId, supabaseUrl) {
     turns,
     title: metadata.title,
     topic: metadata.topic,
-    language: metadata.language,
+    language,
     topic_id: topicId,
-    topic_name: metadata.topic,
+    topic_name: topicEntry?.['topic-name'] || metadata.topic,
     provider: metadata.provider || metadata.chatbot_name || 'ChatGPT',
     access_type: metadata.access_type || 'chatbot',
   };
@@ -132,7 +132,7 @@ export async function prepareConversation(output, userId, supabaseUrl) {
   return { capture, images };
 }
 
-export async function uploadConversation(output, accessToken) {
+export async function uploadConversation(output, accessToken, englishFile) {
   await loadLocalEnvironment();
   const { supabaseUrl, publicKey } = await portalPublicConfig();
   if (!/^https:\/\/[^/]+$/.test(supabaseUrl) && !/^http:\/\/localhost(?::\d+)?$/.test(supabaseUrl) && !/^http:\/\/127\.0\.0\.1(?::\d+)?$/.test(supabaseUrl)) throw new Error('SUPABASE_URL must be an HTTPS origin');
@@ -156,6 +156,27 @@ export async function uploadConversation(output, accessToken) {
     throw new Error('A portal admin or annotator profile is required');
   }
   const { capture, images } = await prepareConversation(output, user.id, supabaseUrl);
+  let translated = null;
+  if (englishFile) {
+    if (/^(en|english)$/i.test(capture.language)) throw new Error('The capture is already in English');
+    if (englishFile === true) {
+      const target = path.join(path.dirname(output), `${path.parse(output).name}.english.json`);
+      const sourceSha256 = translationSourceHash(capture);
+      try {
+        translated = JSON.parse(await readFile(target, 'utf8'));
+        if (translated.source_sha256 !== sourceSha256) throw new Error(`Existing English translation does not match this capture: ${target}`);
+      } catch (error) {
+        if (error.code !== 'ENOENT') throw error;
+        translated = { ...(await translateCaptureToEnglish(capture, { withAnchors: true })), source_sha256: sourceSha256 };
+        await writeFile(target, `${JSON.stringify(translated, null, 2)}\n`, { encoding: 'utf8', flag: 'wx' });
+      }
+    } else translated = JSON.parse(await readFile(englishFile, 'utf8'));
+    const turns = translated.turns;
+    if (!translated.title?.trim() || !translated.topic?.trim() || !Array.isArray(turns) || turns.length !== capture.turns.length ||
+        turns.some((turn, index) => turn.turn_id !== capture.turns[index].turn_id || turn.speaker !== capture.turns[index].speaker || !turn.text?.trim())) {
+      throw new Error('English translation must provide a title, topic, and nonempty text for every original turn in order');
+    }
+  }
   for (const image of images) {
     const objectUrl = `${supabaseUrl}/storage/v1/object/capture-images/${image.storagePath}`;
     const response = await fetch(objectUrl, { method: 'POST', headers: { ...headers, 'Content-Type': image.mime }, body: image.bytes, signal: AbortSignal.timeout(30000) });
@@ -174,12 +195,22 @@ export async function uploadConversation(output, accessToken) {
     method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' }, body: JSON.stringify({ p_capture: capture }),
   });
   if (!/^[a-f0-9-]{36}$/i.test(receipt.conversation_id || '')) throw new Error('Supabase did not confirm the conversation import');
-  const result = { ...receipt, uploadedImages: images.length };
+  let english = null;
+  if (translated) {
+    english = await request(`${supabaseUrl}/rest/v1/rpc/import_capture_english_translation`, {
+      method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_source_id: receipt.conversation_id, p_title: translated.title, p_topic: translated.topic,
+        p_turns: translated.turns.map(({ turn_id, speaker, text }) => ({ turn_id, speaker, text })), p_alignment: translated.alignment || [] }),
+    });
+    if (!/^[a-f0-9-]{36}$/i.test(english?.conversation_id || '') || english.source_conversation_id !== receipt.conversation_id) throw new Error('Supabase did not confirm the linked English translation');
+  }
+  const result = { ...receipt, uploadedImages: images.length, ...(english ? { english } : {}) };
   const uploadRecord = {
     conversation_id: receipt.conversation_id,
     uploaded_at: new Date().toISOString(),
     snapshot_sha256: receipt.snapshot_sha256,
     uploaded_images: images.length,
+    ...(english ? { english_conversation_id: english.conversation_id } : {}),
   };
   await writeFile(path.join(path.dirname(output), `${path.parse(output).name}.upload.json`), `${JSON.stringify(uploadRecord, null, 2)}\n`, 'utf8');
   return result;

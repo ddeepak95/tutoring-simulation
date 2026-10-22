@@ -7,7 +7,8 @@ const questions = JSON.parse(fs.readFileSync('src/generated/comparison-questions
 async function comparisonBackend(page: Page) {
   const state = await backend(page);
   const docB = '00000000-0000-4000-8000-000000000020';
-  state.documents.push({ ...structuredClone(state.documents[0]), id: docB, label: 'Alternative tutor', transcript: { ...structuredClone(sample), messages: [
+  state.documents[0].topic_id = 'evaporation';
+  state.documents.push({ ...structuredClone(state.documents[0]), id: docB, label: 'Alternative tutor', language: 'en', source_conversation_id: ids.doc, transcript: { ...structuredClone(sample), source_conversation_id: ids.doc, messages: [
     { turn_id: 'b1', speaker: 'tutor', text: 'Alternative first response.\n\n' + Array.from({ length: 60 }, (_, i) => `Explanation paragraph ${i + 1}.`).join('\n\n') },
     { turn_id: 'bs1', speaker: 'student', text: 'Alternative student reply.' },
     { turn_id: 'b2', speaker: 'tutor', text: 'Alternative second response.' },
@@ -48,7 +49,7 @@ async function comparisonBackend(page: Page) {
     return route.fallback();
   });
   function seed() { assignments.push({ id: '00000000-0000-4000-8000-000000000030', conversation_a_id: ids.doc, conversation_b_id: docB, annotator_id: ids.alice, questions, answers: [], status: 'not_started', revision: 0, submitted_at: null, updated_at: new Date().toISOString() }); }
-  return { assignments, comparisonState, docB, seed };
+  return { documents: state.documents, captureDocuments: state.captureDocuments, assignments, comparisonState, docB, seed };
 }
 
 test('dashboard lists label, rate, and comparison assignments in separate sections', async ({ page }) => {
@@ -86,12 +87,75 @@ test('admin selects conversations and assigns a comparison', async ({ page }) =>
   await page.getByLabel('Annotator', { exact: true }).selectOption(ids.alice);
   await page.getByRole('button', { name: 'Assign comparison', exact: true }).click();
   await expect(page.getByText('Comparison assigned.', { exact: false })).toBeVisible();
+  const assignedRow = page.locator('.comparisons-page .assignment-list li').first();
+  await expect(assignedRow.getByRole('heading', { name: 'Evaporation' })).toBeVisible();
+  await expect(assignedRow.getByText('Tamil · Original')).toBeVisible();
+  await expect(assignedRow.getByText('English · Translated from Tamil')).toBeVisible();
+  await expect(assignedRow.getByText('Topic ID: evaporation')).toBeVisible();
+  await expect(assignedRow.getByText('Annotator: alice')).toBeVisible();
+  await expect(assignedRow.getByText('0/2 turns compared')).toBeVisible();
   expect(state.assignments[0].annotator_id).toBe(ids.alice);
   expect(state.assignments[0].questions).toHaveLength(8);
   expect(state.assignments[0].questions.filter(question => question.scope === 'overall')).toHaveLength(2);
   await page.locator('.comparisons-page').getByRole('link', { name: /Open$/ }).click();
   await expect(page.getByRole('button', { name: 'Choose conversation A', exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Tie / equally good', exact: true })).toBeDisabled();
+});
+
+test('comparison picker shows language and source type and limits choices to the selected topic', async ({ page }) => {
+  const state = await comparisonBackend(page);
+  const otherId = '00000000-0000-4000-8000-000000000021';
+  state.documents.push({ ...structuredClone(state.documents[0]), id: otherId, topic_id: 'brain', label: 'Brain conversation', transcript: { ...structuredClone(sample), topic_id: 'brain', topic_name: 'Working of the brain' } });
+  await login(page, 'admin');
+  await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
+  const first = page.getByLabel('Conversation A', { exact: true });
+  const second = page.getByLabel('Conversation B', { exact: true });
+  await expect(first.locator(`option[value="${ids.doc}"]`)).toHaveText('Evaporation — Tamil — Original');
+  await expect(first.locator(`option[value="${state.docB}"]`)).toHaveText('Evaporation — English — Translated from Tamil');
+  await first.selectOption(ids.doc);
+  await expect(second.locator(`option[value="${otherId}"]`)).toHaveCount(0);
+  await expect(second.locator(`option[value="${state.docB}"]`)).toHaveCount(1);
+  await second.selectOption(state.docB);
+  await page.getByLabel('Annotator', { exact: true }).selectOption(ids.alice);
+  await expect(page.getByRole('button', { name: 'Assign comparison', exact: true })).toBeEnabled();
+});
+
+test('translated comparison shows English inside the original captured layout for the current round', async ({ page }) => {
+  const state = await comparisonBackend(page); state.seed();
+  const source = '\u0ba4\u0bae\u0bbf\u0bb4\u0bcd';
+  const english = 'Hello in English';
+  const original = state.documents[0] as any;
+  const translated = state.documents.find(document => document.id === state.docB)! as any;
+  original.transcript = { ...original.transcript, conversation_id: ids.doc, archive_source: { version: 'test' }, messages: [
+    { turn_id: 's0', speaker: 'student', text: 'Initial You prompt' },
+    { turn_id: 't1', speaker: 'tutor', text: source },
+    { turn_id: 's1', speaker: 'student', text: 'Student question' },
+    { turn_id: 't2', speaker: 'tutor', text: 'Second captured turn' },
+  ] };
+  translated.transcript = { ...translated.transcript, conversation_id: state.docB, source_conversation_id: ids.doc, messages: [
+    { turn_id: 's0', speaker: 'student', text: 'Initial You prompt' },
+    { turn_id: 't1', speaker: 'tutor', text: english },
+    { turn_id: 's1', speaker: 'student', text: 'Student question' },
+    { turn_id: 't2', speaker: 'tutor', text: 'Second captured turn' },
+  ], translation: { version: 'capture-english/1', sha256: 'test', source_messages: original.transcript.messages, alignment: [
+    { segment_id: 't1:s0001', turn_id: 't1', kind: 'heading', source_start: 0, source_end: source.length, start: 0, end: english.length },
+  ] } };
+  const html = `<!doctype html><html><head><meta charset="utf-8"><style>.capture-message{border:2px solid purple;padding:8px}</style></head><body><article class="capture-message" data-turn-id="s0"><strong>You</strong><p>Initial You prompt</p></article><article class="capture-message" data-turn-id="t1"><strong>Bot</strong><h2>${source}</h2><img alt="Captured diagram" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></article><article class="capture-message" data-turn-id="s1"><p>Student question</p></article><article class="capture-message" data-turn-id="t2"><p>Second captured turn</p></article></body></html>`;
+  state.captureDocuments.push({ conversation_id: ids.doc, html }, { conversation_id: state.docB, html });
+  await login(page, 'alice');
+  await page.getByRole('region', { name: 'Compare' }).getByRole('link', { name: /Open$/ }).click();
+  const originalFrame = page.frameLocator('.comparison-transcript iframe').nth(0);
+  const translatedFrame = page.frameLocator('.comparison-transcript iframe').nth(1);
+  await expect(originalFrame.locator('h2')).toHaveText(source);
+  await expect(originalFrame.getByText('Initial You prompt')).toBeVisible();
+  await expect(translatedFrame.locator('h2')).toHaveText(english);
+  await expect(translatedFrame.getByText('Initial You prompt')).toBeVisible();
+  await expect(translatedFrame.locator('[data-turn-id="t1"]')).toHaveCSS('border-top-color', 'rgb(128, 0, 128)');
+  await expect(translatedFrame.getByAltText('Captured diagram')).toBeVisible();
+  await expect(translatedFrame.locator('[data-turn-id="t2"]')).toBeHidden();
+  await translatedFrame.locator('h2').click();
+  await expect(page.locator('.comparison-transcript').nth(1).locator('.comparison-selection-feedback')).toBeVisible();
+  await expect(page.getByText('Question 2 of 5', { exact: false })).toBeVisible();
 });
 
 test('questions advance through card choices, recover drafts, and unlock turns only after saving', async ({ page }) => {
@@ -133,14 +197,14 @@ test('questions advance through card choices, recover drafts, and unlock turns o
   await expect(review).toBeFocused();
   await expect(review).toBeInViewport();
   await expect(save).toBeEnabled();
-  const changeLoad = page.getByRole('button', { name: 'Change answer for Focus and Amount of Information', exact: true });
+  const changeLoad = page.getByRole('button', { name: 'Change answer for Opportunity to Demonstrate Understanding', exact: true });
   await changeLoad.click(); await expect(cardB).toHaveAttribute('aria-pressed', 'true');
   for (let question = 4; question <= 5; question++) await page.getByRole('button', { name: 'Tie / equally good', exact: true }).click();
   state.comparisonState.failSave = true; await save.click(); await expect(page.getByRole('alert')).toContainText('Network unavailable');
   await expect(page.locator('.comparison-round')).toHaveCount(1);
   state.comparisonState.failSave = false; await save.click();
   await expect(page.locator('.comparison-round')).toHaveCount(2);
-  await expect(page.getByText('Student response', { exact: true })).toHaveCount(2);
+  await expect(page.getByText('You', { exact: true })).toHaveCount(2);
   await expect(page.getByText('Alternative student reply.', { exact: true })).toBeVisible();
   const turn2 = page.locator('.comparison-round').nth(1); await expect(turn2.locator('.comparison-question')).toHaveCount(1);
   await expect(turn2.getByText('Question 1 of 6', { exact: false })).toBeVisible();

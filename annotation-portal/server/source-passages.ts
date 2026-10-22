@@ -9,10 +9,16 @@ import {htmlStructuralRanges} from './html-structure.ts';
 export interface SourcePassage {source_id:string;kind:'heading'|'table_header'|'passage';turn_id:string;quote:string;occurrence:number;start:number;end:number}
 export function sourcePassages(conversation:Conversation,htmlByTurn:Record<string,string>={}):SourcePassage[]{
  return conversation.messages.filter(t=>t.speaker==='tutor').flatMap(turn=>{
+  const aligned=conversation.translation?.alignment?.filter(item=>item.turn_id===turn.turn_id);
+  if(aligned?.length)return aligned.map((item,i)=>{
+   const quote=turn.text.slice(item.start,item.end);let occurrence=0,at=-1;do{at=turn.text.indexOf(quote,at+1);occurrence++;}while(at<item.start);
+   return {source_id:`${turn.turn_id}:source_${i+1}`,kind:(['heading','table_header'].includes(item.kind)?item.kind:'passage') as SourcePassage['kind'],turn_id:turn.turn_id,quote,occurrence,start:item.start,end:item.end};
+  });
   const ranges=new Map<string,{start:number;end:number;kind:SourcePassage['kind']}>();
   const add=(start:number|undefined,end:number|undefined,kind:SourcePassage['kind'])=>{if(start!==undefined&&end!==undefined&&end>start&&!ranges.has(`${start}:${end}`))ranges.set(`${start}:${end}`,{start,end,kind});};
-  headingRanges(turn.text,htmlByTurn[turn.turn_id]||'').forEach(h=>add(h.start,h.end,'heading'));
-  htmlStructuralRanges(htmlByTurn[turn.turn_id]||'',turn.text).forEach(r=>{if(r.kind!=='heading'||!isCaptureMetadataHeading(turn.text.slice(r.start,r.end)))add(r.start,r.end,r.kind);});
+  const html=conversation.translation?'':htmlByTurn[turn.turn_id]||'';
+  headingRanges(turn.text,html).forEach(h=>add(h.start,h.end,'heading'));
+  htmlStructuralRanges(html,turn.text).forEach(r=>{if(r.kind!=='heading'||!isCaptureMetadataHeading(turn.text.slice(r.start,r.end)))add(r.start,r.end,r.kind);});
   const root=unified().use(remarkParse).use(remarkGfm).parse(turn.text) as Root;
   function visit(node:Root|RootContent){
    if(node.type==='table')node.children.forEach((row,i)=>add(row.position?.start.offset,row.position?.end.offset,i===0?'table_header':'passage'));

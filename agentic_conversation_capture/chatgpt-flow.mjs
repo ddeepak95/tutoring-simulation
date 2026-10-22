@@ -8,6 +8,7 @@ import { auditInteractions, captureInteractions } from './capture-interactions.m
 import { init as initAgentCapture, readSession as readAgentCapture, questionNavigation } from './agent-capture.mjs';
 import { addStaticQuizFallback } from './static-quiz-fallback.mjs';
 import { portalPublicConfig, uploadConversation } from './upload-supabase.mjs';
+import { translateCaptureToEnglish, translationSourceHash } from './translate-english.mjs';
 
 const host = 'http://127.0.0.1:9222';
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -124,6 +125,7 @@ async function writeState(state) {
 
 async function readTopics() {
   const topics = JSON.parse(await readFile(topicsPath, 'utf8'));
+  const supportedLanguages = JSON.parse(await readFile(path.join(import.meta.dirname, 'languages.json'), 'utf8'));
   if (!Array.isArray(topics)) throw new Error('topics.json must contain an array');
   const ids = new Set();
   for (const topic of topics) {
@@ -133,10 +135,11 @@ async function readTopics() {
     }
     if (ids.has(id)) throw new Error(`Duplicate topic-id: ${id}`);
     ids.add(id);
-    const languages = Object.entries(topic).filter(([key, value]) => key !== 'topic-id' && value && typeof value === 'object' && !Array.isArray(value));
+    if (typeof topic['topic-name'] !== 'string' || !topic['topic-name'].trim()) throw new Error(`Topic ${id} needs a generic topic-name`);
+    const languages = Object.entries(topic).filter(([key]) => key !== 'topic-id' && key !== 'topic-name');
     if (!languages.length) throw new Error(`Topic ${id} needs at least one language configuration`);
     for (const [language, configuration] of languages) {
-      if (!/^[A-Za-z][A-Za-z0-9_-]*$/.test(language) || typeof configuration.title !== 'string' || !configuration.title.trim()) {
+      if (!supportedLanguages[language] || !configuration || typeof configuration !== 'object' || Array.isArray(configuration) || typeof configuration.title !== 'string' || !configuration.title.trim()) {
         throw new Error(`Topic ${id} needs a title for language ${language}`);
       }
       if (!Array.isArray(configuration.prompts) || configuration.prompts.length === 0 || configuration.prompts.some((prompt) => typeof prompt !== 'string' || !prompt.trim())) {
@@ -960,8 +963,8 @@ async function portalBrowserToken() {
 }
 
 async function main() {
-  if (!['start', 'ask', 'followup', 'save', 'agent-save', 'status', 'topics', 'run', 'pipeline', 'review', 'screenshots', 'upload'].includes(action)) {
-    throw new Error('Usage: node chatgpt-flow.mjs topics | run [topic-id] [--lang en] [--agent-review] [--screenshots] [--upload] [--scripted-capture] | pipeline [topic-id] [--lang en] [--agent-review] [--screenshots] [--no-review] [--scripted-capture] | agent-save existing.html [output.html] [--resume-agent] | upload [file.html] [--browser-auth] | review [file.html] [--screenshots] | screenshots [file.html] | start | ask "question" [--out file.html] [--scripted-capture] | followup "question" [--out file.html] [--scripted-capture] | save [file.html] [--scripted-capture] | status');
+  if (!['start', 'ask', 'followup', 'save', 'agent-save', 'status', 'topics', 'run', 'pipeline', 'review', 'screenshots', 'upload', 'english-template', 'translate'].includes(action)) {
+    throw new Error('Usage: node chatgpt-flow.mjs topics | run [topic-id] [--lang en] [--agent-review] [--screenshots] [--upload] [--scripted-capture] | pipeline [topic-id] [--lang en] [--agent-review] [--screenshots] [--no-review] [--scripted-capture] | agent-save existing.html [output.html] [--resume-agent] | translate [file.html] | english-template [file.html] | upload [file.html] [--browser-auth] [--translate-english [translated.json]] | review [file.html] [--screenshots] | screenshots [file.html] | start | ask "question" [--out file.html] [--scripted-capture] | followup "question" [--out file.html] [--scripted-capture] | save [file.html] [--scripted-capture] | status');
   }
   if (action === 'topics') {
     console.log(JSON.stringify((await readTopics()).map((topic) => ({ id: topic['topic-id'], languages: Object.fromEntries(Object.keys(topic).filter((key) => key !== 'topic-id').map((language) => [language, topicName(topic, language)])) })), null, 2));
@@ -1004,9 +1007,32 @@ async function main() {
   }
   if (action === 'upload') {
     const state = await readState();
-    const output = path.resolve(argumentsAfterAction.find((argument) => argument !== '--browser-auth') || state.output || defaultOutput);
+    const englishIndex = argumentsAfterAction.indexOf('--translate-english');
+    const englishArgument = englishIndex >= 0 && argumentsAfterAction[englishIndex + 1]?.toLowerCase().endsWith('.json') ? argumentsAfterAction[englishIndex + 1] : null;
+    const output = path.resolve(argumentsAfterAction.find((argument, index) => argument !== '--browser-auth' && index !== englishIndex && !(englishArgument && index === englishIndex + 1)) || state.output || defaultOutput);
     const token = argumentsAfterAction.includes('--browser-auth') ? await portalBrowserToken() : undefined;
-    console.log(JSON.stringify(await uploadConversation(output, token), null, 2));
+    console.log(JSON.stringify(await uploadConversation(output, token, englishIndex >= 0 ? englishArgument ? path.resolve(englishArgument) : true : undefined), null, 2));
+    return;
+  }
+  if (action === 'english-template') {
+    const output = path.resolve(argumentsAfterAction[0] || (await readState()).output || defaultOutput);
+    const metadata = JSON.parse(await readFile(path.join(path.dirname(output), `${path.parse(output).name}.capture.json`), 'utf8'));
+    if (!Array.isArray(metadata.turns) || !metadata.turns.length) throw new Error('Capture has no prepared turns');
+    const destination = path.join(path.dirname(output), `${path.parse(output).name}.english-template.json`);
+    await writeFile(destination, `${JSON.stringify({ title: metadata.title, topic: metadata.topic, turns: metadata.turns.map(({ turn_id, speaker, text }) => ({ turn_id, speaker, text })) }, null, 2)}\n`, 'utf8');
+    console.log(destination);
+    return;
+  }
+  if (action === 'translate') {
+    const output = path.resolve(argumentsAfterAction[0] || (await readState()).output || defaultOutput);
+    const metadata = JSON.parse(await readFile(path.join(path.dirname(output), `${path.parse(output).name}.capture.json`), 'utf8'));
+    if (!Array.isArray(metadata.turns) || !metadata.turns.length || /^(en|english)$/i.test(metadata.language)) throw new Error('Translate requires a non-English capture with prepared turns');
+    const destination = path.join(path.dirname(output), `${path.parse(output).name}.english.json`);
+    try { await access(destination); throw new Error(`English translation already exists: ${destination}`); }
+    catch (error) { if (error.code !== 'ENOENT') throw error; }
+    const translated = { ...(await translateCaptureToEnglish(metadata, { withAnchors: true })), source_sha256: translationSourceHash(metadata) };
+    await writeFile(destination, `${JSON.stringify(translated, null, 2)}\n`, { encoding: 'utf8', flag: 'wx' });
+    console.log(destination);
     return;
   }
   if (action === 'agent-save') {

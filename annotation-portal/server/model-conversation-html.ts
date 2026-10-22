@@ -118,11 +118,35 @@ export function modelConversationHtml(conversation:Conversation,captureHtml:Reco
   const turnVisuals=visualRefs.get(turn.turn_id)||[];const visualByIndex=new Map<number,string>();
   turnVisuals.forEach((id,index)=>{const match=id.match(/image-(\d+)$/);visualByIndex.set(match?Number(match[1])-1:index,id);});
   const usedVisualIds=new Set<string>();
-  const body=captureHtml[turn.turn_id]?compactSourceHtml(captureHtml[turn.turn_id],turn.turn_id,turn.text,segments,counter,visualByIndex,usedVisualIds,visualCaptions):markdownHtml(turn.text,turn.turn_id,turn.text,segments,counter,visualByIndex,usedVisualIds,visualCaptions);
+  const aligned=conversation.translation?.alignment?.filter(item=>item.turn_id===turn.turn_id);
+  const body=aligned?.length?alignedTranslationHtml(turn.turn_id,turn.text,aligned,segments):!conversation.translation&&captureHtml[turn.turn_id]?compactSourceHtml(captureHtml[turn.turn_id],turn.turn_id,turn.text,segments,counter,visualByIndex,usedVisualIds,visualCaptions):markdownHtml(turn.text,turn.turn_id,turn.text,segments,counter,visualByIndex,usedVisualIds,visualCaptions);
   const refs=turnVisuals.filter(id=>!usedVisualIds.has(id)).map(id=>{visualCaptions[id]='Image';return `<figure data-visual-id="${esc(id)}"><figcaption><span>${esc(id)}</span>: Image</figcaption></figure>`;}).join('');
   return `<turn id="${esc(turn.turn_id)}" speaker="${esc(turn.speaker)}">${body}${refs}</turn>`;
  }).join('');
  return {html:`<conversation>${turns}</conversation>`,segments,visualCaptions};
+}
+function alignedTranslationHtml(turnId:string,body:string,alignment:NonNullable<NonNullable<Conversation['translation']>['alignment']>,segments:EvidenceSegment[]){
+ const valid=alignment.filter(item=>item.segment_id.startsWith(`${turnId}:s`)&&Number.isInteger(item.start)&&Number.isInteger(item.end)&&item.start>=0&&item.end>item.start&&item.end<=body.length)
+  .sort((a,b)=>a.start-b.start||b.end-a.end);
+ const blocks:string[]=[];let cursor=0,englishId=0;
+ const gap=(start:number,end:number)=>{
+  const quote=body.slice(start,end);if(!quote.trim())return `<p>${esc(quote)}</p>`;
+  const id=`${turnId}:e${String(++englishId).padStart(4,'0')}`;
+  segments.push({segment_id:id,turn_id:turnId,start,end,block_start:start,block_end:end,quote,source_text:quote,kind:'paragraph',source_path:null});
+  return `<p data-evidence-ids="${esc(id)}">${esc(quote)}</p>`;
+ };
+ for(const item of valid){
+  if(item.start<cursor)continue;
+  if(item.start>cursor)blocks.push(gap(cursor,item.start));
+  const quote=body.slice(item.start,item.end);
+  const same=valid.filter(other=>other.start===item.start&&other.end===item.end);
+  for(const matched of same)segments.push({segment_id:matched.segment_id,turn_id:turnId,start:item.start,end:item.end,block_start:item.start,block_end:item.end,quote,source_text:quote,kind:matched.kind,source_path:null});
+  const tag=item.kind==='heading'?'h2':item.kind==='list_item'?'li':item.kind==='code'?'pre':item.kind==='blockquote'?'blockquote':'p';
+  blocks.push(`<${tag} data-evidence-ids="${esc(same.map(matched=>matched.segment_id).join(' '))}">${esc(quote)}</${tag}>`);
+  cursor=item.end;
+ }
+ if(cursor<body.length)blocks.push(gap(cursor,body.length));
+ return blocks.join('');
 }
 export function expandRepeatedQuestionOccurrences(value:any,segments:EvidenceSegment[],conversation:Conversation){
  if(!value||typeof value!=='object'||!Array.isArray(value.annotations))return value;

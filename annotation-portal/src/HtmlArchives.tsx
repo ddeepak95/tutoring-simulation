@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { download, fetchAllRows, supabase } from './lib';
 import { PrepareArchive } from './PrepareArchive';
+import { languageName } from './languages';
 
 type Archive = { id: string; title: string; topic: string; language: string; captured_at: string; source_url: string };
 
@@ -67,7 +68,7 @@ export function HtmlArchives({ onPrepared = async () => {} }: { onPrepared?: () 
     {notice && <p role="status">{notice}</p>}
     {error && <p className="error" role="alert">{error}</p>}
     {archives.length ? <div className="table-wrap"><table className="conversation-table"><thead><tr><th>Title / topic</th><th>Language</th><th>Captured</th><th>Actions</th></tr></thead><tbody>{archives.map(archive => <tr key={archive.id}>
-      <td><strong>{archive.title}</strong><p>{archive.topic}</p></td><td>{archive.language}</td><td>{new Date(archive.captured_at).toLocaleString()}</td>
+      <td><strong>{archive.title}</strong><p>{archive.topic}</p></td><td>{languageName(archive.language)}</td><td>{new Date(archive.captured_at).toLocaleString()}</td>
       <td><a href={archive.source_url} target="_blank" rel="noopener noreferrer">Source</a>{' '}<button className="primary" disabled={Boolean(busy)} onClick={() => setPreparing(archive.id)}>Prepare for annotation</button>{' '}<button className="secondary" disabled={Boolean(busy)} onClick={() => void openArchive(archive.id)}>Open viewer</button>{' '}<button className="secondary" disabled={Boolean(busy)} onClick={() => void exportArchive(archive.id)}>{busy === archive.id ? 'Loading…' : 'Download archive'}</button>{' '}<button className="delete-confirm" disabled={Boolean(busy)} onClick={() => { setDeleteError(''); setDeleting(archive); }}>Delete archive</button></td>
     </tr>)}</tbody></table></div> : <p>No HTML archives saved yet.</p>}
     <dialog ref={deleteDialog} className="delete-dialog" aria-labelledby="delete-archive-title" onCancel={event => { if (deletionPending.current) event.preventDefault(); else setDeleting(null); }}>

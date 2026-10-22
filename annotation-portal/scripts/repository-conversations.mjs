@@ -8,7 +8,7 @@ export function prepareRepositoryConversation(entry, bytes, adminId) {
   const normalized = C.normalizeConversation({ ...input, learning_topic: entry.topic }, entry.label);
   if (!normalized.conversation_id || normalized.conversation_id !== entry.source_conversation_id || normalized.messages.length !== entry.turn_count) throw new Error('Source conversation ID or turn count no longer matches the catalog.');
   const transcript = { ...normalized, label: entry.label,
-    topic_english_name: input.topic_english_name || input.metadata?.topic_english_name || entry.topic_english_name || (entry.language === 'English' ? entry.topic : null),
+    topic_english_name: input.topic_english_name || input.metadata?.topic_english_name || entry.topic_english_name || (entry.language === 'en' ? entry.topic : null),
     source_conversation_id: input.source_conversation_id || null,
     original_language: entry.original_language || input.translation?.original_language || (entry.version === 'Original' ? entry.language : null),
     repository_source: { run_id: entry.run_id, relative_path: entry.source_relative_path, original_conversation_id: normalized.conversation_id, file_sha256: hash, version: entry.version, language: entry.language, topic_id: entry.topic_id }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { bundledRubric, C, download, fetchAssignments, fetchAllRows, supabase } from './lib';
 import type { Assignment, AssignmentType, DocumentRow, Profile, RubricSnapshot } from './types';
 import { AssignmentMenu } from './AssignmentMenu';
@@ -8,6 +9,7 @@ import { DeleteConversation } from './DeleteConversation';
 import { captureAssetsForExport } from './CapturedTranscript';
 import { identifyUploadedConversation } from './conversation-identity';
 import { ratingQuestionMetadata } from './turn-ratings';
+import { languageId, languageName } from './languages';
 import { compareWithBaseline } from './baseline-comparison';
 import type { LLMBaseline } from './types';
 
@@ -17,14 +19,15 @@ const statusText = (status: string) => ({ not_started: 'Not started', in_progres
 export function Admin() {
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
   const [error, setError] = useState(''); const [notice, setNotice] = useState(''); const [busy, setBusy] = useState(false); const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState<string[]>([]); const [language, setLanguage] = useState('English');
+  const [selected, setSelected] = useState<string[]>([]); const [language, setLanguage] = useState('en');
   const [uploadOpen, setUploadOpen] = useState(false);
   const [deleteDocument, setDeleteDocument] = useState<DocumentRow | null>(null);
   const [menu, setMenu] = useState<{ ids: string[]; anchor: HTMLButtonElement } | null>(null);
+  const [assignmentPopup, setAssignmentPopup] = useState<{ key: string; task: AssignmentType; assignments: Assignment[]; left: number; top: number } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null); const uploadDialog = useRef<HTMLDialogElement>(null);
   async function refresh() {
     try {
-      const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversations').select('*').order('created_at', { ascending: false }), supabase!.from('profiles').select('*').order('username')]);
+      const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*').order('created_at', { ascending: false }), supabase!.from('profiles').select('*').order('username')]);
       if (docs.error) throw docs.error; if (people.error) throw people.error;
       setRows(assignments); setDocuments(docs.data as DocumentRow[]); setUsers(people.data as Profile[]);
     } catch (err) { setError(message(err)); } finally { setLoading(false); }
@@ -40,9 +43,11 @@ export function Admin() {
         const text = await file.text(); const parsed = file.name.endsWith('.json') ? JSON.parse(text) : null; const input = parsed?.conversation || parsed;
         const source = input ? C.normalizeConversation(input, file.name) : C.parseTranscript(text, file.name);
         if (input?.source_conversation_id) source.source_conversation_id = input.source_conversation_id;
-        source.original_language = input?.original_language || input?.translation?.original_language || (!input?.source_conversation_id ? input?.configuration?.language || input?.metadata?.native_language || language : null);
-        const transcriptLanguage = input?.configuration?.language || input?.metadata?.native_language || language;
-        source.topic_english_name = input?.topic_english_name || input?.metadata?.topic_english_name || (transcriptLanguage === 'English' ? source.learning_topic : null);
+        const originalLanguageInput = input?.original_language || input?.translation?.original_language || (!input?.source_conversation_id ? input?.configuration?.language || input?.metadata?.native_language || input?.language || language : null);
+        source.original_language = originalLanguageInput ? languageId(originalLanguageInput) : null;
+        const transcriptLanguage = languageId(input?.configuration?.language || input?.metadata?.native_language || input?.language || language);
+        source.topic_id = input?.topic_id || input?.configuration?.topic_id || source.topic_id || null;
+        source.topic_english_name = input?.topic_english_name || input?.metadata?.topic_english_name || (transcriptLanguage === 'en' ? source.learning_topic : null);
         const { id, transcript } = identifyUploadedConversation(source);
         const path = `${id}/${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
         const { error: storageError } = await supabase!.storage.from('transcripts').upload(path, file); if (storageError) throw storageError;
@@ -97,10 +102,17 @@ export function Admin() {
     } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
   function originalLanguage(doc: DocumentRow) {
-    if (doc.transcript.original_language) return doc.transcript.original_language;
+    if (doc.transcript.original_language) return languageName(doc.transcript.original_language);
     const original = documents.find(source => source.transcript.conversation_id === doc.transcript.source_conversation_id);
-    if (original) return original.language;
-    return doc.transcript.source_conversation_id || doc.transcript.repository_source?.version.includes('translation') ? 'Unknown' : doc.language;
+    if (original) return languageName(original.language);
+    return doc.transcript.source_conversation_id || doc.transcript.repository_source?.version.includes('translation') ? 'Unknown' : languageName(doc.language);
+  }
+  function showAssignmentPopup(anchor: HTMLButtonElement, key: string, task: AssignmentType, assignments: Assignment[]) {
+    const rect = anchor.getBoundingClientRect();
+    const height = Math.min(240, 64 + assignments.length * 32);
+    const left = Math.max(8, Math.min(rect.left, window.innerWidth - 268));
+    const top = rect.bottom + height + 8 <= window.innerHeight ? rect.bottom + 8 : Math.max(8, rect.top - height - 8);
+    setAssignmentPopup({ key, task, assignments, left, top });
   }
   const visible = rows;
   const menuDocuments = menu ? documents.filter(doc => menu.ids.includes(doc.id)) : [];
@@ -112,30 +124,34 @@ export function Admin() {
       <div className="conversation-toolbar"><span>{documents.length} conversation{documents.length === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div>
       <div className="table-wrap"><table className="conversation-table"><thead><tr>
         <th className="select-column"><input type="checkbox" aria-label="Select all conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} /></th>
-        <th>Topic</th><th>Topic ID</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>ID</th><th>Assigned to</th><th aria-label="Actions"></th>
+        <th>Conversation</th><th>Topic ID</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>Label</th><th>Rate</th><th aria-label="Actions"></th>
       </tr></thead><tbody>{documents.map(doc => {
         const assigned = rows.filter(row => row.conversation_id === doc.id);
-        const people = [...new Set(assigned.map(row => row.annotator_id))].map(id => ({ id, username: assigned.find(row => row.annotator_id === id)?.profiles?.username || users.find(user => user.id === id)?.username || 'Annotator', tasks: [...new Set(assigned.filter(row => row.annotator_id === id).map(row => row.task_type))] }));
-        const topic = doc.transcript.topic_name || doc.transcript.learning_topic || doc.label;
-        const englishTopic = doc.transcript.topic_english_name || (doc.language === 'English' ? topic : documents.find(other => other.language === 'English' && doc.transcript.repository_source?.topic_id && other.transcript.repository_source?.topic_id === doc.transcript.repository_source.topic_id)?.transcript.learning_topic);
+        const assignmentsFor = (task: AssignmentType) => [...new Map(assigned.filter(row => row.task_type === task).map(row => [row.annotator_id, row])).values()].sort((a, b) => (a.profiles?.username || users.find(user => user.id === a.annotator_id)?.username || '').localeCompare(b.profiles?.username || users.find(user => user.id === b.annotator_id)?.username || ''));
+        const labelAssignments = assignmentsFor('label');
+        const rateAssignments = assignmentsFor('rate');
+        const topic = doc.conversation_title || doc.transcript.learning_topic || doc.label;
+        const genericTopic = doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || topic;
         return <tr key={doc.id} data-conversation-id={doc.id} className={selected.includes(doc.id) ? 'selected-row' : ''}>
           <td><input type="checkbox" aria-label={`Select ${doc.label}`} checked={selected.includes(doc.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, doc.id] : previous.filter(id => id !== doc.id))} /></td>
-          <td className="topic-cell">{englishTopic && <small className="english-topic" lang="en">{englishTopic}</small>}<Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small></td>
-          <td className="metadata-id-cell"><code>{doc.transcript.topic_id || doc.transcript.repository_source?.topic_id || '—'}</code></td><td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
-          <td>{originalLanguage(doc)}</td><td>{doc.language}</td><td className="id-cell"><code>{doc.transcript.conversation_id || doc.id}</code></td>
-          <td>{people.length ? <div className="assigned-users">{people.map(person => <span className="pill" key={person.id}>{person.username}<small>{person.tasks.map(task => task === 'label' ? 'Label' : 'Rate').join(' · ')}</small></span>)}</div> : <span className="unassigned">Unassigned</span>}</td>
+          <td className="topic-cell"><small className="generic-topic" lang="en">{genericTopic}</small><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
+          <td className="metadata-id-cell"><code>{doc.topic_id || doc.transcript.topic_id || doc.transcript.repository_source?.topic_id || '—'}</code></td><td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
+          <td>{originalLanguage(doc)}</td><td>{languageName(doc.language)}</td>
+          <td><button type="button" className="assignment-count" aria-label={`Label: ${labelAssignments.filter(row => row.status === 'submitted').length} completed of ${labelAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:label` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onBlur={() => setAssignmentPopup(null)}>{labelAssignments.filter(row => row.status === 'submitted').length}/{labelAssignments.length}</button></td>
+          <td><button type="button" className="assignment-count" aria-label={`Rate: ${rateAssignments.filter(row => row.status === 'submitted').length} completed of ${rateAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:rate` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onBlur={() => setAssignmentPopup(null)}>{rateAssignments.filter(row => row.status === 'submitted').length}/{rateAssignments.length}</button></td>
           <td className="row-actions"><button className="conversation-menu-button" aria-label={`Assign users for ${doc.label}`} title="Assign users" aria-haspopup="dialog" aria-expanded={Boolean(menu?.ids.length === 1 && menu.ids[0] === doc.id)} disabled={busy} onClick={event => { const anchor = event.currentTarget; setMenu(previous => previous?.ids.length === 1 && previous.ids[0] === doc.id ? null : { ids: [doc.id], anchor }); }}>⋮</button></td>
         </tr>;
       })}</tbody></table></div>
       {loading ? <p className="empty" role="status">Loading conversations…</p> : !documents.length && <p className="empty">No conversations yet. Upload transcript files to get started.</p>}
     </section>
+    {assignmentPopup && createPortal(<div id="assignment-progress-popup" className="assignment-progress-popup" role="tooltip" style={{ left: assignmentPopup.left, top: assignmentPopup.top }}><strong>{assignmentPopup.task === 'label' ? 'Label' : 'Rate'} · {assignmentPopup.assignments.filter(row => row.status === 'submitted').length}/{assignmentPopup.assignments.length} completed</strong>{assignmentPopup.assignments.length ? <ul>{assignmentPopup.assignments.map(row => <li key={row.annotator_id}><span>{row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Annotator'}</span><small>{statusText(row.status)}</small></li>)}</ul> : <p>No annotators assigned</p>}</div>, document.body)}
     {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
     {deleteDocument && <DeleteConversation document={deleteDocument} onClose={() => setDeleteDocument(null)} onDeleted={async id => { setSelected(previous => previous.filter(value => value !== id)); setDocuments(previous => previous.filter(doc => doc.id !== id)); setRows(previous => previous.filter(row => row.conversation_id !== id)); setNotice('Conversation and associated annotation work deleted.'); await refresh(); }} />}
     <section className="card progress"><div className="progress-heading"><h2>Annotation progress</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? `${row.annotations.length} highlights` : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>
     <dialog ref={uploadDialog} className="upload-dialog" aria-labelledby="upload-title" onCancel={event => { if (busy) event.preventDefault(); else setUploadOpen(false); }} onClose={() => setUploadOpen(false)}>
       <div className="upload-heading"><div><h2 id="upload-title">Upload conversations</h2><p>Add transcript files directly to the conversation table.</p></div><button className="secondary" aria-label="Close upload" disabled={busy} onClick={() => setUploadOpen(false)}>Close</button></div>
       {uploadOpen && error && <p className="error" role="alert">{error}</p>}{uploadOpen && notice && <p className="notice" role="status">{notice}</p>}
-      <section className="card"><h3>Upload files</h3><p>JSON conversations or text files with Tutor: and Student: turns.</p><label>Transcript language<input value={language} onChange={event => setLanguage(event.target.value)} required /></label><input ref={fileRef} type="file" accept=".json,.txt,.md" multiple disabled={busy} aria-label="Choose transcript files" onChange={event => void upload(event.target.files)} /><small>Used when a file has no language metadata. Original files are stored privately.</small></section>
+      <section className="card"><h3>Upload files</h3><p>JSON conversations or text files with Tutor: and Student: turns.</p><label>Transcript language code<input value={language} onChange={event => setLanguage(event.target.value)} required /></label><input ref={fileRef} type="file" accept=".json,.txt,.md" multiple disabled={busy} aria-label="Choose transcript files" onChange={event => void upload(event.target.files)} /><small>Use en or ta. Used when a file has no language metadata. Original files are stored privately.</small></section>
     </dialog>
   </main>;
 }

@@ -61,7 +61,11 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
         if (start < 0) throw new Error('Evidence quotation or occurrence does not exactly match the tutor turn.');
       }
       if(item.feature==='concepts_and_subtopics_covered'){
-        const ranges=headings.get(turn.turn_id)||headingRanges(turn.text,htmlByTurn[turn.turn_id]||'');headings.set(turn.turn_id,ranges);
+        const ranges=headings.get(turn.turn_id)||(
+          conversation.translation?.alignment?.length
+            ? conversation.translation.alignment.filter(item=>item.turn_id===turn.turn_id&&item.kind==='heading').map(item=>({start:item.start,end:item.end}))
+            : headingRanges(turn.text,conversation.translation?'':htmlByTurn[turn.turn_id]||'')
+        );headings.set(turn.turn_id,ranges);
         if(!/[\p{L}\p{N}]/u.test(quote)||!ranges.some(range=>start>=range.start&&start+quote.length<=range.end))throw new Error('Content hierarchy evidence must highlight only an actual heading or standalone bold section title, never its body text.');
       }
       if(item.feature==='representations'&&(item.entry as Record<string,unknown>).representation_type==='Table'){

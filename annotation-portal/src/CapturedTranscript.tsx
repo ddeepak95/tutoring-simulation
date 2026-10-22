@@ -1,12 +1,13 @@
-import { createElement, Fragment, useEffect, useMemo, useState, type ComponentProps, type CSSProperties, type ReactNode } from 'react';
+import { createElement, Fragment, useEffect, useMemo, useRef, useState, type ComponentProps, type CSSProperties, type ReactNode } from 'react';
 import type { Conversation } from './types';
 import { supabase, fetchAllRows } from './lib';
 import { MarkdownTranscript } from './MarkdownTranscript';
 import { sanitizeCapturedHtml } from './capture-document';
+import { translateCapturedLayout } from './translated-capture-layout';
 
 export function useCaptureAssets(conversation: Conversation) {
-  const [state, setState] = useState<{ id: string | null; assets: Record<string, string>; exactHtml?: string; error: string }>({ id: null, assets: {}, error: '' });
-  const id = conversation.archive_source || conversation.chatgpt_source?.extractor_version?.startsWith('agentic-conversation-capture/') ? conversation.conversation_id : null;
+  const [state, setState] = useState<{ id: string | null; assets: Record<string, string>; exactHtml?: string; originalHtml?: string; error: string }>({ id: null, assets: {}, error: '' });
+  const id = conversation.archive_source || conversation.chatgpt_source?.extractor_version?.startsWith('agentic-conversation-capture/') || conversation.translation?.version === 'capture-english/1' ? conversation.conversation_id : null;
   useEffect(() => {
     let active = true;
     if (id) void (async () => {
@@ -20,15 +21,56 @@ export function useCaptureAssets(conversation: Conversation) {
         const { data: exact, error: exactError } = await supabase!.from('conversation_capture_documents').select('html').eq('conversation_id', id).maybeSingle();
         const assets = Object.fromEntries(rows.map(row => [row.turn_id, row.media_html || row.html]));
         const fallback = rows.length ? `<!doctype html><meta charset="utf-8"><style>html,body{margin:0;background:#fff;color:#0d0d0d}body{font-family:system-ui,sans-serif}.capture-conversation{max-width:800px;margin:0 auto;padding:32px 20px 64px}.capture-message{margin:0 0 32px}.capture-speaker{display:block;margin:0 0 10px;color:#555;font:600 14px/1.4 system-ui,sans-serif}</style><main class="capture-conversation">${rows.map(row => { const turn = conversation.messages.find(message => message.turn_id === row.turn_id); const speaker = turn?.speaker === 'tutor' ? 'assistant' : 'user'; const label = speaker === 'assistant' ? 'Bot' : 'You'; return `<article class="capture-message capture-${speaker}" data-turn-id="${row.turn_id}" data-speaker="${speaker}"><strong class="capture-speaker">${label}</strong>${assets[row.turn_id]}</article>`; }).join('')}</main>` : undefined;
-        if (active) setState({ id, exactHtml: exact?.html || fallback, assets, error: exact?.html || fallback ? '' : exactError ? 'The exact captured layout could not be loaded.' : 'The exact captured layout is unavailable. Reload to retry.' });
+        const canTranslateLayout = !conversation.translation || Boolean(conversation.translation.source_messages?.length && conversation.translation.alignment?.length);
+        if (active) setState({ id, exactHtml: canTranslateLayout ? exact?.html || fallback : undefined, originalHtml: conversation.translation ? exact?.html : undefined, assets, error: exact?.html || fallback ? '' : exactError ? 'The exact captured layout could not be loaded.' : 'The exact captured layout is unavailable. Reload to retry.' });
       } catch { if (active) setState({ id, assets: {}, error: 'Could not load captured layouts. Reload to retry.' }); }
     })();
     return () => { active = false; };
   }, [id]);
   return id && state.id === id ? { ...state, loading: false } : { id, assets: {} as Record<string, string>, error: '', loading: Boolean(id) };
 }
+export function CaptureFrame({ html, conversation, visibleTurnIds, selectable = false, onChoose }: { html: string; conversation: Conversation; visibleTurnIds?: string[]; selectable?: boolean; onChoose?: () => void }) {
+  const frame = useRef<HTMLIFrameElement>(null);
+  const choice = useRef({ selectable, onChoose });
+  choice.current = { selectable, onChoose };
+  return <iframe ref={frame} title={conversation.translation ? 'Translated conversation in original captured layout' : 'Exact original conversation'} sandbox="allow-same-origin" srcDoc={html}
+    onLoad={() => {
+      const document = frame.current?.contentDocument;
+      if (!document) return;
+      translateCapturedLayout(document, conversation);
+      if (!visibleTurnIds) return;
+      const visible = new Set(visibleTurnIds);
+      const style = document.createElement('style');
+      style.textContent = '[data-comparison-turn-hidden="true"]{display:none!important}';
+      document.head.appendChild(style);
+      [...document.querySelectorAll<HTMLElement>('article.capture-message,[data-turn-id]')]
+        .filter(article => article.matches('article.capture-message') || article.closest('article.capture-message') === null)
+        .forEach((article, index) => {
+          const turn = conversation.messages.find(item => item.turn_id === article.dataset.turnId) || conversation.messages[index];
+          if (turn) article.dataset.comparisonTurnHidden = String(!visible.has(turn.turn_id));
+        });
+      document.addEventListener('click', event => {
+        const target = event.target as HTMLElement;
+        if (!choice.current.selectable || event.detail > 1 || target.closest('a, input, button, summary') || document.getSelection()?.toString()) return;
+        choice.current.onChoose?.();
+      });
+    }} />;
+}
 export async function captureAssetsForExport() {
   return fetchAllRows<{ conversation_id: string; turn_id: string; html: string; source_ids: string[] }>('conversation_capture_assets', '*', ['conversation_id', 'turn_id']);
+}
+
+export function CaptureMedia({ html }: { html: string }) {
+  const images = useMemo(() => {
+    const { root } = sanitizeCapturedHtml(html);
+    return [...root.querySelectorAll('img')].map(image => ({ src: image.src, alt: image.alt }));
+  }, [html]);
+  if (!images.length) return null;
+  return <div className="translated-capture-media" aria-label="Original captured visuals">{images.map((image, index) => <img key={`${image.src}-${index}`} src={image.src} alt={image.alt || `Captured visual ${index + 1}`} loading="lazy" />)}</div>;
+}
+
+export function OriginalCapture({ html }: { html: string }) {
+  return <details className="translated-original"><summary>View original captured layout</summary><div className="exact-capture"><iframe title="Original captured layout" sandbox="allow-same-origin" srcDoc={html} /></div></details>;
 }
 
 type Props = ComponentProps<typeof MarkdownTranscript> & { html: string };

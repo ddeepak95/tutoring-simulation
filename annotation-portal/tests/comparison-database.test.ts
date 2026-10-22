@@ -84,7 +84,7 @@ describe.sequential('final overall comparison ratings', () => {
     await expect(overall(1)).rejects.toThrow(/Revision conflict/);
     await expect(overall(2, {})).rejects.toThrow(/every overall/);
     await expect(overall(2, { ...overallValues(), overall_learning_goal: 'invalid' })).rejects.toThrow(/every overall/);
-    await expect(overall(2, { ...overallValues(), principle_focus: 'b' })).rejects.toThrow(/Unexpected/);
+    await expect(overall(2, { ...overallValues(), explaining_the_core_principle: 'b' })).rejects.toThrow(/Unexpected/);
     const result = (await overall(2)).rows[0].result;
     expect(result.status).toBe('submitted'); expect(result.revision).toBe(3);
     expect(result.overall_answer).toEqual({ values: overallValues(), notes: 'Whole conversation judgment' });

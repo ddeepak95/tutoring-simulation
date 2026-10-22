@@ -5,13 +5,27 @@ import type { Conversation, DocumentRow, Profile } from './types';
 import questions from './generated/comparison-questions.json';
 import { comparisonComplete, comparisonQuestions, comparisonRounds, overallComparisonQuestions, type ComparisonAnswer, type ComparisonAssignment, type ComparisonChoice, type ComparisonRound } from './comparison';
 import { MarkdownTranscript } from './MarkdownTranscript';
-import { CapturedTranscript, useCaptureAssets, captureAssetsForExport } from './CapturedTranscript';
+import { CapturedTranscript, CaptureFrame, CaptureMedia, useCaptureAssets, captureAssetsForExport } from './CapturedTranscript';
 import './comparisons.css';
 import { ResetComparison } from './ResetComparison';
+import { languageName } from './languages';
 
 const message = (error: unknown) => (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
 const emptyAnswer = (): ComparisonAnswer => ({ values: {}, notes: '' });
+const topicId = (doc: DocumentRow) => doc.topic_id || null;
+const comparisonOrigin = (doc: DocumentRow, documents: DocumentRow[]) => {
+  const sourceId = doc.source_conversation_id || doc.transcript.source_conversation_id;
+  const translated = Boolean(sourceId || doc.transcript.translation || /translation/i.test(doc.transcript.repository_source?.version || ''));
+  const source = sourceId ? documents.find(other => other.id === sourceId || other.transcript.conversation_id === sourceId) : null;
+  const originalLanguage = doc.transcript.original_language || source?.language;
+  return translated ? `Translated${originalLanguage ? ` from ${languageName(originalLanguage)}` : ''}` : 'Original';
+};
+const comparisonTopic = (doc: DocumentRow) => doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || doc.transcript.learning_topic || doc.label;
+const comparisonTitle = (doc: DocumentRow) => doc.conversation_title || doc.transcript.learning_topic || doc.label;
+const comparisonLabel = (doc: DocumentRow, documents: DocumentRow[]) => {
+  return `${comparisonTopic(doc)} — ${languageName(doc.language)} — ${comparisonOrigin(doc, documents)}`;
+};
 
 export function Comparisons({ profile, embedded = false }: { profile: Profile; embedded?: boolean }) {
   const Container = embedded ? 'section' : 'main';
@@ -28,7 +42,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
     try {
       const [assignments, docs, people] = await Promise.all([
         fetchAllRows<ComparisonAssignment>('comparison_assignments', profile.role === 'admin' ? '*, profiles!comparison_assignments_annotator_id_fkey(id, username, role)' : '*'),
-        fetchAllRows<DocumentRow>('conversations'),
+        fetchAllRows<DocumentRow>('conversation_details'),
         profile.role === 'admin' ? fetchAllRows<Profile>('profiles') : Promise.resolve([]),
       ]);
       setRows(assignments.sort((a, b) => b.updated_at.localeCompare(a.updated_at))); setDocuments(docs); setUsers(people.filter(user => user.role === 'annotator'));
@@ -45,9 +59,13 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
   }, [embedded, loading, location.hash]);
   const docA = documents.find(doc => doc.id === a), docB = documents.find(doc => doc.id === b);
   const countA = docA ? comparisonRounds(docA.transcript).length : 0, countB = docB ? comparisonRounds(docB.transcript).length : 0;
-  const validPair = Boolean(a && b && a !== b && countA > 0 && countA === countB);
-  const label = (doc: DocumentRow) => `${doc.label} · ${doc.language} · ${doc.id}`;
-  const options = documents.filter(doc => `${doc.label} ${doc.language} ${doc.transcript.learning_topic || ''} ${doc.id}`.toLowerCase().includes(search.toLowerCase()));
+  const sameTopic = Boolean(docA && docB && topicId(docA) && topicId(docA) === topicId(docB));
+  const validPair = Boolean(a && b && a !== b && sameTopic && countA > 0 && countA === countB);
+  const label = (doc: DocumentRow) => {
+    const base = comparisonLabel(doc, documents);
+    return documents.filter(other => comparisonLabel(other, documents) === base).length > 1 ? `${base} · ${doc.id.slice(0, 8)}` : base;
+  };
+  const options = documents.filter(doc => `${label(doc)} ${doc.label} ${doc.language} ${doc.id}`.toLowerCase().includes(search.toLowerCase()));
   async function create(event: FormEvent) {
     event.preventDefault(); if (busy || !validPair || !annotator) return;
     setBusy(true); setError(''); setNotice('');
@@ -61,11 +79,23 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
     {error && <p className="error" role="alert">{error}</p>}{notice && <p className="notice" role="status">{notice}</p>}
     {profile.role === 'admin' && <form className="card comparison-create" onSubmit={create}><h2>Assign a comparison</h2><label>Filter conversations<input value={search} onChange={event => setSearch(event.target.value)} placeholder="Topic, language, label, or ID" /></label><div className="comparison-columns">{(['a', 'b'] as const).map(side => {
       const selected = side === 'a' ? a : b; const selectedDoc = side === 'a' ? docA : docB;
-      const choices = selectedDoc && !options.some(doc => doc.id === selected) ? [selectedDoc, ...options] : options;
-      return <label key={side}>Conversation {side.toUpperCase()}<select aria-label={`Conversation ${side.toUpperCase()}`} required disabled={busy || loading} value={selected} onChange={event => side === 'a' ? setA(event.target.value) : setB(event.target.value)}><option value="">Select a conversation</option>{choices.map(doc => <option key={doc.id} value={doc.id}>{label(doc)}</option>)}</select>{selectedDoc && <small>{selectedDoc.transcript.learning_topic} · {comparisonRounds(selectedDoc.transcript).length} tutor turns</small>}</label>;
+      const otherDoc = side === 'a' ? docB : docA;
+      const matchingOptions = options.filter(doc => !otherDoc || (topicId(doc) && topicId(doc) === topicId(otherDoc)));
+      const choices = selectedDoc && !matchingOptions.some(doc => doc.id === selected) ? [selectedDoc, ...matchingOptions] : matchingOptions;
+      return <label key={side}>Conversation {side.toUpperCase()}<select aria-label={`Conversation ${side.toUpperCase()}`} required disabled={busy || loading} value={selected} onChange={event => {
+        const next = event.target.value;
+        const nextDoc = documents.find(doc => doc.id === next);
+        if (side === 'a') { setA(next); if (docB && nextDoc && topicId(docB) !== topicId(nextDoc)) setB(''); }
+        else { setB(next); if (docA && nextDoc && topicId(docA) !== topicId(nextDoc)) setA(''); }
+      }}><option value="">Select a conversation</option>{choices.map(doc => <option key={doc.id} value={doc.id}>{label(doc)}</option>)}</select>{selectedDoc && <small>{selectedDoc.transcript.learning_topic} · {comparisonRounds(selectedDoc.transcript).length} tutor turns</small>}</label>;
     })}</div><label>Annotator<select aria-label="Annotator" required disabled={busy || loading} value={annotator} onChange={event => setAnnotator(event.target.value)}><option value="">Select an annotator</option>{users.map(user => <option key={user.id} value={user.id}>{user.username}</option>)}</select></label>
-      {a && b && !validPair && <p className="error">Choose two different conversations with the same nonzero number of tutor turns.</p>}<p>Turns are paired in order. Select conversations covering the same topic. Annotators see anonymous labels A and B.</p><button className="primary" disabled={busy || loading || !validPair || !annotator}>{busy ? 'Assigning…' : 'Assign comparison'}</button></form>}
-    {loading ? <p role="status">Loading comparisons…</p> : <section className={embedded ? undefined : "card"}><div className="progress-heading">{!embedded && <h2>Comparison assignments</h2>}{profile.role === 'admin' && <button className="secondary" onClick={() => void (async () => { try { const capture_assets = await captureAssetsForExport(); download('study-comparisons.json', { format_version: 'annotation-portal-comparisons/1.0', exported_at: new Date().toISOString(), capture_assets, assignments: rows.map(row => ({ ...row, conversation_a: documents.find(doc => doc.id === row.conversation_a_id)?.transcript, conversation_b: documents.find(doc => doc.id === row.conversation_b_id)?.transcript })) }); } catch (failure) { setError(message(failure)); } })()}>Export comparisons</button>}</div>{!rows.length ? <p className="empty">No comparison assignments yet.</p> : <ul className="assignment-list">{rows.map(row => <li key={row.id}><Link className="assignment-row" to={`/comparisons/${row.id}`}><div className="assignment-row-content"><h3>{profile.role === 'admin' ? `${documents.find(doc => doc.id === row.conversation_a_id)?.label || 'Conversation A'} / ${documents.find(doc => doc.id === row.conversation_b_id)?.label || 'Conversation B'}` : documents.find(doc => doc.id === row.conversation_a_id)?.transcript.learning_topic || 'Tutor response comparison'}</h3><div className="assignment-row-meta">{profile.role === 'admin' && <span>{row.profiles?.username}</span>}<span>{row.answers.length} turns compared</span></div></div><span className={`status ${row.status}`}>{statusText(row.status)}</span><span className="primary assignment-open">Open</span></Link></li>)}</ul>}</section>}
+      {a && b && !validPair && <p className="error">Choose two different conversations with the same topic and the same nonzero number of tutor turns.</p>}<p>Turns are paired in order. Comparisons require the same topic. Annotators see anonymous labels A and B.</p><button className="primary" disabled={busy || loading || !validPair || !annotator}>{busy ? 'Assigning…' : 'Assign comparison'}</button></form>}
+    {loading ? <p role="status">Loading comparisons…</p> : <section className={embedded ? undefined : "card"}><div className="progress-heading">{!embedded && <h2>Comparison assignments</h2>}{profile.role === 'admin' && <button className="secondary" onClick={() => void (async () => { try { const capture_assets = await captureAssetsForExport(); download('study-comparisons.json', { format_version: 'annotation-portal-comparisons/1.0', exported_at: new Date().toISOString(), capture_assets, assignments: rows.map(row => ({ ...row, conversation_a: documents.find(doc => doc.id === row.conversation_a_id)?.transcript, conversation_b: documents.find(doc => doc.id === row.conversation_b_id)?.transcript })) }); } catch (failure) { setError(message(failure)); } })()}>Export comparisons</button>}</div>{!rows.length ? <p className="empty">No comparison assignments yet.</p> : <ul className="assignment-list">{rows.map(row => {
+      const first = documents.find(doc => doc.id === row.conversation_a_id);
+      const second = documents.find(doc => doc.id === row.conversation_b_id);
+      const totalTurns = first ? comparisonRounds(first.transcript).length : 0;
+      return <li key={row.id}><Link className="assignment-row" to={`/comparisons/${row.id}`}><div className="assignment-row-content"><h3>{profile.role === 'admin' ? first ? comparisonTopic(first) : 'Conversation comparison' : first?.transcript.learning_topic || 'Tutor response comparison'}</h3>{profile.role === 'admin' && <div className="comparison-list-pair">{([['A', first], ['B', second]] as const).map(([side, doc]) => <div key={side} className="comparison-list-side"><span className="comparison-list-side-marker">{side}</span><div><strong>{doc ? comparisonTitle(doc) : `Conversation ${side} unavailable`}</strong>{doc && <small>{languageName(doc.language)} · {comparisonOrigin(doc, documents)}</small>}</div></div>)}</div>}<div className="assignment-row-meta">{profile.role === 'admin' && <><span>Topic ID: {first?.topic_id || 'Unknown'}</span><span>Annotator: {row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Unknown'}</span></>}<span>{profile.role === 'admin' && totalTurns ? `${row.answers.length}/${totalTurns} turns compared` : `${row.answers.length} turns compared`}</span>{profile.role === 'admin' && <span>Updated {new Date(row.updated_at).toLocaleString()}</span>}</div></div><span className={`status ${row.status}`}>{statusText(row.status)}</span><span className="primary assignment-open">Open</span></Link></li>;
+    })}</ul>}</section>}
   </Container>;
 }
 
@@ -86,9 +116,11 @@ function TranscriptRound({ conversation, round, side, selectable, selected, conf
     }}>
     {confirming && <SelectionTick />}
     {captured.error && <p className="notice">{captured.error}</p>}
-    <div className="comparison-scroll" tabIndex={0} role="region" aria-label={`Conversation ${side} transcript`}>
-      {[...round.students, round.tutor].map(turn => <article className={`comparison-message ${turn.speaker}`} key={turn.turn_id}><strong>{turn.speaker === 'student' ? 'Student response' : 'Tutor response'}</strong><div className="markdown-body"><>{captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={[]} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={[]} readonly onHighlight={() => {}} />}</></div></article>)}
-    </div>
+    {captured.exactHtml ? <div className="comparison-capture" role="region" aria-label={`Conversation ${side} transcript`}><CaptureFrame html={captured.exactHtml} conversation={conversation} visibleTurnIds={[...round.students, round.tutor].map(turn => turn.turn_id)} selectable={selectable} onChoose={onChoose} /></div>
+      : captured.loading ? <div className="comparison-capture-loading" role="status">Loading captured conversation…</div>
+        : <div className="comparison-scroll" tabIndex={0} role="region" aria-label={`Conversation ${side} transcript`}>
+          {[...round.students, round.tutor].map(turn => <article className={`comparison-message ${turn.speaker}`} key={turn.turn_id}><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong><div className="markdown-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={[]} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={[]} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={[]} readonly onHighlight={() => {}} />}</div></article>)}
+        </div>}
   </section>;
 }
 

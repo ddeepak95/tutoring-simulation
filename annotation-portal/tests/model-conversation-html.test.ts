@@ -21,6 +21,22 @@ it('serializes the conversation once as compact semantic HTML and strips noisy c
  expect(result.segments.map(segment=>segment.source_path)).toEqual([[0,0],[0,1],null]);
 });
 
+it('uses parent evidence IDs and English offsets for an aligned translation',()=>{
+ const original={conversation_id:'parent',learning_topic:'Topic',label:'Original',messages:[{turn_id:'t1',speaker:'tutor' as const,text:'Título\nUna frase.'}]};
+ const source=modelConversationHtml(original,{t1:'<h2>Título</h2><p>Una frase.</p>'});
+ const english={conversation_id:'translation',learning_topic:'Topic',label:'English',messages:[{turn_id:'t1',speaker:'tutor' as const,text:'Title\nA sentence.'}],translation:{version:'capture-english/1',sha256:'test',alignment:[
+  {segment_id:source.segments[0].segment_id,turn_id:'t1',start:0,end:5,source_start:0,source_end:6,kind:'heading'},
+  {segment_id:source.segments[1].segment_id,turn_id:'t1',start:6,end:17,source_start:7,source_end:17,kind:'paragraph'},
+ ]}};
+ const result=modelConversationHtml(english,{t1:'<h2>Título</h2><p>Una frase.</p>'});
+ expect(result.segments.map(segment=>segment.segment_id)).toEqual(source.segments.map(segment=>segment.segment_id));
+ expect(result.segments.map(segment=>segment.quote)).toEqual(['Title','A sentence.']);
+ expect(result.html).toContain('<h2 data-evidence-ids="t1:s0001">Title</h2>');
+ expect(result.html).not.toContain('Una frase');
+ const output=resolveSegmentEvidence({annotations:[{feature:'concepts_and_subtopics_covered',entry:{topic:'Title',detail_level:'Brief'},evidence:[{segment_id:'t1:s0001',quote:'Title'}]}]},result.segments,english);
+ expect(output.annotations[0].evidence[0]).toEqual({turn_id:'t1',quote:'Title',occurrence:1});
+});
+
 it('keeps attached visual references in the owning turn without embedding duplicate image metadata',()=>{
  const conversation={conversation_id:'c1',learning_topic:'topic',label:'label',messages:[{turn_id:'t1',speaker:'tutor' as const,text:'Captured diagram'}]};
  const result=modelConversationHtml(conversation,{t1:'<img src="image.png">'},[{id:'visual-1',turn_id:'t1'}]);

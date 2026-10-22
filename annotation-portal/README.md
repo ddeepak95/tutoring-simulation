@@ -293,3 +293,9 @@ The source archive is retained unchanged. Preparation provenance lives in `trans
 Captured images are uploaded by the extension to the public-read `capture-images` bucket under `captures/<signed-in-user>/<content-sha256>.<extension>`. Uploads require an authenticated portal profile and are restricted to that user's folder. Apply `npm run migrate:capture-images -- --project YOUR_PROJECT_REF` after archive preparation, then run `npm run backfill:capture-images` to create `media_html` copies for earlier archives and turns. The backfill is resumable and idempotent; it does not change original archive HTML or snapshot hashes. Preview, preparation, transcript display, and local Gemini annotation prefer `media_html` and fall back to the source HTML for old rows.
 
 Admins can remove saved captures with **HTML archives ? Delete archive**. Confirming deletes the source archive from the database; prepared conversation transcripts, HTML assets, assignments, annotations, and ratings are retained. The deletion RPC is admin-only; annotators cannot delete archive records.
+
+### Topic and language catalog
+
+`../agentic_conversation_capture/topics.json` is the source for each generic `topic-id`, generic `topic-name`, and language-specific conversation `title`. `../agentic_conversation_capture/languages.json` lists the supported language IDs and display names. Use lowercase language IDs, such as `en` and `ta`, as the language keys in `topics.json`.
+
+After changing either file, run `npm run sync:topics -- --project PROJECT_REF` from `annotation-portal`. It updates the database catalogs and conversation links. The `conversation_details` view shows `topic_id`, `generic_topic_name`, `language`, and `conversation_title`; the admin conversation table reads this view. The historical `covalent-redius` ID is mapped to the canonical `covalent-radius` ID during import and backfill. Existing capture files retain their original names and content.

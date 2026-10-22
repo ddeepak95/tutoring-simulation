@@ -6,7 +6,9 @@ import C from '../src/generated/core.js';
 export const CATALOG_PATH = 'repository/catalog.json';
 export const CATALOG_FORMAT = 'annotation-portal-repository/1.0';
 const digest = value => crypto.createHash('sha256').update(value).digest('hex');
-const languages = { en: 'English', ta: 'Tamil' };
+const languageDefinitions = JSON.parse(fs.readFileSync(path.resolve(import.meta.dirname, '../../agentic_conversation_capture/languages.json'), 'utf8'));
+const languageCode = value => Object.entries(languageDefinitions).find(([id, entry]) => id === String(value || '').trim().toLowerCase() || entry.name.toLowerCase() === String(value || '').trim().toLowerCase())?.[0] || 'und';
+const languageName = value => languageDefinitions[value]?.name || 'Unspecified';
 
 export function buildRepositoryCatalog({ repositoryRoot, runIds, allRuns = false }) {
   const outputs = path.join(repositoryRoot, 'simulated-conversation-openrouter/outputs');
@@ -36,16 +38,16 @@ export function buildRepositoryCatalog({ repositoryRoot, runIds, allRuns = false
           const raw = JSON.parse(bytes.toString('utf8')); const input = raw.conversation || raw;
           const topic = input.learning_topic || input.configuration?.topic_name || input.metadata?.topic_english_name || input.metadata?.topic_native_name || directory.name.split('__')[0];
           const original = name === 'conversation.json';
-          const language = original ? input.configuration?.language || input.metadata?.native_language || languages[input.configuration?.language_code || directory.name.split('__').at(-1)] || 'Unspecified' : 'English';
+          const language = original ? languageCode(input.configuration?.language_code || input.configuration?.language || input.metadata?.native_language || directory.name.split('__').at(-1)) : 'en';
           const version = original ? 'Original' : name.includes('comparative') ? 'Reviewed English translation' : 'English translation';
           const normalized = C.normalizeConversation({ ...input, learning_topic: topic });
           const originalInput = original ? input : JSON.parse(fs.readFileSync(path.join(folder, 'conversation.json'), 'utf8'));
           const sourceInput = originalInput.conversation || originalInput;
-          const original_language = sourceInput.configuration?.language || sourceInput.metadata?.native_language || languages[sourceInput.configuration?.language_code || directory.name.split('__').at(-1)] || 'Unspecified';
-          const topic_english_name = input.topic_english_name || input.metadata?.topic_english_name || englishTopics.get(input.configuration?.topic_id || directory.name.split('__')[0]) || (language === 'English' ? topic : null);
+          const original_language = languageCode(sourceInput.configuration?.language_code || sourceInput.configuration?.language || sourceInput.metadata?.native_language || directory.name.split('__').at(-1));
+          const topic_english_name = input.topic_english_name || input.metadata?.topic_english_name || englishTopics.get(input.configuration?.topic_id || directory.name.split('__')[0]) || (language === 'en' ? topic : null);
           const file_sha256 = digest(bytes); const id = digest(sourceRelativePath + '\0' + file_sha256);
           if (!normalized.conversation_id) throw new Error('Assign a conversation_id in the source file before syncing.');
-          const entry = { id, label: `${topic} — ${original ? `${language} original` : version} · ${String(normalized.conversation_id).slice(0, 8)}`, run_id: run, topic, topic_english_name, topic_id: input.configuration?.topic_id || directory.name.split('__')[0], language, original_language, version, turn_count: normalized.messages.length, source_relative_path: sourceRelativePath, source_conversation_id: normalized.conversation_id, file_sha256, storage_path: `repository/files/${id}.json` };
+          const entry = { id, label: `${topic} — ${original ? `${languageName(language)} original` : version} · ${String(normalized.conversation_id).slice(0, 8)}`, run_id: run, topic, topic_english_name, topic_id: input.configuration?.topic_id || directory.name.split('__')[0], language, original_language, version, turn_count: normalized.messages.length, source_relative_path: sourceRelativePath, source_conversation_id: normalized.conversation_id, file_sha256, storage_path: `repository/files/${id}.json` };
           entries.push(entry); files.push({ entry, bytes });
         } catch (error) { skipped.push({ source_relative_path: sourceRelativePath, reason: error instanceof SyntaxError ? 'Source is not valid JSON.' : error.message }); }
       }

@@ -11,6 +11,8 @@ import {runCheckpointedPipeline} from './llm-pipeline.mjs';
 import C from '../src/generated/core.js';
 import { resolveRepositoryAdmin } from './repository-conversations.mjs';
 const portal=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const languageDefinitions=JSON.parse(fs.readFileSync(path.resolve(portal,'../agentic_conversation_capture/languages.json'),'utf8'));
+const languageCode=value=>Object.entries(languageDefinitions).find(([id,entry])=>id===String(value||'').trim().toLowerCase()||entry.name.toLowerCase()===String(value||'').trim().toLowerCase())?.[0]||String(value||'').trim().toLowerCase();
 if(fs.existsSync(path.join(portal,'.env.local')))process.loadEnvFile(path.join(portal,'.env.local'));
 if(fs.existsSync(path.join(portal,'../.env')))process.loadEnvFile(path.join(portal,'../.env'));
 const args=process.argv.slice(2);let project,admin,model,pilot=false,all=false,dry=false,regenerate=false,review=false,reasoningHigh=false,geminiArgon=false,includeScreenshots=false,reviewFrom,repairFrom,importFile,resume,resumedState,provider;const requested=[];
@@ -58,7 +60,7 @@ try{
       try{
        const metadata=JSON.parse(fs.readFileSync(path.join(runPath,entry.name),'utf8'));
        if(metadata.source?.conversation_id!==sourceId)continue;
-       if(document.language&&metadata.language&&String(document.language).toLowerCase()!==String(metadata.language).toLowerCase())continue;
+       if(document.language&&metadata.language&&languageCode(document.language)!==languageCode(metadata.language))continue;
        matches.push({folder:runPath,capturedAt:Date.parse(metadata.captured_at||'')});
       }catch{}
      }
@@ -131,7 +133,7 @@ try{
  const existing=new Set(baselines.map(baseline=>baseline.conversation_id));
  let selection=documents.filter(doc=>regenerate||!existing.has(doc.id));
  if(requested.length){const unknown=requested.filter(id=>!documents.some(doc=>doc.id===id));if(unknown.length)throw new Error('A requested conversation does not exist in this portal.');selection=selection.filter(doc=>requested.includes(doc.id));}
- if(pilot){selection.sort((a,b)=>Number(b.language==='English'&&!b.transcript.source_conversation_id)-Number(a.language==='English'&&!a.transcript.source_conversation_id)||Number(b.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)-Number(a.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)||a.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0)-b.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0));selection=selection.slice(0,1);}
+ if(pilot){selection.sort((a,b)=>Number(b.language==='en'&&!b.transcript.source_conversation_id)-Number(a.language==='en'&&!a.transcript.source_conversation_id)||Number(b.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)-Number(a.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)||a.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0)-b.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0));selection=selection.slice(0,1);}
  async function push(artifact){
   const document=documents.find(doc=>doc.id===artifact.conversation_id);if(!document)throw new Error('The baseline conversation is not in the configured portal.');
   if(!isDeepStrictEqual(artifact.conversation,document.transcript))throw new Error('The local baseline does not contain this exact saved transcript.');
