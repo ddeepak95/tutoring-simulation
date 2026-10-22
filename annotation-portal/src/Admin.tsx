@@ -16,6 +16,14 @@ import { Toast, useToast } from './Toast';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
+const conversationTitle = (doc: DocumentRow) => doc.conversation_title || doc.transcript.learning_topic || doc.label;
+const genericTopic = (doc: DocumentRow) => doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || conversationTitle(doc);
+const conversationOrder = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true });
+const compareConversations = (a: DocumentRow, b: DocumentRow) =>
+  conversationOrder.compare(genericTopic(a), genericTopic(b)) ||
+  conversationOrder.compare(conversationTitle(a), conversationTitle(b)) ||
+  conversationOrder.compare(a.language, b.language) ||
+  a.id.localeCompare(b.id);
 
 export function Admin() {
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
@@ -31,9 +39,9 @@ export function Admin() {
       const { data: version, error: rubricError } = await supabase!.from('rubric_versions').select('hash').eq('hash', bundledRubric.rubric_sha256).maybeSingle();
       if (rubricError) throw rubricError;
       if (!version) { const { error: insertError } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (insertError && insertError.code !== '23505') throw insertError; }
-      const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*').order('created_at', { ascending: false }), supabase!.from('profiles').select('*').order('username')]);
+      const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*'), supabase!.from('profiles').select('*').order('username')]);
       if (docs.error) throw docs.error; if (people.error) throw people.error;
-      setRows(assignments); setDocuments(docs.data as DocumentRow[]); setUsers(people.data as Profile[]);
+      setRows(assignments); setDocuments((docs.data as DocumentRow[]).sort(compareConversations)); setUsers(people.data as Profile[]);
     } catch (err) { setError(message(err)); } finally { setLoading(false); }
   }
   useEffect(() => { void refresh(); const timer = setInterval(() => void refresh(), 30000); return () => clearInterval(timer); }, []);
@@ -134,11 +142,11 @@ export function Admin() {
         const assignmentsFor = (task: AssignmentType) => [...new Map(assigned.filter(row => row.task_type === task).map(row => [row.annotator_id, row])).values()].sort((a, b) => (a.profiles?.username || users.find(user => user.id === a.annotator_id)?.username || '').localeCompare(b.profiles?.username || users.find(user => user.id === b.annotator_id)?.username || ''));
         const labelAssignments = assignmentsFor('label');
         const rateAssignments = assignmentsFor('rate');
-        const topic = doc.conversation_title || doc.transcript.learning_topic || doc.label;
-        const genericTopic = doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || topic;
+        const topic = conversationTitle(doc);
+        const topicName = genericTopic(doc);
         return <tr key={doc.id} data-conversation-id={doc.id} className={selected.includes(doc.id) ? 'selected-row' : ''}>
           <td><input type="checkbox" aria-label={`Select ${doc.label}`} checked={selected.includes(doc.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, doc.id] : previous.filter(id => id !== doc.id))} /></td>
-          <td className="topic-cell"><small className="generic-topic" lang="en">{genericTopic}</small><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
+          <td className="topic-cell"><small className="generic-topic" lang="en">{topicName}</small><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
           <td className="metadata-id-cell"><code>{doc.topic_id || doc.transcript.topic_id || doc.transcript.repository_source?.topic_id || '—'}</code></td><td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
           <td>{originalLanguage(doc)}</td><td>{languageName(doc.language)}</td>
           <td><button type="button" className="assignment-count" aria-label={`Label: ${labelAssignments.filter(row => row.status === 'submitted').length} completed of ${labelAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:label` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onBlur={() => setAssignmentPopup(null)}>{labelAssignments.filter(row => row.status === 'submitted').length}/{labelAssignments.length}</button></td>

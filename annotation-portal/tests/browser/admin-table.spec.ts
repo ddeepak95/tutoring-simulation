@@ -1,6 +1,22 @@
 import { expect, test } from '@playwright/test';
 import { backend, ids, login, repositoryFixture } from './mock';
 
+test('conversation rows are ordered by generic topic and then conversation title', async ({ page }) => {
+  const state = await backend(page);
+  const makeDocument = (id: string, generic_topic_name: string, conversation_title: string) => ({
+    ...structuredClone(state.documents[0]), id, label: conversation_title, generic_topic_name, conversation_title,
+  });
+  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000061', 'Brain', 'Working of the brain'));
+  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000062', 'Alkaline earth metals', 'Zinc explanation'));
+  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000063', 'Alkaline earth metals', 'Aluminum explanation'));
+  await login(page, 'admin');
+  await expect(page.locator('.conversation-table tbody tr')).toHaveCount(4);
+  await expect(page.locator('.conversation-table tbody tr').nth(0)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000063');
+  await expect(page.locator('.conversation-table tbody tr').nth(1)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000062');
+  await expect(page.locator('.conversation-table tbody tr').nth(2)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000061');
+  await expect(page.locator('.conversation-table tbody tr').nth(3)).toHaveAttribute('data-conversation-id', ids.doc);
+});
+
 test('conversation menus preserve existing assignments and bulk assignment fills only missing work', async ({ page }) => {
   const state = await backend(page); const fixture = repositoryFixture();
   state.documents.push({ id: fixture.catalog.entries[2].source_conversation_id, label: 'Translated evaporation', language: 'English', transcript: { ...state.documents[0].transcript, conversation_id: fixture.catalog.entries[2].source_conversation_id, source_conversation_id: 'unimported-original', original_language: 'Tamil' } as any, created_at: new Date().toISOString() });
