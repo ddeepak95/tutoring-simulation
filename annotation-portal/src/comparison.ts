@@ -8,7 +8,7 @@ export interface ComparisonQuestion extends RatingDimension { scope?: string; }
 export interface ComparisonAssignment {
   id: string; pair_id?: string; mode?: ComparisonMode; conversation_a_id: string; conversation_b_id: string; annotator_id: string;
   questions: ComparisonQuestion[]; answers: ComparisonAnswer[]; overall_answer?: ComparisonAnswer | null; status: Status; revision: number;
-  updated_at: string; submitted_at: string | null; profiles?: Profile;
+  updated_at: string; submitted_at: string | null; is_active?: boolean; unassigned_at?: string | null; profiles?: Profile;
 }
 export interface ComparisonPair {
   id: string; mode?: ComparisonMode; conversation_a_id: string; conversation_b_id: string;

@@ -2,6 +2,7 @@ import { afterAll, beforeAll, expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
 import questions from '../src/generated/comparison-questions.json';
+import { comparisonQuestions } from '../src/comparison';
 
 const admin = '00000000-0000-4000-8000-000000000001';
 const alice = '00000000-0000-4000-8000-000000000002';
@@ -127,4 +128,28 @@ it('removes the retired question from active assignments while retaining complet
   expect((await db.query<{ questions: { key: string }[] }>('select questions from public.comparison_pairs where id=$1', [active.pair_id])).rows[0].questions.some(q => q.key === retired.key)).toBe(false);
   expect((await db.query<{ operation: string; question_snapshot: { key: string }[] }>('select operation,question_snapshot from public.comparison_revisions where assignment_id=$1 order by revision', [active.id])).rows.map(row => row.operation)).toEqual(['rubric_update', 'rubric_update']);
   expect((await db.query<{ questions: unknown }>('select questions from public.comparison_assignments where id=$1', [completed.id])).rows[0].questions).toEqual(completed.questions);
+});
+
+it('unassigns comparisons without losing revisions, blocks further saves, and permits reassignment', async () => {
+  await db.exec(fs.readFileSync('supabase/migrations/202610220005_comparison_unassignment.sql', 'utf8'));
+  await asUser(admin);
+  const assignments = (await db.query<{ id: string; pair_id: string; revision: number; mode: string }>('select id,pair_id,revision,mode from public.comparison_assignments order by mode')).rows;
+  const turn = assignments.find(row => row.mode === 'turn_wise')!;
+  const whole = assignments.find(row => row.mode === 'whole_conversation')!;
+  const unassign = (row: typeof turn) => db.query<{ result: { unassigned: boolean } }>('select public.unassign_comparison_assignment($1,$2) as result', [row.id, row.revision]);
+  await expect(db.query('select public.unassign_comparison_assignment($1,$2)', [whole.id, whole.revision + 1])).rejects.toThrow(/Revision conflict/);
+  expect((await unassign(whole)).rows[0].result.unassigned).toBe(true);
+  expect((await unassign(turn)).rows[0].result.unassigned).toBe(true);
+  expect((await db.query<{ count: number }>('select count(*) from public.comparison_revisions where assignment_id=$1', [whole.id])).rows[0].count).toBe(1);
+  await asUser(alice);
+  expect((await db.query('select id from public.comparison_assignments')).rows).toHaveLength(0);
+  expect((await db.query('select id from public.conversations')).rows).toHaveLength(0);
+  const answers = Object.fromEntries(comparisonQuestions(questions, 0).map(question => [question.key, 'tie']));
+  await expect(db.query('select public.save_comparison_round($1,$2,0,$3::jsonb)', [turn.id, turn.revision, JSON.stringify({ values: answers, notes: '' })])).rejects.toThrow(/no longer active/);
+  await asUser(admin);
+  expect((await assign(turn.pair_id, [alice])).rows[0].count).toBe(1);
+  const rows = (await db.query<{ id: string; is_active: boolean }>('select id,is_active from public.comparison_assignments where pair_id=$1 order by created_at,id', [turn.pair_id])).rows;
+  expect(rows).toHaveLength(2);
+  expect(rows.find(row => row.id === turn.id)?.is_active).toBe(false);
+  expect(rows.find(row => row.id !== turn.id)?.is_active).toBe(true);
 });

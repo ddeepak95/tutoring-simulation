@@ -24,9 +24,24 @@ const comparisonOrigin = (doc: DocumentRow, documents: DocumentRow[]) => {
   return translated ? `Translated${originalLanguage ? ` from ${languageName(originalLanguage)}` : ''}` : 'Original';
 };
 const comparisonTopic = (doc: DocumentRow) => doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || doc.transcript.learning_topic || doc.label;
-const comparisonTitle = (doc: DocumentRow) => doc.conversation_title || doc.transcript.learning_topic || doc.label;
 const comparisonProvider = (doc: DocumentRow) => doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : 'Unknown provider');
 const ComparisonModePill = ({ mode = 'turn_wise' }: { mode?: ComparisonMode }) => <span className={`comparison-mode-pill comparison-mode-pill-${mode}`}>{comparisonModeLabel(mode)}</span>;
+function PairActionsMenu({ disabled, onDelete }: { disabled: boolean; onDelete: () => void }) {
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const dismiss = (event: PointerEvent) => { if (!root.current?.contains(event.target as Node)) setOpen(false); };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setOpen(false); trigger.current?.focus(); }
+    };
+    document.addEventListener('pointerdown', dismiss);
+    document.addEventListener('keydown', escape);
+    return () => { document.removeEventListener('pointerdown', dismiss); document.removeEventListener('keydown', escape); };
+  }, [open]);
+  return <div className="comparison-pair-menu" ref={root}><button ref={trigger} type="button" className="comparison-pair-menu-trigger" aria-label="Pair actions" aria-haspopup="menu" aria-expanded={open} disabled={disabled} onClick={() => setOpen(value => !value)}>⋮</button>{open && <div className="comparison-pair-menu-panel" role="menu"><button type="button" role="menuitem" className="comparison-delete-action" onClick={() => { setOpen(false); onDelete(); }}>Delete pair</button></div>}</div>;
+}
 const comparisonLabel = (doc: DocumentRow, documents: DocumentRow[]) => {
   return `${comparisonTopic(doc)} — ${languageName(doc.language)} — ${comparisonOrigin(doc, documents)} — ${comparisonProvider(doc)}`;
 };
@@ -36,6 +51,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
   const location = useLocation();
   const compareHeading = useRef<HTMLHeadingElement>(null);
   const [rows, setRows] = useState<ComparisonAssignment[]>([]);
+  const [archivedRows, setArchivedRows] = useState<ComparisonAssignment[]>([]);
   const [pairs, setPairs] = useState<ComparisonPair[]>([]);
   const [documents, setDocuments] = useState<DocumentRow[]>([]);
   const [users, setUsers] = useState<Profile[]>([]);
@@ -44,7 +60,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
   const [selectedAnnotators, setSelectedAnnotators] = useState<Record<string, string[]>>({});
   const [resetTarget, setResetTarget] = useState<{ assignment: ComparisonAssignment; annotatorName: string } | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<{ kind: 'assignment'; assignment: ComparisonAssignment; annotatorName: string } | { kind: 'pair'; pair: ComparisonPair; assignments: ComparisonAssignment[] } | null>(null);
-  const [search, setSearch] = useState(''); const [error, setError] = useState('');
+  const [error, setError] = useState('');
   const [notice, setNotice] = useToast(); const [busy, setBusy] = useState(false); const [loading, setLoading] = useState(true);
   async function refresh() {
     setError('');
@@ -55,7 +71,9 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
         fetchAllRows<DocumentRow>('conversation_details'),
         profile.role === 'admin' ? fetchAllRows<Profile>('profiles') : Promise.resolve([]),
       ]);
-      setRows(assignments.sort((a, b) => b.updated_at.localeCompare(a.updated_at))); setPairs(comparisonPairs.sort((a, b) => b.created_at.localeCompare(a.created_at))); setDocuments(docs); setUsers(people.filter(user => user.role === 'annotator'));
+      setRows(assignments.filter(row => row.is_active !== false).sort((a, b) => b.updated_at.localeCompare(a.updated_at)));
+      setArchivedRows(assignments.filter(row => row.is_active === false));
+      setPairs(comparisonPairs.sort((a, b) => b.created_at.localeCompare(a.created_at))); setDocuments(docs); setUsers(people.filter(user => user.role === 'annotator'));
     } catch (err) { setError(message(err)); } finally { setLoading(false); }
   }
   useEffect(() => { void refresh(); }, [profile.id]);
@@ -75,8 +93,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
     const base = comparisonLabel(doc, documents);
     return documents.filter(other => comparisonLabel(other, documents) === base).length > 1 ? `${base} · ${doc.id.slice(0, 8)}` : base;
   };
-  const options = documents.filter(doc => `${label(doc)} ${doc.label} ${doc.language} ${doc.id}`.toLowerCase().includes(search.toLowerCase()))
-    .sort((first, second) => label(first).localeCompare(label(second), undefined, { sensitivity: 'base' }) || first.id.localeCompare(second.id));
+  const options = [...documents].sort((first, second) => label(first).localeCompare(label(second), undefined, { sensitivity: 'base' }) || first.id.localeCompare(second.id));
   async function create(event: FormEvent) {
     event.preventDefault(); if (busy || !validPair) return;
     setBusy(true); setError(''); setNotice('');
@@ -87,7 +104,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
     } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
   async function assign(pairId: string) {
-    const ids = selectedAnnotators[pairId] || [];
+    const ids = (selectedAnnotators[pairId] || []).filter(id => users.some(user => user.id === id) && !rows.some(row => row.pair_id === pairId && row.annotator_id === id));
     if (busy || !ids.length) return;
     setBusy(true); setError(''); setNotice('');
     try {
@@ -104,7 +121,7 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
       download('study-comparisons.json', {
         format_version: 'annotation-portal-comparisons/1.1', exported_at: new Date().toISOString(), capture_assets,
         pairs: pairs.map(pair => ({ ...pair, conversation_a: documents.find(doc => doc.id === pair.conversation_a_id)?.transcript, conversation_b: documents.find(doc => doc.id === pair.conversation_b_id)?.transcript })),
-        assignments: rows.map(row => ({ ...row, conversation_a: documents.find(doc => doc.id === row.conversation_a_id)?.transcript, conversation_b: documents.find(doc => doc.id === row.conversation_b_id)?.transcript })),
+        assignments: [...rows, ...archivedRows].map(row => ({ ...row, conversation_a: documents.find(doc => doc.id === row.conversation_a_id)?.transcript, conversation_b: documents.find(doc => doc.id === row.conversation_b_id)?.transcript })),
       });
     } catch (failure) { setError(message(failure)); }
   }
@@ -117,10 +134,10 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
   }
   async function deleteComparison(target: NonNullable<typeof deleteTarget>) {
     if (target.kind === 'assignment') {
-      const { data, error } = await supabase!.rpc('delete_comparison_assignment', { p_assignment_id: target.assignment.id, p_revision: target.assignment.revision });
+      const { data, error } = await supabase!.rpc('unassign_comparison_assignment', { p_assignment_id: target.assignment.id, p_revision: target.assignment.revision });
       if (error) throw error;
-      if (data?.assignment_id !== target.assignment.id || data.deleted !== true) throw new Error('Could not confirm deletion. Refresh comparisons before trying again.');
-      setNotice(`${target.annotatorName}'s comparison deleted. The pair is still available.`);
+      if (data?.assignment_id !== target.assignment.id || data.unassigned !== true) throw new Error('Could not confirm unassignment. Refresh comparisons before trying again.');
+      setNotice(`${target.annotatorName} unassigned. Saved responses and revision history were preserved.`);
     } else {
       const expected = target.assignments.map(row => ({ id: row.id, revision: row.revision })).sort((a, b) => a.id.localeCompare(b.id));
       const { data, error } = await supabase!.rpc('delete_comparison_pair', { p_pair_id: target.pair.id, p_expected_assignments: expected });
@@ -130,9 +147,9 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
     }
     await refresh();
   }
-  return <Container className={embedded ? "dashboard-compare" : "dashboard comparisons-page"} aria-label={embedded ? "Compare" : undefined}><div className="page-heading">{embedded ? <h2 id="compare" ref={compareHeading} tabIndex={-1}>Compare</h2> : <div><span className="eyebrow">COMPARISON MODE</span><h1>{profile.role === 'admin' ? 'Conversation comparisons' : 'Your comparisons'}</h1><p>Compare tutor responses one turn at a time using the existing rating questions.</p></div>}{!embedded && <button className="secondary" disabled={busy || loading} onClick={() => void refresh()}>Refresh</button>}</div>
+  return <Container className={embedded ? "dashboard-compare" : "dashboard comparisons-page"} aria-label={embedded ? "Compare" : undefined}><div className="page-heading">{embedded ? <h2 id="compare" ref={compareHeading} tabIndex={-1}>Compare</h2> : <div><span className="eyebrow">COMPARISON MODE</span><h1>{profile.role === 'admin' ? 'Conversation comparisons' : 'Your comparisons'}</h1><p>Compare two conversations turn by turn or as complete exchanges.</p></div>}{!embedded && <button className="secondary" disabled={busy || loading} onClick={() => void refresh()}>Refresh</button>}</div>
     {error && <p className="error" role="alert">{error}</p>}<Toast notice={notice} onDismiss={() => setNotice('')} />
-    {profile.role === 'admin' && <form className="card comparison-create" onSubmit={create}><h2>1. Create a comparison pair</h2><fieldset className="comparison-mode-picker"><legend>Comparison mode</legend><label><input type="radio" name="comparison-mode" checked={mode === 'turn_wise'} onChange={() => setMode('turn_wise')} />Turn wise</label><label><input type="radio" name="comparison-mode" checked={mode === 'whole_conversation'} onChange={() => setMode('whole_conversation')} />Whole conversation</label></fieldset><label>Filter conversations<input value={search} onChange={event => setSearch(event.target.value)} placeholder="Topic, language, label, or ID" /></label><div className="comparison-columns">{(['a', 'b'] as const).map(side => {
+    {profile.role === 'admin' && <form className="card comparison-create" onSubmit={create}><h2>1. Create a comparison pair</h2><div className="comparison-columns">{(['a', 'b'] as const).map(side => {
       const selected = side === 'a' ? a : b; const selectedDoc = side === 'a' ? docA : docB;
       const otherDoc = side === 'a' ? docB : docA;
       const matchingOptions = options.filter(doc => !otherDoc || (topicId(doc) && topicId(doc) === topicId(otherDoc)));
@@ -143,29 +160,30 @@ export function Comparisons({ profile, embedded = false }: { profile: Profile; e
         if (side === 'a') { setA(next); if (docB && nextDoc && topicId(docB) !== topicId(nextDoc)) setB(''); }
         else { setB(next); if (docA && nextDoc && topicId(docA) !== topicId(nextDoc)) setA(''); }
       }}><option value="">Select a conversation</option>{choices.map(doc => <option key={doc.id} value={doc.id}>{label(doc)}</option>)}</select>{selectedDoc && <small>{selectedDoc.transcript.learning_topic} · {comparisonRounds(selectedDoc.transcript).length} tutor turns</small>}</label>;
-    })}</div>
+    })}</div><fieldset className="comparison-mode-picker"><legend>Comparison mode</legend><label><input type="radio" name="comparison-mode" checked={mode === 'turn_wise'} onChange={() => setMode('turn_wise')} />Turn wise</label><label><input type="radio" name="comparison-mode" checked={mode === 'whole_conversation'} onChange={() => setMode('whole_conversation')} />Whole conversation</label></fieldset>
       {a && b && !validPair && <p className="error">Choose two different conversations with the same topic{mode === 'turn_wise' ? ' and the same nonzero number of tutor turns' : ' and at least one tutor turn each'}.</p>}<p>{mode === 'turn_wise' ? 'Turns are paired in order.' : 'Each question considers both complete conversations.'} Annotators see anonymous labels A and B.</p><button className="primary" disabled={busy || loading || !validPair}>{busy ? 'Creating…' : 'Create pair'}</button></form>}
-    {profile.role === 'admin' && !loading && <section className="card comparison-pairs"><div className="progress-heading"><h2>2. Comparison pairs</h2><button className="secondary" onClick={() => void exportComparisons()}>Export comparisons</button></div>{!pairs.length ? <p className="empty">No comparison pairs yet.</p> : <ul className="comparison-pair-list">{pairs.map(pair => {
+    {profile.role === 'admin' && !loading && <section className="comparison-pairs"><div className="progress-heading"><h2>2. Comparison pairs</h2><button className="secondary" onClick={() => void exportComparisons()}>Export comparisons</button></div>{!pairs.length ? <p className="card empty">No comparison pairs yet.</p> : <ul className="comparison-pair-list">{pairs.map(pair => {
       const first = documents.find(doc => doc.id === pair.conversation_a_id);
       const second = documents.find(doc => doc.id === pair.conversation_b_id);
       const assigned = rows.filter(row => row.pair_id === pair.id);
-      const chosen = selectedAnnotators[pair.id] || [];
+      const allAssignments = [...assigned, ...archivedRows.filter(row => row.pair_id === pair.id)];
       const available = users.filter(user => !assigned.some(row => row.annotator_id === user.id));
+      const chosen = (selectedAnnotators[pair.id] || []).filter(id => available.some(user => user.id === id));
       const totalTurns = first ? comparisonRounds(first.transcript).length : 0;
-      return <li key={pair.id} className="comparison-pair-item"><div className="comparison-pair-heading"><h3>{first ? comparisonTopic(first) : 'Conversation comparison'}</h3><ComparisonModePill mode={pair.mode} /></div><small>Topic ID: {first?.topic_id || 'Unknown'}</small><div className="comparison-list-pair">{([['A', first], ['B', second]] as const).map(([side, doc]) => <div key={side} className="comparison-list-side"><span className="comparison-list-side-marker">{side}</span><div><strong>{doc ? comparisonTitle(doc) : `Conversation ${side} unavailable`}</strong>{doc && <small>{languageName(doc.language)} · {comparisonOrigin(doc, documents)} · {comparisonProvider(doc)}</small>}</div></div>)}</div><p className="comparison-pair-summary">{assigned.filter(row => row.status === 'submitted').length}/{assigned.length} completed</p>
-        {assigned.length > 0 && <div className="comparison-assigned-list"><h4>Assigned annotators</h4><ul>{assigned.map(row => {
+      return <li key={pair.id} className="card comparison-pair-item"><div className="comparison-pair-heading"><div className="comparison-pair-heading-label"><h3>{first ? comparisonTopic(first) : 'Conversation comparison'}</h3><ComparisonModePill mode={pair.mode} /></div><Link className="comparison-preview-link" to={`/comparisons/pairs/${pair.id}/preview`}>Preview</Link><PairActionsMenu disabled={busy} onDelete={() => setDeleteTarget({ kind: 'pair', pair, assignments: allAssignments })} /></div><div className="comparison-list-pair">{([['A', first], ['B', second]] as const).map(([side, doc]) => <div key={side} className="comparison-list-side"><span className="comparison-list-side-marker">{side}</span>{doc ? <small>{languageName(doc.language)} · {comparisonOrigin(doc, documents)} · {comparisonProvider(doc)}</small> : <strong>Conversation {side} unavailable</strong>}</div>)}</div>
+        <details className="comparison-assigned-list"><summary><span>Assigned annotators</span><span>{assigned.filter(row => row.status === 'submitted').length}/{assigned.length} completed</span></summary>{assigned.length > 0 ? <ul>{assigned.map(row => {
           const annotatorName = row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Unknown annotator';
-          return <li key={row.id}><span>{annotatorName}</span><span className={`status ${row.status}`}>{statusText(row.status)}</span><span>{pair.mode === 'whole_conversation' ? row.overall_answer ? 'All questions answered' : 'Not yet rated' : `${row.answers.length}/${totalTurns} turns`}</span><div className="comparison-assigned-actions"><Link to={`/comparisons/${row.id}`}>View</Link><button type="button" className="text-button" onClick={() => setResetTarget({ assignment: row, annotatorName })}>Reset</button><button type="button" className="text-button comparison-delete-action" onClick={() => setDeleteTarget({ kind: 'assignment', assignment: row, annotatorName })}>Delete</button></div></li>;
-        })}</ul></div>}
-        {available.length > 0 && <fieldset><legend>Assign annotators</legend><div className="comparison-annotators">{available.map(user => <label key={user.id}><input type="checkbox" disabled={busy} checked={chosen.includes(user.id)} onChange={event => setSelectedAnnotators(current => ({ ...current, [pair.id]: event.target.checked ? [...(current[pair.id] || []), user.id] : (current[pair.id] || []).filter(id => id !== user.id) }))} />{user.username}</label>)}</div></fieldset>}
-        <div className="comparison-pair-actions">{available.length > 0 && <button type="button" className="primary" disabled={busy || chosen.length === 0} onClick={() => void assign(pair.id)}>{busy ? 'Assigning…' : `Assign ${chosen.length} annotator${chosen.length === 1 ? '' : 's'}`}</button>}<button type="button" className="delete-action" onClick={() => setDeleteTarget({ kind: 'pair', pair, assignments: assigned })}>Delete pair</button></div></li>;
+          return <li key={row.id}><span>{annotatorName}</span><span className={`status ${row.status}`}>{statusText(row.status)}</span><span>{pair.mode === 'whole_conversation' ? row.overall_answer ? 'All questions answered' : 'Not yet rated' : `${row.answers.length}/${totalTurns} turns`}</span><div className="comparison-assigned-actions"><Link to={`/comparisons/${row.id}`}>View</Link><button type="button" className="text-button" onClick={() => setResetTarget({ assignment: row, annotatorName })}>Reset</button><button type="button" className="text-button" onClick={() => setDeleteTarget({ kind: 'assignment', assignment: row, annotatorName })}>Unassign</button></div></li>;
+        })}</ul> : <p>No annotators assigned yet.</p>}
+        {available.length > 0 && <fieldset><legend>Assign annotators</legend><label className="comparison-select-all"><input type="checkbox" disabled={busy} checked={chosen.length === available.length} onChange={event => setSelectedAnnotators(current => ({ ...current, [pair.id]: event.target.checked ? available.map(user => user.id) : [] }))} />Select all annotators</label><div className="comparison-annotators">{available.map(user => <label key={user.id}><input type="checkbox" disabled={busy} checked={chosen.includes(user.id)} onChange={event => setSelectedAnnotators(current => ({ ...current, [pair.id]: event.target.checked ? [...(current[pair.id] || []), user.id] : (current[pair.id] || []).filter(id => id !== user.id) }))} />{user.username}</label>)}</div></fieldset>}
+        {available.length > 0 && <div className="comparison-pair-actions"><button type="button" className="primary" disabled={busy || chosen.length === 0} onClick={() => void assign(pair.id)}>{busy ? 'Assigning…' : `Assign ${chosen.length} annotator${chosen.length === 1 ? '' : 's'}`}</button></div>}</details></li>;
     })}</ul>}</section>}
     {loading ? <p role="status">Loading comparisons…</p> : profile.role !== 'admin' && <section className={embedded ? undefined : "card"}><div className="progress-heading">{!embedded && <h2>Comparison assignments</h2>}</div>{!rows.length ? <p className="empty">No comparison assignments yet.</p> : <ul className="assignment-list">{rows.map(row => {
       const first = documents.find(doc => doc.id === row.conversation_a_id);
       return <li key={row.id}><Link className="assignment-row" to={`/comparisons/${row.id}`}><div className="assignment-row-content"><h3>{first?.transcript.learning_topic || 'Tutor response comparison'}</h3><div className="assignment-row-meta"><ComparisonModePill mode={row.mode} /><span>{row.mode === 'whole_conversation' ? row.overall_answer ? 'All questions answered' : 'Not yet rated' : `${row.answers.length} turns compared`}</span></div></div><span className={`status ${row.status}`}>{statusText(row.status)}</span><span className="primary assignment-open">Open</span></Link></li>;
     })}</ul>}</section>}
     {resetTarget && <ResetComparison key={resetTarget.assignment.id} assignment={resetTarget.assignment} annotatorName={resetTarget.annotatorName} onClose={() => setResetTarget(null)} onReset={() => resetAssignment(resetTarget.assignment)} />}
-    {deleteTarget && <ConfirmDialog title={deleteTarget.kind === 'pair' ? 'Delete comparison pair?' : `Delete ${deleteTarget.annotatorName}'s comparison?`} confirmLabel={deleteTarget.kind === 'pair' ? 'Delete pair' : 'Delete comparison'} pendingLabel="Deleting…" danger onCancel={() => setDeleteTarget(null)} onConfirm={() => deleteComparison(deleteTarget)}><p>{deleteTarget.kind === 'pair' ? `This permanently deletes the pair, ${deleteTarget.assignments.length} annotator assignment${deleteTarget.assignments.length === 1 ? '' : 's'}, and their saved responses and revision history.` : 'This permanently deletes this annotator’s comparison, saved responses, and revision history. The pair remains available for reassignment.'}</p></ConfirmDialog>}
+    {deleteTarget && <ConfirmDialog title={deleteTarget.kind === 'pair' ? 'Delete comparison pair?' : `Unassign ${deleteTarget.annotatorName}?`} confirmLabel={deleteTarget.kind === 'pair' ? 'Delete pair' : 'Unassign'} pendingLabel={deleteTarget.kind === 'pair' ? 'Deleting…' : 'Unassigning…'} danger={deleteTarget.kind === 'pair'} onCancel={() => setDeleteTarget(null)} onConfirm={() => deleteComparison(deleteTarget)}><p>{deleteTarget.kind === 'pair' ? `This permanently deletes the pair, ${deleteTarget.assignments.length} annotator assignment${deleteTarget.assignments.length === 1 ? '' : 's'}, and their saved responses and revision history.` : 'This removes the comparison from the annotator’s list. Saved responses and revision history remain in the database.'}</p></ConfirmDialog>}
   </Container>;
 }
 
@@ -194,12 +212,12 @@ function TranscriptRound({ conversation, turns, side, selectable, selected, conf
   </section>;
 }
 
-function RoundForm({ conversationA, conversationB, assignment, index, saved, busy, editable, last, whole = false, turnsA, turnsB, onSave }: { conversationA: Conversation; conversationB: Conversation; assignment: ComparisonAssignment; index: number; saved?: ComparisonAnswer; busy: boolean; editable: boolean; last: boolean; whole?: boolean; turnsA: Turn[]; turnsB: Turn[]; onSave: (answer: ComparisonAnswer) => Promise<void> }) {
+function RoundForm({ conversationA, conversationB, assignment, index, saved, busy, editable, last, whole = false, preview = false, turnsA, turnsB, onSave }: { conversationA: Conversation; conversationB: Conversation; assignment: ComparisonAssignment; index: number; saved?: ComparisonAnswer; busy: boolean; editable: boolean; last: boolean; whole?: boolean; preview?: boolean; turnsA: Turn[]; turnsB: Turn[]; onSave: (answer: ComparisonAnswer) => Promise<void> }) {
   const draftKey = `annotation-portal:${whole ? 'comparison-whole' : 'comparison'}:${assignment.annotator_id}:${assignment.id}:${assignment.revision}`;
   const [storageError, setStorageError] = useState('');
   const [answer, setAnswer] = useState<ComparisonAnswer>(() => {
     if (saved) return saved;
-    if (!editable) return emptyAnswer();
+    if (!editable || preview) return emptyAnswer();
     try {
       const cached = JSON.parse(localStorage.getItem(draftKey) || 'null');
       if (cached && typeof cached.notes === 'string' && cached.values && typeof cached.values === 'object' && !Array.isArray(cached.values) && Object.entries(cached.values).every(([key, value]) => (whole ? wholeComparisonQuestions(assignment.questions) : comparisonQuestions(assignment.questions, index)).some(q => q.key === key) && ['a', 'b', 'tie'].includes(value as string))) return cached;
@@ -228,6 +246,7 @@ function RoundForm({ conversationA, conversationB, assignment, index, saved, bus
   }, [questionIndex, editable, question]);
   function change(next: ComparisonAnswer) {
     setAnswer(next);
+    if (preview) return;
     try { localStorage.setItem(draftKey, JSON.stringify(next)); setStorageError(''); }
     catch { setStorageError(`Local draft storage is unavailable. Save this ${whole ? 'comparison' : 'turn'} before leaving.`); }
   }
@@ -248,18 +267,18 @@ function RoundForm({ conversationA, conversationB, assignment, index, saved, bus
       {question ? <><span className="eyebrow">Question {questionIndex + 1} of {activeQuestions.length} · {question.label}</span><h3 ref={questionHeading} tabIndex={-1}>{question.description}</h3><details><summary>Judging guidance</summary><p>{question.guidance}</p></details>{questionIndex > 0 && editable && <button className="text-button" type="button" disabled={busy || confirmation !== null} onClick={() => setQuestionIndex(current => current - 1)}>Previous question</button>}</> : <><h3 ref={questionHeading} tabIndex={-1}>All questions answered</h3><p>Review your choices and save {whole ? 'the whole-conversation comparison' : 'this turn'} to continue.</p>{editable && <button type="button" className="secondary" disabled={busy || confirmation !== null} onClick={() => setQuestionIndex(activeQuestions.length - 1)}>Previous question</button>}</>}
     </div>}
     <div className="comparison-choice-grid"><TranscriptRound conversation={conversationA} turns={turnsA} side="A" confirming={confirmation === 'a'} selectable={selectable} selected={Boolean(question && answer.values[question.key] === 'a')} onChoose={() => choose('a')} />{saved ? <span aria-hidden="true" /> : <button className="comparison-tie" type="button" aria-label="Tie / equally good" title="Tie / equally good" aria-pressed={Boolean(question && answer.values[question.key] === 'tie')} disabled={!selectable} onClick={() => choose('tie')}>{confirmation === 'tie' && <SelectionTick />}<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M5 9h14M5 15h14" /></svg></button>}<TranscriptRound conversation={conversationB} turns={turnsB} side="B" confirming={confirmation === 'b'} selectable={selectable} selected={Boolean(question && answer.values[question.key] === 'b')} onChoose={() => choose('b')} /></div>
-    {(saved || !question) && <div className="card comparison-review"><h3 ref={reviewHeading} tabIndex={-1}>{saved ? 'Saved comparison' : 'Review your choices'}</h3><dl>{activeQuestions.map((item, itemIndex) => <div key={item.key}><dt>{item.label}</dt><dd>{({ a: 'A is better', b: 'B is better', tie: 'Tie / equally good' })[answer.values[item.key]] || 'Not answered'}{editable && <button className="text-button" type="button" disabled={busy} aria-label={`Change answer for ${item.label}`} onClick={() => setQuestionIndex(itemIndex)}>Change</button>}</dd></div>)}</dl><label>Notes (optional)<textarea disabled={busy || !editable} value={answer.notes} onChange={event => change({ ...answer, notes: event.target.value })} /></label>{editable && <button className="primary" disabled={busy || !complete}>{busy ? 'Saving…' : whole ? 'Save whole-conversation comparison' : last ? 'Save comparison and finish' : 'Save comparison and continue'}</button>}</div>}
+    {(saved || !question) && <div className="card comparison-review"><h3 ref={reviewHeading} tabIndex={-1}>{saved ? preview ? 'Previewed comparison' : 'Saved comparison' : 'Review your choices'}</h3><dl>{activeQuestions.map((item, itemIndex) => <div key={item.key}><dt>{item.label}</dt><dd>{({ a: 'A is better', b: 'B is better', tie: 'Tie / equally good' })[answer.values[item.key]] || 'Not answered'}{editable && <button className="text-button" type="button" disabled={busy} aria-label={`Change answer for ${item.label}`} onClick={() => setQuestionIndex(itemIndex)}>Change</button>}</dd></div>)}</dl><label>Notes (optional)<textarea disabled={busy || !editable} value={answer.notes} onChange={event => change({ ...answer, notes: event.target.value })} /></label>{editable && <button className="primary" disabled={busy || !complete}>{preview ? whole || last ? 'Finish preview' : 'Continue preview' : busy ? 'Saving…' : whole ? 'Save whole-conversation comparison' : last ? 'Save comparison and finish' : 'Save comparison and continue'}</button>}</div>}
     {storageError && <p className="error" role="alert">{storageError}</p>}
   </form>;
 }
 
-function OverallComparisonForm({ assignment, editable, busy, onSave }: { assignment: ComparisonAssignment; editable: boolean; busy: boolean; onSave: (answer: ComparisonAnswer) => Promise<void> }) {
+function OverallComparisonForm({ assignment, editable, busy, preview = false, onSave }: { assignment: ComparisonAssignment; editable: boolean; busy: boolean; preview?: boolean; onSave: (answer: ComparisonAnswer) => Promise<void> }) {
   const questions = overallComparisonQuestions(assignment.questions);
   const draftKey = `annotation-portal:comparison-overall:${assignment.annotator_id}:${assignment.id}:${assignment.revision}`;
   const [storageError, setStorageError] = useState('');
   const [answer, setAnswer] = useState<ComparisonAnswer>(() => {
     if (assignment.overall_answer) return assignment.overall_answer;
-    if (editable) {
+    if (editable && !preview) {
       try {
         const cached = JSON.parse(localStorage.getItem(draftKey) || 'null');
         if (cached && typeof cached.notes === 'string' && cached.values && typeof cached.values === 'object' && !Array.isArray(cached.values) && Object.entries(cached.values).every(([key, value]) => questions.some(q => q.key === key) && ['a', 'b', 'tie'].includes(value as string))) return cached;
@@ -275,21 +294,22 @@ function OverallComparisonForm({ assignment, editable, busy, onSave }: { assignm
   }, [editable]);
   function change(next: ComparisonAnswer) {
     setAnswer(next);
+    if (preview) return;
     try { localStorage.setItem(draftKey, JSON.stringify(next)); setStorageError(''); }
     catch { setStorageError('Local draft storage is unavailable. Save the overall comparison before leaving.'); }
   }
   const complete = questions.every(q => ['a', 'b', 'tie'].includes(answer.values[q.key]));
   return <form className="card comparison-overall" aria-labelledby="overall-heading" onSubmit={event => { event.preventDefault(); if (editable && !busy && complete) void onSave(answer); }}>
     <h2 id="overall-heading" ref={heading} tabIndex={-1}>Overall conversation</h2>
-    <p>All turns have been compared. Consider the complete conversations for these final two questions.</p>
+    <p>All turns have been compared. Consider the complete conversations for this final question.</p>
     {questions.map(question => <fieldset key={question.key} disabled={!editable || busy}><legend>{question.description}</legend><div className="overall-options">{(['a', 'b', 'tie'] as const).map(choice => <label className="overall-option" key={choice}><input type="radio" name={question.key} value={choice} checked={answer.values[question.key] === choice} onChange={() => change({ ...answer, values: { ...answer.values, [question.key]: choice } })} />{({ a: 'A is better', b: 'B is better', tie: 'Tie / equally good' })[choice]}</label>)}</div></fieldset>)}
     <label>Overall notes (optional)<textarea disabled={!editable || busy} value={answer.notes} onChange={event => change({ ...answer, notes: event.target.value })} /></label>
     {storageError && <p className="error" role="alert">{storageError}</p>}
-    {editable && <button className="primary" disabled={busy || !complete}>{busy ? 'Saving?' : 'Save overall comparison and finish'}</button>}
+    {editable && <button className="primary" disabled={busy || !complete}>{preview ? 'Finish preview' : busy ? 'Saving?' : 'Save overall comparison and finish'}</button>}
   </form>;
 }
 
-export function ComparisonEditor({ profile }: { profile: Profile }) {
+export function ComparisonEditor({ profile, preview = false }: { profile: Profile; preview?: boolean }) {
   const { id } = useParams();
   const backTo = profile.role === 'admin' ? '/comparisons' : '/#compare';
   const [assignment, setAssignment] = useState<ComparisonAssignment | null>(null);
@@ -302,15 +322,19 @@ export function ComparisonEditor({ profile }: { profile: Profile }) {
     let alive = true; setAssignment(null); setA(null); setB(null); setError('');
     void (async () => {
       try {
-        const { data, error } = await supabase!.from('comparison_assignments').select('*').eq('id', id).single(); if (error) throw error;
-        const row = data as ComparisonAssignment;
+        const query = supabase!.from(preview ? 'comparison_pairs' : 'comparison_assignments').select('*').eq('id', id);
+        const { data, error } = await (preview ? query : query.eq('is_active', true)).single(); if (error) throw error;
+        const row = preview ? (() => {
+          const pair = data as ComparisonPair;
+          return { id: pair.id, pair_id: pair.id, mode: pair.mode || 'turn_wise', conversation_a_id: pair.conversation_a_id, conversation_b_id: pair.conversation_b_id, annotator_id: profile.id, questions: pair.questions, answers: [], overall_answer: null, status: 'not_started', revision: 0, updated_at: pair.created_at, submitted_at: null } as ComparisonAssignment;
+        })() : data as ComparisonAssignment;
         const { data: docs, error: docsError } = await supabase!.from('conversations').select('*').in('id', [row.conversation_a_id, row.conversation_b_id]); if (docsError) throw docsError;
         const docA = docs.find(doc => doc.id === row.conversation_a_id) as DocumentRow | undefined, docB = docs.find(doc => doc.id === row.conversation_b_id) as DocumentRow | undefined;
         if (!docA || !docB) throw new Error('Could not load both conversations.');
         if (alive) { setAssignment(row); setA(docA); setB(docB); }
       } catch (err) { if (alive) setError(message(err)); }
     })(); return () => { alive = false; };
-  }, [id, reload]);
+  }, [id, reload, preview, profile.id]);
   useEffect(() => { nextHeading.current?.focus(); }, [assignment?.answers.length, assignment?.overall_answer]);
   async function resetResponses() {
     if (!assignment || profile.role !== 'admin') throw new Error('Admin access required.');
@@ -323,6 +347,17 @@ export function ComparisonEditor({ profile }: { profile: Profile }) {
   }
   async function save(answer: ComparisonAnswer, stage: 'round' | 'overall' | 'whole' = 'round') {
     if (!assignment || busy) return;
+    if (preview) {
+      const totalTurns = a ? comparisonRounds(a.transcript).length : 0;
+      const hasFinalQuestion = overallComparisonQuestions(assignment.questions).length > 0;
+      setAssignment(current => current ? { ...current,
+        answers: stage === 'round' ? [...current.answers, answer] : current.answers,
+        overall_answer: stage === 'round' ? current.overall_answer : answer,
+        status: stage !== 'round' || current.answers.length + 1 === totalTurns && !hasFinalQuestion ? 'submitted' : 'in_progress',
+        revision: current.revision + 1,
+      } : current);
+      return;
+    }
     setBusy(true); setError('');
     try {
       const rpc = stage === 'whole' ? 'save_whole_comparison' : stage === 'overall' ? 'save_comparison_overall' : 'save_comparison_round';
@@ -335,15 +370,15 @@ export function ComparisonEditor({ profile }: { profile: Profile }) {
   if (!assignment || !a || !b) return <main className="center">{error ? <p className="error" role="alert">{error}</p> : <p role="status">Loading comparison…</p>}<Link to={backTo}>{profile.role === 'admin' ? 'Back to comparisons' : 'Back to dashboard'}</Link></main>;
   const roundsA = comparisonRounds(a.transcript), roundsB = comparisonRounds(b.transcript);
   const whole = assignment.mode === 'whole_conversation';
-  const editable = assignment.annotator_id === profile.id && assignment.status !== 'submitted';
+  const editable = assignment.status !== 'submitted' && (preview || assignment.annotator_id === profile.id);
   const hasOverall = overallComparisonQuestions(assignment.questions).length > 0;
   const turnsComplete = assignment.answers.length === roundsA.length;
   const visibleCount = Math.min(roundsA.length, assignment.answers.length + 1);
   const topic = a.transcript.topic_english_name || b.transcript.topic_english_name || a.transcript.learning_topic || b.transcript.learning_topic || a.label;
-  return <main className="dashboard comparisons-page"><div className="page-heading"><div className="comparison-heading-content"><Link to={backTo}>← {profile.role === 'admin' ? 'Comparisons' : 'Dashboard'}</Link><div className="comparison-title"><h1>{topic}</h1>{profile.role === 'admin' && <details className="comparison-info" onKeyDown={event => { if (event.key === 'Escape') { event.currentTarget.open = false; event.currentTarget.querySelector('summary')?.focus(); } }}><summary aria-label="Comparison details" title="Comparison details"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" /></svg></summary><div className="comparison-info-panel"><dl><dt>Mode</dt><dd>{comparisonModeLabel(assignment.mode || 'turn_wise')}</dd><dt>Conversation A</dt><dd>{a.label}</dd><dt>Provider A</dt><dd>{comparisonProvider(a)}</dd><dt>Conversation B</dt><dd>{b.label}</dd><dt>Provider B</dt><dd>{comparisonProvider(b)}</dd><dt>Annotator ID</dt><dd>{assignment.annotator_id}</dd></dl></div></details>}{profile.role === 'admin' && <button className="secondary" disabled={busy} onClick={() => setResetOpen(true)}>Reset responses</button>}<p className="comparison-progress">{whole ? `${assignment.overall_answer ? wholeComparisonQuestions(assignment.questions).length : 0} of ${wholeComparisonQuestions(assignment.questions).length} questions rated` : `${assignment.answers.length} of ${roundsA.length} turns compared`} · {statusText(assignment.status)}</p></div></div></div>{error && <p className="error" role="alert">{error} <button className="secondary" disabled={busy} onClick={() => setReload(value => value + 1)}>Reload saved comparison</button></p>}
-    {whole ? <section className="comparison-round comparison-whole" ref={nextHeading} tabIndex={-1} aria-label="Whole conversation comparison"><RoundForm conversationA={a.transcript} conversationB={b.transcript} key={`${assignment.id}:${resetGeneration}:whole:${Boolean(assignment.overall_answer)}`} assignment={assignment} index={0} whole turnsA={a.transcript.messages} turnsB={b.transcript.messages} last saved={assignment.overall_answer || undefined} editable={editable} busy={busy} onSave={answer => save(answer, 'whole')} /></section> : roundsA.slice(0, visibleCount).map((round, index) => <section className="comparison-round" key={index} ref={index === assignment.answers.length ? nextHeading : undefined} tabIndex={-1} aria-label={`Comparison round ${index + 1}`}><RoundForm conversationA={a!.transcript} conversationB={b!.transcript} key={`${assignment.id}:${resetGeneration}:${index}:${Boolean(assignment.answers[index])}`} assignment={assignment} index={index} turnsA={[...round.students, round.tutor]} turnsB={[...roundsB[index].students, roundsB[index].tutor]} last={index === roundsA.length - 1 && !hasOverall} saved={assignment.answers[index]} editable={editable && index === assignment.answers.length} busy={busy} onSave={save} /></section>)}
-    {resetOpen && profile.role === 'admin' && <ResetComparison assignment={assignment} onClose={() => setResetOpen(false)} onReset={resetResponses} />}
-    {!whole && turnsComplete && hasOverall && <OverallComparisonForm key={`${assignment.id}:${resetGeneration}:overall:${Boolean(assignment.overall_answer)}`} assignment={assignment} editable={editable} busy={busy} onSave={answer => save(answer, 'overall')} />}
-    {assignment.status === 'submitted' ? <p className="notice" role="status">Comparison complete. All ratings have been saved.</p> : whole ? <p className="notice">Compare the complete conversations for each question, then review and save your choices.</p> : turnsComplete && hasOverall ? <p className="notice">Complete the overall conversation ratings to finish.</p> : <p className="notice">The next turn appears after every question for the current turn is answered and saved.</p>}
+  return <main className="dashboard comparisons-page"><div className="page-heading"><div className="comparison-heading-content"><Link to={backTo}>← {profile.role === 'admin' ? 'Comparisons' : 'Dashboard'}</Link><div className="comparison-title"><h1>{preview ? `Preview: ${topic}` : topic}</h1>{profile.role === 'admin' && <details className="comparison-info" onKeyDown={event => { if (event.key === 'Escape') { event.currentTarget.open = false; event.currentTarget.querySelector('summary')?.focus(); } }}><summary aria-label="Comparison details" title="Comparison details"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6" /><circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" /></svg></summary><div className="comparison-info-panel"><dl><dt>Mode</dt><dd>{comparisonModeLabel(assignment.mode || 'turn_wise')}</dd><dt>Conversation A</dt><dd>{a.label}</dd><dt>Provider A</dt><dd>{comparisonProvider(a)}</dd><dt>Conversation B</dt><dd>{b.label}</dd><dt>Provider B</dt><dd>{comparisonProvider(b)}</dd>{!preview && <><dt>Annotator ID</dt><dd>{assignment.annotator_id}</dd></>}</dl></div></details>}{preview ? <button className="secondary" onClick={() => { setAssignment(current => current ? { ...current, answers: [], overall_answer: null, status: 'not_started', revision: 0 } : current); setResetGeneration(value => value + 1); }}>Restart preview</button> : profile.role === 'admin' && <button className="secondary" disabled={busy} onClick={() => setResetOpen(true)}>Reset responses</button>}<p className="comparison-progress">{whole ? `${assignment.overall_answer ? wholeComparisonQuestions(assignment.questions).length : 0} of ${wholeComparisonQuestions(assignment.questions).length} questions rated` : `${assignment.answers.length} of ${roundsA.length} turns compared`} · {statusText(assignment.status)}</p></div></div></div>{preview && <p className="notice" role="status">Preview only. Your choices are not saved or assigned to an annotator.</p>}{error && <p className="error" role="alert">{error} <button className="secondary" disabled={busy} onClick={() => setReload(value => value + 1)}>Reload saved comparison</button></p>}
+    {whole ? <section className="comparison-round comparison-whole" ref={nextHeading} tabIndex={-1} aria-label="Whole conversation comparison"><RoundForm conversationA={a.transcript} conversationB={b.transcript} key={`${assignment.id}:${resetGeneration}:whole:${Boolean(assignment.overall_answer)}`} assignment={assignment} index={0} whole preview={preview} turnsA={a.transcript.messages} turnsB={b.transcript.messages} last saved={assignment.overall_answer || undefined} editable={editable} busy={busy} onSave={answer => save(answer, 'whole')} /></section> : roundsA.slice(0, visibleCount).map((round, index) => <section className="comparison-round" key={index} ref={index === assignment.answers.length ? nextHeading : undefined} tabIndex={-1} aria-label={`Comparison round ${index + 1}`}><RoundForm conversationA={a!.transcript} conversationB={b!.transcript} key={`${assignment.id}:${resetGeneration}:${index}:${Boolean(assignment.answers[index])}`} assignment={assignment} index={index} preview={preview} turnsA={[...round.students, round.tutor]} turnsB={[...roundsB[index].students, roundsB[index].tutor]} last={index === roundsA.length - 1 && !hasOverall} saved={assignment.answers[index]} editable={editable && index === assignment.answers.length} busy={busy} onSave={save} /></section>)}
+    {resetOpen && !preview && profile.role === 'admin' && <ResetComparison assignment={assignment} onClose={() => setResetOpen(false)} onReset={resetResponses} />}
+    {!whole && turnsComplete && hasOverall && <OverallComparisonForm key={`${assignment.id}:${resetGeneration}:overall:${Boolean(assignment.overall_answer)}`} assignment={assignment} editable={editable} busy={busy} preview={preview} onSave={answer => save(answer, 'overall')} />}
+    {preview ? assignment.status === 'submitted' ? <p className="notice" role="status">Preview complete. No answers were saved.</p> : null : assignment.status === 'submitted' ? <p className="notice" role="status">Comparison complete. All ratings have been saved.</p> : whole ? <p className="notice">Compare the complete conversations for each question, then review and save your choices.</p> : turnsComplete && hasOverall ? <p className="notice">Complete the overall conversation ratings to finish.</p> : <p className="notice">The next turn appears after every question for the current turn is answered and saved.</p>}
   </main>;
 }

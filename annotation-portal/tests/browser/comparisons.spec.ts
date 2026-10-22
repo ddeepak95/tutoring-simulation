@@ -25,7 +25,10 @@ async function comparisonBackend(page: Page) {
       const id = url.searchParams.get('id')?.slice(3);
       return send(id ? assignments.find(row => row.id === id) : assignments.map(row => ({ ...row, profiles: profiles.find(p => p.id === row.annotator_id) })));
     }
-    if (url.pathname === '/rest/v1/comparison_pairs') return send(pairs);
+    if (url.pathname === '/rest/v1/comparison_pairs') {
+      const id = url.searchParams.get('id')?.slice(3);
+      return send(id ? pairs.find(pair => pair.id === id) : pairs);
+    }
     if (url.pathname === '/rest/v1/rpc/create_comparison_pair') {
       const body = route.request().postDataJSON();
       const existing = pairs.find(pair => (pair.mode || 'turn_wise') === body.p_mode && [pair.conversation_a_id, pair.conversation_b_id].sort().join() === [body.p_conversation_a_id, body.p_conversation_b_id].sort().join());
@@ -99,12 +102,15 @@ async function comparisonBackend(page: Page) {
   return { documents: state.documents, captureDocuments: state.captureDocuments, assignments, pairs, comparisonState, docB, seed };
 }
 
-test('dashboard lists label, rate, and comparison assignments in separate sections', async ({ page }) => {
+test('dashboard lists compare, label, and rate assignments in that order', async ({ page }) => {
   const state = await comparisonBackend(page); state.seed();
   await login(page, 'alice');
   const label = page.getByRole('region', { name: 'Label instructional features' });
   const rate = page.getByRole('region', { name: 'Rate tutor turns' });
   const compare = page.getByRole('region', { name: 'Compare', exact: true });
+  await expect(page.locator('main.dashboard > section').nth(0)).toHaveAttribute('aria-label', 'Compare');
+  await expect(page.locator('main.dashboard > section').nth(1)).toHaveAttribute('aria-labelledby', 'label-heading');
+  await expect(page.locator('main.dashboard > section').nth(2)).toHaveAttribute('aria-labelledby', 'rate-heading');
   await expect(label.locator('a[href^="/assignments/"]').first()).toBeVisible();
   await expect(rate.getByText('No rate assignments yet')).toBeVisible();
   await expect(compare.getByRole('heading', { name: 'Compare', exact: true })).toBeVisible();
@@ -141,18 +147,35 @@ test('admin creates a pair before assigning it to multiple annotators', async ({
   expect(state.assignments).toHaveLength(0);
   const pair = page.locator('.comparison-pair-item').first();
   await expect(pair.locator('.comparison-mode-pill')).toHaveText('Turn wise');
-  await expect(pair.getByText('0/0 completed')).toBeVisible();
-  await pair.getByRole('checkbox', { name: 'alice' }).check();
-  await pair.getByRole('checkbox', { name: 'bob' }).check();
+  const annotators = pair.locator('.comparison-assigned-list');
+  await expect(annotators.locator('summary')).toContainText('Assigned annotators');
+  await expect(annotators.locator('summary')).toContainText('0/0 completed');
+  const selectAll = pair.getByRole('checkbox', { name: 'Select all annotators' });
+  await expect(selectAll).toBeHidden();
+  await annotators.locator('summary').click();
+  await selectAll.check();
+  await expect(pair.getByRole('checkbox', { name: 'alice' })).toBeChecked();
+  await expect(pair.getByRole('checkbox', { name: 'bob' })).toBeChecked();
+  await pair.getByRole('checkbox', { name: 'bob' }).uncheck();
+  await expect(selectAll).not.toBeChecked();
+  await selectAll.check();
   await pair.getByRole('button', { name: 'Assign 2 annotators' }).click();
   await expect(page.getByText('2 annotators assigned', { exact: false })).toBeVisible();
-  await expect(pair.getByText('0/2 completed')).toBeVisible();
+  await expect(annotators.locator('summary')).toContainText('0/2 completed');
+  await annotators.locator('summary').click();
+  await expect(annotators.locator('li').first()).toBeHidden();
+  await annotators.locator('summary').click();
+  await expect(annotators).toHaveAttribute('open', '');
   await expect(pair.getByRole('checkbox')).toHaveCount(0);
-  await expect(pair.getByRole('link', { name: 'View' })).toHaveCount(2);
+  await expect(pair.getByRole('link', { name: 'View', exact: true })).toHaveCount(2);
   expect(state.assignments).toHaveLength(2);
   await expect(page.locator('.comparisons-page .assignment-list')).toHaveCount(0);
   await expect(pair.getByRole('heading', { name: 'Evaporation' })).toBeVisible();
-  await expect(pair.getByText('Topic ID: evaporation')).toBeVisible();
+  await expect(pair.getByText('Topic ID: evaporation')).toHaveCount(0);
+  const titleBox = await pair.getByRole('heading', { name: 'Evaporation' }).boundingBox();
+  const pillBox = await pair.locator('.comparison-mode-pill').boundingBox();
+  expect(pillBox!.x - (titleBox!.x + titleBox!.width)).toBeLessThan(20);
+  await expect(pair.getByText('Alternative tutor', { exact: true })).toHaveCount(0);
   await expect(pair.getByText('Tamil · Original · ChatGPT')).toBeVisible();
   await expect(pair.getByText('English · Translated from Tamil · gpt-6.1-sol')).toBeVisible();
   await expect(pair.getByText('alice')).toBeVisible();
@@ -164,7 +187,7 @@ test('admin creates a pair before assigning it to multiple annotators', async ({
   await page.getByRole('button', { name: 'Refresh' }).click();
   await expect(pair.getByText('1/2 completed')).toBeVisible();
   await expect(pair.getByText('Submitted')).toBeVisible();
-  await pair.getByRole('link', { name: 'View' }).first().click();
+  await pair.getByRole('link', { name: 'View', exact: true }).first().click();
   await page.getByLabel('Comparison details').click();
   await expect(page.locator('.comparison-info-panel')).toContainText('Provider A');
   await expect(page.locator('.comparison-info-panel')).toContainText('ChatGPT');
@@ -183,6 +206,7 @@ test('admin resets one annotator, deletes that assignment, and deletes the pair 
   await login(page, 'admin');
   await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
   const pair = page.locator('.comparison-pair-item');
+  await pair.locator('.comparison-assigned-list summary').click();
   const aliceRow = pair.locator('.comparison-assigned-list li').filter({ hasText: 'alice' });
   await expect(pair.getByText('0/2 completed')).toBeVisible();
   await aliceRow.getByRole('button', { name: 'Reset' }).click();
@@ -204,11 +228,23 @@ test('admin resets one annotator, deletes that assignment, and deletes the pair 
   await expect(pair.getByText('0/1 completed')).toBeVisible();
   expect(state.assignments.map(row => row.annotator_id)).toEqual([ids.bob]);
   await expect(pair.getByRole('checkbox', { name: 'alice' })).toBeVisible();
-  await pair.getByRole('button', { name: 'Delete pair' }).click();
+  const pairActions = pair.getByRole('button', { name: 'Pair actions' });
+  const headingBox = await pair.getByRole('heading', { name: 'Evaporation' }).boundingBox();
+  const menuBox = await pairActions.boundingBox();
+  expect(menuBox!.y).toBeLessThan(headingBox!.y + headingBox!.height);
+  await expect(pair.getByRole('menuitem', { name: 'Delete pair' })).toHaveCount(0);
+  await pairActions.click();
+  await expect(pairActions).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Escape');
+  await expect(pair.getByRole('menuitem', { name: 'Delete pair' })).toHaveCount(0);
+  await expect(pairActions).toBeFocused();
+  await pairActions.click();
+  await pair.getByRole('menuitem', { name: 'Delete pair' }).click();
   const deletePair = page.getByRole('dialog', { name: 'Delete comparison pair?' });
   await deletePair.getByRole('button', { name: 'Cancel' }).click();
   expect(state.pairs).toHaveLength(1);
-  await pair.getByRole('button', { name: 'Delete pair' }).click();
+  await pairActions.click();
+  await pair.getByRole('menuitem', { name: 'Delete pair' }).click();
   await deletePair.getByRole('button', { name: 'Delete pair' }).click();
   await expect(page.getByText('No comparison pairs yet.')).toBeVisible();
   expect(state.pairs).toHaveLength(0);
@@ -223,6 +259,10 @@ test('comparison picker shows language and source type and limits choices to the
   await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
   const first = page.getByLabel('Conversation A', { exact: true });
   const second = page.getByLabel('Conversation B', { exact: true });
+  await expect(page.getByLabel('Filter conversations')).toHaveCount(0);
+  const modeBox = await page.getByRole('group', { name: 'Comparison mode' }).boundingBox();
+  const secondBox = await second.boundingBox();
+  expect(modeBox!.y).toBeGreaterThan(secondBox!.y);
   await expect(first.locator('option').nth(1)).toHaveAttribute('value', otherId);
   await expect(first.locator(`option[value="${ids.doc}"]`)).toHaveText('Evaporation — Tamil — Original — ChatGPT');
   await expect(first.locator(`option[value="${state.docB}"]`)).toHaveText('Evaporation — English — Translated from Tamil — gpt-6.1-sol');
@@ -246,6 +286,47 @@ test('admin can create a whole-conversation pair with different turn counts', as
   await expect(page.locator('.comparison-pair-item')).toContainText('Whole conversation');
   await expect(page.locator('.comparison-pair-item .comparison-mode-pill')).toHaveText('Whole conversation');
   expect(state.pairs[0].mode).toBe('whole_conversation');
+});
+
+test('admin previews a turn-wise pair without creating or saving an assignment', async ({ page }) => {
+  const state = await comparisonBackend(page); state.seed(); state.assignments.length = 0;
+  await login(page, 'admin');
+  await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
+  await page.locator('.comparison-pair-item').getByRole('link', { name: 'Preview' }).click();
+  await expect(page).toHaveURL(/\/comparisons\/pairs\/[^/]+\/preview$/);
+  await expect(page.getByRole('heading', { name: 'Preview: Evaporation' })).toBeVisible();
+  await expect(page.getByText('Preview only. Your choices are not saved')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Reset responses' })).toHaveCount(0);
+  for (let question = 1; question <= 5; question++) await page.getByRole('button', { name: 'Tie / equally good', exact: true }).click();
+  await page.getByRole('button', { name: 'Continue preview' }).click();
+  await expect(page.locator('.comparison-round')).toHaveCount(2);
+  for (let question = 1; question <= 6; question++) await page.locator('.comparison-round').last().getByRole('button', { name: 'Tie / equally good', exact: true }).click();
+  await page.locator('.comparison-round').last().getByRole('button', { name: 'Continue preview' }).click();
+  const overall = page.getByRole('form', { name: 'Overall conversation' });
+  await overall.getByRole('radio', { name: 'A is better' }).check();
+  await overall.getByRole('button', { name: 'Finish preview' }).click();
+  await expect(page.getByText('Preview complete. No answers were saved.')).toBeVisible();
+  expect(state.assignments).toHaveLength(0);
+  await page.getByRole('button', { name: 'Restart preview' }).click();
+  await expect(page.locator('.comparison-round')).toHaveCount(1);
+  await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText('Question 1 of 5', { exact: false })).toBeVisible();
+  expect(state.assignments).toHaveLength(0);
+});
+
+test('admin previews a whole-conversation pair without saving answers', async ({ page }) => {
+  const state = await comparisonBackend(page); state.seed(); state.assignments.length = 0; state.pairs[0].mode = 'whole_conversation';
+  state.documents[1].transcript.messages.push({ turn_id: 'b3', speaker: 'tutor', text: 'Third explanation.' });
+  await login(page, 'admin');
+  await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
+  await page.locator('.comparison-pair-item').getByRole('link', { name: 'Preview' }).click();
+  await expect(page.locator('.comparison-whole')).toHaveCount(1);
+  await expect(page.getByRole('region', { name: 'Conversation B transcript' })).toContainText('Third explanation.');
+  for (let question = 1; question <= 7; question++) await page.getByRole('button', { name: 'Tie / equally good', exact: true }).click();
+  await page.getByRole('button', { name: 'Finish preview' }).click();
+  await expect(page.getByText('Preview complete. No answers were saved.')).toBeVisible();
+  expect(state.assignments).toHaveLength(0);
 });
 
 test('whole-conversation mode shows both full transcripts for each question and saves one answer', async ({ page }) => {
@@ -414,7 +495,8 @@ test('admin confirms a reset, preserves work on cancel or failure, and restarts 
   row.status = 'submitted'; row.revision = 2;
   await login(page, 'admin');
   await page.getByRole('link', { name: 'Comparisons', exact: true }).click();
-  await page.locator('.comparison-pair-item').getByRole('link', { name: 'View' }).click();
+  await page.locator('.comparison-pair-item .comparison-assigned-list summary').click();
+  await page.locator('.comparison-pair-item').getByRole('link', { name: 'View', exact: true }).click();
   await page.getByRole('button', { name: 'Reset responses', exact: true }).click();
   const dialog = page.getByRole('dialog', { name: 'Reset comparison responses?' });
   await expect(dialog).toBeVisible();
