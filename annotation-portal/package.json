@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "npm run sync:rubric && npm run sync:comparisons",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
@@ -26,6 +27,7 @@
     "migrate:language-ids": "node scripts/migrate-language-ids.mjs",
     "migrate:comparison-same-topic": "node scripts/migrate-comparison-same-topic.mjs",
     "migrate:comparison-rating-alignment": "node scripts/migrate-comparison-rating-alignment.mjs",
+    "migrate:live-label-rubric": "node scripts/migrate-live-label-rubric.mjs",
     "sync:topics": "node scripts/sync-topic-catalog.mjs",
     "migrate:admin-reset-annotations": "node scripts/migrate-admin-reset-annotations.mjs",
     "migrate:admin-assignments": "node scripts/migrate-admin-assignments.mjs",
@@ -33,7 +35,7 @@
     "llm:baselines": "node scripts/llm-baselines.mjs",
     "sync:prompt": "node scripts/sync-llm-prompt.mjs",
     "sync:comparisons": "node scripts/sync-comparison-questions.mjs",
-    "prebuild": "npm run sync:comparisons"
+    "prebuild": "npm run sync:rubric && npm run sync:comparisons"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

@@ -27,6 +27,9 @@ export function Admin() {
   const fileRef = useRef<HTMLInputElement>(null); const uploadDialog = useRef<HTMLDialogElement>(null);
   async function refresh() {
     try {
+      const { data: version, error: rubricError } = await supabase!.from('rubric_versions').select('hash').eq('hash', bundledRubric.rubric_sha256).maybeSingle();
+      if (rubricError) throw rubricError;
+      if (!version) { const { error: insertError } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (insertError && insertError.code !== '23505') throw insertError; }
       const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*').order('created_at', { ascending: false }), supabase!.from('profiles').select('*').order('username')]);
       if (docs.error) throw docs.error; if (people.error) throw people.error;
       setRows(assignments); setDocuments(docs.data as DocumentRow[]); setUsers(people.data as Profile[]);

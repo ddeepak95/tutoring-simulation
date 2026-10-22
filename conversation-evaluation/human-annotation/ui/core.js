@@ -17,7 +17,7 @@
   };
 
   function formFields(feature) {
-    return feature.fields.filter(field => FORM_FIELDS[feature.key]?.includes(field.key));
+    return feature.fields.filter(field => !FORM_FIELDS[feature.key] || FORM_FIELDS[feature.key].includes(field.key));
   }
 
   function normalizeConversation(input, filename = "Imported conversation") {

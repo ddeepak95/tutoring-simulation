@@ -196,13 +196,16 @@ Local recovery data is namespaced by stable user/assignment ID. A stale draft ca
 ## Rubric maintenance and validation
 
 ```powershell
-npm run sync:rubric
 npm test
 npm run test:browser
 npm run build
 ```
 
-`sync:rubric` reads the guidebook, evaluator schema, and existing annotation core from the parent repository. It writes the checked-in `src/generated` files; it does not bundle the existing tool's sample conversations. Production builds use this snapshot and do not require Python or access to parent directories. Keep generated changes with the corresponding rubric change.
+`npm run dev` and `npm run build` run `sync:rubric` automatically. During development, Vite reruns it when the guidebook, rubric definitions, evaluator schema, annotation core, instructional prompt, rating questions, or evaluation config changes. `sync:rubric` writes the checked-in `src/generated` files; it does not bundle the existing tool's sample conversations. Production builds use this snapshot and do not require Python or access to parent directories. Keep generated changes with the corresponding rubric change. Repository agent instructions in `../AGENTS.md` also cover this workflow.
+
+### Adding instructional features
+
+Apply `npm run migrate:live-label-rubric -- --project PROJECT_REF` once to the existing database. It removes the fixed feature-category count and adds a guarded upgrade for active Label assignments. For a new category, update `conversation-evaluation/human-annotation/coding-guidebook.md`, `conversation-evaluation/human-annotation/ui/data.js`, and `conversation-evaluation/schemas/evaluator-v3.schema.json`; then build and deploy the portal. Rubric syncing runs automatically during development and builds. The admin dashboard registers the deployed rubric in the database. When an annotator next opens an active Label assignment, the portal adopts the new rubric if its existing categories and fields remain compatible. Existing highlights, assignment status, revision, and local recovery drafts are preserved. Newly added fields on an existing category must be optional; new categories can have required fields because existing assignments have no entries for them. Submitted assignments stay pinned to the rubric used for submission and can adopt a compatible rubric if an admin reopens them. Incompatible changes keep the old rubric and require a deliberate data migration. New Rate questions still follow their separate versioning flow.
 
 Unit tests validate core behavior, rating completeness, issue exports, save serialization, retry/conflict recovery, migration verification, and the admin API's Auth/role checks, eight-character passwords, duplicate usernames, invalid requests, safe failures, and rollback of new accounts. Database tests run the actual migrations in embedded PostgreSQL (PGlite) with mocked Supabase Auth/Storage tables and test real role grants, RLS, RPCs, Unicode evidence, mandatory tutor ratings, submitted locks, immutable originals, preservation of existing assignments during upgrades, and audit history. Browser tests mock all Supabase/API responses and block other external requests, covering admin account creation and new-user login, separate users, all pop-ups, overlap/deletion, uploads/assignments, ratings and issues, submission/reopening, failed saves, recovery, and narrow screens. No paid calls or live database writes occur in automated tests. Windows tests use installed Microsoft Edge; on other systems install Chromium with `npx playwright install chromium`.
 

@@ -132,7 +132,16 @@ function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
       setAssignment(null); setRubric(null); setAnnotations([]); setTurnRatings({}); setBaseline(null); setDraft(null); setError(''); setState('saved');
       try {
         const { data, error } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').eq('id', id).single(); if (error) throw error;
-        const row = data as Assignment;
+        let row = data as Assignment;
+        if (!viewOnly && row.task_type === 'label' && row.is_active !== false && row.status !== 'submitted' && row.rubric_hash !== bundledRubric.rubric_sha256) {
+          const { data: upgraded, error: upgradeError } = await supabase!.rpc('upgrade_label_assignment_rubric', { p_assignment_id: row.id, p_rubric_hash: bundledRubric.rubric_sha256 });
+          if (upgradeError) throw new Error(`Could not check the current labeling features: ${upgradeError.message}`);
+          if (upgraded) {
+            const { data: refreshed, error: refreshError } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').eq('id', id).single();
+            if (refreshError) throw refreshError;
+            row = refreshed as Assignment;
+          }
+        }
         const { data: version, error: versionError } = await supabase!.from('rubric_versions').select('snapshot').eq('hash', row.rubric_hash).single(); if (versionError) throw versionError;
         if (!alive) return;
         const snapshot = version.snapshot as RubricSnapshot;
@@ -161,7 +170,7 @@ function AssignmentEditor({ viewOnly = false }: { viewOnly?: boolean }) {
               }
             }
           }
-          if (cached) { cached.turn_ratings ||= {}; if(row.task_type==='label') cached.turn_ratings={}; else cached.annotations=[]; C.validateAnnotations(row.conversations!.transcript, cached.annotations, snapshot.rubric, { allowIncomplete: true }); validateTurnRatings(row.conversations!.transcript, cached.turn_ratings, snapshot); if (JSON.stringify(cached.annotations) !== JSON.stringify(row.annotations) || JSON.stringify(cached.turn_ratings) !== JSON.stringify(row.turn_ratings || {})) setDraft(cached); else localStorage.removeItem(draftKey); }
+          if (cached) { cached.turn_ratings ||= {}; if(row.task_type==='label') cached.turn_ratings={}; else cached.annotations=[]; C.validateAnnotations(row.conversations!.transcript, cached.annotations, snapshot.rubric, { allowIncomplete: true }); validateTurnRatings(row.conversations!.transcript, cached.turn_ratings, snapshot); if (row.task_type === 'label' && cached.revision === row.revision && cached.rubric_hash !== row.rubric_hash) { cached.rubric_hash = row.rubric_hash; localStorage.setItem(draftKey, JSON.stringify(cached)); } if (JSON.stringify(cached.annotations) !== JSON.stringify(row.annotations) || JSON.stringify(cached.turn_ratings) !== JSON.stringify(row.turn_ratings || {})) setDraft(cached); else localStorage.removeItem(draftKey); }
         } catch { setError('A local recovery draft could not be read. Cloud data has been kept.'); }
         queue.current = new SaveQueue<AnnotationWork>(row.revision, async (next, revision) => {
           const { data, error } = await supabase!.rpc('save_assignment', { p_assignment_id: row.id, p_revision: revision, p_annotations: next.annotations, p_turn_ratings: next.turn_ratings, p_submit: false }); if (error) throw new Error(error.message);
