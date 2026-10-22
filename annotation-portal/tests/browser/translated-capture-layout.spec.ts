@@ -66,7 +66,7 @@ test('translates definitions beside math in the covalent radius capture', async 
   expect(result.math).toBe(2);
 });
 
-for (const [topic, run] of [['heart', '20261020T042424Z'], ['brain', '20261020T135751Z']] as const) {
+for (const [topic, run] of [['heart', '20261020T042424Z'], ['brain', '20261020T135751Z'], ['alkaline-earth-metals', '20261022T021315264Z']] as const) {
   test(`keeps the ${topic} capture layout while translating its turns`, async ({ page }) => {
     const folder = new URL(`../../../agentic_conversation_capture/outputs/${topic}/ta/${run}/`, import.meta.url);
     const source = JSON.parse(await readFile(new URL(`${topic}-ta.capture.json`, folder), 'utf8'));
@@ -85,7 +85,7 @@ for (const [topic, run] of [['heart', '20261020T042424Z'], ['brain', '20261020T1
         const visible: string[] = [];
         let node: Node | null;
         while ((node = walker.nextNode())) if (!node.parentElement?.closest('script,style,noscript,template,svg,[hidden],.sr-only')) visible.push(node.textContent || '');
-        const tamil = visible.join(' ').match(/[\u0B80-\u0BFF][^\s]{0,80}/gu) || [];
+        const tamil = visible.join(' ').match(/[\u0B80-\u0BFF\u3040-\u30FF\u4E00-\u9FFF][^\s]{0,80}/gu) || [];
         return { turn: sourceTurn.turn_id, tamil: tamil.slice(0, 8), images: article.querySelectorAll('img').length,
           tables: article.querySelectorAll('table').length, buttons: article.querySelectorAll('button').length };
       });

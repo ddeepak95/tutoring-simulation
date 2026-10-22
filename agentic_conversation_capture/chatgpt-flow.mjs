@@ -968,7 +968,7 @@ async function main() {
     throw new Error('Usage: node chatgpt-flow.mjs topics | run [topic-id] [--lang en] [--agent-review] [--screenshots] [--upload] [--scripted-capture] | pipeline [topic-id] [--lang en] [--agent-review] [--screenshots] [--no-review] [--scripted-capture] | agent-save existing.html [output.html] [--resume-agent] | translate [file.html] | english-template [file.html] | upload [file.html] [--browser-auth] [--translate-english [translated.json]] | review [file.html] [--screenshots] | screenshots [file.html] | start | ask "question" [--out file.html] [--scripted-capture] | followup "question" [--out file.html] [--scripted-capture] | save [file.html] [--scripted-capture] | status');
   }
   if (action === 'topics') {
-    console.log(JSON.stringify((await readTopics()).map((topic) => ({ id: topic['topic-id'], languages: Object.fromEntries(Object.keys(topic).filter((key) => key !== 'topic-id').map((language) => [language, topicName(topic, language)])) })), null, 2));
+    console.log(JSON.stringify((await readTopics()).map((topic) => ({ id: topic['topic-id'], languages: Object.fromEntries(Object.keys(topic).filter((key) => key !== 'topic-id' && key !== 'topic-name').map((language) => [language, topicName(topic, language)])) })), null, 2));
     return;
   }
   if (action === 'run') {
