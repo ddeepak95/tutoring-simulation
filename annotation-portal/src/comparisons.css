@@ -32,13 +32,22 @@
 .comparison-transcript.selectable:hover { border-color: #276b5980; box-shadow: 0 0 0 5px #276b5980; }
 .comparison-transcript.selected { border-color: #276b59; box-shadow: 0 0 0 5px #276b59; }
 .comparison-transcript:focus-visible { outline: 3px solid #276b59; outline-offset: 3px; }
-.comparison-scroll { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable; padding-right: 12px; }
+.comparison-scroll { flex: 1; min-height: 0; display: flex; flex-direction: column; gap:18px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-gutter: stable; padding: 4px 12px 10px 0; }
 .comparison-capture { flex: 1; min-height: 0; overflow: hidden; border: 1px solid #d6dfd7; border-radius: 8px; background: #fff; }
 .comparison-capture iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
 .comparison-capture-loading { flex: 1; display: grid; place-items: center; color: #68756d; }
 .comparison-scroll:focus-visible { outline: 2px solid #276b59; outline-offset: -2px; }
-.comparison-message { margin-top: 20px; overflow-wrap: anywhere; }
-.comparison-message.student { background: #f3f6f5; padding: 16px; border-radius: 8px; }
+.comparison-message { display:flex; flex-direction:column; align-self:flex-start; min-width:0; width:100%; overflow-wrap:anywhere; }
+.comparison-message.student { align-self:stretch; width:100%; max-width:none; }
+.comparison-message>strong { margin:0 0 7px; color:#263430; font-size:12px; }
+.comparison-message.student>strong { text-align:left; }
+.comparison-message .markdown-body { min-width:0; padding:0; border:0; border-radius:0; background:transparent; line-height:1.7; }
+.comparison-message.student .markdown-body { align-self:flex-end; width:fit-content; max-width:88%; padding:12px 16px; border:0; border-radius:16px 16px 5px 16px; background:#2459b8; color:#fff; }
+.comparison-message.student .markdown-body a { color:#fff; text-decoration:underline; }
+.comparison-message.student .markdown-body :is(code,pre) { color:#fff; background:#ffffff24; border-color:#ffffff40; }
+.comparison-message.student .markdown-body blockquote { color:#fff; border-color:#ffffff80; }
+.comparison-message.student .markdown-body :is(th,td) { color:#fff; background:transparent; border-color:#ffffff80; }
+.comparison-message .markdown-body>*:last-child { margin-bottom:0; }
 .comparison-message pre { white-space: pre-wrap; }
 .comparison-message img { max-width: 100%; }
 .comparison-ratings { margin-top: 20px; }

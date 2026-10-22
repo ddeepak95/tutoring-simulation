@@ -32,6 +32,23 @@ test('capture extraction is stable, sanitizes executable markup and requires exp
   expect(result.unsafe.html).toContain('data:image/svg+xml,');
 });
 
+test('saved capture labels show Bot without rewriting quoted or learner text', async ({ page }) => {
+  await page.goto('/');
+  const result = await page.evaluate(async () => {
+    const { normalizeCapturedSpeakerLabels } = await import('/src/captured-speaker-labels.ts');
+    const html = '<main><article class="capture-message capture-user" data-turn-id="s1"><strong class="capture-speaker">You</strong><p>ChatGPT said:</p></article><article class="capture-message capture-assistant" data-turn-id="t1"><strong class="capture-speaker">ChatGPT</strong><p>ChatGPT can explain this.</p><blockquote>ChatGPT said:</blockquote></article><article class="capture-message capture-assistant" data-turn-id="t2"><h2>ChatGPT said:</h2><p>Another answer.</p></article></main>';
+    const document = new DOMParser().parseFromString(html, 'text/html');
+    normalizeCapturedSpeakerLabels(document, { messages: [{ turn_id: 's1', speaker: 'student', text: 'ChatGPT said:' }, { turn_id: 't1', speaker: 'tutor', text: 'ChatGPT can explain this.' }, { turn_id: 't2', speaker: 'tutor', text: 'Another answer.' }] } as any);
+    return {
+      labels: [...document.querySelectorAll('article')].map(article => article.querySelector('strong,h2')?.textContent),
+      learner: document.querySelector('[data-turn-id="s1"] p')?.textContent,
+      explanation: document.querySelector('[data-turn-id="t1"] p')?.textContent,
+      quote: document.querySelector('blockquote')?.textContent,
+    };
+  });
+  expect(result).toEqual({ labels: ['You', 'Bot', 'Bot'], learner: 'ChatGPT said:', explanation: 'ChatGPT can explain this.', quote: 'ChatGPT said:' });
+});
+
 test('admin prepares, assigns, then annotator highlights preserved HTML and rates the original tutor turn', async ({ page }) => {
   const state = await backend(page);
   const archiveId = '00000000-0000-4000-8000-000000000055'; const conversationId = '00000000-0000-4000-8000-000000000056';

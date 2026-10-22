@@ -462,7 +462,7 @@ async function saveConversation(page, output, details = {}) {
       article.className = 'capture-message capture-' + role;
       const speaker = document.createElement('h2');
       speaker.className = 'capture-speaker';
-      speaker.textContent = message.querySelector('[data-message-attribution]')?.textContent || (role === 'user' ? 'You' : 'ChatGPT');
+      speaker.textContent = role === 'user' ? 'You' : 'Bot';
       article.append(speaker, content.cloneNode(true));
       conversation.append(article);
     }
@@ -590,6 +590,7 @@ async function saveConversation(page, output, details = {}) {
     }
     const captureStyle = document.createElement('style');
     captureStyle.textContent = 'html,body{height:auto!important;min-height:100%!important;overflow:auto!important}body{display:block!important;margin:0!important;background:#fff!important;color:#0d0d0d!important}.capture-conversation{box-sizing:border-box;max-width:800px;margin:0 auto;padding:32px 20px 64px}.capture-message{margin:0 0 32px}.capture-speaker{display:block!important;margin:0 0 10px!important;color:#555!important;font:600 14px/1.4 system-ui,sans-serif!important}.capture-user [data-user-message-bubble]{margin-left:auto;max-width:85%}.capture-assistant [data-assistant-markdown-root],.capture-assistant [data-markdown-text-style="assistant-message"]{width:100%}.capture-conversation [data-d-component="radio"]:has(input:checked){outline:2px solid #6b9d91;border-radius:8px}.capture-conversation .capture-correct{outline:2px solid #2f8a53!important}.capture-conversation .capture-incorrect{outline:2px solid #bd544e!important}.capture-quiz-feedback{margin:12px 0;padding:12px;border-radius:8px;background:#f2f5f3}.capture-quiz-feedback p{margin:6px 0 0}.capture-quiz-score{margin:12px 0;font-weight:700}#capture-image-dialog{max-width:min(90vw,1000px);max-height:90vh;border:0;border-radius:12px;padding:20px;box-shadow:0 20px 60px #0005}#capture-image-dialog::backdrop{background:#0009}#capture-image-dialog img{display:block;max-width:100%;max-height:75vh;margin:auto}#capture-image-dialog [data-capture-close]{float:right;font-size:28px;border:0;background:transparent;cursor:pointer}#capture-image-dialog p{clear:both;margin:12px 0 0}';
+    captureStyle.textContent += '.capture-user [data-user-message-bubble]{display:block!important;box-sizing:border-box!important;width:fit-content!important;max-width:min(82%,720px)!important;margin-left:auto!important;margin-right:0!important;padding:13px 18px!important;border:0!important;border-radius:18px 18px 5px 18px!important;background:#2459b8!important;color:#fff!important;overflow-wrap:anywhere!important;text-align:left!important;box-shadow:none!important}.capture-user [data-user-message-bubble] :is(p,span,strong,em,a,li,div,blockquote,code,pre,th,td){color:inherit!important}.capture-user [data-user-message-bubble] a{color:#fff!important;text-decoration:underline!important}.capture-user [data-user-message-bubble] :is(code,pre){background:#ffffff24!important;border-color:#ffffff40!important}@media(max-width:700px){.capture-user [data-user-message-bubble]{max-width:92%!important}}';
     clone.querySelector('head').append(captureStyle);
     const imageData = ${JSON.stringify(imageData)};
     clone.querySelectorAll('img').forEach(image => {

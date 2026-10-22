@@ -150,6 +150,7 @@ test('translated comparison shows English inside the original captured layout fo
   await expect(originalFrame.getByText('Initial You prompt')).toBeVisible();
   await expect(translatedFrame.locator('h2')).toHaveText(english);
   await expect(translatedFrame.getByText('Initial You prompt')).toBeVisible();
+  await expect(translatedFrame.locator('[data-turn-id="s0"] [data-portal-user-bubble]')).toHaveCSS('background-color', 'rgb(36, 89, 184)');
   await expect(translatedFrame.locator('[data-turn-id="t1"]')).toHaveCSS('border-top-color', 'rgb(128, 0, 128)');
   await expect(translatedFrame.getByAltText('Captured diagram')).toBeVisible();
   await expect(translatedFrame.locator('[data-turn-id="t2"]')).toBeHidden();

@@ -65,4 +65,23 @@ describe('Markdown evidence mapping', () => {
     expect(html).not.toContain('<script'); expect(html).not.toContain('href="javascript:');
     expect(html).toContain('href="https://example.com"'); expect(html).toContain('&lt;script&gt;');
   });
+  it('renders display equations while retaining their exact source span', () => {
+    const text = String.raw`\[
+\mathrm{Mg \rightarrow Mg^{2+} + 2e^-}
+\]
+
+The reaction is shown above.
+
+$$
+E = mc^2
+$$
+
+\`\[not math\]\``;
+    const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly={false} onHighlight={() => {}} />);
+    expect(html.match(/class="katex-display"/g)).toHaveLength(2);
+    expect(html).toContain('<annotation encoding="application/x-tex">\\mathrm{Mg \\rightarrow Mg^{2+} + 2e^-}</annotation>');
+    expect(html).toContain(`data-math-source-start="${text.indexOf('\\mathrm')}"`);
+    expect(html).toContain(`data-math-source-end="${text.indexOf('\\mathrm') + String.raw`\mathrm{Mg \rightarrow Mg^{2+} + 2e^-}`.length}"`);
+    expect(html).toContain('[not math]');
+  });
 });

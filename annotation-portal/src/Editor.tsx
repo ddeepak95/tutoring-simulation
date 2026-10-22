@@ -6,7 +6,10 @@ import { TurnRatingsPanel } from './TurnRatingsPanel';
 import { ratingComplete } from './turn-ratings';
 import { CapturedTranscript, CaptureMedia, OriginalCapture, useCaptureAssets } from './CapturedTranscript';
 import { translateCapturedLayout } from './translated-capture-layout';
+import { normalizeCapturedSpeakerLabels } from './captured-speaker-labels';
+import { styleCapturedUserBubbles } from './captured-user-bubbles';
 import { MarkdownTranscript } from './MarkdownTranscript';
+import { selectedSourceRange } from './markdown-source';
 import { countFeatureItems, featureSubitemCounts } from './feature-counts';
 
 function RichText({ text }: { text: string }) {
@@ -162,6 +165,8 @@ function ExactCapture({ html, conversation, annotations, rubric, readonly, onSel
       if (!document) return;
       removeDocumentListeners();
       translateCapturedLayout(document, conversation);
+      normalizeCapturedSpeakerLabels(document, conversation);
+      styleCapturedUserBubbles(document, conversation);
       const articles = [...document.querySelectorAll<HTMLElement>('article')].filter(article => article.classList.contains('capture-message') || Boolean(article.dataset.turnId));
       const style = document.createElement('style');
       style.dataset.annotationStyle = 'true';
@@ -479,8 +484,15 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
     const articleFor = (node: Node) => (node.nodeType === Node.ELEMENT_NODE ? node as Element : node.parentElement)?.closest<HTMLElement>('.turn[data-turn-id]');
     const article = articleFor(range.commonAncestorContainer), endArticle = articleFor(range.endContainer);
     if (!article || article !== endArticle || !article.classList.contains('tutor')) return;
-    const rect = range.getBoundingClientRect();
-    selectExactPassage(article.dataset.turnId || '', selection.toString(), rect);
+    try {
+      const turnId = article.dataset.turnId || '';
+      const body = article.querySelector<HTMLElement>('.turn-body');
+      if (!body) return;
+      const { start, end } = selectedSourceRange(body, range);
+      const evidence = C.makeEvidence(conversation, turnId, start, end);
+      const rect = range.getBoundingClientRect();
+      setPopup({ x: rect.left, y: rect.bottom + 8, evidence }); setError('');
+    } catch (err) { setError((err as Error).message); }
   }
   function selectImage(turnId: string, imageIndex: number, rect: DOMRect) {
     if (labelReadonly) return;
@@ -564,9 +576,9 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
       {taskType !== 'rate' && <div className="feature-filter-row"><div className="feature-counts" role="list" aria-label="Feature counts">{rubric.map(item => <FeatureCountPill key={item.key} feature={item} annotations={annotations} selected={highlightFilters.includes(item.key)} onToggle={() => toggleHighlightFilter(item.key)} />)}</div>{highlightFilters.length > 0 && <button type="button" className="clear-highlight-filters" onClick={() => { close(); setHighlightFilters([]); }}>Show all highlights</button>}</div>}
     </div>
       {taskType === 'rate' ? <div className="rating-exchange" data-testid="rating-exchange" data-tutor-turn={ratedTurn} aria-live="polite">
-        {exactHtml ? <div className="exact-capture rating-exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={[]} rubric={rubric} readonly onSelect={() => {}} onImageSelect={() => {}} onHighlight={() => {}} onHighlightLeave={() => {}} visibleTurnIds={ratingExchange.map(turn => turn.turn_id)} /></div> : captured.loading ? <div className="exact-capture rating-exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : ratingExchange.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'S' : 'B'}</span><strong>{turn.speaker === 'student' ? 'Student' : 'Bot'}</strong><span>{turn.turn_id}</span></div><div className="turn-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />}</div></article>)}
-      </div> : exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onSelect={selectExactPassage} onImageSelect={selectImage} onNotationSelect={selectNotation} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript" onMouseUp={selectMarkdownPassage}>{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'S' : 'B'}</span><strong>{turn.speaker === 'student' ? 'Student' : 'Bot'}</strong><span>{turn.turn_id}</span></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
-    {captured.originalHtml && <OriginalCapture html={captured.originalHtml} />}
+        {exactHtml ? <div className="exact-capture rating-exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={[]} rubric={rubric} readonly onSelect={() => {}} onImageSelect={() => {}} onHighlight={() => {}} onHighlightLeave={() => {}} visibleTurnIds={ratingExchange.map(turn => turn.turn_id)} /></div> : captured.loading ? <div className="exact-capture rating-exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : ratingExchange.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />}</div></article>)}
+      </div> : exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onSelect={selectExactPassage} onImageSelect={selectImage} onNotationSelect={selectNotation} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript" onMouseUp={selectMarkdownPassage}>{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} onMathSelect={(start, end, rect) => selectNotation(turn.turn_id, start, end, rect)} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
+    {captured.originalHtml && <OriginalCapture html={captured.originalHtml} conversation={conversation} />}
     {completionAction && taskType !== 'rate' && <div className="annotation-completion">{completionAction}</div>}
     {popup && <div className="selection-menu" ref={menuRef} role="dialog" aria-label={active ? `${readonly ? 'View' : 'Edit'} ${feature(active.feature).name}` : readonly ? 'Choose a highlight to view' : 'Choose instructional feature'} onPointerDown={event => event.stopPropagation()} onMouseEnter={keepPopupOpen} style={{ left: popup.x, top: popup.y }}>
       <button className="dismiss" aria-label="Close annotation popup" onClick={close}>×</button>

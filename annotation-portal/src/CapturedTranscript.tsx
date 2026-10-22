@@ -4,6 +4,8 @@ import { supabase, fetchAllRows } from './lib';
 import { MarkdownTranscript } from './MarkdownTranscript';
 import { sanitizeCapturedHtml } from './capture-document';
 import { translateCapturedLayout } from './translated-capture-layout';
+import { normalizeCapturedSpeakerLabels } from './captured-speaker-labels';
+import { styleCapturedUserBubbles } from './captured-user-bubbles';
 
 export function useCaptureAssets(conversation: Conversation) {
   const [state, setState] = useState<{ id: string | null; assets: Record<string, string>; exactHtml?: string; originalHtml?: string; error: string }>({ id: null, assets: {}, error: '' });
@@ -38,6 +40,8 @@ export function CaptureFrame({ html, conversation, visibleTurnIds, selectable = 
       const document = frame.current?.contentDocument;
       if (!document) return;
       translateCapturedLayout(document, conversation);
+      normalizeCapturedSpeakerLabels(document, conversation);
+      styleCapturedUserBubbles(document, conversation);
       if (!visibleTurnIds) return;
       const visible = new Set(visibleTurnIds);
       const style = document.createElement('style');
@@ -69,8 +73,8 @@ export function CaptureMedia({ html }: { html: string }) {
   return <div className="translated-capture-media" aria-label="Original captured visuals">{images.map((image, index) => <img key={`${image.src}-${index}`} src={image.src} alt={image.alt || `Captured visual ${index + 1}`} loading="lazy" />)}</div>;
 }
 
-export function OriginalCapture({ html }: { html: string }) {
-  return <details className="translated-original"><summary>View original captured layout</summary><div className="exact-capture"><iframe title="Original captured layout" sandbox="allow-same-origin" srcDoc={html} /></div></details>;
+export function OriginalCapture({ html, conversation }: { html: string; conversation: Conversation }) {
+  return <details className="translated-original"><summary>View original captured layout</summary><div className="exact-capture"><iframe title="Original captured layout" sandbox="allow-same-origin" srcDoc={html} onLoad={event => { const document = event.currentTarget.contentDocument; if (document) { normalizeCapturedSpeakerLabels(document, conversation); styleCapturedUserBubbles(document, conversation); } }} /></div></details>;
 }
 
 type Props = ComponentProps<typeof MarkdownTranscript> & { html: string };

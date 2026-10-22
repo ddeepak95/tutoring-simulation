@@ -12,7 +12,9 @@ test('formatted transcript selections save exact Markdown evidence and remain ed
   await expect(turn.getByRole('heading', { level: 3, name: 'Evaporation' })).toBeVisible();
   await expect(turn.locator('ol li')).toHaveCount(2); await expect(turn.locator('blockquote')).toContainText('Water & vapour');
   await expect(turn.getByRole('table')).toContainText('74 pm'); await expect(turn.locator('pre code')).toHaveText('r = 74 / 2');
-  await expect(page.locator('[data-turn-id="s1"] strong')).toHaveText('Student text');
+  await expect(page.locator('[data-turn-id="s1"] .turn-heading strong')).toHaveText('You');
+  await expect(page.locator('[data-turn-id="s1"] .turn-body strong')).toHaveText('Student text');
+  await expect(page.locator('[data-turn-id="s1"] .turn-heading')).not.toContainText('s1');
   await select(page, 't1', 'Wet clothes drying');
   await page.getByRole('button', { name: 'Examples', exact: true }).click(); await page.getByRole('button', { name: 'Brief', exact: true }).click();
   await expect.poll(() => state.assignments[0].annotations[0]?.entry.detail_level).toBe('Brief');

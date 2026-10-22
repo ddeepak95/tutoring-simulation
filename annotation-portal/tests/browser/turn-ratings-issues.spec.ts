@@ -126,10 +126,12 @@ test('rating keeps the saved original HTML and shows only the selected exchange'
   await login(page, 'alice'); await page.getByRole('region', { name: 'Rate tutor turns' }).locator('.assignment-row').click();
   const original = page.frameLocator('.rating-exact-capture iframe');
   await expect(original.locator('[data-turn-id="t1"]')).toBeVisible();
+  await expect(original.locator('[data-turn-id="t1"] .capture-speaker')).toHaveText('Bot');
   await expect(original.locator('[data-turn-id="s1"]')).toBeHidden();
   await expect(original.locator('[data-turn-id="t2"]')).toBeHidden();
   await rateCurrentTutorTurn(page); await page.getByRole('complementary', { name: 'Tutor turn ratings' }).getByRole('button', { name: 'Next', exact: true }).first().click();
   await expect(original.locator('[data-turn-id="t1"]')).toBeHidden();
   await expect(original.locator('[data-turn-id="s1"]')).toBeVisible();
+  await expect(original.locator('[data-turn-id="s1"] [data-portal-user-bubble]')).toHaveCSS('background-color', 'rgb(36, 89, 184)');
   await expect(original.locator('[data-turn-id="t2"]')).toBeVisible();
 });
