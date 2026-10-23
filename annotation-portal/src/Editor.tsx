@@ -11,6 +11,7 @@ import { styleCapturedUserBubbles } from './captured-user-bubbles';
 import { MarkdownTranscript } from './MarkdownTranscript';
 import { selectedSourceRange } from './markdown-source';
 import { countFeatureItems, featureSubitemCounts } from './feature-counts';
+import { contextualizeAnnotationError, missingFieldLabels } from './annotation-validation';
 
 function RichText({ text }: { text: string }) {
   return <>{text.split(/(<br><br>|<br>|\*\*[^*]+\*\*|`[^`]+`)/g).map((part, i) => part === '<br><br>' ? <span key={i}><br /><br /></span> : part === '<br>' ? <br key={i} /> : part.startsWith('**') ? <strong key={i}>{part.slice(2, -2)}</strong> : part.startsWith('`') ? <code key={i}>{part.slice(1, -1)}</code> : part)}</>;
@@ -117,7 +118,7 @@ function FeatureCountPill({ feature, annotations, selected, onToggle }: { featur
     {position && <div className="feature-count-tooltip" role="tooltip" id={tooltipId} style={position}><strong>{feature.name}</strong>{featureSubitemCounts(annotations, feature).map(group => <div className="feature-count-group" key={group.label}><span>{group.label}</span><dl>{group.counts.map(item => <div key={item.label}><dt>{item.label}</dt><dd>{item.count}</dd></div>)}</dl></div>)}</div>}
   </div>;
 }
-interface Props { conversation: Conversation; rubric: RubricSnapshot; annotations: Annotation[]; onChange: (annotations: Annotation[]) => void; turnRatings?: TurnRatings; onRatingsChange?: (ratings: TurnRatings) => void; readonly?: boolean; completionAction?: ReactNode; onFinish?: () => void; taskType?: AssignmentType; }
+interface Props { conversation: Conversation; rubric: RubricSnapshot; annotations: Annotation[]; onChange: (annotations: Annotation[]) => void; turnRatings?: TurnRatings; onRatingsChange?: (ratings: TurnRatings) => void; readonly?: boolean; completionAction?: ReactNode; onFinish?: () => void; taskType?: AssignmentType; focusAnnotation?: { id: string; request: number } | null; }
 function optionExplanation(feature: Feature, key: string, value: string) {
   const text = feature.guidance.split(`**${value}:**`)[1];
   if (!text) return null;
@@ -389,7 +390,7 @@ function ExactCapture({ html, conversation, annotations, rubric, readonly, onSel
   }, [annotations, conversation, html, readonly, rubric, visibleTurnIds?.join('|')]);
   return <iframe ref={frame} title={conversation.translation ? 'Translated ChatGPT capture in original layout' : 'Exact original ChatGPT capture'} sandbox="allow-same-origin" srcDoc={html} />;
 }
-export function Editor({ conversation, rubric: snapshot, annotations, onChange, turnRatings = {}, onRatingsChange = () => {}, readonly = false, completionAction, onFinish, taskType = 'label' }: Props) {
+export function Editor({ conversation, rubric: snapshot, annotations, onChange, turnRatings = {}, onRatingsChange = () => {}, readonly = false, completionAction, onFinish, taskType = 'label', focusAnnotation }: Props) {
   const captured = useCaptureAssets(conversation);
   const exactHtml = captured.exactHtml;
   const rubric = useMemo(() => snapshot.rubric.map(conceptDisplayFeature), [snapshot.rubric]);
@@ -415,6 +416,11 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
   const [popup, setPopup] = useState<{ x: number; y: number; evidence?: Evidence; ids?: string[]; id?: string; extend?: boolean; editing?: boolean } | null>(null);
   const [listDraft, setListDraft] = useState<{ id: string; key: string; value: string } | null>(null);
   const [guide, setGuide] = useState(taskType !== 'rate'); const [guideKey, setGuideKey] = useState<string | null>(null);
+  useEffect(() => {
+    if (!focusAnnotation || readonly || taskType !== 'label' || !annotations.some(annotation => annotation.id === focusAnnotation.id)) return;
+    setGuide(false);
+    setPopup({ x: Math.max(8, window.innerWidth / 2 - 170), y: 32, id: focusAnnotation.id, editing: true });
+  }, [focusAnnotation?.request]);
   const [error, setError] = useState(''); const [undo, setUndo] = useState<Annotation | null>(null);
   const [dismissedCaptureError, setDismissedCaptureError] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -463,7 +469,7 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
   }, [popup, active?.feature]);
   function commit(next: Annotation[]) {
     try { C.validateAnnotations(conversation, next, rubric, { allowIncomplete: true }); setError(''); onChange(next); }
-    catch (err) { setError((err as Error).message); }
+    catch (err) { setError(contextualizeAnnotationError(err, conversation, next, rubric).message); }
   }
   function update(annotation: Annotation) { commit(annotations.map(a => a.id === annotation.id ? annotation : a)); }
   function selectExactPassage(turnId: string, selected: string, rect: DOMRect) {
@@ -554,7 +560,7 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
     if (!active) return;
     const next = structuredClone(active); next.entry[key] = [...new Set(value.split(',').map(item => item.trim()).filter(Boolean))];
     try { C.validateAnnotations(conversation, [next], rubric, { allowIncomplete: true }); setError(''); onChange(annotations.map(annotation => annotation.id === next.id ? next : annotation)); setListDraft(null); }
-    catch (err) { setError((err as Error).message); }
+    catch (err) { setError(contextualizeAnnotationError(err, conversation, [next], rubric).message); }
   }
   function displayField(value: string | string[] | number | null | undefined) { return Array.isArray(value) ? value.join(', ') || 'Not provided' : String(value || 'Not provided'); }
   function listField(value: string | string[] | number | null | undefined) { return Array.isArray(value) ? value.join(', ') : ''; }
@@ -588,7 +594,7 @@ export function Editor({ conversation, rubric: snapshot, annotations, onChange, 
       </> : <><h3>{feature(active.feature).name}</h3>
         {popup.editing && <label>Instructional feature<select value={active.feature} onChange={e => changeFeature(e.target.value)}>{rubric.map(f => <option key={f.key} value={f.key} disabled={f.key === 'questions' && active.evidence.length > 1}>{f.name}</option>)}</select></label>}
         {C.formFields(feature(active.feature)).filter(field => field.key !== 'topic' && (field.key !== 'diagram_count' || ['Diagram', 'Flowchart'].includes(String(active.entry.representation_type)))).map(field => <div className="popup-field" key={field.key}><label htmlFor={`field-${field.key}`}>{fieldLabel(field)}</label>{field.numeric ? <><input id={`field-${field.key}`} type="number" min="1" max="1000" step="1" placeholder="1" value={typeof active.entry[field.key] === 'number' ? Number(active.entry[field.key]) : ''} onChange={e => setNumberField(field.key, e.target.value)} /><small>Leave blank for one in this highlight.</small></> : field.options ? <div className="attribute-options" role="group" aria-label={fieldLabel(field)}>{field.optional && <button className="choice" aria-label={`No ${field.key.replaceAll('_', ' ')}`} aria-pressed={!active.entry[field.key]} onClick={() => setField(field.key, '')}>Not specified</button>}{field.options.map(value => <button className="choice" key={value} aria-label={value} aria-pressed={active.entry[field.key] === value} onClick={() => setField(field.key, value)}>{value}{optionExplanation(feature(active.feature), field.key, value) && <small><RichText text={optionExplanation(feature(active.feature), field.key, value)!} /></small>}</button>)}</div> : field.multiple ? <><textarea id={`field-${field.key}`} rows={2} placeholder={field.key === 'image_languages' ? 'en, ta' : 'One item, another item'} value={listDraft?.id === active.id && listDraft.key === field.key ? listDraft.value : listField(active.entry[field.key])} onChange={e => setListDraft({ id: active.id, key: field.key, value: e.target.value })} onBlur={e => commitListField(field.key, e.target.value)} /><small>{field.key === 'image_languages' ? 'Comma-separated BCP 47 language tags. Use zxx for no written language or und when text is unreadable.' : 'Separate items with commas.'}</small></> : <textarea id={`field-${field.key}`} rows={2} value={String(active.entry[field.key] || '')} onChange={e => setField(field.key, e.target.value)} />}</div>)}
-        <small>{C.missingAttributes(active, rubric).length ? 'Details needed: ' + C.missingAttributes(active, rubric).join(', ').replaceAll('_', ' ') : 'Changes save automatically.'}</small>
+        <small>{C.missingAttributes(active, rubric).length ? `Required before completion: ${missingFieldLabels(active, C.missingAttributes(active, rubric), rubric).join(', ')}` : 'Changes save automatically.'}</small>
         {active.feature==='examples'&&<fieldset><legend>Example occurrence</legend>{active.evidence.map((ev,i)=><label key={`${ev.turn_id}-${ev.start}`}><small>{ev.turn_id}: {ev.quote.slice(0,100)}</small><select aria-label={`Example status for passage ${i+1}`} value={ev.example_status||''} onChange={event=>{const next=structuredClone(active);next.evidence[i].example_status=event.target.value as 'Fresh'|'Duplicate';update(next);}}><option value="" disabled>Not classified</option><option value="Fresh">Fresh</option><option value="Duplicate">Duplicate</option></select></label>)}</fieldset>}
         {popup.editing && <><details><summary>Supporting passages ({active.evidence.length})</summary>{active.evidence.map((ev, i) => <div className="evidence" key={`${ev.turn_id}-${ev.start}`}><small>{ev.turn_id}</small><p>{ev.quote}</p>{active.evidence.length > 1 && <button className="secondary" onClick={() => { const next = structuredClone(active); next.evidence.splice(i, 1); next.entry.turn_locations = [...new Set(next.evidence.map(e => e.turn_id))]; const primary = feature(next.feature).fields[0].key; if (next.entry[primary] === ev.quote) next.entry[primary] = next.evidence[0].quote; update(next); }}>Remove passage</button>}</div>)}</details><button className="danger" onClick={() => { setUndo(structuredClone(active)); commit(annotations.filter(a => a.id !== active.id)); close(); }}>Delete highlight</button></>}
       </> : popup.ids ? <><h3>Choose a highlight to {readonly ? 'view' : 'edit'}</h3>{popup.ids.map(id => { const a = annotations.find(item => item.id === id)!; return <button className="choice" key={id} onClick={() => setPopup({ ...popup, id, ids: undefined })}>{feature(a.feature).name}<small>{a.evidence[0].quote.slice(0, 100)}</small></button>; })}</> : popup.extend ? <><h3>Add supporting passage</h3>{annotations.filter(a => a.feature !== 'questions').map(a => <button className="choice" key={a.id} onClick={() => { const next = C.addEvidence(structuredClone(a), { ...popup.evidence!, ...(a.feature==='examples'?{example_status:'Duplicate' as const}:{}) }); update(next); window.getSelection()?.removeAllRanges(); setPopup({ ...popup, id: a.id, evidence: undefined, extend: false, editing: true }); }}>{feature(a.feature).name}<small>{a.evidence[0].quote.slice(0, 100)}</small></button>)}</> : <><h3>Annotate as</h3>{rubric.map(f => <button className="choice feature-choice" key={f.key} onClick={() => create(f.key)}><i style={{ background: f.color }} />{f.name}</button>)}{annotations.some(a => a.feature !== 'questions') && <button className="text-button" onClick={() => setPopup({ ...popup, extend: true })}>Add passage to an existing entry</button>}</>}

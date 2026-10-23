@@ -13,17 +13,10 @@ import { languageId, languageName } from './languages';
 import { compareWithBaseline } from './baseline-comparison';
 import type { LLMBaseline } from './types';
 import { Toast, useToast } from './Toast';
+import { conversationTitle, groupByTopic } from './topic-groups';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
-const conversationTitle = (doc: DocumentRow) => doc.conversation_title || doc.transcript.learning_topic || doc.label;
-const genericTopic = (doc: DocumentRow) => doc.generic_topic_name || doc.transcript.topic_name || doc.transcript.topic_english_name || conversationTitle(doc);
-const conversationOrder = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true });
-const compareConversations = (a: DocumentRow, b: DocumentRow) =>
-  conversationOrder.compare(genericTopic(a), genericTopic(b)) ||
-  conversationOrder.compare(conversationTitle(a), conversationTitle(b)) ||
-  conversationOrder.compare(a.language, b.language) ||
-  a.id.localeCompare(b.id);
 
 export function Admin() {
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
@@ -41,7 +34,7 @@ export function Admin() {
       if (!version) { const { error: insertError } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (insertError && insertError.code !== '23505') throw insertError; }
       const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*'), supabase!.from('profiles').select('*').order('username')]);
       if (docs.error) throw docs.error; if (people.error) throw people.error;
-      setRows(assignments); setDocuments((docs.data as DocumentRow[]).sort(compareConversations)); setUsers(people.data as Profile[]);
+      setRows(assignments); setDocuments((docs.data as DocumentRow[])); setUsers(people.data as Profile[]);
     } catch (err) { setError(message(err)); } finally { setLoading(false); }
   }
   useEffect(() => { void refresh(); const timer = setInterval(() => void refresh(), 30000); return () => clearInterval(timer); }, []);
@@ -127,34 +120,38 @@ export function Admin() {
     setAssignmentPopup({ key, task, assignments, left, top });
   }
   const visible = rows;
+  const topics = groupByTopic(documents);
   const menuDocuments = menu ? documents.filter(doc => menu.ids.includes(doc.id)) : [];
   return <main className="dashboard admin-dashboard">
     <div className="page-heading"><div><span className="eyebrow">ADMINISTRATION</span><h1>Conversations</h1><p>Manage transcripts and assign annotation work.</p></div><div className="actions"><button className="secondary" disabled={busy} onClick={() => { setError(''); void refresh(); }}>Refresh</button><button className="primary" onClick={() => setUploadOpen(true)}>Upload</button></div></div>
     {error && !uploadOpen && <p className="error" role="alert">{error}</p>}{!uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}
     
-    <section className="card conversation-card" aria-label="Conversations">
-      <div className="conversation-toolbar"><span>{documents.length} conversation{documents.length === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div>
+    <section className="conversation-overview" aria-label="Conversations">
+      <div className="card conversation-toolbar"><span>{topics.length} topic{topics.length === 1 ? '' : 's'} · {documents.length} conversation{documents.length === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span><div className="conversation-toolbar-actions"><Link to="/topics/labels">Compare English and Tamil labels</Link><label className="checkbox"><input type="checkbox" aria-label="Select all conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} />Select all</label>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div></div>
+      {topics.map((group, index) => <details className="card conversation-card topic-group" key={group.key} open={index === 0} aria-label={`${group.name} conversations`}>
+      <summary className="topic-group-heading"><h2 lang="en">{group.name}</h2><small>{group.documents.length} conversation{group.documents.length === 1 ? '' : 's'}</small></summary>
+      <div className="topic-group-actions"><Link to={`/topics/${encodeURIComponent(group.key)}/labels`}>Compare feature labels</Link></div>
       <div className="table-wrap"><table className="conversation-table"><thead><tr>
-        <th className="select-column"><input type="checkbox" aria-label="Select all conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} /></th>
-        <th>Conversation</th><th>Topic ID</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>Label</th><th>Rate</th><th aria-label="Actions"></th>
-      </tr></thead><tbody>{documents.map(doc => {
+        <th className="select-column" aria-label="Select"></th>
+        <th>Conversation</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>Label</th><th>Rate</th><th aria-label="Actions"></th>
+      </tr></thead><tbody>{group.documents.map(doc => {
         const assigned = rows.filter(row => row.conversation_id === doc.id);
         const assignmentsFor = (task: AssignmentType) => [...new Map(assigned.filter(row => row.task_type === task).map(row => [row.annotator_id, row])).values()].sort((a, b) => (a.profiles?.username || users.find(user => user.id === a.annotator_id)?.username || '').localeCompare(b.profiles?.username || users.find(user => user.id === b.annotator_id)?.username || ''));
         const labelAssignments = assignmentsFor('label');
         const rateAssignments = assignmentsFor('rate');
         const topic = conversationTitle(doc);
-        const topicName = genericTopic(doc);
         return <tr key={doc.id} data-conversation-id={doc.id} className={selected.includes(doc.id) ? 'selected-row' : ''}>
           <td><input type="checkbox" aria-label={`Select ${doc.label}`} checked={selected.includes(doc.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, doc.id] : previous.filter(id => id !== doc.id))} /></td>
-          <td className="topic-cell"><small className="generic-topic" lang="en">{topicName}</small><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
-          <td className="metadata-id-cell"><code>{doc.topic_id || doc.transcript.topic_id || doc.transcript.repository_source?.topic_id || '—'}</code></td><td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
+          <td className="topic-cell"><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
+          <td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
           <td>{originalLanguage(doc)}</td><td>{languageName(doc.language)}</td>
           <td><button type="button" className="assignment-count" aria-label={`Label: ${labelAssignments.filter(row => row.status === 'submitted').length} completed of ${labelAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:label` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onBlur={() => setAssignmentPopup(null)}>{labelAssignments.filter(row => row.status === 'submitted').length}/{labelAssignments.length}</button></td>
           <td><button type="button" className="assignment-count" aria-label={`Rate: ${rateAssignments.filter(row => row.status === 'submitted').length} completed of ${rateAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:rate` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onBlur={() => setAssignmentPopup(null)}>{rateAssignments.filter(row => row.status === 'submitted').length}/{rateAssignments.length}</button></td>
           <td className="row-actions"><button className="conversation-menu-button" aria-label={`Assign users for ${doc.label}`} title="Assign users" aria-haspopup="dialog" aria-expanded={Boolean(menu?.ids.length === 1 && menu.ids[0] === doc.id)} disabled={busy} onClick={event => { const anchor = event.currentTarget; setMenu(previous => previous?.ids.length === 1 && previous.ids[0] === doc.id ? null : { ids: [doc.id], anchor }); }}>⋮</button></td>
         </tr>;
       })}</tbody></table></div>
-      {loading ? <p className="empty" role="status">Loading conversations…</p> : !documents.length && <p className="empty">No conversations yet. Upload transcript files to get started.</p>}
+      </details>)}
+      {loading ? <p className="card empty" role="status">Loading conversations…</p> : !documents.length && <p className="card empty">No conversations yet. Upload transcript files to get started.</p>}
     </section>
     {assignmentPopup && createPortal(<div id="assignment-progress-popup" className="assignment-progress-popup" role="tooltip" style={{ left: assignmentPopup.left, top: assignmentPopup.top }}><strong>{assignmentPopup.task === 'label' ? 'Label' : 'Rate'} · {assignmentPopup.assignments.filter(row => row.status === 'submitted').length}/{assignmentPopup.assignments.length} completed</strong>{assignmentPopup.assignments.length ? <ul>{assignmentPopup.assignments.map(row => <li key={row.annotator_id}><span>{row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Annotator'}</span><small>{statusText(row.status)}</small></li>)}</ul> : <p>No annotators assigned</p>}</div>, document.body)}
     {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}

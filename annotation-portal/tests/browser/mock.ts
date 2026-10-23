@@ -16,7 +16,7 @@ export async function backend(page: Page) {
   const passwords = new Map(people.map(profile => [profile.username, 'test-password-123']));
   const documents = [{ id: ids.doc, label: sample.label, language: 'Tamil', transcript: structuredClone(sample), created_at: new Date().toISOString() }];
   const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, task_type: 'label', status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }));
-  const state = { documents, assignments, people, passwords, baselines:[] as any[], captureAssets:[] as any[], captureDocuments:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
+  const state = { documents, assignments, comparisonPairs: [] as any[], comparisonAssignments: [] as any[], people, passwords, baselines:[] as any[], captureAssets:[] as any[], captureDocuments:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
   await page.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url());
     if((url.hostname==='127.0.0.1'||url.hostname==='localhost')&&url.pathname==='/api/llm-annotations') {
@@ -132,6 +132,8 @@ export async function backend(page: Page) {
     if (url.pathname === '/rest/v1/profiles') rows = people.filter(p => profile.role === 'admin' || p.id === userId);
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
     if (url.pathname === '/rest/v1/conversation_details') rows = documents;
+    if (url.pathname === '/rest/v1/comparison_pairs') rows = state.comparisonPairs;
+    if (url.pathname === '/rest/v1/comparison_assignments') rows = state.comparisonAssignments;
     if (url.pathname === '/rest/v1/conversation_capture_assets') rows=state.captureAssets;
     if (url.pathname === '/rest/v1/conversation_capture_documents') rows=state.captureDocuments;
     if (url.pathname === '/rest/v1/rubric_versions') rows = [{ hash: rubric.rubric_sha256, snapshot: rubric }];

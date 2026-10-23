@@ -1,6 +1,32 @@
 import { expect, test } from '@playwright/test';
 import { backend, ids, login, rateAllTutorTurns, rateCurrentTutorTurn, select } from './mock';
 
+test('completion identifies missing question fields and opens the affected highlight', async ({ page }) => {
+  const state = await backend(page);
+  const quote = 'Have you understood?';
+  const start = state.documents[0].transcript.messages[0].text.indexOf(quote);
+  state.assignments[0].status = 'in_progress';
+  state.assignments[0].annotations = [{ id: 'incomplete-question', feature: 'questions', entry: { question: quote, question_type: '', turn_locations: ['t1'] }, evidence: [{ turn_id: 't1', quote, start, end: start + quote.length, occurrence: 1 }] }];
+  await login(page, 'alice'); await page.goto(`/assignments/${ids.a}`);
+  await expect(page.locator('.save-status')).toContainText('Saved to cloud');
+  await page.getByRole('button', { name: 'Complete Label task', exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('Questions · Bot turn 1 · “Have you understood?”: Question classification');
+  const issues = page.getByRole('region', { name: 'Highlights needing details' });
+  await expect(issues).toContainText('Have you understood?');
+  await expect(issues).toContainText('Question classification');
+  await issues.getByRole('button', { name: 'Edit highlight' }).click();
+  const popup = page.getByRole('dialog', { name: 'Edit Questions' });
+  await expect(popup).toBeVisible();
+  await popup.getByRole('button', { name: /Instructional/ }).click();
+  await popup.getByLabel('Number of questions (optional)').fill('1001');
+  await expect(page.locator('.editor-toast-error')).toContainText('Questions · Bot turn 1 · “Have you understood?”: Number of questions must be a whole number from 1 to 1000.');
+  await popup.getByLabel('Number of questions (optional)').fill('');
+  await expect(issues).toHaveCount(0);
+  await popup.getByRole('button', { name: 'Close annotation popup' }).click();
+  await page.getByRole('button', { name: 'Complete Label task', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Complete Label task?' })).toBeVisible();
+});
+
 test('desktop rating panels fit the remaining viewport without page scrolling', async ({ page }) => {
   const state = await backend(page); state.assignments[0].task_type = 'rate'; state.assignments[0].annotations = [];
   await page.setViewportSize({ width: 1440, height: 900 });

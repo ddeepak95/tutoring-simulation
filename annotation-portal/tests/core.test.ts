@@ -24,7 +24,9 @@ describe('annotation evidence and submission', () => {
   it('allows incomplete autosaves but refuses incomplete submissions', () => {
     const a = C.createAnnotation('questions', C.makeEvidence(conversation, 't1', conversation.messages[0].text.indexOf('What is evaporation?'), conversation.messages[0].text.indexOf('What is evaporation?') + 'What is evaporation?'.length), bundledRubric.rubric, 'a');
     expect(C.validateAnnotations(conversation, [a], bundledRubric.rubric, { allowIncomplete: true })).toHaveLength(1);
-    expect(() => validateSubmission(conversation, [a], bundledRubric, 'ann', {}, 'label')).toThrow(/Complete/);
+    expect(() => validateSubmission(conversation, [a], bundledRubric, 'ann', {}, 'label')).toThrow(/Complete required fields.*Questions · Bot turn 1 · “What is evaporation\?”: Question classification/);
+    a.entry.question_type = 'Invalid';
+    expect(() => validateSubmission(conversation, [a], bundledRubric, 'ann', {}, 'label')).toThrow(/Questions · Bot turn 1 · “What is evaporation\?”.*Question classification has an invalid value/);
     a.entry.question_type = 'Knowledge-checking';
     expect(validateSubmission(conversation, [a], bundledRubric, 'ann', {}, 'label').feature_counts.questions).toBe(1);
     const ratings = completeRatings(conversation, bundledRubric);
