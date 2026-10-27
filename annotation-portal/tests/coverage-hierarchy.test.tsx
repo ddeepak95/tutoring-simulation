@@ -3,7 +3,8 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {parseCoverageTopic,groupCoverage,conceptLevel,conceptDisplayFeature} from '../src/coverage-hierarchy';
 import {MarkdownTranscript} from '../src/MarkdownTranscript';
 import {AnnotationSummary} from '../src/AnnotationSummary';
-import {C,bundledRubric} from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 it('groups multiple mains without conflating legacy topics or losing each component detail',()=>{
  const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'Water evaporates.'}]});

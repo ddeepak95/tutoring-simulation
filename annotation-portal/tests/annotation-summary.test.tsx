@@ -1,7 +1,8 @@
 import { expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AnnotationSummary } from '../src/AnnotationSummary';
-import { bundledRubric, C } from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 it('shows question and diagram totals from per-highlight counts', () => {
   const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text: 'Why A? Why B? Diagram A and diagram B.' }] });

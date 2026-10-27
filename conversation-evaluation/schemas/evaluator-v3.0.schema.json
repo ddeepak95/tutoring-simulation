@@ -1,0 +1,528 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Coding Schema Conversation Evaluation v3",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "rubric_version": {
+      "const": "3.0",
+      "type": "string"
+    },
+    "conversation_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "learning_topic": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "instructional_features": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concepts_and_subtopics_covered": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "topic": {
+                "type": "string",
+                "minLength": 1
+              },
+              "detail_level": {
+                "enum": [
+                  "Brief",
+                  "Explained",
+                  "Elaborated"
+                ],
+                "type": "string",
+                "minLength": 1
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "topic",
+              "turn_locations"
+            ]
+          }
+        },
+        "examples": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "example": {
+                "type": "string",
+                "minLength": 1
+              },
+              "concept_illustrated": {
+                "type": "string",
+                "minLength": 1
+              },
+              "detail_level": {
+                "enum": [
+                  "Brief",
+                  "Explained",
+                  "Elaborated"
+                ],
+                "type": "string",
+                "minLength": 1
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "example",
+              "concept_illustrated",
+              "turn_locations"
+            ]
+          }
+        },
+        "analogies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "comparison": {
+                "type": "string",
+                "minLength": 1
+              },
+              "concept_explained": {
+                "type": "string",
+                "minLength": 1
+              },
+              "detail_level": {
+                "enum": [
+                  "Brief",
+                  "Explained",
+                  "Elaborated"
+                ],
+                "type": "string",
+                "minLength": 1
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "comparison",
+              "concept_explained",
+              "turn_locations"
+            ]
+          }
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "representation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "representation_type": {
+                "enum": [
+                  "Diagram",
+                  "Flowchart",
+                  "Graph",
+                  "Table",
+                  "Equation",
+                  "Other visual or symbolic form"
+                ],
+                "type": "string",
+                "minLength": 1
+              },
+              "concept_illustrated": {
+                "type": "string",
+                "minLength": 1
+              },
+              "image_languages": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*|und|zxx)$"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              },
+              "diagram_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "representation",
+              "representation_type",
+              "concept_illustrated",
+              "turn_locations"
+            ]
+          }
+        },
+        "cultural_references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "reference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "concept_illustrated": {
+                "type": "string",
+                "minLength": 1
+              },
+              "detail_level": {
+                "enum": [
+                  "Brief",
+                  "Explained",
+                  "Elaborated"
+                ],
+                "type": "string",
+                "minLength": 1
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "reference",
+              "concept_illustrated",
+              "turn_locations"
+            ]
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "question": {
+                "type": "string",
+                "minLength": 1
+              },
+              "question_type": {
+                "type": "string",
+                "enum": [
+                  "Knowledge-checking",
+                  "Instructional"
+                ]
+              },
+              "concept_checked": {
+                "type": ["string", "null"],
+                "minLength": 1
+              },
+              "question_count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1,
+                "maxItems": 1
+              }
+            },
+            "required": [
+              "question",
+              "question_type",
+              "concept_checked",
+              "turn_locations"
+            ]
+          }
+        }
+      },
+      "required": [
+        "concepts_and_subtopics_covered",
+        "examples",
+        "analogies",
+        "representations",
+        "cultural_references",
+        "questions"
+      ]
+    },
+    "pedagogical_characteristics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "instructional_sequence": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "enum": [
+                "Rule → Example",
+                "Example → Rule",
+                "Not determinable"
+              ],
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/evidence"
+              }
+            }
+          },
+          "required": [
+            "value",
+            "reason",
+            "evidence"
+          ]
+        },
+        "concept_summarization": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "coherence": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "information_load_appropriateness": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "relevance": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "real_world_connection_and_usefulness": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "appropriateness_for_the_learners_level": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "opportunities_to_demonstrate_understanding": {
+          "$ref": "#/$defs/ordinal_judgment"
+        }
+      },
+      "required": [
+        "instructional_sequence",
+        "concept_summarization",
+        "coherence",
+        "information_load_appropriateness",
+        "relevance",
+        "real_world_connection_and_usefulness",
+        "appropriateness_for_the_learners_level",
+        "opportunities_to_demonstrate_understanding"
+      ]
+    },
+    "conversation_quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "conversational_naturalness": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "responsiveness": {
+          "$ref": "#/$defs/ordinal_judgment"
+        },
+        "positivity_of_tone": {
+          "$ref": "#/$defs/ordinal_judgment"
+        }
+      },
+      "required": [
+        "conversational_naturalness",
+        "responsiveness",
+        "positivity_of_tone"
+      ]
+    },
+    "errors": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "error": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 1
+              },
+              "explanation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "correction_status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              }
+            },
+            "required": [
+              "error",
+              "evidence",
+              "explanation",
+              "correction_status",
+              "turn_locations"
+            ]
+          }
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "verification_needed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "issue": {
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/evidence"
+            }
+          },
+          "reason": {
+            "type": "string"
+          },
+          "turn_locations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "issue",
+          "evidence",
+          "reason",
+          "turn_locations"
+        ]
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "rubric_version",
+    "conversation_id",
+    "learning_topic",
+    "instructional_features",
+    "pedagogical_characteristics",
+    "conversation_quality",
+    "errors",
+    "verification_needed",
+    "limitations"
+  ],
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "turn_id": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1
+        },
+        "occurrence": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "turn_id",
+        "quote",
+        "occurrence"
+      ]
+    },
+    "ordinal_judgment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": [
+            "scored",
+            "Not applicable",
+            "Insufficient evidence"
+          ],
+          "type": "string"
+        },
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 3
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "score",
+        "reason",
+        "evidence"
+      ]
+    }
+  }
+}

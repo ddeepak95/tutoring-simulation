@@ -21,7 +21,7 @@
   };
 
   function formFields(feature) {
-    return feature.fields.filter(field => !FORM_FIELDS[feature.key] || FORM_FIELDS[feature.key].includes(field.key));
+    return feature.category ? feature.fields : feature.fields.filter(field => !FORM_FIELDS[feature.key] || FORM_FIELDS[feature.key].includes(field.key));
   }
 
   function normalizeConversation(input, filename = "Imported conversation") {
@@ -94,7 +94,8 @@
     if (!feature) throw new Error("Unknown instructional feature.");
     const entry = Object.fromEntries(feature.fields.filter(field => !field.optional && OPTIONAL_CONCEPT_FIELDS[featureKey] !== field.key).map(field => [field.key, field.multiple ? [] : ""]));
     // Use the selected wording as an editable starting point, without guessing enums.
-    entry[feature.fields[0].key] = evidence.quote;
+    if (feature.category) { entry.category = feature.category; entry.count = 1; }
+    else entry[feature.fields[0].key] = evidence.quote;
     if (featureKey === "concepts_and_subtopics_covered" && feature.fields.some(field => field.key === "concept_level")) entry.concept_level = null;
     entry.turn_locations = [evidence.turn_id];
     return { id, feature: featureKey, entry, evidence: [structuredClone(evidence)] };
@@ -103,18 +104,30 @@
   function validateAnnotations(conversation, annotations, rubric, { allowIncomplete = false } = {}) {
     if (!Array.isArray(annotations)) throw new Error("Annotations must be a list.");
     const ids = new Set();
+    const sectionItems = new Set();
     for (const annotation of annotations) {
       if (!annotation || typeof annotation.id !== "string" || !annotation.id || ids.has(annotation.id)) throw new Error("Annotation IDs must be nonempty and unique.");
       ids.add(annotation.id);
       const feature = rubric.find(f => f.key === annotation.feature);
       if (!feature) throw new Error("Unknown instructional feature.");
+      if (annotation.section_id !== undefined && !/^t[1-9][0-9]*s[1-9][0-9]*$/.test(annotation.section_id)) throw new Error("Invalid permanent section ID.");
       if (!annotation.entry || typeof annotation.entry !== "object" || !Array.isArray(annotation.evidence) || !annotation.evidence.length) throw new Error("Every annotation needs attributes and supporting evidence.");
+      if (feature.category) {
+        if (annotation.entry.category !== feature.category) throw new Error("Category does not match the selected item.");
+        if (annotation.evidence.length !== 1) throw new Error("Item labels require exactly one section.");
+        const ev = annotation.evidence[0];
+        const sectionKey = JSON.stringify([annotation.feature, ev.turn_id, ev.start, ev.end]);
+        if (sectionItems.has(sectionKey)) throw new Error("This item already labels this section. Edit its quantity instead.");
+        sectionItems.add(sectionKey);
+        if (ev.example_status !== undefined) throw new Error("Item labels do not use Fresh/Duplicate metadata.");
+      }
       for (const evidence of annotation.evidence) {
         if (evidence.example_status !== undefined && (annotation.feature !== "examples" || !["Fresh", "Duplicate"].includes(evidence.example_status))) throw new Error("Example status must be Fresh or Duplicate and belongs only to examples.");
         const expected = makeEvidence(conversation, evidence.turn_id, evidence.start, evidence.end);
         if (evidence.quote !== expected.quote || evidence.occurrence !== expected.occurrence) throw new Error("An evidence quotation or occurrence no longer matches the transcript.");
       }
       const allowed = new Set([...feature.fields.map(f => f.key), "turn_locations"]);
+      if (feature.category) allowed.add("category");
       if (annotation.feature === "issues") allowed.add("correction_status");
       for (const key of Object.keys(annotation.entry)) {
         if (!allowed.has(key)) throw new Error(`Unexpected entry attribute: ${key}.`);
@@ -147,7 +160,7 @@
       }
       const turns = [...new Set(annotation.evidence.map(e => e.turn_id))];
       if (!Array.isArray(annotation.entry.turn_locations) || JSON.stringify(turns) !== JSON.stringify(annotation.entry.turn_locations)) throw new Error("Turn locations must match the supporting passages.");
-      if (annotation.feature === "questions") {
+      if (!feature.category && annotation.feature === "questions") {
         if (annotation.evidence.length !== 1 || annotation.entry.question !== annotation.evidence[0].quote) throw new Error("Record each question occurrence separately using its exact selected wording.");
       }
     }
@@ -155,6 +168,7 @@
   }
 
   function addEvidence(annotation, evidence) {
+    if (annotation.entry.category) throw new Error("Item labels cannot merge sections.");
     if (annotation.feature === "questions") throw new Error("Each question occurrence is a separate entry.");
     const same = e => e.turn_id === evidence.turn_id && e.start === evidence.start && e.end === evidence.end;
     if (!annotation.evidence.some(same)) annotation.evidence.push(evidence);
@@ -178,24 +192,27 @@
         for (const field of feature.fields) {
           if ((field.optional || OPTIONAL_CONCEPT_FIELDS[feature.key] === field.key) && (entry[field.key] === "" || (field.multiple && Array.isArray(entry[field.key]) && !entry[field.key].length))) delete entry[field.key];
         }
+        if (a.section_id) entry.section_id = a.section_id;
         return entry;
       });
       instructional_features[feature.key] = entries;
-      feature_counts[feature.key] = entries.length;
+      feature_counts[feature.key] = feature.category ? entries.reduce((sum, entry) => sum + entry.count, 0) : entries.length;
       highlight_counts[feature.key] = matching.length;
     }
     const issues = instructional_features.issues || [];
     delete instructional_features.issues;
     return {
       issues,
-      format_version: FORMAT_VERSION,
+      section_counts: Object.fromEntries(rubric.filter(feature => feature.category).map(feature => [feature.key, annotations.filter(a => a.feature === feature.key).length])),
+      format_version: rubric.some(feature => feature.category) ? "instructional-feature-annotation/2.0" : FORMAT_VERSION,
       exported_at: new Date().toISOString(),
       annotator: annotator || null,
       offset_convention: "Zero-based UTF-16 code-unit offsets; end is exclusive. Occurrence is one-based and includes overlapping matches.",
       conversation: structuredClone(conversation),
       rubric: structuredClone(rubric),
       form_fields: structuredClone(FORM_FIELDS),
-      annotations: structuredClone(annotations),
+      sections: [...new Map(annotations.filter(a => a.section_id).map(a => [a.section_id, { section_id: a.section_id, ...structuredClone(a.evidence[0]) }])).values()],
+      annotations: annotations.map(a => { if (!a.section_id) return structuredClone(a); const { evidence, entry, ...reference } = a; const { turn_locations, ...attributes } = entry; return structuredClone({ ...reference, entry: attributes }); }),
       incomplete_annotations,
       instructional_features,
       feature_counts,

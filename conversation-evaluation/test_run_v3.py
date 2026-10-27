@@ -18,6 +18,10 @@ spec.loader.exec_module(pipeline)
 
 class V3Tests(unittest.TestCase):
     def setUp(self):
+        for name, value in [("SCHEMA", HERE / "schemas/evaluator-v3.0.schema.json"), ("PROMPT", HERE / "prompts/evaluator-v3.0.md")]:
+            replacement = patch.object(pipeline, name, value)
+            replacement.start()
+            self.addCleanup(replacement.stop)
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
@@ -34,7 +38,7 @@ class V3Tests(unittest.TestCase):
                 {"turn_id": "t2", "speaker": "tutor", "text": "Correction: evaporation occurs below boiling temperature. Why do clothes dry faster in moving air?"}]}
         pipeline.save_json(self.source, self.transcript)
         self.conversation = pipeline.normalize(self.source)
-        self.schema = pipeline.read_json(pipeline.SCHEMA)
+        self.schema = pipeline.read_json(HERE / "schemas/evaluator-v3.0.schema.json")
         self.prompt = pipeline.PROMPT.read_text(encoding="utf-8")
         self.tasks = pipeline.tasks_for(self.conversation, "unused reference", self.schema, self.prompt)
         self.settings = pipeline.read_json(HERE / "config.json")
@@ -197,12 +201,14 @@ class V3Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Schema"):
             pipeline.validate_stage(value, self.tasks[0])
 
-    def test_question_guidance_matches_the_guidebook(self):
+    def test_current_question_guidance_matches_the_item_guidebook(self):
         table = (HERE / "human-annotation/coding-guidebook.md").read_text(encoding="utf-8")
         row = next(line for line in table.splitlines() if line.startswith("| Questions |"))
         columns = [cell.strip() for cell in row.split("|")[1:-1]]
-        section = self.prompt.split("#### Questions\n\n", 1)[1].split("### Pedagogical Characteristics", 1)[0].strip()
-        self.assertEqual(section, columns[1] + "\n\n**Guidance**\n\n" + columns[4].replace("<br><br>", "\n\n"))
+        prompt = (HERE / "prompts/evaluator-v3.md").read_text(encoding="utf-8")
+        self.assertIn(columns[1], prompt)
+        self.assertIn("Category: " + columns[2], prompt)
+        self.assertIn("count from 1 to 1000", prompt)
 
     def test_omitted_rhetorical_and_table_questions_trigger_repair(self):
         task = copy.deepcopy(self.tasks[0])

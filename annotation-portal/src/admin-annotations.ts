@@ -5,7 +5,7 @@ import type { AssignmentType, Profile } from './types';
 export async function openAdminAnnotations(conversationId: string, profile: Profile, client: SupabaseClient = supabase!, taskType: AssignmentType = 'label'): Promise<string> {
   if (profile.role !== 'admin') throw new Error('Admin access required.');
   async function existing() {
-    const { data, error } = await client.from('assignments').select('id, baseline_id, status, revision, annotations, turn_ratings, task_type').eq('conversation_id', conversationId).eq('annotator_id', profile.id).eq('task_type',taskType).order('updated_at', { ascending: false }).limit(1).maybeSingle();
+    const { data, error } = await client.from('assignments').select('id, baseline_id, status, revision, annotations, turn_ratings, task_type').eq('conversation_id', conversationId).eq('annotator_id', profile.id).eq('task_type',taskType).eq('is_active',true).order('updated_at', { ascending: false }).limit(1).maybeSingle();
     if (error) throw new Error('Could not load your annotations. Please try again.');
     return data;
   }

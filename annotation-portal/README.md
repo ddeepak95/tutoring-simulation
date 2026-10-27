@@ -302,3 +302,28 @@ Admins can remove saved captures with **HTML archives ? Delete archive**. Confir
 `../agentic_conversation_capture/topics.json` is the source for each generic `topic-id`, generic `topic-name`, and language-specific conversation `title`. `../agentic_conversation_capture/languages.json` lists the supported language IDs and display names. Use lowercase language IDs, such as `en` and `ta`, as the language keys in `topics.json`.
 
 After changing either file, run `npm run sync:topics -- --project PROJECT_REF` from `annotation-portal`. It updates the database catalogs and conversation links. The `conversation_details` view shows `topic_id`, `generic_topic_name`, `language`, and `conversation_title`; the admin conversation table reads this view. The historical `covalent-redius` ID is mapped to the canonical `covalent-radius` ID during import and backfill. Existing capture files retain their original names and content.
+
+
+### Section item labeling rollout
+
+The current Label rubric is `section-items/1`: 15 items under Multimedia, Textual Representations, and Content. Select a section, add one or more items, and enter each item's occurrence quantity (1-1,000; default 1). Categories are fixed metadata. Counts sum quantities, while section totals count distinct source passages. The old descriptive fields and Fresh/Duplicate classification remain available only through historical rubric snapshots.
+
+After the live-label-rubric prerequisite, run `npm run build` and `npm run migrate:section-items -- --project PROJECT_REF` from `annotation-portal` as part of rollout, before serving the new portal. The project-checked script registers the built snapshot and applies the transition in one transaction. It automatically archives every active old-rubric Label assignment, including submitted work, and creates blank replacements for the same owners. It preserves old annotations, statuses, rubric snapshots, baselines, and revisions; Rate assignments and already inactive historical work remain unchanged. `label_schema_replacements` links each archived assignment to its replacement. Archived assignments cannot be edited or restored, including by stale admin clients. Running the same rollout again retains replacement work and creates no duplicates. New assignments can use only baselines matching their rubric.
+
+The migration template contains snapshot placeholders and must be applied through this script. Do not execute the unrendered SQL directly. Old rubric exports remain readable, and the retired guide is in `conversation-evaluation/human-annotation/coding-guidebook-legacy.md`. This incompatible transition is separate from compatible future rubric additions. Existing local recovery drafts remain attached to the archived assignment ID and are never copied to its blank replacement.
+
+
+### Permanent section IDs
+
+Sections are registered once per conversation in `conversation_sections`. IDs are short and scoped by the database conversation ID: `t1s1`, `t1s2`, `t2s1`, etc. Turn numbers count tutor responses, matching the labeling boxes. Each registry record retains its canonical turn ID, UTF-16 offsets, exact quotation, occurrence and source fingerprint. Resolve references with `(conversation_id, section_id)`; different conversations may both have `t1s1`.
+
+New item annotations in assignments, revision history and LLM baselines store `section_id` rather than duplicated passage evidence. Reads resolve the reference through the registry; exports include section records and the conversation scope. IDs and boundaries cannot be updated or renumbered. Reopening an assignment, changing label quantities, another annotator, or regenerating a baseline reuses the same records. Revised source text must use a new conversation record.
+
+Apply `npm run migrate:persistent-sections -- --project PROJECT_REF` with the local portal running. It checks existing captured/translated source mappings, registers the existing conversations transactionally, and converts current item annotations to references. `--dry-run` prepares mappings without changing the database. New conversations initialize their registry on first opening of the labeling view. LLM generation requires that registry and uses its IDs. The initial empty iframe is never used to initialize sections. When a saved interactive snapshot differs from the canonical asset, labeling uses the verified canonical asset; translated layout mismatches use the supplied canonical English text and translation heading alignment.
+
+
+### Section labeling controls
+
+Click a section button to select its blue bounding box and open the item controls to the right of the conversation. Each item has a distinct icon before its name, a minus button, numeric count, and plus button. The same icons appear in totals, guides, and summaries. An info button beside each item expands its labeling guidance directly in the panel, including in read-only assignments. Zero means the item is absent and removes its annotation; positive counts save automatically against the permanent section ID. Selecting another section updates the counters without changing saved work. Submitted assignments show disabled counters. On smaller screens the controls become a closable bottom panel. The labeling guide starts closed for item labeling, opens from the conversation header, and floats above the workspace independently of the selected section; close it with its close button or Escape.
+
+The top and bottom section labels both select the section. Selection turns both label outlines blue and increases the section border from 2px to 3px. Beside the bottom label, item icons show the section's saved nonzero counts; the badges update immediately as counts change.

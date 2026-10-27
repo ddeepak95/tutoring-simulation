@@ -276,7 +276,7 @@ def save_translation(source, path, conversation, task, value, settings):
 
 
 def is_v3(schema):
-    return schema.get("properties", {}).get("rubric_version", {}).get("const") == "3.0"
+    return schema.get("properties", {}).get("rubric_version", {}).get("const") in {"3.0", "3.1"}
 
 
 def response_format(schema):
@@ -563,7 +563,7 @@ def validate_v3(value, task):
         raise ValueError("Conversation ID differs from the supplied conversation")
     if value["learning_topic"] != data["learning_topic"]:
         raise ValueError("Learning topic differs from the supplied learning_topic; copy it exactly, or use null when none was supplied")
-    for question in value["instructional_features"]["questions"]:
+    for question in (value["instructional_features"]["questions"] if value["rubric_version"] == "3.0" else []):
         if question["question_type"] == "Knowledge-checking" and question["concept_checked"] is None:
             raise ValueError("Knowledge-checking questions need concept_checked identifying the subject-matter knowledge being checked")
         if question["question_type"] == "Instructional" and question["concept_checked"] is not None:
@@ -605,7 +605,8 @@ def validate_v3(value, task):
                          "\nCorrect ALL listed entries. Copy the original question or incorrect wording exactly, "
                          "including Markdown and punctuation, from its cited tutor turn. "
                          "Do not paraphrase or invent source text.")
-    validate_question_inventory(value["instructional_features"]["questions"], data["messages"])
+    if value["rubric_version"] == "3.0":
+        validate_question_inventory(value["instructional_features"]["questions"], data["messages"])
     for entry in value["verification_needed"]:
         if any(t not in turns for t in entry["turn_locations"]):
             raise ValueError("Verification case references an unknown turn")
@@ -662,7 +663,7 @@ def request_api(messages, settings):
     if settings.get("reasoning") == "none":
         request["reasoning"] = {"enabled": False}
     elif settings.get("reasoning") is not None:
-        request["reasoning"] = {"effort": settings["reasoning"]}
+        request["reasoning"] = settings["reasoning"] if isinstance(settings["reasoning"], dict) else {"effort": settings["reasoning"]}
     for attempt in range(settings["http_retries"] + 1):
         try:
             response = requests.post(API_URL, headers={"Authorization": f"Bearer {key}"},
@@ -791,7 +792,7 @@ def write_v3_report(folder, result):
 
 
 def write_report(folder, result):
-    if result["rubric_version"] == "3.0":
+    if result["rubric_version"] in {"3.0", "3.1"}:
         return write_v3_report(folder, result)
     lines = [f"# Evaluation: {result['conversation_id']}", "",
              f"Rubric: {result['rubric_version']}", "", "## Response-level assessments", ""]
@@ -874,7 +875,7 @@ def write_summary(output, records):
                 continue
             result = read_json(Path(record["folder"]) / "evaluation.json")
             prefix = [record["source"], result["conversation_id"], record["evaluation_variant"], record["evaluation_language"]]
-            if result["rubric_version"] == "3.0":
+            if result["rubric_version"] in {"3.0", "3.1"}:
                 for group in ("pedagogical_characteristics", "conversation_quality"):
                     for name, rating in result[group].items():
                         writer.writerow(prefix + ["conversation", "", name,
@@ -964,13 +965,14 @@ def write_variant_comparison(folder, records):
              "## Instructional feature counts", "",
              "| Item | Original | Translated | Translated − original |", "| --- | ---: | ---: | ---: |"]
     for name, entries in original["instructional_features"].items():
-        count = len(translated["instructional_features"][name])
-        lines.append(f"| {name.replace('_', ' ').title()} | {len(entries)} | {count} | {count - len(entries):+d} |")
+        first = sum(entry.get("count", 1) for entry in entries)
+        count = sum(entry.get("count", 1) for entry in translated["instructional_features"][name])
+        lines.append(f"| {name.replace('_', ' ').title()} | {first} | {count} | {count - first:+d} |")
     lines += ["", "### Question classifications", "",
               "| Question type | Original | Translated | Translated − original |", "| --- | ---: | ---: | ---: |"]
     for question_type in ("Knowledge-checking", "Instructional"):
-        first = sum(q["question_type"] == question_type for q in original["instructional_features"]["questions"])
-        second = sum(q["question_type"] == question_type for q in translated["instructional_features"]["questions"])
+        first = sum(q.get("question_type") == question_type for q in original["instructional_features"]["questions"])
+        second = sum(q.get("question_type") == question_type for q in translated["instructional_features"]["questions"])
         lines.append(f"| {question_type} | {first} | {second} | {second - first:+d} |")
     lines += ["", "## Ratings", "", "| Item | Original | Translated | Translated − original |", "| --- | --- | --- | --- |"]
     def label(judgment):
@@ -1023,7 +1025,7 @@ def main(argv=None, call=None):
         for key in ("max_tokens", "timeout", "http_retries", "repair_attempts"):
             if type(settings[key]) is not int or settings[key] < (1 if key in {"max_tokens", "timeout"} else 0):
                 raise ValueError(f"Invalid {key}")
-        if settings["reasoning"] not in {None, "none", "minimal", "low", "medium", "high"}:
+        if (settings["reasoning"].get("effort") if isinstance(settings["reasoning"], dict) else settings["reasoning"]) not in {None, "none", "minimal", "low", "medium", "high"}:
             raise ValueError("Invalid reasoning setting")
         translation_settings = dict(settings)
         if args.translation_model:

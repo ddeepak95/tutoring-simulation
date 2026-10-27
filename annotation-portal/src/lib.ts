@@ -1,3 +1,4 @@
+import {hydrateRows} from './section-registry';
 import { createClient } from '@supabase/supabase-js';
 import C from './generated/core.js';
 import snapshot from './generated/rubric.json';
@@ -35,7 +36,7 @@ export function validateSubmission(conversation: Conversation, annotations: Anno
 }
 export async function fetchAssignments(): Promise<Assignment[]> {
   const { data, error } = await supabase!.from('assignments').select('*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)').eq('is_active',true).order('updated_at', { ascending: false });
-  if (error) throw error; return data as Assignment[];
+  if (error) throw error; return hydrateRows(supabase!, data as Assignment[]);
 }
 export async function fetchAllRows<T>(table: string, columns = '*', orderColumns = ['id']): Promise<T[]> {
   const rows: T[] = [];
@@ -45,6 +46,9 @@ export async function fetchAllRows<T>(table: string, columns = '*', orderColumns
     const {data,error}=await query.range(offset,offset+499);
     if(error) throw error;
     rows.push(...data as T[]);
-    if(data.length<500) return rows;
+    if(data.length<500) {
+      if(['assignments','llm_baselines'].includes(table)) return await hydrateRows(supabase!,rows as {conversation_id:string;annotations:Annotation[]}[]) as T[];
+      return rows;
+    }
   }
 }

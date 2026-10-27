@@ -1,15 +1,22 @@
+import {SectionItemBadges} from './SectionItemBadges';
+import {markdownSectionGroups} from './section-registry';
 import { conceptLevel, conceptDisplayFeature } from './coverage-hierarchy';
 import { createElement, Fragment, useMemo, type ReactNode } from 'react';
 import katex from 'katex';
 import type { Nodes, Definition } from 'mdast';
 import { mappedText, parseMarkdown } from './markdown-source';
-import type { Annotation, Feature } from './types';
+import type { Annotation, Evidence, Feature, ConversationSection } from './types';
 
 interface Props {
   text: string; turnId: string; annotations: Annotation[]; rubric: Feature[]; readonly: boolean;
   onHighlight: (ids: string[], rect: DOMRect) => void;
   onHighlightLeave?: () => void;
   onMathSelect?: (start: number, end: number, rect: DOMRect) => void;
+  selectedSection?: Evidence;
+  sectionLabels?: boolean;
+  sections?: ConversationSection[];
+  turnNumber?: number;
+  onSectionSelect?: (start: number, end: number, rect: DOMRect) => void;
 }
 function safeUrl(value: string, image = false): string | undefined {
   try {
@@ -17,7 +24,7 @@ function safeUrl(value: string, image = false): string | undefined {
     if (['https:', 'http:', ...(image ? [] : ['mailto:'])].includes(url.protocol)) return value;
   } catch { /* Render unsafe destinations as ordinary text. */ }
 }
-export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave, onMathSelect }: Props) {
+export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave, onMathSelect, sectionLabels = false, sections, selectedSection, turnNumber = 1, onSectionSelect }: Props) {
   rubric = rubric.map(conceptDisplayFeature);
   const tree = useMemo(() => parseMarkdown(text), [text]);
   const definitions = new Map<string, Definition>();
@@ -27,6 +34,7 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
   }
   function content(node: Parameters<typeof mappedText>[1]) {
     const { value, map } = mappedText(text, node);
+    if (sectionLabels) return <span>{value}</span>;
     const segments: ReactNode[] = [];
     const applicable = annotations.filter(annotation => annotation.evidence.some(e => e.turn_id === turnId));
     let i = 0;
@@ -82,6 +90,7 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
     const active = annotations.filter(annotation => annotation.evidence.some(evidence => evidence.turn_id === turnId && evidence.start < end && evidence.end > start));
     const ids = active.map(annotation => annotation.id);
     const html = katex.renderToString(tex, { displayMode: true, throwOnError: false, trust: false });
+    if (sectionLabels) return <div className="markdown-math" dangerouslySetInnerHTML={{ __html: html }} />;
     const interact = (target: HTMLElement) => {
       const rect = target.getBoundingClientRect();
       if (ids.length) onHighlight(ids, rect);
@@ -130,5 +139,29 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
       default: return children(node);
     }
   }
-  return <>{render(tree)}</>;
+  if (!sectionLabels) return <>{render(tree)}</>;
+  const groups = markdownSectionGroups(text);
+  return <>{groups.map((nodes, index) => {
+    const start = nodes[0].position!.start.offset!;
+    const end = nodes.at(-1)!.position!.end.offset!;
+    const matches = annotations.filter(annotation => annotation.evidence.some(evidence => evidence.turn_id === turnId && evidence.start < end && evidence.end > start));
+    const feature = rubric.find(item => item.key === matches[0]?.feature);
+    const selected=selectedSection?.turn_id===turnId&&selectedSection.start===start&&selectedSection.end===end;
+    const sectionId=sections?.find(s=>s.turn_id===turnId&&s.start===start&&s.end===end)?.section_id;
+    const select=(element:HTMLElement)=>{const rect=element.getBoundingClientRect();if(matches.length)onHighlight(matches.map(a=>a.id),rect);else if(!readonly)onSectionSelect?.(start,end,rect);};
+    const labelStyle={ '--annotation-color': selected?'#2563eb':'#263430', '--annotation-background': selected?'#eff6ff':'#fff' } as React.CSSProperties;
+    return <Fragment key={start}>
+      <section className="section-annotation-boundary" data-selected={selected} style={{borderColor:selected?'#2563eb':'#263430',borderWidth:selected?3:2}} aria-label={`Turn ${turnNumber} - Section ${index + 1} content`}>
+        <button type="button" className="section-annotation-top-label" aria-label={`Select Turn ${turnNumber} - Section ${index+1}`} aria-pressed={selected} data-section-id={sectionId} style={labelStyle} onClick={event=>select(event.currentTarget)}>
+          Turn {turnNumber} - Section {index + 1}
+        </button>
+        {nodes.map((node,nodeIndex)=><Fragment key={nodeIndex}>{render(node)}</Fragment>)}
+      </section>
+      <div className="section-annotation-controls">
+        <button type="button" className="section-annotation-label" aria-pressed={selected} data-section-id={sectionId} data-annotation-ids={matches.map(a=>a.id).join(',')} title={feature?.name||'Annotate section'} style={labelStyle} onClick={event=>select(event.currentTarget)}>Turn {turnNumber} - Section {index+1}</button>
+        <SectionItemBadges annotations={matches} rubric={rubric}/>
+      </div>
+    </Fragment>;
+
+  })}</>;
 }

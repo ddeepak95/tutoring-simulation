@@ -1,5 +1,6 @@
 import {expect,it,vi} from 'vitest';
-import {C,bundledRubric} from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 import {sourcePassages} from '../server/source-passages';
 import {resolveLLMAnnotations} from '../server/llm-annotation-core';
 import {generateInstructionalBaseline,type GenerationCheckpoint} from '../server/llm-provider';

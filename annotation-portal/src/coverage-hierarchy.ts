@@ -35,7 +35,15 @@ export function conceptLevel(annotation: Annotation) {
   return topic ? (['Main concept', 'Explanatory unit', 'Explanatory subunit'] as const)[topic.depth - 1] : null;
 }
 export function conceptDisplayFeature(feature: Feature): Feature {
+  if(feature.key==='memory_aids'&&feature.category)return {...feature,name:'Memory Aids',short_label:'Memory Aids'};
   return feature.key === 'concepts_and_subtopics_covered'
     ? {...feature, name: 'Concepts', short_label: 'Concepts', fields: feature.fields.map(field => field.key === 'topic' ? {...field, label: 'Concept'} : field)}
     : feature;
+}
+
+export function displayRubric(features:Feature[]):Feature[] {
+  const result=features.map(conceptDisplayFeature);
+  const table=result.findIndex(f=>f.key==='tables'),heading=result.findIndex(f=>f.key==='headings');
+  if(table>=0&&heading>table)[result[table],result[heading]]=[result[heading],result[table]];
+  return result;
 }

@@ -33,15 +33,17 @@ export function useCaptureAssets(conversation: Conversation) {
 }
 export function CaptureFrame({ html, conversation, visibleTurnIds, selectable = false, onChoose }: { html: string; conversation: Conversation; visibleTurnIds?: string[]; selectable?: boolean; onChoose?: () => void }) {
   const frame = useRef<HTMLIFrameElement>(null);
+  const [readyHtml,setReadyHtml]=useState<string|null>(null);
   const choice = useRef({ selectable, onChoose });
   choice.current = { selectable, onChoose };
-  return <iframe ref={frame} title={conversation.translation ? 'Translated conversation in original captured layout' : 'Exact original conversation'} sandbox="allow-same-origin" srcDoc={html}
+  return <><iframe ref={frame} style={{visibility:readyHtml===html?'visible':'hidden'}} aria-busy={readyHtml!==html} title={conversation.translation ? 'Translated conversation in original captured layout' : 'Exact original conversation'} sandbox="allow-same-origin" srcDoc={html}
     onLoad={() => {
       const document = frame.current?.contentDocument;
-      if (!document) return;
+      if (!document || document.URL==='about:blank') return;
       translateCapturedLayout(document, conversation);
       normalizeCapturedSpeakerLabels(document, conversation);
       styleCapturedUserBubbles(document, conversation);
+      setReadyHtml(html);
       if (!visibleTurnIds) return;
       const visible = new Set(visibleTurnIds);
       const style = document.createElement('style');
@@ -58,7 +60,7 @@ export function CaptureFrame({ html, conversation, visibleTurnIds, selectable = 
         if (!choice.current.selectable || event.detail > 1 || target.closest('a, input, button, summary') || document.getSelection()?.toString()) return;
         choice.current.onChoose?.();
       });
-    }} />;
+    }} />{readyHtml!==html&&<div className="capture-layout-loading capture-frame-pending" role="status">Loading captured conversation…</div>}</>;
 }
 export async function captureAssetsForExport() {
   return fetchAllRows<{ conversation_id: string; turn_id: string; html: string; source_ids: string[] }>('conversation_capture_assets', '*', ['conversation_id', 'turn_id']);

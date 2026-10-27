@@ -1,5 +1,6 @@
 import { expect, it } from 'vitest';
-import { bundledRubric, C, validateSubmission } from '../src/lib';
+import { C, validateSubmission } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 import { missingTurnRatings, ratingComplete, validateTurnRatings } from '../src/turn-ratings';
 import { completeRatings } from './ratings-fixture';
 import { activeRatingDimensions } from '../src/turn-ratings';

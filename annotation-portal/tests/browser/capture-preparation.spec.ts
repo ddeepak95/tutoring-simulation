@@ -86,7 +86,7 @@ test('admin prepares, assigns, then annotator highlights preserved HTML and rate
   await page.goto('/assignments/' + row.id);
   const exact = page.frameLocator('.exact-capture iframe');
   const turn = exact.locator('[data-turn-id="turn_0002"]');
-  await expect(turn.locator('img')).toBeVisible(); await expect(turn.locator('.exact-image-annotation-label')).toHaveText('turn_0002-image-1'); await expect(turn.locator('table')).toContainText('Liquid'); await expect(turn.locator('math mfrac')).toHaveCount(1);
+  await expect(turn.locator('img')).toBeVisible(); await expect(turn.locator('.exact-image-annotation-label,.exact-notation-annotation-label')).toHaveCount(0); await expect(turn.locator('table')).toContainText('Liquid'); await expect(turn.locator('math mfrac')).toHaveCount(1);
   await expect(turn).toContainText('Question 2: What adds energy?');
   await turn.evaluate((node, value) => {
     const text = node.textContent!, start = text.indexOf(value as string); if (start < 0) throw new Error('Selection quote missing');

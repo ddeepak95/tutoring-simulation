@@ -54,9 +54,9 @@ test('each feature has concise guidance and an example', async ({ page }) => {
 test('a highlight can record question and diagram quantities', async ({ page }) => {
   const state = await backend(page);
   state.documents[0].transcript.conversation_id = state.documents[0].id;
-  state.documents[0].transcript.messages[0].text = 'Why A? Why B? Two diagrams show A and B.';
+  state.documents[0].transcript.messages[0].text = 'Why A? Why B?\nTwo diagrams show A and B.';
   state.documents[0].transcript.archive_source = 'capture';
-  state.captureDocuments.push({ conversation_id: state.documents[0].id, html: '<!doctype html><main><article class="capture-message capture-assistant" data-turn-id="t1"><strong class="capture-speaker">Assistant</strong><p>Why A? Why B?</p><p>Two diagrams show A and B.</p></article></main>' });
+  state.captureDocuments.push({ conversation_id: state.documents[0].id, html: '<!doctype html><main><article class="capture-message capture-assistant" data-turn-id="t1"><strong class="capture-speaker">Assistant</strong><h2>Why A? Why B?</h2><h2>Two diagrams show A and B.</h2></article></main>' });
   await login(page, 'alice');
   await page.getByRole('region', { name: 'Label instructional features' }).locator('.assignment-row').click();
   const counts = page.getByRole('list', { name: 'Feature counts' });
@@ -66,16 +66,8 @@ test('a highlight can record question and diagram quantities', async ({ page }) 
   await counts.locator('[data-feature-key="questions"]').hover();
   await expect(page.getByRole('tooltip')).toContainText('Knowledge-checking');
   await expect(page.getByRole('tooltip')).toContainText('Instructional');
-  const paragraphs = page.frameLocator('.exact-capture iframe').locator('article p');
-  async function highlight(index: number) {
-    await paragraphs.nth(index).evaluate(node => {
-      const range = node.ownerDocument.createRange();
-      range.selectNodeContents(node);
-      const selection = node.ownerDocument.defaultView!.getSelection()!;
-      selection.removeAllRanges(); selection.addRange(range);
-      node.dispatchEvent(new node.ownerDocument.defaultView!.MouseEvent('mouseup', { bubbles: true }));
-    });
-  }
+  const sections = page.frameLocator('.exact-capture iframe').locator('.exact-section-annotation-label');
+  async function highlight(index: number) { await sections.nth(index).click(); }
   await highlight(0);
   await page.getByRole('button', { name: 'Questions', exact: true }).click();
   const questions = page.getByRole('dialog', { name: 'Edit Questions' });
@@ -95,19 +87,19 @@ test('a highlight can record question and diagram quantities', async ({ page }) 
   await expect(counts.locator('[data-feature-key="representations"] strong')).toHaveText('2');
   await counts.locator('[data-feature-key="representations"]').hover();
   await expect(page.getByRole('tooltip').locator('dl > div').filter({ hasText: 'Diagram' }).locator('dd')).toHaveText('2');
-  const marks = page.frameLocator('.exact-capture iframe').locator('mark.exact-annotation');
+  const marks = page.frameLocator('.exact-capture iframe').locator('.exact-section-annotation-label[data-annotation-ids]:not([data-annotation-ids=""])');
   await expect(marks).toHaveCount(2);
   const questionsFilter = counts.locator('[data-feature-key="questions"]').getByRole('button', { name: 'Filter Questions highlights' });
   const representationsFilter = counts.locator('[data-feature-key="representations"]').getByRole('button', { name: 'Filter Representations highlights' });
   await questionsFilter.click();
   await expect(questionsFilter).toHaveAttribute('aria-pressed', 'true');
   await expect(marks).toHaveCount(1);
-  await expect(marks).toContainText('Why A? Why B?');
+  await expect(marks).toHaveAttribute('title', 'Questions');
   await representationsFilter.click();
   await expect(marks).toHaveCount(2);
   await questionsFilter.click();
   await expect(marks).toHaveCount(1);
-  await expect(marks).toContainText('Two diagrams show A and B.');
+  await expect(marks).toHaveAttribute('title', 'Representations');
   await page.getByRole('button', { name: 'Show all highlights' }).click();
   await expect(marks).toHaveCount(2);
   await expect(questionsFilter).toHaveAttribute('aria-pressed', 'false');
@@ -137,17 +129,10 @@ test('a tutor mnemonic can be highlighted as a Memory Aid', async ({ page }) => 
   state.captureDocuments.push({ conversation_id: state.documents[0].id, html: '<!doctype html><main><article class="capture-message capture-assistant" data-turn-id="t1"><strong class="capture-speaker">Assistant</strong><p>Remember PEMDAS for the order of operations.</p></article></main>' });
   await login(page, 'alice');
   await page.getByRole('region', { name: 'Label instructional features' }).locator('.assignment-row').click();
-  await page.frameLocator('.exact-capture iframe').locator('article p').evaluate(node => {
-    const textNode = node.firstChild!;
-    const range = node.ownerDocument.createRange();
-    range.setStart(textNode, 9); range.setEnd(textNode, 15);
-    const selection = node.ownerDocument.defaultView!.getSelection()!;
-    selection.removeAllRanges(); selection.addRange(range);
-    node.dispatchEvent(new node.ownerDocument.defaultView!.MouseEvent('mouseup', { bubbles: true }));
-  });
+  await page.frameLocator('.exact-capture iframe').getByRole('button', { name: 'Turn 1 - Section 1', exact: true }).click();
   await page.getByRole('button', { name: 'Memory Aid', exact: true }).click();
   await expect.poll(() => state.assignments[0].annotations[0]?.feature).toBe('memory_aids');
-  await expect.poll(() => state.assignments[0].annotations[0]?.entry.memory_aid).toBe('PEMDAS');
+  await expect.poll(() => state.assignments[0].annotations[0]?.entry.memory_aid).toBe(text);
 });
 
 test('concept annotations use the highlight and optional level choices', async ({ page }) => {
@@ -158,13 +143,7 @@ test('concept annotations use the highlight and optional level choices', async (
   state.captureDocuments.push({ conversation_id: state.documents[0].id, html: '<!doctype html><main><article class="capture-message capture-assistant" data-turn-id="t1"><strong class="capture-speaker">Assistant</strong><h2>Forces</h2></article></main>' });
   await login(page, 'alice');
   await page.getByRole('region', { name: 'Label instructional features' }).locator('.assignment-row').click();
-  await page.frameLocator('.exact-capture iframe').locator('h2').evaluate(node => {
-    const range = node.ownerDocument.createRange();
-    range.selectNodeContents(node);
-    const selection = node.ownerDocument.defaultView!.getSelection()!;
-    selection.removeAllRanges(); selection.addRange(range);
-    node.dispatchEvent(new node.ownerDocument.defaultView!.MouseEvent('mouseup', { bubbles: true }));
-  });
+  await page.frameLocator('.exact-capture iframe').getByRole('button', { name: 'Turn 1 - Section 1', exact: true }).click();
   await page.getByRole('button', { name: 'Concepts', exact: true }).click();
   const popup = page.getByRole('dialog', { name: 'Edit Concepts' });
   await expect(popup.getByRole('heading', { name: 'Concepts' })).toBeVisible();

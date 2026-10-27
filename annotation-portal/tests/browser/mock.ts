@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import C from '../../src/generated/core.js';
-const rubric = JSON.parse(fs.readFileSync('src/generated/rubric.json', 'utf8'));
+const legacyRubric = JSON.parse(fs.readFileSync('tests/fixtures/legacy-rubric.json', 'utf8'));
 export const ids = { admin: '00000000-0000-4000-8000-000000000001', alice: '00000000-0000-4000-8000-000000000002', bob: '00000000-0000-4000-8000-000000000003', doc: '00000000-0000-4000-8000-000000000010', a: '00000000-0000-4000-8000-000000000011', b: '00000000-0000-4000-8000-000000000012' };
 export const profiles = [{ id: ids.admin, username: 'admin', role: 'admin' }, { id: ids.alice, username: 'alice', role: 'annotator' }, { id: ids.bob, username: 'bob', role: 'annotator' }];
 export const sample = { conversation_id: 'demo', label: 'Evaporation · Tamil', learning_topic: 'Evaporation', messages: [
@@ -11,12 +11,12 @@ export const sample = { conversation_id: 'demo', label: 'Evaporation · Tamil', 
   { turn_id: 't2', speaker: 'tutor', text: 'Think of the process like people leaving a crowded room. A table can compare the drying times. Pongal cooking also involves evaporation.' }
 ] };
 const jwt = (id: string) => `${Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url')}.${Buffer.from(JSON.stringify({ sub: id, role: 'authenticated', aud: 'authenticated', exp: Math.floor(Date.now() / 1000) + 3600 })).toString('base64url')}.test`;
-export async function backend(page: Page) {
+export async function backend(page: Page, rubric = legacyRubric) {
   const people = profiles.map(profile => ({ ...profile }));
   const passwords = new Map(people.map(profile => [profile.username, 'test-password-123']));
   const documents = [{ id: ids.doc, label: sample.label, language: 'Tamil', transcript: structuredClone(sample), created_at: new Date().toISOString() }];
   const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, task_type: 'label', status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }));
-  const state = { documents, assignments, comparisonPairs: [] as any[], comparisonAssignments: [] as any[], people, passwords, baselines:[] as any[], captureAssets:[] as any[], captureDocuments:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
+  const state = { sections: [] as any[], documents, assignments, comparisonPairs: [] as any[], comparisonAssignments: [] as any[], people, passwords, baselines:[] as any[], captureAssets:[] as any[], captureDocuments:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
   await page.route('**/*', async route => {
     const request = route.request(), url = new URL(request.url());
     if((url.hostname==='127.0.0.1'||url.hostname==='localhost')&&url.pathname==='/api/llm-annotations') {
@@ -117,6 +117,14 @@ export async function backend(page: Page) {
       for (let i = assignments.length - 1; i >= 0; i--) if (assignments[i].conversation_id === document.id) assignments.splice(i, 1);
       return send({ ...preview, deleted: true });
     }
+    if(url.pathname==='/rest/v1/rpc/register_conversation_sections') {
+      const existing=state.sections.filter(s=>s.conversation_id===body.p_conversation_id);
+      if(existing.length)return send(existing);
+      const document=documents.find(d=>d.id===body.p_conversation_id);
+      if(!document)return send({message:'Conversation not found'},404);
+      const sections=body.p_sections.map((s:any)=>{const turn=document.transcript.messages.find(t=>t.turn_id===s.turn_id)!;const quote=turn.text.slice(s.start,s.end);return {...s,conversation_id:document.id,section_id:`t${s.turn_number}s${s.section_number}`,quote,occurrence:C.occurrenceAt(turn.text,quote,s.start),source_hash:'test-source'};});
+      state.sections.push(...sections);return send(sections);
+    }
     if (url.pathname === '/rest/v1/rpc/save_assignment') {
       if (state.failNextSave || state.failSaves) { state.failNextSave = false; return send({ message: 'Network unavailable. Retry saving.', code: 'offline' }, 500); }
       const row = assignments.find(a => a.id === body.p_assignment_id);
@@ -131,6 +139,7 @@ export async function backend(page: Page) {
     let rows: any[] = [];
     if (url.pathname === '/rest/v1/profiles') rows = people.filter(p => profile.role === 'admin' || p.id === userId);
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
+    if (url.pathname === '/rest/v1/conversation_sections') rows=state.sections;
     if (url.pathname === '/rest/v1/conversation_details') rows = documents;
     if (url.pathname === '/rest/v1/comparison_pairs') rows = state.comparisonPairs;
     if (url.pathname === '/rest/v1/comparison_assignments') rows = state.comparisonAssignments;

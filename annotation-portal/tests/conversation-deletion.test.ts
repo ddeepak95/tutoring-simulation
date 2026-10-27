@@ -1,7 +1,8 @@
 import { beforeAll, afterAll, describe, expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
-import { C, bundledRubric } from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 import { completeRatings } from './ratings-fixture';
 
 const admin = '00000000-0000-4000-8000-000000000001', alice = '00000000-0000-4000-8000-000000000002';

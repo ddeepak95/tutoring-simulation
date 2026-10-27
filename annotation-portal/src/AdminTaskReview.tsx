@@ -1,3 +1,4 @@
+import {hydrateRows} from './section-registry';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AnnotationSummary } from './AnnotationSummary';
@@ -29,7 +30,9 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
           taskType==='label'?supabase!.from('llm_baselines').select('*').eq('conversation_id',id).order('created_at',{ascending:false}):Promise.resolve({data:[],error:null})
         ]);
         if(doc.error)throw doc.error;if(work.error)throw work.error;if(versions.error)throw versions.error;
-        if(alive){setDocument(doc.data as DocumentRow);setAssignments(work.data as Assignment[]);setBaselines(versions.data as LLMBaseline[]);}
+        const hydratedWork=await hydrateRows(supabase!,work.data as Assignment[]);
+        const hydratedVersions=await hydrateRows(supabase!,versions.data as LLMBaseline[]);
+        if(alive){setDocument(doc.data as DocumentRow);setAssignments(hydratedWork);setBaselines(hydratedVersions);}
       }catch(err){if(alive)setError(errorText(err));}
       finally{if(alive)setLoading(false);}
     })();
@@ -65,7 +68,7 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
     {!sources.length?<section className="card empty"><h2>No {taskType==='label'?'label annotations':'ratings'} yet</h2><p>Assign this task to an annotator to see their work here.</p></section>:source&&rubric&&<>
       {source.baseline&&<p className="notice">LLM baseline · {source.baseline.model} · {new Date(source.baseline.created_at).toLocaleString()}</p>}
       {taskType==='label'&&<AnnotationSummary annotations={source.annotations} rubric={rubric}/>}
-      <Editor key={source.key} conversation={document.transcript} rubric={rubric} annotations={source.annotations} onChange={()=>{}} turnRatings={source.ratings} readonly taskType={taskType}/>
+      <Editor key={source.key} conversationId={document.id} conversation={document.transcript} rubric={rubric} annotations={source.annotations} onChange={()=>{}} turnRatings={source.ratings} readonly taskType={taskType}/>
     </>}
   </main>;
 }

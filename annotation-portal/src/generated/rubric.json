@@ -1,250 +1,275 @@
 {
+  "label_schema_version": "section-items/1",
   "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
-  "rubric_sha256": "1369aca924ebc72c33b52a0ee9ff9cd24e377b62a29a3c04e70c7a158370d525",
+  "rubric_sha256": "609ddae432a4cafdf3e2f2e30ff5e42781d993f7a7d1302202174748d7e93927",
   "rubric": [
     {
-      "name": "Concepts",
-      "key": "concepts_and_subtopics_covered",
-      "short_label": "Concepts",
-      "color": "#658151",
-      "highlight": "#eaf2df",
-      "description": "Which main concepts, explanatory units, and explanatory subunits organise the tutor's explanation?",
-      "entry_attributes": "`topic` (selected heading); optional `concept_level` (Main concept / Explanatory unit / Explanatory subunit); `detail_level` (Brief / Explained / Elaborated); `turn_locations`",
-      "guidance": "**What to record:** Read the whole conversation to identify its main concepts, then visit every tutor section and subsection in source order. Highlight every actual heading, including standalone bold titles, and classify it using the section's meaning. Keep heading-only evidence; inspect the body separately for other instructional features and issues.<br><br>**Concept level:** The highlighted heading supplies the `topic` text. Optionally mark it as Main concept, Explanatory unit, or Explanatory subunit according to its role in the explanation. Leave the level blank when unclear; no parent path is needed.<br><br>**Stable levels:** An explanatory unit is a distinct aspect, method, or purpose under a main concept; a subunit develops that unit through a procedure, result, example, or other specific explanation. For Nucleus identification, Rutherford experiment and Mass spectrometry are units even beneath an Identification methods overview heading. Name generic sections with their local context, such as X-ray diffraction procedure and Electron diffraction procedure; these remain separate. Equivalent original and translated sections should use the same semantic levels when their instructional content is unchanged.<br><br>**Grouping:** Keep one entry per distinct concept and highlight every heading occurrence for that node. Include introductions, summaries, example sections, and closing invitations under the relevant concept, using descriptive names. Keep parents and descendants as separate entries.<br><br>**Detail levels:** **Brief:** States the main idea with little development. **Explained:** Develops how or why it works, or unpacks an example, comparison, or application. **Elaborated:** Extends the explanation through multiple connected aspects, conditions, comparisons, or applications. Assess detail using the section and its descendant content across relevant turns. These levels describe development; they do not establish correctness. Record issues separately.",
+      "key": "photographs",
+      "name": "Photographs",
+      "short_label": "Photographs",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Photographic images of real objects, people, places, or events.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Photographic images of real objects, people, places, or events. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
       "fields": [
         {
-          "key": "topic",
-          "label": "Concept hierarchy path"
-        },
-        {
-          "key": "concept_level",
-          "label": "Concept level (optional)",
-          "options": [
-            "Main concept",
-            "Explanatory unit",
-            "Explanatory subunit"
-          ],
-          "optional": true
-        },
-        {
-          "key": "detail_level",
-          "label": "Detail level",
-          "options": [
-            "Brief",
-            "Explained",
-            "Elaborated"
-          ],
-          "optional": true
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
         }
       ]
     },
     {
-      "name": "Examples",
+      "key": "diagrams_and_illustrations",
+      "name": "Diagram & Illustrations",
+      "short_label": "Diagram & Illustrations",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Drawn or schematic illustrations that explain structures or relationships; exclude flow diagrams, graphs, and maps.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Drawn or schematic illustrations that explain structures or relationships; exclude flow diagrams, graphs, and maps. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "flow_diagrams",
+      "name": "Flow Diagram",
+      "short_label": "Flow Diagram",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Diagrams showing a sequence, process, or decision flow.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Diagrams showing a sequence, process, or decision flow. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "graphs",
+      "name": "Graphs",
+      "short_label": "Graphs",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Plots or charts that encode quantities or relationships.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Plots or charts that encode quantities or relationships. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "maps",
+      "name": "Maps",
+      "short_label": "Maps",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Geographical or spatial maps.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Geographical or spatial maps. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "animations",
+      "name": "Animations",
+      "short_label": "Animations",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Moving visual sequences; count each animation, not its frames.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Moving visual sequences; count each animation, not its frames. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "interactive_media",
+      "name": "Interactive Media",
+      "short_label": "Interactive Media",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Media the learner can manipulate or interact with; count each interactive component.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Media the learner can manipulate or interact with; count each interactive component. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "other_images",
+      "name": "Other Images",
+      "short_label": "Other Images",
+      "category": "Multimedia",
+      "color": "#36759c",
+      "highlight": "#e7f2fa",
+      "description": "Instructional images not covered by another multimedia item; exclude decorative images.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Instructional images not covered by another multimedia item; exclude decorative images. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "headings",
+      "name": "Headings",
+      "short_label": "Headings",
+      "category": "Textual Representations",
+      "color": "#765b96",
+      "highlight": "#f0eaf7",
+      "description": "Explicit headings and standalone bold section titles; exclude speaker labels and capture metadata.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Explicit headings and standalone bold section titles; exclude speaker labels and capture metadata. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "tables",
+      "name": "Tables",
+      "short_label": "Tables",
+      "category": "Textual Representations",
+      "color": "#765b96",
+      "highlight": "#f0eaf7",
+      "description": "Tabular arrangements of information; count each complete table once.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Tabular arrangements of information; count each complete table once. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "equations",
+      "name": "Equations",
+      "short_label": "Equations",
+      "category": "Textual Representations",
+      "color": "#765b96",
+      "highlight": "#f0eaf7",
+      "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed; count each expression once.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed; count each expression once. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
       "key": "examples",
+      "name": "Examples",
       "short_label": "Examples",
-      "color": "#ac8040",
-      "highlight": "#fcf0d7",
-      "description": "Which distinct specific cases or instances does the tutor use to illustrate a learning concept, rule, or principle?",
-      "entry_attributes": "`example`; `concept_illustrated`; optional `detail_level` (Brief / Explained / Elaborated); `turn_locations`",
-      "guidance": "**What to record:** List each distinct specific case or instance the tutor uses to illustrate a learning concept, rule, or principle. The case may be real or hypothetical. It must be linked to the concept; a general explanation without a specific case is not an example.<br><br>**Entry attributes:** Record `example` (a short description of the specific case), `concept_illustrated` (the concept, rule, or principle it illustrates), optional `detail_level` (Brief / Explained / Elaborated), and `turn_locations` (the supporting turns).<br><br>**Coverage audit:** Inspect paragraphs, parenthetical cases, every nested list item, every table data row and example cell, and worked-example subsections. A short named case qualifies as Brief when its instructional connection is supplied by its sentence, section, or table row; an Example heading or standalone explanation is not required. Include table recaps as additional occurrences. For Examples, highlight case-specific data-cell evidence; header-only highlighting applies to Table representations.<br><br>**Distinct entries:** Define an example by its concrete case or scenario and its specific instructional use. Water geometry and water hydrogen bonding are separate uses; H? bond length, scale conversion, and separate method-specific measurement applications are separate scenarios. Merge repeated occurrences only when both case and use match. Keep the connected steps of one calculation or method application together. Separate independent co-listed cases, but keep a deliberate comparison or ordered series together when its teaching point depends on the relationship. Do not double-count a comparison and its members for the same use. Keep one entry for each distinct case/use and highlight every occurrence, including repeated uses in the same turn. Each example highlight has an `example_status` attribute: **Fresh** for the first qualifying occurrence, partial repetitions, and later occurrences that add new example content; **Duplicate** only when the complete example is repeated with no new example content. Compare the whole occurrence, including its setup, facts, worked steps, explanation, and conclusion when present. Reusing the same case, entity, numbers, concept, or selected steps alone does not make an occurrence Duplicate. A shortened reuse of only some elements or an expanded explanation remains Fresh. Different wording or formatting can still be Duplicate if the entire example content is repeated. One case entry may have several Fresh highlights. Supporting fragments of one occurrence share its status. Include all supporting turn locations. Assess its detail level using its development across those turns. Record different cases separately, even when they illustrate the same concept.<br><br>**Detail levels:** **Brief:** Names a specific case and links it to the concept, for example, “Wet clothes drying is an example of evaporation.” **Explained:** Describes how the case illustrates the concept, for example, water in the clothes changes into vapour and enters the surrounding air. **Elaborated:** Develops the case further through reasoning, conditions, comparisons, or worked steps, for example, explaining why clothes dry faster in warm, moving air. These are descriptive detail levels rather than quality scores; a brief example may be sufficient.<br><br>**Worked example:** The tutor says, “Water evaporates from wet clothes as they dry. The water changes from liquid into water vapour and enters the surrounding air.” Record `example`: **Wet clothes drying**; `concept_illustrated`: **Evaporation**; `detail_level`: **Explained**; `turn_locations`: the actual turns containing this example.<br><br>If the tutor also explains water evaporating from a puddle, record **A puddle drying** as a second example, with its concept, detail level, and turn locations. Both illustrate evaporation, but use distinct cases.<br><br>**Explanation without an example:** If the tutor says only, “Evaporation is a change from liquid to gas,” do not record an example: it explains the concept without giving a specific case.",
+      "category": "Content",
+      "color": "#397b71",
+      "highlight": "#e2f3ee",
+      "description": "Specific real or hypothetical cases illustrating a concept, rule, or principle; count repeated occurrences within the section.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Specific real or hypothetical cases illustrating a concept, rule, or principle; count repeated occurrences within the section. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
       "fields": [
         {
-          "key": "example",
-          "label": "Specific example"
-        },
-        {
-          "key": "concept_illustrated",
-          "label": "Concept illustrated",
-          "optional": true
-        },
-        {
-          "key": "detail_level",
-          "label": "Detail level",
-          "options": [
-            "Brief",
-            "Explained",
-            "Elaborated"
-          ],
-          "optional": true
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
         }
       ]
     },
     {
-      "name": "Analogies",
       "key": "analogies",
+      "name": "Analogies",
       "short_label": "Analogies",
-      "color": "#8772af",
-      "highlight": "#f0eafa",
-      "description": "Which distinct comparisons does the tutor make between a learning concept and another situation or system, using shared features or relationships to explain the concept?",
-      "entry_attributes": "`comparison`; `concept_explained`; optional `detail_level` (Brief / Explained / Elaborated); `turn_locations`",
-      "guidance": "**What to record:** List each distinct comparison the tutor uses to explain a learning concept through another situation or system. Identify both what is being explained and what it is compared with. The tutor must use a shared feature or relationship to support the explanation; the word “like” alone does not establish an analogy.<br><br>**Entry attributes:** Record `comparison` (a short description naming both sides of the comparison), `concept_explained` (the learning concept the comparison explains), optional `detail_level` (Brief / Explained / Elaborated), and `turn_locations` (the supporting turns).<br><br>**Distinct entries:** List repeated use of the same comparison once and include all supporting turn locations. Assess its detail level using its development across those turns. Record comparisons with different situations or systems separately, even when they explain the same concept.<br><br>**Detail levels:** **Brief:** Introduces a comparison and identifies a shared feature or relationship without developing it further. **Explained:** Explains how the features or relationships in one situation correspond to those in the learning concept. **Elaborated:** Develops the comparison through multiple connected correspondences, uses it to reason about the concept, or explains where the comparison stops applying. These are descriptive detail levels rather than quality scores.<br><br>**Worked example:** The tutor says, “Electric current is like water flowing through a pipe. Current describes the rate of flow of electric charge, just as water flow rate describes how much water passes through a pipe each second.” Record `comparison`: **Flow of electric charge compared with water flowing through a pipe**; `concept_explained`: **Electric current**; `detail_level`: **Explained**; `turn_locations`: the actual turns containing this comparison.<br><br>**Example without an analogy:** If the tutor says, “An electric current flows through a lamp when the circuit is closed,” do not record an analogy: the lamp is a specific case of the concept, but no comparison with another situation or system is made.",
+      "category": "Content",
+      "color": "#397b71",
+      "highlight": "#e2f3ee",
+      "description": "Comparisons that explain a concept through another situation or domain.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Comparisons that explain a concept through another situation or domain. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
       "fields": [
         {
-          "key": "comparison",
-          "label": "Comparison"
-        },
-        {
-          "key": "concept_explained",
-          "label": "Concept explained",
-          "optional": true
-        },
-        {
-          "key": "detail_level",
-          "label": "Detail level",
-          "options": [
-            "Brief",
-            "Explained",
-            "Elaborated"
-          ],
-          "optional": true
-        }
-      ]
-    },
-    {
-      "name": "Representations",
-      "key": "representations",
-      "short_label": "Representations",
-      "color": "#4f89a3",
-      "highlight": "#e4f1f8",
-      "description": "Which distinct diagrams, graphs, tables, equations, or other visual or symbolic forms does the tutor use to explain or illustrate a learning concept?",
-      "entry_attributes": "`representation`; `representation_type` (Diagram / Flowchart / Graph / Table / Equation / Other visual or symbolic form); `concept_illustrated`; optional `image_languages` (list of BCP 47 language tags); optional `diagram_count` (number of diagrams in one highlighted Diagram or Flowchart); `turn_locations`",
-      "guidance": "**What to record:** List each distinct visual or symbolic representation the tutor provides to explain or illustrate a learning concept. Record representations actually present in the conversation, including images, text-based diagrams, tables, or displayed equations. Do not record a representation that is merely suggested or mentioned without being provided.<br><br>**Entry attributes:** Record `representation` (a short description of what is provided), `representation_type` (Diagram / Flowchart / Graph / Table / Equation / Other visual or symbolic form), `concept_illustrated` (the concept it helps explain), optional `image_languages` (a list of languages visibly written inside the representation, using BCP 47 tags such as `en`, `ta`, or `hi`), optional `diagram_count` (number of diagrams in a Diagram or Flowchart highlight), and `turn_locations` (where it appears). Record every visible written language: for example, use `[\"ta\", \"en\"]` for Tamil and English. Use `[\"zxx\"]` for no written language and `[\"und\"]` when text is present but its language cannot be reliably identified. For Other, specify the form.<br><br>**Distinct entries:** List repeated use of the same representation once and include all supporting turn locations. Record distinct representations separately, even when they illustrate the same concept.<br><br>**Worked example:** The tutor provides a temperature–time graph showing a heating curve and explains the flat section during a phase change. Record `representation`: **Temperature–time graph showing a heating curve**; `representation_type`: **Graph**; `concept_illustrated`: **Heating and phase changes**; `image_languages`: **[\"en\"]**; `turn_locations`: the actual turns where the graph appears.<br><br>**Mention without a representation:** If the tutor only says, “You could draw a graph of temperature against time,” but provides no graph, do not list a representation.",
-      "fields": [
-        {
-          "key": "representation",
-          "label": "Representation"
-        },
-        {
-          "key": "representation_type",
-          "label": "Representation type",
-          "options": [
-            "Diagram",
-            "Flowchart",
-            "Graph",
-            "Table",
-            "Equation",
-            "Other visual or symbolic form"
-          ]
-        },
-        {
-          "key": "concept_illustrated",
-          "label": "Concept illustrated",
-          "optional": true
-        },
-        {
-          "key": "image_languages",
-          "label": "Languages in image or representation",
-          "multiple": true,
-          "optional": true
-        },
-        {
-          "key": "diagram_count",
-          "label": "Number of diagrams",
-          "numeric": true,
-          "optional": true
-        }
-      ]
-    },
-    {
-      "name": "Cultural References",
-      "key": "cultural_references",
-      "short_label": "Cultural references",
-      "color": "#ba7180",
-      "highlight": "#fbe7ed",
-      "description": "Which distinct references to cultural practices, traditions, artifacts, stories, media, or shared cultural experiences does the tutor use to explain or illustrate a learning concept?",
-      "entry_attributes": "`reference`; `concept_illustrated`; optional `detail_level` (Brief / Explained / Elaborated); `turn_locations`",
-      "guidance": "**What to record:** List each distinct reference to a cultural practice, tradition, or artifact that the tutor uses to explain or illustrate a learning concept. The cultural connection and its instructional use must be evident; exclude incidental cultural mentions.<br><br>**Entry attributes:** Record `reference` (the specific cultural reference used), `concept_illustrated` (the learning concept it helps explain), optional `detail_level` (Brief / Explained / Elaborated), and `turn_locations` (the supporting turns).<br><br>**Distinct entries:** List repeated use of the same reference once and include all supporting turn locations. Assess its detail level using its development across those turns.<br><br>**Detail levels:** **Brief:** Names the cultural reference and links it to the concept. **Explained:** Explains how the reference illustrates the concept. **Elaborated:** Develops the connection through reasoning, comparisons, or applications. These are descriptive detail levels rather than quality scores.<br><br>**Worked example:** The tutor discusses fireworks used during a named cultural festival and explains how heating atoms leads them to emit characteristic colours. Record `reference`: **Fireworks during the named festival** (using the festival actually named); `concept_illustrated`: **Atomic emission**; `detail_level`: **Explained**; `turn_locations`: the actual turns containing this reference and explanation.<br><br>**Everyday example without an explicit cultural connection:** An explanation of fireworks alone is an everyday example; list it as a cultural reference only when the tutor explicitly connects it to a cultural celebration or practice.<br><br>**Incidental cultural mention:** A festival greeting without using the festival to explain a learning concept is not a qualifying cultural reference.<br><br>**Cultural artifacts:** References to objects such as traditional textiles, artworks, or musical instruments also qualify when the tutor uses their cultural context or features to explain a learning concept. For example, using repeating motifs in a traditional textile to explain symmetry can qualify; merely naming the textile does not.",
-      "fields": [
-        {
-          "key": "reference",
-          "label": "Cultural reference"
-        },
-        {
-          "key": "concept_illustrated",
-          "label": "Concept illustrated",
-          "optional": true
-        },
-        {
-          "key": "detail_level",
-          "label": "Detail level",
-          "options": [
-            "Brief",
-            "Explained",
-            "Elaborated"
-          ],
-          "optional": true
-        }
-      ]
-    },
-    {
-      "name": "Questions",
-      "key": "questions",
-      "short_label": "Questions",
-      "color": "#548d7d",
-      "highlight": "#e0f2ed",
-      "description": "Which questions does the tutor direct to the learner to elicit a response?",
-      "entry_attributes": "`question`; `question_type` (Knowledge-checking / Instructional); `concept_checked` (knowledge being checked, or null); optional `question_count` (number of questions in one highlight); `turn_locations`",
-      "guidance": "**What to record:** Record only actual questions directed to the learner with an expectation of a learner response. The learner need not actually answer for the question to qualify. Record each eligible question occurrence, including repetitions. A contiguous group of questions may use one highlight with `question_count` set to the number in it. Exclude learner-only questions and questions used as section headings.<br><br>**Eligibility before classification:** Read the surrounding tutor content before assigning a question type. Exclude rhetorical questions that the tutor answers itself as part of its explanation, including a question followed by its definition, calculation, reasoning, or conclusion without inviting the learner to respond. Subject-matter wording or a question mark alone does not establish eligibility. A genuine learner-directed knowledge check remains eligible even if a later tutor turn explains the answer after a learner response or opportunity to respond.<br><br>**Closing invitations and suggested doubts:** Exclude statements or imperatives inviting the learner to ask questions, such as \"If you have any other doubt, ask!\", \"We can explore in more detail\", or \"Let me know if you have questions.\" These are not questions to the learner. Also exclude lists of suggested questions the learner could ask the tutor, unless the tutor instead asks the learner to answer them. An actual learner-directed question such as \"Do you have any questions?\" or \"Would you like another example?\" remains eligible as Instructional. Do not convert an invitation into a question or include the surrounding invitation text in the highlighted question.<br><br>**Entry attributes:** Record `question` (the exact eligible question wording, preserving source language, Markdown, and punctuation), `question_type` (Knowledge-checking / Instructional), `concept_checked` (the knowledge or concept being checked for Knowledge-checking questions; null for Instructional questions), optional `question_count` (number of questions in the highlight), and `turn_locations` (the single tutor turn containing that occurrence). Separate questions in the same turn may be highlighted individually or as a contiguous group.<br><br>**Knowledge-checking:** The tutor asks the learner to recall, explain, compare, reason about, or apply subject-matter knowledge. It requests a demonstration of knowledge rather than a self-report of understanding. Classify it this way even if the learner does not answer, provided the question is genuinely posed to the learner rather than self-answered rhetorically.<br><br>**Instructional:** An eligible question manages the learning interaction without requesting a demonstration of subject-matter knowledge. This includes self-report checks such as \"Have you understood?\" or \"Does that make sense?\", actual questions such as \"Do you have any questions?\", and preference questions such as \"Would you like another example?\" Rhetorical self-answered questions, suggested learner doubts, and statements inviting questions do not qualify under either question type.<br><br>**Worked example - Knowledge-checking:** The tutor asks, \"Why do wet clothes dry faster in moving air?\", inviting the learner to explain the effect of airflow. Record that exact question as Knowledge-checking, with `concept_checked`: **Effect of airflow on evaporation**.<br><br>**Worked example - Instructional understanding check:** The tutor asks, \"Have you understood?\" Record that exact question as Instructional, with `concept_checked`: **null**.<br><br>**Excluded example - Rhetorical:** \"What is evaporation? Evaporation is the change of liquid water into vapour.\" The tutor asks and answers its own explanatory question. Do not create a Questions annotation; if the question is a heading, retain its Concepts hierarchy annotation.<br><br>**Excluded example - Closing invitation:** \"Or, if you have any other doubt, ask! We can explore in more detail. ??\" Do not create a Questions annotation: this is an invitation, not a question requesting a learner response.",
-      "fields": [
-        {
-          "key": "question",
-          "label": "Exact question wording"
-        },
-        {
-          "key": "question_type",
-          "label": "Question classification",
-          "options": [
-            "Knowledge-checking",
-            "Instructional"
-          ]
-        },
-        {
-          "key": "concept_checked",
-          "label": "Concept checked",
-          "optional": true
-        },
-        {
-          "key": "question_count",
-          "label": "Number of questions",
-          "numeric": true,
-          "optional": true
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
         }
       ]
     },
     {
       "key": "memory_aids",
-      "name": "Memory Aid",
-      "short_label": "Memory aid",
+      "name": "Memory Aids",
+      "short_label": "Memory Aids",
+      "category": "Content",
       "color": "#397b71",
       "highlight": "#e2f3ee",
-      "description": "Which mnemonics or practical memory tips does the tutor give to help the learner remember a concept, sequence, rule, or step?",
-      "entry_attributes": "`memory_aid`; `turn_locations`",
-      "guidance": "**What to record:** Record an explicit aid for remembering, such as an acronym, acrostic, rhyme, memorable phrase, or a stated tip for recalling a concept or procedure. Highlight the aid itself and enough adjacent wording to identify what it helps the learner remember.<br><br>**Distinct entries:** Keep one entry per distinct aid. Merge repeated use of the same aid and include each supporting turn. Separate different aids even when they target the same concept.<br><br>**Worked example:** “Remember the order of operations with PEMDAS: parentheses, exponents, multiplication, division, addition, subtraction.” Record `memory_aid`: **PEMDAS for the order of operations**.<br><br>**Boundary:** A summary or explanation alone is not a memory aid. An analogy that explains a concept is an Analogy; record it as a Memory Aid as well only when the tutor explicitly presents it as a way to remember.",
+      "description": "Mnemonics, memory tips, and explicit summaries that help recall learning content.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Mnemonics, memory tips, and explicit summaries that help recall learning content. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
       "fields": [
         {
-          "key": "memory_aid",
-          "label": "Memory aid"
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
         }
       ]
     },
     {
-      "key": "issues",
-      "name": "Issues",
-      "short_label": "Issues",
-      "color": "#ad514b",
-      "highlight": "#fbe7e4",
-      "description": "Which distinct factual, conceptual, procedural, or reasoning issues occur in the tutor’s contributions?",
-      "entry_attributes": "`issue`; optional `explanation`; exact selected evidence; `turn_locations`",
-      "guidance": "**What to record:** List each distinct confirmed factual, conceptual, procedural, or reasoning issue in the tutor’s contributions. Do not assign severity labels.<br><br>**Entry attributes:** Record `issue` (a short description of the issue), `evidence` (the tutor’s exact incorrect wording or step), `explanation` (why it is incorrect and what the correct claim or step should be), `turn_locations` (the turns containing the issue and any correction).<br><br>**Distinct entries:** List repetitions of the same underlying issue once and record all occurrences. List independently incorrect claims or steps separately. Retain corrected issues in the list; supporting passages can include a later correction.<br><br>**Worked example:** The tutor says, “Evaporation only occurs at boiling temperature.” Record `issue`: **Evaporation incorrectly restricted to boiling temperature**; `evidence`: **Evaporation only occurs at boiling temperature.**; `explanation`: **Evaporation can occur below boiling temperature; it takes place at the liquid’s surface.**; `turn_locations`: the actual supporting turns.<br><br>Flag uncertain or interpretation-dependent cases for verification rather than listing them as confirmed issues.",
+      "key": "questions",
+      "name": "Questions",
+      "short_label": "Questions",
+      "category": "Content",
+      "color": "#397b71",
+      "highlight": "#e2f3ee",
+      "description": "Questions directed to the learner to elicit a response; exclude headings and rhetorical questions answered by the tutor.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `turn_locations`",
+      "guidance": "Questions directed to the learner to elicit a response; exclude headings and rhetorical questions answered by the tutor. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
       "fields": [
         {
-          "key": "issue",
-          "label": "Issue description"
-        },
-        {
-          "key": "explanation",
-          "label": "Why it is an issue and the correct claim or step",
-          "optional": true
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
         }
       ]
     }

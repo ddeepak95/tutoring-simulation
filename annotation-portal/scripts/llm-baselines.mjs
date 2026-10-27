@@ -1,3 +1,4 @@
+import {readSections,hydrateAnnotations} from '../src/section-registry.ts';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -119,7 +120,7 @@ try{
   const files=(liveFiles.length?liveFiles:stateFiles).sort((a,b)=>a.localeCompare(b)).slice(0,8);
   return files.map((file,index)=>({id:`conversation-screenshot-${String(index+1).padStart(2,'0')}`,turn_id:'conversation',mime_type:'image/png',data:fs.readFileSync(file).toString('base64'),source:file}));
  }
- const documents=await readAll('conversations');const baselines=await readAll('llm_baselines','id,conversation_id');
+ const documents=await readAll('conversations');const baselines=await readAll('llm_baselines','id,conversation_id,rubric_hash');
  const rubric=JSON.parse(fs.readFileSync(path.join(portal,'src/generated/rubric.json'),'utf8'));
  const config=JSON.parse(fs.readFileSync(path.join(portal,'server/generated/evaluation-config.json'),'utf8'));
  config.timeout=600;config.stream=true;config.max_tokens=null;config.repair_attempts=3;
@@ -130,14 +131,15 @@ try{
  if(reasoningHigh)config.reasoning={effort:'high',exclude:true};
  if(repairFrom && (requested.length!==1 || !regenerate))throw new Error('--repair-from-response requires one --conversation and --regenerate.');
  if(reviewFrom && (requested.length!==1 || !regenerate))throw new Error('--review-from requires one --conversation and --regenerate.');
- const existing=new Set(baselines.map(baseline=>baseline.conversation_id));
+ const existing=new Set(baselines.filter(baseline=>baseline.rubric_hash===rubric.rubric_sha256).map(baseline=>baseline.conversation_id));
  let selection=documents.filter(doc=>regenerate||!existing.has(doc.id));
  if(requested.length){const unknown=requested.filter(id=>!documents.some(doc=>doc.id===id));if(unknown.length)throw new Error('A requested conversation does not exist in this portal.');selection=selection.filter(doc=>requested.includes(doc.id));}
  if(pilot){selection.sort((a,b)=>Number(b.language==='en'&&!b.transcript.source_conversation_id)-Number(a.language==='en'&&!a.transcript.source_conversation_id)||Number(b.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)-Number(a.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)||a.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0)-b.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0));selection=selection.slice(0,1);}
  async function push(artifact){
   const document=documents.find(doc=>doc.id===artifact.conversation_id);if(!document)throw new Error('The baseline conversation is not in the configured portal.');
   if(!isDeepStrictEqual(artifact.conversation,document.transcript))throw new Error('The local baseline does not contain this exact saved transcript.');
-  if(artifact.format_version!=='llm-baseline-local/1.0'||artifact.rubric_snapshot?.rubric_sha256!==artifact.rubric_hash||!Array.isArray(artifact.annotations)||artifact.annotations.some(annotation=>!['concepts_and_subtopics_covered','examples','analogies','representations','cultural_references','questions','memory_aids','issues'].includes(annotation.feature)))throw new Error('Invalid local baseline format.');
+  if(artifact.format_version!=='llm-baseline-local/1.0'||artifact.rubric_snapshot?.rubric_sha256!==artifact.rubric_hash||!Array.isArray(artifact.annotations)||artifact.annotations.some(annotation=>!artifact.rubric_snapshot.rubric?.some(feature=>feature.key===annotation.feature)))throw new Error('Invalid local baseline format.');
+  if(artifact.sections)artifact.annotations=hydrateAnnotations(artifact.annotations,artifact.sections);
   C.validateAnnotations(document.transcript,artifact.annotations,artifact.rubric_snapshot.rubric);
   const {data:version,error:readError}=await client.from('rubric_versions').select('snapshot').eq('hash',artifact.rubric_hash).maybeSingle();if(readError)throw new Error('Could not read the baseline rubric.');
   if(version && !isDeepStrictEqual(version.snapshot.rubric,artifact.rubric_snapshot.rubric))throw new Error('The saved rubric definition differs from the local baseline.');
@@ -153,8 +155,10 @@ try{
   if(!dry){
    if(!apiKey)throw new Error(provider==='google'?'Set GEMINI_API_KEY or GOOGLE_API_KEY locally.':'Set OPENROUTER_API_KEY locally.');
    for(const document of selection){
+    const sections=await readSections(client,[document.id]);
+    if(!sections.length)throw Error('Open the conversation labeling view once to initialize its permanent section IDs.');
     let previous;
-    if(reviewFrom){const {data,error}=await client.from('llm_baselines').select('*').eq('id',reviewFrom).single();if(error||data.conversation_id!==document.id||data.rubric_hash!==rubric.rubric_sha256)throw new Error('Review baseline must match the selected conversation and rubric.');previous=data;}
+    if(reviewFrom){const {data,error}=await client.from('llm_baselines').select('*').eq('id',reviewFrom).single();if(error||data.conversation_id!==document.id||data.rubric_hash!==rubric.rubric_sha256)throw new Error('Review baseline must match the selected conversation and rubric.');previous={...data,annotations:hydrateAnnotations(data.annotations,sections)};}
     const passes=reviewFrom?['review']:review?['extraction','review']:['extraction'];
     const visualBundle=await embeddedVisuals(document.id);
     const contextScreenshots=includeScreenshots?conversationScreenshots(captureOutputFolder(document)):[];
@@ -189,8 +193,8 @@ try{
      const providerCallFolder=attempt=>{let sequence=callFolders.get(attempt);if(sequence===undefined){do{sequence=++nextCallSequence;}while(fs.existsSync(path.join(providerLogFolder,`request_${String(sequence).padStart(2,'0')}`)));callFolders.set(attempt,sequence);}const directory=path.join(providerLogFolder,`request_${String(sequence).padStart(2,'0')}`);fs.mkdirSync(directory,{recursive:true});return directory;};
      const recovered=repairFrom&&stage===job.stages[0]?JSON.parse(fs.readFileSync(path.resolve(repairFrom),'utf8')):null;
 
-     const generated=await generateInstructionalBaseline({...(recovered?{initialContent:recovered.choices[0].message.content,initialResponseId:recovered.id}:{}),checkpoint:stage.generation_checkpoint,onCheckpoint:checkpoint=>{stage.generation_checkpoint=checkpoint;persist();},onProviderRequest:(request,attempt)=>{const directory=providerCallFolder(attempt);fs.writeFileSync(path.join(directory,'request.json'),JSON.stringify(request,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(directory,'metadata.json'),JSON.stringify({pipeline_attempt:job.output_attempt,attempt_type:stage.pass,baseline_id:id,provider_attempt:attempt,screenshots:contextScreenshots.map(({id,source})=>({id,source}))},null,2)+'\n',{flag:'wx'});},onProviderResponse:(payload,attempt)=>fs.writeFileSync(path.join(providerCallFolder(attempt),'response.json'),JSON.stringify(payload,null,2)+'\n',{flag:'wx'}),conversation:document.transcript,captureHtml:visualBundle.captureHtml,rubric,requestId:id,config,apiKey,visuals:visualBundle.visuals,contextScreenshots,...(stage.pass==='review'?{previousAnnotations:previous.annotations}:{})});
-     const artifact={format_version:'llm-baseline-local/1.0',id,conversation_id:document.id,rubric_hash:rubric.rubric_sha256,rubric_snapshot:rubric,conversation:document.transcript,annotations:generated.annotations,model:generated.model,prompt_version:promptVersion,prompt:generated.prompt,generation_config:{...generated.generation_config,origin:'local_llm_generation',provider_transitions:job.provider_transitions||[],pipeline_job_id:job.id,reviewed_baseline_id:stage.pass==='review'?previous.id:null,visual_capture:{embedded_images:visualBundle.visuals.length,omitted_images:visualBundle.omitted,embedded_bytes:visualBundle.bytes,conversation_screenshots:contextScreenshots.length}},generated_at:new Date().toISOString()};
+     const generated=await generateInstructionalBaseline({...(recovered?{initialContent:recovered.choices[0].message.content,initialResponseId:recovered.id}:{}),checkpoint:stage.generation_checkpoint,onCheckpoint:checkpoint=>{stage.generation_checkpoint=checkpoint;persist();},onProviderRequest:(request,attempt)=>{const directory=providerCallFolder(attempt);fs.writeFileSync(path.join(directory,'request.json'),JSON.stringify(request,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(directory,'metadata.json'),JSON.stringify({pipeline_attempt:job.output_attempt,attempt_type:stage.pass,baseline_id:id,provider_attempt:attempt,screenshots:contextScreenshots.map(({id,source})=>({id,source}))},null,2)+'\n',{flag:'wx'});},onProviderResponse:(payload,attempt)=>fs.writeFileSync(path.join(providerCallFolder(attempt),'response.json'),JSON.stringify(payload,null,2)+'\n',{flag:'wx'}),conversation:document.transcript,captureHtml:visualBundle.captureHtml,sections,rubric,requestId:id,config,apiKey,visuals:visualBundle.visuals,contextScreenshots,...(stage.pass==='review'?{previousAnnotations:previous.annotations}:{})});
+     const artifact={format_version:'llm-baseline-local/1.0',id,conversation_id:document.id,rubric_hash:rubric.rubric_sha256,rubric_snapshot:rubric,sections,conversation:document.transcript,annotations:generated.annotations,model:generated.model,prompt_version:promptVersion,prompt:generated.prompt,generation_config:{...generated.generation_config,origin:'local_llm_generation',provider_transitions:job.provider_transitions||[],pipeline_job_id:job.id,reviewed_baseline_id:stage.pass==='review'?previous.id:null,visual_capture:{embedded_images:visualBundle.visuals.length,omitted_images:visualBundle.omitted,embedded_bytes:visualBundle.bytes,conversation_screenshots:contextScreenshots.length}},generated_at:new Date().toISOString()};
      fs.writeFileSync(file,JSON.stringify(artifact,null,2)+'\n',{flag:'wx'});
      console.log(JSON.stringify({result:'generated_and_validated',conversation_id:document.id,baseline_id:id,pass:stage.pass,annotation_count:artifact.annotations.length,local_file:file}));return artifact;
     }});}finally{fs.closeSync(lock);fs.unlinkSync(lockFile);}

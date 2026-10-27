@@ -40,7 +40,9 @@
     "llm:baselines": "node scripts/llm-baselines.mjs",
     "sync:prompt": "node scripts/sync-llm-prompt.mjs",
     "sync:comparisons": "node scripts/sync-comparison-questions.mjs",
-    "prebuild": "npm run sync:rubric && npm run sync:comparisons"
+    "prebuild": "npm run sync:rubric && npm run sync:comparisons",
+    "migrate:section-items": "node scripts/migrate-section-items.mjs",
+    "migrate:persistent-sections": "node scripts/migrate-persistent-sections.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

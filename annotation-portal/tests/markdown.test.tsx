@@ -3,7 +3,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import type { Nodes } from 'mdast';
 import { mappedText, parseMarkdown } from '../src/markdown-source';
 import { MarkdownTranscript } from '../src/MarkdownTranscript';
-import {C,bundledRubric} from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 function leaves(source: string) {
   const result: ReturnType<typeof mappedText>[] = [];
@@ -14,6 +15,18 @@ function leaves(source: string) {
   walk(parseMarkdown(source)); return result;
 }
 describe('Markdown evidence mapping', () => {
+  it('uses section buttons instead of inline highlights in the labeling view', () => {
+    const text = 'Introduction.\n\n## Topic\n\nFirst sentence. Second sentence.\n\n**Details:**\n\nMore explanation.\n\n$$F=ma$$';
+    const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text }] });
+    const start = text.indexOf('First sentence.');
+    const annotation = C.createAnnotation('examples', C.makeEvidence(conversation, 't1', start, start + 15), bundledRubric.rubric, 'existing');
+    const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[annotation]} rubric={bundledRubric.rubric} readonly={false} sectionLabels onHighlight={() => {}} onSectionSelect={() => {}} />);
+    expect(html).not.toContain('<mark');
+    expect(html).not.toContain('Select equation');
+    expect(html.match(/class="section-annotation-label"/g)).toHaveLength(3);
+    expect(html).toContain('data-annotation-ids="existing"');
+    expect(html).toContain('Section 3');
+  });
   it('labels fresh and duplicate passages independently while retaining one example entry',()=>{
     const text='Hydrogen example.\n\nHydrogen example.';
     const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text}]});

@@ -1,7 +1,8 @@
 import {PGlite} from '@electric-sql/pglite';
 import fs from 'node:fs';
 import {expect,it} from 'vitest';
-import {C,bundledRubric} from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 it('preserves every UTF-16 boundary and overlapping occurrence while validating many late passages in long tutor turns',async()=>{
  const db=new PGlite();

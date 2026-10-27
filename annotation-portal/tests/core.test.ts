@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { C, bundledRubric, loginIdentifier, validateSubmission } from '../src/lib';
+import { C, loginIdentifier, validateSubmission } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 import { completeRatings } from './ratings-fixture';
 const conversation = C.normalizeConversation({ messages: [
   { turn_id: 't1', speaker: 'tutor', text: 'தமிழ் 😀 What is evaporation? What is evaporation?\nClothes dry as liquid water becomes vapour.' },

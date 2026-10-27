@@ -2,6 +2,7 @@ import type { Annotation, Feature } from './types';
 import { conceptLevel } from './coverage-hierarchy';
 
 export function featureItemCount(annotation: Annotation): number {
+  if (annotation.entry.category && typeof annotation.entry.count === 'number') return annotation.entry.count;
   if (annotation.feature === 'questions') return typeof annotation.entry.question_count === 'number' ? annotation.entry.question_count : 1;
   if (annotation.feature === 'representations' && ['Diagram', 'Flowchart'].includes(String(annotation.entry.representation_type))) {
     return typeof annotation.entry.diagram_count === 'number' ? annotation.entry.diagram_count : 1;
@@ -15,6 +16,7 @@ export function countFeatureItems(annotations: Annotation[], featureKey: string)
 
 export function featureSubitemCounts(annotations: Annotation[], feature: Feature) {
   const entries = annotations.filter(annotation => annotation.feature === feature.key);
+  if (feature.category) return [{ label: feature.category, counts: [{ label: 'Occurrences', count: countFeatureItems(entries, feature.key) }, { label: 'Sections', count: entries.length }] }];
   const groups = feature.fields.filter(field => field.options?.length).map(field => {
     const counts = field.options!.map(option => ({ label: option, count: 0 }));
     let unspecified = 0;

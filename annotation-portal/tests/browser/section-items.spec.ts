@@ -1,0 +1,162 @@
+import {expect,test} from '@playwright/test';
+import fs from 'node:fs';
+const snapshot=JSON.parse(fs.readFileSync('src/generated/rubric.json','utf8'));
+import {backend,ids,login} from './mock';
+
+for(const captured of [true,false])test(`section sidebar counters save, reload and share IDs (captured=${captured})`,async({page})=>{
+ const state=await backend(page,snapshot);
+ const text='# Practice\n\nThree examples. x = 1. y = 2.\n\n# Practice\n\nThree examples. x = 1. y = 2.';
+ state.documents[0].transcript.messages[0].text=text;
+ if(captured){
+  state.documents[0].transcript.conversation_id=ids.doc;state.documents[0].transcript.archive_source='capture';
+  state.captureDocuments.push({conversation_id:ids.doc,html:'<!doctype html><article class="capture-message capture-assistant" data-turn-id="t1"><h2>Practice</h2><p>Three examples. x = 1. y = 2.</p><h2>Practice</h2><p>Three examples. x = 1. y = 2.</p></article>'});
+  state.documents[0].transcript.messages[0].text=text.replaceAll('# ','');
+ }
+ await login(page,'alice');
+ await page.getByRole('region',{name:'Label instructional features'}).locator('.assignment-row').click();
+ const panel=page.getByRole('complementary',{name:'Section labeling',exact:true});
+ await expect(panel).toContainText('Click a section');
+ await expect(page.getByRole('complementary',{name:'Labeling guide',exact:true})).toHaveCount(0);
+ const turn=captured?page.frameLocator('.exact-capture iframe').locator('[data-turn-id="t1"]'):page.locator('[data-turn-id="t1"]');
+ const buttons=turn.getByRole('button',{name:/Turn 1 - Section/});
+ const section=turn.getByRole('button',{name:'Turn 1 - Section 2',exact:true});
+ await expect(section).toHaveAttribute('data-section-id','t1s2');
+ const top=captured?page.frameLocator('.exact-capture iframe').getByRole('button',{name:'Select Turn 1 - Section 2',exact:true}):turn.getByRole('button',{name:'Select Turn 1 - Section 2',exact:true});
+ await top.click();
+ await expect(panel.getByRole('heading',{name:'Turn 1 - Section 2 t1s2',exact:true})).toBeVisible();
+ await expect(panel).toContainText('t1s2');
+ await expect(panel).not.toContainText('Set the number of occurrences.');
+ await expect(page.getByRole('dialog')).toHaveCount(0);
+ const documentBox=(await page.locator('.annotation-layout > .document').boundingBox())!,panelBox=(await panel.boundingBox())!;
+ expect(panelBox.x).toBeGreaterThanOrEqual(documentBox.x+documentBox.width);
+ for(const category of ['Multimedia','Textual Representations','Content'])await expect(panel.getByRole('heading',{name:category,exact:true})).toBeVisible();
+ await expect(panel.getByRole('spinbutton')).toHaveCount(15);
+ const info=panel.getByRole('button',{name:'Examples labeling info',exact:true});
+ await info.click();
+ await expect(info).toHaveAttribute('aria-expanded','true');
+ await expect(panel.getByRole('region',{name:'Examples labeling guidance',exact:true})).toContainText('Specific real or hypothetical cases');
+ await expect(panel.getByRole('region',{name:'Examples labeling guidance',exact:true})).not.toContainText('Select its section, choose this item');
+ expect(state.assignments[0].annotations).toHaveLength(0);
+ await info.click();
+ await expect(panel.getByRole('region',{name:'Examples labeling guidance',exact:true})).toHaveCount(0);
+ await expect(panel.locator('.section-item-category').nth(1).locator('.section-item-row > label')).toHaveText(['Headings','Tables','Equations']);
+ await expect(panel.locator('[data-label-icon]')).toHaveCount(15);
+ await expect(panel.locator('[data-label-icon=photographs]')).toHaveAttribute('aria-hidden','true');
+ const boundary=captured?page.frameLocator('.exact-capture iframe').locator('.exact-section-boundary').nth(1):turn.locator('.section-annotation-boundary').nth(1);
+ await expect(boundary).toHaveCSS('border-top-color','rgb(37, 99, 235)');
+ await expect(boundary).toHaveCSS('border-top-width','3px');
+ await expect(section).toHaveCSS('border-top-color','rgb(37, 99, 235)');
+ await expect(top).toHaveCSS('border-top-color','rgb(37, 99, 235)');
+ await panel.getByRole('button',{name:'Increase Examples',exact:true}).click();
+ await panel.getByRole('spinbutton',{name:'Examples count',exact:true}).fill('3');
+ await panel.getByRole('button',{name:'Increase Equations',exact:true}).click();
+ await panel.getByRole('button',{name:'Increase Equations',exact:true}).click();
+ await expect.poll(()=>state.assignments[0].annotations.map((a:any)=>a.entry.count)).toEqual([3,2]);
+ const badges=captured?turn.locator('.exact-section-controls').nth(1):turn.locator('.section-annotation-controls').nth(1);
+ await expect(badges.getByRole('img',{name:'Examples: 3',exact:true})).toBeVisible();
+ await expect(badges.getByRole('img',{name:'Equations: 2',exact:true})).toBeVisible();
+ await expect(badges.getByRole('img')).toHaveCount(2);
+ const exampleBadge=badges.getByRole('img',{name:'Examples: 3',exact:true});
+ await exampleBadge.hover();
+ const tooltip=badges.getByRole('tooltip');
+ await expect(tooltip).toBeVisible();
+ await expect(tooltip).toHaveText('Examples: 3');
+ await expect(tooltip).not.toContainText('Select its section, choose this item');
+ await panel.getByRole('heading').first().hover();
+ await expect(tooltip).toHaveCount(0);
+ await exampleBadge.focus();
+ await expect(tooltip).toBeVisible();
+
+ expect(state.assignments[0].annotations[0].section_id).toBe('t1s2');expect(state.assignments[0].annotations[0]).not.toHaveProperty('evidence');
+ await expect(panel.locator('footer')).toHaveCount(0);
+ await expect(page.getByRole('status').filter({hasText:'Saved to cloud'})).toBeVisible();
+ // Switching sections must keep the existing work and reset the shown counters.
+ await buttons.first().click();
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('0');
+ expect(state.assignments[0].annotations).toHaveLength(2);
+ await section.click();
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('3');
+ // The guide floats above the panel and closing it preserves section selection.
+ await page.getByRole('button',{name:'Labeling guide',exact:true}).click();
+ const guide=page.getByRole('complementary',{name:'Labeling guide',exact:true});
+ await expect(guide).toBeVisible();
+ expect(await guide.evaluate(e=>e.parentElement===document.body)).toBe(true);
+ expect(Number(await guide.evaluate(e=>getComputedStyle(e).zIndex))).toBeGreaterThan((parseInt(await panel.evaluate(e=>getComputedStyle(e).zIndex))||0));
+ await guide.getByRole('button',{name:'Close labeling guide',exact:true}).click();
+ await page.getByRole('button',{name:'Labeling guide',exact:true}).click();
+ await expect(guide).toBeVisible();
+ await page.keyboard.press('Escape');
+ await expect(guide).toHaveCount(0);
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('3');
+ await page.reload();await section.click();
+ await expect(panel.getByRole('spinbutton',{name:'Equations count',exact:true})).toHaveValue('2');
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('3');
+ await panel.getByRole('spinbutton',{name:'Examples count',exact:true}).fill('0');
+ await expect.poll(()=>state.assignments[0].annotations.length).toBe(1);
+ await expect(badges.getByRole('img',{name:'Examples: 3',exact:true})).toHaveCount(0);
+ await expect(badges.getByRole('img',{name:'Equations: 2',exact:true})).toBeVisible();
+ await expect(page.getByRole('status').filter({hasText:'Saved to cloud'})).toBeVisible();
+ await panel.getByRole('button',{name:'Close section labeling',exact:true}).click();
+ await expect(boundary).toHaveCSS('border-top-color','rgb(38, 52, 48)');
+ await expect(boundary).toHaveCSS('border-top-width','2px');
+ await expect(section).toHaveCSS('border-top-color','rgb(38, 52, 48)');
+ await expect(section).toHaveCSS('background-color','rgb(255, 255, 255)');
+ await expect(top).toHaveCSS('border-top-color','rgb(38, 52, 48)');
+ await section.click();
+ await page.screenshot({path:`test-results/section-sidebar-${captured?'captured':'markdown'}-desktop.png`,fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ await expect(panel.getByRole('spinbutton',{name:'Equations count',exact:true})).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
+ await page.screenshot({path:`test-results/section-sidebar-${captured?'captured':'markdown'}-mobile.png`,fullPage:true});
+ await panel.getByRole('button',{name:'Close section labeling',exact:true}).click();
+ await page.getByRole('button',{name:'Sign out',exact:true}).click();await login(page,'bob');
+ await page.getByRole('region',{name:'Label instructional features'}).locator('.assignment-row').click();
+ await expect(section).toHaveAttribute('data-section-id','t1s2');await section.click();
+ await panel.getByRole('button',{name:'Increase Examples',exact:true}).click();
+ await expect.poll(()=>state.assignments[1].annotations[0]?.section_id).toBe(state.assignments[0].annotations[0].section_id);
+ expect(state.sections).toHaveLength(3);
+});
+
+
+test('submitted section counts remain read only in the sidebar',async({page})=>{
+ const state=await backend(page,snapshot);
+ state.documents[0].transcript.messages[0].text='One example.';
+ state.sections.push({conversation_id:ids.doc,section_id:'t1s1',turn_id:'t1',turn_number:1,section_number:1,start:0,end:12,quote:'One example.',occurrence:1,source_hash:'test'});
+ state.assignments[0].status='submitted';
+ state.assignments[0].annotations=[{id:'saved',feature:'examples',section_id:'t1s1',entry:{category:'Content',count:2}}];
+ await login(page,'alice');
+ await page.getByRole('region',{name:'Label instructional features'}).locator('.assignment-row').click();
+ await page.getByRole('button',{name:'Turn 1 - Section 1',exact:true}).click();
+ const panel=page.getByRole('complementary',{name:'Section labeling',exact:true});
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('2');
+ await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toBeDisabled();
+ await expect(panel.getByRole('button',{name:'Increase Examples',exact:true})).toBeDisabled();
+ await panel.getByRole('button',{name:'Examples labeling info',exact:true}).click();
+ await expect(panel.getByRole('region',{name:'Examples labeling guidance',exact:true})).toBeVisible();
+ await expect(panel.locator('footer')).toHaveCount(0);
+ expect(state.saves).toBe(0);
+});
+
+
+test('captured assignment stays behind loading message until frame styles and section controls are ready',async({page})=>{
+ const state=await backend(page,snapshot);
+ state.documents[0].transcript.conversation_id=ids.doc;
+ state.documents[0].transcript.archive_source='capture';
+ state.documents[0].transcript.messages[0].text='Practice\n\nOne example.';
+ state.captureDocuments.push({conversation_id:ids.doc,html:'<!doctype html><link rel="stylesheet" href="https://capture-style.test/layout.css"><article class="capture-message capture-assistant" data-turn-id="t1"><h2>Practice</h2><p>One example.</p></article>'});
+ let release!:()=>void;
+ const pending=new Promise<void>(resolve=>{release=resolve;});
+ let requested=false;
+ await page.route('https://capture-style.test/layout.css',async route=>{requested=true;await pending;await route.fulfill({contentType:'text/css',body:'article{padding:24px}'});});
+ await login(page,'alice');
+ await page.getByRole('region',{name:'Label instructional features'}).locator('.assignment-row').click();
+ try{
+  await expect.poll(()=>requested).toBe(true);
+  await expect(page.getByRole('status').filter({hasText:'Loading captured conversation'})).toBeVisible();
+  await expect(page.locator('.exact-capture iframe')).toHaveCSS('visibility','hidden');
+  await expect(page.locator('.document > .transcript')).toHaveCount(0);
+ }finally{release();}
+ await expect(page.locator('.exact-capture iframe')).toHaveCSS('visibility','visible');
+ await expect(page.getByRole('status').filter({hasText:'Loading captured conversation'})).toHaveCount(0);
+ await expect(page.frameLocator('.exact-capture iframe').getByRole('button',{name:'Turn 1 - Section 1',exact:true})).toBeVisible();
+});

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { openAdminAnnotations } from '../src/admin-annotations';
-import { bundledRubric } from '../src/lib';
+import {bundledRubric} from '../src/lib';
 import type { Profile } from '../src/types';
 
 const admin: Profile = { id: 'admin-id', username: 'admin', role: 'admin' };

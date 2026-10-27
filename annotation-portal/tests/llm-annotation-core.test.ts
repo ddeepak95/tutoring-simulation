@@ -1,5 +1,7 @@
 import { expect,it,vi } from 'vitest';
-import { bundledRubric,C } from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
+import {bundledRubric as itemRubric} from '../src/lib';
 import { annotationSchema,instructionalPrompt,promptVersion,resolveLLMAnnotations } from '../server/llm-annotation-core';
 import fs from 'node:fs';
 import {instructionalPromptText,instructionalReviewPrompt,instructionalRepairPrompt,instructionalPromptSource,instructionalPromptSha256} from '../server/generated/instructional-prompt';
@@ -7,7 +9,7 @@ import {createHash} from 'node:crypto';
 import { generateInstructionalBaseline } from '../server/llm-provider';
 import { compareWithBaseline } from '../src/baseline-comparison';
 import {modelSourcePassages} from '../server/source-passages';
-const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'😀 **Water evaporates.** Water evaporates. Why? Why?'},{turn_id:'s1',speaker:'student',text:'Water evaporates.'}]});
+const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'ðŸ˜€ **Water evaporates.** Water evaporates. Why? Why?'},{turn_id:'s1',speaker:'student',text:'Water evaporates.'}]});
 const output={annotations:[{feature:'examples',entry:{example:'Evaporation',concept_illustrated:null,detail_level:'Brief'},evidence:[{turn_id:'t1',quote:'Water evaporates.',occurrence:2,example_status:'Fresh' as const}]}]};
 const repairPatch={replacements:[{index:0,annotation:output.annotations[0]}],additions:[]};
 it('uses both prompts and version from the single Markdown source and records its full hash',()=>{
@@ -21,7 +23,7 @@ it('uses both prompts and version from the single Markdown source and records it
  expect(instructionalPromptSha256).toBe(createHash('sha256').update(source).digest('hex'));
  expect(source).toContain(`prompt_version: ${promptVersion}`);
  const prompt=instructionalPrompt();expect(prompt).toContain('segment_id');expect(prompt).toContain('data-evidence-ids');expect(prompt.length).toBeLessThan(12000);
-  for(const feature of bundledRubric.rubric)expect(prompt).toContain(feature.key);
+  for(const feature of itemRubric.rubric)expect(prompt).toContain(feature.key);
  for(const section of ['### Pedagogical Characteristics','#### Instructional Sequence','### Conversation Quality','### Errors'])expect(prompt).not.toContain(section);
 });
 it('resolves raw quotations to exact UTF-16 spans and retains occurrence identity',()=>{

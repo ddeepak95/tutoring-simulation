@@ -1,7 +1,8 @@
 import {expect,it,vi} from 'vitest';
 import {googleRequest,googleResponse} from '../server/google-provider';
 import {generateInstructionalBaseline} from '../server/llm-provider';
-import {C,bundledRubric} from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 it('uses Google authentication, native schema and medium reasoning without a token cap',()=>{
  const request=googleRequest([{role:'system',content:'Instructions'},{role:'user',content:'Transcript'}],{type:'object'},{model:'google/gemini-3.8-flash',stream:true,max_tokens:null,reasoning:{effort:'medium'}},'secret');
  expect(request.url).toBe('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:streamGenerateContent?alt=sse');expect(request.url).not.toContain('secret');

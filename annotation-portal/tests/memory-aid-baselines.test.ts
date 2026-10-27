@@ -1,7 +1,8 @@
 import { expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
-import { bundledRubric, C } from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 it('stores Memory Aid annotations in generated and imported LLM baselines', async () => {
   const db = new PGlite();

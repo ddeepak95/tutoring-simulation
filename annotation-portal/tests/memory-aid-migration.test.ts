@@ -1,7 +1,8 @@
 import { expect, it } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs';
-import { bundledRubric, C } from '../src/lib';
+import { C } from '../src/lib';
+import {bundledRubric} from './fixtures/legacy-rubric';
 
 it('upgrades active Label tasks for Memory Aid without changing submitted work', async () => {
   const db = new PGlite();
