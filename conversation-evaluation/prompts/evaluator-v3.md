@@ -19,6 +19,8 @@ The following sections reproduce the updated coding schema wording verbatim. The
 
 Use the section-items taxonomy for rubric_version 3.1. Segment each tutor response at every heading and standalone bold title, including subheadings. Treat introductory content separately; a response without headings has one section. Exclude speaker labels and capture metadata. Record each present item once per section, with its fixed category, count from 1 to 1000, and the supporting tutor turn in turn_locations. Count occurrences within that section, including repeats. Different items may coexist. Do not merge sections or provide descriptive fields, question classifications, detail levels, or Fresh/Duplicate status. Empty item lists mean no occurrences identified.
 
+Include hidden or off-screen questions and instructional images when visible counters, numbered pagination, thumbnails, or other explicit quantity cues establish their number. For example, a knowledge-checking quiz showing "Question 1 of 5" counts as 5 questions, and an instructional image carousel showing "Image 2 of 4" contains 4 images, not 5. Count the indicated total once per component within a section, including its visible item; do not add it again for repeated tiles or states of that same component in the section. A Next arrow alone does not establish a quantity: count only the evidenced number. Attribute counts to their own registered section; do not merge sections. For hidden images, use the specific image type only when supported; use Other Images for instructional images whose type cannot be established. Do not also count those images under a specific type. Evidence must cite the quantity cue and distinguish visible from inferred hidden occurrences.
+
 #### Photographs (`photographs`)
 
 Category: Multimedia. Photographic images of real objects, people, places, or events.
@@ -45,7 +47,7 @@ Category: Multimedia. Moving visual sequences; count each animation, not its fra
 
 #### Interactive Media (`interactive_media`)
 
-Category: Multimedia. Media the learner can manipulate or interact with; count each interactive component.
+Category: Multimedia. Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions.
 
 #### Other Images (`other_images`)
 
@@ -61,7 +63,7 @@ Category: Textual Representations. Explicit headings and standalone bold section
 
 #### Equations (`equations`)
 
-Category: Textual Representations. Mathematical equalities, inequalities, and symbolic formulas, inline or displayed; count each expression once.
+Category: Textual Representations. Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section.
 
 #### Examples (`examples`)
 
@@ -77,7 +79,7 @@ Category: Content. Mnemonics, memory tips, and explicit summaries that help reca
 
 #### Questions (`questions`)
 
-Category: Content. Questions directed to the learner to elicit a response; exclude headings and rhetorical questions answered by the tutor.
+Category: Content. Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as "Have you understood?" or "Does that make sense?", invitations for questions, and learning-preference or continuation questions. Include hidden questions in a clearly knowledge-checking quiz when explicit counters or pagination establish the total, including the visible question once. Do not infer knowledge-checking intent from a question mark alone.
 
 ### Pedagogical Characteristics
 
@@ -350,3 +352,8 @@ Use supplied turn IDs. If absent, assign `turn_1`, `turn_2`, and so on in messag
 Copy evidence exactly from the source. For rating and sequence evidence, `occurrence` identifies the one-based match within the turn, including overlapping matches. Use separate entries for non-contiguous passages. For omissions, cite context establishing the need. Explain when evidence is unavailable.
 
 Place uncertain errors in `verification_needed`. Record missing context and material constraints in `limitations`. Use null for an unavailable conversation ID.
+
+
+Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.
+
+HTML capture v2: section IDs are frozen at source capture and preserved in translations. Component/state IDs identify supporting views within the same section; count each occurrence once across views of the same component. Labels reference the section ID directly, without transcript quotations or offsets.

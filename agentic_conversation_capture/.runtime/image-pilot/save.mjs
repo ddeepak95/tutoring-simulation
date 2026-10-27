@@ -1,0 +1,7 @@
+import fs from 'node:fs/promises';import path from 'node:path';import {CaptureSession} from '../../browser-session.mjs';import {saveConversation} from '../../chatgpt-flow.mjs';
+const t=JSON.parse(await fs.readFile(new URL('./target.json',import.meta.url))),s=await CaptureSession.connect(t.ws);
+const graph=JSON.parse(await fs.readFile(new URL('../../outputs/newtons-laws/bn/20261027T054749609Z/newtons-laws-bn.agent-states.json',import.meta.url)));
+const media=JSON.parse(await fs.readFile(new URL('./media.json',import.meta.url))),checkpoint=JSON.parse(await fs.readFile(new URL('./checkpoint.json',import.meta.url)));
+for(const m of graph.messages){m.coverage={};for(const section of m.states[0].section_layout.sections)for(const anchor of section.anchors)m.coverage[anchor]={status:'complete',expected:null,notes:'image-focused/1: all discovered image viewers verified; text widgets retain initial view only.'};}
+const output=path.resolve('agentic_conversation_capture/outputs/newtons-laws/bn/image-focused-pilot-v2/newtons-laws-bn.html');await fs.mkdir(path.dirname(output),{recursive:true});
+try{const start=Date.now();const result=await saveConversation(s,output,{agentStates:graph,mediaInventory:media,mediaCandidates:checkpoint.turns.flatMap(t=>t.candidates),title:'নিউটনের গতিসূত্র',topic:'নিউটনের গতিসূত্র',topicId:'newtons-laws',language:'bn'});await fs.writeFile(new URL('./save-result.json',import.meta.url),JSON.stringify({...result,total_save_ms:Date.now()-start},null,2));console.log(result);}finally{s.close();}

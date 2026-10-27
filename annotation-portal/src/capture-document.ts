@@ -9,7 +9,7 @@ export function safeCapturedUrl(value: string, image = false) {
   if (image && /^data:image\/(?:png|jpe?g|gif|webp|avif|bmp|svg\+xml)(?:;[^,]*)?,/i.test(value)) return value;
   try { const url = new URL(value); if ((image ? ['https:'] : ['https:', 'http:', 'mailto:']).includes(url.protocol)) return value; } catch { /* Reject relative, executable and unknown URLs. */ }
 }
-export function sanitizeCapturedHtml(html: string, options: { preserveLayout?: boolean } = {}): { html: string; text: string; root: HTMLElement } {
+export function sanitizeCapturedHtml(html: string, options: { preserveLayout?: boolean;imageUrls?:ReadonlySet<string> } = {}): { html: string; text: string; root: HTMLElement } {
   const preserveLayout = options.preserveLayout === true;
   const parsed = new DOMParser().parseFromString(html, 'text/html');
   const root = parsed.createElement('div');
@@ -26,27 +26,36 @@ export function sanitizeCapturedHtml(html: string, options: { preserveLayout?: b
     if (tag === 'svg') {
       const svg = source.cloneNode(true) as Element; svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
       svg.querySelectorAll('script,foreignObject,animate,animateTransform,set').forEach(node => node.remove());
-      for (const node of [svg, ...svg.querySelectorAll('*')]) for (const attr of [...node.attributes]) if (/^on/i.test(attr.name) || (['href', 'xlink:href'].includes(attr.name) && !attr.value.startsWith('#'))) node.removeAttribute(attr.name);
+      for (const node of [svg, ...svg.querySelectorAll('*')]) for (const attr of [...node.attributes]) if (/^on/i.test(attr.name) || (!preserveLayout && ['href', 'xlink:href'].includes(attr.name) && !attr.value.startsWith('#'))) node.removeAttribute(attr.name);
       if (preserveLayout) {
-        const label = source.getAttribute('aria-label') || 'Captured diagram';
-        if (!source.querySelector('title,desc')) { const title = parsed.createElement('title'); title.textContent = label; source.insertBefore(title, source.firstChild); }
-        for (const attr of source.attributes) if (!/^on/i.test(attr.name) && !(['href', 'xlink:href'].includes(attr.name) && !attr.value.startsWith('#'))) output.setAttribute(attr.name, attr.value);
-        for (const child of source.childNodes) { const cleaned = clean(child); if (cleaned) output.append(cleaned); }
-        return output;
+        // SVG presentation attributes and fragment references are significant:
+        // rebuilding through the HTML attribute list loses strokes, transforms,
+        // clipping paths and shared-symbol icons.
+        for(const node of [svg,...svg.querySelectorAll('*')])for(const attr of [...node.attributes]){
+          if(/^on/i.test(attr.name))node.removeAttribute(attr.name);
+          if(['href','xlink:href'].includes(attr.name)){
+            const local=attr.value.startsWith('#');
+            const sprite=node.localName==='use'&&/^\/cdn\/assets\/[A-Za-z0-9_.-]+\.svg#[A-Za-z0-9_.:-]+$/.test(attr.value);
+            if(!local&&!sprite)node.removeAttribute(attr.name);
+          }
+          if(attr.name==='style'&&/expression\s*\(|url\s*\(\s*['"]?(?!#)/i.test(attr.value))node.removeAttribute(attr.name);
+        }
+        return svg;
       }
       const image = parsed.createElement('img'); image.src = 'data:image/svg+xml,' + encodeURIComponent(new XMLSerializer().serializeToString(svg)); image.alt = source.getAttribute('aria-label') || 'Captured diagram'; return clean(image);
     }
     if (tag === 'img') {
-      const src = safeCapturedUrl(source.getAttribute('src') || '', true);
+      const raw=source.getAttribute('src')||'';
+      const src = options.imageUrls?.has(raw)?raw:safeCapturedUrl(raw, true);
       if (!src) { const missing = parsed.createElement('span'); missing.textContent = '[Image unavailable: ' + (source.getAttribute('alt') || 'image') + ']'; return missing; }
       output.setAttribute('src', src); output.setAttribute('alt', source.getAttribute('alt') || 'Captured image'); output.setAttribute('referrerpolicy', 'no-referrer');
-      if (!source.closest('figure')?.querySelector('figcaption') && !source.closest('[data-capture-image]')?.querySelector('[data-capture-caption]')) {
+      if (!preserveLayout && !source.closest('figure')?.querySelector('figcaption') && !source.closest('[data-capture-image]')?.querySelector('[data-capture-caption]')) {
         const inline = Boolean(source.closest('p,span,a,h1,h2,h3,h4,h5,h6,code'));
         const figure = parsed.createElement(inline ? 'span' : 'figure'); const caption = parsed.createElement(inline ? 'span' : 'figcaption');
         figure.setAttribute('data-capture-image', ''); caption.setAttribute('data-capture-caption', '');
         caption.textContent = source.getAttribute('alt') || 'Captured image'; figure.append(output, caption); return figure;
       }
-      return output;
+      if(!preserveLayout)return output;
     }
     if (tag === 'a') { const href = safeCapturedUrl(source.getAttribute('href') || ''); if (href) { output.setAttribute('href', href); output.setAttribute('target', '_blank'); output.setAttribute('rel', 'noopener noreferrer'); } }
     if (tag === 'details') output.setAttribute('open', '');
@@ -60,13 +69,17 @@ export function sanitizeCapturedHtml(html: string, options: { preserveLayout?: b
     }
     for (const attr of ['data-capture-image', 'data-capture-caption']) if (source.hasAttribute(attr)) output.setAttribute(attr, '');
     for (const attr of ['colspan', 'rowspan', 'start', 'dir', 'lang', 'display', 'mathvariant', 'columnalign', 'rowalign', 'stretchy', 'fence', 'separator']) if (source.hasAttribute(attr)) output.setAttribute(attr, source.getAttribute(attr)!);
-    for (const property of source.style || []) {
+    if(preserveLayout&&!/url\s*\(|expression\s*\(/i.test(source.style.cssText)){
+      // CSSOM exposes empty longhands for variable-based shorthands. Copying
+      // them property by property silently drops borders, padding and gaps.
+      output.style.cssText=source.style.cssText;
+    }else for (const property of source.style || []) {
       const value = source.style.getPropertyValue(property);
-      if ((preserveLayout || styleKeys.has(property)) && !/url\s*\(|expression\s*\(|var\s*\(/i.test(value)) output.style.setProperty(property, value);
+      if ((preserveLayout || styleKeys.has(property)) && !/url\s*\(|expression\s*\(/i.test(value) && (preserveLayout||!/var\s*\(/i.test(value))) output.style.setProperty(property, value);
     }
     const rgb = source.style.color.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-    if (rgb && rgb.slice(1).every(value => Number(value) > 220) && (!source.style.backgroundColor || /transparent|rgba\([^)]*,\s*0\)/.test(source.style.backgroundColor))) output.style.color = 'inherit';
-    if (['grid', 'flex'].includes(source.style?.display)) {
+    if (!preserveLayout && rgb && rgb.slice(1).every(value => Number(value) > 220) && (!source.style.backgroundColor || /transparent|rgba\([^)]*,\s*0\)/.test(source.style.backgroundColor))) output.style.color = 'inherit';
+    if (!preserveLayout && ['grid', 'flex'].includes(source.style?.display)) {
       output.style.display = source.style.display;
       if (output.style.display === 'grid') {
         const columns = Number(source.style.gridTemplateColumns.match(/^repeat\(\s*(\d+)/)?.[1]) || source.style.gridTemplateColumns.match(/(?:^|\s)\d+(?:\.\d+)?px/g)?.length || Math.min(2, source.children.length);

@@ -1,5 +1,5 @@
 ---
-prompt_version: instructional-section-items/2
+prompt_version: instructional-section-items/6
 ---
 
 ## Annotation prompt
@@ -10,10 +10,14 @@ When the output schema includes `section_id`, return that exact persistent ID fr
 The section-inventory gives the complete canonical source sections and their data-evidence-ids. Use only those section IDs as segment_id and quote the entire section exactly. Include its heading; never include speaker labels or capture metadata. Repeated sections have different IDs: preserve the correct occurrence. Semantic HTML, images, and supplementary screenshots help interpret content, but section-inventory determines annotation evidence. Do not output turn IDs, occurrence numbers, source offsets, descriptive fields, or Fresh/Duplicate metadata.
 
 Multimedia: photographs, diagrams_and_illustrations, flow_diagrams, graphs, maps, animations, interactive_media, other_images. Count instructional images or media components, not decorative content or individual animation frames. Classify each visual into its most specific item, without also counting it as Other Images. Inspect all supplied visuals; do not infer animation or interaction from a still image alone.
-Textual Representations: tables, headings, equations. Count complete tables, actual headings (including standalone bold titles), and individual inline or displayed formulas. Exclude speaker labels and capture metadata.
-Content: examples, analogies, memory_aids, questions. Examples are concrete cases illustrating concepts. Analogies explain through comparisons to another domain or situation. Memory Aids includes mnemonics, memory tips, and explicit summaries. Questions are directed to the learner for a response; exclude rhetorical questions answered by the tutor and heading titles. Different items can coexist in the same section.
+Textual Representations: tables, headings, equations. Count complete tables and actual headings (including standalone bold titles). Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section. Exclude speaker labels and capture metadata.
+Content: examples, analogies, memory_aids, questions. Examples are concrete cases illustrating concepts. Analogies explain through comparisons to another domain or situation. Memory Aids includes mnemonics, memory tips, and explicit summaries. Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as "Have you understood?" or "Does that make sense?", invitations for questions, and learning-preference or continuation questions. Different items can coexist in the same section.
 
 Every entry contains only category and count. Category must be exactly Multimedia, Textual Representations, or Content as prescribed by its item. Inspect every tutor section, including lists, tables, equations, and media.
+
+Include hidden or off-screen questions and instructional images when visible counters, numbered pagination, thumbnails, or other explicit quantity cues establish their number. For example, a knowledge-checking quiz showing "Question 1 of 5" counts as 5 questions, and an instructional image carousel showing "Image 2 of 4" contains 4 images, not 5. Count the indicated total once per component within a section, including its visible item; do not add it again for repeated tiles or states of that same component in the section. A Next arrow alone does not establish a quantity: count only the evidenced number. Attribute counts to their own registered section; do not merge sections. For hidden images, use the specific image type only when supported; use Other Images for instructional images whose type cannot be established. Do not also count those images under a specific type. Evidence must cite the quantity cue and distinguish visible from inferred hidden occurrences.
+
+Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.
 
 ## Review prompt
 Review all sections and the draft against the supplied item schema. Correct missing items, wrong categories, and occurrence quantities. Keep one annotation per section/item pair. Do not merge sections or introduce descriptive fields.
@@ -21,3 +25,8 @@ Review all sections and the draft against the supplied item schema. Correct miss
 ## Validation repair prompt
 Correct the validation errors below using the supplied section inventory and schema. For targeted repair, return replacements for the listed invalid indices and an empty additions array. Preserve valid entries and source occurrences. If a complete replacement response is requested, return the annotations object instead.
 Validation problem: {{validation_error}}
+
+
+Interactive Media rule: Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions.
+
+HTML capture v2: section IDs are frozen at source capture and preserved in translations. Component/state IDs identify supporting views within the same section; count each occurrence once across views of the same component. Labels reference the section ID directly, without transcript quotations or offsets.

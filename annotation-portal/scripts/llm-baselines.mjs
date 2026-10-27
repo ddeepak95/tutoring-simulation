@@ -1,3 +1,4 @@
+import {resolveCaptureContent} from '../src/capture-content.ts';
 import {readSections,hydrateAnnotations} from '../src/section-registry.ts';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -9,6 +10,7 @@ import { promptVersion } from '../server/llm-annotation-core.ts';
 import {instructionalPromptSha256} from '../server/generated/instructional-prompt.ts';
 import {createHash} from 'node:crypto';
 import {runCheckpointedPipeline} from './llm-pipeline.mjs';
+import {runImageBaselineJob} from './image-baseline-job.mjs';
 import C from '../src/generated/core.js';
 import { resolveRepositoryAdmin } from './repository-conversations.mjs';
 const portal=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
@@ -16,12 +18,12 @@ const languageDefinitions=JSON.parse(fs.readFileSync(path.resolve(portal,'../age
 const languageCode=value=>Object.entries(languageDefinitions).find(([id,entry])=>id===String(value||'').trim().toLowerCase()||entry.name.toLowerCase()===String(value||'').trim().toLowerCase())?.[0]||String(value||'').trim().toLowerCase();
 if(fs.existsSync(path.join(portal,'.env.local')))process.loadEnvFile(path.join(portal,'.env.local'));
 if(fs.existsSync(path.join(portal,'../.env')))process.loadEnvFile(path.join(portal,'../.env'));
-const args=process.argv.slice(2);let project,admin,model,pilot=false,all=false,dry=false,regenerate=false,review=false,reasoningHigh=false,geminiArgon=false,includeScreenshots=false,reviewFrom,repairFrom,importFile,resume,resumedState,provider;const requested=[];
+const args=process.argv.slice(2);let project,admin,model,pilot=false,all=false,dry=false,regenerate=false,review=false,reasoningHigh=false,geminiArgon=false,includeScreenshots=false,imageOnly=false,origin='http://127.0.0.1:5173',reviewFrom,repairFrom,importFile,resume,resumedState,provider;const requested=[];
 try{
  for(let i=0;i<args.length;i++){
-  if(args[i]==='--provider')provider=args[++i];else if(args[i]==='--model')model=args[++i];else if(args[i]==='--project')project=args[++i];else if(args[i]==='--admin')admin=args[++i];else if(args[i]==='--conversation')requested.push(args[++i]);
+  if(args[i]==='--image-only')imageOnly=true;else if(args[i]==='--url')origin=args[++i];else if(args[i]==='--provider')provider=args[++i];else if(args[i]==='--model')model=args[++i];else if(args[i]==='--project')project=args[++i];else if(args[i]==='--admin')admin=args[++i];else if(args[i]==='--conversation')requested.push(args[++i]);
   else if(args[i]==='--pilot')pilot=true;else if(args[i]==='--all-missing')all=true;else if(args[i]==='--dry-run')dry=true;else if(args[i]==='--regenerate')regenerate=true;else if(args[i]==='--import')importFile=args[++i];else if(args[i]==='--review')review=true;else if(args[i]==='--reasoning-high')reasoningHigh=true;else if(args[i]==='--gemini-argon')geminiArgon=true;else if(args[i]==='--screenshots')includeScreenshots=true;else if(args[i]==='--review-from'){review=true;reviewFrom=args[++i];}else if(args[i]==='--repair-from-response')repairFrom=args[++i];else if(args[i]==='--resume')resume=args[++i];
-  else throw new Error('Usage: npm run llm:baselines -- --project PROJECT (--pilot | --conversation ID | --all-missing | --import FILE) [--dry-run] [--regenerate] [--admin USERNAME] [--review] [--screenshots] [--reasoning-high] [--review-from BASELINE_ID]');
+  else throw new Error('Usage: npm run llm:baselines -- --project PROJECT (--pilot | --conversation ID | --all-missing | --import FILE) [--image-only] [--url LOCAL_PORTAL_URL] [--dry-run] [--regenerate] [--admin USERNAME] [--review] [--screenshots] [--reasoning-high] [--review-from BASELINE_ID]');
  }
  if(provider&&!['google','openrouter'].includes(provider))throw new Error('--provider must be google or openrouter.');
  if(resume){
@@ -29,7 +31,9 @@ try{
   resumedState=JSON.parse(fs.readFileSync(path.join(portal,'.runtime/llm-baselines/jobs',resume+'.json'),'utf8'));
   if(resumedState.project!==project||resumedState.id!==resume||!Array.isArray(resumedState.stages)||resumedState.stages.some(s=>!['extraction','review'].includes(s.pass)||!/^[0-9a-f-]{36}$/i.test(s.baseline_id)))throw new Error('Invalid job checkpoint.');
   requested.push(resumedState.conversation_id);regenerate=true;review=resumedState.stages.some(s=>s.pass==='review');reviewFrom=resumedState.review_from;
+  if(resumedState.input_mode==='turn-images/1')imageOnly=true;
  }
+ if(imageOnly){if(review||reviewFrom||repairFrom||includeScreenshots)throw Error('--image-only cannot be combined with legacy review, repair or screenshots.');geminiArgon=true;}
  if(Number(pilot)+Number(all)+Number(Boolean(requested.length))+Number(Boolean(importFile))!==1)throw new Error('Choose exactly one conversation selection or a local baseline file to import.');
  const url=process.env.VITE_SUPABASE_URL;const ref=url&&new URL(url).hostname.match(/^([a-z0-9]+)\.supabase\.co$/)?.[1];
  if(!ref||new URL(url).protocol!=='https:'||project!==ref)throw new Error('--project must match VITE_SUPABASE_URL. No requests sent.');
@@ -137,6 +141,7 @@ try{
  if(pilot){selection.sort((a,b)=>Number(b.language==='en'&&!b.transcript.source_conversation_id)-Number(a.language==='en'&&!a.transcript.source_conversation_id)||Number(b.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)-Number(a.transcript.messages.filter(turn=>turn.speaker==='tutor').length>=2)||a.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0)-b.transcript.messages.reduce((sum,turn)=>sum+turn.text.length,0));selection=selection.slice(0,1);}
  async function push(artifact){
   const document=documents.find(doc=>doc.id===artifact.conversation_id);if(!document)throw new Error('The baseline conversation is not in the configured portal.');
+  document.transcript=await resolveCaptureContent(client,document.transcript);
   if(!isDeepStrictEqual(artifact.conversation,document.transcript))throw new Error('The local baseline does not contain this exact saved transcript.');
   if(artifact.format_version!=='llm-baseline-local/1.0'||artifact.rubric_snapshot?.rubric_sha256!==artifact.rubric_hash||!Array.isArray(artifact.annotations)||artifact.annotations.some(annotation=>!artifact.rubric_snapshot.rubric?.some(feature=>feature.key===annotation.feature)))throw new Error('Invalid local baseline format.');
   if(artifact.sections)artifact.annotations=hydrateAnnotations(artifact.annotations,artifact.sections);
@@ -155,8 +160,10 @@ try{
   if(!dry){
    if(!apiKey)throw new Error(provider==='google'?'Set GEMINI_API_KEY or GOOGLE_API_KEY locally.':'Set OPENROUTER_API_KEY locally.');
    for(const document of selection){
+    document.transcript=await resolveCaptureContent(client,document.transcript);
     const sections=await readSections(client,[document.id]);
     if(!sections.length)throw Error('Open the conversation labeling view once to initialize its permanent section IDs.');
+    if(imageOnly){await runImageBaselineJob({client,document,sections,rubric,config,apiKey,project,portal,push,resumedState,origin});continue;}
     let previous;
     if(reviewFrom){const {data,error}=await client.from('llm_baselines').select('*').eq('id',reviewFrom).single();if(error||data.conversation_id!==document.id||data.rubric_hash!==rubric.rubric_sha256)throw new Error('Review baseline must match the selected conversation and rubric.');previous={...data,annotations:hydrateAnnotations(data.annotations,sections)};}
     const passes=reviewFrom?['review']:review?['extraction','review']:['extraction'];

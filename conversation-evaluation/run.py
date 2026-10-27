@@ -579,15 +579,31 @@ def validate_v3(value, task):
             elif judgment["score"] is not None:
                 raise ValueError(f"{name}: unscored judgments need score null")
     turns = {m["turn_id"]: m for m in data["messages"]}
+    html_sections = {section["section_id"]: turn["turn_id"]
+                     for turn in data.get("html_content", {}).get("turns", [])
+                     for section in turn.get("sections", [])}
+    section_items = set()
     problems = []
     for group in ("instructional_features", "errors"):
         for name, entries in value[group].items():
             for index, entry in enumerate(entries):
-                for location in entry["turn_locations"]:
+                locations = entry.get("turn_locations")
+                if group == "instructional_features" and entry.get("section_id"):
+                    section_id = entry["section_id"]
+                    if section_id not in html_sections:
+                        raise ValueError("Section ID must reference the supplied HTML section inventory")
+                    pair = (section_id, name)
+                    if pair in section_items:
+                        raise ValueError("Duplicate section item; edit its quantity")
+                    section_items.add(pair)
+                    locations = [html_sections[section_id]]
+                if not locations:
+                    raise ValueError("Provide a registered HTML section or tutor turn locations")
+                for location in locations:
                     if location not in turns or turns[location]["speaker"] != "tutor":
                         raise ValueError(f"{group}: turn_locations must reference tutor turns")
                 source = entry.get("question") if group == "instructional_features" else entry["evidence"]
-                if source is not None and not any(source in turns[t]["text"] for t in entry["turn_locations"]):
+                if source is not None and not any(source in turns[t]["text"] for t in locations):
                     problem = (f"{group}.{name}[{index}]: exact question or error evidence not found in "
                                f"turn_locations {entry['turn_locations']}: " + json.dumps(source, ensure_ascii=False))
                     candidates = [dict(turn_id=t, **candidate)

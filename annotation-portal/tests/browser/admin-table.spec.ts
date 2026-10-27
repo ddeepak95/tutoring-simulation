@@ -10,6 +10,7 @@ test('conversation rows are ordered by generic topic and then conversation title
   state.documents.push(makeDocument('00000000-0000-4000-8000-000000000062', 'Alkaline earth metals', 'Zinc explanation'));
   state.documents.push(makeDocument('00000000-0000-4000-8000-000000000063', 'Alkaline earth metals', 'Aluminum explanation'));
   await login(page, 'admin');
+  for(const group of await page.locator('.topic-group').all())if((await group.getAttribute('open'))===null)await group.locator('summary').click();
   await expect(page.locator('.conversation-table tbody tr')).toHaveCount(4);
   await expect(page.locator('.conversation-table tbody tr').nth(0)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000063');
   await expect(page.locator('.conversation-table tbody tr').nth(1)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000062');
@@ -17,6 +18,7 @@ test('conversation rows are ordered by generic topic and then conversation title
   await expect(page.locator('.conversation-table tbody tr').nth(3)).toHaveAttribute('data-conversation-id', ids.doc);
   await expect(page.locator('.topic-group-heading h2')).toHaveText(['Alkaline earth metals', 'Brain', 'Evaporation']);
   await expect(page.locator('.topic-group').first().locator('.conversation-table tbody tr')).toHaveCount(2);
+  await page.locator('.topic-group').nth(1).locator('summary').click();
   await expect(page.locator('.topic-group').nth(1)).not.toHaveAttribute('open', '');
   await page.locator('.topic-group').nth(1).locator('summary').click();
   await expect(page.locator('.topic-group').nth(1).locator('.conversation-table')).toBeVisible();
@@ -117,7 +119,7 @@ test('conversation menus preserve existing assignments and bulk assignment fills
   await expect(menu.getByRole('button', { name: 'Assign labeling' })).toBeDisabled();
   await menu.getByRole('button', { name: 'Close menu' }).click(); await expect(menu).toHaveCount(0); await expect(originalButton).toBeFocused();
   await translated.getByRole('button', { name: /Assign users for/ }).click(); await page.getByRole('heading', { name: 'Conversations', exact: true }).click(); await expect(page.getByRole('dialog', { name: 'Conversation actions' })).toHaveCount(0);
-  await page.getByLabel('Select all conversations').check(); await page.getByRole('button', { name: 'Assign selected', exact: true }).click();
+  await page.getByLabel('Select all loaded conversations').check(); await page.getByRole('button', { name: 'Assign selected', exact: true }).click();
   await page.getByRole('dialog', { name: 'Conversation actions' }).getByRole('button', { name: 'Assign', exact: true }).click();
   await expect(menu).toContainText('2 selected conversations'); await expect(menu).toContainText('Assigned to 1 of 2');
   await menu.getByRole('checkbox', { name: /alice/ }).check(); await menu.getByRole('checkbox', { name: /bob/ }).check();
@@ -143,6 +145,6 @@ test('Settings is protected from annotators and supports direct admin navigation
   await page.goto('/settings'); await expect(page.getByRole('heading', { name: 'Settings', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Create annotator', exact: true })).toBeVisible();
   await expect(page.locator('.annotator-list')).toContainText('alice'); await expect(page.locator('.annotator-list')).toContainText('bob');
-  await page.getByRole('link', { name: 'Conversations', exact: true }).click(); await expect(page.locator('.conversation-table')).toBeVisible();
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click(); await expect(page.locator('.topic-group-heading').first()).toBeVisible(); await page.locator('.topic-group').first().locator('summary').click(); await expect(page.locator('.conversation-table').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Create annotator', exact: true })).toHaveCount(0);
 });

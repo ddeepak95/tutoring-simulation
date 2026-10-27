@@ -97,12 +97,28 @@
   }
 
   function validateAnnotations(conversation, annotations, rubric, { allowIncomplete = false } = {}) {
+    if(conversation.html_content){
+      const pkg=conversation.html_content;
+      if(pkg.format_version!=="html-conversation/2"||pkg.status!=="complete")throw new Error("A complete HTML capture is required.");
+      if(!Array.isArray(annotations)||annotations.length>10000)throw new Error("Invalid annotation list.");
+      const sections=new Set(pkg.turns.flatMap(t=>t.sections.map(s=>s.section_id))),ids=new Set(),pairs=new Set();
+      for(const a of annotations){
+        if(!a.id||ids.has(a.id))throw new Error("Invalid or duplicate annotation ID.");ids.add(a.id);
+        const f=rubric.find(f=>f.key===a.feature);
+        if(!f?.category||!sections.has(a.section_id)||!a.entry||a.entry.category!==f.category)throw new Error("Unknown section/item or mismatched category.");
+        if(Object.keys(a.entry).some(k=>!["category","count"].includes(k))||!Number.isInteger(a.entry.count)||a.entry.count<1||a.entry.count>1000)throw new Error("Use a positive integer count from 1 to 1,000.");
+        if(a.evidence!==undefined&&(!Array.isArray(a.evidence)||a.evidence.length))throw new Error("HTML section labels do not use transcript spans.");
+        const pair=`${a.section_id}:${a.feature}`;if(pairs.has(pair))throw new Error("Duplicate section item; edit its quantity.");pairs.add(pair);
+        if(a.llm_evidence!==undefined&&(typeof a.llm_evidence!=="string"||!a.llm_evidence.trim()||a.llm_evidence.length>1000||/[\r\n\u2028\u2029]/u.test(a.llm_evidence)))throw new Error("LLM evidence must be a single nonempty line of at most 1000 characters.");
+      }return annotations;
+    }
     if (!Array.isArray(annotations)) throw new Error("Annotations must be a list.");
     const ids = new Set();
     const sectionItems = new Set();
     for (const annotation of annotations) {
       if (!annotation || typeof annotation.id !== "string" || !annotation.id || ids.has(annotation.id)) throw new Error("Annotation IDs must be nonempty and unique.");
       ids.add(annotation.id);
+      if (annotation.llm_evidence !== undefined && (typeof annotation.llm_evidence !== "string" || !annotation.llm_evidence.trim() || annotation.llm_evidence.length > 1000 || /[\r\n\u2028\u2029]/u.test(annotation.llm_evidence))) throw new Error("LLM evidence must be a single nonempty line of at most 1000 characters.");
       const feature = rubric.find(f => f.key === annotation.feature);
       if (!feature) throw new Error("Unknown instructional feature.");
       if (annotation.section_id !== undefined && !/^t[1-9][0-9]*s[1-9][0-9]*$/.test(annotation.section_id)) throw new Error("Invalid permanent section ID.");
@@ -186,6 +202,7 @@
           if ((field.optional || OPTIONAL_CONCEPT_FIELDS[feature.key] === field.key) && (entry[field.key] === "" || (field.multiple && Array.isArray(entry[field.key]) && !entry[field.key].length))) delete entry[field.key];
         }
         if (a.section_id) entry.section_id = a.section_id;
+        if (a.llm_evidence !== undefined) entry.llm_evidence = a.llm_evidence;
         return entry;
       });
       instructional_features[feature.key] = entries;
@@ -197,11 +214,11 @@
       format_version: rubric.some(feature => feature.category) ? "instructional-feature-annotation/2.0" : FORMAT_VERSION,
       exported_at: new Date().toISOString(),
       annotator: annotator || null,
-      offset_convention: "Zero-based UTF-16 code-unit offsets; end is exclusive. Occurrence is one-based and includes overlapping matches.",
+      offset_convention: conversation.html_content ? null : "Zero-based UTF-16 code-unit offsets; end is exclusive. Occurrence is one-based and includes overlapping matches.",
       conversation: structuredClone(conversation),
       rubric: structuredClone(rubric),
       form_fields: structuredClone(FORM_FIELDS),
-      sections: [...new Map(annotations.filter(a => a.section_id).map(a => [a.section_id, { section_id: a.section_id, ...structuredClone(a.evidence[0]) }])).values()],
+      sections: conversation.html_content ? conversation.html_content.turns.flatMap(t=>t.sections.map(s=>({section_id:s.section_id,turn_id:t.turn_id,turn_number:s.turn_number,section_number:s.section_number,heading:s.heading}))) : [...new Map(annotations.filter(a => a.section_id).map(a => [a.section_id, { section_id: a.section_id, ...structuredClone(a.evidence[0]) }])).values()],
       annotations: annotations.map(a => { if (!a.section_id) return structuredClone(a); const { evidence, entry, ...reference } = a; const { turn_locations, ...attributes } = entry; return structuredClone({ ...reference, entry: attributes }); }),
       incomplete_annotations,
       instructional_features,

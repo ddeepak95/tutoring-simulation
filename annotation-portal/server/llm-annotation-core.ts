@@ -37,6 +37,7 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
       if(!exactKeys(item,["feature","entry","section_id"])||typeof item.section_id!=="string"||typeof item.feature!=="string")throw new Error("Use a registered section_id, item and entry.");
       const section=sections.find(s=>s.section_id===item.section_id);
       if(!section)throw new Error("Unknown section ID for this conversation.");
+      if(conversation.html_content)return {id:`llm-${requestId}-${index+1}`,feature:item.feature,section_id:section.section_id,entry:item.entry as Annotation['entry'],evidence:[]};
       const evidence=C.makeEvidence(conversation,section.turn_id,section.start,section.end);
       if(evidence.quote!==section.quote||evidence.occurrence!==section.occurrence)throw new Error("Registered section source changed.");
       const annotation=C.createAnnotation(item.feature,evidence,rubric.rubric,`llm-${requestId}-${index+1}`);

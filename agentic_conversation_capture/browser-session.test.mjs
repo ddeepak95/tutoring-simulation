@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {CaptureSession,browserTargets,openCaptureTarget} from './browser-session.mjs';
+class Socket extends EventTarget{readyState=1;send(value){this.last=JSON.parse(value);}close(){this.readyState=3;this.dispatchEvent(new Event('close'));}}
+test('target command deadline rejects and clears pending promises',async()=>{const socket=new Socket(),session=new CaptureSession(socket,{commandTimeout:10});await assert.rejects(session.send('Runtime.evaluate'),/timed out/);assert.equal(session.pending.size,0);});
+test('disconnect rejects all in-flight commands promptly',async()=>{const socket=new Socket(),session=new CaptureSession(socket);const pending=session.send('Runtime.evaluate');socket.close();await assert.rejects(pending,/disconnected/);assert.equal(session.pending.size,0);await assert.rejects(session.send('Page.enable'),/not connected/);});
+test('recovery cannot open a new generated conversation',async()=>{await assert.rejects(openCaptureTarget('https://chatgpt.com/'),/saved ChatGPT/);await assert.rejects(browserTargets('http://127.0.0.1:1'),/unavailable/);});

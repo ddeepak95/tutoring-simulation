@@ -1,10 +1,13 @@
 import {createSectionItemBadges} from './SectionItemBadges';
 import sectionBadgeStyles from './section-item-badges.css?inline';
+import {HtmlConversationFrame} from './HtmlConversationFrame';
+import {htmlSections} from './html-conversation';
 import {RichText} from './RichText';
 import {LabelItemIcon} from './LabelItemIcon';
 import {createPortal} from 'react-dom';
 import {SectionLabelPanel} from './SectionLabelPanel';
-import {ensureSections, readSections, sectionCandidates} from './section-registry';
+import {ensureSections, ensureSectionStates, readSections, sectionCandidates} from './section-registry';
+import {deriveSectionStates} from './section-states';
 import { mapCapturedArticle } from './captured-sections';
 import { displayRubric } from './coverage-hierarchy';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
@@ -297,14 +300,17 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
   const receiveSections=(ranges:typeof sectionInventory)=>setSectionInventory(previous=>JSON.stringify(previous)===JSON.stringify(ranges)?previous:ranges);
   useEffect(()=>{
     if(!itemLabels || !conversationId || taskType==='rate' || captured.loading)return;
+    if(conversation.html_content){setRegisteredSections(htmlSections(conversation.html_content).map(s=>({...s,conversation_id:conversationId,content_version:'html-conversation/2'})) as unknown as ConversationSection[]);return;}
     let alive=true;
     void (async()=>{
       try{
-        let rows=await readSections(supabase!,[conversationId]);
+        let rows=await readSections(supabase!,[conversationId],true);
         if(!rows.length){
           if(exactHtml&&!sectionInventory?.length)return;
           rows=await ensureSections(supabase!,conversationId,sectionCandidates(conversation,exactHtml?sectionInventory!:undefined));
         }
+        const states=deriveSectionStates(conversation,rows,captured.assets);
+        if(states.length){await ensureSectionStates(supabase!,conversationId,states);rows=await readSections(supabase!,[conversationId]);}
         if(alive)setRegisteredSections(rows);
       }catch(err){if(alive)setError((err as Error).message);}
     })();
@@ -451,14 +457,14 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
   }
   const itemChoices = () => <>{[...new Set(rubric.map(f => f.category || 'Instructional features'))].map(category => <div key={category} className="item-choice-category"><h4>{category}</h4>{rubric.filter(f => (f.category || 'Instructional features') === category).map(f => <button className="choice feature-choice" key={f.key} onClick={() => create(f.key)}><LabelItemIcon item={f.key} style={{color:f.color}}/>{f.name}</button>)}</div>)}</>;
   const selectedEvidence=popup?.evidence || active?.evidence[0] || annotations.find(a=>popup?.ids?.includes(a.id))?.evidence[0];
-  const selectedRecord=selectedEvidence?registeredSections.find(s=>s.turn_id===selectedEvidence.turn_id&&s.start===selectedEvidence.start&&s.end===selectedEvidence.end):undefined;
+  const selectedRecord=popup?.sectionId?registeredSections.find(s=>s.section_id===popup.sectionId):selectedEvidence?registeredSections.find(s=>s.turn_id===selectedEvidence.turn_id&&s.start===selectedEvidence.start&&s.end===selectedEvidence.end):undefined;
   const selectedId=popup?.sectionId||active?.section_id||selectedRecord?.section_id;
-  const sectionAnnotations=selectedEvidence?annotations.filter(a=>selectedId?(a.section_id===selectedId||(!a.section_id&&a.evidence.some(e=>e.turn_id===selectedEvidence.turn_id&&e.start===selectedEvidence.start&&e.end===selectedEvidence.end))):a.evidence.some(e=>e.turn_id===selectedEvidence.turn_id&&e.start===selectedEvidence.start&&e.end===selectedEvidence.end)):[];
+  const sectionAnnotations=selectedId?annotations.filter(a=>a.section_id===selectedId):selectedEvidence?annotations.filter(a=>selectedId?(a.section_id===selectedId||(!a.section_id&&a.evidence.some(e=>e.turn_id===selectedEvidence.turn_id&&e.start===selectedEvidence.start&&e.end===selectedEvidence.end))):a.evidence.some(e=>e.turn_id===selectedEvidence.turn_id&&e.start===selectedEvidence.start&&e.end===selectedEvidence.end)):[];
   function setSectionCount(key:string,count:number){
-    if(labelReadonly||!selectedEvidence||!Number.isInteger(count)||count<0||count>1000)return;
+    if(labelReadonly||(!selectedEvidence&&!selectedId)||!Number.isInteger(count)||count<0||count>1000)return;
     const existing=sectionAnnotations.find(a=>a.feature===key);
     if(count===0){if(existing){setUndo(structuredClone(existing));commit(annotations.filter(a=>a.id!==existing.id));}return;}
-    const next=existing?structuredClone(existing):C.createAnnotation(key,selectedEvidence,rubric,crypto.randomUUID());
+    const next:Annotation=existing?structuredClone(existing):conversation.html_content?{id:crypto.randomUUID(),feature:key,section_id:selectedId,entry:{category:feature(key).category!,count:1},evidence:[]}:C.createAnnotation(key,selectedEvidence!,rubric,crypto.randomUUID());
     if(selectedId)next.section_id=selectedId;
     next.entry.count=count;setUndo(null);
     commit(existing?annotations.map(a=>a.id===next.id?next:a):[...annotations,next]);
@@ -476,8 +482,8 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
       {taskType !== 'rate' && <div className="feature-filter-row"><div className="feature-counts" role="list" aria-label="Feature counts">{rubric.map(item => <FeatureCountPill key={item.key} feature={item} annotations={annotations} selected={highlightFilters.includes(item.key)} onToggle={() => toggleHighlightFilter(item.key)} />)}</div>{highlightFilters.length > 0 && <button type="button" className="clear-highlight-filters" onClick={() => { close(); setHighlightFilters([]); }}>Show all highlights</button>}</div>}
     </div>
       {taskType === 'rate' ? <div className="rating-exchange" data-testid="rating-exchange" data-tutor-turn={ratedTurn} aria-live="polite">
-        {exactHtml ? <div className="exact-capture rating-exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} visibleTurnIds={ratingExchange.map(turn => turn.turn_id)} /></div> : captured.loading ? <div className="exact-capture rating-exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : ratingExchange.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />}</div></article>)}
-      </div> : exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} selectedSection={selectedEvidence} assets={captured.assets} sections={registeredSections} onSections={receiveSections} onSectionSelect={selectSourcePassage} onHighlight={editHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript">{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} selectedSection={selectedEvidence} sections={registeredSections} sectionLabels={turn.speaker === 'tutor'} turnNumber={tutorTurns.findIndex(item => item.turn_id === turn.turn_id) + 1} onSectionSelect={(start, end, rect) => selectSourcePassage(turn.turn_id, start, end, rect)} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
+        {conversation.html_content?<HtmlConversationFrame pkg={conversation.html_content} annotations={[]} rubric={rubric} visibleTurnIds={ratingExchange.map(t=>t.turn_id)}/>:exactHtml ? <div className="exact-capture rating-exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} visibleTurnIds={ratingExchange.map(turn => turn.turn_id)} /></div> : captured.loading ? <div className="exact-capture rating-exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : ratingExchange.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />}</div></article>)}
+      </div> : conversation.html_content?<HtmlConversationFrame pkg={conversation.html_content} annotations={visibleAnnotations} rubric={rubric} selectedId={selectedId} onSelect={id=>{setPopup({x:0,y:0,sectionId:id});setError('');}}/>:exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} selectedSection={selectedEvidence} assets={captured.assets} sections={registeredSections} onSections={receiveSections} onSectionSelect={selectSourcePassage} onHighlight={editHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript">{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} selectedSection={selectedEvidence} sections={registeredSections} sectionLabels={turn.speaker === 'tutor'} turnNumber={tutorTurns.findIndex(item => item.turn_id === turn.turn_id) + 1} onSectionSelect={(start, end, rect) => selectSourcePassage(turn.turn_id, start, end, rect)} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
     {captured.originalHtml && <OriginalCapture html={captured.originalHtml} conversation={conversation} />}
     {completionAction && taskType !== 'rate' && <div className="annotation-completion">{completionAction}</div>}
     {popup && !itemLabels && <div className="selection-menu" ref={menuRef} role="dialog" aria-label={active ? `${readonly ? 'View' : 'Edit'} ${feature(active.feature).name}` : readonly ? 'Choose a highlight to view' : 'Choose instructional feature'} onPointerDown={event => event.stopPropagation()} onMouseEnter={keepPopupOpen} style={{ left: popup.x, top: popup.y }}>

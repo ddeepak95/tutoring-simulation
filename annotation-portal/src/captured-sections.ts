@@ -3,7 +3,8 @@ import { sanitizeCapturedHtml } from './capture-document';
 const metadataHeading = /^Agent-explored interactive state state_\d+ \(capture action, not a learner response\):?$/u;
 const ignored = '.capture-speaker,script,style,annotation,annotation-xml,.sr-only,[hidden]';
 
-function isHeading(element: HTMLElement) {
+export const structuredUnitSelector='[data-d-component="grid"],[data-d-component="grid-item"],[role="grid"],[role="gridcell"],li,dt,dd,figure,figcaption,[data-d-component="image"]';
+export function isHeadingCandidate(element: HTMLElement) {
   if (element.closest(`${ignored},pre,code,table,.katex,math`)) return false;
   const copy = element.cloneNode(true) as HTMLElement;
   copy.querySelectorAll(ignored).forEach(node => node.remove());
@@ -12,6 +13,17 @@ function isHeading(element: HTMLElement) {
   if (!element.matches('p,div') || !copy.querySelector('strong,b')) return false;
   copy.querySelectorAll('strong,b').forEach(node => node.remove());
   return /^[\s:.,!?;()\[\]{}\-]*$/.test(copy.textContent || '');
+}
+
+export function isStructuredUnit(element:HTMLElement) {
+  if(element.closest(structuredUnitSelector))return true;
+  const row=element.closest('[data-d-component="row"],[data-d-direction="row"]');
+  // Repeated labels can be separate boxes or a stack within one side of a row.
+  // An ordinary heading beside an icon still has only one heading.
+  return !!row&&row.querySelectorAll('h1,h2,h3,h4,h5,h6').length>1;
+}
+export function isHeading(element: HTMLElement) {
+  return !isStructuredUnit(element)&&isHeadingCandidate(element);
 }
 
 /** Build section boundaries before annotation controls or highlights enter the DOM. */
@@ -90,7 +102,7 @@ export function capturedSections(article: HTMLElement, source: string) {
       if (last.nodeType === Node.TEXT_NODE) bounds.setEnd(last, last.textContent!.length);
       else bounds.setEndAfter(last);
     }
-    return [{ before, bounds, offsets: { start: positions[start], end: (positions[cursor - 1] ?? -1) + 1 } }];
+    return [{ before, bounds, range, offsets: { start: positions[start], end: (positions[cursor - 1] ?? -1) + 1 } }];
   });
   // Interactive capture states can be appended to the canonical turn while
   // the exact document shows only its original response. Their explicit
@@ -105,19 +117,22 @@ export function capturedSections(article: HTMLElement, source: string) {
 
 /** A snapshot can show a later interactive state than its canonical turn asset. */
 export function mapCapturedArticle(article:HTMLElement, source:string, canonicalHtml?:string, translatedHeadings?:{start:number;end:number}[]) {
+  article.querySelectorAll('[data-capture-derived-state]').forEach(state=>state.remove());
   let sections=capturedSections(article,source);
   if(sections.length&&sections.every(section=>section.offsets))return sections;
   if(!canonicalHtml&&!translatedHeadings)return sections;
   const candidate=article.ownerDocument.createElement('article');
   candidate.innerHTML='<strong class="capture-speaker">Bot</strong>'+(canonicalHtml||'');
+  candidate.querySelectorAll('[data-capture-derived-state]').forEach(state=>state.remove());
   const fallback=capturedSections(candidate,source);
   if(!fallback.length||fallback.some(section=>!section.offsets)) {
     if(!translatedHeadings)return sections;
     // An interactive source snapshot may not match the translated alignment.
     // Render the authoritative translated text using its supplied heading
     // boundaries instead of assigning offsets to different visible wording.
-    const headings=[...translatedHeadings];
-    for(const marker of source.matchAll(/^Agent-explored interactive state state_\d+ \(capture action, not a learner response\):?[\t ]*\r?$/gm))headings.push({start:marker.index!,end:marker.index!+marker[0].length});
+    const state=source.match(/^Agent-explored interactive state state_\d+ \(capture action, not a learner response\):?[\t ]*\r?$/m);
+    const primary=source.slice(0,state?.index??source.length).trimEnd();
+    const headings=translatedHeadings.filter(h=>h.end<=primary.length);
     headings.sort((a,b)=>a.start-b.start||a.end-b.end);
     const fragment=article.ownerDocument.createDocumentFragment();let cursor=0;
     const paragraph=(value:string)=>{if(!value.trim())return;const p=article.ownerDocument.createElement('p');p.style.whiteSpace='pre-wrap';p.textContent=value;fragment.append(p);};
@@ -126,7 +141,7 @@ export function mapCapturedArticle(article:HTMLElement, source:string, canonical
       paragraph(source.slice(cursor,heading.start));
       const h=article.ownerDocument.createElement('h2');h.textContent=source.slice(heading.start,heading.end);fragment.append(h);cursor=heading.end;
     }
-    paragraph(source.slice(cursor));
+    paragraph(primary.slice(cursor));
     candidate.replaceChildren(fragment);
     const translated=capturedSections(candidate,source);
     if(!translated.length||translated.some(section=>!section.offsets))return sections;

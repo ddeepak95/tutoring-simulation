@@ -47,6 +47,8 @@ def build() -> dict:
                 "label": record["condition"], "messages": record["messages"],
             })
     return {
+        "annotation_metadata": {"html_capture": "html-conversation/2: HTML is authoritative. Source-assigned section IDs are shared with translations; labels require no transcript spans.", "llm_evidence": "Optional single-line model justification, separate from source evidence; at most 1000 characters."},
+        "section_state_semantics": "Captured interaction states belong to their original containing section; count component items once across supporting views.",
         "label_schema_version": "section-items/1",
         "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
         "rubric_sha256": hashlib.sha256(GUIDE.read_bytes() + SCHEMA.read_bytes()).hexdigest(),

@@ -12,6 +12,12 @@ it('uses short tutor-turn IDs and preserves separate repeated occurrences',()=>{
  expect(sections[0].turn_id).toBe('turn_0002');expect(sections[1].occurrence).toBe(2);
 });
 
+it('keeps captured interaction states inside the original section inventory',()=>{
+ const c=C.normalizeConversation({messages:[{turn_id:'t',speaker:'tutor',text:'# Quiz\n\nQuestion 1 of 3.\n\nAgent-explored interactive state state_1 (capture action, not a learner response):\nQuestion 2 of 3.\n\nAgent-explored interactive state state_2 (capture action, not a learner response):\nQuestion 3 of 3.'}]});
+ const inventory=sectionCandidates(c);
+ expect(inventory).toHaveLength(1);expect(c.messages[0].text.slice(inventory[0].start,inventory[0].end)).toBe('# Quiz\n\nQuestion 1 of 3.');
+});
+
 it('stores only references and resolves source evidence through the registry',()=>{
  const section=sections[1],a=C.createAnnotation('examples',C.makeEvidence(conversation,section.turn_id,section.start,section.end),bundledRubric.rubric,'example');a.section_id=section.section_id;a.entry.count=3;
  const stored=storedAnnotations([a]);

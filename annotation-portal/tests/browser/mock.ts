@@ -2,6 +2,7 @@ import type { Page } from '@playwright/test';
 import fs from 'node:fs';
 import { createHash } from 'node:crypto';
 import C from '../../src/generated/core.js';
+import {groupByTopic,topicKey} from '../../src/topic-groups';
 const legacyRubric = JSON.parse(fs.readFileSync('tests/fixtures/legacy-rubric.json', 'utf8'));
 export const ids = { admin: '00000000-0000-4000-8000-000000000001', alice: '00000000-0000-4000-8000-000000000002', bob: '00000000-0000-4000-8000-000000000003', doc: '00000000-0000-4000-8000-000000000010', a: '00000000-0000-4000-8000-000000000011', b: '00000000-0000-4000-8000-000000000012' };
 export const profiles = [{ id: ids.admin, username: 'admin', role: 'admin' }, { id: ids.alice, username: 'alice', role: 'annotator' }, { id: ids.bob, username: 'bob', role: 'annotator' }];
@@ -14,6 +15,7 @@ const jwt = (id: string) => `${Buffer.from(JSON.stringify({ alg: 'HS256', typ: '
 export async function backend(page: Page, rubric = legacyRubric) {
   const people = profiles.map(profile => ({ ...profile }));
   const passwords = new Map(people.map(profile => [profile.username, 'test-password-123']));
+  const versions=[{hash:rubric.rubric_sha256,snapshot:rubric}];
   const documents = [{ id: ids.doc, label: sample.label, language: 'Tamil', transcript: structuredClone(sample), created_at: new Date().toISOString() }];
   const assignments: any[] = [ids.alice, ids.bob].map((annotator_id, i) => ({ id: i ? ids.b : ids.a, conversation_id: ids.doc, annotator_id, rubric_hash: rubric.rubric_sha256, task_type: 'label', status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }));
   const state = { sections: [] as any[], documents, assignments, comparisonPairs: [] as any[], comparisonAssignments: [] as any[], people, passwords, baselines:[] as any[], captureAssets:[] as any[], captureDocuments:[] as any[], generationRuns:[] as any[], llmGenerations:0, failLLMGeneration:false, repository: null as any, repositoryFiles: {} as Record<string, string>, failRepositoryPath: '', failNextCreate: false, failNextSave: false, failSaves: false, failNextDelete: false, saves: 0, requests: [] as string[] };
@@ -137,21 +139,26 @@ export async function backend(page: Page, rubric = legacyRubric) {
     }
     if (url.pathname === '/rest/v1/rpc/reopen_assignment') { if (profile.role !== 'admin') return send({ message: 'Admin required' }, 403); const row = assignments.find(a => a.id === body.p_assignment_id); if (!row || row.revision !== body.p_revision || row.status !== 'submitted') return send({ message: 'Assignment has changed or is not submitted', code: '40001' }, 409); row.status = 'in_progress'; row.revision++; row.submitted_at = null; return send(null); }
     let rows: any[] = [];
+    if(url.pathname==='/rest/v1/rpc/dashboard_topics')return send(profile.role==='admin'?groupByTopic(documents).map(group=>({key:group.key,name:group.name,conversation_count:group.documents.length})):[]);
+    if(url.pathname==='/rest/v1/rpc/dashboard_topic_conversations')rows=profile.role==='admin'?documents.filter(d=>topicKey(d)===body.p_topic_key):[];
     if (url.pathname === '/rest/v1/profiles') rows = people.filter(p => profile.role === 'admin' || p.id === userId);
     if (url.pathname === '/rest/v1/conversations') { if (request.method() === 'POST') { documents.push({ id: crypto.randomUUID(), ...body, created_at: new Date().toISOString() }); return send(null, 201); } rows = documents; }
     if (url.pathname === '/rest/v1/conversation_sections') rows=state.sections;
+    if (url.pathname === '/rest/v1/html_conversation_sections') rows=documents.flatMap(d=>(d.transcript as any).html_content?.turns.flatMap((t:any)=>t.sections.map((s:any)=>({...s,conversation_id:d.id,turn_id:t.turn_id})))||[]);
     if (url.pathname === '/rest/v1/conversation_details') rows = documents;
+    if ((url.pathname === '/rest/v1/conversation_details'||url.pathname==='/rest/v1/rpc/dashboard_topic_conversations')&&url.searchParams.get('select')?.includes('html_format:')) rows=rows.map(({transcript,...d})=>{const t:any=transcript;return {...d,conversation_id:t.conversation_id,learning_topic:t.learning_topic,topic_name:t.topic_name,topic_english_name:t.topic_english_name,provider:t.provider,access_type:t.access_type,original_language:t.original_language,transcript_source_id:t.source_conversation_id,messages:t.messages,repository_source:t.repository_source,archive_id:t.archive_source?.archive_id,chatgpt_id:t.chatgpt_source?.source_conversation_id,html_format:t.html_content?.format_version,html_source_language:t.html_content?.source_version?.language};});
     if (url.pathname === '/rest/v1/comparison_pairs') rows = state.comparisonPairs;
     if (url.pathname === '/rest/v1/comparison_assignments') rows = state.comparisonAssignments;
     if (url.pathname === '/rest/v1/conversation_capture_assets') rows=state.captureAssets;
     if (url.pathname === '/rest/v1/conversation_capture_documents') rows=state.captureDocuments;
-    if (url.pathname === '/rest/v1/rubric_versions') rows = [{ hash: rubric.rubric_sha256, snapshot: rubric }];
+    if (url.pathname === '/rest/v1/rubric_versions') {if(request.method()==='POST'){versions.push(body);return send(null,201);}rows=versions;}
     if(url.pathname==='/rest/v1/llm_baselines')rows=state.baselines.filter(baseline=>profile.role==='admin'||assignments.some(row=>row.baseline_id===baseline.id&&row.annotator_id===userId));
     if(url.pathname==='/rest/v1/llm_generation_runs')rows=profile.role==='admin'?state.generationRuns:[];
     if(url.pathname==='/rest/v1/annotation_revisions')rows=[];
     if (url.pathname === '/rest/v1/assignments') {
       if (request.method() === 'POST') { const newRows = Array.isArray(body) ? body : [body]; assignments.push(...newRows.map((a: any) => ({ id: crypto.randomUUID(), task_type: 'label', ...a, status: 'not_started', revision: 0, annotations: [], turn_ratings: {}, updated_at: new Date().toISOString(), submitted_at: null }))); return send(null, 201); }
       rows = assignments.filter(a => profile.role === 'admin' || (a.annotator_id === userId && a.is_active!==false)).map(a => ({ ...a, is_active:a.is_active!==false, conversations: documents.find(d => d.id === a.conversation_id), profiles: people.find(p => p.id === a.annotator_id) }));
+      if(!url.searchParams.get('select')?.includes('conversations('))rows=rows.map(({conversations,...row})=>row);
     }
     for (const [key, value] of url.searchParams) { if (value.startsWith('eq.')) rows = rows.filter(row => String(row[key]) === value.slice(3));if(value.startsWith('in.(')){const values=value.slice(4,-1).split(',');rows=rows.filter(row=>values.includes(String(row[key])));} }
     if (request.headers().accept?.includes('application/vnd.pgrst.object+json')) return rows[0] ? send(rows[0]) : send({ message: 'Not found' }, 406);
@@ -159,8 +166,11 @@ export async function backend(page: Page, rubric = legacyRubric) {
   });
   return state;
 }
-export async function login(page: Page, username: string) {
-  await page.goto('/'); await page.getByLabel('Username', { exact: true }).fill(username); await page.getByLabel('Password', { exact: true }).fill('test-password-123'); await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+export async function login(page: Page, username: string, options={expandTopic:true}) {
+  await page.goto('/'); await page.getByLabel('Username', { exact: true }).fill(username); await page.getByLabel('Password', { exact: true }).fill('test-password-123');
+  const topics=username==='admin'?page.waitForResponse(r=>new URL(r.url()).pathname==='/rest/v1/rpc/dashboard_topics'):null;
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  if(topics){const data=await (await topics).json();if(options.expandTopic&&data.length)await page.locator('.topic-group').first().locator('summary').click();}
 }
 export function repositoryFixture() {
   const files: Record<string, string> = {};

@@ -1,0 +1,3 @@
+import fs from 'node:fs';import {CaptureSession} from '../../browser-session.mjs';import {readViewer} from '../../image-inventory.mjs';
+const t=JSON.parse(fs.readFileSync(new URL('./target.json',import.meta.url)));const s=await CaptureSession.connect(t.ws);
+try{await s.click('t1a1');await new Promise(r=>setTimeout(r,1000));const v=await s.evaluate(readViewer);fs.writeFileSync(new URL('./viewer.json',import.meta.url),JSON.stringify(v,null,2));console.log(v?{images:v.images,position:v.position,total:v.total,controls:v.controls}:await s.evaluate(()=>({dialogs:document.querySelectorAll('[role="dialog"]').length,tail:document.body.innerText.slice(-1800)})));}finally{s.close();}

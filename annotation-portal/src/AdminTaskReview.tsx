@@ -1,7 +1,7 @@
+import {resolveCaptureDocument} from './capture-content';
 import {hydrateRows} from './section-registry';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AnnotationSummary } from './AnnotationSummary';
 import { Editor } from './Editor';
 import { C, supabase } from './lib';
 import type { Annotation, Assignment, AssignmentType, DocumentRow, LLMBaseline, RubricSnapshot, TurnRatings } from './types';
@@ -30,9 +30,10 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
           taskType==='label'?supabase!.from('llm_baselines').select('*').eq('conversation_id',id).order('created_at',{ascending:false}):Promise.resolve({data:[],error:null})
         ]);
         if(doc.error)throw doc.error;if(work.error)throw work.error;if(versions.error)throw versions.error;
+        const fullDocument=await resolveCaptureDocument(supabase!,doc.data as DocumentRow);
         const hydratedWork=await hydrateRows(supabase!,work.data as Assignment[]);
         const hydratedVersions=await hydrateRows(supabase!,versions.data as LLMBaseline[]);
-        if(alive){setDocument(doc.data as DocumentRow);setAssignments(hydratedWork);setBaselines(hydratedVersions);}
+        if(alive){setDocument(fullDocument);setAssignments(hydratedWork);setBaselines(hydratedVersions);}
       }catch(err){if(alive)setError(errorText(err));}
       finally{if(alive)setLoading(false);}
     })();
@@ -66,8 +67,6 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
     <div className="page-heading"><div><span className="eyebrow">{taskType.toUpperCase()} REVIEW</span><h1>{title}</h1><p>{document.transcript.learning_topic||document.label}</p></div><Link to="/" className="secondary">Back to conversations</Link></div>
     {sources.length>0&&<section className="card review-source"><label htmlFor="review-source">{taskType==='label'?'Annotation source':'Annotator'}</label><select id="review-source" value={sourceKey} onChange={event=>setSourceKey(event.target.value)}>{sources.map(item=><option key={item.key} value={item.key}>{item.label}</option>)}</select></section>}
     {!sources.length?<section className="card empty"><h2>No {taskType==='label'?'label annotations':'ratings'} yet</h2><p>Assign this task to an annotator to see their work here.</p></section>:source&&rubric&&<>
-      {source.baseline&&<p className="notice">LLM baseline · {source.baseline.model} · {new Date(source.baseline.created_at).toLocaleString()}</p>}
-      {taskType==='label'&&<AnnotationSummary annotations={source.annotations} rubric={rubric}/>}
       <Editor key={source.key} conversationId={document.id} conversation={document.transcript} rubric={rubric} annotations={source.annotations} onChange={()=>{}} turnRatings={source.ratings} readonly taskType={taskType}/>
     </>}
   </main>;

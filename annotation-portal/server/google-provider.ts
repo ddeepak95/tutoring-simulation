@@ -1,6 +1,6 @@
 // Direct Gemini REST transport; validation and repair remain in llm-provider.
 export interface GeminiVisual { id:string; turn_id:string; mime_type:string; caption?:string; data?:string; uri?:string; }
-export function googleRequest(messages: {role:string;content:string}[], schema:unknown, config:{model:string;stream?:boolean;max_tokens?:number|null;reasoning:unknown}, apiKey:string, visuals:GeminiVisual[] = [], contextScreenshots:GeminiVisual[] = []) {
+export function googleRequest(messages: {role:string;content:string}[], schema:unknown, config:{model:string;stream?:boolean;max_tokens?:number|null;reasoning:unknown}, apiKey:string, visuals:GeminiVisual[] = [], contextScreenshots:GeminiVisual[] = [], imageOnly=false) {
  const model=config.model.replace(/^google\//,'');
  if(!/^gemini-[a-z0-9.-]+$/.test(model))throw new Error('Direct Google requires a Gemini model.');
  const effort=(config.reasoning as {effort?:string}|null)?.effort;
@@ -10,7 +10,7 @@ export function googleRequest(messages: {role:string;content:string}[], schema:u
   ...(visual.uri?[{fileData:{mimeType:visual.mime_type,fileUri:visual.uri}}]:visual.data?[{inlineData:{mimeType:visual.mime_type,data:visual.data}}]:[])
  ]);
  const screenshotParts=contextScreenshots.flatMap((screenshot,index)=>[
-  {text:`Supplementary screenshot ${index+1} of the captured tutor conversation. Use only to understand visual layout and formatting. The semantic HTML is authoritative for exact wording and evidence; do not quote text from the screenshot.`},
+  {text:imageOnly?`Tutor turn image tile ${index+1} of ${contextScreenshots.length}. These tiles are ordered and non-overlapping; use them as the authoritative conversation content.`:`Supplementary screenshot ${index+1} of the captured tutor conversation. Use only to understand visual layout and formatting. The semantic HTML is authoritative for exact wording and evidence; do not quote text from the screenshot.`},
   {inlineData:{mimeType:screenshot.mime_type,data:screenshot.data||''}}
  ]);
  return {url:`https://generativelanguage.googleapis.com/v1beta/models/${model}:${config.stream?'streamGenerateContent?alt=sse':'generateContent'}`,headers:{'x-goog-api-key':apiKey,'Content-Type':'application/json'},body:JSON.stringify({

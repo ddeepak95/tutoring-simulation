@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { translateCaptureToEnglish, translationSourceHash } from './translate-english.mjs';
+import {uploadHtmlPackage} from './upload-html.mjs';
 
 const maxArchiveBytes = 8 * 1024 * 1024;
 const maxImageBytes = 10 * 1024 * 1024;
@@ -155,6 +156,9 @@ export async function uploadConversation(output, accessToken, englishFile) {
   if (!Array.isArray(profiles) || profiles.length !== 1 || !['admin', 'annotator'].includes(profiles[0].role)) {
     throw new Error('A portal admin or annotator profile is required');
   }
+  const packageFile=output.endsWith('.html-conversation.json')?output:path.join(path.dirname(output),`${path.parse(output).name}.html-conversation.json`);
+  let htmlPackage=false;try{await readFile(packageFile);htmlPackage=true;}catch(e){if(e.code!=='ENOENT')throw e;}
+  if(htmlPackage)return uploadHtmlPackage(packageFile,{supabaseUrl,headers,userId:user.id,englishFile,request});
   const { capture, images } = await prepareConversation(output, user.id, supabaseUrl);
   let translated = null;
   if (englishFile) {

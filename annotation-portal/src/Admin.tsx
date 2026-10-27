@@ -1,7 +1,9 @@
+import {resolveCaptureDocument} from './capture-content';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
-import { bundledRubric, C, download, fetchAssignments, fetchAllRows, supabase } from './lib';
+import { bundledRubric, C, download, fetchAllRows, supabase } from './lib';
+import {fetchDashboardTopics,fetchTopicDashboardData,type DashboardTopic} from './dashboard-data';
 import type { Assignment, AssignmentType, DocumentRow, Profile, RubricSnapshot } from './types';
 import { AssignmentMenu } from './AssignmentMenu';
 import { DeleteConversation } from './DeleteConversation';
@@ -15,12 +17,18 @@ import { compareWithBaseline } from './baseline-comparison';
 import type { LLMBaseline } from './types';
 import { Toast, useToast } from './Toast';
 import { conversationTitle, groupByTopic } from './topic-groups';
+import {conversationOrigin} from './conversation-origin';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
 
 export function Admin() {
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
+  const [topicHeaders,setTopicHeaders]=useState<DashboardTopic[]>([]);
+  const [topicStatus,setTopicStatus]=useState<Record<string,'loading'|'loaded'|'error'>>({});
+  const [topicErrors,setTopicErrors]=useState<Record<string,string>>({});
+  const loadedTopics=useRef(new Map<string,Set<string>>());
+  const topicRequests=useRef(new Map<string,Promise<void>>());
   const [error, setError] = useState(''); const [notice, setNotice] = useToast(); const [busy, setBusy] = useState(false); const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<string[]>([]); const [language, setLanguage] = useState('en');
   const [uploadOpen, setUploadOpen] = useState(false);
@@ -28,17 +36,43 @@ export function Admin() {
   const [menu, setMenu] = useState<{ ids: string[]; anchor: HTMLButtonElement } | null>(null);
   const [assignmentPopup, setAssignmentPopup] = useState<{ key: string; task: AssignmentType; assignments: Assignment[]; left: number; top: number } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null); const uploadDialog = useRef<HTMLDialogElement>(null);
-  async function refresh() {
+  const refreshing=useRef(false);const rubricRegistered=useRef(false);
+  function loadTopic(key:string,force=false):Promise<void>{
+    const existing=topicRequests.current.get(key);if(existing)return existing;
+    if(!force&&loadedTopics.current.has(key))return Promise.resolve();
+    setTopicStatus(previous=>({...previous,[key]:'loading'}));
+    const pending=(async()=>{
+      try{
+        const data=await fetchTopicDashboardData(key),oldIds=loadedTopics.current.get(key)||new Set<string>();
+        loadedTopics.current.set(key,new Set(data.documents.map(d=>d.id)));
+        setDocuments(previous=>[...previous.filter(d=>!oldIds.has(d.id)),...data.documents]);
+        setRows(previous=>[...previous.filter(r=>!oldIds.has(r.conversation_id)),...data.assignments]);
+        const available=new Set(data.documents.map(d=>d.id));setSelected(previous=>previous.filter(id=>!oldIds.has(id)||available.has(id)));
+        setTopicStatus(previous=>({...previous,[key]:'loaded'}));setTopicErrors(previous=>({...previous,[key]:''}));
+      }catch(err){setTopicErrors(previous=>({...previous,[key]:message(err)}));setTopicStatus(previous=>({...previous,[key]:'error'}));}
+      finally{topicRequests.current.delete(key);}
+    })();
+    topicRequests.current.set(key,pending);return pending;
+  }
+  async function refresh(reloadLoaded=true) {
+    if(refreshing.current)return;refreshing.current=true;
     try {
+      const registration=(async()=>{
+      if(rubricRegistered.current)return;
       const { data: version, error: rubricError } = await supabase!.from('rubric_versions').select('hash').eq('hash', bundledRubric.rubric_sha256).maybeSingle();
       if (rubricError) throw rubricError;
       if (!version) { const { error: insertError } = await supabase!.from('rubric_versions').insert({ hash: bundledRubric.rubric_sha256, snapshot: bundledRubric }); if (insertError && insertError.code !== '23505') throw insertError; }
-      const [assignments, docs, people] = await Promise.all([fetchAssignments(), supabase!.from('conversation_details').select('*'), supabase!.from('profiles').select('*').order('username')]);
-      if (docs.error) throw docs.error; if (people.error) throw people.error;
-      setRows(assignments); setDocuments((docs.data as DocumentRow[])); setUsers(people.data as Profile[]);
-    } catch (err) { setError(message(err)); } finally { setLoading(false); }
+      rubricRegistered.current=true;
+      })();
+      const [data]=await Promise.all([fetchDashboardTopics(),registration]);
+      setTopicHeaders(data.topics);setUsers(data.users);
+      const available=new Set(data.topics.map(t=>t.key)),removedIds=new Set<string>();
+      for(const [key,ids] of loadedTopics.current)if(!available.has(key)){ids.forEach(id=>removedIds.add(id));loadedTopics.current.delete(key);}
+      if(removedIds.size){setDocuments(previous=>previous.filter(d=>!removedIds.has(d.id)));setRows(previous=>previous.filter(r=>!removedIds.has(r.conversation_id)));setSelected(previous=>previous.filter(id=>!removedIds.has(id)));}
+      if(reloadLoaded)await Promise.all([...loadedTopics.current.keys()].map(key=>loadTopic(key,true)));
+    } catch (err) { setError(message(err)); } finally { refreshing.current=false;setLoading(false); }
   }
-  useEffect(() => { void refresh(); const timer = setInterval(() => void refresh(), 30000); return () => clearInterval(timer); }, []);
+  useEffect(() => { void refresh(); const timer = setInterval(() => {if(globalThis.document.visibilityState==='visible')void refresh(false);}, 30000); return () => clearInterval(timer); }, []);
   useEffect(() => { if (uploadOpen) uploadDialog.current?.showModal(); else uploadDialog.current?.close(); }, [uploadOpen]);
 
   async function upload(files: FileList | null) {
@@ -101,17 +135,16 @@ export function Admin() {
     setBusy(true); setError('');
     try {
       const fresh = await fetchAllRows<Assignment>('assignments','*, conversations(*), profiles!assignments_annotator_id_fkey(id, username, role)'); const data = await fetchAllRows<{hash:string;snapshot:RubricSnapshot}>('rubric_versions','hash, snapshot',['hash']);
+      await Promise.all(fresh.map(async row=>{if(row.conversations)row.conversations=await resolveCaptureDocument(supabase!,row.conversations);}));
       const versions = new Map(data.map(row => [row.hash, row.snapshot as RubricSnapshot]));
       const [baselines,revisionRows,captureAssets,sections]=await Promise.all([fetchAllRows<LLMBaseline>('llm_baselines'),fetchAllRows('annotation_revisions','*',['assignment_id','revision']),captureAssetsForExport(),fetchAllRows('conversation_sections','*',['conversation_id','turn_number','section_number'])]);
       const baselinesById=new Map(baselines.map(baseline=>[baseline.id,baseline]));
-      download('study-annotations.json', { format_version: 'annotation-portal-study/2.1', exported_at: new Date().toISOString(), sections, llm_baselines:baselines, revision_history:revisionRows, capture_assets:captureAssets, assignments: fresh.map(row => ({ assignment_id: row.id, conversation_id: row.conversation_id, task_type: row.task_type, annotator_id: row.annotator_id, annotation_source:row.annotation_source || 'blank', baseline_id:row.baseline_id || null, baseline_comparison:row.task_type==='label'&&row.baseline_id&&baselinesById.has(row.baseline_id)?compareWithBaseline(baselinesById.get(row.baseline_id)!.annotations,row.annotations):null, is_active:row.is_active!==false, unassigned_at:row.unassigned_at || null, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, turn_ratings: row.turn_ratings || {}, ...ratingQuestionMetadata(versions.get(row.rubric_hash)!), source_conversation_id: row.conversations!.transcript.source_conversation_id || null, repository_source: row.conversations!.transcript.repository_source || null, chatgpt_source: row.conversations!.transcript.chatgpt_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
+      download('study-annotations.json', { format_version: 'annotation-portal-study/2.1', exported_at: new Date().toISOString(), sections, llm_baselines:baselines, revision_history:revisionRows, capture_assets:captureAssets, assignments: fresh.map(row => ({ assignment_id: row.id, conversation_id: row.conversation_id, task_type: row.task_type, annotator_id: row.annotator_id, annotation_source:row.annotation_source || 'blank', baseline_id:row.baseline_id || null, baseline_comparison:row.task_type==='label'&&row.baseline_id&&baselinesById.has(row.baseline_id)?compareWithBaseline(baselinesById.get(row.baseline_id)!.annotations,row.annotations):null, is_active:row.is_active!==false, unassigned_at:row.unassigned_at || null, status: row.status, revision: row.revision, rubric_hash: row.rubric_hash, submitted_at: row.submitted_at, turn_ratings: row.turn_ratings || {}, ...ratingQuestionMetadata(versions.get(row.rubric_hash)!), source_conversation_id: conversationOrigin(row.conversations!).sourceId, repository_source: row.conversations!.transcript.repository_source || null, chatgpt_source: row.conversations!.transcript.chatgpt_source || null, ...C.buildExport(row.conversations!.transcript, row.annotations, versions.get(row.rubric_hash)!.rubric, row.profiles!.username) })) });
     } catch (err) { setError(message(err)); } finally { setBusy(false); }
   }
   function originalLanguage(doc: DocumentRow) {
-    if (doc.transcript.original_language) return languageName(doc.transcript.original_language);
-    const original = documents.find(source => source.transcript.conversation_id === doc.transcript.source_conversation_id);
-    if (original) return languageName(original.language);
-    return doc.transcript.source_conversation_id || doc.transcript.repository_source?.version.includes('translation') ? 'Unknown' : languageName(doc.language);
+    const language=conversationOrigin(doc,documents).originalLanguage;
+    return language?languageName(language):'Unknown';
   }
   function showAssignmentPopup(anchor: HTMLButtonElement, key: string, task: AssignmentType, assignments: Assignment[]) {
     const rect = anchor.getBoundingClientRect();
@@ -121,17 +154,21 @@ export function Admin() {
     setAssignmentPopup({ key, task, assignments, left, top });
   }
   const visible = rows;
-  const topics = groupByTopic(documents);
+  const loadedGroups=new Map(groupByTopic(documents).map(group=>[group.key,group]));
+  const topics=topicHeaders.map(topic=>({...topic,documents:loadedGroups.get(topic.key)?.documents||[]}));
+  const conversationCount=topicHeaders.reduce((n,t)=>n+t.conversation_count,0);
   const menuDocuments = menu ? documents.filter(doc => menu.ids.includes(doc.id)) : [];
   return <main className="dashboard admin-dashboard">
     <div className="page-heading"><div><span className="eyebrow">ADMINISTRATION</span><h1>Conversations</h1><p>Manage transcripts and assign annotation work.</p></div><div className="actions"><button className="secondary" disabled={busy} onClick={() => { setError(''); void refresh(); }}>Refresh</button><button className="primary" onClick={() => setUploadOpen(true)}>Upload</button></div></div>
     {error && !uploadOpen && <p className="error" role="alert">{error}</p>}{!uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}
     
     <section className="conversation-overview" aria-label="Conversations">
-      <div className="card conversation-toolbar"><span>{topics.length} topic{topics.length === 1 ? '' : 's'} · {documents.length} conversation{documents.length === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span><div className="conversation-toolbar-actions"><Link to="/topics/labels">Compare English and Tamil labels</Link><label className="checkbox"><input type="checkbox" aria-label="Select all conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} />Select all</label>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div></div>
-      {topics.map((group, index) => <details className="card conversation-card topic-group" key={group.key} open={index === 0} aria-label={`${group.name} conversations`}>
-      <summary className="topic-group-heading"><h2 lang="en">{group.name}</h2><small>{group.documents.length} conversation{group.documents.length === 1 ? '' : 's'}</small></summary>
+      <div className="card conversation-toolbar"><span>{topics.length} topic{topics.length === 1 ? '' : 's'} · {conversationCount} conversation{conversationCount === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span><div className="conversation-toolbar-actions"><Link to="/topics/labels">Compare English and Tamil labels</Link><label className="checkbox"><input type="checkbox" aria-label="Select all loaded conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} />Select loaded</label>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div></div>
+      {topics.map(group => <details className="card conversation-card topic-group" key={group.key} data-topic-key={group.key} onToggle={event=>{if(event.currentTarget.open)void loadTopic(group.key);}} aria-label={`${group.name} conversations`}>
+      <summary className="topic-group-heading"><h2 lang="en">{group.name}</h2><small>{group.conversation_count} conversation{group.conversation_count === 1 ? '' : 's'}</small></summary>
       <div className="topic-group-actions"><Link to={`/topics/${encodeURIComponent(group.key)}/labels`}>Compare feature labels</Link></div>
+      {topicStatus[group.key]==='loading'&&<p role="status">Loading conversations...</p>}
+      {topicErrors[group.key]&&<div role="alert"><p className="error">{topicErrors[group.key]}</p><button className="secondary" onClick={()=>void loadTopic(group.key,true)}>Retry loading conversations</button></div>}
       <div className="table-wrap"><table className="conversation-table"><thead><tr>
         <th className="select-column" aria-label="Select"></th>
         <th>Conversation</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>Label</th><th>Rate</th><th aria-label="Actions"></th>
@@ -143,7 +180,7 @@ export function Admin() {
         const topic = conversationTitle(doc);
         return <tr key={doc.id} data-conversation-id={doc.id} className={selected.includes(doc.id) ? 'selected-row' : ''}>
           <td><input type="checkbox" aria-label={`Select ${doc.label}`} checked={selected.includes(doc.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, doc.id] : previous.filter(id => id !== doc.id))} /></td>
-          <td className="topic-cell"><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.transcript.messages.length} turns</small>{doc.transcript.source_conversation_id && documents.some(other => other.id === doc.transcript.source_conversation_id) && <small><Link to={`/conversations/${doc.transcript.source_conversation_id}/labeling`}>View original capture</Link></small>}</td>
+          <td className="topic-cell"><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{(doc.is_html_capture || doc.transcript.html_content) ? (conversationOrigin(doc,documents).translated?`Translated from ${originalLanguage(doc)}`:'Original HTML capture') : doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.turn_count ?? doc.transcript.messages.length} turns</small>{conversationOrigin(doc,documents).sourceId && documents.some(other => other.id === conversationOrigin(doc,documents).sourceId) && <small><Link to={`/conversations/${conversationOrigin(doc,documents).sourceId}/labeling`}>View original capture</Link></small>}</td>
           <td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
           <td>{originalLanguage(doc)}</td><td>{languageName(doc.language)}</td>
           <td><button type="button" className="assignment-count" aria-label={`Label: ${labelAssignments.filter(row => row.status === 'submitted').length} completed of ${labelAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:label` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onBlur={() => setAssignmentPopup(null)}>{labelAssignments.filter(row => row.status === 'submitted').length}/{labelAssignments.length}</button></td>
@@ -152,12 +189,12 @@ export function Admin() {
         </tr>;
       })}</tbody></table></div>
       </details>)}
-      {loading ? <p className="card empty" role="status">Loading conversations…</p> : !documents.length && <p className="card empty">No conversations yet. Upload transcript files to get started.</p>}
+      {loading ? <p className="card empty" role="status">Loading conversations…</p> : !topicHeaders.length && <p className="card empty">No conversations yet. Upload transcript files to get started.</p>}
     </section>
     {assignmentPopup && createPortal(<div id="assignment-progress-popup" className="assignment-progress-popup" role="tooltip" style={{ left: assignmentPopup.left, top: assignmentPopup.top }}><strong>{assignmentPopup.task === 'label' ? 'Label' : 'Rate'} · {assignmentPopup.assignments.filter(row => row.status === 'submitted').length}/{assignmentPopup.assignments.length} completed</strong>{assignmentPopup.assignments.length ? <ul>{assignmentPopup.assignments.map(row => <li key={row.annotator_id}><span>{row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Annotator'}</span><small>{statusText(row.status)}</small></li>)}</ul> : <p>No annotators assigned</p>}</div>, document.body)}
     {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
     {deleteDocument && <DeleteConversation document={deleteDocument} onClose={() => setDeleteDocument(null)} onDeleted={async id => { setSelected(previous => previous.filter(value => value !== id)); setDocuments(previous => previous.filter(doc => doc.id !== id)); setRows(previous => previous.filter(row => row.conversation_id !== id)); setNotice('Conversation and associated annotation work deleted.'); await refresh(); }} />}
-    <section className="card progress"><div className="progress-heading"><h2>Annotation progress</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? (row.rubric_hash === bundledRubric.rubric_sha256 || row.annotations.some(a => a.entry.category) ? `${row.annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(row.annotations.flatMap(a => a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${row.annotations.length} highlights`) : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>
+    <section className="card progress"><div className="progress-heading"><h2>Annotation progress for loaded topics</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? (row.rubric_hash === bundledRubric.rubric_sha256 || row.annotations.some(a => a.entry.category) ? `${row.annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(row.annotations.flatMap(a => a.section_id ? [a.section_id] : a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${row.annotations.length} highlights`) : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>
     <dialog ref={uploadDialog} className="upload-dialog" aria-labelledby="upload-title" onCancel={event => { if (busy) event.preventDefault(); else setUploadOpen(false); }} onClose={() => setUploadOpen(false)}>
       <div className="upload-heading"><div><h2 id="upload-title">Upload conversations</h2><p>Add transcript files directly to the conversation table.</p></div><button className="secondary" aria-label="Close upload" disabled={busy} onClick={() => setUploadOpen(false)}>Close</button></div>
       {uploadOpen && error && <p className="error" role="alert">{error}</p>}{uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}

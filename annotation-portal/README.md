@@ -327,3 +327,39 @@ Apply `npm run migrate:persistent-sections -- --project PROJECT_REF` with the lo
 Click a section button to select its blue bounding box and open the item controls to the right of the conversation. Each item has a distinct icon before its name, a minus button, numeric count, and plus button. The same icons appear in totals, guides, and summaries. An info button beside each item expands its labeling guidance directly in the panel, including in read-only assignments. Zero means the item is absent and removes its annotation; positive counts save automatically against the permanent section ID. Selecting another section updates the counters without changing saved work. Submitted assignments show disabled counters. On smaller screens the controls become a closable bottom panel. The labeling guide starts closed for item labeling, opens from the conversation header, and floats above the workspace independently of the selected section; close it with its close button or Escape.
 
 The top and bottom section labels both select the section. Selection turns both label outlines blue and increases the section border from 2px to 3px. Beside the bottom label, item icons show the section's saved nonzero counts; the badges update immediately as counts change.
+
+## Image-only local LLM labeling
+
+Start the local Vite portal, then run:
+
+```powershell
+npm run migrate:llm-evidence -- --project PROJECT
+npm run llm:baselines -- --project PROJECT --conversation CONVERSATION_ID --image-only --regenerate
+```
+
+`--image-only` selects direct Google `gemini-4-argon`, sends one tutor turn per request, and never sends transcript text or HTML. It requires `GEMINI_API_KEY` or `GOOGLE_API_KEY` locally or in repository `.env`. Optional `--url` sets the local portal origin (default `http://127.0.0.1:5173`). Legacy review/repair/screenshot flags cannot be combined with this mode. Admin generation remains unchanged.
+
+Images, manifests, exchanges and checkpoints stay under `.runtime/llm-baselines`. Every section returns all 15 counts, including zeros; positive counts become baseline labels with single-line `llm_evidence`. The command prints a resume command; validated turns are reused, and a baseline is published only after all tutor turns validate. Human assignments are preserved. The baseline page exposes evidence and an export.
+
+The initial pilot targets only original English Covalent Radius (`ddea3bd0-d9cd-4b94-ac1b-2c8d665d6bf5`), corresponding to `agentic_conversation_capture/outputs/covalent-redius/en/20261020T141818Z`.
+
+### Interactive views within sections
+
+Captured quiz navigation and feedback states belong to the original containing section. Run `npm run migrate:section-state-ownership -- --project PROJECT --conversation CONVERSATION_ID` to attach existing captured states to their permanent owner; omit `--conversation` to process all conversations with states. Visible section IDs and source offsets remain unchanged. Legacy snapshot section IDs are retained only for historical reads and exports; new labels use the owner ID. Ownership follows originating capture control metadata. Older captures are resolved automatically only when their controls have exactly one containing section; ambiguous captures fail rather than guessing. LLM screenshots nest supporting views inside that owner, and new section registration does not create IDs for navigation snapshots.
+
+## HTML capture v2
+
+New captures use `html-conversation/2` and permanent DOM section/component/state IDs. `npm run migrate:html-conversations -- --project PROJECT` adds transactional import and ID-only labeling. The existing conversation metadata envelope retains an empty-text turn inventory for legacy consumers; it is not a transcript or labeling source. New content uses the shared HTML renderer for portal review and image-only Gemini baselines.
+
+Pilot: `node scripts/html-pilot.mjs --project PROJECT --stage import --package PATH`, generate the English baseline with `llm:baselines --image-only`, then run `--stage verify`. Browser verification exports the baseline and checks every section count. `--stage reset` is gated by the current acceptance record and deletes other portal conversations transactionally, retaining the pilot pair and user accounts. Local capture files are retained.
+
+
+### Capture storage and egress
+
+HTML packages belong in the private `conversation-packages` Storage bucket. Database rows retain the versioned capture index, section IDs, turn inventory, quantities, and annotation metadata. Full HTML, component states, fonts, styles and image inventories load only on detail views. The loader verifies file hashes and byte lengths and keeps a bounded cache per client and signed-in user. Inline captures remain readable during rollout. Baseline pages poll only during generation, and hidden tabs do not poll.
+
+Apply `npm run migrate:capture-files -- --project PROJECT_REF` before using the updated capture uploader. This adds the file-backed import and offload functions without changing existing rows. Then run `node ../agentic_conversation_capture/offload-hosted-captures.mjs` to move existing captures. It reconstructs the exact hosted version from local packages rather than downloading all database payloads. A version mismatch leaves the row unchanged. Each move verifies the uploaded bytes before transactionally replacing inline content with its reference; conversation IDs, section IDs, labels, ratings, assignments and baselines are retained. Progress is recorded in `agentic_conversation_capture/outputs/batches/capture-storage-offload.json`; reruns skip already moved rows. Keep local captures as the recovery copy.
+
+Private Storage access follows conversation access rules. Moving content to Storage does not make Supabase bandwidth free; metadata projections, on-demand downloads, immutable asset caching, and reduced polling prevent repeated transfers. Never restore a whole-transcript query on listing pages.
+
+The admin dashboard initially requests only topic names and conversation counts. All topic groups start collapsed. Expanding a topic loads only its conversation metadata and active assignments; reopening it uses the in-page cache. Background polling refreshes topic counts only. Manual Refresh reloads already loaded topics, and bulk selection applies to loaded conversations. Apply `npm run migrate:dashboard-topics -- --project PROJECT_REF` when deploying this UI to an existing project.

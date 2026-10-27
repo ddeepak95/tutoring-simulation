@@ -3,6 +3,7 @@ import { createServer,type Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import type { createClient } from '@supabase/supabase-js';
 import { createLLMAnnotationHandler } from '../server/llm-annotations';
+import {promptVersion} from '../server/llm-annotation-core';
 const servers:Server[]=[];afterEach(async()=>{await Promise.all(servers.splice(0).map(server=>new Promise<void>(resolve=>{server.close(()=>resolve());server.closeAllConnections();})));});
 const doc='00000000-0000-4000-8000-000000000010',requestId='00000000-0000-4000-8000-000000000020';
 async function setup({role='admin',authError=false,key='provider-key',claimed=true,status='generating',providerError=false,saveError=false,checkpoint=undefined}: {checkpoint?:any;role?:string;authError?:boolean;key?:string;claimed?:boolean;status?:string;providerError?:boolean;saveError?:boolean}={}) {
@@ -24,7 +25,7 @@ it('rejects model/rating injection, malformed JSON and oversized requests',async
 it('persists only validated highlights with model/prompt/config provenance and no human ratings',async()=>{
  const mock=await setup();expect((await mock.send()).status).toBe(201);
  const args=mock.rpc.mock.calls.find(([name])=>name==='complete_llm_generation')?.[1] as any;
- expect(args.p_annotations).toEqual([]);expect(args.p_model).toBe('configured/model');expect(args.p_prompt_version).toBe('instructional-section-items/2');expect(args.p_prompt).toContain('count');expect(args.p_turn_ratings).toBeUndefined();expect(args.p_generation_config.attempts).toBe(1);
+ expect(args.p_annotations).toEqual([]);expect(args.p_model).toBe('configured/model');expect(args.p_prompt_version).toBe(promptVersion);expect(args.p_prompt).toContain('count');expect(args.p_turn_ratings).toBeUndefined();expect(args.p_generation_config.attempts).toBe(1);
 });
 it('does not repeat paid calls for an already claimed or completed generation',async()=>{
  const running=await setup({claimed:false});expect((await running.send()).status).toBe(202);expect(running.fetcher).not.toHaveBeenCalled();const complete=await setup({claimed:false,status:'completed'});expect((await complete.send()).status).toBe(200);expect(complete.fetcher).not.toHaveBeenCalled();

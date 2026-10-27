@@ -37,7 +37,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -49,13 +50,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -72,7 +87,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -84,13 +100,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -107,7 +137,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -119,13 +150,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -142,7 +187,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -154,13 +200,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -177,7 +237,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -189,13 +250,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -224,13 +299,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -247,7 +336,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions."
               },
               "turn_locations": {
                 "type": "array",
@@ -259,15 +349,30 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
-          }
+          },
+          "description": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions."
         },
         "other_images": {
           "type": "array",
@@ -282,7 +387,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
               },
               "turn_locations": {
                 "type": "array",
@@ -294,13 +400,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -329,13 +449,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -364,13 +498,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -387,7 +535,8 @@
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section."
               },
               "turn_locations": {
                 "type": "array",
@@ -399,15 +548,30 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
-          }
+          },
+          "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section."
         },
         "examples": {
           "type": "array",
@@ -434,13 +598,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -469,13 +647,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           }
         },
@@ -504,13 +696,27 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
           },
           "title": "Memory Aids"
@@ -540,15 +746,30 @@
               "section_id": {
                 "type": "string",
                 "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Persistent section identifier scoped by conversation_id; resolved through the conversation section registry."
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
               }
             },
             "required": [
               "category",
-              "count",
-              "turn_locations"
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
             ]
-          }
+          },
+          "description": "Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as \"Have you understood?\" or \"Does that make sense?\", invitations for questions, and learning-preference or continuation questions. Include hidden questions in a clearly knowledge-checking quiz when explicit counters or pagination establish the total, including the visible question once. Do not infer knowledge-checking intent from a question mark alone."
         }
       },
       "required": [
@@ -567,7 +788,8 @@
         "analogies",
         "memory_aids",
         "questions"
-      ]
+      ],
+      "description": "Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings."
     },
     "pedagogical_characteristics": {
       "type": "object",
@@ -579,8 +801,8 @@
           "properties": {
             "value": {
               "enum": [
-                "Rule \u2192 Example",
-                "Example \u2192 Rule",
+                "Rule → Example",
+                "Example → Rule",
                 "Not determinable"
               ],
               "type": "string"
@@ -812,6 +1034,13 @@
         "reason",
         "evidence"
       ]
+    },
+    "llm_evidence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^[^\\r\\n\\u2028\\u2029]*\\S[^\\r\\n\\u2028\\u2029]*$",
+      "description": "Optional single-line model justification. HTML capture labels reference their owning section ID and do not require transcript spans."
     }
   }
 }

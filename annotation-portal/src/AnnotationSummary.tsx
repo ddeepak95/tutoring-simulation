@@ -6,12 +6,12 @@ import { countFeatureItems, featureItemCount } from './feature-counts';
 
 export function AnnotationSummary({ annotations, rubric }: { annotations: Annotation[]; rubric: RubricSnapshot }) {
   return <section className="annotation-summary" aria-label="Annotation summary">
-    <div className="annotation-summary-heading"><strong>Annotation summary</strong><small>{rubric.label_schema_version ? `${annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(annotations.flatMap(a => a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${annotations.length} total`}</small></div>
+    <div className="annotation-summary-heading"><strong>Annotation summary</strong><small>{rubric.label_schema_version ? `${annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(annotations.flatMap(a => a.section_id?[a.section_id]:a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${annotations.length} total`}</small></div>
     <div className="annotation-category-grid">{displayRubric(rubric.rubric).map(feature => {
       const entries = annotations.filter(annotation => annotation.feature === feature.key);
       const itemCount = countFeatureItems(entries, feature.key);
-      const passages = entries.reduce((total, annotation) => total + annotation.evidence.length, 0);
-      const turns = new Set(entries.flatMap(annotation => annotation.evidence.map(evidence => evidence.turn_id))).size;
+      const passages = entries.reduce((total, annotation) => total + (annotation.section_id?1:annotation.evidence.length), 0);
+      const turns = new Set(entries.flatMap(annotation => annotation.section_id?[annotation.section_id.split("s")[0]]:annotation.evidence.map(evidence => evidence.turn_id))).size;
       const incomplete = entries.filter(annotation => C.missingAttributes(annotation, rubric.rubric).length > 0).length;
       const explicitLevels = feature.key === 'concepts_and_subtopics_covered' ? entries.filter(annotation => Object.hasOwn(annotation.entry, 'concept_level')) : [];
       const hierarchy = groupCoverage(entries.filter(annotation => !Object.hasOwn(annotation.entry, 'concept_level')));

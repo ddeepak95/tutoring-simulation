@@ -5,6 +5,9 @@ import {fileURLToPath} from 'node:url';
 
 export function syncLLMPrompt() {
  const portal=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+ const imageText=fs.readFileSync(path.resolve(portal,'../conversation-evaluation/prompts/turn-image-counts.md'),'utf8').trim();
+ fs.mkdirSync(path.join(portal,'server/generated'),{recursive:true});
+ fs.writeFileSync(path.join(portal,'server/generated/turn-image-prompt.ts'),'// Generated from conversation-evaluation/prompts/turn-image-counts.md.\nexport const turnImagePromptText = '+JSON.stringify(imageText)+';\n');
  const source='conversation-evaluation/prompts/instructional-features.md';
  const document=fs.readFileSync(path.resolve(portal,'..',source),'utf8');
  const parsed=document.match(/^---\r?\nprompt_version:\s*([^\r\n]+)\r?\n---\r?\n\s*## Annotation prompt\r?\n([\s\S]*?)\r?\n## Review prompt\r?\n([\s\S]*?)\r?\n## Validation repair prompt\r?\n([\s\S]*)$/);

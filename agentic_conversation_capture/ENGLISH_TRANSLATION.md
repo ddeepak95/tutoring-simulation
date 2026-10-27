@@ -1,3 +1,9 @@
+# HTML capture v2 translations
+
+For new `html-conversation/2` packages, run `node chatgpt-flow.mjs translate capture.html`. Translation changes DOM text and linguistic accessibility attributes only. It keeps the original section, component, and state IDs; it does not detect sections from the English wording. Equations, numbers, images, and replay links remain intact. Translation checkpoints are pinned to source hash, prompt version, and model; failed work can resume without translating validated passages again. Completed English packages have a source-version reference and their own immutable content hash.
+
+The older text-alignment workflow below applies only to legacy captures.
+
 # English translations for annotation
 
 Apply the database migration before uploading a translation. From `annotation-portal`, run `npm run migrate:capture-english -- --project YOUR_PROJECT_REF` with the same local Management API credentials used for the other portal migrations.

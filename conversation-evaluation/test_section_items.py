@@ -29,6 +29,13 @@ class SectionItemTests(unittest.TestCase):
             result["instructional_features"]["equations"] = [{"category": "Textual Representations", "count": 2, "turn_locations": ["t1"]}]
             result["instructional_features"]["questions"] = [{"category": "Content", "count": 1, "turn_locations": ["t1"]}]
             pipeline.validate_stage(result, task)
+            result["instructional_features"]["examples"][0]["llm_evidence"] = "Three visible examples."
+            pipeline.validate_stage(result, task)
+            for evidence in ["", "two\nlines", "x" * 1001, None]:
+                bad = copy.deepcopy(result)
+                bad["instructional_features"]["examples"][0]["llm_evidence"] = evidence
+                with self.assertRaises(ValueError):
+                    pipeline.validate_stage(bad, task)
             for invalid in [0, 1001, 1.5]:
                 bad = copy.deepcopy(result)
                 bad["instructional_features"]["examples"][0]["count"] = invalid

@@ -1,53 +1,15 @@
+import {CaptureSession as DevTools} from './browser-session.mjs';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {browserBundle} from './html-sections.mjs';
+import {captureGalleryImages} from './gallery-images.mjs';
 
 const host = 'http://127.0.0.1:9222';
 const rootSelector = '[data-message-role="assistant"] [data-assistant-markdown-root], [data-content-search-unit-key$=":assistant"] [data-markdown-text-style="assistant-message"]';
 const controlSelector = 'button,input,select,textarea,summary,[role="button"],[role="tab"],[role="radio"],[role="switch"],a[href]';
-const maxCaptureClicks = 18;
 
-class DevTools {
-  constructor(socket) {
-    this.socket = socket;
-    this.nextId = 1;
-    this.pending = new Map();
-    socket.addEventListener('message', (event) => {
-      const message = JSON.parse(event.data);
-      const pending = this.pending.get(message.id);
-      if (!pending) return;
-      this.pending.delete(message.id);
-      if (message.error) pending.reject(new Error(JSON.stringify(message.error)));
-      else pending.resolve(message.result);
-    });
-  }
-
-  static async connect(url) {
-    const socket = new WebSocket(url);
-    await new Promise((resolve, reject) => {
-      socket.addEventListener('open', resolve, { once: true });
-      socket.addEventListener('error', reject, { once: true });
-    });
-    return new DevTools(socket);
-  }
-
-  send(method, params = {}) {
-    const id = this.nextId++;
-    return new Promise((resolve, reject) => {
-      this.pending.set(id, { resolve, reject });
-      this.socket.send(JSON.stringify({ id, method, params }));
-    });
-  }
-
-  async evaluate(expression) {
-    const result = await this.send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
-    if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text);
-    return result.result.value;
-  }
-
-  close() { this.socket.close(); }
-}
 
 async function withPage(url, action) {
   const response = await fetch(`${host}/json/list`);
@@ -74,11 +36,16 @@ function stateKey(state) {
   return createHash('sha256').update(JSON.stringify({ text: state.text, imageUrls: state.imageUrls, visualKey: state.visualKey, controls: state.controls.map(({ label, disabled, checked }) => ({ label, disabled, checked })) })).digest('hex');
 }
 
-async function snapshot(page, messageIndex) {
+export function isUnavailableResponse(text){return /^This response (?:couldn[’']t|could not) load(?:\s*(?:Retry|Try again))?[.!]?$/i.test(text.trim());}
+
+async function snapshot(page, messageIndex, initialize=false) {
+  await page.evaluate(await browserBundle());
   const value = await page.evaluate(`(() => {
     const roots = [...document.querySelectorAll(${JSON.stringify(rootSelector)})];
     const root = roots[${messageIndex}];
     if (!root) throw Error('Assistant message ${messageIndex + 1} is no longer loaded');
+    ${initialize?'CaptureSections.freezeTurn(root,'+(messageIndex+1)+');':''}
+    if (!root.dataset.captureFrozenTurn) throw Error('Frozen HTML section anchors were lost; capture remains incomplete.');
     const controls = [...root.querySelectorAll(${JSON.stringify(controlSelector)})].filter(element => !element.closest('template'));
     const clone = root.cloneNode(true);
     const clonedControls = [...clone.querySelectorAll(${JSON.stringify(controlSelector)})].filter(element => !element.closest('template'));
@@ -90,6 +57,7 @@ async function snapshot(page, messageIndex) {
       assistantCount: roots.length,
       text: root.innerText,
       html: clone.outerHTML,
+      section_layout: CaptureSections.snapshotTurn(clone, ${messageIndex+1}),
       imageUrls: [...root.querySelectorAll('img')].map(image => image.src).filter(Boolean),
       visualKey: [...root.querySelectorAll('svg,[aria-expanded],[aria-selected],[data-state]')]
         .map(element => element.outerHTML).join('|'),
@@ -101,6 +69,7 @@ async function snapshot(page, messageIndex) {
       },
       controls: controls.map((element, index) => ({
         index,
+        component_anchor: element.closest('[data-capture-component-anchor]')?.dataset.captureComponentAnchor || null,
         tag: element.tagName.toLowerCase(),
         type: element.getAttribute('type') || '',
         label: (element.getAttribute('aria-label') || element.innerText || element.getAttribute('value') || '').trim().slice(0, 160),
@@ -111,6 +80,7 @@ async function snapshot(page, messageIndex) {
       })),
     };
   })()`);
+  if(isUnavailableResponse(value.text))throw Error(`Tutor response ${messageIndex+1} could not load; the error placeholder cannot be captured as conversation content.`);
   value.visualKey = createHash('sha256').update(value.visualKey).digest('hex');
   return { ...value, key: stateKey(value) };
 }
@@ -124,19 +94,23 @@ function addState(message, snapshotValue) {
   return state;
 }
 
-async function init(file, url) {
+async function init(file, url, existingPage) {
   if (!/^https:\/\/chatgpt\.com\/(?:g\/[a-zA-Z0-9_/-]+\/)?c\/[a-f0-9-]{36}$/.test(url)) throw new Error('A saved ChatGPT conversation URL is required');
   const session = { formatVersion: 'agent-interactions/1', url, createdAt: new Date().toISOString(), messages: [], actions: [] };
-  await withPage(url, async (page) => {
+  const capture=async (page) => {
     const count = await page.evaluate(`document.querySelectorAll(${JSON.stringify(rootSelector)}).length`);
     if (!count) throw new Error('No assistant messages are loaded');
     for (let index = 0; index < count; index++) {
       const message = { index, initial: 'state_0', active: 'state_0', states: [], transitions: [] };
-      addState(message, await snapshot(page, index));
+      addState(message, await snapshot(page, index, true));
       session.messages.push(message);
     }
-  });
-  await saveSession(file, session);
+    await saveSession(file,session);
+    session.gallery_checkpoint={};
+    session.gallery_images=await captureGalleryImages(url,{session:page,checkpoint:session.gallery_checkpoint,persist:async checkpoint=>{session.gallery_checkpoint=checkpoint;await saveSession(file,session);}});
+  };
+  if(existingPage)await capture(existingPage);else await withPage(url,capture);
+  await saveSession(file,session);
   return summary(session);
 }
 
@@ -147,9 +121,10 @@ function summary(session) {
       const state = message.states.find((entry) => entry.id === message.active);
       const explored = new Set(message.transitions.filter((edge) => edge.from === state.id).map((edge) => edge.control));
       return { message: message.index + 1, state: state.id, statesRecorded: message.states.length,
-        text: state.text.slice(0, 8000),
+        text: state.controls.filter(c=>message.coverage?.[c.component_anchor]?.status!=='complete').map(c=>c.context).filter((v,i,a)=>a.indexOf(v)===i).join('\n').slice(0,2000),
         visualHints: state.visualHints,
-        controls: state.controls.map(({ index, tag, type, label, context, disabled, checked }) => ({ index, tag, type, label, context, disabled, checked, explored: explored.has(index) })) };
+        coverage:message.coverage||{},
+        controls: state.controls.filter(c=>message.coverage?.[c.component_anchor]?.status!=='complete').map(({ index, tag, type, label, context, disabled, checked, component_anchor }) => ({ index, tag, type, label, context, disabled, checked, component_anchor, explored: explored.has(index) })) };
     }),
     actions: session.actions.length,
   };
@@ -211,7 +186,6 @@ async function inspect(file) {
 
 async function click(file, messageNumber, controlNumber) {
   const session = await readSession(file);
-  if (session.actions.length >= maxCaptureClicks) throw new Error(`Representative capture click budget reached (${maxCaptureClicks})`);
   const message = session.messages[messageNumber - 1];
   if (!message || !Number.isInteger(controlNumber) || controlNumber < 0) throw new Error('Provide a valid message number and control index');
   const result = await withPage(session.url, async (page) => {
@@ -219,6 +193,7 @@ async function click(file, messageNumber, controlNumber) {
     const from = addState(message, before);
     const control = from.controls[controlNumber];
     if (!control) throw new Error(`Control ${controlNumber} is not in the current state`);
+    if(message.transitions.some(e=>e.from===from.id&&e.control===controlNumber))throw Error('This state/control was already explored. Follow another unexplored branch or finish coverage.');
     if (control.disabled || control.tag === 'a' || ['submit', 'reset'].includes(control.type)) throw new Error('This control is disabled or could navigate or submit');
     const clicked = await page.evaluate(`(() => {
       const root = [...document.querySelectorAll(${JSON.stringify(rootSelector)})][${message.index}];
@@ -242,34 +217,53 @@ async function click(file, messageNumber, controlNumber) {
     const edge = { from: from.id, control: controlNumber, label: control.label, to: to.id, changed: to.id !== from.id, at: new Date().toISOString() };
     message.transitions.push(edge);
     session.actions.push({ message: messageNumber, ...edge });
-    if (session.actions.length === maxCaptureClicks) session.stopReason = 'click_limit';
     return { edge, state: { id: to.id, text: to.text.slice(0, 8000), controls: to.controls.map(({ index, label, disabled, checked, context }) => ({ index, label, disabled, checked, context })) } };
   });
   await saveSession(file, session);
+  if(result.edge.changed){
+    const gallery=await captureGalleryImages(session.url),previous=session.gallery_images||{images:[],galleries:[],complete:true};
+    session.gallery_images={images:[...previous.images,...gallery.images],galleries:[...previous.galleries,...gallery.galleries],complete:previous.complete&&gallery.complete};
+    await saveSession(file,session);
+  }
   return result;
 }
 
-async function screenshot(file) {
+async function screenshot(file,messageNumber,anchor) {
   const session = await readSession(file);
+  if(messageNumber)return withPage(session.url,async page=>{
+    const region=await page.evaluate(({selector,index,anchor})=>{const component=document.querySelectorAll(selector)[index]?.querySelector(`[data-capture-component-anchor="${anchor}"]`);if(!component)throw Error('Capture component is missing.');component.dataset.imageCaptureRegion='agent-component';return 'agent-component';},{selector:rootSelector,index:messageNumber-1,anchor});
+    const output=path.join(path.dirname(file),`${path.parse(file).name}.m${messageNumber}-c${anchor}.png`);await writeFile(output,Buffer.from(await page.screenshot(region),'base64'));return {screenshot:output};
+  });
   return withPage(session.url, async (page) => {
     await page.send('Page.enable');
-    const image = await page.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const image = await page.send('Page.captureScreenshot', { format: 'png', fromSurface: true,captureBeyondViewport:true });
     const output = path.join(path.dirname(file), `${path.parse(file).name}.screen-${Date.now()}.png`);
     await writeFile(output, Buffer.from(image.data, 'base64'));
     return { screenshot: output };
   });
 }
 
+async function coverage(file,messageNumber,anchor,status,expected,notes) {
+  const session=await readSession(file),message=session.messages[messageNumber-1];
+  if(!message||!['complete','incomplete'].includes(status)||!message.states[0].section_layout.sections.some(s=>s.anchors.includes(anchor)))throw Error('Provide an existing component anchor and complete/incomplete coverage.');
+  const total=expected==='unknown'?null:Number(expected);
+  if(total!==null&&(!Number.isInteger(total)||total<1))throw Error('Expected coverage must be a positive integer or unknown.');
+  if(!notes?.trim())throw Error('Coverage needs a factual explanation of what was checked and any gaps.');
+  message.coverage??={};message.coverage[anchor]={status,expected:total,notes};
+  delete session.stopReason;await saveSession(file,session);return summary(session);
+}
+
 async function main() {
   const [action, filename, ...args] = process.argv.slice(2);
-  if (!['init', 'inspect', 'click', 'screenshot'].includes(action) || !filename) {
+  if (!['init', 'inspect', 'click', 'screenshot','coverage'].includes(action) || !filename) {
     throw new Error('Usage: node agent-capture.mjs init SESSION URL | inspect SESSION | click SESSION MESSAGE CONTROL | screenshot SESSION');
   }
   const file = path.resolve(filename);
   const result = action === 'init' ? await init(file, args[0])
     : action === 'inspect' ? await inspect(file)
+      : action === 'coverage' ? await coverage(file,Number(args[0]),args[1],args[2],args[3],args.slice(4).join(' '))
       : action === 'click' ? await click(file, Number(args[0]), Number(args[1]))
-        : await screenshot(file);
+        : await screenshot(file,args[0]?Number(args[0]):undefined,args[1]);
   console.log(JSON.stringify(result, null, 2));
 }
 
@@ -277,4 +271,4 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   main().catch((error) => { console.error(error.message); process.exitCode = 1; });
 }
 
-export { init, inspect, click, screenshot, readSession, summary, questionNavigation };
+export { init, inspect, click, screenshot, readSession, summary, questionNavigation, snapshot };

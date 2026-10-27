@@ -1,0 +1,4 @@
+import fs from 'node:fs/promises';import {CaptureSession} from '../../browser-session.mjs';import {collectFocusedImages} from '../../image-focused.mjs';
+const t=JSON.parse(await fs.readFile(new URL('./target.json',import.meta.url))),s=await CaptureSession.connect(t.ws);
+let checkpoint;try{checkpoint=JSON.parse(await fs.readFile(new URL('./checkpoint.json',import.meta.url)));}catch{checkpoint={turns:JSON.parse(await fs.readFile(new URL('./inventory.json',import.meta.url)))}};
+try{const media=await collectFocusedImages(s,{checkpoint,adoptOpenCandidate:'t1a1',persist:c=>fs.writeFile(new URL('./checkpoint.json',import.meta.url),JSON.stringify(c,null,2))});await fs.writeFile(new URL('./media.json',import.meta.url),JSON.stringify(media,null,2));console.log({images:media.images.length,galleries:media.galleries.map(g=>({id:g.gallery_id,views:g.views.length,expected:g.expected,complete:g.complete})),metrics:checkpoint.metrics});}finally{s.close();}

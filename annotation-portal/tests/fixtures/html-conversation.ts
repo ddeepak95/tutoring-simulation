@@ -1,0 +1,9 @@
+import type {HtmlConversation} from '../../src/html-conversation';
+import {createHash} from 'node:crypto';
+export const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
+export function captureHash(pkg:HtmlConversation){const {version_hash:_hash,...data}=pkg;const canonical=(v:any):string=>v===null||typeof v!=='object'?JSON.stringify(v):Array.isArray(v)?'['+v.map(canonical).join(',')+']':'{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}';return sha(canonical(data));}
+export function htmlFixture():HtmlConversation {
+  const first='<div data-capture-component-anchor="1"><p>Question 1 of 2: What is 2 + 2?</p><button data-capture-agent-control="0">Next</button></div>';
+  const second='<div data-capture-component-anchor="1"><p>Question 2 of 2: What is 3 + 3?</p><button data-capture-agent-control="1">Previous</button></div>';
+  const pkg:HtmlConversation={format_version:'html-conversation/2',capture_id:'fixture-capture',captured_at:'2026-10-26T00:00:00Z',version_hash:'',status:'complete',metadata:{title:'Covalent Radius',topic:'Covalent Radius',language:'ta',topic_id:'covalent-radius',provider:'ChatGPT',access_type:'chatbot',source_url:'https://chatgpt.com/c/00000000-0000-4000-8000-000000000010'},source_version:null,styles:'',assets:[],turns:[{turn_id:'turn_0001',speaker:'student',html:'<p>Explain.</p>',sections:[]},{turn_id:'turn_0002',speaker:'tutor',html:'',sections:[{section_id:'t1s1',turn_number:1,section_number:1,heading:'Quiz',html:'<h2>Quiz</h2>'+first,components:[{component_id:'t1s1c1',initial_state:'t1s1c1v1',states:[{state_id:'t1s1c1v1',html:first,sha256:sha(first)},{state_id:'t1s1c1v2',html:second,sha256:sha(second)}],transitions:[{from:'t1s1c1v1',control_id:'0',to:'t1s1c1v2'},{from:'t1s1c1v2',control_id:'1',to:'t1s1c1v1'}],coverage:{status:'complete',expected:2,captured:2,notes:'Both questions and options captured.'}}]}]}]};pkg.version_hash=captureHash(pkg);return pkg;
+}

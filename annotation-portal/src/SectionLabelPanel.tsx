@@ -30,16 +30,17 @@ function ItemCounter({feature,count,readonly,onCount}:{feature:Feature;count:num
 
 export function SectionLabelPanel({rubric,selection,sectionId,title,annotations,readonly,onCount,onClose}:{rubric:Feature[];selection?:Evidence;sectionId?:string;title?:string;annotations:Annotation[];readonly:boolean;onCount:(key:string,count:number)=>void;onClose:()=>void}) {
   const heading=useRef<HTMLHeadingElement>(null);
-  const key=selection?`${selection.turn_id}:${selection.start}:${selection.end}`:'';
+  const selected=!!(selection||sectionId);
+  const key=sectionId|| (selection?`${selection.turn_id}:${selection.start}:${selection.end}`:'');
   useEffect(()=>{if(key)heading.current?.focus({preventScroll:true});},[key]);
   const numbers=sectionId?.match(/^t(\d+)s(\d+)$/u);
   const selectedTitle=title||(numbers?`Turn ${numbers[1]} - Section ${numbers[2]}`:'Selected section');
-  return <aside className={`section-label-sidebar${selection?' has-selection':''}`} aria-label="Section labeling">
+  return <aside className={`section-label-sidebar${selected?' has-selection':''}`} aria-label="Section labeling">
     <header className="section-label-panel-heading">
-      <div><h2 ref={heading} tabIndex={-1}><span>{selection?selectedTitle:'Section labels'}</span>{selection&&sectionId&&<span className="section-label-heading-id">{sectionId}</span>}</h2></div>
-      {selection&&<button type="button" className="dismiss" aria-label="Close section labeling" onClick={onClose}>×</button>}
+      <div><h2 ref={heading} tabIndex={-1}><span>{selected?selectedTitle:'Section labels'}</span>{selected&&sectionId&&<span className="section-label-heading-id">{sectionId}</span>}</h2></div>
+      {selected&&<button type="button" className="dismiss" aria-label="Close section labeling" onClick={onClose}>×</button>}
     </header>
-    {!selection?<p className="section-label-empty">Click a section’s labeling button to add items and counts here.</p>:<>
+    {!selected?<p className="section-label-empty">Click a section’s labeling button to add items and counts here.</p>:<>
       <div className="section-label-panel-content">
         {[...new Set(rubric.map(f=>f.category))].map(category=><section className="section-item-category" key={category} aria-label={category}>
           <h3>{category}</h3>

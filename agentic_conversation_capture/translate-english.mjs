@@ -1,19 +1,29 @@
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
+import { createHash,randomUUID } from 'node:crypto';
+import {withCaptureDOM,verifyPackage,packageHash,hash} from './html-sections.mjs';
+import {validateHtmlConversation} from '../annotation-portal/src/html-conversation.ts';
 import path from 'node:path';
 import { modelConversationHtml } from '../annotation-portal/server/model-conversation-html.ts';
 import { htmlStructuralRanges } from '../annotation-portal/server/html-structure.ts';
 
+function validPassage(source,target){
+  if(typeof target!=='string'||!target.trim())return false;
+  const tokens=s=>s.match(/\{\{(?:OPEN|CLOSE|NODE):[a-z]+\}\}/g)||[];
+  if(JSON.stringify(tokens(source).sort())!==JSON.stringify(tokens(target).sort())||JSON.stringify(source.match(/\d+(?:[.,]\d+)*/g)||[])!==JSON.stringify(target.match(/\d+(?:[.,]\d+)*/g)||[]))return false;
+  const stack=[];for(const token of tokens(target)){const [,kind,name]=token.match(/\{\{(OPEN|CLOSE|NODE):([a-z]+)\}\}/);if(kind==='OPEN')stack.push(name);else if(kind==='CLOSE'&&stack.pop()!==name)return false;}return stack.length===0;
+}
+
 export function translationSourceHash(capture) {
+  if(capture.format_version==='html-conversation/2')return capture.version_hash;
   return createHash('sha256').update(JSON.stringify({ title: capture.title, topic: capture.topic, language: capture.language,
     turns: capture.turns.map(({ turn_id, speaker, text, html }) => ({ turn_id, speaker, text, html })) })).digest('hex');
 }
 
 async function geminiKey() {
   if (process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY) return process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-  for (const directory of [import.meta.dirname, path.join(import.meta.dirname, '..', 'annotation-portal')]) {
+  for (const file of [path.join(import.meta.dirname,'.env.local'),path.join(import.meta.dirname,'..','annotation-portal','.env.local'),path.join(import.meta.dirname,'..','.env')]) {
     let contents;
-    try { contents = await readFile(path.join(directory, '.env.local'), 'utf8'); } catch { continue; }
+    try { contents = await readFile(file, 'utf8'); } catch { continue; }
     for (const line of contents.split(/\r?\n/)) {
       const match = line.match(/^\s*(GEMINI_API_KEY|GOOGLE_API_KEY)\s*=\s*(.*?)\s*$/);
       if (match && match[2]) return match[2].replace(/^(['"])(.*)\1$/, '$2');
@@ -22,9 +32,11 @@ async function geminiKey() {
   throw new Error('Set GEMINI_API_KEY or GOOGLE_API_KEY locally to translate to English');
 }
 
-export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiKey, model = process.env.TRANSLATION_MODEL || 'gemini-4-argon', withAnchors = false } = {}) {
+export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiKey, model = process.env.TRANSLATION_MODEL || 'gemini-4-argon', withAnchors = false,checkpoint,onCheckpoint=async()=>{} } = {}) {
   if (!/^gemini-[a-z0-9.-]+$/.test(model)) throw new Error('TRANSLATION_MODEL must name a Gemini model');
   const key = apiKey || await geminiKey();
+  const usage={...(checkpoint?.usage||{})};
+  const recordUsage=value=>{for(const [key,n] of Object.entries(value||{}))if(typeof n==='number')usage[key]=(usage[key]||0)+n;};
   async function translate(text, label) {
     const body = JSON.stringify({
       systemInstruction: { parts: [{ text: 'Translate the supplied text into faithful, natural English. Translate only linguistic content. Preserve all information, equations, numbers, URLs, citations, answer labels, and the order of questions and answer options. Do not add commentary or omit content. Return only the translated text.' }] },
@@ -42,6 +54,7 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
         throw new Error(`Gemini translation failed for ${label} (HTTP ${response.status}): ${(await response.text()).slice(0, 200)}`);
       }
       const result = await response.json();
+      recordUsage(result.usageMetadata);
       const candidate = result.candidates?.[0];
       const translated = candidate?.content?.parts?.filter(part => !part.thought).map(part => part.text || '').join('').trim();
       if (candidate?.finishReason !== 'STOP' || !translated) throw new Error(`Gemini returned an incomplete translation for ${label}`);
@@ -52,7 +65,7 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
   async function translateBatch(items, label) {
     if (!items.length) return [];
     const body = JSON.stringify({
-      systemInstruction: { parts: [{ text: 'You are translating a JSON array of text passages into faithful, natural English. Return a JSON array of strings with exactly one translation per input element, in the same order. Translate only linguistic content. Preserve all information, equations, numbers, URLs, citations, answer labels, and question and answer order. Do not merge, omit, or add passages.' }] },
+      systemInstruction: { parts: [{ text: 'You are translating a JSON array of complete text passages into faithful, fluent, natural English. Return a JSON array of strings with exactly one translation per input element, in the same order. Translate only linguistic content. Preserve all information, equations, numbers, URLs, citations, answer labels, and question and answer order. Do not merge, omit, or add passages. Tokens {{OPEN:name}} and {{CLOSE:name}} delimit original inline formatting; {{NODE:name}} represents an original equation, image, or other protected element. Preserve every token exactly once, keep formatting balanced, and translate the entire passage grammatically around them. You may move an inline phrase/token pair within its passage when English word order requires it. Never translate token names or add markup.' }] },
       contents: [{ role: 'user', parts: [{ text: JSON.stringify(items) }] }],
       generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 65536,
         ...(model === 'gemini-4-argon' ? { thinkingConfig: { thinkingLevel: 'MEDIUM', includeThoughts: false } } : { temperature: 0 }) },
@@ -66,15 +79,55 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
         throw new Error(`Gemini translation failed for ${label} (HTTP ${response.status}): ${(await response.text()).slice(0, 200)}`);
       }
       const result = await response.json();
+      recordUsage(result.usageMetadata);
       const candidate = result.candidates?.[0];
       const raw = candidate?.content?.parts?.filter(part => !part.thought).map(part => part.text || '').join('');
       let translated;
       try { translated = JSON.parse(raw); } catch { /* retry malformed JSON */ }
       if (candidate?.finishReason === 'STOP' && Array.isArray(translated) && translated.length === items.length &&
           translated.every(value => typeof value === 'string' && value.trim()) &&
+          (capture.format_version!=='html-conversation/2'||items.every((value,index)=>validPassage(value,translated[index]))) &&
           items.every((value, index) => (value.match(/https?:\/\/[^\s<>"']+/g) || []).every(url => translated[index].includes(url)))) return translated;
       if (attempt === 2) throw new Error(`Gemini returned incomplete or misaligned translations for ${label}`);
     }
+  }
+  if(capture.format_version==='html-conversation/2'){
+    await verifyPackage(capture);
+    return withCaptureDOM(async page=>{
+      if(checkpoint&&(checkpoint.source_hash!==capture.version_hash||checkpoint.model!==model||checkpoint.version!=='html-dom-translation/2'))throw Error('Translation checkpoint differs from its source, prompt or model.');
+      const progress=checkpoint||{version:'html-dom-translation/2',source_hash:capture.version_hash,model,translations:[]};
+      const translated=structuredClone(capture),cache=new Map(progress.translations.filter(([source,target])=>validPassage(source,target)));
+      async function texts(items,label){
+        const missing=[...new Set(items.filter(s=>s.trim()&&!cache.has(s)))];
+        for(let from=0;from<missing.length;){let to=from,chars=0;while(to<missing.length&&to-from<20&&(chars+missing[to].length<=6000||to===from))chars+=missing[to++].length;
+          const originals=missing.slice(from,to),values=await translateBatch(originals,label);
+          originals.forEach((original,i)=>{
+            if(JSON.stringify(original.match(/\d+(?:[.,]\d+)*/g)||[])!==JSON.stringify(values[i].match(/\d+(?:[.,]\d+)*/g)||[]))throw Error(`Translation changed numeric content in ${label}.`);
+            const leading=original.match(/^\s*/)[0],trailing=original.match(/\s*$/)[0];cache.set(original,leading+values[i].trim()+trailing);
+          });progress.translations=[...cache.entries()];progress.usage={...usage};await onCheckpoint(structuredClone(progress));from=to;
+        }return items.map(s=>s.trim()?cache.get(s):s);
+      }
+      async function html(value,label){
+        if(!value)return value;
+        const units=await page.evaluate(value=>globalThis.CaptureSections.translationUnits(value),value);
+        const values=await texts(units.map(u=>u.text),label);
+        return page.evaluate(({value,units,values})=>globalThis.CaptureSections.applyTranslations(value,units,values),{value,units,values});
+      }
+      const markup=capture.turns.flatMap(t=>[t.html,...t.sections.flatMap(s=>[s.html,...s.components.flatMap(c=>c.states.map(v=>v.html))])]);
+      const passages=await page.evaluate(markup=>markup.flatMap(value=>globalThis.CaptureSections.translationUnits(value).map(u=>u.text)),markup);
+      await texts([capture.metadata.title,capture.metadata.topic,...capture.turns.flatMap(t=>t.sections.flatMap(s=>s.heading?[s.heading]:[])),...(capture.image_inventory||[]).map(i=>i.alt),...passages],'conversation passages');
+      const [title,topic]=await texts([capture.metadata.title,capture.metadata.topic],'metadata');
+      translated.metadata={...capture.metadata,title,topic,language:'en'};
+      for(const image of translated.image_inventory||[])if(image.alt.trim())image.alt=(await texts([image.alt],'image metadata'))[0];
+      for(const turn of translated.turns){turn.html=await html(turn.html,turn.turn_id);for(const section of turn.sections){
+        section.html=await html(section.html,section.section_id);
+        if(section.heading)section.heading=(await texts([section.heading],section.section_id))[0];
+        for(const component of section.components)for(const state of component.states){state.html=await html(state.html,state.state_id);state.sha256=hash(state.html);}
+      }}
+      translated.capture_id=randomUUID();translated.source_version={capture_id:capture.capture_id,version_hash:capture.version_hash,language:capture.metadata.language};
+      translated.translation_info={model,prompt_version:'html-dom-translation/2',usage};
+      translated.version_hash=packageHash(translated);validateHtmlConversation(translated,{source:capture});return translated;
+    });
   }
   const title = await translate(capture.title, 'title');
   const topic = capture.topic === capture.title ? title : await translate(capture.topic, 'topic');
