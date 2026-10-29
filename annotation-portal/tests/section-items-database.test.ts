@@ -1,7 +1,8 @@
 import {expect,it} from 'vitest';
 import {PGlite} from '@electric-sql/pglite';
 import fs from 'node:fs';
-import {bundledRubric,C} from '../src/lib';
+import {C} from '../src/lib';
+import {bundledRubric} from './fixtures/section-items-v1';
 import {bundledRubric as legacy} from './fixtures/legacy-rubric';
 
 it('archives old Label work atomically, preserves ratings, and starts blank item assignments exactly once',async()=>{

@@ -97,6 +97,18 @@
   }
 
   function validateAnnotations(conversation, annotations, rubric, { allowIncomplete = false } = {}) {
+    for(const annotation of annotations){
+      if(annotation.highlights===undefined)continue;
+      if(conversation.html_content||!annotation.section_id||!Array.isArray(annotation.highlights)||!annotation.highlights.length||annotation.highlights.length>1000)throw new Error("Invalid section highlights.");
+      const source=annotation.evidence?.[0]?.quote,seen=new Set();
+      if(typeof source!=="string")throw new Error("Hydrate section evidence before validating highlights.");
+      for(const h of annotation.highlights){
+        if(!h||Object.keys(h).some(k=>!["quote","occurrence"].includes(k))||typeof h.quote!=="string"||!h.quote.trim()||h.quote.length>500||!Number.isInteger(h.occurrence)||h.occurrence<1)throw new Error("Invalid section highlight.");
+        let position=-1,from=0;for(let i=0;i<h.occurrence;i++){position=source.indexOf(h.quote,from);if(position<0)throw new Error("Highlight is outside its owning section.");from=position+1;}
+        const key=position+":"+h.quote.length;if(seen.has(key))throw new Error("Duplicate occurrence highlight.");seen.add(key);
+      }
+    }
+
     if(conversation.html_content){
       const pkg=conversation.html_content;
       if(pkg.format_version!=="html-conversation/2"||pkg.status!=="complete")throw new Error("A complete HTML capture is required.");
@@ -203,6 +215,7 @@
         }
         if (a.section_id) entry.section_id = a.section_id;
         if (a.llm_evidence !== undefined) entry.llm_evidence = a.llm_evidence;
+        if (a.highlights !== undefined) entry.highlights = structuredClone(a.highlights);
         return entry;
       });
       instructional_features[feature.key] = entries;

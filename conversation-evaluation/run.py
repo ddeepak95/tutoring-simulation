@@ -25,7 +25,6 @@ LEGACY_SCHEMA = ROOT / "explanation-difference/content/evaluation_rubric.schema.
 PROMPT = HERE / "prompts/evaluator-v3.md"
 RUBRIC = HERE / "human-annotation/coding-guidebook.md"
 SCHEMA = HERE / "schemas/evaluator-v3.schema.json"
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
 PIPELINE_VERSION = "6"
 TRANSLATION_PROMPT = HERE / "prompts/translator.md"
 METADATA_KEYS = (
@@ -669,41 +668,52 @@ def assemble(conversation, values, schema):
 
 def request_api(messages, settings):
     import requests
-    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    if settings.get("provider", "google") != "google":
+        raise ValueError("Evaluator runs use the direct Google connection")
+    key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip()
     if not key:
-        raise ValueError("Set OPENROUTER_API_KEY in the environment or repository .env")
-    request = dict(model=settings["model"], messages=messages,
-                   max_tokens=settings["max_tokens"], response_format=settings.get("response_format", {"type": "json_object"}))
-    if request["response_format"]["type"] == "json_schema":
-        request["provider"] = {"require_parameters": True}
-    if settings.get("reasoning") == "none":
-        request["reasoning"] = {"enabled": False}
-    elif settings.get("reasoning") is not None:
-        request["reasoning"] = settings["reasoning"] if isinstance(settings["reasoning"], dict) else {"effort": settings["reasoning"]}
+        raise ValueError("Set GEMINI_API_KEY or GOOGLE_API_KEY in the environment or repository .env")
+    model = settings["model"].removeprefix("google/")
+    if not re.fullmatch(r"gemini-[a-z0-9.-]+", model):
+        raise ValueError("Direct Google evaluation requires a Gemini model")
+    generation = {"responseMimeType": "application/json", "maxOutputTokens": settings["max_tokens"]}
+    if model != "gemini-4-argon":
+        generation["temperature"] = 0
+    output_format = settings.get("response_format", {})
+    if output_format.get("type") == "json_schema":
+        generation["responseJsonSchema"] = output_format["json_schema"]["schema"]
+    reasoning = settings.get("reasoning")
+    effort = reasoning.get("effort") if isinstance(reasoning, dict) else reasoning
+    if effort and effort != "none":
+        generation["thinkingConfig"] = {"thinkingLevel": effort.upper(), "includeThoughts": False}
+    request = {"systemInstruction": {"parts": [{"text": m["content"]} for m in messages if m["role"] == "system"]},
+               "contents": [{"role": "model" if m["role"] == "assistant" else "user", "parts": [{"text": m["content"]}]} for m in messages if m["role"] != "system"],
+               "generationConfig": generation}
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
     for attempt in range(settings["http_retries"] + 1):
         try:
-            response = requests.post(API_URL, headers={"Authorization": f"Bearer {key}"},
+            response = requests.post(url, headers={"x-goog-api-key": key, "Content-Type": "application/json"},
                                      json=request, timeout=settings["timeout"])
         except (requests.Timeout, requests.ConnectionError):
             if attempt < settings["http_retries"]:
                 time.sleep(min(2 ** attempt, 10))
                 continue
-            raise RuntimeError("OpenRouter connection failed or timed out") from None
+            raise RuntimeError("Google connection failed or timed out") from None
         if response.status_code in {429, 500, 502, 503, 504} and attempt < settings["http_retries"]:
             time.sleep(min(2 ** attempt, 10))
             continue
         if response.status_code >= 400:
-            # Never persist provider error bodies, which can include credential metadata.
-            raise RuntimeError(f"OpenRouter HTTP {response.status_code}")
+            raise RuntimeError(f"Google HTTP {response.status_code}")
         raw = response.json()
         if raw.get("error"):
-            raise RuntimeError("OpenRouter returned an API error")
-        choice = (raw.get("choices") or [{}])[0]
-        text = (choice.get("message") or {}).get("content")
-        if choice.get("finish_reason") != "stop" or not isinstance(text, str):
+            raise RuntimeError("Google returned an API error")
+        candidate = (raw.get("candidates") or [{}])[0]
+        text = "".join(part.get("text", "") for part in candidate.get("content", {}).get("parts", []) if not part.get("thought"))
+        if candidate.get("finishReason") != "STOP" or not text.strip():
             raise RuntimeError("Evaluator output is incomplete or missing; increase max_tokens if truncated")
-        return dict(text=text, usage=raw.get("usage", {}), model=raw.get("model"),
-                    response_id=raw.get("id"), provider=raw.get("provider"), finish_reason=choice["finish_reason"])
+        usage = raw.get("usageMetadata", {})
+        return dict(text=text, usage={"prompt_tokens": usage.get("promptTokenCount", 0), "completion_tokens": usage.get("candidatesTokenCount", 0), "total_tokens": usage.get("totalTokenCount", 0)},
+                    model=settings["model"], native_model=raw.get("modelVersion"), response_id=raw.get("responseId"), provider="google", finish_reason="stop")
     raise RuntimeError("Request retry limit reached")
 
 
@@ -742,7 +752,8 @@ def run_stage(task, folder, settings, call=request_api, resume=False):
     save_json(destination / "request.json", {"messages": messages, "settings": request_settings})
     for attempt in range(settings["repair_attempts"] + 1):
         response = call(messages, request_settings)
-        response["text"] = response["text"].replace(os.environ.get("OPENROUTER_API_KEY") or "\0", "[REDACTED]")
+        for name in ("GEMINI_API_KEY", "GOOGLE_API_KEY", "OPENROUTER_API_KEY"):
+            response["text"] = response["text"].replace(os.environ.get(name) or "\0", "[REDACTED]")
         save_json(destination / f"attempt_{offset + attempt + 1:02d}.json",
                   {"response": response, "messages": messages})
         try:
@@ -1031,9 +1042,12 @@ def main(argv=None, call=None):
     try:
         from jsonschema import Draft202012Validator
         settings = read_json(args.config)
-        allowed = {"model", "max_tokens", "timeout", "http_retries", "repair_attempts", "reasoning"}
+        settings.setdefault("provider", "google")
+        allowed = {"model", "provider", "max_tokens", "timeout", "http_retries", "repair_attempts", "reasoning"}
         if set(settings) != allowed:
             raise ValueError("Config must contain exactly: " + ", ".join(sorted(allowed)))
+        if settings["provider"] != "google":
+            raise ValueError("Evaluator runs use the direct Google connection")
         if args.model:
             settings["model"] = args.model
         if settings["model"] is not None and (not isinstance(settings["model"], str) or "/" not in settings["model"]):
@@ -1065,8 +1079,8 @@ def main(argv=None, call=None):
             load_dotenv(ROOT / ".env")
             if not settings["model"]:
                 raise ValueError("Choose --model provider/model or set model in config.json")
-            if not os.environ.get("OPENROUTER_API_KEY", "").strip():
-                raise ValueError("Missing OPENROUTER_API_KEY")
+            if not (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip():
+                raise ValueError("Missing GEMINI_API_KEY or GOOGLE_API_KEY")
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
         output = (args.output or HERE / "outputs" / stamp).resolve()
         fingerprint = digest(dict(version=PIPELINE_VERSION, settings=settings, rubric=rubric, schema=schema,

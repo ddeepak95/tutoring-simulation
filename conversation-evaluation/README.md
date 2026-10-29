@@ -43,12 +43,12 @@ From the repository root (PowerShell):
 .venv/Scripts/python.exe -m pip install -r conversation-evaluation/requirements.txt
 ```
 
-Set OPENROUTER_API_KEY in the repository-root .env or environment. All evaluator
-models use OpenRouter, including Google and OpenAI; this pipeline does not inherit
-the generation runner's direct-provider routing. Credentials are not saved.
+Set GEMINI_API_KEY or GOOGLE_API_KEY in the repository-root .env or environment.
+Evaluator and translation requests always use the direct Google REST API.
+Credentials are not saved. The provider setting must be google.
 
-Choose an explicit OpenRouter provider/model ID with --model or config.json.
-The default model is google/gemini-3.8-flash; dry runs need no API key.
+Choose an explicit Google Gemini ID, such as google/gemini-3.8-flash, with --model or config.json.
+The default model is google/gemini-4-argon; dry runs need no API key.
 
 Use `--evaluation-mode both` (the default), `--evaluation-mode original`, or
 `--evaluation-mode translated` to select transcript versions. Original-only runs
@@ -76,7 +76,7 @@ structured outputs. Provider routing requires support for the requested paramete
 unsupported model/provider combinations fail instead of silently falling back to JSON
 object output. Dry runs and tests make no paid calls. Original transcripts are preserved;
 translation artifacts are written beside non-English sources during live runs.
-See [OpenRouter structured outputs](https://openrouter.ai/docs/guides/features/structured-outputs).
+Structured output is requested through Gemini responseJsonSchema on the direct Google API.
 
 The nullable ordinal score uses an integer range of 1?3 instead of the mixed enum
 `[1, 2, 3, null]`. A minimal live Gemini/OpenRouter probe returned an empty object
@@ -175,7 +175,7 @@ Translation is recorded as a limitation for wording and tone judgments in the
 translated evaluation.
 
 Translation uses the evaluator model by default. Use `--translation-model provider/model-id`
-to select a different OpenRouter translator. Both models use the existing OpenRouter
+to select a different Gemini translator. Both models use the direct Google
 key. Translation adds a model call and may require corrective retries.
 
 Translations are reused when source content, translation prompt, schema, and settings

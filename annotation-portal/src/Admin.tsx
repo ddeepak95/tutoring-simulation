@@ -1,6 +1,7 @@
+import {ConversationRowLinks} from './ConversationRowLinks';
 import {resolveCaptureDocument} from './capture-content';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { bundledRubric, C, download, fetchAllRows, supabase } from './lib';
 import {fetchDashboardTopics,fetchTopicDashboardData,type DashboardTopic} from './dashboard-data';
@@ -16,13 +17,20 @@ import { featureItemCount } from './feature-counts';
 import { compareWithBaseline } from './baseline-comparison';
 import type { LLMBaseline } from './types';
 import { Toast, useToast } from './Toast';
-import { conversationTitle, groupByTopic } from './topic-groups';
+import { conversationTitle } from './topic-groups';
 import {conversationOrigin} from './conversation-origin';
+import { providerGroups, providerLanguageGroups, providerLanguagePath } from './admin-conversation-groups';
+import { ProviderOccurrenceComparison, SetOccurrenceComparison } from './SetOccurrenceComparison';
+import { ProviderAccordion } from './ProviderAccordion';
 
 const message = (error: unknown) => error instanceof Error ? error.message : (error as { message?: string })?.message || String(error);
 const statusText = (status: string) => ({ not_started: 'Not started', in_progress: 'In progress', submitted: 'Submitted' })[status] || status;
 
 export function Admin() {
+  const { topicKey, provider, sourceLanguage } = useParams();
+  const isGroupPage = Boolean(provider && sourceLanguage);
+  const isTopicPage = Boolean(topicKey) && !isGroupPage;
+  useEffect(() => { if (topicKey) void loadTopic(topicKey); setSelected([]); setMenu(null); setAssignmentPopup(null); }, [topicKey, provider, sourceLanguage]);
   const [rows, setRows] = useState<Assignment[]>([]); const [documents, setDocuments] = useState<DocumentRow[]>([]); const [users, setUsers] = useState<Profile[]>([]);
   const [topicHeaders,setTopicHeaders]=useState<DashboardTopic[]>([]);
   const [topicStatus,setTopicStatus]=useState<Record<string,'loading'|'loaded'|'error'>>({});
@@ -33,7 +41,7 @@ export function Admin() {
   const [selected, setSelected] = useState<string[]>([]); const [language, setLanguage] = useState('en');
   const [uploadOpen, setUploadOpen] = useState(false);
   const [deleteDocument, setDeleteDocument] = useState<DocumentRow | null>(null);
-  const [menu, setMenu] = useState<{ ids: string[]; anchor: HTMLButtonElement } | null>(null);
+  const [menu, setMenu] = useState<{ ids: string[]; anchor: HTMLButtonElement; initialPanel?:'assign' } | null>(null);
   const [assignmentPopup, setAssignmentPopup] = useState<{ key: string; task: AssignmentType; assignments: Assignment[]; left: number; top: number } | null>(null);
   const fileRef = useRef<HTMLInputElement>(null); const uploadDialog = useRef<HTMLDialogElement>(null);
   const refreshing=useRef(false);const rubricRegistered=useRef(false);
@@ -69,7 +77,7 @@ export function Admin() {
       const available=new Set(data.topics.map(t=>t.key)),removedIds=new Set<string>();
       for(const [key,ids] of loadedTopics.current)if(!available.has(key)){ids.forEach(id=>removedIds.add(id));loadedTopics.current.delete(key);}
       if(removedIds.size){setDocuments(previous=>previous.filter(d=>!removedIds.has(d.id)));setRows(previous=>previous.filter(r=>!removedIds.has(r.conversation_id)));setSelected(previous=>previous.filter(id=>!removedIds.has(id)));}
-      if(reloadLoaded)await Promise.all([...loadedTopics.current.keys()].map(key=>loadTopic(key,true)));
+      if(reloadLoaded && topicKey)await loadTopic(topicKey,true);
     } catch (err) { setError(message(err)); } finally { refreshing.current=false;setLoading(false); }
   }
   useEffect(() => { void refresh(); const timer = setInterval(() => {if(globalThis.document.visibilityState==='visible')void refresh(false);}, 30000); return () => clearInterval(timer); }, []);
@@ -153,26 +161,40 @@ export function Admin() {
     const top = rect.bottom + height + 8 <= window.innerHeight ? rect.bottom + 8 : Math.max(8, rect.top - height - 8);
     setAssignmentPopup({ key, task, assignments, left, top });
   }
-  const visible = rows;
-  const loadedGroups=new Map(groupByTopic(documents).map(group=>[group.key,group]));
-  const topics=topicHeaders.map(topic=>({...topic,documents:loadedGroups.get(topic.key)?.documents||[]}));
-  const conversationCount=topicHeaders.reduce((n,t)=>n+t.conversation_count,0);
+  const activeTopic = topicHeaders.find(topic => topic.key === topicKey);
+  const topicDocuments = topicKey ? documents.filter(doc => loadedTopics.current.get(topicKey)?.has(doc.id)) : [];
+  const activeGroup = providerLanguageGroups(topicDocuments).find(group => group.provider === provider && group.language === sourceLanguage);
+  const groupDocuments = activeGroup?.attempts.flatMap(attempt => [attempt.document, ...attempt.translations]) || [];
+  const groupIds = new Set(groupDocuments.map(doc => doc.id));
+  const selectableDocuments = isGroupPage ? activeGroup?.attempts.map(attempt => attempt.document) || [] : [];
+  const visible = isGroupPage ? rows.filter(row => groupIds.has(row.conversation_id)) : rows;
   const menuDocuments = menu ? documents.filter(doc => menu.ids.includes(doc.id)) : [];
   return <main className="dashboard admin-dashboard">
-    <div className="page-heading"><div><span className="eyebrow">ADMINISTRATION</span><h1>Conversations</h1><p>Manage transcripts and assign annotation work.</p></div><div className="actions"><button className="secondary" disabled={busy} onClick={() => { setError(''); void refresh(); }}>Refresh</button><button className="primary" onClick={() => setUploadOpen(true)}>Upload</button></div></div>
+    <div className="page-heading"><div><span className="eyebrow">ADMINISTRATION</span><h1>{isGroupPage ? `${provider} / ${languageName(sourceLanguage)}` : isTopicPage ? activeTopic?.name || (loading ? 'Loading topic...' : topicKey) : 'Topics'}</h1><p>{isGroupPage ? activeTopic?.name || 'Loading topic...' : isTopicPage ? 'Choose a provider and language to view its conversation tries.' : 'Choose a topic to browse its conversations.'}</p></div><div className="actions"><Link className="secondary link-button" to="/statistics">Compare languages across topics</Link><Link className="secondary link-button" to={`/statistics?compare=models${topicKey ? `&topic=${encodeURIComponent(topicKey)}` : ''}`}>Compare models</Link><button className="secondary" disabled={busy} onClick={() => { setError(''); void refresh(); }}>Refresh</button><button className="primary" onClick={() => setUploadOpen(true)}>Upload</button></div></div>
     {error && !uploadOpen && <p className="error" role="alert">{error}</p>}{!uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}
     
+    {topicKey && <nav className="conversation-breadcrumbs" aria-label="Conversation navigation"><Link to="/">All topics</Link><span aria-hidden="true">/</span>{isGroupPage ? <><Link to={`/topics/${encodeURIComponent(topicKey)}`}>{activeTopic?.name || topicKey}</Link><span aria-hidden="true">/</span><span>{provider} / {languageName(sourceLanguage)}</span></> : <span>{activeTopic?.name || topicKey}</span>}</nav>}
     <section className="conversation-overview" aria-label="Conversations">
-      <div className="card conversation-toolbar"><span>{topics.length} topic{topics.length === 1 ? '' : 's'} · {conversationCount} conversation{conversationCount === 1 ? '' : 's'}{selected.length > 0 && ` · ${selected.length} selected`}</span><div className="conversation-toolbar-actions"><Link to="/topics/labels">Compare English and Tamil labels</Link><label className="checkbox"><input type="checkbox" aria-label="Select all loaded conversations" checked={documents.length > 0 && selected.length === documents.length} disabled={!documents.length} onChange={event => setSelected(event.target.checked ? documents.map(doc => doc.id) : [])} />Select loaded</label>{selected.length > 0 && <button className="secondary" aria-haspopup="dialog" aria-expanded={menu?.ids.length === selected.length && menu?.anchor.dataset.bulk === 'true'} data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div></div>
-      {topics.map(group => <details className="card conversation-card topic-group" key={group.key} data-topic-key={group.key} onToggle={event=>{if(event.currentTarget.open)void loadTopic(group.key);}} aria-label={`${group.name} conversations`}>
-      <summary className="topic-group-heading"><h2 lang="en">{group.name}</h2><small>{group.conversation_count} conversation{group.conversation_count === 1 ? '' : 's'}</small></summary>
-      <div className="topic-group-actions"><Link to={`/topics/${encodeURIComponent(group.key)}/labels`}>Compare feature labels</Link></div>
-      {topicStatus[group.key]==='loading'&&<p role="status">Loading conversations...</p>}
-      {topicErrors[group.key]&&<div role="alert"><p className="error">{topicErrors[group.key]}</p><button className="secondary" onClick={()=>void loadTopic(group.key,true)}>Retry loading conversations</button></div>}
+      {!topicKey ? <>
+        {topicHeaders.map(topic => <Link className="card topic-link" key={topic.key} data-topic-key={topic.key} to={`/topics/${encodeURIComponent(topic.key)}`}><h2 lang="en">{topic.name}</h2><small>{topic.conversation_count} conversation records</small><span aria-hidden="true">&rarr;</span></Link>)}
+        {loading ? <p className="card empty" role="status">Loading topics...</p> : !topicHeaders.length && <p className="card empty">No topics yet. Upload transcript files to get started.</p>}
+      </> : isTopicPage ? <section className="card topic-provider-page" aria-label="Provider and language combinations">
+        <div className="topic-group-actions"><Link to={`/topics/${encodeURIComponent(topicKey)}/labels`}>Compare feature labels</Link></div>
+        {topicStatus[topicKey] === 'loading' && <p role="status">Loading providers and languages...</p>}
+        {topicErrors[topicKey] && <div role="alert"><p className="error">{topicErrors[topicKey]}</p><button className="secondary" onClick={() => void loadTopic(topicKey, true)}>Retry loading conversations</button></div>}
+        <div className="topic-providers">{providerGroups(topicDocuments).map(group => <ProviderAccordion topicKey={topicKey} provider={group.provider} key={`${topicKey}:${group.provider}`} summary={<><strong>{group.provider}</strong><small>{group.languages.length} {group.languages.length === 1 ? 'language' : 'languages'} &middot; {group.languages.reduce((n, language) => n + language.attempts.length, 0)} tries</small></>}>
+          <div className="provider-language-list">{group.languages.map(entry => <Link className="provider-language-link" key={entry.language} to={providerLanguagePath(topicKey, entry.provider, entry.language)}><span><strong>{languageName(entry.language)}</strong></span><small>{entry.attempts.length} {entry.attempts.length === 1 ? 'try' : 'tries'} &middot; {entry.translationCount} {entry.translationCount === 1 ? 'translation' : 'translations'}</small><span aria-hidden="true">&rarr;</span></Link>)}</div>
+          <ProviderOccurrenceComparison documents={topicDocuments} provider={group.provider} />
+        </ProviderAccordion>)}</div>
+        {topicStatus[topicKey] === 'loaded' && !topicDocuments.length && <p>No provider and language combinations for this topic.</p>}
+      </section> : <>
+        <div className="card conversation-toolbar"><span>{activeGroup?.attempts.length || 0} {activeGroup?.attempts.length === 1 ? 'try' : 'tries'} · {activeGroup?.translationCount || 0} {activeGroup?.translationCount === 1 ? 'translation' : 'translations'}{selected.length > 0 && ` · ${selected.length} selected`}</span><div className="conversation-toolbar-actions"><Link to={`/topics/${encodeURIComponent(topicKey!)}/labels`}>Compare feature labels</Link><label className="checkbox"><input type="checkbox" aria-label="Select all conversations in this group" checked={selectableDocuments.length > 0 && selectableDocuments.every(doc => selected.includes(doc.id))} disabled={!selectableDocuments.length} onChange={event => setSelected(event.target.checked ? selectableDocuments.map(doc => doc.id) : [])} />Select all tries</label>{selected.length > 0 && <button className="secondary" data-bulk="true" onClick={event => setMenu({ ids: selected, anchor: event.currentTarget })}>Assign selected</button>}</div></div>
+        {activeGroup && topicStatus[topicKey!] === 'loaded' && <SetOccurrenceComparison key={`${topicKey}:${provider}:${sourceLanguage}`} documents={topicDocuments} currentGroup={activeGroup} />}
+        {topicStatus[topicKey!] === 'loading' || loading ? <p role="status">Loading conversations...</p> : topicErrors[topicKey!] ? <div role="alert"><p>{topicErrors[topicKey!]}</p><button onClick={() => void loadTopic(topicKey!, true)}>Retry loading conversations</button></div> : activeGroup ? <section className="card conversation-attempts" aria-label="Conversation tries">
       <div className="table-wrap"><table className="conversation-table"><thead><tr>
         <th className="select-column" aria-label="Select"></th>
-        <th>Conversation</th><th>Provider</th><th>Access type</th><th>Original language</th><th>Transcript language</th><th>Label</th><th>Rate</th><th aria-label="Actions"></th>
-      </tr></thead><tbody>{group.documents.map(doc => {
+        <th>Try</th><th>Conversation and translations</th><th>Access type</th><th>Label</th><th>Rate</th>
+      </tr></thead><tbody>{activeGroup.attempts.map(({ document: doc, translations }, attemptIndex) => {
         const assigned = rows.filter(row => row.conversation_id === doc.id);
         const assignmentsFor = (task: AssignmentType) => [...new Map(assigned.filter(row => row.task_type === task).map(row => [row.annotator_id, row])).values()].sort((a, b) => (a.profiles?.username || users.find(user => user.id === a.annotator_id)?.username || '').localeCompare(b.profiles?.username || users.find(user => user.id === b.annotator_id)?.username || ''));
         const labelAssignments = assignmentsFor('label');
@@ -180,21 +202,20 @@ export function Admin() {
         const topic = conversationTitle(doc);
         return <tr key={doc.id} data-conversation-id={doc.id} className={selected.includes(doc.id) ? 'selected-row' : ''}>
           <td><input type="checkbox" aria-label={`Select ${doc.label}`} checked={selected.includes(doc.id)} onChange={event => setSelected(previous => event.target.checked ? [...previous, doc.id] : previous.filter(id => id !== doc.id))} /></td>
-          <td className="topic-cell"><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><small>{(doc.is_html_capture || doc.transcript.html_content) ? (conversationOrigin(doc,documents).translated?`Translated from ${originalLanguage(doc)}`:'Original HTML capture') : doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.turn_count ?? doc.transcript.messages.length} turns</small>{conversationOrigin(doc,documents).sourceId && documents.some(other => other.id === conversationOrigin(doc,documents).sourceId) && <small><Link to={`/conversations/${conversationOrigin(doc,documents).sourceId}/labeling`}>View original capture</Link></small>}</td>
-          <td>{doc.transcript.provider || (doc.transcript.chatgpt_source ? 'ChatGPT' : '-')}</td><td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
-          <td>{originalLanguage(doc)}</td><td>{languageName(doc.language)}</td>
+          <td className="attempt-number">Try {attemptIndex + 1}<small><time dateTime={doc.created_at}>{new Date(doc.created_at).toLocaleDateString()}</time></small></td>
+          <td className="topic-cell"><div className="conversation-title-links"><Link className="conversation-topic-link" to={`/conversations/${doc.id}/labeling`} title="View Labeling"><strong lang={doc.language}>{topic}</strong></Link><ConversationRowLinks document={doc} busy={busy} onAssign={anchor=>setMenu({ids:[doc.id],anchor,initialPanel:'assign'})} onDelete={()=>{setMenu(null);setDeleteDocument(doc);}}/></div><small>{(doc.is_html_capture || doc.transcript.html_content) ? (conversationOrigin(doc,documents).translated?`Translated from ${originalLanguage(doc)}`:'Original HTML capture') : doc.transcript.archive_source ? 'Prepared ChatGPT capture' : doc.transcript.chatgpt_source ? 'ChatGPT import' : doc.transcript.repository_source?.version || (doc.transcript.source_conversation_id ? 'Translation' : 'Original')} · {doc.turn_count ?? doc.transcript.messages.length} turns</small>{conversationOrigin(doc,documents).sourceId && documents.some(other => other.id === conversationOrigin(doc,documents).sourceId) && <small><Link to={`/conversations/${conversationOrigin(doc,documents).sourceId}/labeling`}>View original capture</Link></small>}{translations.map(translation => <div className="conversation-translation" key={translation.id} data-translation-id={translation.id}><strong>{languageName(translation.language)} translation</strong>{translation.transcript.translation?.alignment_status==='stale'&&<small role="status">Retranslation needed: section grouping changed.</small>}<Link to={`/conversations/${translation.id}`}>View</Link><Link to={`/conversations/${translation.id}/labeling`}>Label</Link><Link to={`/conversations/${translation.id}/rating`}>Rate</Link><Link to={`/conversations/${translation.id}/baselines`}>Baselines</Link><button type="button" className="text-button" aria-label={`Assign users for ${translation.label}`} onClick={event => setMenu({ ids: [translation.id], anchor: event.currentTarget })}>Manage</button></div>)}</td>
+          <td>{doc.transcript.access_type || (doc.transcript.chatgpt_source ? 'chatbot' : '-')}</td>
           <td><button type="button" className="assignment-count" aria-label={`Label: ${labelAssignments.filter(row => row.status === 'submitted').length} completed of ${labelAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:label` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:label`, 'label', labelAssignments)} onBlur={() => setAssignmentPopup(null)}>{labelAssignments.filter(row => row.status === 'submitted').length}/{labelAssignments.length}</button></td>
           <td><button type="button" className="assignment-count" aria-label={`Rate: ${rateAssignments.filter(row => row.status === 'submitted').length} completed of ${rateAssignments.length} assigned`} aria-describedby={assignmentPopup?.key === `${doc.id}:rate` ? 'assignment-progress-popup' : undefined} onMouseEnter={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onMouseLeave={() => setAssignmentPopup(null)} onFocus={event => showAssignmentPopup(event.currentTarget, `${doc.id}:rate`, 'rate', rateAssignments)} onBlur={() => setAssignmentPopup(null)}>{rateAssignments.filter(row => row.status === 'submitted').length}/{rateAssignments.length}</button></td>
-          <td className="row-actions"><button className="conversation-menu-button" aria-label={`Assign users for ${doc.label}`} title="Assign users" aria-haspopup="dialog" aria-expanded={Boolean(menu?.ids.length === 1 && menu.ids[0] === doc.id)} disabled={busy} onClick={event => { const anchor = event.currentTarget; setMenu(previous => previous?.ids.length === 1 && previous.ids[0] === doc.id ? null : { ids: [doc.id], anchor }); }}>⋮</button></td>
         </tr>;
       })}</tbody></table></div>
-      </details>)}
-      {loading ? <p className="card empty" role="status">Loading conversations…</p> : !topicHeaders.length && <p className="card empty">No conversations yet. Upload transcript files to get started.</p>}
+        </section> : <p className="card empty">No conversations for this provider and language. <Link to="/">Browse topics</Link></p>}
+      </>}
     </section>
     {assignmentPopup && createPortal(<div id="assignment-progress-popup" className="assignment-progress-popup" role="tooltip" style={{ left: assignmentPopup.left, top: assignmentPopup.top }}><strong>{assignmentPopup.task === 'label' ? 'Label' : 'Rate'} · {assignmentPopup.assignments.filter(row => row.status === 'submitted').length}/{assignmentPopup.assignments.length} completed</strong>{assignmentPopup.assignments.length ? <ul>{assignmentPopup.assignments.map(row => <li key={row.annotator_id}><span>{row.profiles?.username || users.find(user => user.id === row.annotator_id)?.username || 'Annotator'}</span><small>{statusText(row.status)}</small></li>)}</ul> : <p>No annotators assigned</p>}</div>, document.body)}
-    {menu && menuDocuments.length > 0 && <AssignmentMenu key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
+    {menu && menuDocuments.length > 0 && <AssignmentMenu initialPanel={menu.initialPanel} key={menu.ids.join(':')} documents={menuDocuments} users={users} assignments={rows} anchor={menu.anchor} onUnassign={unassign} onAssign={assign} onClose={() => setMenu(null)} onDelete={document => { setMenu(null); setDeleteDocument(document); }} />}
     {deleteDocument && <DeleteConversation document={deleteDocument} onClose={() => setDeleteDocument(null)} onDeleted={async id => { setSelected(previous => previous.filter(value => value !== id)); setDocuments(previous => previous.filter(doc => doc.id !== id)); setRows(previous => previous.filter(row => row.conversation_id !== id)); setNotice('Conversation and associated annotation work deleted.'); await refresh(); }} />}
-    <section className="card progress"><div className="progress-heading"><h2>Annotation progress for loaded topics</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? (row.rubric_hash === bundledRubric.rubric_sha256 || row.annotations.some(a => a.entry.category) ? `${row.annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(row.annotations.flatMap(a => a.section_id ? [a.section_id] : a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${row.annotations.length} highlights`) : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>
+    {isGroupPage && <section className="card progress"><div className="progress-heading"><h2>{isGroupPage ? 'Annotation progress for this group' : 'Annotation progress for loaded topics'}</h2><button className="secondary" disabled={busy} onClick={() => void exportAll()}>Export all annotations</button></div><div className="table-wrap"><table><thead><tr><th>Conversation</th><th>Task</th><th>Annotator</th><th>Status</th><th>Work</th><th>Updated</th><th>Actions</th></tr></thead><tbody>{visible.map(row => <tr key={row.id}><td>{row.conversations?.label}</td><td>{row.task_type === 'label' ? 'Label' : 'Rate'}</td><td>{row.profiles?.username}</td><td><span className={`status ${row.status}`}>{statusText(row.status)}</span></td><td>{row.task_type === 'label' ? (row.rubric_hash === bundledRubric.rubric_sha256 || row.annotations.some(a => a.entry.category) ? `${row.annotations.reduce((n, a) => n + featureItemCount(a), 0)} occurrences; ${new Set(row.annotations.flatMap(a => a.section_id ? [a.section_id] : a.evidence.map(e => `${e.turn_id}:${e.start}:${e.end}`))).size} sections` : `${row.annotations.length} highlights`) : `${Object.keys(row.turn_ratings || {}).length} tutor turns rated`}</td><td>{new Date(row.updated_at).toLocaleString()}</td><td><Link to={`/assignments/${row.id}`}>View</Link>{row.status === 'submitted' && <button className="text-button" disabled={busy} onClick={() => void reopen(row)}>Reopen</button>}<button className="text-button" disabled={busy} onClick={() => void resetAnnotations(row)}>Reset</button></td></tr>)}</tbody></table>{!visible.length && <p className="empty">No assignments in this view.</p>}</div></section>}
     <dialog ref={uploadDialog} className="upload-dialog" aria-labelledby="upload-title" onCancel={event => { if (busy) event.preventDefault(); else setUploadOpen(false); }} onClose={() => setUploadOpen(false)}>
       <div className="upload-heading"><div><h2 id="upload-title">Upload conversations</h2><p>Add transcript files directly to the conversation table.</p></div><button className="secondary" aria-label="Close upload" disabled={busy} onClick={() => setUploadOpen(false)}>Close</button></div>
       {uploadOpen && error && <p className="error" role="alert">{error}</p>}{uploadOpen && <Toast notice={notice} onDismiss={() => setNotice('')} />}

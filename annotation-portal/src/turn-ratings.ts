@@ -1,13 +1,15 @@
 import type { Conversation, RatingDimension, RubricSnapshot, TurnRating, TurnRatings } from './types';
-import questions from './generated/rating-questions.json';
 
 export function ratingQuestionMetadata(rubric: RubricSnapshot) {
-  return { rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has five criteria; subsequent tutor turns also require Follow-up Responsiveness.' };
+  return { rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: rubric.rating_scope || 'Rate each tutor turn using its pinned rubric and the preceding conversation.' };
 }
 
 export function activeRatingDimensions(rubric: RubricSnapshot, conversation?: Conversation, turnId?: string): RatingDimension[] {
   const firstTurn = conversation?.messages.find(turn => turn.speaker === 'tutor')?.turn_id;
-  return (rubric.rating_dimensions || []).filter(dimension => dimension.key !== 'instructional_sequence').map(dimension => (questions as RatingDimension[]).find(question => question.key === dimension.key) || dimension).filter(dimension => !(conversation && turnId === firstTurn && dimension.subsequent_only));
+  const dimensions = (rubric.rating_dimensions || []).filter(dimension => dimension.key !== 'instructional_sequence');
+  const replacesIntroduction = dimensions.some(dimension => dimension.first_only);
+  return dimensions.filter(dimension => !conversation || !turnId || (turnId === firstTurn ? !dimension.subsequent_only : !dimension.first_only))
+    .sort((a, b) => replacesIntroduction && conversation && turnId && turnId !== firstTurn ? Number(Boolean(b.subsequent_only)) - Number(Boolean(a.subsequent_only)) : 0);
 }
 
 export function missingTurnRatings(conversation: Conversation, ratings: TurnRatings, rubric: RubricSnapshot): string[] {

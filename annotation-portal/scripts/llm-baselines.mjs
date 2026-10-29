@@ -1,3 +1,6 @@
+import { loadSupabaseEnvironment } from './load-supabase-env.mjs';
+import {createRateLimitedFetch,runConcurrent} from './rate-limited-fetch.mjs';
+import {checkpointWriter} from './checkpoint-file.mjs';
 import {resolveCaptureContent} from '../src/capture-content.ts';
 import {readSections,hydrateAnnotations} from '../src/section-registry.ts';
 import fs from 'node:fs';
@@ -18,14 +21,19 @@ const languageDefinitions=JSON.parse(fs.readFileSync(path.resolve(portal,'../age
 const languageCode=value=>Object.entries(languageDefinitions).find(([id,entry])=>id===String(value||'').trim().toLowerCase()||entry.name.toLowerCase()===String(value||'').trim().toLowerCase())?.[0]||String(value||'').trim().toLowerCase();
 if(fs.existsSync(path.join(portal,'.env.local')))process.loadEnvFile(path.join(portal,'.env.local'));
 if(fs.existsSync(path.join(portal,'../.env')))process.loadEnvFile(path.join(portal,'../.env'));
-const args=process.argv.slice(2);let project,admin,model,pilot=false,all=false,dry=false,regenerate=false,review=false,reasoningHigh=false,geminiArgon=false,includeScreenshots=false,imageOnly=false,origin='http://127.0.0.1:5173',reviewFrom,repairFrom,importFile,resume,resumedState,provider;const requested=[];
+loadSupabaseEnvironment();
+const args=process.argv.slice(2);let concurrency=1,requestIntervalMs=2000;let project,admin,model,pilot=false,all=false,dry=false,regenerate=false,review=false,reasoningHigh=false,geminiArgon=false,includeScreenshots=false,imageOnly=false,origin='http://127.0.0.1:5173',reviewFrom,repairFrom,importFile,resume,resumedState,provider;const requested=[];
 try{
  for(let i=0;i<args.length;i++){
-  if(args[i]==='--image-only')imageOnly=true;else if(args[i]==='--url')origin=args[++i];else if(args[i]==='--provider')provider=args[++i];else if(args[i]==='--model')model=args[++i];else if(args[i]==='--project')project=args[++i];else if(args[i]==='--admin')admin=args[++i];else if(args[i]==='--conversation')requested.push(args[++i]);
+  if(args[i]==='--concurrency')concurrency=Number(args[++i]);else if(args[i]==='--request-interval-ms')requestIntervalMs=Number(args[++i]);else if(args[i]==='--image-only')imageOnly=true;else if(args[i]==='--url')origin=args[++i];else if(args[i]==='--provider')provider=args[++i];else if(args[i]==='--model')model=args[++i];else if(args[i]==='--project')project=args[++i];else if(args[i]==='--admin')admin=args[++i];else if(args[i]==='--conversation')requested.push(args[++i]);
   else if(args[i]==='--pilot')pilot=true;else if(args[i]==='--all-missing')all=true;else if(args[i]==='--dry-run')dry=true;else if(args[i]==='--regenerate')regenerate=true;else if(args[i]==='--import')importFile=args[++i];else if(args[i]==='--review')review=true;else if(args[i]==='--reasoning-high')reasoningHigh=true;else if(args[i]==='--gemini-argon')geminiArgon=true;else if(args[i]==='--screenshots')includeScreenshots=true;else if(args[i]==='--review-from'){review=true;reviewFrom=args[++i];}else if(args[i]==='--repair-from-response')repairFrom=args[++i];else if(args[i]==='--resume')resume=args[++i];
-  else throw new Error('Usage: npm run llm:baselines -- --project PROJECT (--pilot | --conversation ID | --all-missing | --import FILE) [--image-only] [--url LOCAL_PORTAL_URL] [--dry-run] [--regenerate] [--admin USERNAME] [--review] [--screenshots] [--reasoning-high] [--review-from BASELINE_ID]');
+  else throw new Error('Usage: npm run llm:baselines -- --project PROJECT (--pilot | --conversation ID | --all-missing | --import FILE) [--concurrency 1-5] [--request-interval-ms MS] [--image-only] [--url LOCAL_PORTAL_URL] [--dry-run] [--regenerate] [--admin USERNAME] [--review] [--screenshots] [--reasoning-high] [--review-from BASELINE_ID]');
  }
- if(provider&&!['google','openrouter'].includes(provider))throw new Error('--provider must be google or openrouter.');
+ if(!Number.isInteger(concurrency)||concurrency<1||concurrency>5)throw Error('--concurrency must be an integer from 1 to 5.');
+ if(!Number.isInteger(requestIntervalMs)||requestIntervalMs<0||requestIntervalMs>60000)throw Error('--request-interval-ms must be an integer from 0 to 60000.');
+ if(resume&&concurrency!==1)throw Error('Resume one checkpoint at a time.');
+ const limitedFetch=createRateLimitedFetch({minIntervalMs:requestIntervalMs,onRetry:info=>console.log(JSON.stringify({result:'provider_cooldown',...info}))});
+ if(provider&&provider!=='google')throw new Error('Evaluator runs use the direct Google connection; --provider must be google.');
  if(resume){
   if(!/^[0-9a-f-]{36}$/i.test(resume)||pilot||all||requested.length||importFile||reviewFrom||repairFrom)throw new Error('--resume requires only --project and a saved job UUID.');
   resumedState=JSON.parse(fs.readFileSync(path.join(portal,'.runtime/llm-baselines/jobs',resume+'.json'),'utf8'));
@@ -36,7 +44,7 @@ try{
  if(imageOnly){if(review||reviewFrom||repairFrom||includeScreenshots)throw Error('--image-only cannot be combined with legacy review, repair or screenshots.');geminiArgon=true;}
  if(Number(pilot)+Number(all)+Number(Boolean(requested.length))+Number(Boolean(importFile))!==1)throw new Error('Choose exactly one conversation selection or a local baseline file to import.');
  const url=process.env.VITE_SUPABASE_URL;const ref=url&&new URL(url).hostname.match(/^([a-z0-9]+)\.supabase\.co$/)?.[1];
- if(!ref||new URL(url).protocol!=='https:'||project!==ref)throw new Error('--project must match VITE_SUPABASE_URL. No requests sent.');
+ if(process.env.SUPABASE_TARGET==='local' ? project!=='local' : !ref||new URL(url).protocol!=='https:'||project!==ref)throw new Error('--project must match VITE_SUPABASE_URL. No requests sent.');
  if(!process.env.SUPABASE_SERVICE_ROLE_KEY)throw new Error('Set the server-only SUPABASE_SERVICE_ROLE_KEY in .env.local.');
  const client=createClient(url,process.env.SUPABASE_SERVICE_ROLE_KEY,{auth:{persistSession:false,autoRefreshToken:false}});
  const adminId=await resolveRepositoryAdmin(client,admin);
@@ -128,7 +136,7 @@ try{
  const rubric=JSON.parse(fs.readFileSync(path.join(portal,'src/generated/rubric.json'),'utf8'));
  const config=JSON.parse(fs.readFileSync(path.join(portal,'server/generated/evaluation-config.json'),'utf8'));
  config.timeout=600;config.stream=true;config.max_tokens=null;config.repair_attempts=3;
- if(provider)config.provider=provider;
+ provider='google';config.provider=provider;
  if(model)config.model=model;
  if(geminiArgon){if(provider&&provider!=='google')throw new Error('--gemini-argon requires the Google provider.');if(model&&model.replace(/^google\//,'')!=='gemini-4-argon')throw new Error('--gemini-argon cannot be combined with a different --model.');provider='google';config.provider='google';config.model='gemini-4-argon';config.max_tokens=65536;config.timeout=1200;config.reasoning={effort:'medium',exclude:true};}
  const apiKey=provider==='google'?(process.env.GEMINI_API_KEY||process.env.GOOGLE_API_KEY):process.env.OPENROUTER_API_KEY;
@@ -155,15 +163,15 @@ try{
  }
  if(importFile){const artifact=JSON.parse(fs.readFileSync(path.resolve(importFile),'utf8'));if(dry){console.log(JSON.stringify({result:'dry_run',conversation_id:artifact.conversation_id,baseline_id:artifact.id}));}else await push(artifact);}
  else{
-  console.log(JSON.stringify({model:config.model,dry_run:dry,conversations:selection.map(doc=>({id:doc.id,label:doc.label,language:doc.language,tutor_turns:doc.transcript.messages.filter(turn=>turn.speaker==='tutor').length,provider_log_directory:captureOutputFolder(doc)||path.join(portal,'.runtime/llm-baselines/provider-exchanges')}))},null,2));
+  console.log(JSON.stringify({model:config.model,provider:config.provider,dry_run:dry,concurrency,request_interval_ms:requestIntervalMs,conversations:selection.map(doc=>({id:doc.id,label:doc.label,language:doc.language,tutor_turns:doc.transcript.messages.filter(turn=>turn.speaker==='tutor').length,provider_log_directory:captureOutputFolder(doc)||path.join(portal,'.runtime/llm-baselines/provider-exchanges')}))},null,2));
   if(!selection.length)throw new Error('No conversations need a baseline. Use --conversation ID --regenerate to create another version deliberately.');
   if(!dry){
    if(!apiKey)throw new Error(provider==='google'?'Set GEMINI_API_KEY or GOOGLE_API_KEY locally.':'Set OPENROUTER_API_KEY locally.');
-   for(const document of selection){
+   await runConcurrent(selection,concurrency,async document=>{
     document.transcript=await resolveCaptureContent(client,document.transcript);
     const sections=await readSections(client,[document.id]);
     if(!sections.length)throw Error('Open the conversation labeling view once to initialize its permanent section IDs.');
-    if(imageOnly){await runImageBaselineJob({client,document,sections,rubric,config,apiKey,project,portal,push,resumedState,origin});continue;}
+    if(imageOnly){await runImageBaselineJob({client,document,sections,rubric,config,apiKey,project,portal,push,resumedState,origin,fetcher:limitedFetch});return;}
     let previous;
     if(reviewFrom){const {data,error}=await client.from('llm_baselines').select('*').eq('id',reviewFrom).single();if(error||data.conversation_id!==document.id||data.rubric_hash!==rubric.rubric_sha256)throw new Error('Review baseline must match the selected conversation and rubric.');previous={...data,annotations:hydrateAnnotations(data.annotations,sections)};}
     const passes=reviewFrom?['review']:review?['extraction','review']:['extraction'];
@@ -184,10 +192,16 @@ try{
     const folder=path.join(portal,'.runtime/llm-baselines');const jobFolder=path.join(folder,'jobs');fs.mkdirSync(jobFolder,{recursive:true});
     const outputBaseFolder=captureOutputFolder(document)||path.join(folder,'provider-exchanges');fs.mkdirSync(outputBaseFolder,{recursive:true});
     const latestOutputAttempt=()=>fs.readdirSync(outputBaseFolder,{withFileTypes:true}).reduce((max,entry)=>{const match=entry.isDirectory()&&entry.name.match(/^annotation_attempt(\d+)$/);return match?Math.max(max,Number(match[1])):max;},0);
-    const job=resumedState||{id:crypto.randomUUID(),project,conversation_id:document.id,fingerprint,review_from:reviewFrom,previous,status:'pending',output_attempt:latestOutputAttempt()+1,stages:passes.map(pass=>({pass,baseline_id:crypto.randomUUID(),published:false}))};
+    let reservedOutputAttempt;
+    if(!resumedState){
+     reservedOutputAttempt=latestOutputAttempt()+1;
+     for(;;){try{fs.mkdirSync(path.join(outputBaseFolder,`annotation_attempt${String(reservedOutputAttempt).padStart(2,'0')}`));break;}catch(error){if(error.code!=='EEXIST')throw error;reservedOutputAttempt++;}}
+    }
+    const job=resumedState||{id:crypto.randomUUID(),project,conversation_id:document.id,fingerprint,review_from:reviewFrom,previous,status:'pending',output_attempt:reservedOutputAttempt,stages:passes.map(pass=>({pass,baseline_id:crypto.randomUUID(),published:false}))};
     if(!Number.isInteger(job.output_attempt)||job.output_attempt<1)job.output_attempt=latestOutputAttempt()+1;
     const jobFile=path.join(jobFolder,job.id+'.json');
-    const persist=()=>{fs.writeFileSync(jobFile+'.tmp',JSON.stringify(job,null,2)+'\n');fs.renameSync(jobFile+'.tmp',jobFile);};
+    const writeCheckpoint=checkpointWriter(jobFile);
+    const persist=()=>writeCheckpoint(job);
     console.log(JSON.stringify({result:resume?'resuming_job':'created_job',job_id:job.id,checkpoint_file:jobFile,resume_command:`npm run llm:baselines -- --project ${project} --resume ${job.id}${provider?` --provider ${provider}`:''}`}));
     const lockFile=jobFile+'.lock';
     if(fs.existsSync(lockFile)){const pid=Number(fs.readFileSync(lockFile,'utf8'));let alive=false;try{process.kill(pid,0);alive=true;}catch(e){if(e.code!=='ESRCH')alive=true;}if(alive)throw new Error('This job is already running.');fs.unlinkSync(lockFile);}
@@ -200,12 +214,12 @@ try{
      const providerCallFolder=attempt=>{let sequence=callFolders.get(attempt);if(sequence===undefined){do{sequence=++nextCallSequence;}while(fs.existsSync(path.join(providerLogFolder,`request_${String(sequence).padStart(2,'0')}`)));callFolders.set(attempt,sequence);}const directory=path.join(providerLogFolder,`request_${String(sequence).padStart(2,'0')}`);fs.mkdirSync(directory,{recursive:true});return directory;};
      const recovered=repairFrom&&stage===job.stages[0]?JSON.parse(fs.readFileSync(path.resolve(repairFrom),'utf8')):null;
 
-     const generated=await generateInstructionalBaseline({...(recovered?{initialContent:recovered.choices[0].message.content,initialResponseId:recovered.id}:{}),checkpoint:stage.generation_checkpoint,onCheckpoint:checkpoint=>{stage.generation_checkpoint=checkpoint;persist();},onProviderRequest:(request,attempt)=>{const directory=providerCallFolder(attempt);fs.writeFileSync(path.join(directory,'request.json'),JSON.stringify(request,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(directory,'metadata.json'),JSON.stringify({pipeline_attempt:job.output_attempt,attempt_type:stage.pass,baseline_id:id,provider_attempt:attempt,screenshots:contextScreenshots.map(({id,source})=>({id,source}))},null,2)+'\n',{flag:'wx'});},onProviderResponse:(payload,attempt)=>fs.writeFileSync(path.join(providerCallFolder(attempt),'response.json'),JSON.stringify(payload,null,2)+'\n',{flag:'wx'}),conversation:document.transcript,captureHtml:visualBundle.captureHtml,sections,rubric,requestId:id,config,apiKey,visuals:visualBundle.visuals,contextScreenshots,...(stage.pass==='review'?{previousAnnotations:previous.annotations}:{})});
+     const generated=await generateInstructionalBaseline({fetcher:limitedFetch,...(recovered?{initialContent:recovered.choices[0].message.content,initialResponseId:recovered.id}:{}),checkpoint:stage.generation_checkpoint,onCheckpoint:async checkpoint=>{stage.generation_checkpoint=checkpoint;await persist();},onProviderRequest:(request,attempt)=>{const directory=providerCallFolder(attempt);fs.writeFileSync(path.join(directory,'request.json'),JSON.stringify(request,null,2)+'\n',{flag:'wx'});fs.writeFileSync(path.join(directory,'metadata.json'),JSON.stringify({pipeline_attempt:job.output_attempt,attempt_type:stage.pass,baseline_id:id,provider_attempt:attempt,screenshots:contextScreenshots.map(({id,source})=>({id,source}))},null,2)+'\n',{flag:'wx'});},onProviderResponse:(payload,attempt)=>fs.writeFileSync(path.join(providerCallFolder(attempt),'response.json'),JSON.stringify(payload,null,2)+'\n',{flag:'wx'}),conversation:document.transcript,captureHtml:visualBundle.captureHtml,sections,rubric,requestId:id,config,apiKey,visuals:visualBundle.visuals,contextScreenshots,...(stage.pass==='review'?{previousAnnotations:previous.annotations}:{})});
      const artifact={format_version:'llm-baseline-local/1.0',id,conversation_id:document.id,rubric_hash:rubric.rubric_sha256,rubric_snapshot:rubric,sections,conversation:document.transcript,annotations:generated.annotations,model:generated.model,prompt_version:promptVersion,prompt:generated.prompt,generation_config:{...generated.generation_config,origin:'local_llm_generation',provider_transitions:job.provider_transitions||[],pipeline_job_id:job.id,reviewed_baseline_id:stage.pass==='review'?previous.id:null,visual_capture:{embedded_images:visualBundle.visuals.length,omitted_images:visualBundle.omitted,embedded_bytes:visualBundle.bytes,conversation_screenshots:contextScreenshots.length}},generated_at:new Date().toISOString()};
      fs.writeFileSync(file,JSON.stringify(artifact,null,2)+'\n',{flag:'wx'});
      console.log(JSON.stringify({result:'generated_and_validated',conversation_id:document.id,baseline_id:id,pass:stage.pass,annotation_count:artifact.annotations.length,local_file:file}));return artifact;
     }});}finally{fs.closeSync(lock);fs.unlinkSync(lockFile);}
-   }
+   });
   }
  }
 }catch(error){console.error(error instanceof Error&&error.name==='TimeoutError'?'Generation timed out; no baseline was imported.':error instanceof Error&&error.name==='TypeError'?'Could not reach the configured provider or database.':error.message);process.exitCode=1;}

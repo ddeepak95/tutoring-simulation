@@ -235,18 +235,17 @@ class PipelineTests(unittest.TestCase):
         from unittest.mock import Mock
         transient = Mock(status_code=429)
         success = Mock(status_code=200)
-        success.json.return_value = {"choices": [{"finish_reason": "stop", "message": {"content": "{}"}}],
-                                     "usage": {"total_tokens": 5}}
-        with patch.dict(pipeline.os.environ, {"OPENROUTER_API_KEY": "test-key"}), \
+        success.json.return_value = {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": "{}"}]}}], "usageMetadata": {"totalTokenCount": 5}}
+        with patch.dict(pipeline.os.environ, {"GEMINI_API_KEY": "test-key"}), \
              patch.object(requests, "post", side_effect=[transient, success]) as post, \
              patch.object(pipeline.time, "sleep"):
-            self.assertEqual(pipeline.request_api([], self.settings)["text"], "{}")
+            self.assertEqual(pipeline.request_api([], dict(self.settings, model="google/gemini-3.8-flash"))["text"], "{}")
             self.assertEqual(post.call_count, 2)
-        success.json.return_value["choices"][0]["finish_reason"] = "length"
-        with patch.dict(pipeline.os.environ, {"OPENROUTER_API_KEY": "test-key"}), \
+        success.json.return_value["candidates"][0]["finishReason"] = "MAX_TOKENS"
+        with patch.dict(pipeline.os.environ, {"GEMINI_API_KEY": "test-key"}), \
              patch.object(requests, "post", return_value=success):
             with self.assertRaisesRegex(RuntimeError, "incomplete"):
-                pipeline.request_api([], self.settings)
+                pipeline.request_api([], dict(self.settings, model="google/gemini-3.8-flash"))
 
 
     def v2_fixture(self):

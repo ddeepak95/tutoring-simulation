@@ -2,6 +2,8 @@
 export function freshProjectMigration(file,sql,rubric){
  if(!rubric.rubric_sha256||rubric.label_schema_version!=='section-items/1')throw Error('Build the current rubric before provisioning.');
  let rendered=sql.replaceAll('__CURRENT_RUBRIC_HASH__',rubric.rubric_sha256).replaceAll('__CURRENT_RUBRIC_JSON__',JSON.stringify(rubric).replaceAll("'","''")).replace('-- __SECTION_REGISTRY_BACKFILL__','-- Empty project: no historical sections to backfill.');
+ // Only empty-project replay uses the deployed taxonomy in this historical guard.
+ if(file==='202610260001_section_item_labels.sql')rendered=rendered.replace("jsonb_array_length(snapshot->'rubric')=15",`jsonb_array_length(snapshot->'rubric')=${rubric.rubric.length}`);
  // These historical guards protect existing annotations during live upgrades.
  // Empty projects have no assignments or historical rubric to upgrade.
  if(/^2026102100(?:01|02|03|05|07|09|10|11)_/.test(file)){

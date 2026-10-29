@@ -4,7 +4,7 @@ import {googleRequest,googleResponse} from './google-provider.ts';
 import {resolveLLMAnnotations} from './llm-annotation-core.ts';
 import type {Annotation,Conversation,ConversationSection,RubricSnapshot} from '../src/types';
 
-export const imagePromptVersion='turn-image-counts/6';
+export const imagePromptVersion=turnImagePromptText.match(/^Prompt version: (.+)$/m)![1];
 export interface TurnImages {turn_id:string;sections:{section_id:string;name:string;heading:string|null}[];tiles:{id:string;sha256:string;mime_type:string;data:string}[]}
 export interface ImageCheckpoint {fingerprint:string;turns:Record<string,{attempts:number;annotations?:Annotation[];usage?:Record<string,number>;response_id?:string;native_model?:string}>}
 export function imagePrompt(rubric:RubricSnapshot) {
@@ -40,15 +40,19 @@ export async function generateImageBaseline({conversation,rubric,sections,turns,
  const fingerprint=createHash('sha256').update(JSON.stringify({version:imagePromptVersion,conversation,rubric:rubric.rubric_sha256,sections,prompt,config,turns:turns.map(t=>({...t,tiles:t.tiles.map(({data:_data,...tile})=>tile)}))})).digest('hex');
  if(checkpoint&&checkpoint.fingerprint!==fingerprint)throw Error('Image checkpoint differs from the current model, prompt, rubric, registry or images.');
  const state:ImageCheckpoint=checkpoint?structuredClone(checkpoint):{fingerprint,turns:{}};
- for(const turn of turns){
+ const orderedTurns=[...turns].sort((a,b)=>tutorIds.indexOf(a.turn_id)-tutorIds.indexOf(b.turn_id));
+ for(const turn of orderedTurns){
   const saved=state.turns[turn.turn_id]||{attempts:0};state.turns[turn.turn_id]=saved;
   if(saved.annotations)continue;
   let error='';
   for(;saved.attempts<4;){
    saved.attempts++;await onCheckpoint(structuredClone(state));
-   const messages=[{role:'system',content:prompt},{role:'user',content:JSON.stringify({sections:turn.sections})+(error?`\nPrevious response failed validation: ${error}. Return the complete corrected result.`:'')}];
+   const previousWalkthroughTurns=orderedTurns.filter(t=>tutorIds.indexOf(t.turn_id)<tutorIds.indexOf(turn.turn_id)&&state.turns[t.turn_id]?.annotations?.some(a=>a.feature==='step_by_step_walkthroughs'));
+   const previousWalkthroughs=previousWalkthroughTurns.flatMap(t=>state.turns[t.turn_id].annotations!.filter(a=>a.feature==='step_by_step_walkthroughs').map(a=>({turn_id:t.turn_id,section_id:a.section_id,count:a.entry.count})));
+   const messages=[{role:'system',content:prompt},{role:'user',content:JSON.stringify({sections:turn.sections,...(previousWalkthroughs.length?{previously_counted_walkthroughs:previousWalkthroughs,reference_turns:previousWalkthroughTurns.map(t=>({turn_id:t.turn_id,sections:t.sections}))}:{})})+(error?`\nPrevious response failed validation: ${error}. Return the complete corrected result.`:'')}];
    // Screenshot mode deliberately bypasses semantic HTML, source captions and legacy repair evidence.
-   const request=googleRequest(messages,imageOutputSchema(rubric,turn.sections),{...config,stream:false},apiKey,[],turn.tiles.map(t=>({...t,turn_id:turn.turn_id})),true);
+   const imageInputs=[...previousWalkthroughTurns,turn].flatMap(t=>t.tiles.map(tile=>({...tile,turn_id:t.turn_id})));
+   const request=googleRequest(messages,imageOutputSchema(rubric,turn.sections),{...config,stream:false},apiKey,[],imageInputs,true);
    onExchange(turn.turn_id,saved.attempts,'request',JSON.parse(request.body));
    const response=await fetcher(request.url,{method:'POST',headers:request.headers,body:request.body,signal:AbortSignal.timeout(config.timeout*1000)});
    const raw=await response.text();let payload:unknown;try{payload=JSON.parse(raw);}catch{payload={invalid_json:true};}

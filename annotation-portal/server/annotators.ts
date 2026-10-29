@@ -2,6 +2,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { createClient } from '@supabase/supabase-js';
 import { loginIdentifier, validatePassword } from '../scripts/credentials.mjs';
 import { removeNewAccount } from '../scripts/remove-new-account.mjs';
+import { resolveSupabaseEnvironment } from '../scripts/supabase-environment.mjs';
 
 type Environment = Record<string, string | undefined>;
 type Request = IncomingMessage & { body?: unknown };
@@ -38,7 +39,7 @@ export function createAnnotatorHandler({ getEnvironment = () => process.env, cre
       if (!token) throw new RequestError(401, 'Sign in as an administrator to create annotators.');
       if (request.headers['content-type']?.split(';')[0].trim().toLowerCase() !== 'application/json') throw new RequestError(415, 'Send a JSON request.');
 
-      const env = getEnvironment();
+      const env = resolveSupabaseEnvironment(getEnvironment());
       const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL;
       const publicKey = env.VITE_SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_PUBLISHABLE_KEY;
       if (!url || !publicKey) throw new RequestError(503, 'Account creation is not configured on the server.');

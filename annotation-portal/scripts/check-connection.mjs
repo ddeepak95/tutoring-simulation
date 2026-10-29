@@ -1,5 +1,6 @@
+import { loadSupabaseEnvironment } from './load-supabase-env.mjs';
 import fs from 'node:fs';
-if (fs.existsSync('.env.local')) process.loadEnvFile('.env.local');
+loadSupabaseEnvironment();
 const url = process.env.VITE_SUPABASE_URL, key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 if (!url || !key) throw new Error('Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.');
 const headers = { apikey: key };

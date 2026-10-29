@@ -13,6 +13,18 @@ spec.loader.exec_module(pipeline)
 
 
 class SectionItemTests(unittest.TestCase):
+    def test_ui_builder_preserves_notation_key_and_excludes_bold_only_callouts(self):
+        spec = importlib.util.spec_from_file_location("ui_rubric_builder", HERE / "human-annotation/ui/build_data.py")
+        builder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(builder)
+        rubric = {item["key"]: item for item in builder.build()["rubric"]}
+        self.assertEqual(rubric["equations"]["name"], "Mathematical Notation")
+        self.assertNotIn("mathematical_notation", rubric)
+        self.assertEqual(rubric["callouts"]["name"], "Callouts")
+        self.assertIn("Bold or italic formatting alone never qualifies", rubric["callouts"]["description"])
+        self.assertIn("Symbolic comparisons and ordered relationships qualify", rubric["equations"]["description"])
+        self.assertNotIn("single bond length", rubric["equations"]["description"])
+
     def test_new_schema_uses_single_conversation_stage_and_quantity_validation(self):
         with tempfile.TemporaryDirectory() as temporary:
             source = Path(temporary) / "conversation.json"
@@ -25,9 +37,9 @@ class SectionItemTests(unittest.TestCase):
             rating = {"status": "scored", "score": 2, "reason": "Supported.", "evidence": [{"turn_id": "t1", "quote": "An example.", "occurrence": 1}]}
             result = {"rubric_version": "3.1", "conversation_id": conversation["conversation_id"], "learning_topic": conversation["learning_topic"], "instructional_features": {key: [] for key in schema["properties"]["instructional_features"]["properties"]}, "pedagogical_characteristics": {key: copy.deepcopy(rating) for key in schema["properties"]["pedagogical_characteristics"]["properties"]}, "conversation_quality": {key: copy.deepcopy(rating) for key in schema["properties"]["conversation_quality"]["properties"]}, "errors": {"error": []}, "verification_needed": [], "limitations": []}
             result["pedagogical_characteristics"]["instructional_sequence"] = {"value": "Not determinable", "reason": "No sequence.", "evidence": []}
-            result["instructional_features"]["examples"] = [{"category": "Content", "count": 3, "turn_locations": ["t1"]}]
-            result["instructional_features"]["equations"] = [{"category": "Textual Representations", "count": 2, "turn_locations": ["t1"]}]
-            result["instructional_features"]["questions"] = [{"category": "Content", "count": 1, "turn_locations": ["t1"]}]
+            result["instructional_features"]["examples"] = [{"category": "Explanatory & Pedagogical Devices", "count": 3, "turn_locations": ["t1"]}]
+            result["instructional_features"]["equations"] = [{"category": "Formatting & Notation", "count": 2, "turn_locations": ["t1"]}]
+            result["instructional_features"]["questions"] = [{"category": "Conversational & Tutoring Moves", "count": 1, "turn_locations": ["t1"]}]
             pipeline.validate_stage(result, task)
             result["instructional_features"]["examples"][0]["llm_evidence"] = "Three visible examples."
             pipeline.validate_stage(result, task)

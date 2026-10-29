@@ -5,7 +5,7 @@ import {renderLLMTurns} from './render-llm-turns.mjs';
 import {generateImageBaseline,imagePrompt,imagePromptVersion} from '../server/image-labeling.ts';
 import C from '../src/generated/core.js';
 
-export async function runImageBaselineJob({client,document,sections,rubric,config,apiKey,project,portal,push,resumedState,origin}) {
+export async function runImageBaselineJob({client,document,sections,rubric,config,apiKey,project,portal,push,resumedState,origin,fetcher=fetch}) {
  const [{data:capture,error:captureError},{data:assets,error:assetsError}]=await Promise.all([
   client.from('conversation_capture_documents').select('html').eq('conversation_id',document.id).maybeSingle(),
   client.from('conversation_capture_assets').select('turn_id,html,media_html').eq('conversation_id',document.id)
@@ -33,7 +33,7 @@ export async function runImageBaselineJob({client,document,sections,rubric,confi
    const turns=fs.existsSync(manifest)?JSON.parse(fs.readFileSync(manifest,'utf8')).turns:await renderLLMTurns({conversation:document.transcript,sections,html,assets:byTurn,folder:path.join(folder,'images'),origin});
    for(const t of turns)for(const tile of t.tiles)tile.data=fs.readFileSync(tile.file).toString('base64');
    console.log(JSON.stringify({result:'turn_images_ready',turns:turns.length,sections:sections.length,tiles:turns.reduce((n,t)=>n+t.tiles.length,0)}));
-   const generated=await generateImageBaseline({conversation:document.transcript,rubric,sections,turns,requestId:job.stages[0].baseline_id,config,apiKey,checkpoint:job.image_checkpoint,onCheckpoint:checkpoint=>{job.image_checkpoint=checkpoint;persist();const complete=Object.values(checkpoint.turns).filter(t=>t.annotations).length;console.log(JSON.stringify({result:'image_checkpoint',completed_turns:complete,total_turns:turns.length}));},onExchange:(turn,attempt,kind,value)=>{const dir=path.join(folder,turn);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,`${attempt}-${kind}.json`),JSON.stringify(value,null,2)+'\n');}});
+   const generated=await generateImageBaseline({fetcher,conversation:document.transcript,rubric,sections,turns,requestId:job.stages[0].baseline_id,config,apiKey,checkpoint:job.image_checkpoint,onCheckpoint:checkpoint=>{job.image_checkpoint=checkpoint;persist();const complete=Object.values(checkpoint.turns).filter(t=>t.annotations).length;console.log(JSON.stringify({result:'image_checkpoint',completed_turns:complete,total_turns:turns.length}));},onExchange:(turn,attempt,kind,value)=>{const dir=path.join(folder,turn);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,`${attempt}-${kind}.json`),JSON.stringify(value,null,2)+'\n');}});
    artifact={format_version:'llm-baseline-local/1.0',id:job.stages[0].baseline_id,conversation_id:document.id,rubric_hash:rubric.rubric_sha256,rubric_snapshot:rubric,sections,conversation:document.transcript,annotations:generated.annotations,model:generated.model,prompt_version:imagePromptVersion,prompt:generated.prompt,generation_config:{...generated.generation_config,origin:'local_llm_generation',pipeline_job_id:job.id},generated_at:new Date().toISOString()};
    fs.writeFileSync(file,JSON.stringify(artifact,null,2)+'\n',{flag:'wx'});
   }

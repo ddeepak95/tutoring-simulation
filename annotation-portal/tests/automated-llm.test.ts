@@ -6,6 +6,7 @@ import {resolveLLMAnnotations} from '../server/llm-annotation-core';
 import {generateInstructionalBaseline,type GenerationCheckpoint} from '../server/llm-provider';
 import {runCheckpointedPipeline} from '../scripts/llm-pipeline.mjs';
 import {googleRequest} from '../server/google-provider';
+import evaluationConfig from '../server/generated/evaluation-config.json';
 
 const config={model:'configured/model',max_tokens:null,timeout:10,repair_attempts:3,reasoning:{effort:'medium'}};
 const conversation=C.normalizeConversation({messages:[{turn_id:'t1',speaker:'tutor',text:'Hydrogen has a 74 pm bond.\n\nCovalent radius is half of the bond length.'}]});
@@ -13,6 +14,13 @@ const example={feature:'examples',entry:{example:'Hydrogen',concept_illustrated:
 const issue={feature:'issues',entry:{issue:'Definition error',explanation:'Assess the actual definition.'},evidence:[{turn_id:'t1',quote:'Invented definition wording.',occurrence:1}]};
 const initial={annotations:[example,issue]};
 const response=(value:unknown)=>new Response(JSON.stringify({id:'response-id',choices:[{finish_reason:'stop',message:{content:typeof value==='string'?value:JSON.stringify(value)}}]}));
+
+it('defaults future evaluations to Argon over the direct Google connection',()=>{
+ expect(evaluationConfig).toMatchObject({model:'google/gemini-4-argon',provider:'google',max_tokens:65536,timeout:1200});
+ const request=googleRequest([{role:'system',content:'System'},{role:'user',content:'Transcript'}],{},evaluationConfig,'key');
+ expect(request.url).toBe('https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:generateContent');
+ const body=JSON.parse(request.body);expect(body.generationConfig.maxOutputTokens).toBe(65536);expect(body.generationConfig).not.toHaveProperty('temperature');
+});
 
 it('includes captured image bytes with the first Gemini conversation payload only',()=>{
  const request=googleRequest([{role:'system',content:'System'},{role:'user',content:'Transcript'},{role:'user',content:'Repair'}],{}, {model:'google/gemini-3.8-flash',stream:false,reasoning:null},'key',[{id:'turn_0002-image-1',turn_id:'turn_0002',mime_type:'image/png',data:'aGVsbG8='}]);

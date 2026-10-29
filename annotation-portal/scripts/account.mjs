@@ -1,3 +1,4 @@
+import { loadSupabaseEnvironment } from './load-supabase-env.mjs';
 // Provision accounts without invitations. Secrets are read only in this local process.
 import { createClient } from '@supabase/supabase-js';
 import { loginIdentifier, validatePassword } from './credentials.mjs';
@@ -5,7 +6,7 @@ import { removeNewAccount } from './remove-new-account.mjs';
 import readline from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 import fs from 'node:fs';
-if (fs.existsSync('.env.local')) process.loadEnvFile('.env.local');
+loadSupabaseEnvironment();
 const [username, ...args] = process.argv.slice(2);
 const resetting = args.includes('--reset');
 const role = args.find(value => value !== '--reset') || 'annotator';

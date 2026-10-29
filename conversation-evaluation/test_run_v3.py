@@ -297,23 +297,22 @@ class V3Tests(unittest.TestCase):
     def test_provider_recorded_for_routing_diagnostics(self):
         import requests
         success = Mock(status_code=200)
-        success.json.return_value = {"provider": "Google", "choices": [
-            {"finish_reason": "stop", "message": {"content": "{}"}}]}
-        with patch.dict(pipeline.os.environ, {"OPENROUTER_API_KEY": "test-key"}), patch.object(requests, "post", return_value=success):
-            result = pipeline.request_api([], self.settings)
-        self.assertEqual(result["provider"], "Google")
+        success.json.return_value = {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": "{}"}]}}]}
+        with patch.dict(pipeline.os.environ, {"GEMINI_API_KEY": "test-key"}), patch.object(requests, "post", return_value=success):
+            result = pipeline.request_api([], dict(self.settings, model="google/gemini-3.8-flash"))
+        self.assertEqual(result["provider"], "google")
 
     def test_transport_sends_schema_and_requires_support(self):
         import requests
         success = Mock(status_code=200)
-        success.json.return_value = {"choices": [{"finish_reason": "stop", "message": {"content": "{}"}}]}
+        success.json.return_value = {"candidates": [{"finishReason": "STOP", "content": {"parts": [{"text": "{}"}]}}]}
         settings = dict(self.settings, response_format=pipeline.response_format(self.schema))
-        with patch.dict(pipeline.os.environ, {"OPENROUTER_API_KEY": "test-key"}), patch.object(requests, "post", return_value=success) as post:
-            pipeline.request_api(self.tasks[0]["messages"], settings)
+        with patch.dict(pipeline.os.environ, {"GEMINI_API_KEY": "test-key"}), patch.object(requests, "post", return_value=success) as post:
+            pipeline.request_api(self.tasks[0]["messages"], dict(settings, model="google/gemini-3.8-flash"))
         body = post.call_args.kwargs["json"]
-        self.assertEqual(body["response_format"]["json_schema"]["schema"], pipeline.response_format(self.schema)["json_schema"]["schema"])
-        self.assertTrue(body["response_format"]["json_schema"]["strict"])
-        self.assertTrue(body["provider"]["require_parameters"])
+        self.assertEqual(body["generationConfig"]["responseJsonSchema"], pipeline.response_format(self.schema)["json_schema"]["schema"])
+        self.assertTrue(post.call_args.args[0].startswith("https://generativelanguage.googleapis.com/"))
+        self.assertEqual(post.call_args.kwargs["headers"]["x-goog-api-key"], "test-key")
 
     def test_dry_run_end_to_end_and_resume(self):
         output = self.root / "dry"

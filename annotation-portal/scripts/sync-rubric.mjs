@@ -22,19 +22,19 @@ const rubric = sandbox.window.ANNOTATION_DATA.rubric.map(feature => {
   return { ...feature, description: row[1], entry_attributes: row[3], guidance: row[4], fields: [{ key: 'count', label: 'Occurrences', numeric: true }] };
 });
 const questionText = ratingQuestions.toString('utf8');
-const ratingKeyOverrides = { 'Explaining the Core Principle': 'understanding_the_core_principle' };
 const rating_dimensions = [...questionText.matchAll(/^### (.+)\r?\n([\s\S]*?)(?=^#|$(?![\s\S]))/gm)].map(match => {
   const label = match[1].trim();
   const key = label.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
   const body = match[2].trim();
-  const description = body.slice(0, body.search(/\b3:/)).trim();
-  const scale_items = Object.fromEntries([...body.matchAll(/\b([321]):\s*([\s\S]*?)(?=\s+[321]:|$)/g)].map(item => [item[1], item[2].trim()]));
-  const options = ['3', '2', '1'];
+  const description = body.match(/\*\*Question:\*\* (.+)/)?.[1];
+  const scale_items = Object.fromEntries([...body.matchAll(/^- \*\*([321]) — ([^:]+):\*\* (.+)$/gm)].map(item => [item[1], `${item[1]} — ${item[2]}: ${item[3]}`]));
+  const options = ['3', '2', '1', 'N/A'];
+  scale_items['N/A'] = 'N/A — This behavior is not reasonably called for in this response.';
   if (!description || options.some(value => !scale_items[value])) throw new Error('Invalid rating question: ' + label);
-  return { key, label, description, options, scale_items, guidance: description, subsequent_only: match.index > questionText.indexOf('# Subsequent Turns') };
+  return { key, label, description, options, scale_items, guidance: 'Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.', first_only: label === 'Topic Introduction and Learner Engagement', subsequent_only: match.index > questionText.indexOf('# Subsequent Conversation Turns') };
 });
-if (rating_dimensions.length !== 6 || rating_dimensions.filter(dimension => !dimension.subsequent_only).length !== 5) throw new Error('Expected five first-turn questions and one subsequent-turn question.');
-const snapshot = { label_schema_version: 'section-items/1', rubric_source: 'conversation-evaluation/human-annotation/coding-guidebook.md', rubric_sha256: crypto.createHash('sha256').update(guide).update(schemaBytes).update(ratingQuestions).update(JSON.stringify(rubric)).update('portal-section-items-v1').digest('hex'), rubric, rating_dimensions, rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has five criteria; subsequent tutor turns also require Follow-up Responsiveness.' };
+if (rating_dimensions.length !== 9 || rating_dimensions.filter(dimension => !dimension.subsequent_only).length !== 8 || rating_dimensions.filter(dimension => dimension.first_only).length !== 1) throw new Error('Expected eight first-turn questions, with topic introduction replaced by follow-up on subsequent turns.');
+const snapshot = { label_schema_version: 'section-items/1', rubric_source: 'conversation-evaluation/human-annotation/coding-guidebook.md', rubric_sha256: crypto.createHash('sha256').update(guide).update(schemaBytes).update(ratingQuestions).update(JSON.stringify(rubric)).update('portal-section-items-v1').digest('hex'), rubric, rating_dimensions, rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: 'Rate each tutor turn using rating-questions.md and the preceding conversation. Use eight criteria per turn: Addressing Follow-Up Questions replaces Topic Introduction and Learner Engagement after the first tutor turn.' };
 const out = path.join(portal, 'src/generated'); fs.mkdirSync(out, { recursive: true });
 fs.writeFileSync(path.join(out, 'rubric.json'), JSON.stringify(snapshot, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'rating-questions.json'), JSON.stringify(rating_dimensions, null, 2) + '\n');
@@ -42,7 +42,8 @@ const evaluationConfig = JSON.parse(fs.readFileSync(path.join(root, 'conversatio
 if (typeof evaluationConfig.model !== 'string' || !evaluationConfig.model.trim()) throw new Error('Evaluation model is not configured.');
 const serverOut = path.join(portal, 'server/generated'); fs.mkdirSync(serverOut, { recursive: true });
 syncLLMPrompt();
-fs.writeFileSync(path.join(serverOut, 'evaluation-config.json'), JSON.stringify({ model: evaluationConfig.model, max_tokens: evaluationConfig.max_tokens || 16000, timeout: evaluationConfig.timeout || 180, repair_attempts: evaluationConfig.repair_attempts || 0, reasoning: evaluationConfig.reasoning || null }, null, 2) + '\n');
+if(evaluationConfig.provider!=='google')throw new Error('Evaluator connections must use the direct Google provider.');
+fs.writeFileSync(path.join(serverOut, 'evaluation-config.json'), JSON.stringify({ model: evaluationConfig.model, provider: 'google', max_tokens: evaluationConfig.max_tokens || 16000, timeout: evaluationConfig.timeout || 180, repair_attempts: evaluationConfig.repair_attempts || 0, reasoning: evaluationConfig.reasoning || null }, null, 2) + '\n');
 fs.writeFileSync(path.join(out, 'llm-config.json'), JSON.stringify({ model: evaluationConfig.model }, null, 2) + '\n');
 let core = fs.readFileSync(path.join(ui, 'core.js'), 'utf8').replace(/\r\n/g, '\n');
 core = core.replace(/\(function \(root\) \{/, '').replace(/  root.AnnotationCore = api;[\s\S]*$/, 'export default api;\n');

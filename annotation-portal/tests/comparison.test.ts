@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { comparisonComplete, comparisonQuestions, comparisonRounds, overallComparisonQuestions } from '../src/comparison';
 import questions from '../src/generated/comparison-questions.json';
-import legacyQuestions from '../src/generated/rating-questions.json';
+import legacySnapshot from './fixtures/legacy-rubric.json';
+const legacyQuestions = legacySnapshot.rating_dimensions;
 import type { Conversation } from '../src/types';
 
 const conversation: Conversation = { conversation_id: null, learning_topic: null, label: 'Test', messages: [
@@ -12,7 +13,7 @@ const conversation: Conversation = { conversation_id: null, learning_topic: null
   { turn_id: 't2', speaker: 'tutor', text: 'Second tutor' },
 ] };
 describe('comparison rounds', () => {
-  it('matches the rating criteria while preserving comparative wording and guidance', () => {
+  it('retains its original criteria independently of absolute rating rubric updates', () => {
     const active = comparisonQuestions(questions, 1);
     expect(questions.filter(q => q.scope === 'turn').map(q => [q.key, q.label, q.subsequent_only])).toEqual(legacyQuestions.map(q => [q.key, q.label, q.subsequent_only]));
     expect(active.map(q => q.key)).toEqual(['follow_up_responsiveness', ...questions.filter(q => q.scope === 'turn' && !q.subsequent_only).map(q => q.key)]);

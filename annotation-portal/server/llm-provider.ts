@@ -20,7 +20,7 @@ export async function generateInstructionalBaseline({ conversation, rubric, requ
  const modelRubric=rubric;
  const draft=previousAnnotations===undefined?null:{annotations:previousAnnotations.map(({feature,entry,evidence})=>({feature,entry:Object.fromEntries(Object.entries(entry).filter(([key])=>key!=='turn_locations')),evidence:evidence.map(({turn_id,quote,occurrence,example_status})=>({turn_id,quote,occurrence,...(example_status?{example_status}:{})}))}))};
 
- if(draft&&sections)draft.annotations=previousAnnotations!.map(a=>({feature:a.feature,entry:{category:a.entry.category,count:a.entry.count},section_id:a.section_id})) as any;
+ if(draft&&sections)draft.annotations=previousAnnotations!.map(a=>({feature:a.feature,entry:{category:a.entry.category,count:a.entry.count},section_id:a.section_id,...(a.highlights?{highlights:a.highlights}:{})})) as any;
  if(draft)resolveLLMAnnotations(draft,conversation,modelRubric,'review-input',captureHtml,sections);
  const prompt=draft?`${instructionalPrompt()}\n\n${instructionalReviewPrompt}`:instructionalPrompt();
  const modelInput=modelConversationHtml(conversation,captureHtml,visuals);

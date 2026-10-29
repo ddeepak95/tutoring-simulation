@@ -1,5 +1,9 @@
 # Repository agent notes
 
+## Evaluator connections
+
+Always use the direct Google connection for evaluator runs, including portal generation, the local baseline CLI, and the standalone conversation evaluator. Use `GEMINI_API_KEY` or `GOOGLE_API_KEY`; do not route evaluator requests through OpenRouter. Preserve provider, model, prompt version, and prompt hash in run provenance.
+
 ## Instructional labeling features
 
 When adding or changing an instructional feature, update the coding guidebook, `conversation-evaluation/human-annotation/ui/data.js`, and `conversation-evaluation/schemas/evaluator-v3.schema.json` together. Portal builds and development startup run `sync:rubric` automatically; the Vite development server also reruns it when those sources change. Inspect and keep the resulting `annotation-portal/src/generated` changes with the source edits. Run the focused labeling tests and `npm run build` from `annotation-portal` before finishing.

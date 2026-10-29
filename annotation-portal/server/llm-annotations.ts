@@ -1,5 +1,6 @@
 import {resolveCaptureContent} from '../src/capture-content.ts';
 import {readSections} from '../src/section-registry.ts';
+import { resolveSupabaseEnvironment } from '../scripts/supabase-environment.mjs';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import snapshot from '../src/generated/rubric.json';
@@ -37,7 +38,7 @@ export function createLLMAnnotationHandler({ getEnvironment = () => process.env,
       const token = request.headers.authorization?.match(/^Bearer (\S+)$/i)?.[1];
       if (!token) throw new RequestError(401, 'Sign in as an administrator.');
       if (request.headers['content-type']?.split(';')[0].trim().toLowerCase() !== 'application/json') throw new RequestError(415, 'Send a JSON request.');
-      const env = getEnvironment(); const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL; const key = env.VITE_SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_PUBLISHABLE_KEY;
+      const env = resolveSupabaseEnvironment(getEnvironment()); const url = env.VITE_SUPABASE_URL || env.SUPABASE_URL; const key = env.VITE_SUPABASE_PUBLISHABLE_KEY || env.SUPABASE_PUBLISHABLE_KEY;
       if (!url || !key) throw new RequestError(503, 'LLM annotation is not configured on the server.');
       caller = createSupabaseClient(url, key, { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }, global: { headers: { Authorization: `Bearer ${token}` } } });
       const auth = await caller.auth.getUser(token);
@@ -51,7 +52,7 @@ export function createLLMAnnotationHandler({ getEnvironment = () => process.env,
       if (document.error || !document.data) throw new RequestError(404, 'Conversation not found.');
       document.data.transcript=await resolveCaptureContent(caller,document.data.transcript);
       const htmlMode=!!document.data.transcript.html_content;
-      if(htmlMode?!(env.GEMINI_API_KEY||env.GOOGLE_API_KEY):!env.OPENROUTER_API_KEY)throw new RequestError(503,htmlMode?'Set GEMINI_API_KEY to enable HTML image labeling.':'Set the server-only OPENROUTER_API_KEY to enable LLM annotation.');
+      if(!(env.GEMINI_API_KEY||env.GOOGLE_API_KEY))throw new RequestError(503,'Set the server-only GEMINI_API_KEY or GOOGLE_API_KEY to enable direct Google evaluation.');
       const rubric = snapshot as RubricSnapshot;
       const registered = await caller.from('rubric_versions').select('hash').eq('hash', rubric.rubric_sha256).maybeSingle();
       if (registered.error) throw new RequestError(503, 'Could not load the annotation rubric.');
@@ -72,7 +73,7 @@ export function createLLMAnnotationHandler({ getEnvironment = () => process.env,
       }
       claimedId = body.request_id;
       const conversation = document.data.transcript as Conversation;
-      const generated = htmlMode?await generateHtmlImageBaseline({conversation,rubric,sections,requestId:claimedId,apiKey:(env.GEMINI_API_KEY||env.GOOGLE_API_KEY)!,origin:`http://${request.headers.host||'127.0.0.1:5173'}`,checkpoint:claim.data.checkpoint?.fingerprint?claim.data.checkpoint:undefined,onCheckpoint:async state=>{const saved=await caller!.rpc('save_llm_generation_checkpoint',{p_request_id:claimedId,p_checkpoint:{...state,repairs_used:0}});if(saved.error)throw new RequestError(502,'Could not save image generation checkpoint.','save_failed');},fetcher}):await generateInstructionalBaseline({ conversation, rubric, sections, requestId: claimedId, config:{...config,repair_attempts:3}, checkpoint:claim.data.checkpoint?.fingerprint?claim.data.checkpoint:undefined,onCheckpoint:async checkpoint=>{const saved=await caller!.rpc('save_llm_generation_checkpoint',{p_request_id:claimedId,p_checkpoint:checkpoint});if(saved.error)throw new RequestError(502,'Could not save generation checkpoint. Resume this run to try again.','save_failed');}, apiKey: env.OPENROUTER_API_KEY!, fetcher });
+      const generated = htmlMode?await generateHtmlImageBaseline({conversation,rubric,sections,requestId:claimedId,apiKey:(env.GEMINI_API_KEY||env.GOOGLE_API_KEY)!,origin:`http://${request.headers.host||'127.0.0.1:5173'}`,checkpoint:claim.data.checkpoint?.fingerprint?claim.data.checkpoint:undefined,onCheckpoint:async state=>{const saved=await caller!.rpc('save_llm_generation_checkpoint',{p_request_id:claimedId,p_checkpoint:{...state,repairs_used:0}});if(saved.error)throw new RequestError(502,'Could not save image generation checkpoint.','save_failed');},fetcher}):await generateInstructionalBaseline({ conversation, rubric, sections, requestId: claimedId, config:{...config,provider:'google',repair_attempts:3}, checkpoint:claim.data.checkpoint?.fingerprint?claim.data.checkpoint:undefined,onCheckpoint:async checkpoint=>{const saved=await caller!.rpc('save_llm_generation_checkpoint',{p_request_id:claimedId,p_checkpoint:checkpoint});if(saved.error)throw new RequestError(502,'Could not save generation checkpoint. Resume this run to try again.','save_failed');}, apiKey: (env.GEMINI_API_KEY||env.GOOGLE_API_KEY)!, fetcher });
       const saved = await caller.rpc('complete_llm_generation', { p_request_id: claimedId, p_rubric_hash: rubric.rubric_sha256, p_annotations: generated.annotations, p_model: generated.model, p_prompt_version: htmlMode?imagePromptVersion:promptVersion, p_prompt: generated.prompt, p_generation_config: generated.generation_config });
       if (saved.error || !saved.data) throw new RequestError(502, 'Could not confirm baseline storage. Refresh versions before trying again.', 'save_failed');
       send(201, { baseline: saved.data });

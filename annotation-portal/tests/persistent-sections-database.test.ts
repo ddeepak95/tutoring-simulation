@@ -2,7 +2,8 @@ import {expect,it} from 'vitest';
 import {htmlFixture,captureHash} from './fixtures/html-conversation';
 import {PGlite} from '@electric-sql/pglite';
 import fs from 'node:fs';
-import {bundledRubric,C} from '../src/lib';
+import {C} from '../src/lib';
+import {bundledRubric} from './fixtures/section-items-v1';
 import {bundledRubric as legacy} from './fixtures/legacy-rubric';
 
 it('keeps short section references permanent across annotators, saves, reloads and registration retries',async()=>{
@@ -68,6 +69,7 @@ it('keeps short section references permanent across annotators, saves, reloads a
 
  const registryMigration=fs.readFileSync('supabase/migrations/202610260002_persistent_sections.sql','utf8').replace('-- __SECTION_REGISTRY_BACKFILL__',`select public.register_conversation_sections('${doc}','${JSON.stringify([{turn_id:'t1',turn_number:1,section_number:1,start:0,end:conversation.messages[0].text.length}])}'::jsonb); update public.assignments set annotations=public.store_section_annotations(conversation_id,annotations) where is_active and task_type='label';`);
  await db.exec(registryMigration);
+ await db.exec(fs.readFileSync('supabase/migrations/202610280001_section_grouping_version.sql','utf8'));
  await db.exec(fs.readFileSync('supabase/migrations/202610260003_llm_evidence.sql','utf8'));
  await db.exec(fs.readFileSync('supabase/migrations/202610260005_rubric_baseline_features.sql','utf8'));
  const imageBaseline='00000000-0000-4000-8000-000000000031';
@@ -108,7 +110,8 @@ it('keeps short section references permanent across annotators, saves, reloads a
  const stateConversation=C.normalizeConversation({conversation_id:stateDoc,messages:[{turn_id:'quiz',speaker:'tutor',text:base+marker+body}]});
  await db.query('insert into public.conversations(id,label,transcript,created_by) values($1,$2,$3::jsonb,$4)',[stateDoc,'State ownership',JSON.stringify(stateConversation),admin]);
  const primary={turn_id:'quiz',turn_number:1,section_number:1,start:0,end:base.length},historical={turn_id:'quiz',turn_number:1,section_number:2,start:base.length+marker.length,end:base.length+marker.length+body.length};
- await db.query('select public.register_conversation_sections($1,$2::jsonb)',[stateDoc,JSON.stringify([primary,historical])]);
+ await db.query('select public.register_conversation_sections($1,$2::jsonb)',[stateDoc,JSON.stringify([primary,historical].map(s=>({...s,grouping_version:'api-cohesive/2'})))]);
+ expect((await db.query<any>('select parser_version from public.conversation_section_sets where conversation_id=$1',[stateDoc])).rows[0].parser_version).toBe('api-cohesive/2');
  const state={turn_id:'quiz',section_id:'t1s1',state_key:'state_1',start:historical.start,end:historical.end,legacy_section_ids:['t1s2']};
  const register=(states:unknown[])=>db.query('select public.register_conversation_section_states($1,$2::jsonb)',[stateDoc,JSON.stringify(states)]);
  await expect(register([state,{...state,state_key:'state_2',section_id:'t99s1'}])).rejects.toThrow(/owner/);
@@ -124,6 +127,12 @@ it('keeps short section references permanent across annotators, saves, reloads a
  expect((await db.query<any>('select public.hydrate_section_annotations($1,$2::jsonb) as annotations',[stateDoc,JSON.stringify([{id:'old-state',feature:'questions',section_id:'t1s2',entry:{category:'Content',count:1}}])])).rows[0].annotations[0].evidence[0].quote).toBe(body);
  await db.exec(fs.readFileSync('supabase/migrations/202610210012_capture_english_translation.sql','utf8'));
  await db.exec(fs.readFileSync('supabase/migrations/202610260007_html_conversations.sql','utf8'));
+ await db.exec(fs.readFileSync('supabase/migrations/202610280002_section_highlights.sql','utf8'));
+ const highlighted={id:'short-evidence',feature:'examples',section_id:'t1s1',entry:{category:'Content',count:1},highlights:[{quote:'An example.',occurrence:1}]};
+ const storedHighlights=(await db.query<any>('select public.store_section_annotations($1,$2::jsonb) as value',[doc,JSON.stringify([highlighted])])).rows[0].value;
+ expect(storedHighlights[0].highlights).toEqual(highlighted.highlights);
+ for(const highlights of [[{quote:'not present',occurrence:1}],[{quote:'An example.',occurrence:2}],[highlighted.highlights[0],highlighted.highlights[0]]])await expect(db.query('select public.store_section_annotations($1,$2::jsonb)',[doc,JSON.stringify([{...highlighted,highlights}])])).rejects.toThrow(/[Hh]ighlight/);
+
  await db.exec(`set role authenticated;select set_config('request.jwt.claim.sub','${admin}',false);`);
  const pkg=htmlFixture();
  const importHtml=(value:any,source:string|null=null)=>db.query<any>('select public.import_html_conversation($1::jsonb,$2) as receipt',[JSON.stringify(value),source]);

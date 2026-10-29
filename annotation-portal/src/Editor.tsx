@@ -231,6 +231,7 @@ function ExactCapture({ html, conversation, annotations, rubric, readonly, onSec
             label.type = 'button';
             label.className = 'exact-section-annotation-label';
             label.dataset.exactSectionLabel = 'true';
+            label.disabled=readonly;
             label.dataset.annotationIds = matches.map(annotation => annotation.id).join(',');
             label.dataset.sectionTurnId = turn.turn_id;
             const registered = registeredSections?.find(s => s.turn_id===turn.turn_id && s.start===offsets?.start && s.end===offsets?.end);
@@ -241,7 +242,7 @@ function ExactCapture({ html, conversation, annotations, rubric, readonly, onSec
             label.title = feature?.name || 'Annotate section';
             label.style.setProperty('--annotation-color', selected?'#2563eb':'#263430'); label.style.setProperty('--annotation-background', selected?'#eff6ff':'#fff');
             const controls=document.createElement('div');controls.className='exact-section-controls';controls.dataset.exactSectionControls='true';controls.append(label);
-            const badges=createSectionItemBadges(document,matches,rubric);if(badges)controls.append(badges);
+            const badges=createSectionItemBadges(document,matches,rubric,(ids,rect)=>callbacks.current.onHighlight(ids,rect));if(badges)controls.append(badges);
             if(before)before.before(controls);else article.appendChild(controls);
             const topLabel=label.cloneNode(true) as HTMLButtonElement;
             topLabel.className='exact-section-top-label';
@@ -358,7 +359,7 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
   const keepPopupOpen = () => clearTimeout(hoverClose.current);
   const close = () => { keepPopupOpen(); setPopup(null); };
   const toggleHighlightFilter = (key: string) => { close(); setHighlightFilters(current => current.includes(key) ? current.filter(value => value !== key) : [...current, key]); };
-  function leaveHighlight() { keepPopupOpen(); hoverClose.current = setTimeout(() => setPopup(null), 250); }
+  function leaveHighlight() { if(itemLabels)return;keepPopupOpen(); hoverClose.current = setTimeout(() => setPopup(null), 250); }
   useEffect(() => () => clearTimeout(hoverClose.current), []);
   useEffect(() => { setGuide(!itemLabels && taskType !== 'rate'); setGuideKey(null); }, [taskType,itemLabels]);
   useEffect(() => {
@@ -430,6 +431,7 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
   function setNumberField(key: string, value: string) {
     if (!active) return;
     const next = structuredClone(active);
+    if(key==='count'&&Number(value)!==next.entry.count)delete next.highlights;
     if (value === '') delete next.entry[key];
     else next.entry[key] = Number(value);
     update(next);
@@ -448,7 +450,7 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
   function listField(value: string | string[] | number | null | undefined) { return Array.isArray(value) ? value.join(', ') : ''; }
   function editHighlight(ids: string[], rect: DOMRect) {
     keepPopupOpen();
-    if(itemLabels){const annotation=annotations.find(a=>a.id===ids[0]);if(annotation)setPopup({x:rect.left,y:rect.bottom+8,evidence:annotation.evidence[0],sectionId:annotation.section_id});return;}
+    if(itemLabels){const annotation=annotations.find(a=>a.id===ids[0]);if(annotation)setPopup({x:rect.left,y:rect.bottom+8,id:annotation.id,evidence:annotation.evidence[0],sectionId:annotation.section_id});return;}
     setPopup({ x: rect.left, y: rect.bottom + 8, ...(ids.length === 1 ? { id: ids[0] } : { ids }), editing: true });
   }
   function addSectionItem() {
@@ -466,6 +468,7 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
     if(count===0){if(existing){setUndo(structuredClone(existing));commit(annotations.filter(a=>a.id!==existing.id));}return;}
     const next:Annotation=existing?structuredClone(existing):conversation.html_content?{id:crypto.randomUUID(),feature:key,section_id:selectedId,entry:{category:feature(key).category!,count:1},evidence:[]}:C.createAnnotation(key,selectedEvidence!,rubric,crypto.randomUUID());
     if(selectedId)next.section_id=selectedId;
+    if(next.entry.count!==count)delete next.highlights;
     next.entry.count=count;setUndo(null);
     commit(existing?annotations.map(a=>a.id===next.id?next:a):[...annotations,next]);
   }
@@ -476,14 +479,14 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
       {captured.error && captured.error !== dismissedCaptureError && <div className="editor-toast editor-toast-error" role="alert"><p>{captured.error}</p><button type="button" aria-label="Dismiss capture error" onClick={() => setDismissedCaptureError(captured.error)}>×</button></div>}
       {undo && !labelReadonly && <div className="editor-toast" role="status"><p>{itemLabels?'Item label removed.':'Highlight deleted.'}</p><button type="button" className="editor-toast-action" onClick={() => { commit([...annotations, undo]); setUndo(null); }}>Undo</button><button type="button" aria-label="Dismiss deletion message" onClick={() => setUndo(null)}>×</button></div>}
     </div>}
-    <div className={`annotation-layout${!itemLabels&&guide ? ' guide-open' : ''}${itemLabels&&taskType!=='rate'?' section-labeling-layout':''}`}><section className="document">
+    <div className={`annotation-layout${!itemLabels&&guide ? ' guide-open' : ''}${itemLabels&&taskType!=='rate'&&(selectedEvidence||selectedId)?' section-labeling-layout':''}`}><section className="document">
     <div className={`document-header${taskType !== 'rate' ? ' labeling-document-header' : ''}`}>
       <div className="labeling-title-row"><h2>{conversation.learning_topic || conversation.label}</h2>{itemLabels&&taskType!=='rate'&&<button ref={guideToggle} type="button" className="secondary guide-toolbar-button" onClick={()=>guide?closeGuide():setGuide(true)} aria-expanded={guide} aria-controls="coding-guide-panel">Labeling guide</button>}</div>
       {taskType !== 'rate' && <div className="feature-filter-row"><div className="feature-counts" role="list" aria-label="Feature counts">{rubric.map(item => <FeatureCountPill key={item.key} feature={item} annotations={annotations} selected={highlightFilters.includes(item.key)} onToggle={() => toggleHighlightFilter(item.key)} />)}</div>{highlightFilters.length > 0 && <button type="button" className="clear-highlight-filters" onClick={() => { close(); setHighlightFilters([]); }}>Show all highlights</button>}</div>}
     </div>
       {taskType === 'rate' ? <div className="rating-exchange" data-testid="rating-exchange" data-tutor-turn={ratedTurn} aria-live="polite">
         {conversation.html_content?<HtmlConversationFrame pkg={conversation.html_content} annotations={[]} rubric={rubric} visibleTurnIds={ratingExchange.map(t=>t.turn_id)}/>:exactHtml ? <div className="exact-capture rating-exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} visibleTurnIds={ratingExchange.map(turn => turn.turn_id)} /></div> : captured.loading ? <div className="exact-capture rating-exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : ratingExchange.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body">{conversation.translation ? <><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />{captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</> : captured.assets[turn.turn_id] ? <CapturedTranscript html={captured.assets[turn.turn_id]} text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} /> : <MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={[]} rubric={rubric} readonly onHighlight={() => {}} />}</div></article>)}
-      </div> : conversation.html_content?<HtmlConversationFrame pkg={conversation.html_content} annotations={visibleAnnotations} rubric={rubric} selectedId={selectedId} onSelect={id=>{setPopup({x:0,y:0,sectionId:id});setError('');}}/>:exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} selectedSection={selectedEvidence} assets={captured.assets} sections={registeredSections} onSections={receiveSections} onSectionSelect={selectSourcePassage} onHighlight={editHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript">{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} selectedSection={selectedEvidence} sections={registeredSections} sectionLabels={turn.speaker === 'tutor'} turnNumber={tutorTurns.findIndex(item => item.turn_id === turn.turn_id) + 1} onSectionSelect={(start, end, rect) => selectSourcePassage(turn.turn_id, start, end, rect)} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
+      </div> : conversation.html_content?<HtmlConversationFrame pkg={conversation.html_content} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} selectedId={selectedId} onSelect={id=>{setPopup({x:0,y:0,sectionId:id});setError('');}}/>:exactHtml ? <div className="exact-capture"><ExactCapture html={exactHtml} conversation={conversation} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} selectedSection={selectedEvidence} assets={captured.assets} sections={registeredSections} onSections={receiveSections} onSectionSelect={selectSourcePassage} onHighlight={editHighlight} /></div> : captured.loading ? <div className="exact-capture"><div className="capture-layout-loading" role="status">Loading captured conversation…</div></div> : <div className="transcript">{conversation.messages.map(turn => <article className={`turn ${turn.speaker}`} key={turn.turn_id} data-turn-id={turn.turn_id}><div className="turn-heading"><span className="speaker-badge">{turn.speaker === 'student' ? 'Y' : 'B'}</span><strong>{turn.speaker === 'student' ? 'You' : 'Bot'}</strong></div><div className="turn-body"><MarkdownTranscript text={turn.text} turnId={turn.turn_id} annotations={visibleAnnotations} rubric={rubric} readonly={labelReadonly} onHighlight={editHighlight} onHighlightLeave={leaveHighlight} selectedSection={selectedEvidence} sections={registeredSections} apiSections={conversation.access_type === 'API'} sectionLabels={turn.speaker === 'tutor'} turnNumber={tutorTurns.findIndex(item => item.turn_id === turn.turn_id) + 1} onSectionSelect={(start, end, rect) => selectSourcePassage(turn.turn_id, start, end, rect)} />{conversation.translation && captured.assets[turn.turn_id] && <CaptureMedia html={captured.assets[turn.turn_id]} />}</div></article>)}</div>}
     {captured.originalHtml && <OriginalCapture html={captured.originalHtml} conversation={conversation} />}
     {completionAction && taskType !== 'rate' && <div className="annotation-completion">{completionAction}</div>}
     {popup && !itemLabels && <div className="selection-menu" ref={menuRef} role="dialog" aria-label={active ? `${readonly ? 'View' : 'Edit'} ${feature(active.feature).name}` : readonly ? 'Choose a highlight to view' : 'Choose instructional feature'} onPointerDown={event => event.stopPropagation()} onMouseEnter={keepPopupOpen} style={{ left: popup.x, top: popup.y }}>
@@ -500,7 +503,7 @@ export function Editor({ conversationId, conversation, rubric: snapshot, annotat
       </> : popup.ids ? <><h3>Choose a highlight to {readonly ? 'view' : 'edit'}</h3>{popup.ids.map(id => { const a = annotations.find(item => item.id === id)!; return <button className="choice" key={id} onClick={() => setPopup({ ...popup, id, ids: undefined })}>{feature(a.feature).name}{itemLabels && ` \u00d7 ${a.entry.count}`}<small>{a.evidence[0].quote.slice(0, 100)}</small></button>; })}{itemLabels && !readonly && <button className="secondary" onClick={addSectionItem}>Add item</button>}</> : popup.extend ? <><h3>Add supporting passage</h3>{annotations.filter(a => a.feature !== 'questions').map(a => <button className="choice" key={a.id} onClick={() => { const next = C.addEvidence(structuredClone(a), { ...popup.evidence!, ...(a.feature==='examples'?{example_status:'Duplicate' as const}:{}) }); update(next); window.getSelection()?.removeAllRanges(); setPopup({ ...popup, id: a.id, evidence: undefined, extend: false, editing: true }); }}>{feature(a.feature).name}<small>{a.evidence[0].quote.slice(0, 100)}</small></button>)}</> : <><h3>Annotate as</h3>{itemChoices()}{!itemLabels && annotations.some(a => a.feature !== 'questions') && <button className="text-button" onClick={() => setPopup({ ...popup, extend: true })}>Add passage to an existing entry</button>}</>}
     </div>}
   </section>
-    {itemLabels&&taskType!=='rate'&&<SectionLabelPanel rubric={rubric} selection={selectedEvidence} sectionId={selectedId} title={selectedRecord?`Turn ${selectedRecord.turn_number} - Section ${selectedRecord.section_number}`:undefined} annotations={sectionAnnotations} readonly={labelReadonly} onCount={setSectionCount} onClose={close}/>}
+    {itemLabels&&taskType!=='rate'&&(selectedEvidence||selectedId)&&<SectionLabelPanel rubric={rubric} selection={selectedEvidence} sectionId={selectedId} title={selectedRecord?`Turn ${selectedRecord.turn_number} - Section ${selectedRecord.section_number}`:undefined} annotations={sectionAnnotations} activeFeature={active?.feature} readonly={labelReadonly} onCount={setSectionCount} onClose={close}/>}
     {taskType !== 'rate' && !itemLabels && <button ref={guideToggle} className="guide-floating-button secondary" onClick={() => guide ? closeGuide() : setGuide(true)} aria-expanded={guide} aria-controls="coding-guide-panel">Labeling guide</button>}
     {taskType !== 'rate' && guide && createPortal(<aside className="coding-guide-panel" id="coding-guide-panel" aria-labelledby="coding-guide-title">
       <div className="coding-guide-heading"><h2 id="coding-guide-title">Labeling guide</h2><button className="dismiss" aria-label="Close labeling guide" onClick={closeGuide}>×</button></div>

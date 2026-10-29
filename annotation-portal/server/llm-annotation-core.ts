@@ -1,3 +1,4 @@
+import {resolveSectionHighlights,type SectionHighlight} from '../src/section-highlights.ts';
 import C from '../src/generated/core.js';
 import {instructionalPromptText} from './generated/instructional-prompt.ts';
 import type { Annotation, Conversation, Feature, ConversationSection, RubricSnapshot } from '../src/types';
@@ -7,7 +8,22 @@ import {sourcePassages} from './source-passages.ts';
 
 export {instructionalPromptVersion as promptVersion} from './generated/instructional-prompt.ts';
 export function annotationSchema(rubric: RubricSnapshot, useSegmentIds=false, sections?:ConversationSection[]) {
-  if(sections) return {type:"object",additionalProperties:false,required:["annotations"],properties:{annotations:{type:"array",items:{anyOf:rubric.rubric.map(feature=>({type:"object",additionalProperties:false,required:["feature","entry","section_id"],properties:{feature:{type:"string",enum:[feature.key]},section_id:{type:"string",enum:sections.map(s=>s.section_id)},entry:{type:"object",additionalProperties:false,required:["category","count"],properties:{category:{type:"string",enum:[feature.category]},count:{type:"integer",minimum:1,maximum:1000}}}}}))}}}};
+  if(sections){
+    const textSections=sections.every(s=>s.content_version!=='html-conversation/2');
+    const highlights={type:'array',minItems:1,items:{type:'object',additionalProperties:false,required:['quote','occurrence'],properties:{quote:{type:'string',minLength:1},occurrence:{type:'integer',minimum:1}}}};
+    // Share the text evidence shape instead of repeating its nested array for every feature.
+    // The resolver still enforces the exact feature/category pairing.
+    const groups=textSections?[rubric.rubric]:rubric.rubric.map(f=>[f]);
+    const variants=groups.map(features=>({
+      type:'object',additionalProperties:false,required:['feature','entry','section_id',...(textSections?['highlights']:[])],
+      properties:{
+        feature:{type:'string',enum:features.map(f=>f.key)},section_id:{type:'string',enum:sections.map(s=>s.section_id)},
+        ...(textSections?{highlights}:{}),
+        entry:{type:'object',additionalProperties:false,required:['category','count'],properties:{category:{type:'string',enum:[...new Set(features.map(f=>f.category))]},count:{type:'integer',minimum:1,maximum:1000}}}
+      }
+    }));
+    return {type:'object',additionalProperties:false,required:['annotations'],properties:{annotations:{type:'array',items:{anyOf:variants}}}};
+  }
   const variants = rubric.rubric.map(feature => ({
     type: 'object', additionalProperties: false, required: ['feature', 'entry', 'evidence'],
     properties: {
@@ -34,7 +50,7 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
   if(sections){
     if(!exactKeys(output,["annotations"])||!Array.isArray(output.annotations)||output.annotations.length>10000)throw new Error("Expected only an annotations array.");
     const annotations=output.annotations.map((item,index)=>{
-      if(!exactKeys(item,["feature","entry","section_id"])||typeof item.section_id!=="string"||typeof item.feature!=="string")throw new Error("Use a registered section_id, item and entry.");
+      if(!exactKeys(item,["feature","entry","section_id",...(item&&typeof item==="object"&&Object.hasOwn(item,"highlights")?["highlights"]:[])])||typeof item.section_id!=="string"||typeof item.feature!=="string")throw new Error("Use a registered section_id, item and entry.");
       const section=sections.find(s=>s.section_id===item.section_id);
       if(!section)throw new Error("Unknown section ID for this conversation.");
       if(conversation.html_content)return {id:`llm-${requestId}-${index+1}`,feature:item.feature,section_id:section.section_id,entry:item.entry as Annotation['entry'],evidence:[]};
@@ -42,6 +58,11 @@ export function resolveLLMAnnotations(output: unknown, conversation: Conversatio
       if(evidence.quote!==section.quote||evidence.occurrence!==section.occurrence)throw new Error("Registered section source changed.");
       const annotation=C.createAnnotation(item.feature,evidence,rubric.rubric,`llm-${requestId}-${index+1}`);
       annotation.section_id=section.section_id;annotation.entry={...(item.entry as Annotation["entry"]),turn_locations:[section.turn_id]};
+      if(item.highlights!==undefined){
+        resolveSectionHighlights(evidence,item.highlights as SectionHighlight[]);
+        if((item.highlights as unknown[]).length!==Number(annotation.entry.count))throw Error('Return one distinct highlight per counted occurrence.');
+        annotation.highlights=item.highlights as Annotation['highlights'];
+      }
       return annotation;
     });
     C.validateAnnotations(conversation,annotations,rubric.rubric);return annotations;

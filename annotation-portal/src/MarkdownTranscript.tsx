@@ -1,7 +1,9 @@
 import {SectionItemBadges} from './SectionItemBadges';
 import {markdownSectionGroups} from './section-registry';
+import {annotationHighlightEvidence} from './section-highlights';
+import {FeatureHoverPopup} from './FeatureHoverPopup';
 import { conceptLevel, conceptDisplayFeature } from './coverage-hierarchy';
-import { createElement, Fragment, useMemo, type ReactNode } from 'react';
+import { createElement, Fragment, useEffect, useId, useMemo, useState, type ReactNode } from 'react';
 import katex from 'katex';
 import type { Nodes, Definition } from 'mdast';
 import { mappedText, parseMarkdown } from './markdown-source';
@@ -14,6 +16,8 @@ interface Props {
   onMathSelect?: (start: number, end: number, rect: DOMRect) => void;
   selectedSection?: Evidence;
   sectionLabels?: boolean;
+  apiSections?: boolean;
+  sectionPreview?: boolean;
   sections?: ConversationSection[];
   turnNumber?: number;
   onSectionSelect?: (start: number, end: number, rect: DOMRect) => void;
@@ -24,19 +28,37 @@ function safeUrl(value: string, image = false): string | undefined {
     if (['https:', 'http:', ...(image ? [] : ['mailto:'])].includes(url.protocol)) return value;
   } catch { /* Render unsafe destinations as ordinary text. */ }
 }
-export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave, onMathSelect, sectionLabels = false, sections, selectedSection, turnNumber = 1, onSectionSelect }: Props) {
+export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly, onHighlight, onHighlightLeave, onMathSelect, sectionLabels = false, apiSections = false, sectionPreview = false, sections, selectedSection, turnNumber = 1, onSectionSelect }: Props) {
   rubric = rubric.map(conceptDisplayFeature);
   const tree = useMemo(() => parseMarkdown(text), [text]);
   const definitions = new Map<string, Definition>();
   const labeledPassages = new Set<string>();
+  const tooltipId=useId();
+  const [hover,setHover]=useState<{keys:string[];anchor:DOMRect}|null>(null);
+  const [featurePreview,setFeaturePreview]=useState<{key:string;start:number;end:number}|null>(null);
+  const hoverFeatures=hover?rubric.filter(f=>hover.keys.includes(f.key)):[];
+  const showHover=(active:Annotation[],element:HTMLElement)=>setHover({keys:[...new Set(active.map(a=>a.feature))],anchor:element.getBoundingClientRect()});
+  useEffect(()=>{
+    if(!hover)return;
+    const close=()=>setHover(null),key=(e:KeyboardEvent)=>{if(e.key==='Escape')close();};
+    window.addEventListener('scroll',close,true);window.addEventListener('resize',close);window.addEventListener('keydown',key);
+    return()=>{window.removeEventListener('scroll',close,true);window.removeEventListener('resize',close);window.removeEventListener('keydown',key);};
+  },[hover]);
+  const hoverPopup=hover&&hoverFeatures.length?<FeatureHoverPopup id={tooltipId} features={hoverFeatures} anchor={hover.anchor}/>:null;
+  const previewAnnotations=featurePreview?annotations.filter(a=>a.feature===featurePreview.key||!a.evidence.some(e=>e.turn_id===turnId&&e.start<featurePreview.end&&e.end>featurePreview.start)):annotations;
+  const textAnnotations=sectionLabels?previewAnnotations.filter(a=>a.highlights?.length).map(a=>({...a,evidence:annotationHighlightEvidence(a)})):previewAnnotations;
+  const highlightStyle=(active:Annotation[])=>{
+    const features=[...new Set(active.map(a=>a.feature))].map(key=>rubric.find(f=>f.key===key)!);
+    return {backgroundColor:features[0]?.highlight,borderBottomColor:features[0]?.color,'--highlight-label-color':features[0]?.color,
+      ...(features.length>1?{backgroundImage:`linear-gradient(180deg, ${features.map((f,i)=>`${f.highlight} ${100*i/features.length}%, ${f.highlight} ${100*(i+1)/features.length}%`).join(', ')})`}:{})} as React.CSSProperties;
+  };
   for (const node of tree.children) {
     if (node.type === 'definition') definitions.set(node.identifier.toUpperCase(), node);
   }
   function content(node: Parameters<typeof mappedText>[1]) {
     const { value, map } = mappedText(text, node);
-    if (sectionLabels) return <span>{value}</span>;
     const segments: ReactNode[] = [];
-    const applicable = annotations.filter(annotation => annotation.evidence.some(e => e.turn_id === turnId));
+    const applicable = textAnnotations.filter(annotation => annotation.evidence.some(e => e.turn_id === turnId));
     let i = 0;
     while (i < value.length) {
       const matching = (offset: number) => applicable.filter(annotation => annotation.evidence.some(e => e.turn_id === turnId && e.start < map[offset][1] && e.end > map[offset][0]));
@@ -46,7 +68,6 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
       const data = { 'data-source-map': JSON.stringify(map.slice(i, end)) };
       if (!active.length) segments.push(<span key={i} {...data}>{value.slice(i, end)}</span>);
       else {
-        const feature = rubric.find(f => f.key === active[0].feature)!;
         const labels = new Set<string>();
         if (readonly) for (const annotation of active) {
           annotation.evidence.forEach((evidence, index) => {
@@ -57,14 +78,14 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
             }
           });
         }
-        segments.push(<mark key={i} {...data} data-feature-label={labels.size ? [...labels].join(' / ') : undefined} style={{ backgroundColor: feature.highlight, borderBottomColor: feature.color, '--highlight-label-color': feature.color } as React.CSSProperties}
+        segments.push(<mark key={i} {...data} data-feature-keys={active.map(a=>a.feature).join(',')} data-feature-label={!sectionLabels&&labels.size ? [...labels].join(' / ') : undefined} style={highlightStyle(active)}
           tabIndex={0} role="button"
+          aria-describedby={hover&&active.some(a=>hover.keys.includes(a.feature))?tooltipId:undefined}
           aria-label={`${readonly ? 'View' : 'Edit'} ${active.map(a => rubric.find(f => f.key === a.feature)!.name).join(' / ')}`}
-          data-annotation-ids={key} onClick={event => { event.preventDefault(); if (!readonly) onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
-          onMouseEnter={event => { if (readonly) onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
-          onMouseLeave={() => { if (readonly) onHighlightLeave?.(); }}
-          onPointerUp={event => { if (readonly && event.pointerType === 'touch') onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
-          onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); window.getSelection()?.removeAllRanges(); onHighlight(ids, event.currentTarget.getBoundingClientRect()); } }}>
+          data-annotation-ids={key} onClick={event => { event.preventDefault();setHover(null);onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
+          onMouseEnter={event=>showHover(active,event.currentTarget)} onMouseLeave={()=>setHover(null)}
+          onFocus={event=>showHover(active,event.currentTarget)} onBlur={()=>setHover(null)}
+          onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault();setHover(null);window.getSelection()?.removeAllRanges(); onHighlight(ids, event.currentTarget.getBoundingClientRect()); } }}>
           {value.slice(i, end)}
         </mark>);
       }
@@ -78,37 +99,39 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
     return href ? <a href={href} title={title || undefined} target="_blank" rel="noreferrer">{value}</a> : value;
   }
   function displayMath(node: Nodes): ReactNode | null {
-    if (node.type !== 'paragraph' || node.children.length !== 1 || node.children[0].type !== 'text' || node.position?.start.offset == null || node.position.end.offset == null) return null;
-    const raw = text.slice(node.position.start.offset, node.position.end.offset);
-    const match = raw.match(/^(?:\\\[([\s\S]*?)\\\]|\$\$([\s\S]*?)\$\$)$/);
-    if (!match) return null;
-    const source = match[1] ?? match[2];
-    const tex = source.trim();
-    if (!tex) return null;
-    const start = node.position.start.offset + raw.indexOf(tex);
-    const end = start + tex.length;
-    const active = annotations.filter(annotation => annotation.evidence.some(evidence => evidence.turn_id === turnId && evidence.start < end && evidence.end > start));
+    if (node.type !== 'paragraph' || node.children.length !== 1) return null;
+    const math = node.children[0].data?.mathSource;
+    return math?.display ? renderMath(math.tex, math.contentStart, math.contentEnd, true) : null;
+  }
+  function renderMath(tex: string, start: number, end: number, displayMode: boolean): ReactNode {
+    const Tag = displayMode ? 'div' : 'span';
+    const className = displayMode ? 'markdown-math' : 'markdown-inline-math';
+    const active = textAnnotations.filter(annotation => annotation.evidence.some(evidence => evidence.turn_id === turnId && evidence.start < end && evidence.end > start));
     const ids = active.map(annotation => annotation.id);
-    const html = katex.renderToString(tex, { displayMode: true, throwOnError: false, trust: false });
-    if (sectionLabels) return <div className="markdown-math" dangerouslySetInnerHTML={{ __html: html }} />;
+    const html = katex.renderToString(tex, { displayMode, throwOnError: false, trust: false, maxExpand: 1000, maxSize: 20 });
+    if (sectionLabels&&!active.length) return <Tag className={className} dangerouslySetInnerHTML={{ __html: html }} />;
     const interact = (target: HTMLElement) => {
       const rect = target.getBoundingClientRect();
       if (ids.length) onHighlight(ids, rect);
       else if (!readonly) onMathSelect?.(start, end, rect);
     };
-    return <div className={`markdown-math${active.length ? ' annotated-math' : ''}`} data-math-source-start={start} data-math-source-end={end}
-      data-annotation-ids={ids.join(',')} role={!readonly ? 'button' : undefined} tabIndex={!readonly ? 0 : undefined}
-      aria-label={!readonly ? `Select equation: ${tex}` : undefined}
-      onClick={event => interact(event.currentTarget)}
-      onMouseEnter={event => { if (readonly && ids.length) onHighlight(ids, event.currentTarget.getBoundingClientRect()); }}
-      onMouseLeave={() => { if (readonly && ids.length) onHighlightLeave?.(); }}
-      onKeyDown={event => { if (!readonly && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); interact(event.currentTarget); } }}
+    return <Tag className={`${className}${active.length ? ' annotated-math' : ''}`} data-math-source-start={start} data-math-source-end={end}
+      data-annotation-ids={ids.join(',')} data-feature-keys={active.map(a=>a.feature).join(',')} style={active.length?highlightStyle(active):undefined} role={active.length||!readonly ? 'button' : undefined} tabIndex={active.length||!readonly ? 0 : undefined}
+      aria-label={active.length?`${readonly?'View':'Edit'} ${active.map(a=>rubric.find(f=>f.key===a.feature)!.name).join(' / ')}`:!readonly ? `Select equation: ${tex}` : undefined}
+      aria-describedby={hover&&active.some(a=>hover.keys.includes(a.feature))?tooltipId:undefined}
+      onClick={event => {setHover(null);interact(event.currentTarget);}}
+      onMouseEnter={event => {if(active.length)showHover(active,event.currentTarget);}} onMouseLeave={()=>setHover(null)}
+      onFocus={event=>{if(active.length)showHover(active,event.currentTarget);}} onBlur={()=>setHover(null)}
+      onKeyDown={event => { if ((active.length||!readonly) && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault();setHover(null);interact(event.currentTarget); } }}
       dangerouslySetInnerHTML={{ __html: html }} />;
   }
   function render(node: Nodes): ReactNode {
     switch (node.type) {
       case 'root': return children(node);
-      case 'text': return content(node);
+      case 'text': {
+        const math = node.data?.mathSource;
+        return math ? renderMath(math.tex, math.contentStart, math.contentEnd, false) : content(node);
+      }
       case 'paragraph': return displayMath(node) || <p>{children(node)}</p>;
       case 'heading': return createElement(`h${node.depth}`, null, children(node));
       case 'strong': return <strong>{children(node)}</strong>;
@@ -139,29 +162,30 @@ export function MarkdownTranscript({ text, turnId, annotations, rubric, readonly
       default: return children(node);
     }
   }
-  if (!sectionLabels) return <>{render(tree)}</>;
-  const groups = markdownSectionGroups(text);
+  if (!sectionLabels) return <>{render(tree)}{hoverPopup}</>;
+  const ranges=sections?.filter(section=>section.turn_id===turnId&&section.content_version!=='html-conversation/2');
+  const groups = markdownSectionGroups(text,{api:apiSections,ranges:ranges?.length?ranges:undefined});
+  const Label=sectionPreview||readonly?'span':'button';
   return <>{groups.map((nodes, index) => {
     const start = nodes[0].position!.start.offset!;
     const end = nodes.at(-1)!.position!.end.offset!;
     const matches = annotations.filter(annotation => annotation.evidence.some(evidence => evidence.turn_id === turnId && evidence.start < end && evidence.end > start));
-    const feature = rubric.find(item => item.key === matches[0]?.feature);
     const selected=selectedSection?.turn_id===turnId&&selectedSection.start===start&&selectedSection.end===end;
     const sectionId=sections?.find(s=>s.turn_id===turnId&&s.start===start&&s.end===end)?.section_id;
-    const select=(element:HTMLElement)=>{const rect=element.getBoundingClientRect();if(matches.length)onHighlight(matches.map(a=>a.id),rect);else if(!readonly)onSectionSelect?.(start,end,rect);};
+    const select=(element:HTMLElement)=>{if(readonly)return;const rect=element.getBoundingClientRect();if(matches.length)onHighlight(matches.map(a=>a.id),rect);else onSectionSelect?.(start,end,rect);};
     const labelStyle={ '--annotation-color': selected?'#2563eb':'#263430', '--annotation-background': selected?'#eff6ff':'#fff' } as React.CSSProperties;
     return <Fragment key={start}>
       <section className="section-annotation-boundary" data-selected={selected} style={{borderColor:selected?'#2563eb':'#263430',borderWidth:selected?3:2}} aria-label={`Turn ${turnNumber} - Section ${index + 1} content`}>
-        <button type="button" className="section-annotation-top-label" aria-label={`Select Turn ${turnNumber} - Section ${index+1}`} aria-pressed={selected} data-section-id={sectionId} style={labelStyle} onClick={event=>select(event.currentTarget)}>
+        <Label className="section-annotation-top-label" aria-label={sectionPreview||readonly?undefined:`Select Turn ${turnNumber} - Section ${index+1}`} aria-pressed={sectionPreview||readonly?undefined:selected} data-section-id={sectionId} style={labelStyle} onClick={sectionPreview||readonly?undefined:event=>select(event.currentTarget)}>
           Turn {turnNumber} - Section {index + 1}
-        </button>
+        </Label>
         {nodes.map((node,nodeIndex)=><Fragment key={nodeIndex}>{render(node)}</Fragment>)}
       </section>
-      <div className="section-annotation-controls">
-        <button type="button" className="section-annotation-label" aria-pressed={selected} data-section-id={sectionId} data-annotation-ids={matches.map(a=>a.id).join(',')} title={feature?.name||'Annotate section'} style={labelStyle} onClick={event=>select(event.currentTarget)}>Turn {turnNumber} - Section {index+1}</button>
-        <SectionItemBadges annotations={matches} rubric={rubric}/>
-      </div>
+      {!sectionPreview&&<div className="section-annotation-controls">
+        <Label className="section-annotation-label" aria-pressed={readonly?undefined:selected} data-section-id={sectionId} data-annotation-ids={matches.map(a=>a.id).join(',')} style={labelStyle} onClick={readonly?undefined:event=>select(event.currentTarget)}>Turn {turnNumber} - Section {index+1}</Label>
+        <SectionItemBadges annotations={matches} rubric={rubric} onSelect={onHighlight} onHover={key=>{setHover(null);setFeaturePreview(key?{key,start,end}:null);}}/>
+      </div>}
     </Fragment>;
 
-  })}</>;
+  })}{hoverPopup}</>;
 }

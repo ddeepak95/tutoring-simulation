@@ -24,56 +24,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "photographs": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "category": {
-                "type": "string",
-                "const": "Multimedia"
-              },
-              "count": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
-              },
-              "turn_locations": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems": 1
-              },
-              "section_id": {
-                "type": "string",
-                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
-              },
-              "llm_evidence": {
-                "$ref": "#/$defs/llm_evidence"
-              }
-            },
-            "required": [
-              "category",
-              "count"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "section_id"
-                ]
-              },
-              {
-                "required": [
-                  "turn_locations"
-                ]
-              }
-            ]
-          }
-        },
         "diagrams_and_illustrations": {
           "type": "array",
           "items": {
@@ -82,13 +32,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Multimedia"
+                "const": "Visuals & Rich Media"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
+                "description": "Occurrences within this section. Tag conceptual drawings, system architectures, anatomical/scientific schematics, or visual metaphors (including ASCII, SVG, or Mermaid structural diagrams). Exclude sequential flowcharts (*Flow Diagrams*) and quantitative data plots (*Graphs*). Include text-drawn diagrams made from ASCII or Unicode characters, including fenced code or preformatted blocks. An image attachment is not required. Inspect preserved line breaks, spacing, endpoints, and connectors. Exclude ordinary prose, lists, executable code, and isolated chemical formulas without a schematic spatial representation. Apply the same structural criteria in every language and translation; translating labels alone does not add or remove a diagram."
               },
               "turn_locations": {
                 "type": "array",
@@ -104,6 +54,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -122,7 +75,8 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag conceptual drawings, system architectures, anatomical/scientific schematics, or visual metaphors (including ASCII, SVG, or Mermaid structural diagrams). Exclude sequential flowcharts (*Flow Diagrams*) and quantitative data plots (*Graphs*). Include text-drawn diagrams made from ASCII or Unicode characters, including fenced code or preformatted blocks. An image attachment is not required. Inspect preserved line breaks, spacing, endpoints, and connectors. Exclude ordinary prose, lists, executable code, and isolated chemical formulas without a schematic spatial representation. Apply the same structural criteria in every language and translation; translating labels alone does not add or remove a diagram."
         },
         "flow_diagrams": {
           "type": "array",
@@ -132,13 +86,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Multimedia"
+                "const": "Visuals & Rich Media"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
+                "description": "Occurrences within this section. Tag multi-line visual representations of sequential processes, algorithms, decision trees, state machines, or workflows with directional arrows. Require more than one meaningful visual row or level. A single-line sequence such as \"Input → Process → Output\" is not a Flow Diagram, even when bold, fenced as code, or automatically wrapped onto several screen lines. Prose, numbered instructions, and line breaks alone do not qualify. For images, SVG, or Mermaid, judge the rendered visual layout, not serialized source line counts. A top-to-bottom multi-level process or a branching decision diagram qualifies when connected stages span multiple visual rows or levels. Exclude static structural diagrams without sequential flow (Diagrams & Illustrations). Count each complete qualifying diagram once, not its rows, stages, or arrows."
               },
               "turn_locations": {
                 "type": "array",
@@ -154,6 +108,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -172,7 +129,8 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag multi-line visual representations of sequential processes, algorithms, decision trees, state machines, or workflows with directional arrows. Require more than one meaningful visual row or level. A single-line sequence such as \"Input → Process → Output\" is not a Flow Diagram, even when bold, fenced as code, or automatically wrapped onto several screen lines. Prose, numbered instructions, and line breaks alone do not qualify. For images, SVG, or Mermaid, judge the rendered visual layout, not serialized source line counts. A top-to-bottom multi-level process or a branching decision diagram qualifies when connected stages span multiple visual rows or levels. Exclude static structural diagrams without sequential flow (Diagrams & Illustrations). Count each complete qualifying diagram once, not its rows, stages, or arrows."
         },
         "graphs": {
           "type": "array",
@@ -182,13 +140,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Multimedia"
+                "const": "Visuals & Rich Media"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
+                "description": "Occurrences within this section. Tag quantitative data visualizations or mathematical function plots (e.g., bar charts, line graphs, scatter plots, histograms, plotted $x/y$ coordinate curves). Exclude node-edge network diagrams that do not plot quantitative axes."
               },
               "turn_locations": {
                 "type": "array",
@@ -204,155 +162,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
-              }
-            },
-            "required": [
-              "category",
-              "count"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "section_id"
-                ]
               },
-              {
-                "required": [
-                  "turn_locations"
-                ]
-              }
-            ]
-          }
-        },
-        "maps": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "category": {
-                "type": "string",
-                "const": "Multimedia"
-              },
-              "count": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
-              },
-              "turn_locations": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems": 1
-              },
-              "section_id": {
-                "type": "string",
-                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
-              },
-              "llm_evidence": {
-                "$ref": "#/$defs/llm_evidence"
-              }
-            },
-            "required": [
-              "category",
-              "count"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "section_id"
-                ]
-              },
-              {
-                "required": [
-                  "turn_locations"
-                ]
-              }
-            ]
-          }
-        },
-        "animations": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "category": {
-                "type": "string",
-                "const": "Multimedia"
-              },
-              "count": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 1000
-              },
-              "turn_locations": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems": 1
-              },
-              "section_id": {
-                "type": "string",
-                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
-              },
-              "llm_evidence": {
-                "$ref": "#/$defs/llm_evidence"
-              }
-            },
-            "required": [
-              "category",
-              "count"
-            ],
-            "anyOf": [
-              {
-                "required": [
-                  "section_id"
-                ]
-              },
-              {
-                "required": [
-                  "turn_locations"
-                ]
-              }
-            ]
-          }
-        },
-        "interactive_media": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "category": {
-                "type": "string",
-                "const": "Multimedia"
-              },
-              "count": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 1000,
-                "description": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions."
-              },
-              "turn_locations": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "minItems": 1
-              },
-              "section_id": {
-                "type": "string",
-                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
-                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
-              },
-              "llm_evidence": {
-                "$ref": "#/$defs/llm_evidence"
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -372,9 +184,9 @@
               }
             ]
           },
-          "description": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions."
+          "description": "Tag quantitative data visualizations or mathematical function plots (e.g., bar charts, line graphs, scatter plots, histograms, plotted $x/y$ coordinate curves). Exclude node-edge network diagrams that do not plot quantitative axes."
         },
-        "other_images": {
+        "static_images": {
           "type": "array",
           "items": {
             "type": "object",
@@ -382,13 +194,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Multimedia"
+                "const": "Visuals & Rich Media"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 1000,
-                "description": "Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity."
+                "description": "Occurrences within this section. Tag non-schematic static visual media, including real-world photographs, geographical/spatial maps, UI screenshots, or decorative/other imagery. Exclude explanatory diagrams, flowcharts, or quantitative data graphs."
               },
               "turn_locations": {
                 "type": "array",
@@ -404,6 +216,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -422,7 +237,62 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag non-schematic static visual media, including real-world photographs, geographical/spatial maps, UI screenshots, or decorative/other imagery. Exclude explanatory diagrams, flowcharts, or quantitative data graphs."
+        },
+        "interactive_animated_media": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Visuals & Rich Media"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag any visual or audio-visual asset with temporal playback or user manipulation (e.g., GIFs, embedded video/audio players, dynamic animations, interactive sliders, or runnable canvas simulations/applets). Count each media component once, not individual animation frames or interaction states. Require evidence of playback or substantive manipulation; do not infer these from a still image alone. Question pagination and gallery Previous/Next controls alone do not qualify."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag any visual or audio-visual asset with temporal playback or user manipulation (e.g., GIFs, embedded video/audio players, dynamic animations, interactive sliders, or runnable canvas simulations/applets). Count each media component once, not individual animation frames or interaction states. Require evidence of playback or substantive manipulation; do not infer these from a still image alone. Question pagination and gallery Previous/Next controls alone do not qualify."
         },
         "headings": {
           "type": "array",
@@ -432,12 +302,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Textual Representations"
+                "const": "Formatting & Notation"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag visual section dividers used to organize the explanation hierarchy, including Markdown headings (`#`, `##`, `###`) and standalone bolded lines acting as section titles. Do not tag bolded lead-in phrases inside a bullet point or paragraph."
               },
               "turn_locations": {
                 "type": "array",
@@ -453,6 +324,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -471,7 +345,62 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag visual section dividers used to organize the explanation hierarchy, including Markdown headings (`#`, `##`, `###`) and standalone bolded lines acting as section titles. Do not tag bolded lead-in phrases inside a bullet point or paragraph."
+        },
+        "lists": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Formatting & Notation"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag unordered (`*`, `-`) or numbered (`1.`, `2.`) vertical groupings of items, features, or points (count the entire list block as `1` instance). Exclude sequential numbered instructions showing how to solve a problem or execute a process from start to finish (*Step-by-Step Walkthroughs*). Count each complete list block once, not each bullet or item. Nested sublists within one cohesive list belong to that occurrence. Procedural walkthroughs do not additionally count as Lists / Bullet Points."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag unordered (`*`, `-`) or numbered (`1.`, `2.`) vertical groupings of items, features, or points (count the entire list block as `1` instance). Exclude sequential numbered instructions showing how to solve a problem or execute a process from start to finish (*Step-by-Step Walkthroughs*). Count each complete list block once, not each bullet or item. Nested sublists within one cohesive list belong to that occurrence. Procedural walkthroughs do not additionally count as Lists / Bullet Points."
         },
         "tables": {
           "type": "array",
@@ -481,12 +410,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Textual Representations"
+                "const": "Formatting & Notation"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag structured grid layouts organizing information into rows and columns (e.g., Markdown tables, comparison matrices, truth tables). Exclude tab-aligned plain text or lists."
               },
               "turn_locations": {
                 "type": "array",
@@ -502,6 +432,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -520,7 +453,62 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag structured grid layouts organizing information into rows and columns (e.g., Markdown tables, comparison matrices, truth tables). Exclude tab-aligned plain text or lists."
+        },
+        "callouts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Formatting & Notation"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag visually set-apart text blocks used to draw attention to side notes, tips, or warnings (e.g., Markdown blockquotes `>`, admonition boxes like `Note:` or `Tip:`). Can be double-tagged with pedagogical labels (like *Misconceptions* or *Summaries / Key Takeaways*) if the callout serves that specific pedagogical role. Count each distinct callout block once within its section. Bold or italic formatting alone never qualifies, whether applied to a word, phrase, complete sentence, or paragraph. Exclude ordinary bold or italic body text, heading titles, speaker labels, portal section borders and labels. A formula display or boxed numerical result alone is not a Callout. The same block may receive both Callouts and a pedagogical label when both definitions are independently satisfied."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag visually set-apart text blocks used to draw attention to side notes, tips, or warnings (e.g., Markdown blockquotes `>`, admonition boxes like `Note:` or `Tip:`). Can be double-tagged with pedagogical labels (like *Misconceptions* or *Summaries / Key Takeaways*) if the callout serves that specific pedagogical role. Count each distinct callout block once within its section. Bold or italic formatting alone never qualifies, whether applied to a word, phrase, complete sentence, or paragraph. Exclude ordinary bold or italic body text, heading titles, speaker labels, portal section borders and labels. A formula display or boxed numerical result alone is not a Callout. The same block may receive both Callouts and a pedagogical label when both definitions are independently satisfied."
         },
         "equations": {
           "type": "array",
@@ -530,13 +518,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Textual Representations"
+                "const": "Formatting & Notation"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
                 "maximum": 1000,
-                "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section."
+                "description": "Occurrences within this section. Tag formal symbolic math, equations, formulas, or variables rendered via LaTeX or mathematical symbols (e.g., standalone equations, inline variables like $x$ or $\\theta$, chemical reaction equations). Exclude plain-text numbers, dates, currency, or percentages. Chemical formulas and species names alone do not qualify, even with subscripts, superscripts, ionic charges, or LaTeX formatting (e.g., H2O, CO2, NaCl, or Ca2+). Count chemical notation only when it represents a reaction with reactants and products; a list or comparison of chemical formulas is not a reaction. An actual mathematical calculation involving chemical quantities can still qualify as math; do not count its chemical species separately. Count one cohesive notation sequence or connected derivation once within its section, including its general formula, substitutions, rearrangements, intermediate steps, and final answer. Count unrelated notation sequences separately; do not count each variable or line within the same sequence. Standalone formal symbolic variables qualify when outside an already counted sequence. Symbolic comparisons and ordered relationships qualify whether the compared terms are variables, numerical values, or descriptive labels. Exclude isolated plain-text numbers, dates, currency, percentages, and unit labels. Centering, bold text, or TeX formatting alone does not establish Mathematical Notation."
               },
               "turn_locations": {
                 "type": "array",
@@ -552,6 +540,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -571,7 +562,115 @@
               }
             ]
           },
-          "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section."
+          "description": "Tag formal symbolic math, equations, formulas, or variables rendered via LaTeX or mathematical symbols (e.g., standalone equations, inline variables like $x$ or $\\theta$, chemical reaction equations). Exclude plain-text numbers, dates, currency, or percentages. Chemical formulas and species names alone do not qualify, even with subscripts, superscripts, ionic charges, or LaTeX formatting (e.g., H2O, CO2, NaCl, or Ca2+). Count chemical notation only when it represents a reaction with reactants and products; a list or comparison of chemical formulas is not a reaction. An actual mathematical calculation involving chemical quantities can still qualify as math; do not count its chemical species separately. Count one cohesive notation sequence or connected derivation once within its section, including its general formula, substitutions, rearrangements, intermediate steps, and final answer. Count unrelated notation sequences separately; do not count each variable or line within the same sequence. Standalone formal symbolic variables qualify when outside an already counted sequence. Symbolic comparisons and ordered relationships qualify whether the compared terms are variables, numerical values, or descriptive labels. Exclude isolated plain-text numbers, dates, currency, percentages, and unit labels. Centering, bold text, or TeX formatting alone does not establish Mathematical Notation."
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Explanatory & Pedagogical Devices"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition."
+        },
+        "step_by_step_walkthroughs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Explanatory & Pedagogical Devices"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points."
         },
         "examples": {
           "type": "array",
@@ -581,12 +680,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Content"
+                "const": "Explanatory & Pedagogical Devices"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples."
               },
               "turn_locations": {
                 "type": "array",
@@ -602,6 +702,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -620,7 +723,62 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples."
+        },
+        "real_world_connections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Explanatory & Pedagogical Devices"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation."
         },
         "analogies": {
           "type": "array",
@@ -630,12 +788,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Content"
+                "const": "Explanatory & Pedagogical Devices"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration."
               },
               "turn_locations": {
                 "type": "array",
@@ -651,6 +810,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -669,7 +831,62 @@
                 ]
               }
             ]
-          }
+          },
+          "description": "Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration."
+        },
+        "misconceptions_pitfalls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Explanatory & Pedagogical Devices"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction."
         },
         "memory_aids": {
           "type": "array",
@@ -679,12 +896,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Content"
+                "const": "Explanatory & Pedagogical Devices"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways."
               },
               "turn_locations": {
                 "type": "array",
@@ -700,6 +918,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -719,7 +940,115 @@
               }
             ]
           },
-          "title": "Memory Aids"
+          "description": "Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways."
+        },
+        "summaries_key_takeaways": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Explanatory & Pedagogical Devices"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points."
+        },
+        "social_cues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Conversational & Tutoring Moves"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression."
         },
         "questions": {
           "type": "array",
@@ -729,12 +1058,13 @@
             "properties": {
               "category": {
                 "type": "string",
-                "const": "Content"
+                "const": "Conversational & Tutoring Moves"
               },
               "count": {
                 "type": "integer",
                 "minimum": 1,
-                "maximum": 1000
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion."
               },
               "turn_locations": {
                 "type": "array",
@@ -750,6 +1080,9 @@
               },
               "llm_evidence": {
                 "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
               }
             },
             "required": [
@@ -769,25 +1102,250 @@
               }
             ]
           },
-          "description": "Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as \"Have you understood?\" or \"Does that make sense?\", invitations for questions, and learning-preference or continuation questions. Include hidden questions in a clearly knowledge-checking quiz when explicit counters or pagination establish the total, including the visible question once. Do not infer knowledge-checking intent from a question mark alone."
+          "description": "Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion."
+        },
+        "comprehension_checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Conversational & Tutoring Moves"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark."
+        },
+        "hints_scaffolding": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Conversational & Tutoring Moves"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint."
+        },
+        "next_step_suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Conversational & Tutoring Moves"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead."
+        },
+        "bot_errors_hallucinations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string",
+                "const": "Quality & Error Tracking"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "description": "Occurrences within this section. Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa."
+              },
+              "turn_locations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "section_id": {
+                "type": "string",
+                "pattern": "^t[1-9][0-9]*s[1-9][0-9]*$",
+                "description": "Permanent HTML section ID, assigned during source capture and inherited by translated versions. Scoped by conversation_id; no text offsets are required."
+              },
+              "llm_evidence": {
+                "$ref": "#/$defs/llm_evidence"
+              },
+              "highlights": {
+                "$ref": "#/$defs/section_highlights"
+              }
+            },
+            "required": [
+              "category",
+              "count"
+            ],
+            "anyOf": [
+              {
+                "required": [
+                  "section_id"
+                ]
+              },
+              {
+                "required": [
+                  "turn_locations"
+                ]
+              }
+            ]
+          },
+          "description": "Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa."
         }
       },
       "required": [
-        "photographs",
         "diagrams_and_illustrations",
         "flow_diagrams",
         "graphs",
-        "maps",
-        "animations",
-        "interactive_media",
-        "other_images",
+        "static_images",
+        "interactive_animated_media",
         "headings",
+        "lists",
         "tables",
+        "callouts",
         "equations",
+        "definitions",
+        "step_by_step_walkthroughs",
         "examples",
+        "real_world_connections",
         "analogies",
+        "misconceptions_pitfalls",
         "memory_aids",
-        "questions"
+        "summaries_key_takeaways",
+        "social_cues",
+        "questions",
+        "comprehension_checks",
+        "hints_scaffolding",
+        "next_step_suggestions",
+        "bot_errors_hallucinations"
       ],
       "description": "Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings."
     },
@@ -1041,6 +1599,31 @@
       "maxLength": 1000,
       "pattern": "^[^\\r\\n\\u2028\\u2029]*\\S[^\\r\\n\\u2028\\u2029]*$",
       "description": "Optional single-line model justification. HTML capture labels reference their owning section ID and do not require transcript spans."
+    },
+    "section_highlights": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1000,
+      "description": "Optional short exact-source anchors, one per counted text occurrence; occurrence is scoped to the owning section.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "quote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "occurrence": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "quote",
+          "occurrence"
+        ]
+      }
     }
   }
 }

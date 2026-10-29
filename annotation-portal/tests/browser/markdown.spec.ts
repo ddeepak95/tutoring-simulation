@@ -1,6 +1,82 @@
 import { expect, test } from '@playwright/test';
 import { backend, login } from './mock';
 
+test('conversation view displays saved API sections as read-only labels', async ({ page }) => {
+  const state=await backend(page);
+  const document=state.documents[0];
+  const text='## Definition\n\nFirst.\n\n## Calculation\n\n\\[74/2=37\\]';
+  Object.assign(document.transcript,{access_type:'API',provider:'gpt-6.1-sol'});
+  document.transcript.messages[0].text=text;
+  // One pinned section intentionally differs from the heading-based proposal.
+  state.sections.push({conversation_id:document.id,section_id:'t1s1',turn_id:'t1',turn_number:1,section_number:1,start:0,end:text.length,quote:text,occurrence:1,source_hash:'test-source'});
+  await login(page,'admin');
+  await page.goto(`/conversations/${document.id}`);
+  const panel=page.getByRole('tabpanel',{name:'Conversation',exact:true});
+  await expect(panel.locator('[data-section-id="t1s1"]')).toHaveText('Turn 1 - Section 1');
+  await expect(panel.locator('.section-annotation-boundary').first()).toContainText('Definition');
+  await expect(panel.locator('.section-annotation-boundary').first()).toContainText('Calculation');
+  await expect(panel.locator('.section-annotation-boundary').first().locator('.katex-display')).toHaveCount(1);
+  await expect(panel.getByRole('button',{name:/Section/})).toHaveCount(0);
+  await expect(panel.locator('.section-annotation-controls')).toHaveCount(0);
+  await page.reload();
+  await expect(panel.locator('[data-section-id="t1s1"]')).toHaveText('Turn 1 - Section 1');
+  expect(state.sections).toHaveLength(1);
+  expect(state.requests).not.toContain('/rest/v1/rpc/register_conversation_sections');
+  expect(state.saves).toBe(0);
+});
+
+test('API section divisions persist after labeling and use the registered inventory on reload', async ({ page }) => {
+  const state = await backend(page);
+  const text = 'Definition.\n\nCalculation:\n\n\\[74/2=37\\]\n\nSteps:\n\n1. Measure\n2. Divide\n\n---\n\nConclusion.';
+  Object.assign(state.documents[0].transcript, { access_type: 'API', provider: 'gpt-6.1-sol' });
+  state.documents[0].transcript.messages[0].text = text;
+  await login(page, 'alice');
+  await page.locator('a[href^="/assignments/"]').first().click();
+  const turn = page.locator('[data-turn-id="t1"]');
+  await expect(turn.locator('.section-annotation-label')).toHaveCount(4);
+  await expect(turn.locator('.section-annotation-boundary').nth(1).locator('.katex-display')).toHaveCount(1);
+  await expect(turn.locator('.section-annotation-boundary').nth(2).locator('ol li')).toHaveCount(2);
+  await turn.getByRole('button', { name: 'Turn 1 - Section 2', exact: true }).click();
+  await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Brief', exact: true }).click();
+  const quote = 'Calculation:\n\n\\[74/2=37\\]';
+  await expect.poll(() => state.assignments[0].annotations[0]?.evidence[0]?.quote).toBe(quote);
+  const inventory = structuredClone(state.sections);
+  await page.reload();
+  await expect(turn.locator('.section-annotation-label')).toHaveCount(4);
+  expect(state.sections).toEqual(inventory);
+  await expect(turn.locator('.section-annotation-label').nth(1)).toHaveAttribute('data-annotation-ids', /.+/);
+});
+
+test('inline Tamil equations and multiline comparisons render in the labeling view', async ({ page }) => {
+  const state = await backend(page);
+  const text = String.raw`**விடை:** \(74÷2=\boxed{37\ \text{pm}}\).
+
+> **pm** என்பது பிக்கோமீட்டர்; \(1\ \text{pm}=10^{-12}\ \text{m}\).
+
+\[
+\text{ஒற்றைப் பிணைப்பு நீளம்}
+>
+\text{இரட்டைப் பிணைப்பு நீளம்}
+>
+\text{முப்பிணைப்பு நீளம்}
+\]`;
+  state.documents[0].transcript.messages[0].text = text;
+  await login(page, 'alice');
+  await page.locator('a[href^="/assignments/"]').first().click();
+  const turn = page.locator('[data-turn-id="t1"]');
+  await expect(turn.locator('.markdown-inline-math .katex')).toHaveCount(2);
+  await expect(turn.locator('.katex-display')).toHaveCount(1);
+  await expect(turn.locator('.katex-error')).toHaveCount(0);
+  await expect(turn.locator('blockquote')).toHaveCount(1);
+  await expect(turn.locator('.markdown-inline-math').first()).toBeVisible();
+  await turn.getByRole('button', { name: 'Turn 1 - Section 1', exact: true }).click();
+  await page.getByRole('button', { name: 'Examples', exact: true }).click();
+  await page.getByRole('button', { name: 'Brief', exact: true }).click();
+  await expect.poll(() => state.assignments[0].annotations[0]?.evidence[0]?.quote).toBe(text);
+  expect(state.documents[0].transcript.messages[0].text).toBe(text);
+});
+
 const markdown = '### Evaporation\n\nதமிழ் 😀 Wet **clothes** drying is *evaporation*.\n\n1. **Heat**\n2. Add energy\n\n> Water &amp; vapour\n\n| Value | Meaning |\n| --- | --- |\n| 74 pm | Bond length |\n\n```text\nr = 74 / 2\n```\n\n`A &amp; B` and \\*literal\\*.\n\nHave you **understood**? Have you **understood**?';
 
 test('section labeling saves exact Markdown evidence and remains editable after reload', async ({ page }) => {

@@ -2,9 +2,9 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import C from '../../src/generated/core.js';
 import { backend, ids, login, select } from './mock';
-const rubric = JSON.parse(fs.readFileSync('src/generated/rubric.json', 'utf8'));
+const rubric = JSON.parse(fs.readFileSync('tests/fixtures/legacy-rubric.json', 'utf8'));
 
-test('row menu review switches existing annotations and keeps admin work read only', async ({ page }) => {
+test('labeling review omits the summary while switching annotations and keeping admin work read only', async ({ page }) => {
   const state = await backend(page);
   const conversation = C.normalizeConversation(state.documents[0].transcript);
   const quote = 'Wet clothes drying'; const start = conversation.messages[0].text.indexOf(quote);
@@ -19,25 +19,13 @@ test('row menu review switches existing annotations and keeps admin work read on
   const draftValue = JSON.stringify({ annotations: [], revision: 0, rubric_hash: rubric.rubric_sha256 });
   await page.evaluate(({ key, value }) => localStorage.setItem(key, value), { key: draftKey, value: draftValue });
   await expect(page.locator('.conversation-table').getByRole('link', { name: 'View annotations', exact: true })).toHaveCount(0);
-  await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button').click();
-  await page.getByRole('dialog', { name: 'Assign annotators' }).getByRole('link', { name: 'View annotations', exact: true }).click();
+  await page.goto(`/assignments/${ids.a}/view`);
   await expect(page).toHaveURL(new RegExp(`/assignments/${ids.a}/view$`));
-  const switcher = page.getByRole('combobox', { name: 'Annotations by' });
+  const switcher = page.getByRole('combobox', { name: 'Label work by' });
   await expect(switcher).toBeEnabled();
   const summary = page.getByRole('region', { name: 'Annotation summary', exact: true });
-  await expect(summary).toContainText('1 total');
-  const examples = summary.locator('details').filter({ has: page.locator('summary').filter({ hasText: 'Examples' }) });
-  await expect(examples.locator('.category-count')).toHaveText('1');
-  await examples.locator('summary').click();
-  await expect(examples.locator('.attribute-breakdown dl > div').filter({ hasText: 'Explained' })).toHaveText('Explained1');
-  await expect(examples.locator('.category-extra')).toContainText('Supporting passages1');
-  await page.getByRole('button', { name: 'View Examples', exact: true }).hover();
-  await expect(page.getByRole('dialog', { name: 'View Examples' })).toContainText('Explained');
-  await page.getByRole('dialog', { name: 'View Examples' }).hover();
-  await page.getByText('Supporting passages (1)', { exact: true }).click();
-  await expect(page.getByRole('dialog', { name: 'View Examples' }).locator('.evidence')).toContainText(quote);
-  await page.getByRole('heading', { name: 'Evaporation', exact: true }).hover();
-  await expect(page.getByRole('dialog', { name: 'View Examples' })).toHaveCount(0);
+  await expect(summary).toHaveCount(0);
+  await expect(page.getByRole('img', { name: 'Examples: 1', exact: true })).toBeVisible();
   await switcher.selectOption(own.id);
   await expect(page).toHaveURL(/\/assignments\/admin-work\/view$/);
   await expect(page.locator('.save-status')).toContainText('admin · Read only');
@@ -46,17 +34,14 @@ test('row menu review switches existing annotations and keeps admin work read on
   await select(page, 't1', 'What is evaporation?');
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await page.evaluate(() => window.getSelection()?.removeAllRanges());
-  await page.getByRole('button', { name: 'View Examples', exact: true }).hover();
-  await expect(page.getByRole('dialog', { name: 'View Examples' })).toContainText('Explained');
+  await expect(page.getByRole('img', { name: 'Examples: 1', exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Delete highlight' })).toHaveCount(0);
   await switcher.selectOption(ids.b);
   await expect(page).toHaveURL(new RegExp(`/assignments/${ids.b}/view$`));
   await expect(page.locator('mark')).toHaveCount(0);
-  await expect(summary).toContainText('0 total');
-  await expect(summary.locator('.category-count')).toHaveText(['0', '0', '0', '0', '0', '0', '0']);
+  await expect(summary).toHaveCount(0);
   await page.getByRole('button', { name: 'Dashboard', exact: false }).click();
-  await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button').click();
-  await page.getByRole('dialog', { name: 'Assign annotators' }).getByRole('link', { name: 'View annotations', exact: true }).click();
+  await page.goto(`/assignments/${ids.a}/view`);
   await expect(page).toHaveURL(new RegExp(`/assignments/${ids.a}/view$`));
   await expect(switcher).toBeEnabled();
   await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
@@ -66,26 +51,24 @@ test('row menu review switches existing annotations and keeps admin work read on
 
 test('review without admin work offers only existing annotators and unassigned review creates no work', async ({ page }) => {
   const state = await backend(page); await login(page, 'admin');
-  await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button').click();
-  await page.getByRole('dialog', { name: 'Assign annotators' }).getByRole('link', { name: 'View annotations', exact: true }).click();
-  const switcher = page.getByRole('combobox', { name: 'Annotations by' });
+  await page.goto(`/assignments/${ids.a}/view`);
+  const switcher = page.getByRole('combobox', { name: 'Label work by' });
   await expect(switcher).toBeEnabled(); await expect(switcher.locator('option')).toHaveCount(2);
   expect(state.assignments.some(row => row.annotator_id === ids.admin)).toBe(false);
-  await page.getByRole('button', { name: 'Dashboard', exact: false }).click();
   state.assignments.splice(0);
-  await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button').click();
-  await page.getByRole('dialog', { name: 'Assign annotators' }).getByRole('link', { name: 'View annotations', exact: true }).click();
-  await expect(page.getByText('No annotator assignments are available for this conversation yet.', { exact: true })).toBeVisible();
+  await page.goto(`/conversations/${ids.doc}/labeling`);
+  await expect(page.getByText('No label annotations yet', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Complete Annotation', exact: true })).toHaveCount(0);
   expect(state.assignments).toHaveLength(0);
-  await page.getByRole('link', { name: 'Back to conversations', exact: true }).click();
-  await expect(page.locator('.conversation-table')).toBeVisible();
+  await page.getByRole('navigation', { name: 'Conversation navigation' }).getByRole('link', { name: /Unknown provider \/ Tamil/ }).click();
+  await expect(page).toHaveURL(/\/topics\/evaporation\/conversations\//);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Tamil');
 });
 
 test('read-only admin review routes are protected from annotators', async ({ page }) => {
   await backend(page); await login(page, 'alice');
   for (const path of [`/conversations/${ids.doc}/view`, `/assignments/${ids.a}/view`]) {
-    await page.goto(path); await expect(page.getByRole('heading', { name: 'Your assignments', exact: true })).toBeVisible();
+    await page.goto(path); await expect(page.getByRole('region', { name: 'Label instructional features', exact: true })).toBeVisible();
     await expect(page).toHaveURL(/\/$/);
   }
 });

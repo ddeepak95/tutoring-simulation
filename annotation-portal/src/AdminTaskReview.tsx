@@ -1,11 +1,14 @@
 import {resolveCaptureDocument} from './capture-content';
 import {hydrateRows} from './section-registry';
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Editor } from './Editor';
 import { C, supabase } from './lib';
 import type { Annotation, Assignment, AssignmentType, DocumentRow, LLMBaseline, RubricSnapshot, TurnRatings } from './types';
 import { validateTurnRatings } from './turn-ratings';
+import { ApiLabelComparison } from './ApiLabelComparison';
+import { canCompareApiTranslation } from './api-translation';
+import { ConversationBreadcrumbs } from './ConversationBreadcrumbs';
 
 type Source = { key:string; label:string; rubricHash:string; annotations:Annotation[]; ratings:TurnRatings; baseline?:LLMBaseline };
 const errorText=(error:unknown)=>error instanceof Error?error.message:(error as {message?:string})?.message||String(error);
@@ -19,10 +22,11 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
   const [rubric,setRubric]=useState<RubricSnapshot|null>(null);
   const [error,setError]=useState('');
   const [loading,setLoading]=useState(true);
+  const [compareLanguages,setCompareLanguages]=useState(false);
   useEffect(()=>{
     let alive=true;
     void (async()=>{
-      setLoading(true);setError('');
+      setLoading(true);setError('');setCompareLanguages(false);
       try{
         const [doc,work,versions]=await Promise.all([
           supabase!.from('conversations').select('*').eq('id',id).single(),
@@ -40,7 +44,7 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
     return()=>{alive=false;};
   },[id,taskType]);
   const sources=useMemo<Source[]>(()=>[
-    ...baselines.map((baseline,index)=>({key:`baseline:${baseline.id}`,label:`LLM baseline · ${new Date(baseline.created_at).toLocaleString()}${index===0?' · Latest':''}`,rubricHash:baseline.rubric_hash,annotations:baseline.annotations,ratings:{},baseline})),
+    ...baselines.map((baseline,index)=>({key:`baseline:${baseline.id}`,label:`LLM baseline · Prompt ${baseline.prompt_version || 'not recorded'} · ${baseline.model} · ${new Date(baseline.created_at).toLocaleString()}${index===0?' · Latest':''}`,rubricHash:baseline.rubric_hash,annotations:baseline.annotations,ratings:{},baseline})),
     ...assignments.map(row=>({key:`assignment:${row.id}`,label:`${row.profiles?.username||'Annotator'} · ${row.status.replace('_',' ')} · ${new Date(row.updated_at).toLocaleString()}`,rubricHash:row.rubric_hash,annotations:row.annotations,ratings:row.turn_ratings||{}}))
   ],[assignments,baselines]);
   useEffect(()=>{if(!sources.some(source=>source.key===sourceKey))setSourceKey(sources[0]?.key||'');},[sources,sourceKey]);
@@ -61,12 +65,15 @@ export function AdminTaskReview({ taskType }: { taskType: AssignmentType }) {
   },[source?.key,document?.id,taskType]);
   const title=taskType==='label'?'View Labeling':'View Rating';
   if(loading)return <main className="center"><p role="status">Loading {taskType==='label'?'label annotations':'turn ratings'}…</p></main>;
-  if(error)return <main className="center"><p className="error" role="alert">{error}</p><Link to="/">Back to conversations</Link></main>;
-  if(!document)return <main className="center"><p>Conversation not found.</p><Link to="/">Back to conversations</Link></main>;
+  if(error)return <main className="center"><p className="error" role="alert">{error}</p><ConversationBreadcrumbs document={document}/></main>;
+  if(!document)return <main className="center"><p>Conversation not found.</p><ConversationBreadcrumbs document={null}/></main>;
   return <main className="editor-page admin-task-review">
-    <div className="page-heading"><div><span className="eyebrow">{taskType.toUpperCase()} REVIEW</span><h1>{title}</h1><p>{document.transcript.learning_topic||document.label}</p></div><Link to="/" className="secondary">Back to conversations</Link></div>
-    {sources.length>0&&<section className="card review-source"><label htmlFor="review-source">{taskType==='label'?'Annotation source':'Annotator'}</label><select id="review-source" value={sourceKey} onChange={event=>setSourceKey(event.target.value)}>{sources.map(item=><option key={item.key} value={item.key}>{item.label}</option>)}</select></section>}
-    {!sources.length?<section className="card empty"><h2>No {taskType==='label'?'label annotations':'ratings'} yet</h2><p>Assign this task to an annotator to see their work here.</p></section>:source&&rubric&&<>
+    <div className="page-heading"><div><span className="eyebrow">{taskType.toUpperCase()} REVIEW</span><h1>{title}</h1><p>{document.transcript.learning_topic||document.label}</p></div></div>
+    {document.transcript.translation?.alignment_status==='stale'&&<p className="notice" role="status">Retranslation needed: section grouping changed. This translation uses the previous section map.</p>}
+    <ConversationBreadcrumbs document={document} currentPage={taskType === 'label' ? 'Labeling' : 'Rating'}/>
+    {taskType==='label'&&canCompareApiTranslation(document.transcript)&&<button type="button" className="secondary" aria-pressed={compareLanguages} onClick={()=>setCompareLanguages(value=>!value)}>{compareLanguages?'Show single-language labels':'Compare labels side by side'}</button>}
+    {sources.length>0&&!compareLanguages&&<section className="card review-source"><label htmlFor="review-source">{taskType==='label'?'Annotation source':'Annotator'}</label><select id="review-source" value={sourceKey} onChange={event=>setSourceKey(event.target.value)}>{sources.map(item=><option key={item.key} value={item.key}>{item.label}</option>)}</select></section>}
+    {compareLanguages?<ApiLabelComparison key={document.id} conversationId={document.id} conversation={document.transcript} initialSourceKey={sourceKey}/>:!sources.length?<section className="card empty"><h2>No {taskType==='label'?'label annotations':'ratings'} yet</h2><p>Assign this task to an annotator to see their work here.</p></section>:source&&rubric&&<>
       <Editor key={source.key} conversationId={document.id} conversation={document.transcript} rubric={rubric} annotations={source.annotations} onChange={()=>{}} turnRatings={source.ratings} readonly taskType={taskType}/>
     </>}
   </main>;

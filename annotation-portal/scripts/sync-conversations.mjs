@@ -1,3 +1,4 @@
+import { loadSupabaseEnvironment } from './load-supabase-env.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,7 +7,7 @@ import { buildRepositoryCatalog, syncRepositoryCatalog } from './repository-cata
 import { addRepositoryConversations, resolveRepositoryAdmin } from './repository-conversations.mjs';
 
 const portal = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-if (fs.existsSync(path.join(portal, '.env.local'))) process.loadEnvFile(path.join(portal, '.env.local'));
+loadSupabaseEnvironment();
 const args = process.argv.slice(2), runs = []; let expectedProject, adminUsername, allRuns = false, dryRun = false, replaceIdentities = false;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--run') runs.push(args[++i]);
@@ -22,7 +23,7 @@ console.log(JSON.stringify({ conversations: result.catalog.entries.map(({ label,
 if (!dryRun) {
   const url = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
   const ref = url && new URL(url).hostname.match(/^([a-z0-9]+)\.supabase\.co$/)?.[1];
-  if (!ref || new URL(url).protocol !== 'https:' || ref !== expectedProject) throw new Error('--project must match the configured Supabase project. No sync was sent.');
+  if (process.env.SUPABASE_TARGET === 'local' ? expectedProject !== 'local' : !ref || new URL(url).protocol !== 'https:' || ref !== expectedProject) throw new Error('--project must match the configured Supabase project. No sync was sent.');
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) throw new Error('Set server-only SUPABASE_SERVICE_ROLE_KEY in the ignored .env.local.');
   if (!result.files.length) throw new Error('No valid repository conversations were found; nothing was synced.');
   const client = createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false, autoRefreshToken: false } });

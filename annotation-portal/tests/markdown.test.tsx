@@ -15,6 +15,100 @@ function leaves(source: string) {
   walk(parseMarkdown(source)); return result;
 }
 describe('Markdown evidence mapping', () => {
+  it('renders inline units, powers and boxed answers without changing surrounding evidence', () => {
+    const text = String.raw`**விடை:** \(74÷2=\boxed{37\ \text{pm}}\).
+
+> **pm** என்பது பிக்கோமீட்டர்; \(1\ \text{pm}=10^{-12}\ \text{m}\).
+
+Inline $r_A+r_B$ and **\(x_i+y_j\)**. After &amp; more.`;
+    const tree = parseMarkdown(text);
+    const maths: Nodes[] = [];
+    function visit(node: Nodes) {
+      if (node.data?.mathSource) maths.push(node);
+      if ('children' in node) node.children.forEach(visit);
+    }
+    visit(tree);
+    expect(maths).toHaveLength(4);
+    for (const node of maths) {
+      const math = node.data!.mathSource!;
+      expect(text.slice(math.contentStart, math.contentEnd)).toBe(math.tex);
+      expect(node.position?.start.offset).toBe(math.start);
+    }
+    for (const sectionLabels of [false, true]) {
+      const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly={false} sectionLabels={sectionLabels} onHighlight={() => {}} />);
+      expect(html.match(/class="katex"/g)).toHaveLength(4);
+      expect(html).not.toContain('katex-error');
+      expect(html).not.toContain('katex-display');
+      expect(html).toContain('<msup>');
+      expect(html).toContain('class="boxpad"');
+      expect(html).toContain('<blockquote>');
+      expect(html).toContain('<strong>');
+    }
+    const tail = leaves(text).find(item => item.value.includes('After & more.'))!;
+    expect(text.slice(...tail.map[tail.value.indexOf('&')])).toBe('&amp;');
+    expect(text.slice(...tail.map.at(-1)!)).toBe('.');
+  });
+  it('keeps currency, escaped delimiters, code, links and unfinished TeX literal', () => {
+    const text = String.raw`Costs $5 and $10. Escaped \$x\$. Unfinished \(x.
+
+\(unclosed
+
+` + '`\\(x\\)` and `$$x$$`\n\n```tex\n\\(x\\)\n```\n\n[reference](https://example.com/$x$)';
+    const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly onHighlight={() => {}} />);
+    expect(html).not.toContain('class="katex"');
+    expect(html).toContain('Costs $5 and $10.');
+    expect(html).toContain('href="https://example.com/$x$"');
+    expect(html).toContain('<code>');
+  });
+  it('preserves equation highlight metadata and renders invalid TeX without crashing', () => {
+    const text = String.raw`Answer \(\boxed{37}\) then \(\frac{\).`;
+    const start = text.indexOf('\\boxed'), end = start + String.raw`\boxed{37}`.length;
+    const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text }] });
+    const annotation = C.createAnnotation('examples', C.makeEvidence(conversation, 't1', start, end), bundledRubric.rubric, 'math-example');
+    const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[annotation]} rubric={bundledRubric.rubric} readonly={false} onHighlight={() => {}} />);
+    expect(html).toContain('markdown-inline-math annotated-math');
+    expect(html).toContain('data-annotation-ids="math-example"');
+    expect(html).toContain(`data-math-source-start="${start}"`);
+    expect(html).toContain(`data-math-source-end="${end}"`);
+    expect(html).toContain('katex-error');
+  });
+  it.each([['\\[', '\\]', false], ['\\[', '\\]', true], ['$$', '$$', false], ['$$', '$$', true]] as const)('renders multiline Tamil comparisons inside %s (blank lines: %s, %s) as one equation', (open, close, blankLines) => {
+    const spaced = String.raw`\text{ஒற்றைப் பிணைப்பு நீளம்}
+
+>
+
+\text{இரட்டைப் பிணைப்பு நீளம்}
+
+>
+
+\text{முப்பிணைப்பு நீளம்}`;
+    const tex = blankLines ? spaced : spaced.replace(/\n\n/g, '\n');
+    const text = `Before.\n\n${open}\n${tex}\n${close}\n\nAfter **text**.\n\n> Ordinary quote`;
+    const tree = parseMarkdown(text);
+    expect(tree.children.map(node => node.type)).toEqual(['paragraph', 'paragraph', 'paragraph', 'blockquote']);
+    const start = text.indexOf(tex);
+    for (const sectionLabels of [false, true]) {
+      const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly={false} sectionLabels={sectionLabels} onHighlight={() => {}} />);
+      expect(html.match(/class="katex-display"/g)).toHaveLength(1);
+      expect(html).not.toContain('katex-error');
+      expect(html.match(/<blockquote>/g)).toHaveLength(1);
+      expect(html).toContain('ஒற்றைப் பிணைப்பு நீளம்');
+      expect(html).toContain('<strong>');
+      if (!sectionLabels) {
+        expect(html).toContain(`data-math-source-start="${start}"`);
+        expect(html).toContain(`data-math-source-end="${start + tex.length}"`);
+      }
+    }
+    const after = leaves(text).find(item => item.value === 'text')!;
+    expect(text.slice(after.map[0][0], after.map.at(-1)![1])).toBe('text');
+  });
+  it('keeps fenced TeX examples and unmatched delimiters as ordinary Markdown', () => {
+    const text = '```tex\n\\[\nx > y\n\\]\n```\n\n\\[unclosed\n\n> Quote';
+    const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly onHighlight={() => {}} />);
+    expect(html).not.toContain('katex-display');
+    expect(html).toContain('<pre><code');
+    expect(html).toContain('<blockquote>');
+  });
   it('uses section buttons instead of inline highlights in the labeling view', () => {
     const text = 'Introduction.\n\n## Topic\n\nFirst sentence. Second sentence.\n\n**Details:**\n\nMore explanation.\n\n$$F=ma$$';
     const conversation = C.normalizeConversation({ messages: [{ turn_id: 't1', speaker: 'tutor', text }] });
@@ -89,12 +183,12 @@ $$
 E = mc^2
 $$
 
-\`\[not math\]\``;
+` + '`\\[not math\\]`';
     const html = renderToStaticMarkup(<MarkdownTranscript text={text} turnId="t1" annotations={[]} rubric={[]} readonly={false} onHighlight={() => {}} />);
     expect(html.match(/class="katex-display"/g)).toHaveLength(2);
     expect(html).toContain('<annotation encoding="application/x-tex">\\mathrm{Mg \\rightarrow Mg^{2+} + 2e^-}</annotation>');
     expect(html).toContain(`data-math-source-start="${text.indexOf('\\mathrm')}"`);
     expect(html).toContain(`data-math-source-end="${text.indexOf('\\mathrm') + String.raw`\mathrm{Mg \rightarrow Mg^{2+} + 2e^-}`.length}"`);
-    expect(html).toContain('[not math]');
+    expect(html).toContain('\\[not math\\]');
   });
 });

@@ -5,14 +5,15 @@ import type { Assignment, AssignmentType, DocumentRow, LLMBaseline, Profile } fr
 import { bundledRubric, supabase } from './lib';
 
 interface Props {
+  initialPanel?:'menu'|'assign';
   documents: DocumentRow[]; users: Profile[]; assignments: Assignment[]; anchor: HTMLButtonElement;
   onAssign: (documentIds: string[], userIds: string[], baselineIds: Record<string,string>, taskTypes: AssignmentType[]) => Promise<void>; onClose: () => void;
   onDelete: (document: DocumentRow) => void;
   onUnassign: (assignments: Assignment[]) => Promise<void>;
 }
 
-export function AssignmentMenu({ documents, users, assignments, anchor, onAssign, onClose, onDelete, onUnassign }: Props) {
-  const [panel, setPanel] = useState<'menu'|'assign'>('menu');
+export function AssignmentMenu({ documents, users, assignments, anchor, onAssign, onClose, onDelete, onUnassign,initialPanel='menu' }: Props) {
+  const [panel, setPanel] = useState<'menu'|'assign'>(initialPanel);
   const [task, setTask] = useState<AssignmentType>('label');
   const [selected, setSelected] = useState<Record<AssignmentType,string[]>>({ label: [], rate: [] });
   const [busy, setBusy] = useState(false); const [error, setError] = useState('');
@@ -57,7 +58,7 @@ export function AssignmentMenu({ documents, users, assignments, anchor, onAssign
       {taskRows.length>0&&<fieldset><legend>Currently assigned</legend>{users.filter(user=>count(user.id)>0).map(user=><div key={user.id} className="actions"><span>{user.username}{documents.length>1?` (${count(user.id)} conversations)`:''}</span><button type="button" className="text-button" disabled={busy} onClick={()=>{setRemoving(user);setError('');}}>Unassign</button></div>)}</fieldset>}
       {removing&&<div className="notice"><strong>Unassign {removing.username} from {count(removing.id)} conversation{count(removing.id)===1?'':'s'}?</strong><p>Saved work and history are retained.</p><div className="actions"><button type="button" className="secondary" disabled={busy} onClick={()=>setRemoving(null)}>Cancel</button><button type="button" className="delete-confirm" disabled={busy} onClick={()=>void unassign()}>Confirm unassign</button></div></div>}
       {error&&<p className="error" role="alert">{error}</p>}
-      <div className="actions"><button type="button" className="secondary" disabled={busy} onClick={()=>{setPanel('menu');setError('');}}>Back</button><button type="submit" className="primary" disabled={busy||Boolean(removing)||loadingBaselines||!selectedUsers.length}>{busy?'Assigning…':`Assign ${task==='label'?'labeling':'rating'}`}</button></div>
+      <div className="actions">{initialPanel!=='assign'&&<button type="button" className="secondary" disabled={busy} onClick={()=>{setPanel('menu');setError('');}}>Back</button>}<button type="submit" className="primary" disabled={busy||Boolean(removing)||loadingBaselines||!selectedUsers.length}>{busy?'Assigning…':`Assign ${task==='label'?'labeling':'rating'}`}</button></div>
     </>}
   </form>,document.body);
 }

@@ -1,36 +1,18 @@
 {
   "label_schema_version": "section-items/1",
   "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
-  "rubric_sha256": "e62fa74cc5c8099c2f40460e6a9a1c3ff841712da042fc7ba46cb349f54e563c",
+  "rubric_sha256": "0e8d9514c1eb5f6f2359d67d73377081a6ebd7858452c8df4afdf48291aec351",
   "rubric": [
     {
-      "key": "photographs",
-      "name": "Photographs",
-      "short_label": "Photographs",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Photographic images of real objects, people, places, or events.",
-      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Photographic images of real objects, people, places, or events. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
-      "fields": [
-        {
-          "key": "count",
-          "label": "Occurrences",
-          "numeric": true
-        }
-      ]
-    },
-    {
       "key": "diagrams_and_illustrations",
-      "name": "Diagram & Illustrations",
-      "short_label": "Diagram & Illustrations",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Drawn or schematic illustrations that explain structures or relationships; exclude flow diagrams, graphs, and maps.",
+      "name": "Diagrams & Illustrations",
+      "short_label": "Diagrams & Illustrations",
+      "category": "Visuals & Rich Media",
+      "color": "#921c1c",
+      "highlight": "#ebd6d6",
+      "description": "Tag conceptual drawings, system architectures, anatomical/scientific schematics, or visual metaphors (including ASCII, SVG, or Mermaid structural diagrams). Exclude sequential flowcharts (*Flow Diagrams*) and quantitative data plots (*Graphs*). Include text-drawn diagrams made from ASCII or Unicode characters, including fenced code or preformatted blocks. An image attachment is not required. Inspect preserved line breaks, spacing, endpoints, and connectors. Exclude ordinary prose, lists, executable code, and isolated chemical formulas without a schematic spatial representation. Apply the same structural criteria in every language and translation; translating labels alone does not add or remove a diagram.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Drawn or schematic illustrations that explain structures or relationships; exclude flow diagrams, graphs, and maps. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag conceptual drawings, system architectures, anatomical/scientific schematics, or visual metaphors (including ASCII, SVG, or Mermaid structural diagrams). Exclude sequential flowcharts (*Flow Diagrams*) and quantitative data plots (*Graphs*). Include text-drawn diagrams made from ASCII or Unicode characters, including fenced code or preformatted blocks. An image attachment is not required. Inspect preserved line breaks, spacing, endpoints, and connectors. Exclude ordinary prose, lists, executable code, and isolated chemical formulas without a schematic spatial representation. Apply the same structural criteria in every language and translation; translating labels alone does not add or remove a diagram.",
       "fields": [
         {
           "key": "count",
@@ -41,14 +23,14 @@
     },
     {
       "key": "flow_diagrams",
-      "name": "Flow Diagram",
-      "short_label": "Flow Diagram",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Diagrams showing a sequence, process, or decision flow.",
+      "name": "Flow Diagrams",
+      "short_label": "Flow Diagrams",
+      "category": "Visuals & Rich Media",
+      "color": "#1c923e",
+      "highlight": "#d6ebdc",
+      "description": "Tag multi-line visual representations of sequential processes, algorithms, decision trees, state machines, or workflows with directional arrows. Require more than one meaningful visual row or level. A single-line sequence such as \"Input → Process → Output\" is not a Flow Diagram, even when bold, fenced as code, or automatically wrapped onto several screen lines. Prose, numbered instructions, and line breaks alone do not qualify. For images, SVG, or Mermaid, judge the rendered visual layout, not serialized source line counts. A top-to-bottom multi-level process or a branching decision diagram qualifies when connected stages span multiple visual rows or levels. Exclude static structural diagrams without sequential flow (Diagrams & Illustrations). Count each complete qualifying diagram once, not its rows, stages, or arrows.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Diagrams showing a sequence, process, or decision flow. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag multi-line visual representations of sequential processes, algorithms, decision trees, state machines, or workflows with directional arrows. Require more than one meaningful visual row or level. A single-line sequence such as \"Input → Process → Output\" is not a Flow Diagram, even when bold, fenced as code, or automatically wrapped onto several screen lines. Prose, numbered instructions, and line breaks alone do not qualify. For images, SVG, or Mermaid, judge the rendered visual layout, not serialized source line counts. A top-to-bottom multi-level process or a branching decision diagram qualifies when connected stages span multiple visual rows or levels. Exclude static structural diagrams without sequential flow (Diagrams & Illustrations). Count each complete qualifying diagram once, not its rows, stages, or arrows.",
       "fields": [
         {
           "key": "count",
@@ -61,12 +43,12 @@
       "key": "graphs",
       "name": "Graphs",
       "short_label": "Graphs",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Plots or charts that encode quantities or relationships.",
+      "category": "Visuals & Rich Media",
+      "color": "#611c92",
+      "highlight": "#e3d6eb",
+      "description": "Tag quantitative data visualizations or mathematical function plots (e.g., bar charts, line graphs, scatter plots, histograms, plotted $x/y$ coordinate curves). Exclude node-edge network diagrams that do not plot quantitative axes.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Plots or charts that encode quantities or relationships. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag quantitative data visualizations or mathematical function plots (e.g., bar charts, line graphs, scatter plots, histograms, plotted $x/y$ coordinate curves). Exclude node-edge network diagrams that do not plot quantitative axes.",
       "fields": [
         {
           "key": "count",
@@ -76,15 +58,15 @@
       ]
     },
     {
-      "key": "maps",
-      "name": "Maps",
-      "short_label": "Maps",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Geographical or spatial maps.",
+      "key": "static_images",
+      "name": "Static Images",
+      "short_label": "Static Images",
+      "category": "Visuals & Rich Media",
+      "color": "#92831c",
+      "highlight": "#ebe9d6",
+      "description": "Tag non-schematic static visual media, including real-world photographs, geographical/spatial maps, UI screenshots, or decorative/other imagery. Exclude explanatory diagrams, flowcharts, or quantitative data graphs.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Geographical or spatial maps. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag non-schematic static visual media, including real-world photographs, geographical/spatial maps, UI screenshots, or decorative/other imagery. Exclude explanatory diagrams, flowcharts, or quantitative data graphs.",
       "fields": [
         {
           "key": "count",
@@ -94,51 +76,15 @@
       ]
     },
     {
-      "key": "animations",
-      "name": "Animations",
-      "short_label": "Animations",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Moving visual sequences; count each animation, not its frames.",
+      "key": "interactive_animated_media",
+      "name": "Interactive & Animated Media",
+      "short_label": "Interactive & Animated Media",
+      "category": "Visuals & Rich Media",
+      "color": "#1c7e92",
+      "highlight": "#d6e8eb",
+      "description": "Tag any visual or audio-visual asset with temporal playback or user manipulation (e.g., GIFs, embedded video/audio players, dynamic animations, interactive sliders, or runnable canvas simulations/applets). Count each media component once, not individual animation frames or interaction states. Require evidence of playback or substantive manipulation; do not infer these from a still image alone. Question pagination and gallery Previous/Next controls alone do not qualify.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Moving visual sequences; count each animation, not its frames. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
-      "fields": [
-        {
-          "key": "count",
-          "label": "Occurrences",
-          "numeric": true
-        }
-      ]
-    },
-    {
-      "key": "interactive_media",
-      "name": "Interactive Media",
-      "short_label": "Interactive Media",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions.",
-      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Instructional media the learner can substantively manipulate or explore, such as simulations, adjustable parameters, draggable elements, or responsive visualizations; count each interactive component. Question pagination and Previous/Next buttons alone do not qualify as Interactive Media. Do not classify a quiz as interactive media solely because it allows navigation between questions. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
-      "fields": [
-        {
-          "key": "count",
-          "label": "Occurrences",
-          "numeric": true
-        }
-      ]
-    },
-    {
-      "key": "other_images",
-      "name": "Other Images",
-      "short_label": "Other Images",
-      "category": "Multimedia",
-      "color": "#36759c",
-      "highlight": "#e7f2fa",
-      "description": "Instructional images not covered by another multimedia item; exclude decorative images.",
-      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Instructional images not covered by another multimedia item; exclude decorative images. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections. Include hidden instructional images when an explicit quantity cue establishes the total; include the visible image in that total once. Classify hidden images only as specifically as the evidence supports, using Other Images when their type is unknown. A navigation arrow alone does not establish a quantity. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag any visual or audio-visual asset with temporal playback or user manipulation (e.g., GIFs, embedded video/audio players, dynamic animations, interactive sliders, or runnable canvas simulations/applets). Count each media component once, not individual animation frames or interaction states. Require evidence of playback or substantive manipulation; do not infer these from a still image alone. Question pagination and gallery Previous/Next controls alone do not qualify.",
       "fields": [
         {
           "key": "count",
@@ -151,12 +97,30 @@
       "key": "headings",
       "name": "Headings",
       "short_label": "Headings",
-      "category": "Textual Representations",
-      "color": "#765b96",
-      "highlight": "#f0eaf7",
-      "description": "Explicit headings and standalone bold section titles; exclude speaker labels and capture metadata.",
+      "category": "Formatting & Notation",
+      "color": "#6b7280",
+      "highlight": "#e5e7eb",
+      "description": "Tag visual section dividers used to organize the explanation hierarchy, including Markdown headings (`#`, `##`, `###`) and standalone bolded lines acting as section titles. Do not tag bolded lead-in phrases inside a bullet point or paragraph.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Explicit headings and standalone bold section titles; exclude speaker labels and capture metadata. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag visual section dividers used to organize the explanation hierarchy, including Markdown headings (`#`, `##`, `###`) and standalone bolded lines acting as section titles. Do not tag bolded lead-in phrases inside a bullet point or paragraph.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "lists",
+      "name": "Lists / Bullet Points",
+      "short_label": "Lists / Bullet Points",
+      "category": "Formatting & Notation",
+      "color": "#39921c",
+      "highlight": "#dbebd6",
+      "description": "Tag unordered (`*`, `-`) or numbered (`1.`, `2.`) vertical groupings of items, features, or points (count the entire list block as `1` instance). Exclude sequential numbered instructions showing how to solve a problem or execute a process from start to finish (*Step-by-Step Walkthroughs*). Count each complete list block once, not each bullet or item. Nested sublists within one cohesive list belong to that occurrence. Procedural walkthroughs do not additionally count as Lists / Bullet Points.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag unordered (`*`, `-`) or numbered (`1.`, `2.`) vertical groupings of items, features, or points (count the entire list block as `1` instance). Exclude sequential numbered instructions showing how to solve a problem or execute a process from start to finish (*Step-by-Step Walkthroughs*). Count each complete list block once, not each bullet or item. Nested sublists within one cohesive list belong to that occurrence. Procedural walkthroughs do not additionally count as Lists / Bullet Points.",
       "fields": [
         {
           "key": "count",
@@ -169,12 +133,30 @@
       "key": "tables",
       "name": "Tables",
       "short_label": "Tables",
-      "category": "Textual Representations",
-      "color": "#765b96",
-      "highlight": "#f0eaf7",
-      "description": "Tabular arrangements of information; count each complete table once.",
+      "category": "Formatting & Notation",
+      "color": "#211c92",
+      "highlight": "#d7d6eb",
+      "description": "Tag structured grid layouts organizing information into rows and columns (e.g., Markdown tables, comparison matrices, truth tables). Exclude tab-aligned plain text or lists.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Tabular arrangements of information; count each complete table once. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag structured grid layouts organizing information into rows and columns (e.g., Markdown tables, comparison matrices, truth tables). Exclude tab-aligned plain text or lists.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "callouts",
+      "name": "Callouts",
+      "short_label": "Callouts",
+      "category": "Formatting & Notation",
+      "color": "#92431c",
+      "highlight": "#ebddd6",
+      "description": "Tag visually set-apart text blocks used to draw attention to side notes, tips, or warnings (e.g., Markdown blockquotes `>`, admonition boxes like `Note:` or `Tip:`). Can be double-tagged with pedagogical labels (like *Misconceptions* or *Summaries / Key Takeaways*) if the callout serves that specific pedagogical role. Count each distinct callout block once within its section. Bold or italic formatting alone never qualifies, whether applied to a word, phrase, complete sentence, or paragraph. Exclude ordinary bold or italic body text, heading titles, speaker labels, portal section borders and labels. A formula display or boxed numerical result alone is not a Callout. The same block may receive both Callouts and a pedagogical label when both definitions are independently satisfied.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag visually set-apart text blocks used to draw attention to side notes, tips, or warnings (e.g., Markdown blockquotes `>`, admonition boxes like `Note:` or `Tip:`). Can be double-tagged with pedagogical labels (like *Misconceptions* or *Summaries / Key Takeaways*) if the callout serves that specific pedagogical role. Count each distinct callout block once within its section. Bold or italic formatting alone never qualifies, whether applied to a word, phrase, complete sentence, or paragraph. Exclude ordinary bold or italic body text, heading titles, speaker labels, portal section borders and labels. A formula display or boxed numerical result alone is not a Callout. The same block may receive both Callouts and a pedagogical label when both definitions are independently satisfied.",
       "fields": [
         {
           "key": "count",
@@ -185,14 +167,50 @@
     },
     {
       "key": "equations",
-      "name": "Equations",
-      "short_label": "Equations",
-      "category": "Textual Representations",
-      "color": "#765b96",
-      "highlight": "#f0eaf7",
-      "description": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section.",
+      "name": "Mathematical Notation",
+      "short_label": "Mathematical Notation",
+      "category": "Formatting & Notation",
+      "color": "#1c9266",
+      "highlight": "#d6ebe3",
+      "description": "Tag formal symbolic math, equations, formulas, or variables rendered via LaTeX or mathematical symbols (e.g., standalone equations, inline variables like $x$ or $\\theta$, chemical reaction equations). Exclude plain-text numbers, dates, currency, or percentages. Chemical formulas and species names alone do not qualify, even with subscripts, superscripts, ionic charges, or LaTeX formatting (e.g., H2O, CO2, NaCl, or Ca2+). Count chemical notation only when it represents a reaction with reactants and products; a list or comparison of chemical formulas is not a reaction. An actual mathematical calculation involving chemical quantities can still qualify as math; do not count its chemical species separately. Count one cohesive notation sequence or connected derivation once within its section, including its general formula, substitutions, rearrangements, intermediate steps, and final answer. Count unrelated notation sequences separately; do not count each variable or line within the same sequence. Standalone formal symbolic variables qualify when outside an already counted sequence. Symbolic comparisons and ordered relationships qualify whether the compared terms are variables, numerical values, or descriptive labels. Exclude isolated plain-text numbers, dates, currency, percentages, and unit labels. Centering, bold text, or TeX formatting alone does not establish Mathematical Notation.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Mathematical equalities, inequalities, and symbolic formulas, inline or displayed. Count a connected equation, calculation, or derivation solving for one result as one occurrence, including its general formula, substitutions, rearrangements, intermediate steps, and final answer, even across multiple lines or displays. For example, r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence. Count separate calculations or unrelated formulas separately; keep counts within their section. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag formal symbolic math, equations, formulas, or variables rendered via LaTeX or mathematical symbols (e.g., standalone equations, inline variables like $x$ or $\\theta$, chemical reaction equations). Exclude plain-text numbers, dates, currency, or percentages. Chemical formulas and species names alone do not qualify, even with subscripts, superscripts, ionic charges, or LaTeX formatting (e.g., H2O, CO2, NaCl, or Ca2+). Count chemical notation only when it represents a reaction with reactants and products; a list or comparison of chemical formulas is not a reaction. An actual mathematical calculation involving chemical quantities can still qualify as math; do not count its chemical species separately. Count one cohesive notation sequence or connected derivation once within its section, including its general formula, substitutions, rearrangements, intermediate steps, and final answer. Count unrelated notation sequences separately; do not count each variable or line within the same sequence. Standalone formal symbolic variables qualify when outside an already counted sequence. Symbolic comparisons and ordered relationships qualify whether the compared terms are variables, numerical values, or descriptive labels. Exclude isolated plain-text numbers, dates, currency, percentages, and unit labels. Centering, bold text, or TeX formatting alone does not establish Mathematical Notation.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "definitions",
+      "name": "Definitions",
+      "short_label": "Definitions",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#881c92",
+      "highlight": "#ead6eb",
+      "description": "Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "step_by_step_walkthroughs",
+      "name": "Step-by-Step Walkthroughs",
+      "short_label": "Step-by-Step Walkthroughs",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#79921c",
+      "highlight": "#e7ebd6",
+      "description": "Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points.",
       "fields": [
         {
           "key": "count",
@@ -205,12 +223,30 @@
       "key": "examples",
       "name": "Examples",
       "short_label": "Examples",
-      "category": "Content",
-      "color": "#397b71",
-      "highlight": "#e2f3ee",
-      "description": "Specific real or hypothetical cases illustrating a concept, rule, or principle; count repeated occurrences within the section.",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c5792",
+      "highlight": "#d6e1eb",
+      "description": "Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Specific real or hypothetical cases illustrating a concept, rule, or principle; count repeated occurrences within the section. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "real_world_connections",
+      "name": "Real-World Connections / Applications",
+      "short_label": "Real-World Connections / Applications",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#921c34",
+      "highlight": "#ebd6da",
+      "description": "Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation.",
       "fields": [
         {
           "key": "count",
@@ -223,12 +259,30 @@
       "key": "analogies",
       "name": "Analogies",
       "short_label": "Analogies",
-      "category": "Content",
-      "color": "#397b71",
-      "highlight": "#e2f3ee",
-      "description": "Comparisons that explain a concept through another situation or domain.",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c9226",
+      "highlight": "#d6ebd8",
+      "description": "Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Comparisons that explain a concept through another situation or domain. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "misconceptions_pitfalls",
+      "name": "Misconceptions",
+      "short_label": "Misconceptions",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#481c92",
+      "highlight": "#ded6eb",
+      "description": "Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction.",
       "fields": [
         {
           "key": "count",
@@ -241,12 +295,48 @@
       "key": "memory_aids",
       "name": "Memory Aids",
       "short_label": "Memory Aids",
-      "category": "Content",
-      "color": "#397b71",
-      "highlight": "#e2f3ee",
-      "description": "Mnemonics, memory tips, and explicit summaries that help recall learning content.",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#926b1c",
+      "highlight": "#ebe4d6",
+      "description": "Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Mnemonics, memory tips, and explicit summaries that help recall learning content. Select its section, choose this item, and enter the number of occurrences in that section. Include repeats. Save one label per section/item pair. Do not merge evidence from different sections.",
+      "guidance": "Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "summaries_key_takeaways",
+      "name": "Summaries / Key Takeaways",
+      "short_label": "Summaries / Key Takeaways",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c928d",
+      "highlight": "#d6ebea",
+      "description": "Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "social_cues",
+      "name": "Social Cues",
+      "short_label": "Social Cues",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#921c74",
+      "highlight": "#ebd6e6",
+      "description": "Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression.",
       "fields": [
         {
           "key": "count",
@@ -259,12 +349,84 @@
       "key": "questions",
       "name": "Questions",
       "short_label": "Questions",
-      "category": "Content",
-      "color": "#397b71",
-      "highlight": "#e2f3ee",
-      "description": "Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as \"Have you understood?\" or \"Does that make sense?\", invitations for questions, and learning-preference or continuation questions.",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#51921c",
+      "highlight": "#e0ebd6",
+      "description": "Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion.",
       "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
-      "guidance": "Knowledge-checking questions that ask the student to demonstrate subject-matter knowledge by giving an answer, explanation, prediction, calculation, or solution. Exclude rhetorical or tutor-answered questions, heading titles, self-report understanding checks such as \"Have you understood?\" or \"Does that make sense?\", invitations for questions, and learning-preference or continuation questions. Include hidden questions in a clearly knowledge-checking quiz when explicit counters or pagination establish the total, including the visible question once. Do not infer knowledge-checking intent from a question mark alone. Captured interaction states are supporting views of the original containing section, not additional sections or additional components. A quiz with three questions remains three questions when the learner selects an answer, views feedback, or navigates Previous/Next. Count each question/image in that component once across its supporting views. Separate components in the same section remain separate; do not deduplicate merely by matching text. Supporting-view captions and capture metadata do not count as headings.",
+      "guidance": "Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "comprehension_checks",
+      "name": "Comprehension Checks",
+      "short_label": "Comprehension Checks",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#1c2f92",
+      "highlight": "#d6daeb",
+      "description": "Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "hints_scaffolding",
+      "name": "Hints / Scaffolding",
+      "short_label": "Hints / Scaffolding",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#922b1c",
+      "highlight": "#ebd9d6",
+      "description": "Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "next_step_suggestions",
+      "name": "Next Step Suggestions",
+      "short_label": "Next Step Suggestions",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#1c924d",
+      "highlight": "#d6ebdf",
+      "description": "Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "bot_errors_hallucinations",
+      "name": "Bot Errors / Hallucinations",
+      "short_label": "Bot Errors / Hallucinations",
+      "category": "Quality & Error Tracking",
+      "color": "#701c92",
+      "highlight": "#e5d6eb",
+      "description": "Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa.",
+      "entry_attributes": "`category` (fixed metadata); `count` (1-1000); `section_id` (HTML captures; no offsets); `turn_locations` (legacy formats)",
+      "guidance": "Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa.",
       "fields": [
         {
           "key": "count",
@@ -276,108 +438,186 @@
   ],
   "rating_dimensions": [
     {
-      "key": "explaining_the_core_principle",
-      "label": "Explaining the Core Principle",
-      "description": "How well does the response explain the underlying concept or principle, rather than only presenting facts or steps?",
+      "key": "topic_introduction_and_learner_engagement",
+      "label": "Topic Introduction and Learner Engagement",
+      "description": "How effectively does the chatbot introduce the topic, spark the learner's interest, and explore their prior knowledge and learning goals?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Gives facts or steps without explaining the underlying principle, or explains it inaccurately.",
-        "2": "Identifies the principle, but the explanation or connection is incomplete or unclear.",
-        "3": "Clearly explains how or why the concept works and connects facts or steps to the underlying principle."
+        "1": "1 — Ineffective: Jumps directly into explaining the topic without attempting to engage the student, assess prior knowledge, or understand learning goals.",
+        "2": "2 — Partially effective: Introduces the topic but makes limited effort to engage the student or explore prior knowledge and goals. Questions may be generic or superficial.",
+        "3": "3 — Effective: Introduces the topic in a way that sparks curiosity or excitement. Makes a meaningful attempt to learn what the student already knows and what they want to learn before proceeding.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response explain the underlying concept or principle, rather than only presenting facts or steps?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": true,
       "subsequent_only": false
     },
     {
-      "key": "use_of_instructional_features",
-      "label": "Use of Instructional Features",
-      "description": "How well does the response utilize instructional features such as examples, analogies, diagrams, and memory aids to teach the concept?",
+      "key": "amount_of_information",
+      "label": "Amount of Information",
+      "description": "How appropriately does the chatbot adjust the amount and depth of information to a high school learner's needs?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Features confuse or mislead the learner, or the concept remains difficult to understand because helpful features are absent.",
-        "2": "Features partly support learning but are underdeveloped, disconnected, or leave some gaps in understanding.",
-        "3": "Uses appropriate instructional features accurately to clarify the concept; when no feature is needed, the explanation teaches the concept clearly without one."
+        "1": "1 — Ineffective: Gives too little information to understand the topic, or overwhelms the learner with excessive, irrelevant, or poorly organized detail.",
+        "2": "2 — Partially effective: Provides a generally useful explanation but is somewhat too brief, overly detailed, repetitive, or unevenly paced.",
+        "3": "3 — Effective: Provides enough detail to make the topic understandable, focuses on essential ideas, and presents information in manageable amounts without unnecessary repetition.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response utilize instructional features such as examples, analogies, diagrams, and memory aids to teach the concept?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
       "subsequent_only": false
     },
     {
-      "key": "focus_and_amount_of_information",
-      "label": "Focus and Amount of Information",
-      "description": "How well does the response stay focused and provide an appropriate amount of information?",
+      "key": "naturalness_of_the_conversation",
+      "label": "Naturalness of the Conversation",
+      "description": "How natural, approachable, and conversational is the chatbot's response?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Has substantial gaps, or is so irrelevant, repetitive, or overloaded that it impedes understanding.",
-        "2": "Generally focused, but includes some unnecessary or repetitive material, or leaves out useful detail.",
-        "3": "Covers the essential ideas with enough detail and little unnecessary repetition or digression."
+        "1": "1 — Ineffective: Feels robotic, disjointed, or unnatural in a way that makes the exchange difficult to follow or discourages interaction.",
+        "2": "2 — Partially effective: Is understandable but at times feels scripted, overly formal, repetitive, or awkward.",
+        "3": "3 — Effective: Uses clear, friendly, age-appropriate language and a smooth conversational flow that makes the learner feel comfortable participating.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response stay focused and provide an appropriate amount of information?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
       "subsequent_only": false
     },
     {
-      "key": "opportunity_to_demonstrate_understanding",
-      "label": "Opportunity to Demonstrate Understanding",
-      "description": "How well does the response give the learner an opportunity to demonstrate understanding?",
+      "key": "examples_analogies_and_real_world_connections",
+      "label": "Examples, Analogies, and Real-World Connections",
+      "description": "How effectively does the chatbot use examples, analogies, or real-world connections to explain the concept?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Provides no meaningful opportunity, or the prompt does not help demonstrate understanding.",
-        "2": "Provides only a generic check, recall prompt, or vague practice suggestion.",
-        "3": "Provides a relevant, concrete question or task that asks the learner to explain, predict, or apply the concept."
+        "1": "1 — Ineffective: Uses confusing or misleading examples, or omits helpful examples and connections so that the concept remains difficult to understand.",
+        "2": "2 — Partially effective: Includes an example, analogy, or connection, but it is generic, underdeveloped, or only loosely linked to the concept.",
+        "3": "3 — Effective: Uses accurate, relevant, and accessible examples, analogies, or real-world connections that clearly help the learner understand the concept.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response give the learner an opportunity to demonstrate understanding?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
+      "subsequent_only": false
+    },
+    {
+      "key": "clarifying_misconceptions",
+      "label": "Clarifying Misconceptions",
+      "description": "How effectively does the chatbot anticipate or clarify common misconceptions a learner might have about the topic?",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "N/A"
+      ],
+      "scale_items": {
+        "1": "1 — Ineffective: Ignores an important likely misconception, reinforces an incorrect belief, or introduces further confusion.",
+        "2": "2 — Partially effective: Mentions a possible misconception or source of confusion but only partly resolves it, leaving the distinction unclear.",
+        "3": "3 — Effective: Identifies a relevant likely misconception or point of confusion and explains the correct idea clearly, including why the mistaken interpretation is inaccurate.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
+      },
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
+      "subsequent_only": false
+    },
+    {
+      "key": "memory_aids_and_key_takeaways",
+      "label": "Memory Aids and Key Takeaways",
+      "description": "How effectively does the chatbot use memory aids such as mnemonics, key takeaways, or summaries to help the learner remember the concept?",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "N/A"
+      ],
+      "scale_items": {
+        "1": "1 — Ineffective: Provides no useful reinforcement when it would help, or uses a misleading or confusing memory aid.",
+        "2": "2 — Partially effective: Attempts reinforcement, but the memory aid or summary is vague, overly long, incomplete, or not clearly connected to the central idea.",
+        "3": "3 — Effective: Reinforces the most important ideas with a concise, accurate, and useful summary, key takeaway, mnemonic, or other memory aid.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
+      },
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
+      "subsequent_only": false
+    },
+    {
+      "key": "checking_understanding",
+      "label": "Checking Understanding",
+      "description": "How effectively does the chatbot check the learner's understanding of the concept?",
+      "options": [
+        "3",
+        "2",
+        "1",
+        "N/A"
+      ],
+      "scale_items": {
+        "1": "1 — Ineffective: Does not attempt a meaningful understanding check, or asks a question unrelated to what the learner should understand.",
+        "2": "2 — Partially effective: Offers only a generic check such as “Does that make sense?”, a simple recall question, or an unfocused practice prompt.",
+        "3": "3 — Effective: Gives the learner a specific, relevant opportunity to explain, predict, apply, or reason about the concept.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
+      },
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
       "subsequent_only": false
     },
     {
       "key": "guidance_for_next_steps",
       "label": "Guidance for Next Steps",
-      "description": "How well does the response guide the learner toward useful next steps?",
+      "description": "How effectively does the chatbot guide the learner toward an appropriate next step in learning?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Provides no useful next step, or points the learner toward something irrelevant or confusing.",
-        "2": "Suggests a next step, but it is vague, only partly relevant, or does not give a clear direction.",
-        "3": "Suggests a relevant next concept, practice activity, resource, or action and gives a clear direction for what to do next."
+        "1": "1 — Ineffective: Gives no useful direction for continuing, or suggests an irrelevant or confusing next step.",
+        "2": "2 — Partially effective: Suggests a next step, but it is vague, generic, or only loosely connected to the topic.",
+        "3": "3 — Effective: Suggests a clear, relevant next action, such as practice, application, reflection, or a related topic, that builds on the learner's current understanding.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response guide the learner toward useful next steps?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
       "subsequent_only": false
     },
     {
-      "key": "follow_up_responsiveness",
-      "label": "Follow-up Responsiveness",
-      "description": "How well does the response address the student's follow-up?",
+      "key": "addressing_follow_up_questions",
+      "label": "Addressing Follow-Up Questions",
+      "description": "How effectively does the chatbot respond to the learner's follow-up question while using the context of the earlier conversation?",
       "options": [
         "3",
         "2",
-        "1"
+        "1",
+        "N/A"
       ],
       "scale_items": {
-        "1": "Misses or misinterprets the main follow-up, or does not address it.",
-        "2": "Addresses the follow-up partly or generically, or misses part of it or a relevant opportunity to adapt.",
-        "3": "Directly and helpfully addresses the student's question, request, or confusion, and adapts to relevant learner information."
+        "1": "1 — Ineffective: Fails to answer the follow-up, ignores relevant prior context, or gives an irrelevant, confusing, or incorrect response.",
+        "2": "2 — Partially effective: Addresses the follow-up only partly, misses some of the learner's concern, or repeats earlier information without sufficient adaptation.",
+        "3": "3 — Effective: Directly and accurately answers the follow-up, builds on what has already been discussed, and adjusts the explanation to the learner's specific question or confusion.",
+        "N/A": "N/A — This behavior is not reasonably called for in this response."
       },
-      "guidance": "How well does the response address the student's follow-up?",
+      "guidance": "Use N/A only when the behavior is not reasonably called for. An omitted technique that would have helped the learner should receive a low score.",
+      "first_only": false,
       "subsequent_only": true
     }
   ],
   "rating_questions_source": "conversation-evaluation/human-annotation/rating-questions.md",
-  "rating_scope": "Rate each tutor turn using rating-questions.md and the preceding conversation. The first tutor turn has five criteria; subsequent tutor turns also require Follow-up Responsiveness."
+  "rating_scope": "Rate each tutor turn using rating-questions.md and the preceding conversation. Use eight criteria per turn: Addressing Follow-Up Questions replaces Topic Introduction and Learner Engagement after the first tutor turn."
 }

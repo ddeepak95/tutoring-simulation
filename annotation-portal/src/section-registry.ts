@@ -1,20 +1,69 @@
 import type {SupabaseClient} from '@supabase/supabase-js';
 import type {Annotation, Conversation, ConversationSection,ConversationSectionState} from './types';
 import {parseMarkdown} from './markdown-source.ts';
+import type {Nodes} from 'mdast';
 
-export type SectionCandidate = {turn_id:string;turn_number:number;section_number:number;start:number;end:number};
+export const apiGroupingVersion='api-cohesive/2';
+export type SectionCandidate = {turn_id:string;turn_number:number;section_number:number;start:number;end:number;grouping_version?:string};
 const stateStart=/^Agent-explored interactive state state_\d+ \(capture action, not a learner response\):?[\t ]*\r?$/m;
 
-export function markdownSectionGroups(text:string) {
+export function markdownSectionGroups(text:string, options:{api?:boolean;ranges?:{start:number;end:number}[]} = {}) {
+  if(options.ranges?.length)return [...options.ranges].sort((a,b)=>a.start-b.start).map(({start,end})=>{
+    const tree=parseMarkdown(text.slice(start,end));
+    function shift(node:Nodes){
+      if(node.position){node.position.start.offset!+=start;node.position.end.offset!+=start;}
+      const math=node.data?.mathSource;
+      if(math)node.data!.mathSource={...math,start:math.start+start,end:math.end+start,contentStart:math.contentStart+start,contentEnd:math.contentEnd+start};
+      if('children' in node)node.children.forEach(shift);
+    }
+    shift(tree);return tree.children;
+  });
   const groups: ReturnType<typeof parseMarkdown>['children'][] = []; let group: ReturnType<typeof parseMarkdown>['children'] = [];
   const marker=text.match(stateStart);const primary=marker?text.slice(0,marker.index).trimEnd():text;
-  for(const node of parseMarkdown(primary).children) {
+  const nodes=parseMarkdown(primary).children;
+  if(options.api){
+    const plain=(node:Nodes):string=>'value' in node?String(node.value):'children' in node?node.children.map(plain).join(''):'';
+    const title=(node:typeof nodes[number])=>{
+      if(node.type==='heading')return true;
+      if(node.type!=='paragraph'||!node.children.some(c=>c.type==='strong')||!node.children.every(c=>c.type==='strong'||c.type==='text'&&/^[\s:：]*$/u.test(c.value)))return false;
+      const value=plain(node).trim();
+      return [...value].length<=100&&/\p{L}/u.test(value)&&!/[.!?。！？…]$/u.test(value)&&!/[=<>≤≥→←↔⇒⇐⇔]/u.test(value)&&!/^\s*\d+[.)]/u.test(value)&&!node.children.some(c=>'children' in c&&c.children.some(n=>n.type==='inlineCode'||n.data?.mathSource));
+    };
+    const meaningful=nodes.filter(n=>n.type!=='definition'&&n.type!=='thematicBreak');
+    const final=meaningful.at(-1);
+    const closingQuestion=final?.type==='paragraph'&&/[?？]\s*$/u.test(plain(final))?final:null;
+    let sawTitle=false,contentSinceTitle=false;
+    const flush=()=>{if(group.some(n=>n.type!=='thematicBreak'&&n.type!=='definition'))groups.push(group);group=[];contentSinceTitle=false;};
+    for(const node of nodes){
+      if(node.type==='definition'){group.push(node);continue;}
+      if(node.type==='thematicBreak'){if(group.length)group.push(node);flush();continue;}
+      if(title(node)){
+        // A leading introduction belongs to the first titled teaching block.
+        const introduction=!sawTitle&&groups.length===0&&group.every(n=>n.type==='paragraph'||n.type==='definition')&&group.filter(n=>n.type==='paragraph').length<=2;
+        if(contentSinceTitle&&(sawTitle||!introduction))flush();
+        sawTitle=true;contentSinceTitle=false;
+      }else if(node===closingQuestion&&group.some(n=>!title(n))){flush();}
+      if(!title(node))contentSinceTitle=true;
+      group.push(node);
+    }
+    flush();return groups;
+  }
+  const isTitle=(node:typeof nodes[number])=>node.type==='heading'||(node.type==='paragraph'&&node.children.some(child=>child.type==='strong')&&node.children.every(child=>child.type==='strong'||(child.type==='text'&&/^[\s:.,!?;()\[\]{}\-]*$/.test(child.value))));
+  const titled=nodes.some(isTitle);
+  const flush=()=>{if(group.length){groups.push(group);group=[];}};
+  for(const node of nodes) {
     if(node.type==='definition')continue;
-    const bold=node.type==='paragraph'&&node.children.some(child=>child.type==='strong')&&node.children.every(child=>child.type==='strong'||(child.type==='text'&&/^[\s:.,!?;()\[\]{}\-]*$/.test(child.value)));
-    if((node.type==='heading'||bold)&&group.length){groups.push(group);group=[];}
+    if(options.api&&node.type==='thematicBreak'){
+      if(group.length)group.push(node);
+      flush();continue;
+    }
+    const previous=group.at(-1);
+    const equation=node.type==='paragraph'&&node.children.length===1&&node.children[0].data?.mathSource?.display;
+    const introducedBlock=previous?.type==='paragraph'&&/[:：]\s*$/.test(primary.slice(previous.position!.start.offset,previous.position!.end.offset))&&['list','table','code','blockquote'].includes(node.type);
+    if((isTitle(node)&&(!options.api||group.some(item=>!isTitle(item))))||(options.api&&!titled&&!equation&&!introducedBlock))flush();
     group.push(node);
   }
-  if(group.length)groups.push(group);
+  flush();
   return groups;
 }
 
@@ -26,8 +75,8 @@ export function sectionCandidates(conversation:Conversation, captured?: {turn_id
     turnNumber++;
     const visible=captured?.filter(s=>s.turn_id===turn.turn_id);
     const cutoff=turn.text.match(stateStart)?.index??turn.text.length;
-    const ranges=(visible?.length ? visible.map(({start,end})=>({start,end})) : markdownSectionGroups(turn.text).map(nodes=>({start:nodes[0].position!.start.offset!,end:nodes.at(-1)!.position!.end.offset!}))).filter(r=>r.end<=cutoff);
-    return ranges.map((range,index)=>({turn_id:turn.turn_id,turn_number:turnNumber,section_number:index+1,...range}));
+    const ranges=(visible?.length ? visible.map(({start,end})=>({start,end})) : markdownSectionGroups(turn.text,{api:conversation.access_type==='API'}).map(nodes=>({start:nodes[0].position!.start.offset!,end:nodes.at(-1)!.position!.end.offset!}))).filter(r=>r.end<=cutoff);
+    return ranges.map((range,index)=>({turn_id:turn.turn_id,turn_number:turnNumber,section_number:index+1,...range,...(conversation.access_type==='API'&&!visible?.length?{grouping_version:apiGroupingVersion}:{})}));
   });
 }
 

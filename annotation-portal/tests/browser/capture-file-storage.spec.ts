@@ -13,6 +13,6 @@ test('file-backed captures load on demand and preserve section labeling after re
  await page.locator('.conversation-topic-link').click();
  const frame=page.frameLocator('iframe[title="Captured HTML conversation"]');await expect(frame.locator('.html-section')).toHaveCount(1);
  expect(downloads).toBe(1);
- await page.getByRole('link',{name:'Back to conversations'}).click();await page.locator('.topic-group').first().locator('summary').click();await page.locator('.conversation-topic-link').click();await expect(frame.locator('.html-section')).toHaveCount(1);expect(downloads).toBe(1);
+ await page.getByRole('navigation',{name:'Conversation navigation'}).getByRole('link',{name:/ \/ Tamil$/}).click();await page.locator('.conversation-topic-link').click();await expect(frame.locator('.html-section')).toHaveCount(1);expect(downloads).toBe(1);
  await page.reload();await expect(frame.locator('.html-section')).toHaveCount(1);expect(downloads).toBe(2);
 });

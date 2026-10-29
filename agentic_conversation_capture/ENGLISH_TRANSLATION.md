@@ -1,3 +1,19 @@
+# API conversations with matching English sections
+
+For an original non-English API conversation, register its source sections first, then run from the repository root:
+
+```powershell
+node agentic_conversation_capture/translate-api-english.mjs SOURCE_CONVERSATION_ID --project YOUR_PROJECT_REF
+```
+
+The command uses the existing Gemini translation configuration (`GEMINI_API_KEY` or `GOOGLE_API_KEY`, with `TRANSLATION_MODEL` defaulting to `gemini-4-argon`). It translates student messages and each registered tutor section into English, keeping the exact turn IDs, section IDs, and source offsets. English offsets are computed from the translated passages; they are not inferred from English headings. Numbers and URLs are checked before upload. The source conversation and its annotations are preserved.
+
+The English conversation is saved separately with `source_conversation_id`, `translation.version = api-english/1`, the original messages, and a section alignment map. Its sections are registered with the same IDs as the source. The private source artifact is stored in the transcripts bucket. Generation checkpoints under `outputs/api/<topic>/<language>/<source-id>.english.json` are pinned to the source, section inventory, and model; retries reuse completed passages and the same English conversation ID.
+
+Open either conversation in the portal and use **Show English side by side** at the top. Tutor sections appear as paired rows with one shared section label; student messages are also paired. The toggle only reads saved data and does not generate translations or create annotation work. On narrow screens each matching pair stacks vertically. **Hide English translation** restores the single-conversation view.
+
+To label the English version independently, run `npm run llm:baselines -- --project YOUR_PROJECT_REF --conversation ENGLISH_CONVERSATION_ID` from `annotation-portal`. On either conversation's **View Labeling** or **LLM annotations** page, use **Compare labels side by side**. Each language has its own label-source selector for saved LLM baselines or active annotator assignments. Matching section IDs align the original and translated text, with both counts shown beneath each pair. Differing counts are highlighted; an item missing from one pinned rubric is shown as unavailable rather than zero. Viewing or switching comparison sources makes no model requests and changes no saved labels.
+
 # HTML capture v2 translations
 
 For new `html-conversation/2` packages, run `node chatgpt-flow.mjs translate capture.html`. Translation changes DOM text and linguistic accessibility attributes only. It keeps the original section, component, and state IDs; it does not detect sections from the English wording. Equations, numbers, images, and replay links remain intact. Translation checkpoints are pinned to source hash, prompt version, and model; failed work can resume without translating validated passages again. Completed English packages have a source-version reference and their own immutable content hash.

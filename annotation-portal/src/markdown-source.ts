@@ -2,10 +2,59 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { decodeString } from 'micromark-util-decode-string';
-import type { Code, Html, InlineCode, Root, Text } from 'mdast';
+import type { Code, Html, InlineCode, Nodes, Root, Text } from 'mdast';
+import { mathSources, mathText } from './markdown-math.ts';
 
 const parser = unified().use(remarkParse).use(remarkGfm);
-export const parseMarkdown = (source: string) => parser.parse(source) as Root;
+export function parseMarkdown(source: string): Root {
+  const original = parser.parse(source) as Root;
+  const maths = mathSources(source, original);
+  if (!maths.length) return original;
+  // Hide TeX syntax from Markdown before parsing, with UTF-16 length preserved.
+  // Restore original source positions and math nodes afterward. No transcript
+  // normalization or database rewrite is needed.
+  let masked = '', cursor = 0;
+  for (const math of maths) {
+    masked += source.slice(cursor, math.start) + 'x'.repeat(math.end - math.start);
+    cursor = math.end;
+  }
+  const maskedSource = masked + source.slice(cursor);
+  const tree = parser.parse(maskedSource) as Root;
+  const lineStarts = [0];
+  for (const match of source.matchAll(/\r\n|\r|\n/g)) lineStarts.push(match.index + match[0].length);
+  function point(offset: number) {
+    let low = 0, high = lineStarts.length;
+    while (low + 1 < high) { const mid = (low + high) >>> 1; if (lineStarts[mid] <= offset) low = mid; else high = mid; }
+    return { offset, line: low + 1, column: offset - lineStarts[low] + 1 };
+  }
+  const position = (start: number, end: number) => ({ start: point(start), end: point(end) });
+  function restore(node: Nodes) {
+    if (node.position) node.position = position(node.position.start.offset!, node.position.end.offset!);
+    if (!('children' in node)) return;
+    node.children = node.children.flatMap((child): typeof node.children => {
+      restore(child);
+      if (child.type !== 'text' || !child.position) return [child] as typeof node.children;
+      const start = child.position.start.offset!, end = child.position.end.offset!;
+      const contained = maths.filter(math => math.start >= start && math.end <= end);
+      if (!contained.length) return [child] as typeof node.children;
+      const rendered = mappedText(maskedSource, child);
+      const parts: Text[] = [];
+      let at = start;
+      const append = (a: number, b: number) => {
+        if (a < b) parts.push({ type: 'text', value: rendered.value.split('').filter((_, i) => rendered.map[i][0] >= a && rendered.map[i][1] <= b).join(''), position: position(a, b) });
+      };
+      for (const math of contained) {
+        append(at, math.start);
+        parts.push(mathText(source, math, position(math.start, math.end)));
+        at = math.end;
+      }
+      append(at, end);
+      return parts;
+    }) as typeof node.children;
+  }
+  restore(tree);
+  return tree;
+}
 export type SourceMap = [number, number][];
 
 /** Each rendered UTF-16 character points to its exact span in the untouched Markdown. */

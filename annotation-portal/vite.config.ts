@@ -5,6 +5,7 @@ import { createAnnotatorHandler } from './server/annotators';
 import { createLLMAnnotationHandler } from './server/llm-annotations';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
+import { resolveSupabaseEnvironment } from './scripts/supabase-environment.mjs';
 
 const portalRoot = process.cwd();
 const repositoryRoot = path.resolve(portalRoot, '..');
@@ -59,8 +60,8 @@ function rubricSync(): Plugin {
 function localAccountsApi(): Plugin {
   let env: Record<string, string> = {};
   const install = (server: Pick<ViteDevServer, 'middlewares'>) => {
-    const handler = createAnnotatorHandler({ getEnvironment: () => ({ ...env, ...process.env }) });
-    const llmHandler = createLLMAnnotationHandler({ getEnvironment: () => ({ ...env, ...process.env }) });
+    const handler = createAnnotatorHandler({ getEnvironment: () => resolveSupabaseEnvironment({ ...env, ...process.env }) });
+    const llmHandler = createLLMAnnotationHandler({ getEnvironment: () => resolveSupabaseEnvironment({ ...env, ...process.env }) });
     server.middlewares.use((request, response, next) => {
       if (request.url?.split('?')[0] === '/api/annotators') void handler(request, response);
       else if (request.url?.split('?')[0] === '/api/llm-annotations') void llmHandler(request, response);
@@ -69,4 +70,10 @@ function localAccountsApi(): Plugin {
   };
   return { name: 'local-accounts-api', configResolved(config) { env = { ...loadEnv(config.mode,path.dirname(config.root),''), ...loadEnv(config.mode, config.root, '') }; }, configureServer: install, configurePreviewServer: install };
 }
-export default defineConfig({ plugins: [react(), rubricSync(), localAccountsApi()], build: { rollupOptions: { output: { manualChunks(id) { if (id.includes('node_modules')) return id.includes('@supabase') ? 'supabase' : 'vendor'; } } } }, test: { include: ['tests/**/*.test.{ts,tsx}'], testTimeout: 30000, hookTimeout: 30000 } });
+export default defineConfig(({ mode }) => {
+  const env = resolveSupabaseEnvironment({ ...loadEnv(mode, portalRoot, ''), ...process.env });
+  return { define: {
+    'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL || ''),
+    'import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY': JSON.stringify(env.VITE_SUPABASE_PUBLISHABLE_KEY || ''),
+  }, plugins: [react(), rubricSync(), localAccountsApi()], build: { rollupOptions: { output: { manualChunks(id) { if (id.includes('node_modules')) return id.includes('@supabase') ? 'supabase' : 'vendor'; } } } }, test: { include: ['tests/**/*.test.{ts,tsx}'], testTimeout: 30000, hookTimeout: 30000 } };
+});

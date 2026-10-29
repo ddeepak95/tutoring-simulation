@@ -170,7 +170,7 @@ export async function login(page: Page, username: string, options={expandTopic:t
   await page.goto('/'); await page.getByLabel('Username', { exact: true }).fill(username); await page.getByLabel('Password', { exact: true }).fill('test-password-123');
   const topics=username==='admin'?page.waitForResponse(r=>new URL(r.url()).pathname==='/rest/v1/rpc/dashboard_topics'):null;
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-  if(topics){const data=await (await topics).json();if(options.expandTopic&&data.length)await page.locator('.topic-group').first().locator('summary').click();}
+  if(topics){const data=await (await topics).json();if(options.expandTopic&&data.length){await page.locator('.topic-link').first().click();await page.locator('.provider-accordion>summary').first().click();await page.locator('.provider-language-link').first().click();}}
 }
 export function repositoryFixture() {
   const files: Record<string, string> = {};

@@ -1,0 +1,51 @@
+import { expect, test } from '@playwright/test';
+import { backend, ids, login } from './mock';
+
+test('review shows contextual breadcrumbs without either Back control', async ({ page }) => {
+  const state = await backend(page);
+  const doc = state.documents[0] as any;
+  Object.assign(doc, { language: 'en', topic_id: 'evaporation', generic_topic_name: 'Evaporation' });
+  Object.assign(doc.transcript, { conversation_id: ids.doc, topic_id: 'evaporation', provider: 'GPT', original_language: 'en' });
+  await login(page, 'admin');
+  const listPath = '/topics/evaporation/conversations/GPT/en';
+  await page.locator('.conversation-topic-link').click();
+  const navigation = page.getByRole('navigation', { name: 'Conversation navigation' });
+  await expect(navigation.getByRole('link', { name: 'GPT / English', exact: true })).toHaveAttribute('href', listPath);
+  await expect(page.getByRole('button', { name: 'Back', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Back to conversations', exact: true })).toHaveCount(0);
+  await navigation.getByRole('link', { name: 'GPT / English', exact: true }).click();
+  await expect(page).toHaveURL(listPath);
+  await page.goto(`/conversations/${ids.doc}`);
+  await expect(navigation.getByRole('link',{name:'Evaporation',exact:true})).toHaveAttribute('href','/topics/evaporation');
+  await expect(navigation.getByRole('link',{name:'GPT / English',exact:true})).toHaveAttribute('href',listPath);
+  await expect(navigation.locator('[aria-current="page"]')).toHaveText('Conversation');
+  await expect(page.locator('.editor-bar')).toHaveCount(0);
+  await expect(page.getByRole('link',{name:/Back to conversations|← Conversations/})).toHaveCount(0);
+  await navigation.getByRole('link',{name:'GPT / English',exact:true}).click();await expect(page).toHaveURL(listPath);
+  await page.goto(`/conversations/${ids.doc}/labeling`);
+  await expect(page.getByRole('button', { name: 'Back', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: 'Back to conversations', exact: true })).toHaveCount(0);
+  await navigation.getByRole('link', { name: 'GPT / English', exact: true }).click();
+  await expect(page).toHaveURL(listPath);
+  await page.goto(`/conversations/${ids.doc}/rating`);
+  await navigation.getByRole('link', { name: 'GPT / English', exact: true }).click();
+  await expect(page).toHaveURL(listPath);
+});
+
+test('a translated conversation returns to its original provider and language set', async ({ page }) => {
+  const state = await backend(page);
+  const doc = state.documents[0] as any;
+  Object.assign(doc, { language: 'ta', topic_id: 'evaporation', generic_topic_name: 'Evaporation' });
+  Object.assign(doc.transcript, { conversation_id: ids.doc, topic_id: 'evaporation', provider: 'GPT', original_language: 'ta' });
+  const translationId = '00000000-0000-4000-8000-000000000099';
+  state.documents.push({ ...structuredClone(doc), id: translationId, language: 'en', source_conversation_id: ids.doc, transcript: { ...structuredClone(doc.transcript), conversation_id: translationId, provider: 'Translator', source_conversation_id: ids.doc } });
+  await login(page, 'admin', { expandTopic: false });
+  await page.goto(`/conversations/${translationId}/labeling`);
+  const link = page.getByRole('navigation', { name: 'Conversation navigation' }).getByRole('link', { name: 'GPT / Tamil', exact: true });
+  await expect(link).toHaveAttribute('href', '/topics/evaporation/conversations/GPT/ta');
+  await link.click();
+  await expect(page.getByRole('heading', { name: 'GPT / Tamil', exact: true })).toBeVisible();
+  await page.goto(`/conversations/${translationId}`);
+  await expect(link).toHaveAttribute('href','/topics/evaporation/conversations/GPT/ta');
+  await expect(page.locator('.editor-bar')).toHaveCount(0);
+});

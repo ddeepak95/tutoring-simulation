@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url';
 const portal = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = 'comparative-evaluation/prompts/comparative-questions.md';
 const text = fs.readFileSync(path.resolve(portal, '..', source), 'utf8');
-const ratingQuestions = JSON.parse(fs.readFileSync(path.join(portal, 'src/generated/rating-questions.json'), 'utf8'));
 const questions = text.split(/\r?\n/).filter(line => line.startsWith('| `')).map(line => {
   const cells = line.trim().slice(1, -1).split('|').map(cell => cell.trim());
   if (cells.length !== 6) throw new Error('Invalid comparative question row.');
@@ -26,10 +25,7 @@ const questions = text.split(/\r?\n/).filter(line => line.startsWith('| `')).map
 if (questions.length !== 7 || questions.filter(question => question.scope === 'turn' && !question.subsequent_only).length !== 5 || questions.filter(question => question.scope === 'overall').length !== 1 || new Set(questions.map(question => question.key)).size !== questions.length) {
   throw new Error('Expected five first-turn, one follow-up, and one overall question.');
 }
-const turnQuestions = questions.filter(question => question.scope === 'turn');
-if (turnQuestions.length !== ratingQuestions.length || turnQuestions.some((question, index) => question.key !== ratingQuestions[index].key || question.label !== ratingQuestions[index].label || question.subsequent_only !== ratingQuestions[index].subsequent_only)) {
-  throw new Error('Comparison turn questions must match the current rating question keys, labels, order, and timing.');
-}
+// Comparisons retain their own question set when the absolute rating rubric changes.
 const output = path.join(portal, 'src/generated/comparison-questions.json');
 fs.mkdirSync(path.dirname(output), { recursive: true });
 fs.writeFileSync(output, JSON.stringify(questions, null, 2) + '\n');

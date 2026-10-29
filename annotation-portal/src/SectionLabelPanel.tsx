@@ -4,14 +4,14 @@ import {LabelItemIcon} from './LabelItemIcon';
 import {useEffect,useRef,useState} from 'react';
 import type {Annotation,Evidence,Feature} from './types';
 
-function ItemCounter({feature,count,readonly,onCount}:{feature:Feature;count:number;readonly:boolean;onCount:(count:number)=>void}) {
+function ItemCounter({feature,count,readonly,onCount,active}:{feature:Feature;count:number;readonly:boolean;onCount:(count:number)=>void;active?:boolean}) {
   const [draft,setDraft]=useState(String(count));
   const [showInfo,setShowInfo]=useState(false);
   const infoId=`section-item-info-${feature.key}`;
   const guidance=itemGuidance(feature);
   useEffect(()=>setDraft(String(count)),[count]);
   const invalid=draft!==''&&(!Number.isInteger(Number(draft))||Number(draft)<0||Number(draft)>1000);
-  return <div className={`section-item-row${count>0?' is-labeled':''}`}>
+  return <div data-feature-key={feature.key} data-active-feature={active||undefined} className={`section-item-row${count>0?' is-labeled':''}`}>
     <label htmlFor={`section-count-${feature.key}`}><LabelItemIcon item={feature.key} style={{color:feature.color}}/>{feature.name}</label>
     <button type="button" className="section-item-info-button" aria-label={`${feature.name} labeling info`} aria-expanded={showInfo} aria-controls={infoId} title="Show labeling guidance" onClick={()=>setShowInfo(value=>!value)}>
       <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7" r="1" fill="currentColor" stroke="none"/></svg>
@@ -28,11 +28,12 @@ function ItemCounter({feature,count,readonly,onCount}:{feature:Feature;count:num
   </div>;
 }
 
-export function SectionLabelPanel({rubric,selection,sectionId,title,annotations,readonly,onCount,onClose}:{rubric:Feature[];selection?:Evidence;sectionId?:string;title?:string;annotations:Annotation[];readonly:boolean;onCount:(key:string,count:number)=>void;onClose:()=>void}) {
+export function SectionLabelPanel({rubric,selection,sectionId,title,annotations,readonly,onCount,onClose,activeFeature}:{rubric:Feature[];selection?:Evidence;sectionId?:string;title?:string;annotations:Annotation[];readonly:boolean;onCount:(key:string,count:number)=>void;onClose:()=>void;activeFeature?:string}) {
   const heading=useRef<HTMLHeadingElement>(null);
   const selected=!!(selection||sectionId);
   const key=sectionId|| (selection?`${selection.turn_id}:${selection.start}:${selection.end}`:'');
   useEffect(()=>{if(key)heading.current?.focus({preventScroll:true});},[key]);
+  useEffect(()=>{if(activeFeature)heading.current?.closest('aside')?.querySelector<HTMLElement>(`[data-feature-key="${activeFeature}"]`)?.scrollIntoView({block:'nearest'});},[key,activeFeature]);
   const numbers=sectionId?.match(/^t(\d+)s(\d+)$/u);
   const selectedTitle=title||(numbers?`Turn ${numbers[1]} - Section ${numbers[2]}`:'Selected section');
   return <aside className={`section-label-sidebar${selected?' has-selection':''}`} aria-label="Section labeling">
@@ -44,7 +45,7 @@ export function SectionLabelPanel({rubric,selection,sectionId,title,annotations,
       <div className="section-label-panel-content">
         {[...new Set(rubric.map(f=>f.category))].map(category=><section className="section-item-category" key={category} aria-label={category}>
           <h3>{category}</h3>
-          {rubric.filter(f=>f.category===category).map(feature=><ItemCounter key={`${key}:${feature.key}`} feature={feature} count={Number(annotations.find(a=>a.feature===feature.key)?.entry.count||0)} readonly={readonly} onCount={count=>onCount(feature.key,count)}/>)}
+          {rubric.filter(f=>f.category===category).map(feature=><ItemCounter key={`${key}:${feature.key}`} feature={feature} active={feature.key===activeFeature} count={Number(annotations.find(a=>a.feature===feature.key)?.entry.count||0)} readonly={readonly} onCount={count=>onCount(feature.key,count)}/>)}
         </section>)}
       </div>
     </>}

@@ -10,31 +10,51 @@ const output=(ids:string[])=>({sections:ids.map(section_id=>({section_id,feature
 const data=Buffer.from('fixture-image').toString('base64');
 const turns=['a','b'].map(turn_id=>({turn_id,sections:sections.filter(s=>s.turn_id===turn_id).map(s=>({section_id:s.section_id,name:`Turn ${s.turn_number} - Section ${s.section_number}`,heading:null})),tiles:[{id:'tile',data,mime_type:'image/png',sha256:createHash('sha256').update(Buffer.from(data,'base64')).digest('hex')}]}));
 
-it('instructs the model to count evidenced hidden totals and only knowledge-checking questions',()=>{
- const prompt=imagePrompt(rubric);
- expect(prompt).toContain('Question 1 of 5');expect(prompt).toContain('Image 2 of 4');
- expect(prompt).toContain('Next arrow alone does not establish a quantity');
- expect(prompt).toContain('Have you understood?');expect(prompt).toContain('rhetorical or tutor-answered');
- expect(prompt).toContain('Evidence must cite the quantity cue');
- expect(prompt).toContain('supporting views of the original containing section');
- expect(prompt).toContain('Count each question/image in that component once');
- expect(rubric.rubric.find(f=>f.key==='questions')!.description).toContain('demonstrate subject-matter knowledge');
- expect(rubric.rubric.find(f=>f.key==='photographs')!.guidance).toContain('hidden instructional images');
+it('evaluates turns in source order and supplies earlier counted walkthrough images as reference context',async()=>{
+ const requests:any[]=[];
+ const fetcher:typeof fetch=async(_url,options)=>{
+  const request=JSON.parse(String(options?.body));requests.push(request);
+  const manifest=JSON.parse(request.contents[0].parts[0].text);
+  const response=output(manifest.sections.map((s:any)=>s.section_id));
+  if(requests.length===1)response.sections[0].features.step_by_step_walkthroughs={count:1,evidence:'Two linked procedural steps.'};
+  else{
+   expect(manifest.previously_counted_walkthroughs).toEqual([{turn_id:'a',section_id:'t1s1',count:1}]);
+   expect(manifest.reference_turns).toEqual([{turn_id:'a',sections:turns[0].sections}]);
+   expect(request.contents[0].parts.filter((p:any)=>p.inlineData)).toHaveLength(2);
+   expect(manifest.sections).toEqual(turns[1].sections);
+  }
+  return new Response(JSON.stringify({candidates:[{finishReason:'STOP',content:{parts:[{text:JSON.stringify(response)}]}}]}));
+ };
+ const result=await generateImageBaseline({conversation,rubric,sections,turns:[...turns].reverse(),requestId:'walkthrough-context',config:{model:'gemini-test',timeout:10,reasoning:null},apiKey:'test',onCheckpoint:()=>{},onExchange:()=>{},fetcher});
+ expect(requests).toHaveLength(2);
+ expect(result.annotations.filter(a=>a.feature==='step_by_step_walkthroughs').map(a=>a.section_id)).toEqual(['t1s1']);
+ expect(result.prompt).toContain('Do not output labels for reference sections');
 });
 
-it('excludes question navigation as interaction and groups a derivation solving for one result',()=>{
+it('counts evidenced totals, goal questions, and substantive media interaction',()=>{
  const prompt=imagePrompt(rubric);
- expect(prompt).toContain('Question pagination and Previous/Next buttons alone do not qualify');
- expect(prompt).toContain('r = d/2 followed by r = 74/2 = 37 pm is one equation occurrence');
- expect(prompt).toContain('Count separate calculations or unrelated formulas separately');
- expect(rubric.rubric.find(f=>f.key==='interactive_media')!.guidance).toContain('navigation between questions');
- expect(rubric.rubric.find(f=>f.key==='equations')!.description).toContain('even across multiple lines or displays');
+ expect(prompt).toContain('explicit counters');
+ expect(prompt).toContain('A navigation arrow alone establishes no quantity');
+ expect(prompt).toContain('Explain inferred totals using their quantity cue');
+ expect(prompt).toContain('Supporting interaction views do not add occurrences');
+ expect(prompt).toContain('Question pagination and gallery Previous/Next controls alone do not qualify');
+ expect(rubric.rubric.find(f=>f.key==='questions')!.description).toContain('clarify their learning goal');
+ expect(rubric.rubric.find(f=>f.key==='static_images')!.description).toContain('decorative/other imagery');
+});
+
+it('groups cohesive notation sequences rather than variables or derivation lines',()=>{
+ const prompt=imagePrompt(rubric);
+ expect(prompt).toContain('Count one cohesive notation sequence or connected derivation once within its section');
+ expect(prompt).toContain('Count unrelated notation sequences separately');
+ expect(prompt).toContain('do not count each variable or line within the same sequence');
+ expect(prompt).toContain('Standalone formal symbolic variables qualify');
+ expect(prompt).toContain('Symbolic comparisons and ordered relationships qualify');
 });
 
 it('stores positive counts and model evidence separately from canonical repeated-section evidence',()=>{
  const annotations=resolveImageCounts(output(['t1s1','t1s2']),conversation,rubric,sections.filter(s=>s.turn_id==='a'),'run');
  expect(annotations).toHaveLength(4);expect(annotations[2].evidence[0].occurrence).toBe(2);
- expect(annotations[0]).toMatchObject({section_id:'t1s1',entry:{category:'Textual Representations',count:2},llm_evidence:'Visible occurrences in this section.'});
+ expect(annotations[0]).toMatchObject({section_id:'t1s1',entry:{category:'Formatting & Notation',count:2},llm_evidence:'Visible occurrences in this section.'});
  expect(hydrateAnnotations(storedAnnotations(annotations) as typeof annotations,sections)).toEqual(annotations);
  const exported=C.buildExport(conversation,annotations,rubric.rubric,'test');
  expect(exported.feature_counts).toMatchObject({examples:6,equations:4});
@@ -46,10 +66,10 @@ it('rejects missing, duplicate and unknown sections, features, quantities and ev
  const check=(value:unknown)=>resolveImageCounts(value,conversation,rubric,[sections[0]],'run');
  for(const change of [
   (o:any)=>o.sections.push(o.sections[0]),(o:any)=>o.sections[0].section_id='t99s1',
-  (o:any)=>delete o.sections[0].features.maps,(o:any)=>o.sections[0].features.extra={count:0,evidence:null},
+  (o:any)=>delete o.sections[0].features.static_images,(o:any)=>o.sections[0].features.extra={count:0,evidence:null},
   ...[-1,1.5,1001,'3'].map(count=>(o:any)=>o.sections[0].features.examples.count=count),
   ...[null,'','line\nbreak'].map(evidence=>(o:any)=>o.sections[0].features.examples.evidence=evidence),
-  (o:any)=>o.sections[0].features.maps.evidence='present',
+  (o:any)=>o.sections[0].features.static_images.evidence='present',
  ]){const o=output(['t1s1']);change(o);expect(()=>check(o)).toThrow();}
  const duplicate=output(['t1s1','t1s1']);expect(()=>resolveImageCounts(duplicate,conversation,rubric,sections.slice(0,2),'run')).toThrow(/duplicate/);
 });

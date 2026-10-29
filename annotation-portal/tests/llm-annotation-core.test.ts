@@ -22,7 +22,7 @@ it('uses both prompts and version from the single Markdown source and records it
  expect(instructionalRepairPrompt).toBe(source.split('## Validation repair prompt')[1].trim());
  expect(instructionalPromptSha256).toBe(createHash('sha256').update(source).digest('hex'));
  expect(source).toContain(`prompt_version: ${promptVersion}`);
- const prompt=instructionalPrompt();expect(prompt).toContain('segment_id');expect(prompt).toContain('data-evidence-ids');expect(prompt.length).toBeLessThan(12000);
+ const prompt=instructionalPrompt();expect(prompt).toContain('segment_id');expect(prompt).toContain('persistent section_id');expect(prompt.length).toBeLessThan(24000);
   for(const feature of itemRubric.rubric)expect(prompt).toContain(feature.key);
  for(const section of ['### Pedagogical Characteristics','#### Instructional Sequence','### Conversation Quality','### Errors'])expect(prompt).not.toContain(section);
 });

@@ -10,7 +10,7 @@ test('admin assigns Label and Rate independently and annotators see one dashboar
   await expect(menu.getByRole('link', { name: 'View Rating' })).toBeVisible();
   await menu.getByRole('link', { name: 'View Labeling' }).click();
   await expect(page.getByRole('heading', { name: 'View Labeling' })).toBeVisible();
-  await page.getByRole('link', { name: 'Back to conversations' }).click(); await page.locator('.topic-group').first().locator('summary').click();
+  await page.getByRole('navigation', { name: 'Conversation navigation' }).getByRole('link', { name: /Unknown provider \/ Tamil/ }).click();
   await page.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button', { name: /Assign users/ }).click();
   const assignmentMenu = page.getByRole('dialog', { name: 'Conversation actions' });
   await assignmentMenu.getByRole('button', { name: 'Assign', exact: true }).click();

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import C from './generated/core.js';
 import snapshot from './generated/rubric.json';
 import type { Annotation, Assignment, Conversation, ExportData, RubricSnapshot, TurnRatings } from './types';
-import { activeRatingDimensions, validateTurnRatings } from './turn-ratings';
+import { ratingQuestionMetadata, validateTurnRatings } from './turn-ratings';
 import { contextualizeAnnotationError, describeIncompleteAnnotations } from './annotation-validation';
 export const bundledRubric = snapshot as RubricSnapshot;
 export { C };
@@ -22,7 +22,7 @@ export function download(name: string, value: unknown) {
 export function validateSubmission(conversation: Conversation, annotations: Annotation[], rubric: RubricSnapshot, username: string, turnRatings: TurnRatings = {}, taskType: 'label' | 'rate' | 'both' = 'both'): ExportData {
   if (taskType === 'rate') {
     validateTurnRatings(conversation, turnRatings, rubric, true);
-    return { format_version: 'annotation-portal/2.0', annotations: [], incomplete_annotations: [], feature_counts: {}, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
+    return { format_version: 'annotation-portal/2.0', annotations: [], incomplete_annotations: [], feature_counts: {}, turn_ratings: turnRatings, ...ratingQuestionMetadata(rubric) };
   }
   let result: ExportData;
   try { result = C.buildExport(conversation, annotations, rubric.rubric, username); }
@@ -30,7 +30,7 @@ export function validateSubmission(conversation: Conversation, annotations: Anno
   if (result.incomplete_annotations.length) throw new Error(describeIncompleteAnnotations(conversation, annotations, rubric.rubric, result.incomplete_annotations));
   if (taskType === 'both') {
     validateTurnRatings(conversation, turnRatings, rubric, true);
-    return { ...result, turn_ratings: turnRatings, rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
+    return { ...result, turn_ratings: turnRatings, ...ratingQuestionMetadata(rubric) };
   }
   return { ...result, turn_ratings: {}, rating_dimensions: [], rating_questions_source: snapshot.rating_questions_source, rating_scope: snapshot.rating_scope };
 }

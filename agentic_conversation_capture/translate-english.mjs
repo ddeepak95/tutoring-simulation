@@ -5,11 +5,12 @@ import {validateHtmlConversation} from '../annotation-portal/src/html-conversati
 import path from 'node:path';
 import { modelConversationHtml } from '../annotation-portal/server/model-conversation-html.ts';
 import { htmlStructuralRanges } from '../annotation-portal/server/html-structure.ts';
+import {numberSequences,numbersEquivalent} from './numeric-text.mjs';
 
 function validPassage(source,target){
   if(typeof target!=='string'||!target.trim())return false;
   const tokens=s=>s.match(/\{\{(?:OPEN|CLOSE|NODE):[a-z]+\}\}/g)||[];
-  if(JSON.stringify(tokens(source).sort())!==JSON.stringify(tokens(target).sort())||JSON.stringify(source.match(/\d+(?:[.,]\d+)*/g)||[])!==JSON.stringify(target.match(/\d+(?:[.,]\d+)*/g)||[]))return false;
+  if(JSON.stringify(tokens(source).sort())!==JSON.stringify(tokens(target).sort())||!numbersEquivalent(source,target))return false;
   const stack=[];for(const token of tokens(target)){const [,kind,name]=token.match(/\{\{(OPEN|CLOSE|NODE):([a-z]+)\}\}/);if(kind==='OPEN')stack.push(name);else if(kind==='CLOSE'&&stack.pop()!==name)return false;}return stack.length===0;
 }
 
@@ -65,7 +66,7 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
   async function translateBatch(items, label) {
     if (!items.length) return [];
     const body = JSON.stringify({
-      systemInstruction: { parts: [{ text: 'You are translating a JSON array of complete text passages into faithful, fluent, natural English. Return a JSON array of strings with exactly one translation per input element, in the same order. Translate only linguistic content. Preserve all information, equations, numbers, URLs, citations, answer labels, and question and answer order. Do not merge, omit, or add passages. Tokens {{OPEN:name}} and {{CLOSE:name}} delimit original inline formatting; {{NODE:name}} represents an original equation, image, or other protected element. Preserve every token exactly once, keep formatting balanced, and translate the entire passage grammatically around them. You may move an inline phrase/token pair within its passage when English word order requires it. Never translate token names or add markup.' }] },
+      systemInstruction: { parts: [{ text: 'You are translating a JSON array of complete text passages into faithful, fluent, natural English. Return a JSON array of strings with exactly one translation per input element, in the same order. Translate only linguistic content. Preserve all information, equations, numbers, URLs, citations, answer labels, and question and answer order. Do not merge, omit, or add passages. Tokens {{OPEN:name}} and {{CLOSE:name}} delimit original inline formatting; {{NODE:name}} represents an original equation, image, or other protected element. Preserve every token exactly once, keep formatting balanced, and translate the entire passage grammatically around them. You may move an inline phrase/token pair within its passage when English word order requires it. Never translate token names or add markup.' + (capture.format_version==='api-section-translation/1' ? ' These are Markdown sections. Preserve all existing Markdown headings, lists, tables, code fences, links, and TeX delimiters and commands exactly. Translate natural-language labels inside TeX text macros and diagrams into English, retaining all mathematical notation, units, and numerical values in their original order. Do not add introductions, explanations, or additional headings.' : '') }] },
       contents: [{ role: 'user', parts: [{ text: JSON.stringify(items) }] }],
       generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 65536,
         ...(model === 'gemini-4-argon' ? { thinkingConfig: { thinkingLevel: 'MEDIUM', includeThoughts: false } } : { temperature: 0 }) },
@@ -86,10 +87,43 @@ export async function translateCaptureToEnglish(capture, { fetcher = fetch, apiK
       try { translated = JSON.parse(raw); } catch { /* retry malformed JSON */ }
       if (candidate?.finishReason === 'STOP' && Array.isArray(translated) && translated.length === items.length &&
           translated.every(value => typeof value === 'string' && value.trim()) &&
-          (capture.format_version!=='html-conversation/2'||items.every((value,index)=>validPassage(value,translated[index]))) &&
+          (!['html-conversation/2','api-section-translation/1'].includes(capture.format_version)||items.every((value,index)=>validPassage(value,translated[index]))) &&
           items.every((value, index) => (value.match(/https?:\/\/[^\s<>"']+/g) || []).every(url => translated[index].includes(url)))) return translated;
-      if (attempt === 2) throw new Error(`Gemini returned incomplete or misaligned translations for ${label}`);
+      if (attempt === 2) {
+        const invalid=Array.isArray(translated)?items.findIndex((value,index)=>!validPassage(value,translated[index])||!(value.match(/https?:\/\/[^\s<>"']+/g)||[]).every(url=>translated[index]?.includes(url))):-1;
+        const detail=items.length===1&&Array.isArray(translated)?` source_numbers=${JSON.stringify(numberSequences(items[0]))} target_numbers=${JSON.stringify(numberSequences(translated[0]||''))} target_excerpt=${JSON.stringify((translated[0]||'').slice(0,600))}`:'';
+        throw new Error(`Gemini returned incomplete or misaligned translations for ${label} (input ${items.length}, output ${Array.isArray(translated)?translated.length:'invalid JSON'}, first invalid ${invalid}, reason ${candidate?.finishReason||'unknown'})${detail}`);
+      }
     }
+  }
+  if(capture.format_version==='api-section-translation/1'){
+    const originals=new Map(capture.passages.map(passage=>[passage.id,passage.text]));
+    const translated=Object.fromEntries(Object.entries(checkpoint?.passages||{}).filter(([id,value])=>{
+      const source=originals.get(id);
+      return source&&validPassage(source,value)&&(source.match(/https?:\/\/[^\s<>"']+/g)||[]).every(url=>value.includes(url));
+    }));
+    const pending=capture.passages.filter(passage=>!translated[passage.id]);
+    async function translateApiBatch(batch){
+      let values;
+      try { values=await translateBatch(batch.map(passage=>passage.text),'API sections'); }
+      catch(error){
+        if(!error.message.includes('incomplete or misaligned')||batch.length===1)throw error;
+        const middle=Math.floor(batch.length/2);
+        await translateApiBatch(batch.slice(0,middle));
+        await translateApiBatch(batch.slice(middle));
+        return;
+      }
+      values.forEach((value,index)=>{translated[batch[index].id]=value;});
+      await onCheckpoint({passages:translated,usage});
+    }
+    for(let from=0;from<pending.length;){
+      let to=from,chars=0;
+      while(to<pending.length&&to-from<20&&(chars+pending[to].text.length<=6000||to===from))chars+=pending[to++].text.length;
+      const batch=pending.slice(from,to);
+      await translateApiBatch(batch);
+      from=to;
+    }
+    return {passages:capture.passages.map(passage=>({...passage,text:translated[passage.id]})),model,usage};
   }
   if(capture.format_version==='html-conversation/2'){
     await verifyPackage(capture);

@@ -1,27 +1,19 @@
 import { expect, test } from '@playwright/test';
 import { backend, ids, login, repositoryFixture } from './mock';
 
-test('conversation rows are ordered by generic topic and then conversation title', async ({ page }) => {
+test('topics list provider and language groups before opening conversation tries', async ({ page }) => {
   const state = await backend(page);
-  const makeDocument = (id: string, generic_topic_name: string, conversation_title: string) => ({
-    ...structuredClone(state.documents[0]), id, label: conversation_title, generic_topic_name, conversation_title,
-  });
-  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000061', 'Brain', 'Working of the brain'));
-  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000062', 'Alkaline earth metals', 'Zinc explanation'));
-  state.documents.push(makeDocument('00000000-0000-4000-8000-000000000063', 'Alkaline earth metals', 'Aluminum explanation'));
-  await login(page, 'admin');
-  for(const group of await page.locator('.topic-group').all())if((await group.getAttribute('open'))===null)await group.locator('summary').click();
-  await expect(page.locator('.conversation-table tbody tr')).toHaveCount(4);
-  await expect(page.locator('.conversation-table tbody tr').nth(0)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000063');
-  await expect(page.locator('.conversation-table tbody tr').nth(1)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000062');
-  await expect(page.locator('.conversation-table tbody tr').nth(2)).toHaveAttribute('data-conversation-id', '00000000-0000-4000-8000-000000000061');
-  await expect(page.locator('.conversation-table tbody tr').nth(3)).toHaveAttribute('data-conversation-id', ids.doc);
-  await expect(page.locator('.topic-group-heading h2')).toHaveText(['Alkaline earth metals', 'Brain', 'Evaporation']);
-  await expect(page.locator('.topic-group').first().locator('.conversation-table tbody tr')).toHaveCount(2);
-  await page.locator('.topic-group').nth(1).locator('summary').click();
-  await expect(page.locator('.topic-group').nth(1)).not.toHaveAttribute('open', '');
-  await page.locator('.topic-group').nth(1).locator('summary').click();
-  await expect(page.locator('.topic-group').nth(1).locator('.conversation-table')).toBeVisible();
+  for (const [id, title] of [['00000000-0000-4000-8000-000000000062', 'Zinc explanation'], ['00000000-0000-4000-8000-000000000063', 'Aluminum explanation']]) state.documents.push({ ...structuredClone(state.documents[0]), id, label: title, generic_topic_name: 'Alkaline earth metals', conversation_title: title } as any);
+  await login(page, 'admin', { expandTopic: false });
+  await expect(page.locator('.topic-link h2')).toHaveText(['Alkaline earth metals', 'Evaporation']);
+  await page.locator('.topic-link').first().click();
+  const topic = page.locator('.topic-provider-page');
+  await expect(topic.locator('.provider-language-link')).toContainText('2 tries');
+  await expect(page.locator('.conversation-table')).toHaveCount(0);
+  await topic.locator('.provider-accordion>summary').first().click();
+  await topic.locator('.provider-language-link').click();
+  await expect(page.locator('.conversation-table tbody tr')).toHaveCount(2);
+  await expect(page.locator('.attempt-number')).toContainText(['Try 1', 'Try 2']);
 });
 
 test('topic feature counts compare completed label work without combining annotators', async ({ page }) => {
@@ -48,14 +40,15 @@ test('topic feature counts compare completed label work without combining annota
   state.documents.push({ ...structuredClone(state.documents[2]), id: secondTranslation, topic_id: 'newton', generic_topic_name: 'Newton', source_conversation_id: secondSource, transcript: { ...structuredClone(state.documents[2].transcript), topic_id: 'newton', source_conversation_id: secondSource } } as any);
   state.assignments.push({ ...structuredClone(state.assignments[0]), id: '00000000-0000-4000-8000-000000000071', conversation_id: secondEnglish, annotations: [{ id: 'q5', feature: 'questions', entry: { question_count: 9 }, evidence: [] }] });
   state.assignments.push({ ...structuredClone(state.assignments[0]), id: '00000000-0000-4000-8000-000000000072', conversation_id: secondTranslation, annotations: [{ id: 'q6', feature: 'questions', entry: { question_count: 2 }, evidence: [] }] });
-  state.assignments[0].annotations.push({ id: 'r1', feature: 'representations', entry: { representation_type: 'Diagram', diagram_count: 2 }, evidence: [] });
-  state.assignments[1].annotations.push({ id: 'r2', feature: 'representations', entry: { representation_type: 'Table' }, evidence: [] });
-  state.assignments[2].annotations.push({ id: 'r3', feature: 'representations', entry: { representation_type: 'Diagram', diagram_count: 3 }, evidence: [] });
-  state.assignments[4].annotations.push({ id: 'r4', feature: 'representations', entry: { representation_type: 'Diagram' }, evidence: [] });
-  state.assignments[5].annotations.push({ id: 'r5', feature: 'representations', entry: { representation_type: 'Table' }, evidence: [] });
-  await login(page, 'admin');
-  const group = page.locator('.topic-group').first();
-  await expect(group.locator('.conversation-table tbody tr')).toHaveCount(3);
+  state.assignments[0].annotations.push({ id: 'r1', feature: 'diagrams_and_illustrations', entry: { category: 'Multimedia', count: 2 }, evidence: [] });
+  state.assignments[1].annotations.push({ id: 'r2', feature: 'tables', entry: { category: 'Textual Representations', count: 1 }, evidence: [] });
+  state.assignments[2].annotations.push({ id: 'r3', feature: 'diagrams_and_illustrations', entry: { category: 'Multimedia', count: 3 }, evidence: [] });
+  state.assignments[4].annotations.push({ id: 'r4', feature: 'diagrams_and_illustrations', entry: { category: 'Multimedia', count: 1 }, evidence: [] });
+  state.assignments[5].annotations.push({ id: 'r5', feature: 'tables', entry: { category: 'Textual Representations', count: 1 }, evidence: [] });
+  await login(page, 'admin', { expandTopic: false });
+  await page.locator('.topic-link').first().click();
+  const group = page.locator('.topic-provider-page');
+  await expect(group.locator('.provider-language-link')).toHaveCount(2);
   await expect(group.locator('.feature-count-table')).toHaveCount(0);
   await group.getByRole('link', { name: 'Compare feature labels' }).click();
   await expect(page).toHaveURL(/\/topics\/evaporation\/labels$/);
@@ -88,16 +81,14 @@ test('topic feature counts compare completed label work without combining annota
   const markerPositions = await aggregateQuestions.locator('.paired-row').first().locator('.paired-marker').evaluateAll(markers => markers.map(marker => ({ letter: marker.querySelector('.paired-letter')!.getBoundingClientRect().top, dot: marker.querySelector('.paired-dot')!.getBoundingClientRect().top })));
   expect(markerPositions[0].dot).toBe(markerPositions[1].dot);
   expect(markerPositions.every(marker => marker.letter < marker.dot)).toBe(true);
-  const representations = page.getByRole('region', { name: 'Representation subcategory comparison' });
-  await expect(representations.locator('.aggregate-feature')).toHaveCount(6);
-  const diagrams = representations.getByRole('region', { name: 'Diagram paired results' });
+  const diagrams = aggregate.getByRole('region', { name: 'Diagram & Illustrations paired results', exact: true });
   await expect(diagrams.getByLabel('Evaporation: English original 1, Tamil-origin translation 3')).toBeVisible();
   await expect(diagrams.getByLabel('Newton: English original 1, Tamil-origin translation 0')).toBeVisible();
   await expect(diagrams.getByLabel('Newton: English original 1, Tamil-origin translation 0').locator('.paired-values')).toHaveText('0 / 1');
   await expect(diagrams.getByLabel('Topic mean: English original 1, Tamil-origin translation 1.5')).toBeVisible();
   await expect(diagrams.locator('.paired-row').first().locator('.paired-marker')).toHaveText(['E', 'T']);
   await page.getByRole('link', { name: 'Conversations', exact: true }).last().click();
-  await expect(page.locator('.topic-group')).toHaveCount(2);
+  await expect(page.locator('.topic-link')).toHaveCount(2);
 });
 
 test('conversation menus preserve existing assignments and bulk assignment fills only missing work', async ({ page }) => {
@@ -106,20 +97,20 @@ test('conversation menus preserve existing assignments and bulk assignment fills
   const originalAssignments = structuredClone(state.assignments);
   await login(page, 'admin');
   const table = page.locator('.conversation-table');
-  await expect(table.getByRole('columnheader', { name: 'Original language', exact: true })).toBeVisible();
+  await expect(table.getByRole('columnheader', { name: 'Try', exact: true })).toBeVisible();
   const translated = table.locator(`[data-conversation-id="${state.documents[1].id}"]`);
-  await expect(translated.getByRole('cell', { name: 'Tamil', exact: true })).toBeVisible();
-  await expect(translated.getByRole('cell', { name: 'English', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Tamil');
+  await expect(translated).toContainText('Translation');
   const originalButton = table.locator(`[data-conversation-id="${ids.doc}"]`).getByRole('button', { name: /Assign users for/ });
   await originalButton.click();
   const menu = page.getByRole('dialog', { name: 'Assign tasks' });
-  await page.getByRole('dialog', { name: 'Conversation actions' }).getByRole('button', { name: 'Assign', exact: true }).click();
+
   await expect(menu.getByRole('checkbox', { name: /alice/ })).toBeChecked();
   await expect(menu.getByRole('checkbox', { name: /alice/ })).toBeDisabled();
   await expect(menu.getByRole('button', { name: 'Assign labeling' })).toBeDisabled();
   await menu.getByRole('button', { name: 'Close menu' }).click(); await expect(menu).toHaveCount(0); await expect(originalButton).toBeFocused();
-  await translated.getByRole('button', { name: /Assign users for/ }).click(); await page.getByRole('heading', { name: 'Conversations', exact: true }).click(); await expect(page.getByRole('dialog', { name: 'Conversation actions' })).toHaveCount(0);
-  await page.getByLabel('Select all loaded conversations').check(); await page.getByRole('button', { name: 'Assign selected', exact: true }).click();
+  await translated.getByRole('button', { name: /Assign users for/ }).click(); await page.getByRole('heading', { level: 1 }).click(); await expect(page.getByRole('dialog', { name: 'Assign tasks' })).toHaveCount(0);
+  await page.getByLabel('Select all conversations in this group').check(); await page.getByRole('button', { name: 'Assign selected', exact: true }).click();
   await page.getByRole('dialog', { name: 'Conversation actions' }).getByRole('button', { name: 'Assign', exact: true }).click();
   await expect(menu).toContainText('2 selected conversations'); await expect(menu).toContainText('Assigned to 1 of 2');
   await menu.getByRole('checkbox', { name: /alice/ }).check(); await menu.getByRole('checkbox', { name: /bob/ }).check();
@@ -130,10 +121,10 @@ test('conversation menus preserve existing assignments and bulk assignment fills
   await expect(translated.getByRole('button', { name: 'Label: 0 completed of 2 assigned' })).toBeVisible();
   await translated.getByRole('button', { name: 'Label: 0 completed of 2 assigned' }).hover();
   await expect(page.getByRole('tooltip')).toContainText('alice'); await expect(page.getByRole('tooltip')).toContainText('bob');
-  await translated.getByRole('button', { name: /Assign users for/ }).click(); await page.getByRole('dialog', { name: 'Conversation actions' }).getByRole('button', { name: 'Assign', exact: true }).click(); await expect(menu.getByRole('checkbox', { name: /bob/ })).toBeDisabled();
+  await translated.getByRole('button', { name: /Assign users for/ }).click(); await expect(menu.getByRole('checkbox', { name: /bob/ })).toBeDisabled();
   await page.setViewportSize({ width: 390, height: 844 }); await menu.getByRole('button', { name: 'Close menu' }).click(); await expect(menu).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await translated.getByRole('button', { name: /Assign users for/ }).click(); await expect(page.getByRole('dialog', { name: 'Conversation actions' })).toBeInViewport();
+  await translated.getByRole('button', { name: /Assign users for/ }).click(); await expect(page.getByRole('dialog', { name: 'Assign tasks' })).toBeInViewport();
 });
 
 test('Settings is protected from annotators and supports direct admin navigation', async ({ page }) => {
@@ -145,6 +136,6 @@ test('Settings is protected from annotators and supports direct admin navigation
   await page.goto('/settings'); await expect(page.getByRole('heading', { name: 'Settings', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Create annotator', exact: true })).toBeVisible();
   await expect(page.locator('.annotator-list')).toContainText('alice'); await expect(page.locator('.annotator-list')).toContainText('bob');
-  await page.getByRole('link', { name: 'Conversations', exact: true }).click(); await expect(page.locator('.topic-group-heading').first()).toBeVisible(); await page.locator('.topic-group').first().locator('summary').click(); await expect(page.locator('.conversation-table').first()).toBeVisible();
+  await page.getByRole('link', { name: 'Conversations', exact: true }).click(); await expect(page.locator('.topic-link').first()).toBeVisible(); await page.locator('.topic-link').first().click(); await page.locator('.provider-accordion>summary').first().click();await page.locator('.provider-language-link').first().click(); await expect(page.locator('.conversation-table').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Create annotator', exact: true })).toHaveCount(0);
 });

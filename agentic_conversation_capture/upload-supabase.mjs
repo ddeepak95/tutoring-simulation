@@ -3,6 +3,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { translateCaptureToEnglish, translationSourceHash } from './translate-english.mjs';
 import {uploadHtmlPackage} from './upload-html.mjs';
+import { parseEnv } from 'node:util';
+import { resolveSupabaseEnvironment } from '../annotation-portal/scripts/supabase-environment.mjs';
 
 const maxArchiveBytes = 8 * 1024 * 1024;
 const maxImageBytes = 10 * 1024 * 1024;
@@ -42,13 +44,11 @@ export async function portalPublicConfig() {
   let values = {};
   try {
     const contents = await readFile(file, 'utf8');
-    values = Object.fromEntries(contents.split(/\r?\n/).filter((line) => /^(VITE_SUPABASE_URL|VITE_SUPABASE_PUBLISHABLE_KEY)=/.test(line)).map((line) => {
-      const separator = line.indexOf('=');
-      return [line.slice(0, separator), line.slice(separator + 1).trim().replace(/^(['"])(.*)\1$/, '$2')];
-    }));
+    values = parseEnv(contents);
   } catch { }
-  const supabaseUrl = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || values.VITE_SUPABASE_URL || '').replace(/\/$/, '');
-  const publicKey = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || values.VITE_SUPABASE_PUBLISHABLE_KEY;
+  const selected = resolveSupabaseEnvironment({ ...values, ...process.env });
+  const supabaseUrl = (selected.SUPABASE_URL || '').replace(/\/$/, '');
+  const publicKey = selected.SUPABASE_PUBLISHABLE_KEY;
   if (!supabaseUrl || !publicKey) throw new Error('Configure the portal Supabase URL and publishable key');
   return { supabaseUrl, publicKey };
 }

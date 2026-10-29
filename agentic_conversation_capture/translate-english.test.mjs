@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
 import { translateCaptureToEnglish } from './translate-english.mjs';
 
 test('translates only title, topic, and ordered turn text', async () => {
@@ -50,8 +49,11 @@ test('records parent evidence IDs alongside translated passage offsets', async (
 });
 
 test('anchors translated definitions beside math without changing the math label', async () => {
-  const original = JSON.parse(await readFile(new URL('./outputs/covalent-redius/ta/20261020T143758Z/covalent-redius-ta.capture.json', import.meta.url), 'utf8'));
-  const capture = { title: original.title, topic: original.topic, turns: [original.turns[1]] };
+  const capture = { title: 'சகப்பிணைப்பு ஆரம்', topic: 'சகப்பிணைப்பு ஆரம்', turns: [{
+    turn_id: 'turn_0002', speaker: 'tutor',
+    text: 'r = d / 2\nஇங்கு:\nr = சகப்பிணைப்பு ஆரம்\nd = இரண்டு அணுக்கருக்களுக்கு இடையிலான தூரம்',
+    html: '<span class="katex">r = d / 2</span><p>இங்கு:</p>',
+  }] };
   const source = capture.turns[0].text;
   const fetcher = async (_url, options) => {
     const input = JSON.parse(options.body).contents[0].parts[0].text;

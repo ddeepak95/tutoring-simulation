@@ -14,7 +14,7 @@ test('HTML labels survive replay, save and reload without source offsets',async(
  await frame.locator('.html-section-caption').click();
  await expect(panel.getByRole('heading',{level:2})).toHaveText('Turn 1 - Section 1t1s1');
  await panel.getByRole('spinbutton',{name:'Examples count',exact:true}).fill('3');
- await panel.getByRole('spinbutton',{name:'Equations count',exact:true}).fill('2');
+ await panel.getByRole('spinbutton',{name:'Mathematical Notation count',exact:true}).fill('2');
  await expect.poll(()=>state.assignments[0].annotations.length).toBe(2);
  expect(state.assignments[0].annotations[0]).not.toHaveProperty('evidence');
  await frame.getByRole('button',{name:'Next',exact:true}).click();
@@ -23,7 +23,7 @@ test('HTML labels survive replay, save and reload without source offsets',async(
  await expect(panel.getByRole('spinbutton',{name:'Examples count',exact:true})).toHaveValue('3');
  await expect(frame.getByRole('img',{name:'Examples: 3',exact:true})).toBeVisible();
  await page.reload();await frame.locator('.html-section-button').click();
- await expect(panel.getByRole('spinbutton',{name:'Equations count',exact:true})).toHaveValue('2');
+ await expect(panel.getByRole('spinbutton',{name:'Mathematical Notation count',exact:true})).toHaveValue('2');
  await panel.getByRole('spinbutton',{name:'Examples count',exact:true}).fill('0');
  await expect.poll(()=>state.assignments[0].annotations.length).toBe(1);
  await page.setViewportSize({width:390,height:844});
