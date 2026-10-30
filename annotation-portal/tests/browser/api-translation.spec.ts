@@ -1,6 +1,31 @@
 import { expect, test } from '@playwright/test';
 import { backend, login } from './mock';
 
+test('saved marker-free version hides section boxes in the conversation and paired view',async({page})=>{
+  const state=await backend(page),source=state.documents[0];
+  Object.assign(source.transcript,{conversation_id:source.id,access_type:'API',original_language:'ta'});
+  const english:any={...structuredClone(source),id:'00000000-0000-4000-8000-000000000097',language:'en',source_conversation_id:source.id};
+  Object.assign(english.transcript,{conversation_id:english.id,source_conversation_id:source.id,translation:{version:'api-english/1',sha256:'mapped',alignment:[{segment_id:'t1s1'}]}});
+  english.transcript.messages=english.transcript.messages.map((turn:any,index:number)=>({...turn,text:`Translated turn ${index+1}`}));
+  state.documents.push(english);
+  state.sections.push({conversation_id:source.id,section_id:'t1s1',turn_id:'t1',turn_number:1,section_number:1,start:0,end:source.transcript.messages[0].text.length,quote:source.transcript.messages[0].text});
+  for(const document of [source,english]){
+    const transcript=structuredClone(document.transcript);
+    if(transcript.translation)delete transcript.translation.alignment;
+    state.conversationVersions.push({conversation_id:document.id,version_key:'marker-free-v1',section_mode:'none',transcript});
+  }
+  await login(page,'admin');await page.goto(`/conversations/${source.id}`);
+  await expect(page.locator('.transcript')).toBeVisible();
+  await expect(page.locator('.section-annotation-boundary')).toHaveCount(0);
+  await expect(page.getByText('Turn 1 - Section 1')).toHaveCount(0);
+  await page.getByRole('button',{name:'Show English side by side',exact:true}).click();
+  await expect(page.locator('.api-english-comparison .api-parallel-turn')).toHaveCount(source.transcript.messages.length);
+  await expect(page.locator('.api-english-comparison [data-section-id]')).toHaveCount(0);
+  await expect(page.getByText('Turn 1 - Section 1')).toHaveCount(0);
+  await page.goto(`/conversations/${english.id}`);
+  await expect(page.locator('.section-annotation-boundary')).toHaveCount(0);
+});
+
 test('whole-conversation English translation displays by turn without section alignment',async({page})=>{
   const state=await backend(page),source=state.documents[0];
   Object.assign(source.transcript,{conversation_id:source.id,access_type:'API',original_language:'ta'});

@@ -50,6 +50,11 @@ export function createLLMAnnotationHandler({ getEnvironment = () => process.env,
       if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).length !== 2 || Object.keys(body).some(key => !['conversation_id','request_id'].includes(key)) || typeof body.conversation_id !== 'string' || !uuid.test(body.conversation_id) || typeof body.request_id !== 'string' || !uuid.test(body.request_id)) throw new RequestError(400, 'Provide a conversation ID and generation request ID.');
       const document = await caller.from('conversations').select('transcript').eq('id', body.conversation_id).single();
       if (document.error || !document.data) throw new RequestError(404, 'Conversation not found.');
+      if(document.data.transcript.access_type==='API'){
+        const markerFree=await caller.from('conversation_versions').select('version_key').eq('conversation_id',body.conversation_id).eq('version_key','marker-free-v1').maybeSingle();
+        if(markerFree.error&&!['PGRST205','42P01'].includes(markerFree.error.code))throw new RequestError(503,'Could not check the conversation version.');
+        if(markerFree.data)throw new RequestError(409,'This conversation uses marker-free labeling. Open its Labeling page; the legacy 24-label evaluator is disabled.');
+      }
       document.data.transcript=await resolveCaptureContent(caller,document.data.transcript);
       const htmlMode=!!document.data.transcript.html_content;
       if(!(env.GEMINI_API_KEY||env.GOOGLE_API_KEY))throw new RequestError(503,'Set the server-only GEMINI_API_KEY or GOOGLE_API_KEY to enable direct Google evaluation.');

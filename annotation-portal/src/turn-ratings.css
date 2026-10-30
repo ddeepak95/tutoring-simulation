@@ -1,3 +1,62 @@
+.turn-ratings-panel .rating-question-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.turn-ratings-panel .rating-question-heading h3 {
+  margin: 0;
+}
+.turn-ratings-panel .rating-question-info {
+  position: relative;
+  margin: 0;
+  flex: none;
+}
+.turn-ratings-panel .rating-question-info summary {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #789186;
+  border-radius: 50%;
+  color: #235f48;
+  background: #f5faf7;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  list-style: none;
+  cursor: pointer;
+}
+.turn-ratings-panel .rating-question-info summary::-webkit-details-marker {
+  display: none;
+}
+.turn-ratings-panel .rating-question-info summary:focus-visible {
+  outline: 2px solid #235f48;
+  outline-offset: 2px;
+}
+.turn-ratings-panel .rating-question-popup {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  width: min(290px, calc(100vw - 48px));
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 12px 14px;
+  border: 1px solid #cbdad2;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 24px #16382a26;
+}
+.turn-ratings-panel .rating-question-popup p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.turn-ratings-panel .rating-question-popup p:last-child {
+  margin-bottom: 0;
+}
 .turn-ratings-panel .rating-options {
   flex-direction: column;
 }
@@ -8,4 +67,25 @@
   line-height: 1.5;
   white-space: normal;
   overflow-wrap: anywhere;
+}
+.turn-ratings-panel .rating-readonly-option {
+  color: #36453e;
+  background: #fff;
+  border-color: #d9e2dc;
+  font-weight: 400;
+}
+.turn-ratings-panel .rating-readonly-option.selected {
+  color: #174d36;
+  background: #e0f2e7;
+  border-color: #458363;
+  font-weight: 700;
+}
+.turn-ratings-panel .model-rating-reason {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f3f7f5;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
 }

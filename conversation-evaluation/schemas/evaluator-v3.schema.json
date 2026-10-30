@@ -4,6 +4,11 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "marker_free_annotations": {
+      "type": "array",
+      "description": "Experimental turn-anchored occurrences for marker-free-v1; no section identity is used.",
+      "items": { "$ref": "#/$defs/marker_free_occurrence" }
+    },
     "rubric_version": {
       "const": "3.1",
       "type": "string"
@@ -1534,6 +1539,18 @@
     "limitations"
   ],
   "$defs": {
+    "marker_free_occurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "feature": {"enum": ["definitions", "step_by_step_walkthroughs", "examples", "real_world_connections", "analogies", "misconceptions_pitfalls", "memory_aids", "summaries_key_takeaways", "social_cues", "questions", "comprehension_checks", "hints_scaffolding", "next_step_suggestions", "bot_errors_hallucinations"]},
+        "turn_id": {"type": "string", "minLength": 1},
+        "quote": {"type": "string", "minLength": 1},
+        "occurrence": {"type": "integer", "minimum": 1},
+        "reason": {"type": "string", "minLength": 1}
+      },
+      "required": ["feature", "turn_id", "quote", "occurrence"]
+    },
     "evidence": {
       "type": "object",
       "additionalProperties": false,

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { profile, connectProfile, snapshot, readSnapshot, restore } from '../scripts/supabase-sync-core.mjs';
+import { profile, connectProfile, snapshot, readSnapshot, restore, assertCompatible } from '../scripts/supabase-sync-core.mjs';
 import { renderLocalMigration } from '../scripts/supabase-local-bootstrap.mjs';
 
 it('renders cloud migration templates for a fresh local database without weakening existing-work guards', () => {
@@ -15,6 +15,21 @@ it('renders cloud migration templates for a fresh local database without weakeni
   expect(rendered).not.toContain('__CURRENT_');
   const runtimeGuard = "if not exists(select 1 from public.rubric_versions where hash=p_rubric_hash) then raise exception 'Rubric not found'; end if;";
   expect(renderLocalMigration(runtimeGuard, { rubric_sha256: 'historical' })).toBe(runtimeGuard);
+});
+
+it('accepts different physical column order while rejecting changed column contracts', () => {
+  const columns = [
+    { name: 'id', type: 'pg_catalog.uuid', nullable: 'NO', generated: 'NEVER', identity: 'NO' },
+    { name: 'policy', type: 'pg_catalog.text', nullable: 'NO', generated: 'NEVER', identity: 'NO' },
+  ];
+  const inventory = (values: typeof columns) => ({ tables: [{ schema: 'public', name: 'runs', columns: values }], definitions: [] });
+  const source = inventory(columns);
+  expect(() => assertCompatible(source, inventory([...columns].reverse()))).not.toThrow();
+  expect(source.tables[0].columns).toEqual(columns);
+  for (const change of [{ type: 'pg_catalog.jsonb' }, { nullable: 'YES' }, { generated: 'ALWAYS' }, { identity: 'YES' }]) {
+    expect(() => assertCompatible(source, inventory([columns[0], { ...columns[1], ...change }]))).toThrow('Database schemas differ');
+  }
+  expect(() => assertCompatible(source, inventory([columns[0]]))).toThrow('Database schemas differ');
 });
 
 // Explicit opt-in, and only an empty local instance: never connects to cloud.

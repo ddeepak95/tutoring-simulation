@@ -1,7 +1,7 @@
 import {resolveCaptureDocument} from './capture-content';
 import {hydrateRows, storedAnnotations, readSections} from './section-registry';
 import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link,useParams } from 'react-router-dom';
 import { C, download, supabase } from './lib';
 import type { DocumentRow, LLMBaseline, LLMGenerationRun, RubricSnapshot } from './types';
 import modelConfig from './generated/llm-config.json';
@@ -17,12 +17,18 @@ export function LLMBaselines() {
   const [runs, setRuns] = useState<LLMGenerationRun[]>([]); const [selected, setSelected] = useState(''); const [rubric, setRubric] = useState<RubricSnapshot | null>(null);
   const [busy, setBusy] = useState(false); const [error, setError] = useState(''); const [notice, setNotice] = useToast(); const [loading, setLoading] = useState(true);
   const [compareLanguages,setCompareLanguages]=useState(false);
+  const [markerFreeAvailable,setMarkerFreeAvailable]=useState(false);
   const alive = useRef(false); const generating = useRef(false);
   async function refresh() {
     try {
       const [doc, versions, jobs] = await Promise.all([supabase!.from('conversations').select('*').eq('id',id).single(), supabase!.from('llm_baselines').select('*').eq('conversation_id',id).order('created_at',{ascending:false}), supabase!.from('llm_generation_runs').select('id,conversation_id,status,error_code,created_at,finished_at,checkpoint_fingerprint:checkpoint->>fingerprint').eq('conversation_id',id).order('created_at',{ascending:false})]);
       if (doc.error) throw doc.error; if (versions.error) throw versions.error; if (jobs.error) throw jobs.error;
       const fullDocument=await resolveCaptureDocument(supabase!,doc.data as DocumentRow);
+      if(fullDocument.transcript.access_type==='API'){
+        const marker=await supabase!.from('conversation_versions').select('version_key').eq('conversation_id',id).eq('version_key','marker-free-v1').maybeSingle();
+        if(marker.error&&!['PGRST205','42P01'].includes(marker.error.code))throw marker.error;
+        if(alive.current)setMarkerFreeAvailable(Boolean(marker.data));
+      }else if(alive.current)setMarkerFreeAvailable(false);
       const hydrated=await hydrateRows(supabase!, versions.data as LLMBaseline[]);
       if (!alive.current) return;
       setDocument(fullDocument); setBaselines(hydrated); setRuns(jobs.data as LLMGenerationRun[]);
@@ -63,7 +69,7 @@ export function LLMBaselines() {
     <div className="page-heading"><div><h1>LLM annotations</h1><p>{document?.transcript.learning_topic || document?.label}</p></div></div>
     <ConversationBreadcrumbs document={document} currentPage="Evaluations"/>
     <section className="card baseline-controls"><p>Generate instructional item labels and quantities with {modelConfig.model}. Each generation is saved as a separate version. Ratings are completed independently by human annotators.</p>
-      <div className="actions"><button className="primary" disabled={busy || loading || Boolean(activeRun)} onClick={() => void generate()}>{busy || activeRun ? 'Generating…' : baselines.length ? 'Generate new baseline' : 'Generate LLM annotations'}</button><button className="secondary" onClick={() => {setError('');void refresh();}}>Refresh versions</button></div>
+      <div className="actions">{markerFreeAvailable?<Link className="primary" to={`/conversations/${id}/labeling`}>View marker-free labeling</Link>:<button className="primary" disabled={busy || loading || Boolean(activeRun)} onClick={() => void generate()}>{busy || activeRun ? 'Generating…' : baselines.length ? 'Generate new baseline' : 'Generate LLM annotations'}</button>}<button className="secondary" onClick={() => {setError('');void refresh();}}>Refresh versions</button></div>
       {document&&canCompareApiTranslation(document.transcript)&&<button type="button" className="secondary" aria-pressed={compareLanguages} onClick={()=>setCompareLanguages(value=>!value)}>{compareLanguages?'Show single-language labels':'Compare labels side by side'}</button>}
       {baselines.length>0 && !compareLanguages && <label>Baseline version<select value={selected} onChange={event=>setSelected(event.target.value)}>{baselines.map((version,index)=><option key={version.id} value={version.id}>Prompt {version.prompt_version || 'not recorded'} · {version.model} · {new Date(version.created_at).toLocaleString()}{index===0?' · Latest':''}</option>)}</select></label>}
       {baseline && rubric && <button className="secondary" onClick={()=>void readSections(supabase!,[document!.id],baseline.annotations).then(sections=>download(`llm-baseline-${baseline.id}.json`,{baseline:{...baseline,annotations:storedAnnotations(baseline.annotations)},conversation:document!.transcript,rubric,sections}))}>Export baseline</button>}

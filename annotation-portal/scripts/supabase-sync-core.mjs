@@ -9,6 +9,14 @@ export const quote = value => '"' + value.replaceAll('"', '""') + '"';
 const tableName = table => `${quote(table.schema)}.${quote(table.name)}`;
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const checked = result => { if (result.error) throw new Error('Storage operation failed: ' + result.error.message); return result.data; };
+async function retryStorage(operation) {
+  for (let attempt = 0; ; attempt++) {
+    const result = await operation();
+    const status = Number(result.error?.statusCode || result.error?.status);
+    if (!result.error || attempt >= 6 || (status !== 429 && status < 500) || !status) return checked(result);
+    await new Promise(resolve => setTimeout(resolve, Math.min(20000, 2000 * 2 ** attempt)));
+  }
+}
 export function syncOptions(args) {
   const options = {};
   for (let i = 0; i < args.length; i++) {
@@ -65,7 +73,8 @@ export async function inventory(connection) {
   return { tables, buckets, objects, definitions };
 }
 export function assertCompatible(source, destination) {
-  const structure = data => JSON.stringify({ tables: data.tables.map(({ schema, name, columns }) => ({ schema, name, columns })), definitions: data.definitions });
+  // Restore names every column explicitly; physical column order may differ after ALTER TABLE.
+  const structure = data => JSON.stringify({ tables: data.tables.map(({ schema, name, columns }) => ({ schema, name, columns: [...columns].sort((a, b) => a.name.localeCompare(b.name)) })), definitions: data.definitions });
   if (structure(source) !== structure(destination)) throw new Error('Database schemas differ. Apply the same repository migrations and use compatible Supabase Auth versions before syncing. No destination data changed.');
 }
 export async function snapshot(connection, directory) {
@@ -125,13 +134,20 @@ export async function restore(connection, directory, manifest) {
     const existing = checked(await connection.storage.listBuckets()).some(item => item.id === bucket.id);
     checked(existing ? await connection.storage.updateBucket(bucket.id, options) : await connection.storage.createBucket(bucket.id, options));
   }
-  for (const [index, object] of manifest.objects.entries()) {
+  let copied = 0;
+  for (let offset = 0; offset < manifest.objects.length; offset += 2) {
+    // Drain each bounded batch before returning an error or replacing database rows.
+    const results = await Promise.allSettled(manifest.objects.slice(offset, offset + 2).map(async object => {
     const bytes = await fs.readFile(path.join(directory, object.file));
     const cacheControl = object.metadata?.cacheControl?.match(/(?:max-age=)?(\d+)/)?.[1];
-    checked(await connection.storage.from(object.bucket_id).upload(object.name, bytes, { upsert: true, contentType: object.contentType, ...(cacheControl ? { cacheControl } : {}), ...(object.user_metadata ? { metadata: object.user_metadata } : {}) }));
-    const downloaded = checked(await connection.storage.from(object.bucket_id).download(object.name));
+    await retryStorage(() => connection.storage.from(object.bucket_id).upload(object.name, bytes, { upsert: true, contentType: object.contentType, ...(cacheControl ? { cacheControl } : {}), ...(object.user_metadata ? { metadata: object.user_metadata } : {}) }));
+    const downloaded = await retryStorage(() => connection.storage.from(object.bucket_id).download(object.name));
     if (sha(Buffer.from(await downloaded.arrayBuffer())) !== object.sha256) throw new Error('Storage verification failed. Database rows were not replaced.');
-    if ((index + 1) % 50 === 0) console.log(`${connection.target}: copied and verified ${index + 1}/${manifest.objects.length} Storage files.`);
+    copied++;
+    if (copied % 50 === 0) console.log(`${connection.target}: copied and verified ${copied}/${manifest.objects.length} Storage files.`);
+    }));
+    const failed = results.find(result => result.status === 'rejected');
+    if (failed) throw failed.reason;
   }
   await connection.db.query('begin');
   try {

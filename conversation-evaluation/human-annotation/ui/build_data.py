@@ -12,6 +12,7 @@ SCHEMA = ROOT / "conversation-evaluation/schemas/evaluator-v3.schema.json"
 TRANSCRIPTS = ROOT / "comparative-evaluation/outputs/chat-transcripts"
 
 ITEM_NAMES = {'diagrams_and_illustrations': 'Diagrams & Illustrations', 'flow_diagrams': 'Flow Diagrams', 'graphs': 'Graphs', 'static_images': 'Static Images', 'interactive_animated_media': 'Interactive & Animated Media', 'headings': 'Headings', 'lists': 'Lists / Bullet Points', 'tables': 'Tables', 'callouts': 'Callouts', 'equations': 'Mathematical Notation', 'definitions': 'Definitions', 'step_by_step_walkthroughs': 'Step-by-Step Walkthroughs', 'examples': 'Examples', 'real_world_connections': 'Real-World Connections / Applications', 'analogies': 'Analogies', 'misconceptions_pitfalls': 'Misconceptions', 'memory_aids': 'Memory Aids', 'summaries_key_takeaways': 'Summaries / Key Takeaways', 'social_cues': 'Social Cues', 'questions': 'Questions', 'comprehension_checks': 'Comprehension Checks', 'hints_scaffolding': 'Hints / Scaffolding', 'next_step_suggestions': 'Next Step Suggestions', 'bot_errors_hallucinations': 'Bot Errors / Hallucinations'}
+MARKER_FREE_KEYS = ['definitions', 'step_by_step_walkthroughs', 'examples', 'real_world_connections', 'analogies', 'misconceptions_pitfalls', 'memory_aids', 'summaries_key_takeaways', 'social_cues', 'questions', 'comprehension_checks', 'hints_scaffolding', 'next_step_suggestions', 'bot_errors_hallucinations']
 COLORS = {'Visuals & Rich Media': ('#36759c', '#e7f2fa'), 'Formatting & Notation': ('#765b96', '#f0eaf7'), 'Explanatory & Pedagogical Devices': ('#397b71', '#e2f3ee'), 'Conversational & Tutoring Moves': ('#976320', '#fff2db'), 'Quality & Error Tracking': ('#a23c49', '#fbe9ec')}
 
 
@@ -52,6 +53,7 @@ def build() -> dict:
         "annotation_metadata": {"html_capture": "html-conversation/2: HTML is authoritative. Source-assigned section IDs are shared with translations; labels require no transcript spans.", "llm_evidence": "Optional single-line model justification, separate from source evidence; at most 1000 characters."},
         "section_state_semantics": "Captured interaction states belong to their original containing section; count component items once across supporting views.",
         "label_schema_version": "section-items/1",
+        "marker_free_label_keys": MARKER_FREE_KEYS,
         "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
         "rubric_sha256": hashlib.sha256(GUIDE.read_bytes() + SCHEMA.read_bytes()).hexdigest(),
         "rubric": rubric, "samples": samples,

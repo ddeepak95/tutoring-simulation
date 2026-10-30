@@ -26,6 +26,8 @@ import { CapturedTranscript, CaptureFrame, CaptureMedia, OriginalCapture, useCap
 import { MarkdownTranscript } from './MarkdownTranscript';
 import { ApiEnglishComparison, useApiEnglish } from './ApiTranslation';
 import { AdminTaskReview } from './AdminTaskReview';
+import {MarkerFreeLabelReview} from './MarkerFreeLabelReview';
+import {MarkerFreeRatingReview} from './MarkerFreeRatingReview';
 import { ConfirmDialog } from './ConfirmDialog';
 import { describeAnnotation, describeIncompleteAnnotations, missingFieldLabels } from './annotation-validation';
 
@@ -55,11 +57,11 @@ function WorkspaceLink({ to, children, className, end, beforeExit, onError }: { 
   }}>{children}</NavLink>;
 }
 
-function ConversationOnly({document:documentRow}:{document:import('./types').DocumentRow}) {
+function ConversationOnly({document:documentRow,markerFree=false}:{document:import('./types').DocumentRow;markerFree?:boolean}) {
   const conversation=documentRow.transcript,conversationId=documentRow.id;
   const captured = useCaptureAssets(conversation);
-  const comparison = useApiEnglish(conversation, conversationId);
-  const apiSections=conversation.access_type==='API';
+  const comparison = useApiEnglish(conversation, conversationId, false, markerFree);
+  const apiSections=conversation.access_type==='API'&&!markerFree;
   const [sections,setSections]=useState<ConversationSection[]>([]);
   const [sectionError,setSectionError]=useState('');
   useEffect(()=>{
@@ -80,18 +82,32 @@ function AdminAnnotationReview() {
   const { id } = useParams();
   const [error, setError] = useState('');
   const [documentRow,setDocument]=useState<import('./types').DocumentRow|null>(null);
+  const [markerFree,setMarkerFree]=useState(false);
   useEffect(() => {
-    let alive = true;setError('');setDocument(null);
+    let alive = true;setError('');setDocument(null);setMarkerFree(false);
     void (async () => {
       try {
         const {data,error}=await supabase!.from('conversation_details').select('id,label,language,created_at,source_path,source_conversation_id,topic_id,generic_topic_name,conversation_title,transcript').eq('id',id).single();
         if(error)throw error;
-        const resolved=await resolveCaptureDocument(supabase!,data as import('./types').DocumentRow);
-        if(alive)setDocument(resolved);
+        const versionRequest=data.transcript.access_type==='API'
+          ? supabase!.from('conversation_versions').select('transcript,section_mode').eq('conversation_id',id).eq('version_key','marker-free-v1').maybeSingle()
+          : Promise.resolve({data:null,error:null});
+        const [resolved,versionResult]=await Promise.all([resolveCaptureDocument(supabase!,data as import('./types').DocumentRow),versionRequest]);
+        let versioned=false;
+        if(resolved.transcript.access_type==='API'){
+          const {data:version,error:versionError}=versionResult;
+          if(versionError&&!['PGRST205','42P01'].includes(versionError.code))throw versionError;
+          if(version){
+            if(version.section_mode!=='none')throw Error('The saved marker-free version has an invalid section mode.');
+            resolved.transcript=version.transcript;
+            versioned=true;
+          }
+        }
+        if(alive){setMarkerFree(versioned);setDocument(resolved);}
       } catch (err) { if (alive) setError(message(err)); }
     })();return () => { alive = false; };
   }, [id]);
-  return error ? <main className="center"><p className="error" role="alert">{error}</p><ConversationBreadcrumbs document={documentRow}/></main> : documentRow ? <ConversationOnly key={id} document={documentRow}/> : <main className="center"><p role="status">Loading conversation...</p></main>;
+  return error ? <main className="center"><p className="error" role="alert">{error}</p><ConversationBreadcrumbs document={documentRow}/></main> : documentRow ? <ConversationOnly key={id} document={documentRow} markerFree={markerFree}/> : <main className="center"><p role="status">Loading conversation...</p></main>;
 }
 
 export default function App() {
@@ -116,7 +132,7 @@ export default function App() {
     catch (err) { setError(message(err)); }
   }
   return <BrowserRouter><header className="topbar"><WorkspaceLink className="brand" to="/" end beforeExit={beforeExit} onError={setError}><span className="brand-icon">a.</span><span><strong>AI Explanation Evaluation</strong></span></WorkspaceLink>{profile && <div className="top-actions">{profile.role === 'admin' ? <nav aria-label="Administration"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Conversations</WorkspaceLink><WorkspaceLink to="/assignments" beforeExit={beforeExit} onError={setError}>Assignments</WorkspaceLink><WorkspaceLink to="/comparisons" beforeExit={beforeExit} onError={setError}>Comparisons</WorkspaceLink><WorkspaceLink to="/settings" beforeExit={beforeExit} onError={setError}>Settings</WorkspaceLink></nav> : <nav aria-label="Annotator navigation"><WorkspaceLink to="/" end beforeExit={beforeExit} onError={setError}>Dashboard</WorkspaceLink></nav>}<span>{profile.username}<small>{profile.role === 'admin' ? 'Administrator' : 'Annotator'}</small></span><button className="secondary" onClick={() => void signOut()}>Sign out</button></div>}</header>
-    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/label" element={<Navigate to="/" replace />} /><Route path="/rate" element={<Navigate to="/" replace />} /><Route path="/assignments" element={profile.role === 'admin' ? <AdminAssignments /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey/conversations/:provider/:sourceLanguage" element={profile.role === 'admin' ? <Admin /> : <Navigate to="/" replace />} /><Route path="/statistics" element={profile.role === 'admin' ? <LanguageStatistics /> : <Navigate to="/" replace />} /><Route path="/topics/labels" element={profile.role === 'admin' ? <TopicLabelComparison /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey" element={profile.role === 'admin' ? <Admin /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey/labels" element={profile.role === 'admin' ? <TopicLabelComparison /> : <Navigate to="/" replace />} /><Route path="/comparisons" element={profile.role === 'admin' ? <Comparisons profile={profile} /> : <Navigate to="/#compare" replace />} /><Route path="/comparisons/pairs/:id/preview" element={profile.role === 'admin' ? <ComparisonEditor profile={profile} preview /> : <Navigate to="/" replace />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/labeling" element={profile.role === 'admin' ? <AdminTaskReview taskType="label" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/rating" element={profile.role === 'admin' ? <AdminTaskReview taskType="rate" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={<Navigate to="/conversations/:id/labeling" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
+    {!configured ? <Setup /> : loading ? <main className="center" role="status">Loading your workspace…</main> : !session ? <Login /> : !profile ? <main className="card center"><p className="error" role="alert">{error || 'Account profile is missing.'}</p><button onClick={() => void signOut()}>Sign out</button></main> : <PortalContext.Provider value={{ profile, beforeExit }}>{error && <div className="global-error error" role="alert">{error}</div>}<Routes><Route path="/" element={profile.role === 'admin' ? <Admin /> : <Assignments />} /><Route path="/label" element={<Navigate to="/" replace />} /><Route path="/rate" element={<Navigate to="/" replace />} /><Route path="/assignments" element={profile.role === 'admin' ? <AdminAssignments /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey/conversations/:provider/:sourceLanguage" element={profile.role === 'admin' ? <Admin /> : <Navigate to="/" replace />} /><Route path="/statistics" element={profile.role === 'admin' ? <LanguageStatistics /> : <Navigate to="/" replace />} /><Route path="/topics/labels" element={profile.role === 'admin' ? <TopicLabelComparison /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey" element={profile.role === 'admin' ? <Admin /> : <Navigate to="/" replace />} /><Route path="/topics/:topicKey/labels" element={profile.role === 'admin' ? <TopicLabelComparison /> : <Navigate to="/" replace />} /><Route path="/comparisons" element={profile.role === 'admin' ? <Comparisons profile={profile} /> : <Navigate to="/#compare" replace />} /><Route path="/comparisons/pairs/:id/preview" element={profile.role === 'admin' ? <ComparisonEditor profile={profile} preview /> : <Navigate to="/" replace />} /><Route path="/comparisons/:id" element={<ComparisonEditor profile={profile} />} /><Route path="/settings" element={profile.role === 'admin' ? <Settings /> : <Navigate to="/" replace />} /><Route path="/conversations/:id" element={profile.role === 'admin' ? <AdminAnnotationReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/baselines" element={profile.role === 'admin' ? <LLMBaselines /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/labeling" element={profile.role === 'admin' ? <MarkerFreeLabelReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/labeling/legacy" element={profile.role === 'admin' ? <AdminTaskReview taskType="label" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/rating" element={profile.role === 'admin' ? <MarkerFreeRatingReview /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/rating/legacy" element={profile.role === 'admin' ? <AdminTaskReview taskType="rate" /> : <Navigate to="/" replace />} /><Route path="/conversations/:id/view" element={<Navigate to="/conversations/:id/labeling" replace />} /><Route path="/assignments/:id/view" element={profile.role === 'admin' ? <AssignmentEditor viewOnly /> : <Navigate to="/" replace />} /><Route path="/assignments/:id" element={<AssignmentEditor />} /><Route path="*" element={<Navigate to="/" replace />} /></Routes></PortalContext.Provider>}
   </BrowserRouter>;
 }
 function AssignmentList({ rows, taskType }: { rows: Assignment[]; taskType: AssignmentType }) {

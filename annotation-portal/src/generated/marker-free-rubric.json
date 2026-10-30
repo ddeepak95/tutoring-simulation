@@ -1,0 +1,260 @@
+{
+  "label_schema_version": "marker-free-occurrences/1",
+  "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
+  "rubric_sha256": "01dad68028399ca86c7b19b1bce872ec7cfb2758ddcdfb4a5e09bd7d52d04ad3",
+  "rubric": [
+    {
+      "key": "definitions",
+      "name": "Definitions",
+      "short_label": "Definitions",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#881c92",
+      "highlight": "#ead6eb",
+      "description": "Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag explicit statements introducing and explaining the formal meaning of a domain term, concept, law, or theorem (e.g., *\"X is defined as...\"*, *\"In biology, X refers to...\"*). Exclude passing mentions of jargon where the term is not explained. Count each explicitly defined term or concept once per presentation, not every sentence in its definition.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "step_by_step_walkthroughs",
+      "name": "Step-by-Step Walkthroughs",
+      "short_label": "Step-by-Step Walkthroughs",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#79921c",
+      "highlight": "#e7ebd6",
+      "description": "Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag an ordered explanation containing at least two distinct, linked procedural steps that demonstrate how to execute a procedure, derive a formula, or solve a problem. Each step must advance the same procedure toward its outcome. A single-step explanation, one substitution, one arithmetic operation, or an answer with a brief explanation is not a Step-by-Step Walkthrough, even when numbered or spread across several lines. Unordered facts and independent one-step examples do not become a walkthrough merely by appearing together. Count each cohesive procedure or worked solution once, not each step. When the same walkthrough continues across consecutive sections, treat that uninterrupted sequence as one walkthrough and assign its count only to the section where the walkthrough starts. Later consecutive sections that continue that procedure receive no additional walkthrough count. The sequence as a whole must contain at least two linked steps; those steps may span consecutive sections. Do not combine unrelated single-step explanations. This is continuation counting, not conversation-wide deduplication: a walkthrough independently presented again later can count as a new occurrence, even if it uses the same method or problem. Sharing a topic or similar wording alone does not establish continuation. Keep the count on its starting section and preserve all persistent section IDs; do not merge or renumber sections. A specific worked example can receive both Examples and Step-by-Step Walkthroughs when it meets this multi-step requirement. A general procedure without a concrete instance is a Walkthrough only. Do not additionally count the procedural steps as Lists / Bullet Points.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "examples",
+      "name": "Examples",
+      "short_label": "Examples",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c5792",
+      "highlight": "#d6e1eb",
+      "description": "Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag concrete instances, sample scenarios, or specific cases used to instantiate an abstract rule or concept (e.g., *\"For example...\"*, sample inputs/outputs, specific numerical/textual illustrations). Tag *all* concrete instances as *Examples*, and **double-tag** with *Real-World Connections / Applications* if the example is grounded in an authentic everyday, historical, or industry context. Exclude figurative comparisons to an unrelated domain (*Analogies*). Count each concrete case once within its section, including brief illustrative instances. Its introduction, diagram, calculations, intermediate steps, answer, and explanation belong to the same occurrence. Continuing or referring back to that case does not create another occurrence. Count separately presented cases separately. A case independently presented again in another section receives a count in that section. A specific worked example can receive both Examples and Step-by-Step Walkthroughs. An analogy is not automatically an Example. Unsolved practice questions alone are Questions, not Examples.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "real_world_connections",
+      "name": "Real-World Connections / Applications",
+      "short_label": "Real-World Connections / Applications",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#921c34",
+      "highlight": "#ebd6da",
+      "description": "Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag references that bridge the abstract concept to authentic out-of-classroom contexts, industry practices, nature, history, or the learner's everyday lived experience (answers *\"Where is this used in real life?\"* or *\"Why does this matter?\"*). Tag standalone when mentioning real-world relevance broadly, or **double-tag** with *Examples* when walking through a specific real-world instance. Exclude figurative metaphors where the real-world object is not literally using the concept (*Analogies*). Count each distinct authentic application or relevance connection once, including its supporting explanation.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "analogies",
+      "name": "Analogies",
+      "short_label": "Analogies",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c9226",
+      "highlight": "#d6ebd8",
+      "description": "Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag figurative comparisons, metaphors, or similes that map an unfamiliar target concept onto a familiar everyday source domain (e.g., *\"Think of X like a...\"*, *\"Just as a traffic cop directs cars...\"*). Exclude literal within-domain examples (*Examples*) or literal applications in daily life (*Real-World Connections / Applications*). Count each distinct figurative mapping once, including its elaboration.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "misconceptions_pitfalls",
+      "name": "Misconceptions",
+      "short_label": "Misconceptions",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#481c92",
+      "highlight": "#ded6eb",
+      "description": "Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag explicit, accurate warnings where the chatbot proactively addresses common learner errors, false intuitions, pitfalls, edge cases, or non-examples showing what a concept is not (e.g., \"A common mistake is...\", \"Be careful not to confuse X with Y\"). Do not confuse with Bot Errors / Hallucinations, where the chatbot itself makes an error. Count each distinct misconception or pitfall addressed once, including its accurate correction. A quoted learner error followed by an accurate correction is Misconceptions, not a bot error. An inaccurate warning or correction can instead qualify as Bot Errors / Hallucinations; do not label it as an accurate misconception correction.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "memory_aids",
+      "name": "Memory Aids",
+      "short_label": "Memory Aids",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#926b1c",
+      "highlight": "#ebe4d6",
+      "description": "Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag explicit cognitive tricks designed to help the learner recall information, such as acronyms (e.g., *PEMDAS*, *SOHCAHTOA*), acrostics, rhymes, wordplay associations, or visual recall hooks. Exclude regular summaries or takeaways. Count each distinct recall device once; a regular summary or takeaway belongs under Summaries / Key Takeaways.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "summaries_key_takeaways",
+      "name": "Summaries / Key Takeaways",
+      "short_label": "Summaries / Key Takeaways",
+      "category": "Explanatory & Pedagogical Devices",
+      "color": "#1c928d",
+      "highlight": "#d6ebea",
+      "description": "Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag high-level syntheses or recaps that condense the core message of the explanation (e.g., *\"In short...\"*, *\"TL;DR:\"*, *\"Key Takeaways:\"*, *\"To wrap up...\"*, or concluding synthesis paragraphs). Exclude introductory topic sentences or transitions. Count each cohesive recap block once, not each takeaway bullet. A recap list can also count as Lists / Bullet Points.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "social_cues",
+      "name": "Social Cues",
+      "short_label": "Social Cues",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#921c74",
+      "highlight": "#ebd6e6",
+      "description": "Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag utterances whose conversational function is directly engaging the learner socially: acknowledging or registering their input, validating feelings or confusion, expressing empathy, praising effort or contributions, encouraging them, friendly greetings or pleasantries, or establishing collaboration and rapport. Short expressions such as \"Okay\", \"Got it\", and \"Great question!\" qualify when context establishes this social function; no minimum word count or substantive-engagement threshold applies. Apply the same contextual criteria in English, Tamil, and other languages. An acknowledgment such as \"Yes\" or \"No\" can qualify, but a bare domain answer or quoted example does not automatically qualify. Count one cohesive conversational move once within its section, even when expressed across multiple sentences. Count separately expressed social moves separately, such as a distinct acknowledgment followed by distinct encouragement; do not count each word or sentence of one cohesive move separately. Highlight the complete conversational expression, excluding adjacent factual explanation. This overrides the general two-to-eight-word highlight preference for Social Cues. Keep each exact-source highlight within its owning section and the existing 500-character limit; for an exceptionally long expression, use the shortest complete utterance establishing the social move. Exclude factual explanations, neutral organizational transitions, quoted examples, and instructional wording without a social function. \"Let's work through this together\" establishes collaboration and qualifies; \"Next, consider atomic size\" and purely procedural \"Let's calculate the radius\" do not qualify alone. Domain-knowledge questions belong to Questions, self-report pulse-checks to Comprehension Checks, and follow-up offers to Next Step Suggestions; these do not become Social Cues merely through friendly wording. Add Social Cues alongside these labels only for a separately identifiable social expression.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "questions",
+      "name": "Questions",
+      "short_label": "Questions",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#51921c",
+      "highlight": "#e0ebd6",
+      "description": "Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag substantive pedagogical questions posed by the chatbot that require the learner to think, recall, apply knowledge, or clarify their learning goal (e.g., Socratic questions, practice problems, or diagnostic clarifying questions). Exclude rhetorical questions immediately answered by the bot, or passive check-ins (*Comprehension Checks*). Count each independently answerable pedagogical question or practice problem once. A diagnostic question clarifying the learning goal qualifies. Do not also classify the same question as a Comprehension Check or Next Step Suggestion.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "comprehension_checks",
+      "name": "Comprehension Checks",
+      "short_label": "Comprehension Checks",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#1c2f92",
+      "highlight": "#d6daeb",
+      "description": "Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag low-stakes conversational pulse-checks gauging whether the user is following the explanation (e.g., *\"Does that make sense so far?\"*, *\"How are you feeling about this concept?\"*, *\"Are you with me on step 2?\"*). Exclude questions that test domain knowledge (*Questions*) social pleasantries (*Social Cues*), or offers for new topics (*Next Step Suggestions*). Count each distinct self-report check once. Classify by its requested response, not the presence of a question mark.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "hints_scaffolding",
+      "name": "Hints / Scaffolding",
+      "short_label": "Hints / Scaffolding",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#922b1c",
+      "highlight": "#ebd9d6",
+      "description": "Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag partial clues, guiding frameworks, or strategic nudges that help the learner solve a problem themselves without revealing the final answer (e.g., *\"Try looking at the denominator first...\"*, or providing a partially completed template for the user to finish). Exclude full worked solutions (*Step-by-Step Walkthroughs*). Count each cohesive hint or scaffold once, not every sentence in it. A full worked answer is not a Hint.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "next_step_suggestions",
+      "name": "Next Step Suggestions",
+      "short_label": "Next Step Suggestions",
+      "category": "Conversational & Tutoring Moves",
+      "color": "#1c924d",
+      "highlight": "#d6ebdf",
+      "description": "Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag closing conversational offers proposing specific follow-up actions, deeper dives, or practice opportunities to guide the learning trajectory (e.g., *\"Would you like to try a practice problem next, or explore another example?\"*). Exclude direct comprehension checks or immediate test questions. Count each cohesive closing offer once, including alternative follow-up choices in that offer. An immediate practice question is Questions instead.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    },
+    {
+      "key": "bot_errors_hallucinations",
+      "name": "Bot Errors / Hallucinations",
+      "short_label": "Bot Errors / Hallucinations",
+      "category": "Quality & Error Tracking",
+      "color": "#701c92",
+      "highlight": "#e5d6eb",
+      "description": "Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa.",
+      "entry_attributes": "Exact tutor-turn quote and occurrence; no section identity",
+      "guidance": "Tag any span where the chatbot makes a mistake. This includes factual inaccuracies, hallucinated facts or citations, mathematical or logical calculation errors, internal self-contradictions, broken formatting or rendering glitches (e.g., unrendered LaTeX or broken tables), or pedagogical failures (e.g., directly giving away the final answer when the user explicitly asked for just a hint). Can be double-tagged over any structural or pedagogical element that contains the error. Count each distinct confirmed error once within its section, including its supporting explanation; repeated references to the same error within that occurrence do not add counts. Require evidence that the bot asserts the error or that the supplied rendering actually fails. Corrected learner errors, deliberately marked incorrect examples, valid source markup, unfamiliar terminology, language differences, and ordinary stylistic preferences alone are not bot errors. Do not infer a rendering failure from valid Markdown or LaTeX source alone. Treat uncertain or unverifiable claims as uncertain rather than confirmed errors. Judge the supplied conversation version; do not attribute an unseen source-language error to its translation or vice versa.",
+      "fields": [
+        {
+          "key": "count",
+          "label": "Occurrences",
+          "numeric": true
+        }
+      ]
+    }
+  ],
+  "prompt_version": "marker-free-occurrences/2"
+}

@@ -5,8 +5,24 @@ window.ANNOTATION_DATA = {
   },
   "section_state_semantics": "Captured interaction states belong to their original containing section; count component items once across supporting views.",
   "label_schema_version": "section-items/1",
+  "marker_free_label_keys": [
+    "definitions",
+    "step_by_step_walkthroughs",
+    "examples",
+    "real_world_connections",
+    "analogies",
+    "misconceptions_pitfalls",
+    "memory_aids",
+    "summaries_key_takeaways",
+    "social_cues",
+    "questions",
+    "comprehension_checks",
+    "hints_scaffolding",
+    "next_step_suggestions",
+    "bot_errors_hallucinations"
+  ],
   "rubric_source": "conversation-evaluation/human-annotation/coding-guidebook.md",
-  "rubric_sha256": "d855dcdfc51cf1b6bb531cca0136d077565d0d0084ac91aa9769e7cfc627608d",
+  "rubric_sha256": "e2de2498c2ab749dd0dce84339d18dc9b3f1f6b91c28215caabc1a7b8ead4803",
   "rubric": [
     {
       "key": "diagrams_and_illustrations",

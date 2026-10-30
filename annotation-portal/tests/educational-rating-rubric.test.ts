@@ -26,18 +26,22 @@ it('uses eight questions per turn, replacing introduction with follow-up', () =>
   expect(later.map(d=>d.label)).toContain('Addressing Follow-Up Questions');
   expect(later.map(d=>d.label)).not.toContain(first[0].label);
   expect(first.map(d=>d.label).slice(1)).toEqual(later.filter(d=>!d.subsequent_only).map(d=>d.label));
-  expect(first.find(d=>d.key==='checking_understanding')?.scale_items['3']).toContain('explain, predict, apply, or reason');
+  expect(first.find(d=>d.key==='checking_understanding')?.scale_items['5']).toContain('probe the learner');
+  expect(first.every(d=>d.guidance?.includes('no meaningful weakness or realistic improvement'))).toBe(true);
+  expect(later.every(d=>d.guidance?.includes('no meaningful weakness or realistic improvement'))).toBe(true);
   expect(activeRatingDimensions(historical, conversation,'t1')).toHaveLength(5);
 });
 
-it('requires the applicable questions, accepts N/A, and rejects arbitrary scores', () => {
+it('requires the applicable questions, accepts five-point scores and N/A, and rejects arbitrary scores', () => {
   const ratings = completeRatings();
+  expect(bundledRubric.rating_dimensions?.[0].options).toEqual(['5','4','3','2','1','N/A']);
+  ratings.t1.values.amount_of_information = '5';
   ratings.t1.values.memory_aids_and_key_takeaways = 'N/A';
   expect(()=>validateTurnRatings(conversation,ratings,bundledRubric,true)).not.toThrow();
   delete ratings.t2.values.addressing_follow_up_questions;
   expect(missingTurnRatings(conversation,ratings,bundledRubric)).toEqual(['t2']);
   expect(()=>validateTurnRatings(conversation,ratings,bundledRubric,true)).toThrow(/Addressing Follow-Up Questions/);
-  ratings.t2.values.addressing_follow_up_questions = '4';
+  ratings.t2.values.addressing_follow_up_questions = '6';
   expect(()=>validateTurnRatings(conversation,ratings,bundledRubric)).toThrow(/invalid rating value/);
 });
 
@@ -55,7 +59,7 @@ it('enforces the same turn timing and N/A choices in Postgres', async () => {
     ratings.t2.values.addressing_follow_up_questions = '3';
     delete ratings.t1.values.topic_introduction_and_learner_engagement;
     await expect(validate(ratings)).rejects.toThrow(/Topic Introduction/);
-    ratings.t1.values.topic_introduction_and_learner_engagement = '4';
+    ratings.t1.values.topic_introduction_and_learner_engagement = '6';
     await expect(validate(ratings)).rejects.toThrow(/Invalid turn rating value/);
   } finally { await db.close(); }
 });

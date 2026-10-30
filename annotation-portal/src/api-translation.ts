@@ -11,20 +11,25 @@ export interface AlignedTurn {
   passages: { id: string; label: string; original: string; english: string }[];
 }
 
+/** Pair whole turns for the marker-free version; no section inventory is read. */
+export function pairedApiTurns(source: Conversation, english: Conversation): AlignedTurn[] {
+  if(english.source_conversation_id!==source.conversation_id||source.messages.length!==english.messages.length)throw Error('The English translation has no matching turns.');
+  let turnNumber=0;
+  return source.messages.map((turn,index)=>{
+    const target=english.messages[index];
+    if(target.turn_id!==turn.turn_id||target.speaker!==turn.speaker)throw Error('Translation turn identities do not match.');
+    if(turn.speaker==='tutor')turnNumber++;
+    const label=turn.speaker==='student'?'You':`Turn ${turnNumber}`;
+    return {turnId:turn.turn_id,speaker:turn.speaker,turnNumber,passages:[{id:turn.turn_id,label,original:turn.text,english:target.text}]};
+  });
+}
+
 /** Pair registered source sections by identity, never by English headings. */
 export function alignedApiTurns(source: Conversation, english: Conversation, sections: ConversationSection[]): AlignedTurn[] {
   const translation = english.translation;
   if(translationAlignmentStale(english))throw Error('Section grouping has changed. Retranslation is needed before comparing these conversations.');
   if (translation?.version === 'api-english-whole/1') {
-    if (english.source_conversation_id !== source.conversation_id || source.messages.length !== english.messages.length) throw Error('The English translation has no matching turns.');
-    let turnNumber = 0;
-    return source.messages.map((turn, index) => {
-      const target = english.messages[index];
-      if (target.turn_id !== turn.turn_id || target.speaker !== turn.speaker) throw Error('Translation turn identities do not match.');
-      if (turn.speaker === 'tutor') turnNumber++;
-      const label = turn.speaker === 'student' ? 'You' : `Turn ${turnNumber}`;
-      return {turnId:turn.turn_id,speaker:turn.speaker,turnNumber,passages:[{id:turn.turn_id,label,original:turn.text,english:target.text}]};
-    });
+    return pairedApiTurns(source,english);
   }
   if (translation?.version !== 'api-english/1' || english.source_conversation_id !== source.conversation_id || !translation.alignment?.length) throw Error('The English translation has no matching section map.');
   if (source.messages.length !== english.messages.length || !sections.length) throw Error('The original and English inventories do not match.');

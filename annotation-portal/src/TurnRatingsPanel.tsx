@@ -3,7 +3,7 @@ import type { Conversation, RubricSnapshot, TurnRating, TurnRatings } from './ty
 import { activeRatingDimensions, ratingComplete } from './turn-ratings';
 import './turn-ratings.css';
 
-export function TurnRatingsPanel({ conversation, rubric, ratings, turnId, turnIndex, readonly, onTurn, onChange, onFinish }: { conversation: Conversation; rubric: RubricSnapshot; ratings: TurnRatings; turnId: string; turnIndex: number; readonly: boolean; onTurn: (id: string) => void; onChange: (ratings: TurnRatings) => void; onFinish?: () => void }) {
+export function TurnRatingsPanel({ conversation, rubric, ratings, ratingReasons, turnId, turnIndex, readonly, onTurn, onChange, onFinish }: { conversation: Conversation; rubric: RubricSnapshot; ratings: TurnRatings; ratingReasons?: Record<string,Record<string,string>>; turnId: string; turnIndex: number; readonly: boolean; onTurn: (id: string) => void; onChange: (ratings: TurnRatings) => void; onFinish?: () => void }) {
   const panel = useRef<HTMLElement>(null);
   useLayoutEffect(() => {
     if (panel.current) panel.current.scrollTop = 0;
@@ -22,9 +22,15 @@ export function TurnRatingsPanel({ conversation, rubric, ratings, turnId, turnIn
     <p className="rating-context">Rate the tutor response shown in the conversation using the preceding context.</p>
     {readonly && <p className="rating-context">Read only</p>}
     <div className="rating-dimensions">{dimensions.map(dimension => <section className="rating-dimension" key={dimension.key}>
-      <h3>{dimension.label}</h3><p>{dimension.description}</p>
-      {dimension.options.includes('N/A') && <small className="rating-description">{dimension.guidance}</small>}
-      <div className="rating-options" role="group" aria-label={dimension.label}>{dimension.options.map(value => <button type="button" className="choice" key={value} disabled={readonly} aria-pressed={rating.values[dimension.key] === value} aria-label={`${dimension.label}: ${dimension.scale_items[value] || value}`} onClick={() => update({ ...rating, values: { ...rating.values, [dimension.key]: value } })}>{dimension.scale_items[value] || value}</button>)}</div>
+      <div className="rating-question-heading"><h3>{dimension.label}</h3>{dimension.guidance && <details className="rating-question-info">
+        <summary aria-label={`About ${dimension.label}`} title={`About ${dimension.label}`}>i</summary>
+        <div className="rating-question-popup"><p>{dimension.guidance}</p></div>
+      </details>}</div>
+      <p>{dimension.description}</p>
+      <div className="rating-options" role="group" aria-label={dimension.label}>{dimension.options.map(value => readonly && ratingReasons
+        ? <span className={`choice rating-readonly-option${rating.values[dimension.key] === value ? ' selected' : ''}`} key={value} aria-label={`${dimension.label}: ${dimension.scale_items[value] || value}${rating.values[dimension.key] === value ? ' (selected)' : ''}`}>{dimension.scale_items[value] || value}</span>
+        : <button type="button" className="choice" key={value} disabled={readonly} aria-pressed={rating.values[dimension.key] === value} aria-label={`${dimension.label}: ${dimension.scale_items[value] || value}`} onClick={() => update({ ...rating, values: { ...rating.values, [dimension.key]: value } })}>{dimension.scale_items[value] || value}</button>)}</div>
+      {ratingReasons?.[turnId]?.[dimension.key] && <p className="model-rating-reason"><strong>Reason:</strong> {ratingReasons[turnId][dimension.key]}</p>}
       {rating.values[dimension.key] === 'Insufficient evidence' && <small className="rating-description">Previously saved: insufficient evidence of the learner’s level.</small>}
       {dimension.key === 'concept_summarization' && rating.values[dimension.key] === 'Not applicable' && <small className="rating-description">Previously saved: no new concept explained.{!readonly && ' Choose an answer above before submitting.'}</small>}
     </section>)}</div>
