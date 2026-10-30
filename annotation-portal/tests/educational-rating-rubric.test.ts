@@ -2,7 +2,7 @@ import {expect, it} from 'vitest';
 import {PGlite} from '@electric-sql/pglite';
 import fs from 'node:fs';
 import {bundledRubric, C} from '../src/lib';
-import {activeRatingDimensions, missingTurnRatings, validateTurnRatings} from '../src/turn-ratings';
+import {activeRatingDimensions, missingTurnRatings, validateTurnRatings, ratingDimensionsForDisplay} from '../src/turn-ratings';
 import {bundledRubric as historical} from './fixtures/legacy-rubric';
 import type {TurnRatings} from '../src/types';
 
@@ -15,6 +15,26 @@ const conversation = C.normalizeConversation({messages: [
 const completeRatings = (): TurnRatings => Object.fromEntries(['t1','t2'].map(id => [id, {
   values: Object.fromEntries(activeRatingDimensions(bundledRubric, conversation, id).map(d => [d.key,'3'])), notes:''
 }]));
+
+it('refreshes compatible UI wording while preserving saved rubrics and historical scales', () => {
+  const pinned = structuredClone(bundledRubric);
+  const dimension = pinned.rating_dimensions![0];
+  const current = bundledRubric.rating_dimensions![0];
+  dimension.description = 'Old question';
+  dimension.guidance = 'Old guidance';
+  dimension.scale_items['5'] = 'Old score anchor';
+  const displayed = ratingDimensionsForDisplay(pinned, conversation, 't1')[0];
+  expect(displayed.description).toBe(current.description);
+  expect(displayed.guidance).toBe(current.guidance);
+  expect(displayed.scale_items).toEqual(current.scale_items);
+  expect(dimension.description).toBe('Old question');
+  expect(dimension.scale_items['5']).toBe('Old score anchor');
+  dimension.options = ['3','2','1','N/A'];
+  expect(ratingDimensionsForDisplay(pinned, conversation, 't1')[0]).toEqual(dimension);
+  dimension.options = [...current.options];
+  dimension.first_only = false;
+  expect(ratingDimensionsForDisplay(pinned, conversation, 't1')[0]).toEqual(dimension);
+});
 
 it('uses eight questions per turn, replacing introduction with follow-up', () => {
   const first = activeRatingDimensions(bundledRubric, conversation, 't1');

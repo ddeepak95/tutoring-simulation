@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import type { Conversation, RubricSnapshot, TurnRating, TurnRatings } from './types';
-import { activeRatingDimensions, ratingComplete } from './turn-ratings';
+import { ratingDimensionsForDisplay, ratingComplete } from './turn-ratings';
 import './turn-ratings.css';
 
 export function TurnRatingsPanel({ conversation, rubric, ratings, ratingReasons, turnId, turnIndex, readonly, onTurn, onChange, onFinish }: { conversation: Conversation; rubric: RubricSnapshot; ratings: TurnRatings; ratingReasons?: Record<string,Record<string,string>>; turnId: string; turnIndex: number; readonly: boolean; onTurn: (id: string) => void; onChange: (ratings: TurnRatings) => void; onFinish?: () => void }) {
@@ -9,7 +9,7 @@ export function TurnRatingsPanel({ conversation, rubric, ratings, ratingReasons,
     if (panel.current) panel.current.scrollTop = 0;
   }, [turnId]);
   const turns = conversation.messages.filter(turn => turn.speaker === 'tutor');
-  const dimensions = activeRatingDimensions(rubric, conversation, turnId);
+  const dimensions = ratingDimensionsForDisplay(rubric, conversation, turnId);
   const rating: TurnRating = ratings[turnId] || { values: {}, notes: '' };
   const isComplete = (id: string) => ratingComplete(ratings[id], rubric, conversation, id);
   const completed = turns.filter(turn => isComplete(turn.turn_id)).length;

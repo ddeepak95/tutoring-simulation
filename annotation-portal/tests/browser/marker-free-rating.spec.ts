@@ -10,8 +10,9 @@ test('marker-free model rating runs switch in the rater side panel with reasons'
  const ratings=(score:number,reason:string)=>document.transcript.messages.filter(turn=>turn.speaker==='tutor').map((turn,index)=>({turn_id:turn.turn_id,values:Object.fromEntries(ratingQuestions.filter(question=>index===0?!question.subsequent_only:!question.first_only).map(question=>[question.key,{score,reason}]))}));
  const newer='00000000-0000-4000-8000-000000000091',older='00000000-0000-4000-8000-000000000092';
  const historicalQuestions=ratingQuestions.map(question=>({...question,options:['3','2','1','N/A'],scale_items:{'3':'3 — Effective (historical)','2':'2 — Partially effective (historical)','1':'1 — Ineffective (historical)','N/A':'N/A'}}));
+ const savedQuestions=ratingQuestions.map(question=>({...question,description:'Previously pinned question',guidance:'Previously pinned guidance'}));
  state.versionRatingRuns.push(
-  {id:newer,conversation_id:ids.doc,version_key:'marker-free-v1',status:'completed',model:'gemini-3.8-flash',prompt_version:'marker-free-turn-ratings/2',ratings:ratings(5,'Newer reason.'),rubric_hash:'a'.repeat(64),rubric_snapshot:{rating_dimensions:ratingQuestions},error:null,created_at:'2026-10-29T12:00:00Z'},
+  {id:newer,conversation_id:ids.doc,version_key:'marker-free-v1',status:'completed',model:'gemini-3.8-flash',prompt_version:'marker-free-turn-ratings/2',ratings:ratings(5,'Newer reason.'),rubric_hash:'a'.repeat(64),rubric_snapshot:{rating_dimensions:savedQuestions},error:null,created_at:'2026-10-29T12:00:00Z'},
   {id:older,conversation_id:ids.doc,version_key:'marker-free-v1',status:'completed',model:'gemini-3.8-flash',prompt_version:'marker-free-turn-ratings/1',ratings:ratings(3,'Older reason.'),rubric_hash:'b'.repeat(64),rubric_snapshot:{rating_dimensions:historicalQuestions},error:null,created_at:'2026-10-29T11:00:00Z'}
  );
  await login(page,'admin');await page.goto(`/conversations/${ids.doc}/rating`);

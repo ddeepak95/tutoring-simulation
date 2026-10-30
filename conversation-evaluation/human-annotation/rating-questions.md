@@ -52,18 +52,6 @@ Replace each bracketed Additional guidance placeholder with criterion-specific i
 - **2 — Weak:** Uses an underdeveloped, generic, or loosely related explanatory device that adds little clarity, or omits one when the learner would likely benefit from it. Connections to the underlying concept are unclear or insufficiently explained.
 - **1 — Ineffective:** Uses inaccurate, misleading, or confusing explanatory devices that distort the concept, or fails to provide a needed explanatory device for a difficult concept, leaving the explanation substantially unclear.
 
-### Clarifying Misconceptions
-
-**Question:** How effectively does the chatbot anticipate or clarify common misconceptions a learner might have about the topic?
-
-**Additional guidance:** Evaluate how effectively the chatbot identifies, anticipates, and resolves misconceptions that could interfere with the learner's understanding. Consider whether it explicitly distinguishes incorrect intuitions from correct concepts, explains the reasoning behind the confusion, and helps the learner avoid similar mistakes in the future. Merely presenting correct information or repeating an explanation does not constitute misconception clarification. Higher scores should reflect increasingly proactive, insightful, and transferable approaches to correcting misunderstandings.
-
-- **5 — Exceptional:** Goes beyond identifying and correcting misconceptions by proactively anticipating subtle or particularly common false intuitions, explaining why they arise or seem plausible, and clearly contrasting them with the correct understanding. Uses especially effective strategies (e.g., counterexamples, contrasting cases, or targeted reasoning) to expose the underlying conceptual error and equip the learner to recognize and avoid similar misconceptions in new situations.
-- **4 — Effective:** Identifies and clearly corrects relevant misconceptions, explicitly distinguishing the incorrect understanding from the correct concept. Provides a meaningful explanation or example that helps the learner understand the distinction, though it may not explore the underlying reasoning or broader implications in depth.
-- **3 — Adequate:** Addresses an obvious or plausible misconception and provides an accurate correction, but the clarification is relatively basic, brief, or incomplete. The learner can recognize the correct idea, though the explanation offers limited insight into why the misconception occurs or how to avoid it.
-- **2 — Weak:** Makes a limited or superficial attempt to address misconceptions but leaves important confusion unresolved. Corrections may be vague, indirect, or insufficiently explained, or the chatbot overlooks a significant misconception evident in the learner's response.
-- **1 — Ineffective:** Fails to address a central or explicitly expressed misconception, reinforces an incorrect belief, or introduces misleading explanations that further confuse the learner. Provides no meaningful distinction between the mistaken understanding and the correct concept.
-
 ### Memory Aids and Key Takeaways
 
 **Question:** How effectively does the chatbot use memory aids such as mnemonics, key takeaways, or summaries to help the learner remember the concept?
@@ -88,17 +76,29 @@ Replace each bracketed Additional guidance placeholder with criterion-specific i
 - **2 — Weak:** Uses generic, superficial, poorly targeted, or unnecessarily repetitive questions that provide little meaningful evidence of understanding, or misses an important opportunity to check comprehension.
 - **1 — Ineffective:** Provides no meaningful check when one is clearly needed, or uses irrelevant, misleading, or fundamentally inappropriate questions that fail to assess understanding.
 
-### Guidance for Next Steps
+### Language Alignment in Learning Materials
 
-**Question:** How effectively does the chatbot guide the learner toward an appropriate next step in learning?
+**Question:** How effectively does the chatbot use the language of the conversation to support learning across explanations, examples, and visual materials?
 
-**Additional guidance:** Evaluate how effectively the chatbot recommends actionable ways for the learner to continue making progress, such as targeted practice, reviewing prerequisite concepts, applying knowledge, or exploring related topics. Consider the relevance, specificity, timing, and alignment of these recommendations with the learner's current understanding and goals. Focus on guidance for continued learning rather than questions intended primarily to assess immediate understanding.
+**Additional guidance:** Evaluate how consistently and effectively the chatbot uses the language of the conversation across all instructional content, including written explanations, examples, diagrams, charts, tables, labels, captions, and other visuals. Consider whether terminology and expressions are natural, accessible, and appropriate for the learner, rather than unnecessarily relying on foreign-language terms or materials. Foreign-language terminology is acceptable when it is commonly used, technically necessary, or educationally useful, particularly when appropriately explained. Higher scores should reflect thoughtful linguistic adaptation that actively supports understanding, not simply the absence of foreign words.
 
-- **5 — Exceptional:** Recommends a particularly well-chosen, actionable next step that is closely tailored to the learner's demonstrated understanding, needs, or goals. Clearly explains why the step is valuable and how it builds on current learning, creating a purposeful and coherent path for further progress.
-- **4 — Effective:** Suggests a clear, relevant, and actionable next step, such as targeted practice, application, review, or further exploration. The recommendation appropriately supports continued learning, though its personalization or connection to the learner's specific needs could be stronger.
-- **3 — Adequate:** Offers a sensible next step that could support learning, but the suggestion is relatively generic, underdeveloped, or only loosely connected to the learner's current progress.
-- **2 — Weak:** Provides vague, poorly timed, impractical, or weakly related guidance that offers limited direction for further learning, or overlooks an evident opportunity to suggest a useful next step.
-- **1 — Ineffective:** Provides no useful guidance when a next step is clearly needed, or recommends an irrelevant, misleading, or inappropriate action that could hinder the learner's progress.
+- **5 — Exceptional:** Skillfully leverages the language of the conversation across all relevant instructional content, including explanations and visuals, to make learning especially intuitive and accessible. Uses precise, natural, and learner-appropriate terminology, thoughtfully adapting labels, examples, and other materials to the learner's linguistic context. Any foreign-language elements are purposefully included and clearly contextualized to enhance understanding.
+- **4 — Effective:** Consistently uses the language of the conversation across explanations and relevant instructional materials, with clear and appropriate terminology. Foreign-language elements are used only when justified and are adequately explained, with minor opportunities for stronger linguistic adaptation.
+- **3 — Adequate:** Primarily uses the language of the conversation and communicates the main concepts, but some terminology, visual labels, or supporting materials remain in another language or use less natural expressions, creating minor barriers to understanding.
+- **2 — Weak:** Frequently relies on unnecessary foreign-language terminology, untranslated visual labels, or poorly adapted instructional materials when accessible alternatives exist. These inconsistencies make learning noticeably more difficult.
+- **1 — Ineffective:** Substantially depends on unexplained foreign-language content across explanations or instructional materials, creating major linguistic barriers that prevent the learner from meaningfully understanding the concepts.
+
+### Active Learning and Learner Participation
+
+**Question:** How effectively does the chatbot encourage the learner to actively engage with and construct understanding of the concept rather than passively receive information?
+
+**Additional guidance:** Evaluate how effectively the chatbot creates meaningful opportunities for active learning through reasoning, exploration, prediction, problem-solving, reflection, or guided discovery. Consider whether the learner is encouraged to think through ideas, make connections, and participate in developing understanding rather than simply receiving explanations. Active learning does not necessarily require multiple questions or elaborate activities; a well-placed prompt or task can be sufficient. Focus on participation in the learning process rather than assessment of understanding or recommendations for future learning.
+
+- **5 — Exceptional:** Skillfully integrates highly purposeful and engaging active-learning opportunities that enable the learner to explore, reason through, or discover important ideas. Uses thoughtfully designed prompts, tasks, or guided interactions that give the learner a meaningful role in constructing understanding, rather than simply receiving information.
+- **4 — Effective:** Provides relevant and meaningful opportunities for the learner to actively engage with the concept through reasoning, exploration, problem-solving, or reflection. Encourages participation beyond passive listening, though the activities may be relatively straightforward or less deeply integrated into the explanation.
+- **3 — Adequate:** Includes a basic opportunity for active participation, such as a simple prediction, reflection, or guided reasoning prompt, but the interaction is limited or only loosely integrated into the learning process. Most understanding is still developed through direct explanation.
+- **2 — Weak:** Relies predominantly on passive information delivery, with only superficial or poorly connected attempts to involve the learner. Opportunities for meaningful reasoning, exploration, or participation are limited or missed.
+- **1 — Ineffective:** Provides an entirely passive learning experience when active engagement is clearly warranted, or discourages the learner's participation by consistently supplying answers without allowing opportunities to think, explore, or contribute.
 
 # Subsequent Conversation Turns
 

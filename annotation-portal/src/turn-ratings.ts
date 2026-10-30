@@ -1,4 +1,16 @@
 import type { Conversation, RatingDimension, RubricSnapshot, TurnRating, TurnRatings } from './types';
+import currentRatingQuestions from './generated/rating-questions.json';
+
+// Refresh wording without changing the scale or turn timing pinned to saved work.
+export function ratingDimensionsForDisplay(rubric: RubricSnapshot, conversation?: Conversation, turnId?: string): RatingDimension[] {
+  return activeRatingDimensions(rubric, conversation, turnId).map(dimension => {
+    const current = currentRatingQuestions.find(question => question.key === dimension.key);
+    if (!current || JSON.stringify(current.options) !== JSON.stringify(dimension.options)
+      || Boolean(current.first_only) !== Boolean(dimension.first_only)
+      || Boolean(current.subsequent_only) !== Boolean(dimension.subsequent_only)) return dimension;
+    return { ...dimension, label: current.label, description: current.description, guidance: current.guidance, scale_items: current.scale_items };
+  });
+}
 
 export function ratingQuestionMetadata(rubric: RubricSnapshot) {
   return { rating_dimensions: activeRatingDimensions(rubric), rating_questions_source: 'conversation-evaluation/human-annotation/rating-questions.md', rating_scope: rubric.rating_scope || 'Rate each tutor turn using its pinned rubric and the preceding conversation.' };
