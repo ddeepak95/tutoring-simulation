@@ -41,7 +41,7 @@ try{
   requested.push(resumedState.conversation_id);regenerate=true;review=resumedState.stages.some(s=>s.pass==='review');reviewFrom=resumedState.review_from;
   if(resumedState.input_mode==='turn-images/1')imageOnly=true;
  }
- if(imageOnly){if(review||reviewFrom||repairFrom||includeScreenshots)throw Error('--image-only cannot be combined with legacy review, repair or screenshots.');geminiArgon=true;}
+ if(imageOnly){if(review||reviewFrom||repairFrom||includeScreenshots)throw Error('--image-only cannot be combined with legacy review, repair or screenshots.');}
  if(Number(pilot)+Number(all)+Number(Boolean(requested.length))+Number(Boolean(importFile))!==1)throw new Error('Choose exactly one conversation selection or a local baseline file to import.');
  const url=process.env.VITE_SUPABASE_URL;const ref=url&&new URL(url).hostname.match(/^([a-z0-9]+)\.supabase\.co$/)?.[1];
  if(process.env.SUPABASE_TARGET==='local' ? project!=='local' : !ref||new URL(url).protocol!=='https:'||project!==ref)throw new Error('--project must match VITE_SUPABASE_URL. No requests sent.');

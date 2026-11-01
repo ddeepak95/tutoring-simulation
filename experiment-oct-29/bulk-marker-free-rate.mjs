@@ -8,7 +8,7 @@ import {loadSupabaseEnvironment} from '../annotation-portal/scripts/load-supabas
 import {createAdaptiveFetch} from '../annotation-portal/scripts/adaptive-fetch.mjs';
 import {checkpointWriter} from '../annotation-portal/scripts/checkpoint-file.mjs';
 import {loadEnvironment,runRoot,root,languages} from './config.mjs';
-import {normalizeBareRatingArray,normalizeConversationIdRatingWrapper,normalizeNumericStringScores,normalizeSplitRatingObjects,parseEscapedJsonObject,validateMarkerFreeRatings} from './marker-free-rating-core.mjs';
+import {markerFreeRatingSchema,normalizeBareRatingArray,normalizeConversationIdRatingWrapper,normalizeNumericStringScores,normalizeSplitRatingObjects,parseEscapedJsonObject,validateMarkerFreeRatings} from './marker-free-rating-core.mjs';
 
 const command=process.argv[2]||'status';
 const cohort=process.argv[3]||'originals';
@@ -21,21 +21,23 @@ const apiKey=process.env.GEMINI_API_KEY||process.env.GOOGLE_API_KEY;
 if(['pilot','all'].includes(command)&&!apiKey)throw Error('Direct Google API key required');
 const prompt=await fsp.readFile(path.join(root,'conversation-evaluation/prompts/marker-free-ratings.md'),'utf8');
 const promptVersion=prompt.match(/^prompt_version:\s*(\S+)/m)?.[1];
-if(promptVersion!=='marker-free-turn-ratings/4')throw Error('This batch is pinned to rating prompt version 4');
+if(promptVersion!=='marker-free-turn-ratings/5')throw Error('This batch is pinned to rating prompt version 5');
+const batchVersion=Number(promptVersion.split('/').at(-1));
 const dimensions=JSON.parse(await fsp.readFile(path.join(root,'annotation-portal/src/generated/rating-questions.json'),'utf8'));
 if(dimensions.length!==9)throw Error('Unexpected rating dimension count');
 const hash=value=>createHash('sha256').update(value).digest('hex');
+const provenance={provider:'google',model,prompt_version:promptVersion,prompt_sha256:hash(prompt),rating_questions_sha256:hash(JSON.stringify(dimensions)),rubric_source_sha256:hash(await fsp.readFile(path.join(root,'conversation-evaluation/human-annotation/rating-questions.md'),'utf8'))};
 const rubricHash=hash(JSON.stringify(dimensions)+prompt);
 const manifest=JSON.parse(await fsp.readFile(path.join(runRoot,'manifest.json'),'utf8'));
 if(manifest.items.length!==882)throw Error('Experiment manifest does not contain 882 originals');
 const expected=new Map(cohort==='originals'?manifest.items.map(item=>[item.id,item]):manifest.items.filter(item=>item.language!=='en').map(item=>[item.translation?.id,item]));
 const expectedCount=cohort==='originals'?882:756;
 const groupLanguages=cohort==='originals'?languages:languages.filter(language=>language!=='en');
-const lockKey=cohort==='originals'?4:5;
+const lockKey=batchVersion*2+(cohort==='originals'?0:1);
 if(expected.size!==expectedCount||expected.has(undefined))throw Error(`Experiment manifest does not contain ${expectedCount} distinct ${cohort}`);
 const pool=new pg.Pool({connectionString:config.dbUrl,max:14});
 const log=value=>console.log(JSON.stringify({time:new Date().toISOString(),...value}));
-const reportFile=path.join(runRoot,'marker-free-ratings',cohort==='originals'?'batch-v4-progress.json':'batch-v4-translations-progress.json');
+const reportFile=path.join(runRoot,'marker-free-ratings',`batch-v${batchVersion}${cohort==='translations'?'-translations':''}-progress.json`);
 const saveReport=checkpointWriter(reportFile);
 const readInventory=async()=>{
  const result=await pool.query(`select c.id,${cohort==='originals'?'c.language':'source.language'} as language,c.language as transcript_language,
@@ -54,10 +56,12 @@ const readInventory=async()=>{
 const readRuns=async()=>{
  const rows=(await pool.query(`select r.id,r.conversation_id,r.version_key,r.prompt_version,r.rubric_hash,r.status,r.error,r.ratings
  from public.conversation_version_rating_runs r join public.conversations c on c.id=r.conversation_id
- where r.prompt_version=$1 and c.source_conversation_id is ${cohort==='originals'?'null':'not null'}`,[promptVersion])).rows;
+ where r.prompt_version=$1 and c.source_conversation_id is ${cohort==='originals'?'null':'not null'} order by r.created_at,r.id`,[promptVersion])).rows;
  const runs=new Map();
  for(const row of rows){
-  if(!expected.has(row.conversation_id)||row.version_key!==versionKey||row.rubric_hash!==rubricHash||runs.has(row.conversation_id))throw Error(`Conflicting version 4 rating run: ${row.conversation_id} (manifest=${expected.has(row.conversation_id)}, version=${row.version_key}, saved_hash=${row.rubric_hash}, current_hash=${rubricHash}, duplicate=${runs.has(row.conversation_id)})`);
+  const previous=runs.get(row.conversation_id);
+  if(!expected.has(row.conversation_id)||row.version_key!==versionKey||row.rubric_hash!==rubricHash||(previous?.status==='completed'&&row.status==='completed'))throw Error(`Conflicting version ${batchVersion} rating run: ${row.conversation_id}`);
+  if(previous?.status==='completed')continue;
   runs.set(row.conversation_id,row);
  }
  return runs;
@@ -71,7 +75,7 @@ function summarize(inventory,runs,errors={}){
   else if(run?.status==='failed'||error){failed++;byLanguage[row.language].failed++;failures[row.id]={language:row.language,topic:row.topic_id,provider:row.provider,error:error||run?.error||'Saved response failed validation'};}
   else{pending++;byLanguage[row.language].pending++;}
  }
- return {cohort,prompt_version:promptVersion,rubric_hash:rubricHash,expected:expectedCount,completed,failed,pending,by_language:byLanguage,failures,updated_at:new Date().toISOString()};
+ return {...provenance,cohort,rubric_hash:rubricHash,expected:expectedCount,completed,failed,pending,by_language:byLanguage,failures,updated_at:new Date().toISOString()};
 }
 function parseResponse(response,transcript,conversationId){
  const candidate=response.candidates?.[0];
@@ -101,8 +105,12 @@ async function rateOne(row,runs){
  const save=checkpointWriter(file),transcriptHash=hash(JSON.stringify(row.transcript));
  let checkpoint=fs.existsSync(file)?JSON.parse(await fsp.readFile(file,'utf8')):null;
  if(checkpoint&&(checkpoint.conversation_id!==row.id||checkpoint.version_key!==versionKey||checkpoint.prompt_version!==promptVersion||checkpoint.transcript_hash!==transcriptHash||checkpoint.rubric_hash!==rubricHash))throw Error('Saved checkpoint does not match conversation or rubric');
- checkpoint||={id:randomUUID(),conversation_id:row.id,version_key:versionKey,transcript_hash:transcriptHash,model,prompt_version:promptVersion,rubric_hash:rubricHash,created_at:new Date().toISOString()};
- const request={systemInstruction:{parts:[{text:prompt}]},contents:[{role:'user',parts:[{text:JSON.stringify({conversation_id:row.id,messages:row.transcript.messages,rating_questions:dimensions})}]}],generationConfig:{temperature:0,responseMimeType:'application/json',maxOutputTokens:65536}};
+ if(checkpoint?.status==='failed'){
+  await fsp.copyFile(file,file.replace(/\.json$/,`.failed-${checkpoint.id}.json`),fs.constants.COPYFILE_EXCL);
+  checkpoint=null;
+ }
+ checkpoint||={...provenance,id:randomUUID(),conversation_id:row.id,version_key:versionKey,transcript_hash:transcriptHash,rubric_hash:rubricHash,created_at:new Date().toISOString()};
+ const request={systemInstruction:{parts:[{text:prompt}]},contents:[{role:'user',parts:[{text:JSON.stringify({conversation_id:row.id,messages:row.transcript.messages,rating_questions:dimensions})}]}],generationConfig:{temperature:0,responseMimeType:'application/json',responseJsonSchema:markerFreeRatingSchema(row.transcript,dimensions),maxOutputTokens:65536}};
  if(checkpoint.request&&JSON.stringify(checkpoint.request)!==JSON.stringify(request))throw Error('Saved request differs from current prompt or rubric');
  if(!checkpoint.request){checkpoint.request=request;await save(checkpoint);}
  if(!checkpoint.response){
@@ -117,7 +125,7 @@ async function rateOne(row,runs){
  await save(checkpoint);
  await pool.query(`insert into public.conversation_version_rating_runs(id,conversation_id,version_key,rubric_hash,rubric_snapshot,prompt_version,prompt,model,request,response,ratings,status,error,normalization_policy)
  values($1,$2,$3,$4,$5::jsonb,$6,$7,$8,$9::jsonb,$10::jsonb,$11::jsonb,$12,$13,$14)`,[
-  checkpoint.id,row.id,versionKey,rubricHash,JSON.stringify({rating_dimensions:dimensions,source:'conversation-evaluation/human-annotation/rating-questions.md'}),promptVersion,prompt,model,JSON.stringify(request),JSON.stringify(checkpoint.response),JSON.stringify(ratings||[]),checkpoint.status,error,normalizationPolicy,
+  checkpoint.id,row.id,versionKey,rubricHash,JSON.stringify({rating_dimensions:dimensions,source:'conversation-evaluation/human-annotation/rating-questions.md',provenance}),promptVersion,prompt,model,JSON.stringify(request),JSON.stringify(checkpoint.response),JSON.stringify(ratings||[]),checkpoint.status,error,normalizationPolicy,
  ]);
  runs.set(row.id,{id:checkpoint.id,conversation_id:row.id,version_key:versionKey,prompt_version:promptVersion,rubric_hash:rubricHash,status:checkpoint.status,ratings:ratings||[]});
  if(error)throw Error(`Invalid saved response: ${error}`);
@@ -138,9 +146,9 @@ try{
   await fsp.mkdir(path.dirname(reportFile),{recursive:true});
   const lock=await pool.connect();
   const [{locked}]=(await lock.query('select pg_try_advisory_lock(20261029,$1) as locked',[lockKey])).rows;
-  if(!locked){lock.release();throw Error('Another version 4 rating batch is already running');}
+  if(!locked){lock.release();throw Error(`Another version ${batchVersion} rating batch is already running`);}
   try{
-   const remaining=inventory.filter(row=>!runs.has(row.id));
+   const remaining=inventory.filter(row=>runs.get(row.id)?.status!=='completed');
    const jobs=command==='pilot'?groupLanguages.map(language=>remaining.find(row=>row.language===language)).filter(Boolean):remaining;
    log({event:'batch_start',mode:command,cohort,jobs:jobs.length,already_completed:expectedCount-remaining.length,rubric_hash:rubricHash});
    const errors={};let index=0,finished=0;

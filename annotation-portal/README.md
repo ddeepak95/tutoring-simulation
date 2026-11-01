@@ -365,7 +365,7 @@ npm run migrate:llm-evidence -- --project PROJECT
 npm run llm:baselines -- --project PROJECT --conversation CONVERSATION_ID --image-only --regenerate
 ```
 
-`--image-only` selects direct Google `gemini-4-argon`, sends one tutor turn per request, and never sends transcript text or HTML. It requires `GEMINI_API_KEY` or `GOOGLE_API_KEY` locally or in repository `.env`. Optional `--url` sets the local portal origin (default `http://127.0.0.1:5173`). Legacy review/repair/screenshot flags cannot be combined with this mode. Admin generation remains unchanged.
+`--image-only` uses the configured direct Google model (currently `gemini-3.8-flash`), sends one tutor turn per request, and never sends transcript text or HTML. An explicit `--model` overrides the configured model. It requires `GEMINI_API_KEY` or `GOOGLE_API_KEY` locally or in repository `.env`. Optional `--url` sets the local portal origin (default `http://127.0.0.1:5173`). Legacy review/repair/screenshot flags cannot be combined with this mode. Admin generation remains unchanged.
 
 Images, manifests, exchanges and checkpoints stay under `.runtime/llm-baselines`. Every section returns all 15 counts, including zeros; positive counts become baseline labels with single-line `llm_evidence`. The command prints a resume command; validated turns are reused, and a baseline is published only after all tutor turns validate. Human assignments are preserved. The baseline page exposes evidence and an export.
 
@@ -391,3 +391,15 @@ Apply `npm run migrate:capture-files -- --project PROJECT_REF` before using the 
 Private Storage access follows conversation access rules. Moving content to Storage does not make Supabase bandwidth free; metadata projections, on-demand downloads, immutable asset caching, and reduced polling prevent repeated transfers. Never restore a whole-transcript query on listing pages.
 
 The admin dashboard initially requests only topic names and conversation counts. All topic groups start collapsed. Expanding a topic loads only its conversation metadata and active assignments; reopening it uses the in-page cache. Background polling refreshes topic counts only. Manual Refresh reloads already loaded topics, and bulk selection applies to loaded conversations. Apply `npm run migrate:dashboard-topics -- --project PROJECT_REF` when deploying this UI to an existing project.
+
+
+### HTML screenshot rating runs
+
+`202610300001_html_rating_runs.sql` adds separate storage for model ratings of saved HTML captures. Apply it before importing screenshot rating runs. Runs retain the capture version, current rating-question snapshot, Google provider and model, prompt version and hash, request and response, screenshot provenance, and per-turn scores and reasons. The admin Rating view defaults to the latest completed run for the current capture; its Rating source selector also offers earlier runs and human assignments. Human ratings remain independent. Deployments without this migration continue to show human rating review.
+
+
+### Compare languages in the HTML rating cohort
+
+Run `node scripts/analyze-html-rating-languages.mjs` from `annotation-portal` after the 50-capture local batch. It reads the latest completed Gemini 3.8 Flash screenshot ratings for the selected cohort and writes an interactive HTML report, frozen input snapshot, and CSV tables under `.runtime/bulk-html-local/analysis`. It makes no evaluator calls or database writes.
+
+The analysis averages tutor turns within each conversation, blocks on the five topics, and tests the seven-shared-criterion combined score plus all nine individual questions using 99,999 Friedman permutations. Holm correction covers all ten omnibus endpoints. Exact paired language contrasts enumerate all 32 topic-label swaps; global Holm adjustment covers all 450 outcome/language pairs. With only five matched topics, a two-sided exact pairwise p-value cannot be below 0.0625. Cross-model effects cannot be estimated from this single-source, single-evaluator cohort.

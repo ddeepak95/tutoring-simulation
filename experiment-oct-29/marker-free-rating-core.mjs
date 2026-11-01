@@ -66,3 +66,11 @@ export function normalizeSplitRatingObjects(output,conversation,dimensions){
   return {turn_id:rating.turn_id,values};
  })};
 }
+export function markerFreeRatingSchema(conversation,dimensions){
+ const tutorTurns=conversation.messages.filter(turn=>turn.speaker==='tutor');
+ const score={type:'object',additionalProperties:false,required:['score','reason'],properties:{score:{anyOf:[{type:'integer',enum:[1,2,3,4,5]},{type:'string',enum:['N/A']}]},reason:{type:'string',minLength:1}}};
+ return {type:'object',additionalProperties:false,required:['ratings'],properties:{ratings:{type:'array',minItems:tutorTurns.length,maxItems:tutorTurns.length,items:{anyOf:tutorTurns.map((turn,index)=>{
+  const applicable=dimensions.filter(d=>index===0?!d.subsequent_only:!d.first_only);
+  return {type:'object',additionalProperties:false,required:['turn_id','values'],properties:{turn_id:{type:'string',enum:[turn.turn_id]},values:{type:'object',additionalProperties:false,required:applicable.map(d=>d.key),properties:Object.fromEntries(applicable.map(d=>[d.key,score]))}}};
+ })}}}};
+}

@@ -13,7 +13,7 @@ export function componentStateHtml(component:HtmlComponent,stateId:string,imageU
   return clean.root.innerHTML;
 }
 /** Same HTML and state inventory for the portal and image-baseline renderer. */
-export function renderHtmlDocument(pkg:HtmlConversation,{supportingViews=false,turnId}:{supportingViews?:boolean;turnId?:string}={}) {
+export function renderHtmlDocument(pkg:HtmlConversation,{supportingViews=false,turnId,showSectionBoundaries=true}:{supportingViews?:boolean;turnId?:string;showSectionBoundaries?:boolean}={}) {
   validateHtmlConversation(pkg);
   const imageUrls=new Set(pkg.assets.flatMap(a=>[a.file,'./'+a.file]));
   const doc=document.implementation.createHTMLDocument(pkg.metadata.title);
@@ -41,6 +41,7 @@ img,svg{max-width:100%}table{max-width:100%}.html-component{display:flow-root}
 [data-d-component="table"]>[aria-hidden="true"]{max-width:100%}
 @media(max-width:600px){.html-conversation{padding:12px}.html-section{padding-left:10px;padding-right:10px}}
 `;
+  if(!showSectionBoundaries)style.textContent+='\n.html-section,.html-section.is-selected{border:0;padding:0;margin:0;border-radius:0;background:transparent}\n';
   doc.head.append(style);const body=doc.createElement('main');body.className='html-conversation';doc.body.append(body);
   const presentation=pkg.presentation||(pkg.styles.includes('--codex-chat-font-size')?capturedChatGPTPresentation:null);
   if(presentation){body.style.fontFamily=presentation.font_family;body.style.fontSize=presentation.font_size;body.style.lineHeight=presentation.line_height;

@@ -67,6 +67,19 @@ Run checks with the environment's Python from this directory:
 
 ## Full archived English–Tamil comparison
 
+For the **30-topic expanded catalog** specifically, `tamil_archive_report.py` selects the topic IDs from `agentic_conversation_capture/topics_v2.json` and reads their saved v19 evaluations from `research-archive/oct-29`. This is 2,700 original conversations: nine models, English/Tamil, and five tries per cell. The five older archive topics are excluded. This report compares all 24 feature counts, not 1–5 rating scores, and does not reuse the 35-topic GLM p-values below.
+
+From the repository root, run the analysis with a NumPy-enabled Python, then render its embedded-data HTML:
+
+```powershell
+.runtime/rating-comparability-venv/Scripts/python.exe conversation-evaluation/statistics/tamil_archive_report.py
+node conversation-evaluation/render-tamil-archive-report.mjs
+```
+
+The report is written to `experiment-oct-29/run-01/reports/rating-v5/tamil-english-30-topics/index.html` and `research-archive/oct-29/reports/english-tamil-30-topics.html`. It contains corrected pooled/within-model language tests, overall model tests within each language, all feature means, and a searchable browser of all 1,350 Tamil and 1,350 English conversations with exact saved excerpts. The renderer can be rerun independently from the saved analysis and conversation snapshots; it makes no database or evaluator calls.
+
+Inference first averages the five independent tries within each topic/model/language cell. Language tests swap whole cell means across the 30 matched topics; model tests permute model cell means within topic. Three separate Holm families cover 24 pooled language, 216 model-specific language, and 48 language-specific model tests. Difference intervals bootstrap the matched topic differences and are marginal, not simultaneous intervals. Counts are unadjusted for response length and do not measure teaching quality. The source archive, existing Tamil excerpt report, and full 35-topic GLM remain unchanged.
+
 `archive_language_glm.py` reads the dated archive without a database connection. It
 uses all 3,150 original conversations, the latest v19 evaluation for each one,
 and all 24 rubric features. It validates the complete five-try design and pinned

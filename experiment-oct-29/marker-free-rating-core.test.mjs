@@ -1,10 +1,25 @@
 import {test} from 'node:test';
 import {strict as assert} from 'node:assert';
 import fs from 'node:fs';
-import {normalizeBareRatingArray,normalizeConversationIdRatingWrapper,normalizeNumericStringScores,normalizeSplitRatingObjects,parseEscapedJsonObject,validateMarkerFreeRatings} from './marker-free-rating-core.mjs';
+import {markerFreeRatingSchema,normalizeBareRatingArray,normalizeConversationIdRatingWrapper,normalizeNumericStringScores,normalizeSplitRatingObjects,parseEscapedJsonObject,validateMarkerFreeRatings} from './marker-free-rating-core.mjs';
 const dimensions=JSON.parse(fs.readFileSync(new URL('../annotation-portal/src/generated/rating-questions.json',import.meta.url)));
 const conversation={messages:[{speaker:'student',turn_id:'s1',text:'Hi'},{speaker:'tutor',turn_id:'t1',text:'Hello'},{speaker:'student',turn_id:'s2',text:'Why?'},{speaker:'tutor',turn_id:'t2',text:'Because'}]};
 const rating=(turnId,index)=>({turn_id:turnId,values:Object.fromEntries(dimensions.filter(d=>index===0?!d.subsequent_only:!d.first_only).map(d=>[d.key,{score:2,reason:'Specific evidence.'}]))});
+
+test('constrains provider output to all tutor turns and their applicable criterion sets',()=>{
+ const schema=markerFreeRatingSchema(conversation,dimensions);
+ assert.deepEqual(schema.required,['ratings']);
+ assert.equal(schema.additionalProperties,false);
+ const array=schema.properties.ratings;
+ assert.equal(array.minItems,2);assert.equal(array.maxItems,2);
+ array.items.anyOf.forEach((variant,index)=>{
+  assert.deepEqual(variant.properties.turn_id.enum,[index===0?'t1':'t2']);
+  assert.deepEqual(variant.properties.values.required,Object.keys(rating('',index).values));
+  assert.equal(variant.properties.values.required.length,8);
+  assert.equal(variant.properties.values.additionalProperties,false);
+  assert.deepEqual(variant.properties.values.properties.amount_of_information.properties.score.anyOf,[{type:'integer',enum:[1,2,3,4,5]},{type:'string',enum:['N/A']}]);
+ });
+});
 test('validates complete first and follow-up tutor ratings',()=>{
  const output={ratings:[rating('t1',0),rating('t2',1)]};
  assert.deepEqual(dimensions[0].options,['5','4','3','2','1','N/A']);
